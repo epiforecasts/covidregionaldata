@@ -15,7 +15,7 @@ navbar:
       href: news/index.html
     - icon: fa-file-code-o
       text: "Functions"
-      href: reference/index.htm
+      href: reference/index.html
   right:
     - icon: fa-github
       href: https://github.com/epiforecasts/NCoVUtils
@@ -27,8 +27,6 @@ reference:
     desc: Functions to import and clean data
     contents:
       - get_linelist
-      - get_rep_sample_fun
-      - fitted_delay_sample_func
 
   - title: Sample from the serial interval distribution
     desc: Functions that parameterise distributions based on a mean and standard deviation

@@ -4,3 +4,5 @@
 ^\.travis\.yml$
 ^_pkgdown\.yml$
 ^Dockerfile$
+^LICENSE\.md$
+^docs$

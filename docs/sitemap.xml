@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//index.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/get_linelist.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/rgamma_with_mean_sd.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/rweibull_with_mean_sd.html</loc>
+  </url>
+</urlset>
