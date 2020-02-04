@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^inst$
+^\.travis\.yml$
+^_pkgdown\.yml$
+^Dockerfile$
