@@ -48,7 +48,8 @@ get_linelist <- function() {
                          .vars = c("longitude", "latitude"),
                          ~ ifelse(. %in% "#REF!", NA, .) %>%
                            stringr::str_trim() %>%
-                           as.numeric())
+                           as.numeric()) %>%
+        dplyr::mutate_all(~ stringr::str_replace_all(., "N/A", NA_character_))
       })
 
   linelists <- dplyr::bind_rows(linelists) %>%
