@@ -29,7 +29,8 @@ Imports:
     magrittr,
     memoise,
     lubridate,
-    data.table
+    data.table,
+    tidyr
 Suggests:
     pkgdown,
     testthat

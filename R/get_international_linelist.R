@@ -10,6 +10,7 @@
 #' @importFrom readr read_csv
 #' @importFrom lubridate dmy
 #' @importFrom tibble tibble
+#' @importFrom tidyr drop_na
 #' @importFrom memoise memoise cache_filesystem
 #'
 #' @return A linelist of case data
@@ -63,7 +64,8 @@ get_international_linelist <- function(countries = NULL, cities = NULL, clean = 
                     date_onset = lubridate::dmy(date_onset_symptoms),
                     report_delay =
                       as.integer(as.Date(date_confirm) - as.Date(date_onset))) %>%
-      dplyr::select(date_onset, date_confirm, report_delay, import_status)
+      dplyr::select(date_onset, date_confirm, report_delay, import_status) %>%
+      tidyr::drop_na(date_confirm)
 
   }
 
