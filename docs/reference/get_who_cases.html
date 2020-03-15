@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the latest compiled linelist — get_linelist • NCoVUtils</title>
+<title>Download the most recent WHO case data — get_who_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Get the latest compiled linelist — get_linelist" />
-<meta property="og:description" content="Get the latest compiled linelist" />
+<meta property="og:title" content="Download the most recent WHO case data — get_who_cases" />
+<meta property="og:description" content="Downloads the latest WHO case data.It uses memoise to cache the
+results locally. To clear the cache and redownload the data use reset_cache. The cache will be located
+in the directory at which the function is run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,80 +111,73 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the latest compiled linelist</h1>
+    <h1>Download the most recent WHO case data</h1>
     
-    <div class="hidden name"><code>get_linelist.Rd</code></div>
+    <div class="hidden name"><code>get_who_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the latest compiled linelist</p>
+    <p>Downloads the latest WHO case data.It uses <code>memoise</code> to cache the
+results locally. To clear the cache and redownload the data use <code>reset_cache</code>. The cache will be located
+in the directory at which the function is run.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_linelist</span>()</pre>
+    <pre class="usage"><span class='fu'>get_who_cases</span>(<span class='kw'>country</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>daily</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>country</th>
+      <td><p>Character string of current name</p></td>
+    </tr>
+    <tr>
+      <th>daily</th>
+      <td><p>Logical, defaults to <code>FALSE</code>. Should cases</p></td>
+    </tr>
+    <tr>
+      <th>cache</th>
+      <td><p>A <code>memoise</code> cache.
+counts be daily (<code>TRUE</code>) or cumulative (<code>FALSE</code>).</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble with the linelist</p>
+    <p>A datatable of either all WHO data by date or cases in a specific country by date</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## Example</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_linelist</span>()
-}
-
-<span class='co'>## Code</span>
-<span class='no'>get_linelist</span></div><div class='output co'>#&gt; function () 
+<span class='no'>get_who_cases</span></div><div class='output co'>#&gt; function (country = NULL, daily = FALSE, cache = NULL) 
 #&gt; {
-#&gt;     date_onset_symptoms_str &lt;- NULL
-#&gt;     date_admission_hospital_str &lt;- NULL
-#&gt;     ate_confirmation_str &lt;- NULL
-#&gt;     date_confirmation &lt;- NULL
-#&gt;     date_onset_symptoms &lt;- NULL
-#&gt;     date_onset_symptoms &lt;- NULL
-#&gt;     date_admission_hospital &lt;- NULL
-#&gt;     date_confirmation_str &lt;- NULL
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     gids &lt;- c(outside_hubei = 0, hubei = 429276722)
-#&gt;     urls &lt;- paste0("https://docs.google.com/spreadsheets/d/", 
-#&gt;         "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub", "?single=true&amp;output=csv&amp;gid=", 
-#&gt;         gids)
-#&gt;     linelists &lt;- lapply(urls, mem_read)
-#&gt;     drops &lt;- c("chroDisea_Yes(1)/No(0)")
-#&gt;     linelists[[1]] &lt;- linelists[[1]][, !(names(linelists[[1]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists[[2]] &lt;- linelists[[2]][, !(names(linelists[[2]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists &lt;- linelists %&gt;% purrr::map(function(data) {
-#&gt;         dplyr::mutate_at(data, .vars = c("longitude", "latitude"), 
-#&gt;             ~ifelse(. %in% "#REF!", NA, .) %&gt;% stringr::str_trim() %&gt;% 
-#&gt;                 as.numeric()) %&gt;% dplyr::mutate_all(~stringr::str_replace_all(., 
-#&gt;             "N/A", NA_character_))
-#&gt;     })
-#&gt;     linelists &lt;- dplyr::bind_rows(linelists) %&gt;% dplyr::rename(date_onset_symptoms_str = "date_onset_symptoms", 
-#&gt;         date_admission_hospital_str = "date_admission_hospital", 
-#&gt;         date_confirmation_str = "date_confirmation") %&gt;% dplyr::mutate(date_onset_symptoms = as.Date(date_onset_symptoms_str, 
-#&gt;         format = "%d.%m.%Y"), date_admission_hospital = as.Date(date_admission_hospital_str, 
-#&gt;         format = "%d.%m.%Y"), date_confirmation = as.Date(date_confirmation_str, 
-#&gt;         format = "%d.%m.%Y")) %&gt;% dplyr::mutate(delay_confirmation = date_confirmation - 
-#&gt;         date_onset_symptoms, delay_admission = date_admission_hospital - 
-#&gt;         date_onset_symptoms)
-#&gt;     return(linelists)
+#&gt;     mem_fread &lt;- memoise::memoise(data.table::fread, cache = ch)
+#&gt;     who_cases &lt;- mem_fread("https://raw.githubusercontent.com/eebrown/data2019nCoV/master/data-raw/WHO_SR.csv")
+#&gt;     if (!is.null(country)) {
+#&gt;         who_cases &lt;- who_cases[, c("Date", country), with = FALSE]
+#&gt;         colnames(who_cases) &lt;- c("date", "cases")
+#&gt;     }
+#&gt;     if (daily) {
+#&gt;         cols &lt;- colnames(who_cases)
+#&gt;         cols &lt;- cols[!colnames(who_cases) %in% c("Date", "date", 
+#&gt;             "SituationReport")]
+#&gt;         safe_diff &lt;- purrr::safely(diff)
+#&gt;         who_cases &lt;- dplyr::mutate_at(who_cases, .vars = cols, 
+#&gt;             ~. - dplyr::lag(., default = 0))
+#&gt;     }
+#&gt;     return(who_cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x562ccad4f478&gt;
+#&gt; &lt;bytecode: 0x562ccc2a3bb8&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Sebastian Funk <a href='mailto:sebastian.funk@lshtm.ac.uk'>sebastian.funk@lshtm.ac.uk</a></p>
   </div>
 </div>
 

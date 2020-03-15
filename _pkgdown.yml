@@ -27,9 +27,17 @@ reference:
     desc: Functions to import and clean data
     contents:
       - get_linelist
+      - get_international_linelist
+      - get_who_cases
+      - get_total_cases
 
   - title: Sample from the serial interval distribution
     desc: Functions that parameterise distributions based on a mean and standard deviation
     contents:
        - rgamma_with_mean_sd
        - rweibull_with_mean_sd
+
+  - title: Utilities
+    desc: Package utilities
+    contents:
+      - reset_cache

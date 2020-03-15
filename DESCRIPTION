@@ -23,9 +23,13 @@ Depends:
 Imports:
     readr,
     dplyr,
+    tibble,
     purrr,
     stringr,
-    magrittr
+    magrittr,
+    memoise,
+    lubridate,
+    data.table
 Suggests:
     pkgdown,
     testthat

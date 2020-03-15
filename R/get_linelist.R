@@ -1,7 +1,6 @@
 ##' Get the latest compiled linelist
 ##'
 ##' @return a tibble with the linelist
-##'   delays to randomly sample
 ##' @importFrom readr read_csv
 ##' @importFrom dplyr bind_rows rename mutate mutate_at
 ##' @importFrom purrr map
@@ -28,12 +27,17 @@ get_linelist <- function() {
   date_admission_hospital <- NULL; date_confirmation_str <- NULL;
 
 
+  ## Set up cache
+  ch <- memoise::cache_filesystem(".cache")
+
+
+  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
 
   gids <- c(outside_hubei = 0, hubei = 429276722)
   urls <- paste0("https://docs.google.com/spreadsheets/d/",
                  "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub",
                  "?single=true&output=csv&gid=", gids)
-  linelists <- lapply(urls, readr::read_csv)
+  linelists <- lapply(urls, mem_read)
 
   ## Drop columns
   drops <- c("chroDisea_Yes(1)/No(0)")

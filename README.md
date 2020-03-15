@@ -7,7 +7,7 @@
 [![DOI](https://zenodo.org/badge/238177228.svg)](https://zenodo.org/badge/latestdoi/238177228)
 
 
-
+*Note: This package makes extensive use of `memoise` and writes a `.cache` to the directory in which its functions are run. This speeds up data retrieval and avoids hitting rate limits but does not follow CRAN best practice.* **Use with care.** *The cache can be reset with `reset_cache()` when updated data is required from the online source.*
 
 ## Installation
 
@@ -19,10 +19,28 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ## Usage
 
-See the documentation for full details of present functionality. The main function imports and cleans the linelist. 
+See the individual function documentation for full details of present functionality. The main function imports and cleans the linelist. 
 
 ```r
 NCoVUtils::get_linelist()
+```
+
+For individual region/city data outside of Hubei the following function has been provided:
+
+```r
+NCoVUtils::get_international_linelist()
+```
+
+Extract WHO case counts using:
+
+```r
+NCoVUtils::get_who_cases()
+```
+
+Extract total cases (and deaths) by regionusing:
+
+```r
+NCoVUtils::get_total_cases()
 ```
 
 ## Development

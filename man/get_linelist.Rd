@@ -8,7 +8,6 @@ get_linelist()
 }
 \value{
 a tibble with the linelist
-delays to randomly sample
 }
 \description{
 Get the latest compiled linelist

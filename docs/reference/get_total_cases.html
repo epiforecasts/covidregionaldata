@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the latest compiled linelist — get_linelist • NCoVUtils</title>
+<title>Get Total Cases by Country — get_total_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get the latest compiled linelist — get_linelist" />
-<meta property="og:description" content="Get the latest compiled linelist" />
+<meta property="og:title" content="Get Total Cases by Country — get_total_cases" />
+<meta property="og:description" content="Get Total Cases by Country" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,70 +109,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the latest compiled linelist</h1>
+    <h1>Get Total Cases by Country</h1>
     
-    <div class="hidden name"><code>get_linelist.Rd</code></div>
+    <div class="hidden name"><code>get_total_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the latest compiled linelist</p>
+    <p>Get Total Cases by Country</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_linelist</span>()</pre>
+    <pre class="usage"><span class='fu'>get_total_cases</span>()</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble with the linelist</p>
+    <p>Returns a data frame of variables along with their most recent value.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## Example</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_linelist</span>()
-}
 
-<span class='co'>## Code</span>
-<span class='no'>get_linelist</span></div><div class='output co'>#&gt; function () 
-#&gt; {
-#&gt;     date_onset_symptoms_str &lt;- NULL
-#&gt;     date_admission_hospital_str &lt;- NULL
-#&gt;     ate_confirmation_str &lt;- NULL
-#&gt;     date_confirmation &lt;- NULL
-#&gt;     date_onset_symptoms &lt;- NULL
-#&gt;     date_onset_symptoms &lt;- NULL
-#&gt;     date_admission_hospital &lt;- NULL
-#&gt;     date_confirmation_str &lt;- NULL
-#&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     gids &lt;- c(outside_hubei = 0, hubei = 429276722)
-#&gt;     urls &lt;- paste0("https://docs.google.com/spreadsheets/d/", 
-#&gt;         "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub", "?single=true&amp;output=csv&amp;gid=", 
-#&gt;         gids)
-#&gt;     linelists &lt;- lapply(urls, mem_read)
-#&gt;     drops &lt;- c("chroDisea_Yes(1)/No(0)")
-#&gt;     linelists[[1]] &lt;- linelists[[1]][, !(names(linelists[[1]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists[[2]] &lt;- linelists[[2]][, !(names(linelists[[2]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists &lt;- linelists %&gt;% purrr::map(function(data) {
-#&gt;         dplyr::mutate_at(data, .vars = c("longitude", "latitude"), 
-#&gt;             ~ifelse(. %in% "#REF!", NA, .) %&gt;% stringr::str_trim() %&gt;% 
-#&gt;                 as.numeric()) %&gt;% dplyr::mutate_all(~stringr::str_replace_all(., 
-#&gt;             "N/A", NA_character_))
-#&gt;     })
-#&gt;     linelists &lt;- dplyr::bind_rows(linelists) %&gt;% dplyr::rename(date_onset_symptoms_str = "date_onset_symptoms", 
-#&gt;         date_admission_hospital_str = "date_admission_hospital", 
-#&gt;         date_confirmation_str = "date_confirmation") %&gt;% dplyr::mutate(date_onset_symptoms = as.Date(date_onset_symptoms_str, 
-#&gt;         format = "%d.%m.%Y"), date_admission_hospital = as.Date(date_admission_hospital_str, 
-#&gt;         format = "%d.%m.%Y"), date_confirmation = as.Date(date_confirmation_str, 
-#&gt;         format = "%d.%m.%Y")) %&gt;% dplyr::mutate(delay_confirmation = date_confirmation - 
-#&gt;         date_onset_symptoms, delay_admission = date_admission_hospital - 
-#&gt;         date_onset_symptoms)
-#&gt;     return(linelists)
-#&gt; }
-#&gt; &lt;bytecode: 0x562ccad4f478&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+<span class='fu'>get_total_cases</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: 'autostart' is now deprecated and ignored. Consider skip='string' or skip=n</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 186 x 2</span><span>
+#&gt;    country           cases
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Global-confirmed </span><span style='text-decoration: underline;'>142</span><span>539
+#&gt; </span><span style='color: #555555;'> 2</span><span> China             </span><span style='text-decoration: underline;'>81</span><span>021
+#&gt; </span><span style='color: #555555;'> 3</span><span> China-Hubei       </span><span style='text-decoration: underline;'>67</span><span>790
+#&gt; </span><span style='color: #555555;'> 4</span><span> Cases-nonChina    </span><span style='text-decoration: underline;'>61</span><span>518
+#&gt; </span><span style='color: #555555;'> 5</span><span> Italy             </span><span style='text-decoration: underline;'>17</span><span>660
+#&gt; </span><span style='color: #555555;'> 6</span><span> Iran              </span><span style='text-decoration: underline;'>11</span><span>364
+#&gt; </span><span style='color: #555555;'> 7</span><span> RepublicofKorea    </span><span style='text-decoration: underline;'>8</span><span>086
+#&gt; </span><span style='color: #555555;'> 8</span><span> Spain              </span><span style='text-decoration: underline;'>4</span><span>231
+#&gt; </span><span style='color: #555555;'> 9</span><span> France             </span><span style='text-decoration: underline;'>3</span><span>640
+#&gt; </span><span style='color: #555555;'>10</span><span> Germany            </span><span style='text-decoration: underline;'>3</span><span>062
+#&gt; </span><span style='color: #555555;'># … with 176 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -181,8 +150,6 @@
       <li><a href="#examples">Examples</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Sebastian Funk <a href='mailto:sebastian.funk@lshtm.ac.uk'>sebastian.funk@lshtm.ac.uk</a></p>
   </div>
 </div>
 
