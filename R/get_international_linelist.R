@@ -5,6 +5,7 @@
 #' in the directory at which the function is run.
 #' @param countries Character vector identifying the countries to extract data for.
 #' @param cities Character vector identifying the cities to extract data for.
+#' @param provinces  Character vector identifying the provinces to extract data for.
 #' @param clean Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom readr read_csv
@@ -19,7 +20,7 @@
 #' @examples
 #'
 #'get_international_linelist
-get_international_linelist <- function(countries = NULL, cities = NULL, clean = TRUE) {
+get_international_linelist <- function(countries = NULL, cities = NULL, provinces = NULL, clean = TRUE) {
 
   country <- NULL; city <- NULL; travel_history_location <- NULL;
   travel_history_dates <- NULL; date_confirmation <- NULL;
@@ -52,6 +53,11 @@ get_international_linelist <- function(countries = NULL, cities = NULL, clean = 
   if (!is.null(cities)) {
     linelist <- linelist %>%
       dplyr::filter(city %in% cities)
+  }
+
+  if (!is.null(provinces)) {
+    linelist <- linelist %>%
+      dplyr::filter(province %in% provinces)
   }
 
   if (clean) {

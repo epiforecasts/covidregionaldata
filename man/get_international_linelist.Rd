@@ -4,12 +4,19 @@
 \alias{get_international_linelist}
 \title{Get International Linelist Data}
 \usage{
-get_international_linelist(countries = NULL, cities = NULL, clean = TRUE)
+get_international_linelist(
+  countries = NULL,
+  cities = NULL,
+  provinces = NULL,
+  clean = TRUE
+)
 }
 \arguments{
 \item{countries}{Character vector identifying the countries to extract data for.}
 
 \item{cities}{Character vector identifying the cities to extract data for.}
+
+\item{provinces}{Character vector identifying the provinces to extract data for.}
 
 \item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
 }
