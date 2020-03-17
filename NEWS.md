@@ -1,5 +1,9 @@
 
-# NCovUtils 0.2.0
+# NCoVUtils 0.3.0
+
+* Added a function to extract case counts by region for Italy.
+
+# NCoVUtils 0.2.0
 
 * Added `memoise` functionality to automatically cache in the current directory all remote resources.
 * Added a non-Hubei linelist function that can extract country and city linelists.

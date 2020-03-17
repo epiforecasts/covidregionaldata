@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • NCoVUtils</title>
+<title>Italian Regional Case Counts — get_italy_regional_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -29,13 +29,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="Italian Regional Case Counts — get_italy_regional_cases" />
+<meta property="og:description" content="Italian Regional Case Counts" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -66,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">NCoVUtils</a>
+        <a class="navbar-link" href="../index.html">NCoVUtils</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
@@ -74,13 +76,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="../index.html">Home</a>
 </li>
 <li>
-  <a href="news/index.html">News</a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="reference/index.html">
+  <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
     Functions
@@ -105,23 +107,64 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+    <h1>Italian Regional Case Counts</h1>
+    
+    <div class="hidden name"><code>get_italy_regional_cases.Rd</code></div>
     </div>
 
-<div id="mit-license" class="section level1">
+    <div class="ref-description">
+    <p>Italian Regional Case Counts</p>
+    </div>
 
-<p>Copyright (c) 2020 EpiForecasts</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-</div>
+    <pre class="usage"><span class='fu'>get_italy_regional_cases</span>()</pre>
+
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A dataframe of Italian regional case counts.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>## Code</span>
+<span class='no'>get_italy_regional_cases</span></div><div class='output co'>#&gt; function () 
+#&gt; {
+#&gt;     path &lt;- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
+#&gt;     ch &lt;- memoise::cache_filesystem(".cache")
+#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
+#&gt;     get_daily_files = function(date) {
+#&gt;         message("Reading in data from the ", date)
+#&gt;         suppressMessages(suppressWarnings(mem_read(gsub("__date__", 
+#&gt;             format(date, "%Y%m%d"), x = path))))
+#&gt;     }
+#&gt;     start_date &lt;- lubridate::ymd(20200224)
+#&gt;     start_date &lt;- as.Date(format(start_date, "%Y-%m-%d"))
+#&gt;     end_date &lt;- as.Date(Sys.Date() - 1)
+#&gt;     dates &lt;- seq(start_date, end_date, by = "day")
+#&gt;     cases &lt;- purrr::map_dfr(dates, get_daily_files)
+#&gt;     cases &lt;- cases %&gt;% dplyr::mutate(date = as.Date(data), region = denominazione_regione, 
+#&gt;         region_code = codice_regione, total_cases = totale_casi) %&gt;% 
+#&gt;         dplyr::select(date, region, region_code, total_cases) %&gt;% 
+#&gt;         dplyr::arrange(date) %&gt;% dplyr::group_by(region) %&gt;% 
+#&gt;         dplyr::mutate(index = 1:dplyr::n(), cases = total_cases - 
+#&gt;             ifelse(index == 1, 0, dplyr::lag(total_cases))) %&gt;% 
+#&gt;         dplyr::ungroup() %&gt;% dplyr::select(-index, -total_cases) %&gt;% 
+#&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases))
+#&gt;     return(cases)
+#&gt; }
+#&gt; &lt;bytecode: 0x56151e75cec8&gt;
+#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
-
 </div>
-
 
 
       <footer>
