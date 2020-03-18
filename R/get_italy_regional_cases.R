@@ -1,7 +1,3 @@
-require(readr)
-require(dplyr)
-require(purrr)
-require(magrittr)
 
 #' Italian Regional Case Counts
 #'
