@@ -2,6 +2,7 @@
 # NCoVUtils 0.3.0
 
 * Added a function to extract case counts by region for Italy.
+* Function to extract ECDC cases. 
 
 # NCoVUtils 0.2.0
 

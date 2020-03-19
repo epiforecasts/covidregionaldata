@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Utility functions for the 2019-NCoV outbreak • NCoVUtils</title>
+<title>Utility functions for the Covid-19 outbreak • NCoVUtils</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Utility functions for the 2019-NCoV outbreak">
+<script src="pkgdown.js"></script><meta property="og:title" content="Utility functions for the Covid-19 outbreak">
 <meta property="og:description" content="Utility functions for the 2019-NCoV outbreak.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -70,9 +70,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="utility-functions-for-the-2019-ncov-outbreak" class="section level1">
+<div id="utility-functions-for-the-covid-19-outbreak" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#utility-functions-for-the-2019-ncov-outbreak" class="anchor"></a>Utility functions for the 2019-NCoV outbreak</h1></div>
+<a href="#utility-functions-for-the-covid-19-outbreak" class="anchor"></a>Utility functions for the Covid-19 outbreak</h1></div>
 
 <p><em>Note: This package makes extensive use of <code>memoise</code> and writes a <code>.cache</code> to the directory in which its functions are run. This speeds up data retrieval and avoids hitting rate limits but does not follow CRAN best practice.</em> <strong>Use with care.</strong> <em>The cache can be reset with <code><a href="reference/reset_cache.html">reset_cache()</a></code> when updated data is required from the online source.</em></p>
 <div id="installation" class="section level2">
@@ -90,10 +90,12 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_international_linelist.html">get_international_linelist</a></span>()</a></code></pre></div>
 <p>Extract WHO case counts using:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_who_cases.html">get_who_cases</a></span>()</a></code></pre></div>
+<p>Extract ECDC case and deaths counts using:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/get_ecdc_cases.html">get_ecdc_cases</a></span>()</a></code></pre></div>
 <p>Extract total cases (and deaths) by regionusing:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_total_cases.html">get_total_cases</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_total_cases.html">get_total_cases</a></span>()</a></code></pre></div>
 <p>Extract regional case counts from Italy:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_italy_regional_cases.html">get_italy_regional_cases</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_italy_regional_cases.html">get_italy_regional_cases</a></span>()</a></code></pre></div>
 </div>
 <div id="development" class="section level2">
 <h2 class="hasAnchor">
@@ -102,22 +104,22 @@
 <h3 class="hasAnchor">
 <a href="#set-up" class="anchor"></a>Set up</h3>
 <p>Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="render-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#render-documentation" class="anchor"></a>Render documentation</h3>
 <p>Render the documentation with the following:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">Rscript</span> inst/scripts/render_output.R</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">Rscript</span> inst/scripts/render_output.R</a></code></pre></div>
 </div>
 <div id="docker" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker" class="anchor"></a>Docker</h3>
 <p>This package is developed in a docker container based on the tidyverse docker image.</p>
 <p>To build the docker image run (from the <code>NCoVUtils</code> directory):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">docker</span> build . -t ncovutils</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">docker</span> build . -t ncovutils</a></code></pre></div>
 <p>To run the docker image run:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">docker</span> run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">docker</span> run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils</a></code></pre></div>
 <p>The rstudio client can be found on port :8787 at your local machines ip. The default username:password is ncovutils:ncovutils, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.</p>
 <p>To mount a folder (from your current working directory - here assumed to be <code>tmp</code>) in the docker container to your local system use the following in the above docker run command (as given mounts the whole <code>ncovutils</code> directory to <code>tmp</code>).</p>
 <p><code>{bash, eval = FALSE} --mount type=bind,source=$(pwd)/tmp,target=/home/ncovutils</code></p>
@@ -148,6 +150,7 @@
 <ul class="list-unstyled">
 <li>Sam Abbott <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8057-8037" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li>Joel Hellewell <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2683-0849" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Hamish Gibbs <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4413-453X" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li>James Munday <br><small class="roles"> Author </small>  </li>
 <li>Sebastian Funk <br><small class="roles"> Author </small>  </li>
 </ul>
@@ -168,7 +171,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Sam Abbott, Joel Hellewell, James Munday, Sebastian Funk.</p>
+  <p>Developed by Sam Abbott, Joel Hellewell, Hamish Gibbs, James Munday, Sebastian Funk.</p>
 </div>
 
 <div class="pkgdown">

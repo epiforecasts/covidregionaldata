@@ -1,4 +1,4 @@
-# Utility functions for the 2019-NCoV outbreak
+# Utility functions for the Covid-19 outbreak
 
 [![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/NCoVUtils/master?urlpath=rstudio)
 [![Build Status](https://travis-ci.com/epiforecasts/NCoVUtils.svg?branch=master)](https://travis-ci.com/epiforecasts/NCoVUtils)
@@ -35,6 +35,12 @@ Extract WHO case counts using:
 
 ```r
 NCoVUtils::get_who_cases()
+```
+
+Extract ECDC case and deaths counts using:
+
+```r
+get_ecdc_cases()
 ```
 
 Extract total cases (and deaths) by regionusing:

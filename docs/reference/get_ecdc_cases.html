@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Italian Regional Case Counts — get_italy_regional_cases • NCoVUtils</title>
+<title>ECDC International Case Counts — get_ecdc_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Italian Regional Case Counts — get_italy_regional_cases" />
-<meta property="og:description" content="Italian Regional Case Counts" />
+<meta property="og:title" content="ECDC International Case Counts — get_ecdc_cases" />
+<meta property="og:description" content="ECDC International Case Counts" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,56 +109,84 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Italian Regional Case Counts</h1>
+    <h1>ECDC International Case Counts</h1>
     
-    <div class="hidden name"><code>get_italy_regional_cases.Rd</code></div>
+    <div class="hidden name"><code>get_ecdc_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Italian Regional Case Counts</p>
+    <p>ECDC International Case Counts</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_italy_regional_cases</span>()</pre>
+    <pre class="usage"><span class='fu'>get_ecdc_cases</span>(<span class='kw'>countries</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>countries</th>
+      <td><p>Character vector identifying the countries to extract data for.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of Italian regional case counts.</p>
+    <p>A dataframe of International case counts published by ECDC.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+
+<span class='co'>## Get data for france</span>
+<span class='fu'>get_ecdc_cases</span>(<span class='kw'>countries</span> <span class='kw'>=</span> <span class='st'>"France"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 5</span><span>
+#&gt;    date       cases deaths country geoid
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2019-12-31     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-01-01     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-01-02     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-01-03     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-01-04     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-01-05     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-01-06     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-01-07     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-01-08     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'>10</span><span> 2020-01-09     0      0 France  FR   
+#&gt; </span><span style='color: #555555;'># … with 69 more rows</span><span></div><div class='input'>
 <span class='co'>## Code</span>
-<span class='no'>get_italy_regional_cases</span></div><div class='output co'>#&gt; function () 
+<span class='no'>get_ecdc_cases</span></div><div class='output co'>#&gt; function (countries = NULL) 
 #&gt; {
-#&gt;     path &lt;- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
+#&gt;     base_url = "http://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-"
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     get_daily_files = function(date) {
-#&gt;         message("Reading in data from the ", date)
-#&gt;         suppressMessages(suppressWarnings(mem_read(gsub("__date__", 
-#&gt;             format(date, "%Y%m%d"), x = path))))
+#&gt;     mem_read &lt;- memoise::memoise(gdata::read.xls, cache = ch)
+#&gt;     try_dates &lt;- c(as.Date(Sys.time()) - 1, as.Date(Sys.time()))
+#&gt;     for (i in 1:length(try_dates)) {
+#&gt;         date &lt;- try_dates[i]
+#&gt;         url &lt;- paste0(base_url, date, ".xls")
+#&gt;         d &lt;- try(tibble::as_tibble(mem_read(url)), silent = TRUE)
+#&gt;         if (length(d) &gt; 1) {
+#&gt;             break
+#&gt;         }
 #&gt;     }
-#&gt;     start_date &lt;- lubridate::ymd(20200224)
-#&gt;     start_date &lt;- as.Date(format(start_date, "%Y-%m-%d"))
-#&gt;     end_date &lt;- as.Date(Sys.Date() - 1)
-#&gt;     dates &lt;- seq(start_date, end_date, by = "day")
-#&gt;     cases &lt;- purrr::map_dfr(dates, get_daily_files)
-#&gt;     cases &lt;- cases %&gt;% dplyr::mutate(date = as.Date(data), region = denominazione_regione, 
-#&gt;         region_code = codice_regione, total_cases = totale_casi) %&gt;% 
-#&gt;         dplyr::select(date, region, region_code, total_cases) %&gt;% 
-#&gt;         dplyr::arrange(date) %&gt;% dplyr::group_by(region) %&gt;% 
-#&gt;         dplyr::mutate(index = 1:dplyr::n(), cases = total_cases - 
-#&gt;             ifelse(index == 1, 0, dplyr::lag(total_cases))) %&gt;% 
-#&gt;         dplyr::ungroup() %&gt;% dplyr::select(-index, -total_cases) %&gt;% 
-#&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases))
-#&gt;     return(cases)
+#&gt;     if (length(d) == 1) {
+#&gt;         stop(paste0("No data found at: ", url, "\n Tried dates: ", 
+#&gt;             try_dates[1], ", ", try_dates[2]))
+#&gt;     }
+#&gt;     d &lt;- d %&gt;% dplyr::mutate(date = as.Date(DateRep), cases = Cases, 
+#&gt;         deaths = Deaths, country = Countries.and.territories, 
+#&gt;         geoid = GeoId) %&gt;% dplyr::select(date, cases, deaths, 
+#&gt;         country, geoid) %&gt;% dplyr::arrange(date) %&gt;% dplyr::mutate(cases = ifelse(cases &lt; 
+#&gt;         0, 0, cases))
+#&gt;     if (!is.null(countries)) {
+#&gt;         d &lt;- d %&gt;% dplyr::filter(country %in% countries)
+#&gt;     }
+#&gt;     return(d)
 #&gt; }
-#&gt; &lt;bytecode: 0x55c6f52500c8&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+#&gt; &lt;bytecode: 0x55c6f2eb4c30&gt;
+#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

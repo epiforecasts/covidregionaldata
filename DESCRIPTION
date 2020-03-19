@@ -1,5 +1,5 @@
 Package: NCoVUtils
-Title: Utility functions for the 2019-NCoV outbreak
+Title: Utility functions for the Covid-19 outbreak
 Version: 0.3.0
 Authors@R: c(
     person(given = "Sam Abbott",
@@ -10,6 +10,10 @@ Authors@R: c(
            email = "joel.hellewell@lshtm.ac.uk", 
            role = c("aut"),
            comment = c(ORCID = "0000-0003-2683-0849")),
+    person("Hamish", "Gibbs", 
+           email = "Hamish.Gibbs@lshtm.ac.uk", 
+           role = c("aut"),
+           comment = c(ORCID = "0000-0003-4413-453X")),     
     person("James", "Munday", 
            email = "james.munday@lshtm.ac.uk", 
            role = c("aut")),     
@@ -22,6 +26,7 @@ Depends:
     R (>= 2.10)
 Imports:
     readr,
+    gdata,
     dplyr,
     tibble,
     purrr,
