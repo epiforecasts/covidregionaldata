@@ -40,10 +40,10 @@ NCoVUtils::get_who_cases()
 Extract ECDC case and deaths counts using:
 
 ```r
-get_ecdc_cases()
+NCoVUtils::get_ecdc_cases()
 ```
 
-Extract total cases (and deaths) by regionusing:
+Extract total cases (and deaths) by region using:
 
 ```r
 NCoVUtils::get_total_cases()
