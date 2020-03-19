@@ -30,7 +30,8 @@ Imports:
     memoise,
     lubridate,
     data.table,
-    tidyr
+    tidyr,
+    sf
 Suggests:
     pkgdown,
     testthat
