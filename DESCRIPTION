@@ -45,6 +45,8 @@ Imports:
     httr,
     yaml,
     readxl
+    sf
+    
 Suggests:
     pkgdown,
     testthat,
