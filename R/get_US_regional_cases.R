@@ -33,8 +33,8 @@ get_US_regional_cases <- function(){
     dplyr::select(-index, -total_cases) %>%
     ## Adjust negative cases by setting to 0
     dplyr::mutate(cases = ifelse(cases < 0 , 0, cases)) %>%
-    dplyr::filter(region != "Grand Princess", region != "Diamond Princess")
-
+    dplyr::filter(region != "Grand Princess", region != "Diamond Princess") %>%
+    dplyr::full_join(data.frame(region = state.name, region_code = state.abb), by = "region")
 
   # Example plotting code
   # regions <- rnaturalearth::ne_states("United States of America", returnclass = "sf")
