@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_germany_regional_cases.R
 \name{get_germany_regional_cases}
 \alias{get_germany_regional_cases}
-\title{Get German daily cases by Bundesländer}
+\title{Get German daily cases by Bundeslander}
 \usage{
 get_germany_regional_cases()
 }
@@ -10,7 +10,7 @@ get_germany_regional_cases()
 A dataframe of case counts in German regions
 }
 \description{
-Get German daily cases by Bundesländer
+Get German daily cases by Bundeslander
 }
 \examples{
 
