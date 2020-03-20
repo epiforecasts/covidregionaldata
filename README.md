@@ -61,6 +61,12 @@ Extract regional case counts from Germany:
 NCoVUtils::get_germany_regional_cases()
 ```
 
+Extract regional case counts from the United States of America:
+
+```r
+NCoVUtils::get_US_regional_cases()
+```
+
 ## Development
 
 ### Set up

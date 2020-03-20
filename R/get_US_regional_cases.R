@@ -1,6 +1,8 @@
 
 #' Fetch daily COVID cases by state for United States of America
-#'
+#' @description Fetches daily COVID cases by state collated by the
+#' John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
+#' Data is available at https://github.com/CSSEGISandData/COVID-19
 #' @return
 #' @export
 #' @importFrom memoise cache_filesystem memoise

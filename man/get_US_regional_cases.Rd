@@ -10,7 +10,9 @@ get_US_regional_cases()
 
 }
 \description{
-Fetch daily COVID cases by state for United States of America
+Fetches daily COVID cases by state collated by the
+John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
+Data is available at https://github.com/CSSEGISandData/COVID-19
 }
 \examples{
 

@@ -33,6 +33,7 @@ reference:
       - get_total_cases
       - get_italy_regional_cases
       - get_germany_regional_cases
+      - get_US_regional_cases
 
   - title: Sample from the serial interval distribution
     desc: Functions that parameterise distributions based on a mean and standard deviation
