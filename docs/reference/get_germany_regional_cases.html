@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reset Cache and Update all Local Data — reset_cache • NCoVUtils</title>
+<title>Get German daily cases by Bundeslander — get_germany_regional_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Reset Cache and Update all Local Data — reset_cache" />
-<meta property="og:description" content="Reset Cache and Update all Local Data" />
+<meta property="og:title" content="Get German daily cases by Bundeslander — get_germany_regional_cases" />
+<meta property="og:description" content="Get German daily cases by Bundeslander" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,52 +109,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reset Cache and Update all Local Data</h1>
+    <h1>Get German daily cases by Bundeslander</h1>
     
-    <div class="hidden name"><code>reset_cache.Rd</code></div>
+    <div class="hidden name"><code>get_germany_regional_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reset Cache and Update all Local Data</p>
+    <p>Get German daily cases by Bundeslander</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reset_cache</span>(<span class='kw'>refresh_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_germany_regional_cases</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>refresh_data</th>
-      <td><p>Logical defaults to <code>FALSE</code>. Should all data sources be refreshed once the cache has been
-removed.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Null</p>
+    <p>A dataframe of case counts in German regions</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## Code</span>
-<span class='no'>reset_cache</span></div><div class='output co'>#&gt; function (refresh_data = FALSE) 
-#&gt; {
-#&gt;     unlink("cache", recursive = TRUE)
-#&gt;     cache &lt;- memoise::cache_filesystem(".cache")
-#&gt;     if (refresh_data) {
-#&gt;         tmp &lt;- NCoVUtils::get_international_linelist()
-#&gt;         tmp &lt;- NCoVUtils::get_who_cases()
-#&gt;         tmp &lt; -NCoVUtils::get_italy_regional_cases()
-#&gt;     }
-#&gt;     return(invisible(NULL))
-#&gt; }
-#&gt; &lt;bytecode: 0x5624ae9a30b8&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>country</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html'>ne_countries</a></span>(<span class='kw'>scale</span><span class='kw'>=</span><span class='st'>"large"</span>,
+                                        <span class='kw'>country</span> <span class='kw'>=</span> <span class='st'>"Germany"</span>,
+                                        <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>'sf'</span>)
+
+<span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rnaturalearth/man/ne_states.html'>ne_states</a></span>(<span class='st'>"Germany"</span>, <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>"sf"</span>)
+
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>get_germany_regional_cases</span>() <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>date</span> <span class='kw'>==</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>date</span>))
+
+<span class='no'>regions_with_data</span> <span class='kw'>&lt;-</span> <span class='no'>regions</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></span>(<span class='no'>data</span>,
+                  <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"iso_3166_2"</span> <span class='kw'>=</span> <span class='st'>"region_code"</span>))
+
+<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>regions_with_data</span>) +
+  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsf.html'>geom_sf</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>cases</span>))
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
