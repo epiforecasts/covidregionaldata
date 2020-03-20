@@ -28,18 +28,23 @@ get_ecdc_cases <- function(countries = NULL){
   #api may provide file for yesterday's or today's date - it depends on what time it is being accessed
   try_dates <- c(as.Date(Sys.time()) - 1, as.Date(Sys.time()))
 
-  for(i in 1:length(try_dates)){
+  for (i in 1:length(try_dates)) {
+
     date <- try_dates[i]
-
     url <- paste0(base_url, date, '.xls')
+    d <- suppressWarnings(try(tibble::as_tibble(mem_read(url)), silent = TRUE))
 
-    d <- try(tibble::as_tibble(mem_read(url)), silent = TRUE)
+    # if try-error, try again with extension .xlsx
+    if ("try-error" %in% class(d)) {
+      url <- paste0(base_url, date, '.xlsx')
+      d <- suppressWarnings(try(tibble::as_tibble(mem_read(url)), silent = TRUE))
+    }
 
-    if(length(d) > 1){break}
+    if (!"try-error" %in% class(d)) { break }
 
   }
 
-  if(length(d) == 1){
+  if (length(d) == 1) {
     stop(paste0('No data found at: ', url,
                 '\n Tried dates: ', try_dates[1], ', ', try_dates[2]))
   }
@@ -54,7 +59,7 @@ get_ecdc_cases <- function(countries = NULL){
     dplyr::arrange(date) %>%
     dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
 
-  if(!is.null(countries)) {
+  if (!is.null(countries)) {
     d <- d %>%
       dplyr::filter(country %in% countries)
   }
