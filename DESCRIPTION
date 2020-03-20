@@ -20,6 +20,9 @@ Authors@R: c(
     person("Patrick", "Barks",
        email = "patrick.barks@epicentre.msf.org",
        role = c("ctb")),
+    person("Paul", "Campbell",
+       email = " paul.campbell@epicentre.msf.org",
+       role = c("ctb")),
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))

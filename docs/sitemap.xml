@@ -7,6 +7,9 @@
     <loc>epiforecasts.io/NCoVUtils//reference/get_ecdc_cases.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/get_france_regional_cases.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/NCoVUtils//reference/get_germany_regional_cases.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/NCoVUtils//reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/read_spf_regions_yaml.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/NCoVUtils//reference/reset_cache.html</loc>

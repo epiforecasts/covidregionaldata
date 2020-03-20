@@ -4,16 +4,14 @@
 \alias{get_total_cases}
 \title{Get Total Cases by Country}
 \usage{
-get_total_cases()
+get_total_cases(source = "WHO")
+}
+\arguments{
+\item{source}{Character String specifying data source for total cases "WHO", "ECDC", default: "WHO".}
 }
 \value{
 Returns a data frame of variables along with their most recent value.
 }
 \description{
 Get Total Cases by Country
-}
-\examples{
-
-
-get_total_cases()
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mean and standard deviation parameterised gamma sampling function — rgamma_with_mean_sd • NCoVUtils</title>
+<title>French Regional Daily Case Counts — get_france_regional_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Mean and standard deviation parameterised gamma sampling function — rgamma_with_mean_sd" />
-<meta property="og:description" content="Mean and standard deviation parameterised gamma sampling function" />
+<meta property="og:title" content="French Regional Daily Case Counts — get_france_regional_cases" />
+<meta property="og:description" content="Data from Santé Publique France https://github.com/opencovid19-fr/data" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,65 +109,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mean and standard deviation parameterised gamma sampling function</h1>
+    <h1>French Regional Daily Case Counts</h1>
     
-    <div class="hidden name"><code>rgamma_with_mean_sd.Rd</code></div>
+    <div class="hidden name"><code>get_france_regional_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Mean and standard deviation parameterised gamma sampling function</p>
+    <p>Data from Santé Publique France https://github.com/opencovid19-fr/data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rgamma_with_mean_sd</span>(<span class='no'>n</span>, <span class='no'>mean</span>, <span class='no'>sd</span>)</pre>
+    <pre class="usage"><span class='fu'>get_france_regional_cases</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>n</th>
-      <td><p>Numeric, the number of samples to take.</p></td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td><p>Numeric, the mean of the distribution.</p></td>
-    </tr>
-    <tr>
-      <th>sd</th>
-      <td><p>Numeric the standard deviation of the distribution.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of samples from the gamma distribution</p>
+    <p>A dataframe of daily French regional case counts.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## Example </span>
-<span class='no'>sample</span> <span class='kw'>&lt;-</span> <span class='fu'>rgamma_with_mean_sd</span>(<span class='fl'>1000</span>, <span class='fl'>2</span>, <span class='fl'>3</span>)
-
-
-<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>sample</span>)</div><div class='output co'>#&gt; [1] 1.922839</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span>(<span class='no'>sample</span>)</div><div class='output co'>#&gt; [1] 2.818425</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>sample</span>)</div><div class='img'><img src='rgamma_with_mean_sd-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## Code </span>
-<span class='no'>rgamma_with_mean_sd</span></div><div class='output co'>#&gt; function (n, mean, sd) 
+<span class='co'>## Code</span>
+<span class='no'>get_france_regional_cases</span></div><div class='output co'>#&gt; function () 
 #&gt; {
-#&gt;     theta &lt;- sd^2/mean
-#&gt;     k &lt;- mean/theta
-#&gt;     stats::rgamma(n, shape = k, scale = theta)
+#&gt;     spf_url &lt;- "https://api.github.com/repos/opencovid19-fr/data/contents/sante-publique-france"
+#&gt;     spf_ls &lt;- httr::GET(spf_url) %&gt;% httr::content() %&gt;% purrr::map_chr("download_url")
+#&gt;     ch &lt;- memoise::cache_filesystem(".cache")
+#&gt;     mem_read_spf_regions &lt;- memoise::memoise(read_spf_regions_yaml, 
+#&gt;         cache = ch)
+#&gt;     df_spf &lt;- spf_ls %&gt;% purrr::map_dfr(mem_read_spf_regions) %&gt;% 
+#&gt;         dplyr::group_by(region) %&gt;% dplyr::arrange(date) %&gt;% 
+#&gt;         dplyr::mutate(cases = c(cases[1], diff(cases))) %&gt;% dplyr::ungroup()
+#&gt;     return(df_spf)
 #&gt; }
-#&gt; &lt;bytecode: 0x562b9403ddd0&gt;
+#&gt; &lt;bytecode: 0x562b95b40828&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Paul Campbell <a href='mailto:paul.campbell@epicentre.msf.org'>paul.campbell@epicentre.msf.org</a></p>
   </div>
 </div>
 
