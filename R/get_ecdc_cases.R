@@ -26,19 +26,28 @@ get_ecdc_cases <- function(countries = NULL){
   # api may provide file for yesterday's or today's date - it depends on what time it is being accessed
   try_dates <- c(as.Date(Sys.time()), as.Date(Sys.time()) - 1)
 
+  ## Set up caching
+  ch <- memoise::cache_filesystem(".cache")
+
+  mem_download_file <- memoise::memoise(download.file, cache = ch)
+
   # try each combination of date/extension until successful
   for (i in 1:length(try_dates)) {
 
     date <- try_dates[i]
     filename <- paste0(base_file, try_dates[i], ".xls")
     url <- paste0(base_url, filename)
-    dl <- suppressWarnings(try(download.file(url, file.path(temp, filename)), silent = TRUE))
+    dl <- suppressMessages(
+      suppressWarnings(try(mem_download_file(url, file.path(temp, filename)), silent = TRUE))
+    )
 
     # if try-error, try again with extension .xlsx
     if (class(dl) == "try-error") {
       filename <- paste0(base_file, try_dates[i], ".xlsx")
       url <- paste0(base_url, filename)
-      dl <- suppressWarnings(try(download.file(url, file.path(temp, filename)), silent = TRUE))
+      dl <- suppressMessages(
+        suppressWarnings(try(mem_download_file(url, file.path(temp, filename)), silent = TRUE))
+      )
     }
 
     if (class(dl) != "try-error") { break }
