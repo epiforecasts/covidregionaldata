@@ -35,7 +35,8 @@ Imports:
     memoise,
     lubridate,
     data.table,
-    tidyr
+    tidyr,
+    readxl
 Suggests:
     pkgdown,
     testthat

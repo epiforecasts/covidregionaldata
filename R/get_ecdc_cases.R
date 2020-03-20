@@ -3,10 +3,9 @@
 #' @return A dataframe of International case counts published by ECDC.
 #' @export
 #' @inheritParams get_international_linelist
-#' @importFrom gdata read.xls
-#' @importFrom memoise cache_filesystem memoise
+#' @importFrom readxl read_excel
 #' @importFrom dplyr mutate select filter arrange
-#' @importFrom tibble as_tibble
+#' @importFrom lubridate is.POSIXt
 #' @examples
 #'
 #'
@@ -17,43 +16,45 @@
 #' get_ecdc_cases
 get_ecdc_cases <- function(countries = NULL){
 
-  #url to ecdc api
-  base_url = 'http://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-'
+  # url to ecdc api (note typo in "distribution" is from ECDC)
+  base_url <- 'http://www.ecdc.europa.eu/sites/default/files/documents/'
+  base_file <- "COVID-19-geographic-disbtribution-worldwide-"
 
-  #set up cache
-  ch <- memoise::cache_filesystem(".cache")
+  # temporary directory to download files
+  temp <- tempdir()
 
-  mem_read <- memoise::memoise(gdata::read.xls, cache = ch)
+  # api may provide file for yesterday's or today's date - it depends on what time it is being accessed
+  try_dates <- c(as.Date(Sys.time()), as.Date(Sys.time()) - 1)
 
-  #api may provide file for yesterday's or today's date - it depends on what time it is being accessed
-  try_dates <- c(as.Date(Sys.time()) - 1, as.Date(Sys.time()))
-
+  # try each combination of date/extension until successful
   for (i in 1:length(try_dates)) {
 
     date <- try_dates[i]
-    url <- paste0(base_url, date, '.xls')
-    d <- suppressWarnings(try(tibble::as_tibble(mem_read(url)), silent = TRUE))
+    filename <- paste0(base_file, try_dates[i], ".xls")
+    url <- paste0(base_url, filename)
+    dl <- suppressWarnings(try(download.file(url, file.path(temp, filename)), silent = TRUE))
 
     # if try-error, try again with extension .xlsx
-    if ("try-error" %in% class(d)) {
-      url <- paste0(base_url, date, '.xlsx')
-      d <- suppressWarnings(try(tibble::as_tibble(mem_read(url)), silent = TRUE))
+    if (class(dl) == "try-error") {
+      filename <- paste0(base_file, try_dates[i], ".xlsx")
+      url <- paste0(base_url, filename)
+      dl <- suppressWarnings(try(download.file(url, file.path(temp, filename)), silent = TRUE))
     }
 
-    if (!"try-error" %in% class(d)) { break }
-
+    if (class(dl) != "try-error") { break }
   }
 
-  if (length(d) == 1) {
+  if (class(dl) == "try-error") {
     stop(paste0('No data found at: ', url,
                 '\n Tried dates: ', try_dates[1], ', ', try_dates[2]))
   }
 
-  d <- d %>%
+  d <- readxl::read_excel(file.path(temp, filename)) %>%
+    dplyr::mutate_if(lubridate::is.POSIXt, as.Date) %>%
     dplyr::mutate(date = as.Date(DateRep),
                   cases = Cases,
                   deaths = Deaths,
-                  country = Countries.and.territories,
+                  country = `Countries and territories`,
                   geoid = GeoId) %>%
     dplyr::select(date, cases, deaths, country, geoid) %>%
     dplyr::arrange(date) %>%
