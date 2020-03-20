@@ -29,6 +29,7 @@ reference:
       - get_linelist
       - get_international_linelist
       - get_who_cases
+      - get_ecdc_cases
       - get_total_cases
       - get_italy_regional_cases
 
