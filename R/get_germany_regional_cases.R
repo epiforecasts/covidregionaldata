@@ -1,4 +1,4 @@
-#' Get German daily cases by Bundesländer
+#' Get German daily cases by Bundeslander
 #'
 #' @return A dataframe of case counts in German regions
 #' @export
@@ -47,7 +47,7 @@ get_germany_regional_cases <- function() {
     ## Adjust negative cases by setting to 0
     dplyr::mutate(cases = ifelse(cases < 0 , 0, cases),
                   region = dplyr::recode(region_code,
-                                         "DE-BW" = "Baden-Württemberg",
+                                         "DE-BW" = "Baden-Wurttemberg",
                                          "DE-BY" = "Bavaria",
                                          "DE-BE" = "Berlin",
                                          "DE-BB" = "Brandenburg",
