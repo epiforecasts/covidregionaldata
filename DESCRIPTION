@@ -35,7 +35,9 @@ Imports:
     memoise,
     lubridate,
     data.table,
-    tidyr
+    tidyr,
+    httr,
+    yaml
 Suggests:
     pkgdown,
     testthat
