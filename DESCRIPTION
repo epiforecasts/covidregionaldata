@@ -39,6 +39,8 @@ Imports:
     lubridate,
     data.table,
     tidyr,
+    httr,
+    yaml,
     readxl
 Suggests:
     pkgdown,
