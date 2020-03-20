@@ -65,17 +65,17 @@ get_italy_regional_cases <- function() {
 
   cases <- cases %>% dplyr::mutate(region = dplyr::recode(region, "P.A. Trento" = "Trentino-Alto Adige",
                                         "P.A. Bolzano" = "Trentino-Alto Adige")) %>%
-    dplyr::group_by(region) %>%
+    dplyr::group_by(region, date) %>%
     dplyr::summarise(region_code = region_code[1],
-                     date = date[1],
-                     cases = sum(cases))
+                     cases = sum(cases)) %>%
+    dplyr::ungroup()
 
-  cases$region_code <- c(15, 10, 11,
-                         1, 21, 20,
-                         6, 8, 17,
-                         14, 18, 13,
-                         9, 2, 4, 3, 19,
-                          16, 12, 5)
+  # cases$region_code <- c(15, 10, 11,
+  #                        1, 21, 20,
+  #                        6, 8, 17,
+  #                        14, 18, 13,
+  #                        9, 2, 4, 3, 19,
+  #                         16, 12, 5)
 
 
   return(cases)
