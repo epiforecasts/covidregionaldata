@@ -1,6 +1,7 @@
 
 #' Italian Regional Case Counts
-#'
+#' @description Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
+#' and is available on github: https://github.com/pcm-dpc/COVID-19
 #' @return A dataframe of Italian regional case counts.
 #' @export
 #' @importFrom readr read_csv

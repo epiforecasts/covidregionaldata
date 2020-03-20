@@ -10,7 +10,9 @@ get_germany_regional_cases()
 A dataframe of case counts in German regions
 }
 \description{
-Get German daily cases by Bundeslander
+Fetches COVID case counts by region in Germany.
+This data was collated by Jan-Philip Gehrcke (gh: jgehrcke) and is available at:
+https://github.com/jgehrcke/covid-19-germany-gae
 }
 \examples{
 

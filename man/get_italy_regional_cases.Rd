@@ -10,7 +10,8 @@ get_italy_regional_cases()
 A dataframe of Italian regional case counts.
 }
 \description{
-Italian Regional Case Counts
+Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
+and is available on github: https://github.com/pcm-dpc/COVID-19
 }
 \examples{
 

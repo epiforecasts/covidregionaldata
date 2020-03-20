@@ -1,5 +1,7 @@
 #' Get German daily cases by Bundeslander
-#'
+#' @description Fetches COVID case counts by region in Germany.
+#' This data was collated by Jan-Philip Gehrcke (gh: jgehrcke) and is available at:
+#' https://github.com/jgehrcke/covid-19-germany-gae
 #' @return A dataframe of case counts in German regions
 #' @export
 #' @importFrom memoise cache_filesystem memoise

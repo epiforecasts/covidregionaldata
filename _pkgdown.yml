@@ -33,6 +33,7 @@ reference:
       - get_total_cases
       - get_italy_regional_cases
       - get_germany_regional_cases
+      - get_us_regional_cases
       - get_france_regional_cases
 
   - title: Sample from the serial interval distribution
