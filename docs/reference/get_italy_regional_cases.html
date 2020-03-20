@@ -143,7 +143,7 @@
 #&gt;     end_date &lt;- as.Date(Sys.Date() - 1)
 #&gt;     dates &lt;- seq(start_date, end_date, by = "day")
 #&gt;     cases &lt;- purrr::map_dfr(dates, get_daily_files)
-#&gt;     cases &lt;- cases %&gt;% dplyr::mutate(date = as.Date(data), region = denominazione_regione, 
+#&gt;     cases &lt;- cases %&gt;% dplyr::mutate(date = as.Date(data), region = as.character(denominazione_regione), 
 #&gt;         region_code = codice_regione, total_cases = totale_casi) %&gt;% 
 #&gt;         dplyr::select(date, region, region_code, total_cases) %&gt;% 
 #&gt;         dplyr::arrange(date) %&gt;% dplyr::group_by(region) %&gt;% 
@@ -151,9 +151,21 @@
 #&gt;             ifelse(index == 1, 0, dplyr::lag(total_cases))) %&gt;% 
 #&gt;         dplyr::ungroup() %&gt;% dplyr::select(-index, -total_cases) %&gt;% 
 #&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases))
+#&gt;     cases &lt;- cases %&gt;% dplyr::mutate(region = dplyr::recode(region, 
+#&gt;         `P.A. Trento` = "Trentino-Alto Adige", `P.A. Bolzano` = "Trentino-Alto Adige") %&gt;% 
+#&gt;         as.character()) %&gt;% dplyr::group_by(region, date) %&gt;% 
+#&gt;         dplyr::summarise(cases = sum(cases)) %&gt;% dplyr::ungroup()
+#&gt;     regions &lt;- data.frame(region = c("Abruzzo", "Basilicata", 
+#&gt;         "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", 
+#&gt;         "Lazio", "Lombardia", "Marche", "Molise", "P.A. Bolzano", 
+#&gt;         "P.A. Trento", "Piemonte", "Puglia", "Sardegna", "Sicilia", 
+#&gt;         "Toscana", "Umbria", "Valle d'Aosta", "Veneto"), region_code = c(15, 
+#&gt;         10, 11, 1, 21, 20, 6, 8, 17, 14, 18, 13, 9, 2, 4, 3, 
+#&gt;         19, 16, 12, 5), stringsAsFactors = FALSE)
+#&gt;     cases &lt;- cases %&gt;% dplyr::left_join(regions, by = "region")
 #&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x556401096c88&gt;
+#&gt; &lt;bytecode: 0x5624aec8be78&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

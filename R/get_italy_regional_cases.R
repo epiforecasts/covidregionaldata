@@ -6,7 +6,7 @@
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd
 #' @importFrom purrr map_dfr
-#' @importFrom dplyr mutate select arrange group_by n lag ungroup
+#' @importFrom dplyr mutate select arrange group_by n lag ungroup left_join
 #' @importFrom memoise cache_filesystem memoise
 #' @examples
 #'
@@ -48,7 +48,7 @@ get_italy_regional_cases <- function() {
   ## Clean variables
   cases <- cases %>%
     dplyr::mutate(date = as.Date(data),
-                  region = denominazione_regione,
+                  region = as.character(denominazione_regione),
                   region_code = codice_regione,
                   total_cases = totale_casi) %>%
     dplyr::select(date, region, region_code, total_cases) %>%
@@ -63,8 +63,27 @@ get_italy_regional_cases <- function() {
     dplyr::mutate(cases = ifelse(cases < 0 , 0, cases))
 
 
+  cases <- cases %>%
+    dplyr::mutate(region = dplyr::recode(region, "P.A. Trento" = "Trentino-Alto Adige",
+                                        "P.A. Bolzano" = "Trentino-Alto Adige") %>%
+                    as.character()) %>%
+    dplyr::group_by(region, date) %>%
+    dplyr::summarise(cases = sum(cases)) %>%
+    dplyr::ungroup()
+
+
+  regions <-  data.frame(region = c("Abruzzo", "Basilicata", "Calabria",
+                            "Campania", "Emilia Romagna", "Friuli Venezia Giulia",
+                            "Lazio", "Lombardia", "Marche", "Molise", "P.A. Bolzano",
+                            "P.A. Trento", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
+                            "Umbria", "Valle d'Aosta", "Veneto"),
+                         region_code = c(15, 10, 11, 1, 21, 20, 6, 8, 17, 14,
+                                        18, 13, 9, 2, 4, 3, 19, 16, 12, 5),
+                         stringsAsFactors = FALSE)
+
+  cases <- cases %>%
+    dplyr::left_join(regions, by = "region")
+
   return(cases)
-
-
 }
 

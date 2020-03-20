@@ -16,7 +16,10 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-4413-453X")),     
     person("James", "Munday", 
            email = "james.munday@lshtm.ac.uk", 
-           role = c("aut")),     
+           role = c("aut")), 
+    person("Patrick", "Barks",
+       email = "patrick.barks@epicentre.msf.org",
+       role = c("ctb")),
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))
@@ -37,7 +40,8 @@ Imports:
     data.table,
     tidyr,
     httr,
-    yaml
+    yaml,
+    readxl
 Suggests:
     pkgdown,
     testthat
