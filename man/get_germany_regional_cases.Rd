@@ -14,4 +14,23 @@ Get German daily cases by Bundeslander
 }
 \examples{
 
+
+\dontrun{
+country <- rnaturalearth::ne_countries(scale="large",
+                                        country = "Germany",
+                                        returnclass = 'sf')
+
+regions <- rnaturalearth::ne_states("Germany", returnclass = "sf")
+
+data <- get_germany_regional_cases() \%>\%
+  dplyr::filter(date == max(date))
+
+regions_with_data <- regions \%>\%
+  dplyr::left_join(data,
+                  by = c("iso_3166_2" = "region_code"))
+
+ggplot2::ggplot(regions_with_data) +
+  ggplot2::geom_sf(ggplot2::aes(fill = cases))
+
+}
 }

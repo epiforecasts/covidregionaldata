@@ -7,6 +7,25 @@
 #' @importFrom tidyr gather
 #' @examples
 #'
+#'
+#'\dontrun{
+#'country <- rnaturalearth::ne_countries(scale="large",
+#'                                         country = "Germany",
+#'                                         returnclass = 'sf')
+#'
+#'regions <- rnaturalearth::ne_states("Germany", returnclass = "sf")
+#'
+#'data <- get_germany_regional_cases() %>%
+#'   dplyr::filter(date == max(date))
+#'
+#'regions_with_data <- regions %>%
+#'   dplyr::left_join(data,
+#'                   by = c("iso_3166_2" = "region_code"))
+#'
+#'ggplot2::ggplot(regions_with_data) +
+#'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
+#'
+#'}
 get_germany_regional_cases <- function() {
 
   path <- "https://raw.githubusercontent.com/jgehrcke/covid-19-germany-gae/master/data.csv"
@@ -40,6 +59,7 @@ get_germany_regional_cases <- function() {
     tidyr::gather(key = "region_code", value = "total_cases", -date) %>%
     dplyr::group_by(region_code) %>%
     dplyr::mutate(
+      date = as.Date(date),
       index = 1:dplyr::n(),
       cases = total_cases - ifelse(index == 1, 0, dplyr::lag(total_cases))) %>%
     dplyr::ungroup() %>%
@@ -65,24 +85,6 @@ get_germany_regional_cases <- function() {
                                          "DE-TH" = "Thuringia"))
 
 
-  # EXAMPLE PLOTTING DATA
-
-  # country <- rnaturalearth::ne_countries(scale="large",
-  #                                        country = "Germany",
-  #                                        returnclass = 'sf')
-  #
-  # regions <- rnaturalearth::ne_states("Germany", returnclass = "sf")
-  #
-  # tdate <- cases$date[1]
-  # data <- cases %>% dplyr::filter(date == tdate)
-  #
-  # regions_with_data <- regions %>%
-  #   dplyr::left_join(data,
-  #                    by = c("iso_3166_2" = "region_code"))
-  #
-  #   ggplot2::ggplot(regions_with_data) +
-  #   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 
   return(cases)
-
 }
