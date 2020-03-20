@@ -100,6 +100,8 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_france_regional_cases.html">get_france_regional_cases</a></span>()</a></code></pre></div>
 <p>Extract regional case counts from Germany:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_germany_regional_cases.html">get_germany_regional_cases</a></span>()</a></code></pre></div>
+<p>Extract regional case counts from the United States of America:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_us_regional_cases.html">get_us_regional_cases</a></span>()</a></code></pre></div>
 </div>
 <div id="development" class="section level2">
 <h2 class="hasAnchor">
@@ -108,22 +110,22 @@
 <h3 class="hasAnchor">
 <a href="#set-up" class="anchor"></a>Set up</h3>
 <p>Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="render-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#render-documentation" class="anchor"></a>Render documentation</h3>
 <p>Render the documentation with the following:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">Rscript</span> inst/scripts/render_output.R</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">Rscript</span> inst/scripts/render_output.R</a></code></pre></div>
 </div>
 <div id="docker" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker" class="anchor"></a>Docker</h3>
 <p>This package is developed in a docker container based on the tidyverse docker image.</p>
 <p>To build the docker image run (from the <code>NCoVUtils</code> directory):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">docker</span> build . -t ncovutils</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">docker</span> build . -t ncovutils</a></code></pre></div>
 <p>To run the docker image run:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">docker</span> run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ex">docker</span> run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils</a></code></pre></div>
 <p>The rstudio client can be found on port :8787 at your local machines ip. The default username:password is ncovutils:ncovutils, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.</p>
 <p>To mount a folder (from your current working directory - here assumed to be <code>tmp</code>) in the docker container to your local system use the following in the above docker run command (as given mounts the whole <code>ncovutils</code> directory to <code>tmp</code>).</p>
 <p><code>{bash, eval = FALSE} --mount type=bind,source=$(pwd)/tmp,target=/home/ncovutils</code></p>
@@ -166,6 +168,7 @@
 <ul class="list-unstyled">
 <li><a href="https://mybinder.org/v2/gh/epiforecasts/NCoVUtils/master?urlpath=rstudio"><img src="https://img.shields.io/badge/Launch-package-lightblue.svg" alt="badge"></a></li>
 <li><a href="https://travis-ci.com/epiforecasts/NCoVUtils"><img src="https://travis-ci.com/epiforecasts/NCoVUtils.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://codecov.io/gh/epiforecasts/NCoVUtils?branch=master"><img src="https://codecov.io/gh/epiforecasts/NCoVUtils/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/epiforecasts/NCoVUtils"><img src="https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat" alt="develVersion"></a></li>
 <li><a href="https://epiforecasts.io/NCoVUtils"><img src="https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat" alt="Documentation"></a></li>
 <li><a href="https://zenodo.org/badge/latestdoi/238177228"><img src="https://zenodo.org/badge/238177228.svg" alt="DOI"></a></li>

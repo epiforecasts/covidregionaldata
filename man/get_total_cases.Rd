@@ -15,3 +15,11 @@ Returns a data frame of variables along with their most recent value.
 \description{
 Get Total Cases by Country
 }
+\examples{
+
+## Total cases sourced from the WHO
+get_total_cases(source = "WHO")
+
+## Total cases sourced from ECDC
+get_total_cases(source = "ECDC")
+}

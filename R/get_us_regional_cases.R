@@ -16,6 +16,8 @@
 #'
 #'  regions <- rnaturalearth::ne_states("United States of America", returnclass = "sf")
 #'
+#'  cases <- get_us_regional_cases()
+#'
 #'  regions %>% dplyr::filter(name %in% cases$region) %>%
 #'  ggplot2::ggplot() + ggplot2::geom_sf()
 #'

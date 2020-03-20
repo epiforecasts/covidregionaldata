@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>French Regional Daily Case Counts — get_france_regional_cases • NCoVUtils</title>
+<title>Fetch daily COVID cases by state for United States of America — get_us_regional_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="French Regional Daily Case Counts — get_france_regional_cases" />
-<meta property="og:description" content="Data from Santé Publique France https://github.com/opencovid19-fr/data" />
+<meta property="og:title" content="Fetch daily COVID cases by state for United States of America — get_us_regional_cases" />
+<meta property="og:description" content="Fetches daily COVID cases by state collated by the
+John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
+Data is available at https://github.com/CSSEGISandData/COVID-19" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,39 +111,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>French Regional Daily Case Counts</h1>
+    <h1>Fetch daily COVID cases by state for United States of America</h1>
     
-    <div class="hidden name"><code>get_france_regional_cases.Rd</code></div>
+    <div class="hidden name"><code>get_us_regional_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Data from Santé Publique France https://github.com/opencovid19-fr/data</p>
+    <p>Fetches daily COVID cases by state collated by the
+John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
+Data is available at https://github.com/CSSEGISandData/COVID-19</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_france_regional_cases</span>()</pre>
+    <pre class="usage"><span class='fu'>get_us_regional_cases</span>()</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of daily French regional case counts.</p>
+    <p>A data.frame of COVID cases by region in the US</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## Code</span>
-<span class='no'>get_france_regional_cases</span></div><div class='output co'>#&gt; function () 
+    <pre class="examples"><div class='input'><span class='no'>get_us_regional_cases</span></div><div class='output co'>#&gt; function () 
 #&gt; {
-#&gt;     spf_url &lt;- "https://api.github.com/repos/opencovid19-fr/data/contents/sante-publique-france"
-#&gt;     spf_ls &lt;- httr::GET(spf_url) %&gt;% httr::content() %&gt;% purrr::map_chr("download_url")
+#&gt;     path &lt;- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_read_spf_regions &lt;- memoise::memoise(read_spf_regions_yaml, 
-#&gt;         cache = ch)
-#&gt;     df_spf &lt;- spf_ls %&gt;% purrr::map_dfr(mem_read_spf_regions) %&gt;% 
-#&gt;         dplyr::group_by(region) %&gt;% dplyr::arrange(date) %&gt;% 
-#&gt;         dplyr::mutate(cases = c(cases[1], diff(cases))) %&gt;% dplyr::ungroup()
-#&gt;     return(df_spf)
+#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
+#&gt;     cases &lt;- mem_read(path)
+#&gt;     cases &lt;- cases %&gt;% dplyr::filter(`Province/State` %in% state.name) %&gt;% 
+#&gt;         dplyr::select(-`Country/Region`, -Lat, -Long, region = `Province/State`) %&gt;% 
+#&gt;         tidyr::gather(key = "date", value = "total_cases", -region) %&gt;% 
+#&gt;         dplyr::mutate(date = lubridate::mdy(date)) %&gt;% dplyr::arrange(date) %&gt;% 
+#&gt;         dplyr::group_by(region) %&gt;% dplyr::mutate(index = 1:dplyr::n(), 
+#&gt;         cases = total_cases - ifelse(index == 1, 0, dplyr::lag(total_cases))) %&gt;% 
+#&gt;         dplyr::ungroup() %&gt;% dplyr::select(-index, -total_cases) %&gt;% 
+#&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases)) %&gt;% 
+#&gt;         dplyr::filter(region != "Grand Princess", region != "Diamond Princess") %&gt;% 
+#&gt;         dplyr::full_join(data.frame(region = state.name, region_code = state.abb), 
+#&gt;             by = "region")
+#&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x55ea14e9cf28&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+#&gt; &lt;bytecode: 0x55ea148e3788&gt;
+#&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
+ <span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rnaturalearth/man/ne_states.html'>ne_states</a></span>(<span class='st'>"United States of America"</span>, <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>"sf"</span>)
+
+ <span class='no'>cases</span> <span class='kw'>&lt;-</span> <span class='fu'>get_us_regional_cases</span>()
+
+ <span class='no'>regions</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>name</span> <span class='kw'>%in%</span> <span class='no'>cases</span>$<span class='no'>region</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>() + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsf.html'>geom_sf</a></span>()
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -150,8 +169,6 @@
       <li><a href="#examples">Examples</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Paul Campbell <a href='mailto:paul.campbell@epicentre.msf.org'>paul.campbell@epicentre.msf.org</a></p>
   </div>
 </div>
 
