@@ -14,6 +14,14 @@ get_uk_nhs_region_cases <- function() {
 
   cases <- readr::read_csv(file = path)
 
+
+  locations <- c("London","South East","South West","East of England","Midlands",
+                 "North East and Yorkshire", "North West", "Ayrshire and Arran",
+                 "Borders", "Dumfries and Gallow",
+                 "Fife", "Forth Valley", "Grampian", "Greater Glasgow and Clyde",
+                 "Highlands", "Lanarkshire", "Lothian", "Shetland", "Tayside",
+                 "Wales", "Northern Ireland", "Orkney", "Western Isles")
+
   # Filter to only NHS regions
   cases_nhs <- cases %>%
     dplyr::mutate(date = stringr::str_replace_all(Date,pattern = "\\.",replacement = "/")) %>%
@@ -27,7 +35,10 @@ get_uk_nhs_region_cases <- function() {
                               "Highlands", "Lanarkshire", "Lothian", "Shetland", "Tayside",
                               "Wales", "Northern Ireland")) %>%
     dplyr::mutate(UTLA = dplyr::recode(UTLA,"Dumfries and Gallow" = "Dumfries and Galloway",
-                                       "Highlands" = "Highland")) %>%
+                                       "Highlands" = "Highland"),
+                  date = lubridate::dmy(date)) %>%
+    tidyr::complete(UTLA = locations,
+                    date = seq(min(date), max(date), by = "day")) %>%
     dplyr::mutate(confirm = tidyr::replace_na(confirm, 0))
 
 
@@ -37,7 +48,7 @@ get_uk_nhs_region_cases <- function() {
     dplyr::select(region = UTLA,
                   total_cases = confirm,
                   date) %>%
-    dplyr::mutate(date = as.Date(date, format = "%d/%m/%Y")) %>%
+    # dplyr::mutate(date = as.Date(date, format = "%d/%m/%Y")) %>%
     dplyr::arrange(date) %>%
     dplyr::group_by(region) %>%
     dplyr::mutate(
