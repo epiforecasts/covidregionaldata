@@ -13,5 +13,5 @@ A dataframe of case counts in English NHS regions
 Get English daily cases by NHS region
 }
 \examples{
-
+get_uk_nhs_region_cases
 }

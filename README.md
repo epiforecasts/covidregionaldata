@@ -74,6 +74,12 @@ Extract regional case counts from the United States of America:
 NCoVUtils::get_us_regional_cases()
 ```
 
+Extract regional case counts by NHS region from England and Scotland, as well as country-level from Wales and Northern Ireland:
+
+```r
+NCoVUtils::get_uk_nhs_region_cases()
+```
+
 ## Development
 
 ### Set up
