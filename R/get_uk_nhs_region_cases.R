@@ -17,9 +17,9 @@ get_uk_nhs_region_cases <- function() {
 
   locations <- c("London","South East","South West","East of England","Midlands",
                  "North East and Yorkshire", "North West", "Ayrshire and Arran",
-                 "Borders", "Dumfries and Gallow",
+                 "Borders", "Dumfries and Galloway",
                  "Fife", "Forth Valley", "Grampian", "Greater Glasgow and Clyde",
-                 "Highlands", "Lanarkshire", "Lothian", "Shetland", "Tayside",
+                 "Highland", "Lanarkshire", "Lothian", "Shetland", "Tayside",
                  "Wales", "Northern Ireland", "Orkney", "Western Isles")
 
   # Filter to only NHS regions
