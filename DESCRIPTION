@@ -44,9 +44,8 @@ Imports:
     tidyr,
     httr,
     yaml,
-    readxl
+    readxl,
     sf
-    
 Suggests:
     pkgdown,
     testthat,
