@@ -45,7 +45,6 @@ Imports:
     httr,
     yaml,
     readxl,
-    sf
     R.utils
 Suggests:
     pkgdown,

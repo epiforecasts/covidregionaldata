@@ -14,4 +14,13 @@ Get English daily cases by NHS region
 }
 \examples{
 get_uk_nhs_region_cases
+
+\dontrun{
+uk_shp <- readRDS("uk_shp.rds")
+cases <- NCoVUtils::get_uk_nhs_region_cases()
+cases <- cases[1:23,]
+uk_shp \%>\%
+dplyr::full_join(cases, by = "region") \%>\%
+ ggplot2::ggplot(ggplot2::aes(fill = cases)) + ggplot2::geom_sf()
+}
 }
