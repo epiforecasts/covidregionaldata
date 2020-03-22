@@ -4,6 +4,8 @@
 * Added a function to extract case counts by region for Italy.
 * Function to extract ECDC cases. 
 * Added a function to extract case counts by region in Germany.
+* Fixed cache reset. 
+* Added a `NCoVUtils` cache of the public linelist as a fall back option if the source is not available.
 
 # NCoVUtils 0.2.0
 

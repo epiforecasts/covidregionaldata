@@ -139,16 +139,16 @@ removed.</p></td>
 <span class='co'>## Code</span>
 <span class='no'>reset_cache</span></div><div class='output co'>#&gt; function (refresh_data = FALSE) 
 #&gt; {
-#&gt;     unlink("cache", recursive = TRUE)
+#&gt;     unlink(".cache", recursive = TRUE)
 #&gt;     cache &lt;- memoise::cache_filesystem(".cache")
 #&gt;     if (refresh_data) {
 #&gt;         tmp &lt;- NCoVUtils::get_international_linelist()
 #&gt;         tmp &lt;- NCoVUtils::get_who_cases()
-#&gt;         tmp &lt; -NCoVUtils::get_italy_regional_cases()
+#&gt;         tmp &lt;- NCoVUtils::get_italy_regional_cases()
 #&gt;     }
 #&gt;     return(invisible(NULL))
 #&gt; }
-#&gt; &lt;bytecode: 0x55ea14cb0d88&gt;
+#&gt; &lt;bytecode: 0x558a1b37ae20&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

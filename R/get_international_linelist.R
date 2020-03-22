@@ -15,7 +15,7 @@
 #' @importFrom tibble tibble
 #' @importFrom tidyr drop_na
 #' @importFrom memoise memoise cache_filesystem
-#'
+#' @importFrom R.utils withTimeout
 #' @return A linelist of case data
 #' @export
 #' @author Sam Abbott <sam.abbott@lshtm.ac.uk>
@@ -42,15 +42,15 @@ get_international_linelist <- function(countries = NULL, cities = NULL, province
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
   linelist <- suppressWarnings(
     suppressMessages(
-      try(mem_read(url) %>%
-        tibble::as_tibble(),
+      try(R.utils::withTimeout(mem_read(url) %>%
+        tibble::as_tibble(), timeout = 15, onTimeout = "error"),
         silent = TRUE)
     )
   )
 
   if (any(class(linelist) %in% "try-error")) {
-    warning("Could not access linelist source. Using the NCoVUtils cache, this may not be up to date. See the git history to confirm
-            last cache date.")
+    warning("Could not access linelist source. Using the NCoVUtils cache, this may not be up to date.
+    See the git history to confirm last cache date.")
 
     url <- "https://raw.githubusercontent.com/epiforecasts/NCoVUtils/master/data-raw/linelist.csv"
 

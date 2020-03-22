@@ -10,7 +10,7 @@
 #'reset_cache
 reset_cache <- function(refresh_data = FALSE) {
 
-  unlink("cache", recursive = TRUE)
+  unlink(".cache", recursive = TRUE)
 
   cache <- memoise::cache_filesystem(".cache")
 
@@ -19,7 +19,7 @@ reset_cache <- function(refresh_data = FALSE) {
 
     tmp <- NCoVUtils::get_who_cases()
 
-    tmp < -NCoVUtils::get_italy_regional_cases()
+    tmp <- NCoVUtils::get_italy_regional_cases()
 
   }
 
