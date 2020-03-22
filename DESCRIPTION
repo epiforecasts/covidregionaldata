@@ -46,6 +46,7 @@ Imports:
     yaml,
     readxl,
     sf
+    R.utils
 Suggests:
     pkgdown,
     testthat,

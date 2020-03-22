@@ -38,7 +38,9 @@
 <meta property="og:title" content="Get International Linelist Data — get_international_linelist" />
 <meta property="og:description" content="This function downloads the latest non-Hubei linelist. It uses memoise to cache the
 results locally. To clear the cache and redownload the data use reset_cache. The cache will be located
-in the directory at which the function is run." />
+in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
+To account for this we keep a cache in the NCoVUtils GitHub repo which this function will fall back to with a warning if the source
+cannot be downloaded." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,7 +121,9 @@ in the directory at which the function is run." />
     <div class="ref-description">
     <p>This function downloads the latest non-Hubei linelist. It uses <code>memoise</code> to cache the
 results locally. To clear the cache and redownload the data use <code>reset_cache</code>. The cache will be located
-in the directory at which the function is run.</p>
+in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
+To account for this we keep a cache in the <code>NCoVUtils</code> GitHub repo which this function will fall back to with a warning if the source
+cannot be downloaded.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_international_linelist</span>(
@@ -176,8 +180,15 @@ in the directory at which the function is run.</p>
 #&gt;         "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub", "?single=true&amp;output=csv&amp;gid=", 
 #&gt;         gid)
 #&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     linelist &lt;- suppressWarnings(suppressMessages(mem_read(url) %&gt;% 
-#&gt;         tibble::as_tibble()))
+#&gt;     linelist &lt;- suppressWarnings(suppressMessages(try(R.utils::withTimeout(mem_read(url) %&gt;% 
+#&gt;         tibble::as_tibble(), timeout = 15, onTimeout = "error"), 
+#&gt;         silent = TRUE)))
+#&gt;     if (any(class(linelist) %in% "try-error")) {
+#&gt;         warning("Could not access linelist source. Using the NCoVUtils cache, this may not be up to date.\n    See the git history to confirm last cache date.")
+#&gt;         url &lt;- "https://raw.githubusercontent.com/epiforecasts/NCoVUtils/master/data-raw/linelist.csv"
+#&gt;         linelist &lt;- suppressWarnings(suppressMessages(mem_read(url) %&gt;% 
+#&gt;             tibble::as_tibble()))
+#&gt;     }
 #&gt;     if (!is.null(countries)) {
 #&gt;         linelist &lt;- linelist %&gt;% dplyr::filter(country %in% countries)
 #&gt;     }
@@ -201,7 +212,7 @@ in the directory at which the function is run.</p>
 #&gt;     }
 #&gt;     return(linelist)
 #&gt; }
-#&gt; &lt;bytecode: 0x55ea153b3fc0&gt;
+#&gt; &lt;bytecode: 0x558a187547e0&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
