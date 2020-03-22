@@ -2,7 +2,9 @@
 #'
 #' @description This function downloads the latest non-Hubei linelist. It uses `memoise` to cache the
 #' results locally. To clear the cache and redownload the data use `reset_cache`. The cache will be located
-#' in the directory at which the function is run.
+#' in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
+#' To account for this we keep a cache in the `NCoVUtils` GitHub repo which this function will fall back to with a warning if the source
+#' cannot be downloaded.
 #' @param countries Character vector identifying the countries to extract data for.
 #' @param cities Character vector identifying the cities to extract data for.
 #' @param provinces  Character vector identifying the provinces to extract data for.
@@ -40,10 +42,25 @@ get_international_linelist <- function(countries = NULL, cities = NULL, province
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
   linelist <- suppressWarnings(
     suppressMessages(
-      mem_read(url) %>%
-        tibble::as_tibble()
+      try(mem_read(url) %>%
+        tibble::as_tibble(),
+        silent = TRUE)
     )
   )
+
+  if (any(class(linelist) %in% "try-error")) {
+    warning("Could not access linelist source. Using the NCoVUtils cache, this may not be up to date. See the git history to confirm
+            last cache date.")
+
+    url <- "https://raw.githubusercontent.com/epiforecasts/NCoVUtils/master/data-raw/linelist.csv"
+
+      linelist <- suppressWarnings(
+        suppressMessages(
+          mem_read(url) %>%
+            tibble::as_tibble()
+        )
+      )
+  }
 
   if (!is.null(countries)) {
     linelist <- linelist %>%
