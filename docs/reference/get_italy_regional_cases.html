@@ -159,16 +159,27 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 #&gt;         dplyr::summarise(cases = sum(cases)) %&gt;% dplyr::ungroup()
 #&gt;     regions &lt;- data.frame(region = c("Abruzzo", "Basilicata", 
 #&gt;         "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", 
-#&gt;         "Lazio", "Lombardia", "Marche", "Molise", "P.A. Bolzano", 
-#&gt;         "P.A. Trento", "Piemonte", "Puglia", "Sardegna", "Sicilia", 
-#&gt;         "Toscana", "Umbria", "Valle d'Aosta", "Veneto"), region_code = c(15, 
-#&gt;         10, 11, 1, 21, 20, 6, 8, 17, 14, 18, 13, 9, 2, 4, 3, 
-#&gt;         19, 16, 12, 5), stringsAsFactors = FALSE)
+#&gt;         "Lazio", "Liguria", "Lombardia", "Marche", "Molise", 
+#&gt;         "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", 
+#&gt;         "Trentino-Alto Adige", "Umbria", "Valle d'Aosta", "Veneto"), 
+#&gt;         region_code = c(15, 10, 11, 1, 21, 20, 6, 8, 17, 14, 
+#&gt;             18, 13, 9, 2, 4, 3, 19, 16, 12, 5), stringsAsFactors = FALSE)
 #&gt;     cases &lt;- cases %&gt;% dplyr::left_join(regions, by = "region")
 #&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x558a1908eba8&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+#&gt; &lt;bytecode: 0x55dca9464450&gt;
+#&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>day_of_cases</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>NCoVUtils</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/NCoVUtils/man/get_italy_regional_cases.html'>get_italy_regional_cases</a></span>() <span class='kw'>%&gt;%</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>date</span> <span class='kw'>==</span> <span class='st'>"2020-02-24"</span>)
+
+<span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rnaturalearth/man/ne_states.html'>ne_states</a></span>(<span class='st'>"Italy"</span>, <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>"sf"</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>provnum_ne</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span>(<span class='kw'>geometry</span> <span class='kw'>=</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sf/man/geos_combine.html'>st_union</a></span>(<span class='no'>geometry</span>)) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>full_join</a></span>(<span class='no'>day_of_cases</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"provnum_ne"</span> <span class='kw'>=</span> <span class='st'>"region_code"</span>)) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>cases</span>)) +
+ <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsf.html'>geom_sf</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
