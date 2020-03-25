@@ -34,10 +34,7 @@ get_international_linelist <- function(countries = NULL, cities = NULL, province
 
   ch <- memoise::cache_filesystem(".cache")
 
-  gid <- c(outside_hubei = 0)
-  url <- paste0("https://docs.google.com/spreadsheets/d/",
-                "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub",
-                "?single=true&output=csv&gid=", gid)
+  url <- "https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv"
 
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
   linelist <- suppressWarnings(
