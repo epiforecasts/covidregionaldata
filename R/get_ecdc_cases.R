@@ -1,79 +1,50 @@
 #' ECDC International Case Counts
 #'
+#' @author Sam Abbott @seabbs
+#' @author D. van Muijen @dmuijen
+#' @author Kath Sherratt @kathsherratt
+#'
+#'
 #' @return A dataframe of International case counts published by ECDC.
 #' @export
 #' @inheritParams get_international_linelist
-#' @importFrom readxl read_excel
-#' @importFrom dplyr mutate select filter arrange
-#' @importFrom lubridate is.POSIXt
+#' @importFrom memoise cache_filesystem memoise
+#' @importFrom readr read_csv
+#' @importFrom dplyr mutate rename select arrange filter
 #' @examples
-#'
 #'
 #' ## Get data for france
 #' get_ecdc_cases(countries = "France")
 #'
 #' ## Code
-#' get_ecdc_cases
-get_ecdc_cases <- function(countries = NULL){
-
-  # url to ecdc api (note typo in "distribution" is from ECDC)
-  base_url <- 'http://www.ecdc.europa.eu/sites/default/files/documents/'
-  base_file <- "COVID-19-geographic-disbtribution-worldwide-"
-
-  # temporary directory to download files
-  temp <- tempdir()
-
-  # api may provide file for yesterday's or today's date - it depends on what time it is being accessed
-  try_dates <- c(as.Date(Sys.time()), as.Date(Sys.time()) - 1)
+get_ecdc_cases <- function (countries = NULL)
+{
+  # Get latest update
+  base_url <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.csv"
 
   ## Set up caching
   ch <- memoise::cache_filesystem(".cache")
+  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
 
-  mem_download_file <- memoise::memoise(download.file, cache = ch)
+  error <- suppressMessages(
+    suppressWarnings(try(readr::read_csv(file = base_url), silent = TRUE))
+  )
 
-  # try each combination of date/extension until successful
-  for (i in 1:length(try_dates)) {
-
-    date <- try_dates[i]
-    filename <- paste0(base_file, try_dates[i], ".xls")
-    url <- paste0(base_url, filename)
-    dl <- suppressMessages(
-      suppressWarnings(try(mem_download_file(url, file.path(temp, filename)), silent = TRUE))
-    )
-
-    # if try-error, try again with extension .xlsx
-    if (class(dl) == "try-error") {
-      filename <- paste0(base_file, try_dates[i], ".xlsx")
-      url <- paste0(base_url, filename)
-      dl <- suppressMessages(
-        suppressWarnings(try(mem_download_file(url, file.path(temp, filename)), silent = TRUE))
-      )
+  if (class(error) == "try-error") {
+    stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
     }
 
-    if (class(dl) != "try-error") { break }
-  }
-
-  if (class(dl) == "try-error") {
-    stop(paste0('No data found at: ', url,
-                '\n Tried dates: ', try_dates[1], ', ', try_dates[2]))
-  }
-
-  d <- readxl::read_excel(file.path(temp, filename)) %>%
-    dplyr::mutate_if(lubridate::is.POSIXt, as.Date) %>%
-    dplyr::mutate(date = as.Date(DateRep),
-                  cases = Cases,
-                  deaths = Deaths,
-                  country = `Countries and territories`,
-                  geoid = GeoId) %>%
-    dplyr::select(date, cases, deaths, country, geoid) %>%
+   d <- readr::read_csv(base_url) %>%
+    dplyr::mutate(date = as.Date(DateRep, format = "%d/%m/%Y")) %>%
+    rename(geoid = GeoId, country = `Countries and territories`,
+           cases = Cases, death = Deaths,
+           population_2018 = 'Pop_Data.2018') %>%
+    select(-DateRep) %>%
     dplyr::arrange(date) %>%
-    dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
+     dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
 
   if (!is.null(countries)) {
-    d <- d %>%
-      dplyr::filter(country %in% countries)
+    d <- d %>% dplyr::filter(country %in% countries)
   }
-
   return(d)
-
 }
