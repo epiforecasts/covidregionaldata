@@ -26,7 +26,7 @@ get_who_cases <- function(country = NULL, daily = FALSE, cache = NULL) {
   who_cases <- mem_fread("https://raw.githubusercontent.com/eebrown/data2019nCoV/master/data-raw/WHO_SR.csv")
 
   ## Make sure the date is correctly identified as a date
-  who_cases <- dplyr::mutate(who_cases, date = as.Date(date))
+  who_cases <- dplyr::mutate(who_cases, Date = as.Date(Date))
 
   if (!is.null(country)) {
     who_cases <- who_cases[, c("Date", country), with = FALSE]
