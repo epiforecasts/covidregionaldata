@@ -2,7 +2,7 @@
 #'
 #' Data from Santé Publique France https://github.com/opencovid19-fr/data
 #'
-#' @author Paul Campbell <paul.campbell@epicentre.msf.org>
+#' @author Paul Campbell @paulcampbell91
 #'
 #' @return A dataframe of daily French regional case counts.
 #' @importFrom httr GET content

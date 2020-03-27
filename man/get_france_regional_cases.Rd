@@ -18,5 +18,5 @@ Data from Santé Publique France https://github.com/opencovid19-fr/data
 get_france_regional_cases
 }
 \author{
-Paul Campbell \href{mailto:paul.campbell@epicentre.msf.org}{paul.campbell@epicentre.msf.org}
+Paul Campbell @paulcampbell91
 }

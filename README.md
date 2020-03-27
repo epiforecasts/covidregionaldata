@@ -80,6 +80,12 @@ Extract regional case counts by NHS region from England and Scotland, as well as
 NCoVUtils::get_uk_nhs_region_cases()
 ```
 
+Extract dataset of government intervention measures compiled by ACAPS:
+
+```r
+NCoVUtils::get_interventions_data()
+```
+
 ## Development
 
 ### Set up
