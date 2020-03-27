@@ -10,19 +10,22 @@ Authors@R: c(
            email = "joel.hellewell@lshtm.ac.uk", 
            role = c("aut"),
            comment = c(ORCID = "0000-0003-2683-0849")),
+    person("Katharine", "Sherratt", 
+           email = "katharine.sherratt@lshtm.ac.uk", 
+           role = c("aut")),    
     person("Hamish", "Gibbs", 
            email = "Hamish.Gibbs@lshtm.ac.uk", 
            role = c("aut"),
            comment = c(ORCID = "0000-0003-4413-453X")),     
     person("James", "Munday", 
            email = "james.munday@lshtm.ac.uk", 
-           role = c("aut")), 
+           role = c("aut")),
     person("Patrick", "Barks",
        email = "patrick.barks@epicentre.msf.org",
        role = c("ctb")),
     person("Paul", "Campbell",
        email = " paul.campbell@epicentre.msf.org",
-       role = c("ctb")),
+       role = c("ctb")),   
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))
@@ -51,8 +54,7 @@ Imports:
     janitor
 Suggests:
     pkgdown,
-    testthat,
-    covr
+    testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
