@@ -35,9 +35,9 @@ get_interventions_data <- function() {
 
   temp <- tempdir()
   filename <- "interventions.xlsx"
-  mem_download(dl_url, destfile = fs::path(temp, filename))
+  mem_download(dl_url, destfile = file.path(temp, filename), quiet = TRUE)
 
-  readxl::read_excel(fs::path(temp, filename), sheet = "Database") %>%
+  readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
     janitor::clean_names() %>%
     dplyr::mutate_if(lubridate::is.POSIXct, lubridate::as_date)
 }
