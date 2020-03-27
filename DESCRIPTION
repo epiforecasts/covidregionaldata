@@ -23,6 +23,9 @@ Authors@R: c(
     person("Paul", "Campbell",
        email = " paul.campbell@epicentre.msf.org",
        role = c("ctb")),
+    person("Katharine", "Sherratt", 
+           email = "katharine.sherratt@lshtm.ac.uk", 
+           role = c("aut")),       
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))
@@ -47,8 +50,7 @@ Imports:
     readxl
 Suggests:
     pkgdown,
-    testthat,
-    covr
+    testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
