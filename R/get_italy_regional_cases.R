@@ -13,6 +13,18 @@
 #'
 #' ## Code
 #' get_italy_regional_cases
+#'
+#' \dontrun{
+#' day_of_cases <- NCoVUtils::get_italy_regional_cases() %>%
+#' dplyr::filter(date == "2020-02-24")
+#'
+#' rnaturalearth::ne_states("Italy", returnclass = "sf") %>%
+#'  dplyr::group_by(provnum_ne) %>%
+#'  dplyr::summarise(geometry = sf::st_union(geometry)) %>%
+#'  dplyr::full_join(day_of_cases, by = c("provnum_ne" = "region_code")) %>%
+#'  ggplot2::ggplot(ggplot2::aes(fill=cases)) +
+#'  ggplot2::geom_sf()
+#' }
 get_italy_regional_cases <- function() {
 
   ## Path to data
@@ -75,11 +87,18 @@ get_italy_regional_cases <- function() {
 
   regions <-  data.frame(region = c("Abruzzo", "Basilicata", "Calabria",
                             "Campania", "Emilia Romagna", "Friuli Venezia Giulia",
-                            "Lazio", "Lombardia", "Marche", "Molise", "P.A. Bolzano",
-                            "P.A. Trento", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
-                            "Umbria", "Valle d'Aosta", "Veneto"),
-                         region_code = c(15, 10, 11, 1, 21, 20, 6, 8, 17, 14,
-                                        18, 13, 9, 2, 4, 3, 19, 16, 12, 5),
+                            "Lazio", "Liguria", "Lombardia",
+                            "Marche", "Molise", "Piemonte",
+                            "Puglia", "Sardegna", "Sicilia",
+                            "Toscana","Trentino-Alto Adige", "Umbria",
+                            "Valle d'Aosta", "Veneto"),
+                         region_code = c(15, 10, 11,
+                                         1, 21, 20,
+                                         6, 8, 17,
+                                         14, 18, 13,
+                                         9, 2, 4,
+                                         3, 19, 16,
+                                         12, 5),
                          stringsAsFactors = FALSE)
 
   cases <- cases %>%

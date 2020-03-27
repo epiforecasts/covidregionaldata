@@ -17,4 +17,16 @@ and is available on github: https://github.com/pcm-dpc/COVID-19
 
 ## Code
 get_italy_regional_cases
+
+\dontrun{
+day_of_cases <- NCoVUtils::get_italy_regional_cases() \%>\%
+dplyr::filter(date == "2020-02-24")
+
+rnaturalearth::ne_states("Italy", returnclass = "sf") \%>\%
+ dplyr::group_by(provnum_ne) \%>\%
+ dplyr::summarise(geometry = sf::st_union(geometry)) \%>\%
+ dplyr::full_join(day_of_cases, by = c("provnum_ne" = "region_code")) \%>\%
+ ggplot2::ggplot(ggplot2::aes(fill=cases)) +
+ ggplot2::geom_sf()
+}
 }

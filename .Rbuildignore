@@ -8,3 +8,4 @@
 ^docs$
 ^.cache$
 ^codecov\.yml$
+^data-raw$

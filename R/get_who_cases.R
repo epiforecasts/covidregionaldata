@@ -12,7 +12,7 @@
 #' @export
 #' @importFrom data.table fread
 #' @importFrom purrr safely
-#' @importFrom dplyr mutate_at lag
+#' @importFrom dplyr mutate_at lag mutate
 #' @importFrom memoise memoise cache_filesystem
 #' @examples
 #'
@@ -25,6 +25,7 @@ get_who_cases <- function(country = NULL, daily = FALSE, cache = NULL) {
 
   who_cases <- mem_fread("https://raw.githubusercontent.com/eebrown/data2019nCoV/master/data-raw/WHO_SR.csv")
 
+  who_cases$Date <- as.Date(who_cases$Date)
 
   if (!is.null(country)) {
     who_cases <- who_cases[, c("Date", country), with = FALSE]
@@ -41,6 +42,7 @@ get_who_cases <- function(country = NULL, daily = FALSE, cache = NULL) {
                                   .vars = cols,
                                   ~ . - dplyr::lag(., default = 0))
   }
+
 
   return(who_cases)
 }

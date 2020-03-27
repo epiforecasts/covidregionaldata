@@ -17,10 +17,15 @@ ECDC International Case Counts
 }
 \examples{
 
-
 ## Get data for france
 get_ecdc_cases(countries = "France")
 
 ## Code
-get_ecdc_cases
+}
+\author{
+Sam Abbott @seabbs
+
+D. van Muijen @dmuijen
+
+Kath Sherratt @kathsherratt
 }
