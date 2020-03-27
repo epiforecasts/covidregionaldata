@@ -45,7 +45,10 @@ Imports:
     httr,
     yaml,
     readxl,
-    R.utils
+    R.utils,
+    xml2,
+    rvest,
+    janitor
 Suggests:
     pkgdown,
     testthat,
