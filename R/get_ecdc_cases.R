@@ -38,7 +38,7 @@ get_ecdc_cases <- function (countries = NULL)
   d <- readr::read_csv(base_url) %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
     rename(geoid = geoId, country = countriesAndTerritories,
-           cases = cases, death = deaths,
+           cases = cases, deaths = deaths,
            population_2018 = popData2018) %>%
     select(-dateRep) %>%
     dplyr::arrange(date) %>%
