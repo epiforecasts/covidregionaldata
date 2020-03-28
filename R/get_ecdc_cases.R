@@ -3,6 +3,7 @@
 #' @author Sam Abbott @seabbs
 #' @author D. van Muijen @dmuijen
 #' @author Kath Sherratt @kathsherratt
+#' @author Haze Lee @hazealign
 #'
 #'
 #' @return A dataframe of International case counts published by ECDC.
@@ -20,7 +21,7 @@
 get_ecdc_cases <- function (countries = NULL)
 {
   # Get latest update
-  base_url <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide.csv"
+  base_url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
 
   ## Set up caching
   ch <- memoise::cache_filesystem(".cache")
@@ -32,16 +33,16 @@ get_ecdc_cases <- function (countries = NULL)
 
   if (class(error) == "try-error") {
     stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
-    }
+  }
 
-   d <- readr::read_csv(base_url) %>%
-    dplyr::mutate(date = as.Date(DateRep, format = "%d/%m/%Y")) %>%
-    rename(geoid = GeoId, country = `Countries and territories`,
-           cases = Cases, death = Deaths,
-           population_2018 = 'Pop_Data.2018') %>%
-    select(-DateRep) %>%
+  d <- readr::read_csv(base_url) %>%
+    dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
+    rename(geoid = geoId, country = countriesAndTerritories,
+           cases = cases, death = deaths,
+           population_2018 = popData2018) %>%
+    select(-dateRep) %>%
     dplyr::arrange(date) %>%
-     dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
+    dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
 
   if (!is.null(countries)) {
     d <- d %>% dplyr::filter(country %in% countries)
