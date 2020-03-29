@@ -73,7 +73,7 @@ cannot be downloaded." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NCoVUtils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -175,10 +175,7 @@ cannot be downloaded.</p>
 #&gt;     import_status &lt;- NULL
 #&gt;     message("Downloading linelist data")
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     gid &lt;- c(outside_hubei = 0)
-#&gt;     url &lt;- paste0("https://docs.google.com/spreadsheets/d/", 
-#&gt;         "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub", "?single=true&amp;output=csv&amp;gid=", 
-#&gt;         gid)
+#&gt;     url &lt;- "https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv"
 #&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
 #&gt;     linelist &lt;- suppressWarnings(suppressMessages(try(R.utils::withTimeout(mem_read(url) %&gt;% 
 #&gt;         tibble::as_tibble(), timeout = 15, onTimeout = "error"), 
@@ -212,7 +209,7 @@ cannot be downloaded.</p>
 #&gt;     }
 #&gt;     return(linelist)
 #&gt; }
-#&gt; &lt;bytecode: 0x55dca8a1a720&gt;
+#&gt; &lt;bytecode: 0x5587e84e0e58&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -231,7 +228,7 @@ cannot be downloaded.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sam Abbott, Joel Hellewell, Hamish Gibbs, James Munday, Sebastian Funk.</p>
+  <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
 </div>
 
 <div class="pkgdown">

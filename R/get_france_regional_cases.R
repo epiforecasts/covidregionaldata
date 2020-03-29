@@ -1,6 +1,6 @@
 #' French Regional Daily Case Counts
 #'
-#' Data from Santé Publique France https://github.com/opencovid19-fr/data
+#' @description Data from Santé Publique France https://github.com/opencovid19-fr/data
 #'
 #' @author Paul Campbell @paulcampbell91
 #'
