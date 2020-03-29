@@ -12,7 +12,7 @@
 #' @importFrom readr read_csv
 #' @importFrom tidyr drop_na
 #' @examples
-#' get_us_regional_cases
+#' get_us_regional_cases(level = 'state', out = 'timeseries')
 #'
 #' \dontrun{
 #'
