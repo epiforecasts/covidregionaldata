@@ -9,7 +9,7 @@
 #' @importFrom stringr str_remove_all
 #' @importFrom lubridate as_date
 #' @importFrom memoise cache_filesystem memoise
-#'
+#' @export
 #' @examples
 #'
 #'
