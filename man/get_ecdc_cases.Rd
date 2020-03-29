@@ -28,4 +28,6 @@ Sam Abbott @seabbs
 D. van Muijen @dmuijen
 
 Kath Sherratt @kathsherratt
+
+Haze Lee @hazealign
 }
