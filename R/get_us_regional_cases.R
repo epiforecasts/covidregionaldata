@@ -8,7 +8,7 @@
 #' @return A data.frame of COVID cases by region in the US
 #' @export
 #' @importFrom memoise cache_filesystem memoise
-#' @importFrom dplyr select summarise arrange group_by drop_na
+#' @importFrom dplyr select summarise arrange group_by
 #' @importFrom readr read_csv
 #' @importFrom tidyr drop_na
 #' @examples
