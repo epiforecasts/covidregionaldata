@@ -4,26 +4,31 @@
 \alias{get_us_regional_cases}
 \title{Fetch daily COVID cases by state for United States of America}
 \usage{
-get_us_regional_cases()
+get_us_regional_cases(level = "state", out = "timeseries")
+}
+\arguments{
+\item{level}{Character String specifying admin level "state", "county", default: "state".}
+
+\item{out}{Character String specifying output data format "timeseries", "total", default: "timeseries".}
 }
 \value{
 A data.frame of COVID cases by region in the US
 }
 \description{
-Fetches daily COVID cases by state collated by the
-John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
-Data is available at https://github.com/CSSEGISandData/COVID-19
+Fetches daily COVID cases by state or county collated by the
+New York Times
+Data is available at https://github.com/nytimes/covid-19-data
 }
 \examples{
-get_us_regional_cases
+get_us_regional_cases(level = 'state', out = 'timeseries')
 
 \dontrun{
 
  regions <- rnaturalearth::ne_states("United States of America", returnclass = "sf")
 
- cases <- get_us_regional_cases()
+ cases <- get_us_regional_cases(out = 'total')
 
- regions \%>\% dplyr::filter(name \%in\% cases$region) \%>\%
+ regions \%>\% dplyr::filter(name \%in\% cases$state) \%>\%
  ggplot2::ggplot() + ggplot2::geom_sf()
 
 }

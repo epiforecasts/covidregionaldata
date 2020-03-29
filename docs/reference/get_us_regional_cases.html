@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -36,10 +40,9 @@
 
 
 <meta property="og:title" content="Fetch daily COVID cases by state for United States of America — get_us_regional_cases" />
-<meta property="og:description" content="Fetches daily COVID cases by state collated by the
-John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
-Data is available at https://github.com/CSSEGISandData/COVID-19" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:description" content="Fetches daily COVID cases by state or county collated by the
+New York Times
+Data is available at https://github.com/nytimes/covid-19-data" />
 
 
 
@@ -57,7 +60,7 @@ Data is available at https://github.com/CSSEGISandData/COVID-19" />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -117,58 +120,68 @@ Data is available at https://github.com/CSSEGISandData/COVID-19" />
     </div>
 
     <div class="ref-description">
-    <p>Fetches daily COVID cases by state collated by the
-John Hopkins Centre for Systems Science and Engineering (JHU CSSE)
-Data is available at https://github.com/CSSEGISandData/COVID-19</p>
+    <p>Fetches daily COVID cases by state or county collated by the
+New York Times
+Data is available at https://github.com/nytimes/covid-19-data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_us_regional_cases</span>()</pre>
+    <pre class="usage"><span class='fu'>get_us_regional_cases</span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"state"</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='st'>"timeseries"</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>level</th>
+      <td><p>Character String specifying admin level "state", "county", default: "state".</p></td>
+    </tr>
+    <tr>
+      <th>out</th>
+      <td><p>Character String specifying output data format "timeseries", "total", default: "timeseries".</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data.frame of COVID cases by region in the US</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>get_us_regional_cases</span></div><div class='output co'>#&gt; function () 
-#&gt; {
-#&gt;     path &lt;- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
-#&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     cases &lt;- mem_read(path)
-#&gt;     cases &lt;- cases %&gt;% dplyr::filter(`Province/State` %in% state.name) %&gt;% 
-#&gt;         dplyr::select(-`Country/Region`, -Lat, -Long, region = `Province/State`) %&gt;% 
-#&gt;         tidyr::gather(key = "date", value = "total_cases", -region) %&gt;% 
-#&gt;         dplyr::mutate(date = lubridate::mdy(date)) %&gt;% dplyr::arrange(date) %&gt;% 
-#&gt;         dplyr::group_by(region) %&gt;% dplyr::mutate(index = 1:dplyr::n(), 
-#&gt;         cases = total_cases - ifelse(index == 1, 0, dplyr::lag(total_cases))) %&gt;% 
-#&gt;         dplyr::ungroup() %&gt;% dplyr::select(-index, -total_cases) %&gt;% 
-#&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases)) %&gt;% 
-#&gt;         dplyr::filter(region != "Grand Princess", region != "Diamond Princess") %&gt;% 
-#&gt;         dplyr::full_join(data.frame(region = state.name, region_code = state.abb), 
-#&gt;             by = "region")
-#&gt;     return(cases)
-#&gt; }
-#&gt; &lt;bytecode: 0x5587ec349a70&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>get_us_regional_cases</span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>'state'</span>, <span class='kw'>out</span> <span class='kw'>=</span> <span class='st'>'timeseries'</span>)</div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  date = <span style='color: #0000BB;'>col_date(format = "")</span><span>,</span>
+#&gt; <span class='message'>  state = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  fips = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  cases = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  deaths = </span><span style='color: #00BB00;'>col_double()</span><span></span>
+#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,386 x 5</span><span>
+#&gt;    date       state      fips  cases deaths
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2020-01-21 Washington 53        1      0
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-01-22 Washington 53        1      0
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-01-23 Washington 53        1      0
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-01-24 Illinois   17        1      0
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-01-24 Washington 53        1      0
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-01-25 California 06        1      0
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-01-25 Illinois   17        1      0
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-01-25 Washington 53        1      0
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-01-26 Arizona    04        1      0
+#&gt; </span><span style='color: #555555;'>10</span><span> 2020-01-26 California 06        2      0
+#&gt; </span><span style='color: #555555;'># … with 1,376 more rows</span><span></div><div class='input'>
+
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
  <span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rnaturalearth/man/ne_states.html'>ne_states</a></span>(<span class='st'>"United States of America"</span>, <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>"sf"</span>)
 
- <span class='no'>cases</span> <span class='kw'>&lt;-</span> <span class='fu'>get_us_regional_cases</span>()
+ <span class='no'>cases</span> <span class='kw'>&lt;-</span> <span class='fu'>get_us_regional_cases</span>(<span class='kw'>out</span> <span class='kw'>=</span> <span class='st'>'total'</span>)
 
- <span class='no'>regions</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>name</span> <span class='kw'>%in%</span> <span class='no'>cases</span>$<span class='no'>region</span>) <span class='kw'>%&gt;%</span>
+ <span class='no'>regions</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>name</span> <span class='kw'>%in%</span> <span class='no'>cases</span>$<span class='no'>state</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>() + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsf.html'>geom_sf</a></span>()
 
-}</div></pre>
+}</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -176,10 +189,11 @@ Data is available at https://github.com/CSSEGISandData/COVID-19</p>
       <footer>
       <div class="copyright">
   <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
+
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

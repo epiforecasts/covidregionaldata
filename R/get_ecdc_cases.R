@@ -35,7 +35,7 @@ get_ecdc_cases <- function (countries = NULL)
     stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
   }
 
-  d <- readr::read_csv(base_url) %>%
+  d <- mem_read(base_url) %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
     rename(geoid = geoId, country = countriesAndTerritories,
            cases = cases, deaths = deaths,
@@ -49,3 +49,4 @@ get_ecdc_cases <- function (countries = NULL)
   }
   return(d)
 }
+
