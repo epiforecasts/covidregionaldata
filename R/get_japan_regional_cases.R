@@ -49,7 +49,7 @@
 #'
 #' }
 
-get_japan_regional_cases <- function() {
+get_japan_regional_cases <- function(){
   # Locate source
   location <- "https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Japan"
   # Set up cache

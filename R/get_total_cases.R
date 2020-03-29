@@ -12,6 +12,7 @@
 #'
 #' ## Total cases sourced from ECDC
 #' get_total_cases(source = "ECDC")
+
 get_total_cases <- function(source = 'WHO') {
 
   who_total_cases <- function(total_cases){
