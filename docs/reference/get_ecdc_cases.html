@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NCoVUtils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -135,65 +135,35 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-
 <span class='co'>## Get data for france</span>
-<span class='fu'>get_ecdc_cases</span>(<span class='kw'>countries</span> <span class='kw'>=</span> <span class='st'>"France"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 84 x 5</span><span>
-#&gt;    date       cases deaths country geoid
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2019-12-31     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-01-01     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-01-02     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-01-03     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-01-04     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-01-05     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-01-06     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-01-07     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-01-08     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'>10</span><span> 2020-01-09     0      0 France  FR   
-#&gt; </span><span style='color: #555555;'># … with 74 more rows</span><span></div><div class='input'>
-<span class='co'>## Code</span>
-<span class='no'>get_ecdc_cases</span></div><div class='output co'>#&gt; function (countries = NULL) 
-#&gt; {
-#&gt;     base_url &lt;- "http://www.ecdc.europa.eu/sites/default/files/documents/"
-#&gt;     base_file &lt;- "COVID-19-geographic-disbtribution-worldwide-"
-#&gt;     temp &lt;- tempdir()
-#&gt;     try_dates &lt;- c(as.Date(Sys.time()), as.Date(Sys.time()) - 
-#&gt;         1)
-#&gt;     ch &lt;- memoise::cache_filesystem(".cache")
-#&gt;     mem_download_file &lt;- memoise::memoise(download.file, cache = ch)
-#&gt;     for (i in 1:length(try_dates)) {
-#&gt;         date &lt;- try_dates[i]
-#&gt;         filename &lt;- paste0(base_file, try_dates[i], ".xls")
-#&gt;         url &lt;- paste0(base_url, filename)
-#&gt;         dl &lt;- suppressMessages(suppressWarnings(try(mem_download_file(url, 
-#&gt;             file.path(temp, filename)), silent = TRUE)))
-#&gt;         if (class(dl) == "try-error") {
-#&gt;             filename &lt;- paste0(base_file, try_dates[i], ".xlsx")
-#&gt;             url &lt;- paste0(base_url, filename)
-#&gt;             dl &lt;- suppressMessages(suppressWarnings(try(mem_download_file(url, 
-#&gt;                 file.path(temp, filename)), silent = TRUE)))
-#&gt;         }
-#&gt;         if (class(dl) != "try-error") {
-#&gt;             break
-#&gt;         }
-#&gt;     }
-#&gt;     if (class(dl) == "try-error") {
-#&gt;         stop(paste0("No data found at: ", url, "\n Tried dates: ", 
-#&gt;             try_dates[1], ", ", try_dates[2]))
-#&gt;     }
-#&gt;     d &lt;- readxl::read_excel(file.path(temp, filename)) %&gt;% dplyr::mutate_if(lubridate::is.POSIXt, 
-#&gt;         as.Date) %&gt;% dplyr::mutate(date = as.Date(DateRep), cases = Cases, 
-#&gt;         deaths = Deaths, country = `Countries and territories`, 
-#&gt;         geoid = GeoId) %&gt;% dplyr::select(date, cases, deaths, 
-#&gt;         country, geoid) %&gt;% dplyr::arrange(date) %&gt;% dplyr::mutate(cases = ifelse(cases &lt; 
-#&gt;         0, 0, cases))
-#&gt;     if (!is.null(countries)) {
-#&gt;         d &lt;- d %&gt;% dplyr::filter(country %in% countries)
-#&gt;     }
-#&gt;     return(d)
-#&gt; }
-#&gt; &lt;bytecode: 0x55dca5955948&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></span></pre>
+<span class='fu'>get_ecdc_cases</span>(<span class='kw'>countries</span> <span class='kw'>=</span> <span class='st'>"France"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  dateRep = <span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  day = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  month = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  year = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  cases = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  deaths = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  countriesAndTerritories = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  geoId = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  countryterritoryCode = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
+#&gt; <span class='message'>  popData2018 = </span><span style='color: #00BB00;'>col_double()</span><span></span>
+#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 90 x 10</span><span>
+#&gt;      day month  year cases deaths country geoid countryterritor… population_2018
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>    31    12  </span><span style='text-decoration: underline;'>2</span><span>019     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 2</span><span>     1     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 3</span><span>     2     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 4</span><span>     3     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 6</span><span>     5     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 7</span><span>     6     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 8</span><span>     7     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'> 9</span><span>     8     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'>10</span><span>     9     1  </span><span style='text-decoration: underline;'>2</span><span>020     0      0 France  FR    FRA                     66</span><span style='text-decoration: underline;'>987</span><span>244
+#&gt; </span><span style='color: #555555;'># … with 80 more rows, and 1 more variable: date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span></div><div class='input'>
+## Code
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -203,13 +173,18 @@
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Sam Abbott @seabbs</p>
+<p>D. van Muijen @dmuijen</p>
+<p>Kath Sherratt @kathsherratt</p>
+<p>Haze Lee @hazealign</p>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sam Abbott, Joel Hellewell, Hamish Gibbs, James Munday, Sebastian Funk.</p>
+  <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
 </div>
 
 <div class="pkgdown">

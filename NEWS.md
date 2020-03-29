@@ -1,3 +1,8 @@
+# NCoVUtils 0.4.0
+
+* Added functions to extract regional cases for Spain, Japan, South Korea, the United Kingom, and the United States.
+* Improved data extraction from the ECDC.
+* Added minimal unit tests.
 
 # NCoVUtils 0.3.0
 

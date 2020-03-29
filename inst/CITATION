@@ -3,7 +3,7 @@ citHeader("To cite NCoVUtils in publications use:")
 citEntry(entry = "Article",
   title        = "NCoVUtils: Utility functions for the 2019-NCoV outbreak",
   author       = personList(as.person("Sam Abbott"), as.person("Joel Hellewell"),
-                            as.person("James D. Munday"), as.person("Sebastian Funk")),
+                            as.person("James D. Munday"), as.person("Katharine Sherratt"), as.person("Sebastian Funk")),
   journal      = "-",
   year         = "2020",
   volume       = "-",
@@ -12,7 +12,7 @@ citEntry(entry = "Article",
   doi          = "10.5281/zenodo.3635417",
 
   textVersion  =
-  paste("Sam Abbott, Joel Hellewell, James D. Munday, and Sebastian Funk (2020).",
+  paste("Sam Abbott, Joel Hellewell, James D. Munday, Katharine Sherratt, and Sebastian Funk (2020).",
         "NCoVUtils: Utility functions for the 2019-NCoV outbreak,",
         "DOI: 10.5281/zenodo.3635417")
 )

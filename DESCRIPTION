@@ -1,6 +1,6 @@
 Package: NCoVUtils
 Title: Utility functions for the Covid-19 outbreak
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(
     person(given = "Sam Abbott",
            role = c("aut", "cre"),
@@ -25,7 +25,7 @@ Authors@R: c(
        role = c("ctb")),
     person("Paul", "Campbell",
        email = " paul.campbell@epicentre.msf.org",
-       role = c("ctb")),   
+       role = c("aut")),   
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))
@@ -51,7 +51,8 @@ Imports:
     R.utils,
     xml2,
     rvest,
-    janitor
+    janitor,
+    tabulizer
 Suggests:
     pkgdown,
     testthat
