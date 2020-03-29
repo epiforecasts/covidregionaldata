@@ -56,35 +56,7 @@ Extract regional case counts from Italy:
 NCoVUtils::get_italy_regional_cases()
 ```
 
-Extract regional case counts from France:
-
-```r
-NCoVUtils::get_france_regional_cases()
-```
-
-Extract regional case counts from Germany:
-
-```r
-NCoVUtils::get_germany_regional_cases()
-```
-
-Extract regional case counts from the United States of America:
-
-```r
-NCoVUtils::get_us_regional_cases()
-```
-
-Extract regional case counts by NHS region from England and Scotland, as well as country-level from Wales and Northern Ireland:
-
-```r
-NCoVUtils::get_uk_nhs_region_cases()
-```
-
-Extract dataset of government intervention measures compiled by ACAPS:
-
-```r
-NCoVUtils::get_interventions_data()
-```
+See the function reference for a full list of data sets that package can be used to extract.
 
 ## Development
 

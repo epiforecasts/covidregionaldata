@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_uk_nhs_region_cases.R
 \name{get_uk_nhs_region_cases}
 \alias{get_uk_nhs_region_cases}
-\title{Get English daily cases by NHS region}
+\title{Get UK daily cases by NHS region}
 \usage{
 get_uk_nhs_region_cases()
 }
@@ -10,7 +10,7 @@ get_uk_nhs_region_cases()
 A dataframe of case counts in English NHS regions
 }
 \description{
-Get English daily cases by NHS region
+Get UK regional cases.
 }
 \examples{
 get_uk_nhs_region_cases

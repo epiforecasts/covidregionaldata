@@ -1,5 +1,7 @@
-#' Get English daily cases by NHS region
+#' Get UK daily cases by NHS region
 #'
+#'
+#' @description Get UK regional cases.
 #' @return A dataframe of case counts in English NHS regions
 #' @export
 #' @importFrom dplyr mutate select filter full_join arrange group_by ungroup n lag
