@@ -1,12 +1,7 @@
-context("get_linelist")
+test_that("get_linelist works as expected", {
+  
+  d <- get_linelist()
+  expect_is(d, "data.frame")
+  
+})
 
-
-
-#
-#
-# test_that("Can retrieve the linelist without errors", {
-#   data <- suppressWarnings(get_linelist())
-#
-#   expect_true(!is.null(data))
-# })
-#

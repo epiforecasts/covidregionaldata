@@ -6,6 +6,7 @@
 #'
 #'## Code
 #'reset_cache
+
 reset_cache <- function() {
 
   unlink(".cache", recursive = TRUE)

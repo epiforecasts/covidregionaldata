@@ -2,8 +2,7 @@
 ##'
 ##' @return a tibble with the linelist
 ##' @importFrom readr read_csv
-##' @importFrom dplyr bind_rows rename mutate mutate_at
-##' @importFrom purrr map
+##' @importFrom dplyr rename mutate mutate_at mutate_all
 ##' @importFrom stringr str_trim
 ##' @author Sebastian Funk <sebastian.funk@lshtm.ac.uk>
 ##'
@@ -18,6 +17,7 @@
 ##'
 ##' ## Code
 ##' get_linelist
+
 get_linelist <- function() {
 
   ## CRAN check - dealing with global variables
@@ -25,38 +25,19 @@ get_linelist <- function() {
   ate_confirmation_str <- NULL; date_confirmation <- NULL;
   date_onset_symptoms <- NULL; date_onset_symptoms <- NULL;
   date_admission_hospital <- NULL; date_confirmation_str <- NULL;
-
-
+  
   ## Set up cache
   ch <- memoise::cache_filesystem(".cache")
 
-
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  gids <- c(outside_hubei = 0, hubei = 429276722)
-  urls <- paste0("https://docs.google.com/spreadsheets/d/",
-                 "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub",
-                 "?single=true&output=csv&gid=", gids)
-  linelists <- lapply(urls, mem_read)
-
-  ## Drop columns
-  drops <- c("chroDisea_Yes(1)/No(0)")
-  linelists[[1]] <- linelists[[1]][ , !(names(linelists[[1]]) %in% drops)]
-  linelists[[2]] <-  linelists[[2]][ , !(names(linelists[[2]]) %in% drops)]
-
-  ##Munge dataset specific data
-  linelists <- linelists %>%
-    purrr::map(
-      function(data) {
-        dplyr::mutate_at(data,
-                         .vars = c("longitude", "latitude"),
-                         ~ ifelse(. %in% "#REF!", NA, .) %>%
-                           stringr::str_trim() %>%
-                           as.numeric()) %>%
-        dplyr::mutate_all(~ stringr::str_replace_all(., "N/A", NA_character_))
-      })
-
-  linelists <- dplyr::bind_rows(linelists) %>%
+  
+  data <- mem_read('https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv')
+  
+  data <- data %>% 
+    dplyr::mutate_at(.vars = c("longitude", "latitude"), ~ ifelse(. %in% "#REF!", NA, .) %>% 
+                       stringr::str_trim() %>%
+                       as.numeric()) %>%
+    dplyr::mutate_all(~ stringr::str_replace_all(., "N/A", NA_character_)) %>% 
     dplyr::rename(
       date_onset_symptoms_str = "date_onset_symptoms",
       date_admission_hospital_str = "date_admission_hospital",
@@ -76,6 +57,8 @@ get_linelist <- function() {
       delay_admission =
         date_admission_hospital - date_onset_symptoms
     )
-
-  return(linelists)
+  
+  return(data)
 }
+
+
