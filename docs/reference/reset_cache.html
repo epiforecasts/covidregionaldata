@@ -121,17 +121,8 @@
     <p>Reset Cache and Update all Local Data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reset_cache</span>(<span class='kw'>refresh_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>reset_cache</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>refresh_data</th>
-      <td><p>Logical defaults to <code>FALSE</code>. Should all data sources be refreshed once the cache has been
-removed.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -140,18 +131,13 @@ removed.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## Code</span>
-<span class='no'>reset_cache</span></div><div class='output co'>#&gt; function (refresh_data = FALSE) 
+<span class='no'>reset_cache</span></div><div class='output co'>#&gt; function () 
 #&gt; {
 #&gt;     unlink(".cache", recursive = TRUE)
 #&gt;     cache &lt;- memoise::cache_filesystem(".cache")
-#&gt;     if (refresh_data) {
-#&gt;         tmp &lt;- NCoVUtils::get_international_linelist()
-#&gt;         tmp &lt;- NCoVUtils::get_who_cases()
-#&gt;         tmp &lt;- NCoVUtils::get_italy_regional_cases()
-#&gt;     }
 #&gt;     return(invisible(NULL))
 #&gt; }
-#&gt; &lt;bytecode: 0x7fe28212ea68&gt;
+#&gt; &lt;bytecode: 0x7fab3979b1e0&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
