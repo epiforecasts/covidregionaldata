@@ -50,3 +50,28 @@ get_ecdc_cases <- function (countries = NULL)
   return(d)
 }
 
+
+
+#' Format ECDC data for use with EpiNow analysis
+#'
+#' @author Joel Hellewell
+#' @param data data.frame returned by get_ecdc_cases function
+#'
+#' @return data.frame with formatted ecdc case data by country
+#' @importFrom dplyr select arrange filter mutate
+#' @importFrom stringr str_replace_all
+#' @export
+#'
+#' @examples
+#' format_ecdc_data(get_ecdc_cases(countries = "France"))
+format_ecdc_data <- function(data = NULL) {
+
+  out <- data %>%
+    dplyr::select(date, region = country, cases) %>%
+    dplyr::arrange(region, date) %>%
+    dplyr::filter(region != "Cases_on_an_international_conveyance_Japan") %>%
+    dplyr::mutate(region = stringr::str_replace_all(region, "_", " "))
+
+  return(out)
+}
+
