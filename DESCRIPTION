@@ -51,8 +51,7 @@ Imports:
     R.utils,
     xml2,
     rvest,
-    janitor,
-    tabulizer
+    janitor
 Suggests:
     pkgdown,
     testthat

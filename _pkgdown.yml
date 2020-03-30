@@ -27,6 +27,7 @@ reference:
     desc: Functions to import and clean data
     contents:
       - contains("get_")
+      - format_ecdc_data
 
   - title: Sample from the serial interval distribution
     desc: Functions that parameterise distributions based on a mean and standard deviation
