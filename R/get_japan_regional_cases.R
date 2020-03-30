@@ -56,7 +56,7 @@ get_japan_regional_cases <- function(){
   ch <- memoise::cache_filesystem(".cache")
   mem_read <- memoise::memoise(xml2::read_html, cache = ch)
   # Read webpage
-  webpage <- mem_read(location)
+  webpage <- xml2::read_html(location)
   # Get regions
   region <- webpage %>%
     rvest::html_nodes("tr:nth-child(36) th") %>%
@@ -85,4 +85,7 @@ get_japan_regional_cases <- function(){
 
   return(cases)
 }
+
+
+get_japan_regional_cases()
 
