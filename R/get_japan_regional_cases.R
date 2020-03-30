@@ -11,7 +11,7 @@
 #' @importFrom memoise cache_filesystem memoise
 #' @export
 #' @examples
-#'
+#' get_japan_regional_cases()
 #'
 #' \dontrun{
 #'

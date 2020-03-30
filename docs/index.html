@@ -95,8 +95,7 @@
 <p>Extract total cases (and deaths) by region using:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="kw pkg">NCoVUtils</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_total_cases.html">get_total_cases</a></span>()</pre></div>
 <p>Extract regional case counts from Italy:</p>
-
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">NCoVUtils<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/NCoVUtils/man/get_italy_regional_cases.html">get_italy_regional_cases</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="kw pkg">NCoVUtils</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_italy_regional_cases.html">get_italy_regional_cases</a></span>()</pre></div>
 <p>See the function reference for a full list of data sets that package can be used to extract.</p>
 </div>
 <div id="development" class="section level2">
@@ -106,13 +105,12 @@
 <h3 class="hasAnchor">
 <a href="#set-up" class="anchor"></a>Set up</h3>
 <p>Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"epiforecasts/NCoVUtils"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 </div>
 <div id="render-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#render-documentation" class="anchor"></a>Render documentation</h3>
 <p>Render the documentation with the following:</p>
-
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">Rscript</span> inst/scripts/render_output.R</a></code></pre></div>
 </div>
 <div id="docker" class="section level3">
@@ -120,7 +118,6 @@
 <a href="#docker" class="anchor"></a>Docker</h3>
 <p>This package is developed in a docker container based on the tidyverse docker image.</p>
 <p>To build the docker image run (from the <code>NCoVUtils</code> directory):</p>
-
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">docker</span> build . -t ncovutils</a></code></pre></div>
 <p>To run the docker image run:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">docker</span> run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils</a></code></pre></div>
@@ -156,7 +153,6 @@
 <li>Joel Hellewell <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2683-0849" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Katharine Sherratt <br><small class="roles"> Author </small>  </li>
 <li>Hamish Gibbs <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4413-453X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-
 <li>James Munday <br><small class="roles"> Author </small>  </li>
 <li>Paul Campbell <br><small class="roles"> Author </small>  </li>
 <li>Sebastian Funk <br><small class="roles"> Author </small>  </li>
@@ -180,7 +176,6 @@
 
 
       <footer><div class="copyright">
-
   <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
 </div>
 

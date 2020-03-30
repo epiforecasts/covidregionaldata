@@ -39,10 +39,8 @@
 
 
 
-
 <meta property="og:title" content="Get UK daily cases by NHS region — get_uk_nhs_region_cases" />
 <meta property="og:description" content="Get UK regional cases." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -162,8 +160,7 @@
 #&gt;         dplyr::mutate(cases = ifelse(cases &lt; 0, 0, cases))
 #&gt;     return(cases_nhs)
 #&gt; }
-
-#&gt; &lt;bytecode: 0x5587e85ab0a0&gt;
+#&gt; &lt;bytecode: 0x7fe282ab4070&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>uk_shp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/readRDS.html'>readRDS</a></span>(<span class='st'>"uk_shp.rds"</span>)
@@ -185,7 +182,6 @@
       <footer>
       <div class="copyright">
   <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
-
 </div>
 
 <div class="pkgdown">
