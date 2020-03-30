@@ -11,7 +11,7 @@ Extracts regional case counts for Japan.
 \href{https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Japan}{Source}.
 }
 \examples{
-
+get_japan_regional_cases()
 
 \dontrun{
 
