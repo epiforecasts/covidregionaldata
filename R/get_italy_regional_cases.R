@@ -27,6 +27,7 @@
 #'  ggplot2::ggplot(ggplot2::aes(fill=cases)) +
 #'  ggplot2::geom_sf()
 #' }
+
 get_italy_regional_cases <- function() {
 
   ## Path to data
@@ -43,7 +44,6 @@ get_italy_regional_cases <- function() {
   ## Function to get daily files
   get_daily_files = function(date){
 
-    message("Reading in data from the ", date)
     suppressMessages(suppressWarnings(
       mem_read(gsub("__date__", format(date, "%Y%m%d"), x=path))
     ))

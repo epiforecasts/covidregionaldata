@@ -30,6 +30,7 @@
 #'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 #'
 #'}
+
 get_germany_regional_cases <- function() {
 
   path <- "https://raw.githubusercontent.com/jgehrcke/covid-19-germany-gae/master/data.csv"

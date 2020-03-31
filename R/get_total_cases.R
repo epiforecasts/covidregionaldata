@@ -26,7 +26,7 @@ get_total_cases <- function(source = 'WHO') {
       t() %>%
       tibble::as_tibble(rownames = "country") %>%
       dplyr::slice(-c(1:2))  %>%
-      dplyr::mutate(cases = as.numeric(V1)) %>%
+      dplyr::mutate(cases = suppressWarnings(as.numeric(V1))) %>% 
       dplyr::select(-V1) %>%
       dplyr::arrange(dplyr::desc(cases)) %>%
       dplyr::filter(!grepl("Region", country)) %>%
@@ -51,16 +51,18 @@ get_total_cases <- function(source = 'WHO') {
     total_cases <- NCoVUtils::get_who_cases()
 
     total_cases <- who_total_cases(total_cases)
+    
+    return(total_cases)
 
   }else if (source == 'ECDC'){
     total_cases <- NCoVUtils::get_ecdc_cases()
 
     total_cases <- ecdc_total_cases(total_cases)
+    
+    return(total_cases)
 
   }else{
     stop('Unknown Data Source. Current data sources: "WHO", "ECDC"')
   }
-
-  return(total_cases)
 
 }
