@@ -50,6 +50,11 @@
 #' }
 
 get_japan_regional_cases <- function(){
+  
+  #Return error here. 
+  print('This data source has changed. We are currently working to fix it.')
+  return(tibble())
+  
   # Locate source
   location <- "https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Japan"
   # Set up cache
@@ -87,5 +92,4 @@ get_japan_regional_cases <- function(){
 }
 
 
-get_japan_regional_cases()
 

@@ -17,6 +17,7 @@
 #' @examples
 #'
 #' get_who_cases
+
 get_who_cases <- function(country = NULL, daily = FALSE, cache = NULL) {
 
   ch <- memoise::cache_filesystem(".cache")

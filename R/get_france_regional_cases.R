@@ -14,6 +14,7 @@
 #'
 #' ## Code
 #' get_france_regional_cases
+
 get_france_regional_cases <- function() {
 
   # github api url to list contents of folder (daily data is stored in separate yaml files)
@@ -42,7 +43,7 @@ get_france_regional_cases <- function() {
 #' @importFrom tibble tibble
 #' @importFrom purrr map_chr map_int
 read_spf_regions_yaml <- function(path) {
-  ydat <- yaml::read_yaml(path)
+  ydat <- suppressWarnings(yaml::read_yaml(path))
   regions <- ydat$donneesRegionales
 
   tibble::tibble(

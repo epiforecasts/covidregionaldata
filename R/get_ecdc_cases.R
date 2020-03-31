@@ -18,8 +18,7 @@
 #' get_ecdc_cases(countries = "France")
 #'
 #' ## Code
-get_ecdc_cases <- function (countries = NULL)
-{
+get_ecdc_cases <- function (countries = NULL){
   # Get latest update
   base_url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
 
@@ -31,7 +30,7 @@ get_ecdc_cases <- function (countries = NULL)
     suppressWarnings(try(readr::read_csv(file = base_url), silent = TRUE))
   )
 
-  if (class(error) == "try-error") {
+  if ("try-error" %in% class(error)) {
     stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
   }
 

@@ -31,7 +31,7 @@ get_linelist <- function() {
 
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
   
-  data <- mem_read('https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv')
+  data <- suppressWarnings(mem_read('https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv'))
   
   data <- data %>% 
     dplyr::mutate_at(.vars = c("longitude", "latitude"), ~ ifelse(. %in% "#REF!", NA, .) %>% 
