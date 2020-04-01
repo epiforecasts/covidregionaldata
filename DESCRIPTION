@@ -51,7 +51,8 @@ Imports:
     R.utils,
     xml2,
     rvest,
-    janitor
+    janitor,
+    jsonlite
 Suggests:
     pkgdown,
     testthat
