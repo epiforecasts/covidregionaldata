@@ -88,7 +88,7 @@ get_italy_regional_cases <- function() {
 
 
   regions <-  data.frame(region = c("Abruzzo", "Basilicata", "Calabria",
-                            "Campania", "Emilia Romagna", "Friuli Venezia Giulia",
+                            "Campania", "Emilia-Romagna", "Friuli Venezia Giulia",
                             "Lazio", "Liguria", "Lombardia",
                             "Marche", "Molise", "Piemonte",
                             "Puglia", "Sardegna", "Sicilia",
