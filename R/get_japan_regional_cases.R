@@ -1,13 +1,12 @@
 #' Japan regional cases, daily
 
 #' @description Extracts regional case counts for Japan.
-#' [Source](https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Japan).
-#' @importFrom xml2 read_html
+#' [Source](https://mhlw-gis.maps.arcgis.com/apps/opsdashboard/index.html#/0c5d0502bbb54f9a8dddebca003631b8).
+#' @importFrom jsonlite fromJSON
 #' @importFrom rvest html_nodes html_text html_table
-#' @importFrom tidyr as_tibble
-#' @importFrom dplyr mutate filter select
-#' @importFrom stringr str_remove_all
-#' @importFrom lubridate as_date
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate filter select group_by summarise n full_join
+#' @importFrom lubridate as_datetime
 #' @importFrom memoise cache_filesystem memoise
 #' @export
 #' @examples
@@ -31,65 +30,51 @@
 #'    jp_okinawa <- dplyr::filter(regions_with_data, name == "Okinawa")
 #'
 #'    jp_okinawa <- ggplot2::ggplot(jp_okinawa) +
-#'    geom_sf(aes(fill = cases)) +  coord_sf(datum = NA) +
-#'    xlab(jp_okinawa$region) +
-#'    theme_bw() +
-#'    theme(legend.position = "none")
+#'    ggplot2::geom_sf(ggplot2::aes(fill = cases)) +  ggplot2::coord_sf(datum = NA) +
+#'    ggplot2::xlab(jp_okinawa$region) +
+#'    ggplot2::theme_bw() +
+#'    ggplot2::theme(legend.position = "none")
 #'
 #'    ## Map: mainland with insets
 #'    jp_main <- dplyr::filter(regions_with_data, name != "Okinawa") %>%
-#'    ggplot() +
-#'    geom_sf(aes(fill = cases)) +
-#'    coord_sf(crs = sf::st_crs(4326), xlim = c(127, 146), ylim = c(29, 46)) +
-#'    theme_bw()
+#'    ggplot2::ggplot() +
+#'    ggplot2::geom_sf(ggplot2::aes(fill = cases)) +
+#'    ggplot2::coord_sf(crs = sf::st_crs(4326), xlim = c(127, 146), ylim = c(29, 46)) +
+#'    ggplot2::theme_bw()
 #'
 #'    jp_main +
-#'    annotation_custom(
-#'    grob = ggplotGrob(jp_okinawa), xmin = 140,  xmax = 146,  ymin = 24,  ymax = 37)
+#'    ggplot2::annotation_custom(
+#'    grob = ggplot2::ggplotGrob(jp_okinawa), xmin = 140,  xmax = 146,  ymin = 24,  ymax = 37)
 #'
 #' }
 
 get_japan_regional_cases <- function(){
   
-  #Return error here. 
-  print('This data source has changed. We are currently working to fix it.')
-  return(tibble())
+#  #Return error here. 
+#  print('This data source has changed. We are currently working to fix it.')
+#  return(tibble())
   
   # Locate source
-  location <- "https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Japan"
+  location <- "https://services8.arcgis.com/JdxivnCyd1rvJTrY/arcgis/rest/services/covid19_list_csv_EnglishView/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=No%20desc%2C%E7%A2%BA%E5%AE%9A%E6%97%A5%20desc&resultOffset=0&resultRecordCount=2000&cacheHint=true"
   # Set up cache
   ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(xml2::read_html, cache = ch)
-  # Read webpage
-  webpage <- xml2::read_html(location)
-  # Get regions
-  region <- webpage %>%
-    rvest::html_nodes("tr:nth-child(36) th") %>%
-    rvest::html_text()
-  region <- region[2:40]
-  # Get case count
-  cases <- webpage %>%
-    rvest::html_nodes("table") %>%
-    rvest::html_table(fill=T)
-  cases <- suppressMessages(suppressWarnings(tidyr::as_tibble(cases[[5]], .name_repair = "universal")  %>%
-                                               dplyr::mutate(Date = (lubridate::as_date(Date))) %>%
-                                               dplyr::filter(Date == max(Date, na.rm=T))))
-  # Show latest date
-  message(paste0("Latest date found: ", cases$Date))
-  # Combine and clean
-  cases <- dplyr::select(cases, 2:40)
-  cases <- t(cases)
-  cases <- cbind(region, cases)
-  rownames(cases) <- c()
-  colnames(cases) <- c("region", "cases")
-  cases <- tidyr::as_tibble(cases) %>%
-    dplyr::mutate(cases = ifelse(cases == "", 0, cases),
-                  cases = as.numeric(cases),
-                  region = iconv(region, from = 'UTF-8', to = 'ASCII//TRANSLIT'),
-                  region = stringr::str_remove_all(region, "\\s"))
+  mem_read <- memoise::memoise(jsonlite::fromJSON, cache = ch)
+  # Read & clean daily cases
+  data <- mem_read(location)
+  data <- data$features$attributes
+  colnames(data) <- c("pref_jp", "age_jp", "gender_jp", "diagnosis_date", "no", "cumulative", "pref_cases", "region", "age_en", "gender_en", "objectid")
+  regions <- tibble::enframe(unique(data$region))
+  data_df <- data %>%
+    dplyr::mutate(date = as.numeric(diagnosis_date) / 1000,
+                  date = lubridate::as_datetime(date, tz = "Japan")) %>%
+    dplyr::select(region, date)  %>%
+    dplyr::filter(date == max(date, na.rm=T)) %>%
+    dplyr::group_by(region) %>%
+    dplyr::summarise(cases = dplyr::n()) %>%
+    dplyr::full_join(regions, by = c("region" = "value")) %>%
+    dplyr::select(region, cases) %>%
+    dplyr::mutate(cases = tidyr::replace_na(cases, 0))
 
-  return(cases)
+  return(data_df)
 }
-
-
 
