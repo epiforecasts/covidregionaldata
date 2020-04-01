@@ -78,5 +78,3 @@ get_japan_regional_cases <- function(){
   return(data_df)
 }
 
-
-
