@@ -7,6 +7,7 @@
 #' @importFrom dplyr mutate select filter full_join arrange group_by ungroup n lag
 #' @importFrom readr read_csv
 #' @importFrom tidyr gather drop_na
+#' @importFrom stringr str_squish
 #' @examples
 #' get_uk_nhs_region_cases
 #'
