@@ -6,7 +6,7 @@
 #' @export
 #' @importFrom dplyr mutate select filter full_join arrange group_by ungroup n lag
 #' @importFrom readr read_csv
-#' @importFrom tidyr gather
+#' @importFrom tidyr gather drop_na
 #' @examples
 #' get_uk_nhs_region_cases
 #'
@@ -38,7 +38,11 @@ get_uk_nhs_region_cases <- function() {
     dplyr::mutate(date = stringr::str_replace_all(Date,pattern = "\\.",replacement = "/")) %>%
     dplyr::select(-Date) %>%
     tidyr::gather("UTLA","confirm",-date) %>%
-    dplyr::mutate(UTLA = stringr::str_replace_all(UTLA, "_", " ")) %>%
+    tidyr::drop_na(date, confirm) %>%
+    dplyr::mutate(UTLA = stringr::str_replace_all(UTLA, "_", " "),
+                  confirm = confirm %>%
+                    stringr::str_squish() %>%
+                    as.numeric) %>%
     dplyr::filter(UTLA %in% c("London","South East","South West","East of England","Midlands",
                               "North East and Yorkshire", "North West", "Ayrshire and Arran",
                               "Borders", "Dumfries and Gallow",
