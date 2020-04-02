@@ -7,7 +7,7 @@
 get_belgium_regional_cases(dataset = "cases_provincial")
 }
 \arguments{
-\item{dataset}{Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalization_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".}
+\item{dataset}{Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".}
 }
 \value{
 A data.frame of specified Covid data.

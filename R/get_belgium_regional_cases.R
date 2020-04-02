@@ -1,7 +1,7 @@
 #' Fetch daily COVID cases by region for Belgium.
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 #' Data is available at https://epistat.wiv-isp.be/covid/
-#' @param dataset Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalization_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial". 
+#' @param dataset Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial". 
 #' @return A data.frame of specified Covid data. 
 #' @importFrom readr read_csv locale
 #' @importFrom dplyr rename_all 
@@ -15,8 +15,8 @@
 
 get_belgium_regional_cases <- function(dataset = "cases_provincial"){
   
-  if(!dataset %in% c("cases_municipal", "cases_provincial", "hospitalization_provincial", "mortality_provincial", "testing_national")){
-    stop('Unknown input. Please specify dataset: "cases_municipal", "cases_provincial", "hospitalization_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".')
+  if(!dataset %in% c("cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national")){
+    stop('Unknown input. Please specify dataset: "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".')
   }
   
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
@@ -66,7 +66,7 @@ get_belgium_regional_cases <- function(dataset = "cases_provincial"){
     
     return(clean_c_municipal_data(c_municipal))
     
-  }else if (dataset == "hospitalization_provincial"){
+  }else if (dataset == "hospitalisation_provincial"){
     
     return(clean_belgium_data_default(h_provincial))
     

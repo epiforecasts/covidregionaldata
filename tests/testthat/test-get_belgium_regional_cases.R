@@ -8,7 +8,7 @@ test_that("get_belgium_regional_cases cases works as expected", {
   expect_is(base, "data.frame")
   expect_is(base$date, "Date")
 
-  base <- get_belgium_regional_cases(dataset = "hospitalization_provincial")
+  base <- get_belgium_regional_cases(dataset = "hospitalisation_provincial")
   expect_is(base, "data.frame")
   expect_is(base$date, "Date")
   
