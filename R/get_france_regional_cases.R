@@ -13,7 +13,7 @@
 #' @examples
 #'
 #' ## Code
-#' get_france_regional_cases
+#' get_france_regional_cases()
 
 get_france_regional_cases <- function() {
 
