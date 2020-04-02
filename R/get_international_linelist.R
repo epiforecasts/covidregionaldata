@@ -12,7 +12,7 @@
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom readr read_csv
 #' @importFrom lubridate dmy
-#' @importFrom tibble tibble
+#' @importFrom tibble as_tibble
 #' @importFrom tidyr drop_na
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom R.utils withTimeout
