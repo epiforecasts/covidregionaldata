@@ -1,8 +1,8 @@
 #' Fetch daily COVID cases by region for Belgium.
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 #' Data is available at https://epistat.wiv-isp.be/covid/
-#' @param dataset Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial". 
-#' @return A data.frame of specified Covid data. 
+#' @param dataset Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial". 
+#' @return A data.frame of specified Covid data. If dataset = "all", a named list of all available datasets. 
 #' @importFrom readr read_csv locale
 #' @importFrom dplyr rename_all 
 #' @examples
@@ -15,8 +15,8 @@
 
 get_belgium_regional_cases <- function(dataset = "cases_provincial"){
   
-  if(!dataset %in% c("cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national")){
-    stop('Unknown input. Please specify dataset: "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".')
+  if(!dataset %in% c("cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all")){
+    stop('Unknown input. Please specify dataset: "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial".')
   }
   
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
@@ -78,11 +78,19 @@ get_belgium_regional_cases <- function(dataset = "cases_provincial"){
    
     return(clean_t_national_data(t_national))
      
+  }else if (dataset == "all"){
+    
+    all_list = list()
+    
+    all_list[['cases_provincial']] = clean_belgium_data_default(c_provincial)
+    all_list[['cases_municipal']] = clean_c_municipal_data(c_municipal)
+    all_list[['hospitalisation_provincial']] = clean_belgium_data_default(h_provincial)
+    all_list[['mortality_provincial']] = clean_belgium_data_default(m_provincial)
+    all_list[['testing_national']] = clean_t_national_data(t_national)
+    
+    return(all_list)
+    
   }
   
 }
-
-
-
-
 

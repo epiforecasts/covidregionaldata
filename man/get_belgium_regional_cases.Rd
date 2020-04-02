@@ -7,10 +7,10 @@
 get_belgium_regional_cases(dataset = "cases_provincial")
 }
 \arguments{
-\item{dataset}{Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national". Default: "cases_provincial".}
+\item{dataset}{Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial".}
 }
 \value{
-A data.frame of specified Covid data.
+A data.frame of specified Covid data. If dataset = "all", a named list of all available datasets.
 }
 \description{
 Fetches daily COVID data from Sciensano, the Belgian Institute for Health.

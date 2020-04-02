@@ -22,4 +22,9 @@ test_that("get_belgium_regional_cases cases works as expected", {
   expect_is(base$date, "Date")
   expect_true(sum(as.numeric(base$tests) < 0) == 0)
   
+  base <- get_belgium_regional_cases(dataset = "all")
+  expect_is(base, "list")
+  lapply(base, expect_is, class='data.frame')
+  
 })
+
