@@ -148,23 +148,11 @@
 #&gt;     date_confirmation_str &lt;- NULL
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
 #&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
-#&gt;     gids &lt;- c(outside_hubei = 0, hubei = 429276722)
-#&gt;     urls &lt;- paste0("https://docs.google.com/spreadsheets/d/", 
-#&gt;         "1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/pub", "?single=true&amp;output=csv&amp;gid=", 
-#&gt;         gids)
-#&gt;     linelists &lt;- lapply(urls, mem_read)
-#&gt;     drops &lt;- c("chroDisea_Yes(1)/No(0)")
-#&gt;     linelists[[1]] &lt;- linelists[[1]][, !(names(linelists[[1]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists[[2]] &lt;- linelists[[2]][, !(names(linelists[[2]]) %in% 
-#&gt;         drops)]
-#&gt;     linelists &lt;- linelists %&gt;% purrr::map(function(data) {
-#&gt;         dplyr::mutate_at(data, .vars = c("longitude", "latitude"), 
-#&gt;             ~ifelse(. %in% "#REF!", NA, .) %&gt;% stringr::str_trim() %&gt;% 
-#&gt;                 as.numeric()) %&gt;% dplyr::mutate_all(~stringr::str_replace_all(., 
-#&gt;             "N/A", NA_character_))
-#&gt;     })
-#&gt;     linelists &lt;- dplyr::bind_rows(linelists) %&gt;% dplyr::rename(date_onset_symptoms_str = "date_onset_symptoms", 
+#&gt;     data &lt;- suppressWarnings(mem_read("https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv"))
+#&gt;     data &lt;- data %&gt;% dplyr::mutate_at(.vars = c("longitude", 
+#&gt;         "latitude"), ~ifelse(. %in% "#REF!", NA, .) %&gt;% stringr::str_trim() %&gt;% 
+#&gt;         as.numeric()) %&gt;% dplyr::mutate_all(~stringr::str_replace_all(., 
+#&gt;         "N/A", NA_character_)) %&gt;% dplyr::rename(date_onset_symptoms_str = "date_onset_symptoms", 
 #&gt;         date_admission_hospital_str = "date_admission_hospital", 
 #&gt;         date_confirmation_str = "date_confirmation") %&gt;% dplyr::mutate(date_onset_symptoms = as.Date(date_onset_symptoms_str, 
 #&gt;         format = "%d.%m.%Y"), date_admission_hospital = as.Date(date_admission_hospital_str, 
@@ -172,9 +160,9 @@
 #&gt;         format = "%d.%m.%Y")) %&gt;% dplyr::mutate(delay_confirmation = date_confirmation - 
 #&gt;         date_onset_symptoms, delay_admission = date_admission_hospital - 
 #&gt;         date_onset_symptoms)
-#&gt;     return(linelists)
+#&gt;     return(data)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fab3b14a8c8&gt;
+#&gt; &lt;bytecode: 0x7fddaf618128&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

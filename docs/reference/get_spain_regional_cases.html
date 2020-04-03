@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spain regional cases, daily
-Source: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/situacionActual.htm
-NB. PDF table is not produced consistently each day, so code (lines 18 &amp; 20) may need adjusting
-Alternative source here: https://covid19.isciii.es/ — get_spain_regional_cases • NCoVUtils</title>
+<title>Spain regional cases daily — get_spain_regional_cases • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -42,14 +39,9 @@ Alternative source here: https://covid19.isciii.es/ — get_spain_regional_cases
 
 
 
-<meta property="og:title" content="Spain regional cases, daily
-Source: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/situacionActual.htm
-NB. PDF table is not produced consistently each day, so code (lines 18 &amp; 20) may need adjusting
-Alternative source here: https://covid19.isciii.es/ — get_spain_regional_cases" />
-<meta property="og:description" content="Spain regional cases, daily
-Source: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/situacionActual.htm
-NB. PDF table is not produced consistently each day, so code (lines 18 &amp;amp; 20) may need adjusting
-Alternative source here: https://covid19.isciii.es/" />
+<meta property="og:title" content="Spain regional cases daily — get_spain_regional_cases" />
+<meta property="og:description" content="Extract regional spanish case counts.
+Source" />
 
 
 
@@ -81,7 +73,7 @@ Alternative source here: https://covid19.isciii.es/" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NCoVUtils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -121,30 +113,33 @@ Alternative source here: https://covid19.isciii.es/" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Spain regional cases, daily
-Source: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/situacionActual.htm
-NB. PDF table is not produced consistently each day, so code (lines 18 &amp; 20) may need adjusting
-Alternative source here: https://covid19.isciii.es/</h1>
+    <h1>Spain regional cases daily</h1>
     
     <div class="hidden name"><code>get_spain_regional_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Spain regional cases, daily
-Source: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov-China/situacionActual.htm
-NB. PDF table is not produced consistently each day, so code (lines 18 &amp; 20) may need adjusting
-Alternative source here: https://covid19.isciii.es/</p>
+    <p>Extract regional spanish case counts.
+<a href='https://covid19.isciii.es/'>Source</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_spain_regional_cases</span>()</pre>
+    <pre class="usage"><span class='fu'>get_spain_regional_cases</span>(<span class='kw'>dataset</span> <span class='kw'>=</span> <span class='st'>"cases_provincial"</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dataset</th>
+      <td><p>Character String specifying dataset: "cases_provincial", "hospitalisation_provincial", "icu_provincial", "mortality_provincial", "recovered_provincial", "all". Default: "cases_provincial".</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A dataframe of daily Spanish regional case counts.</p>
+    <p>A dataframe of specified Covid data. If dataset = "all", a dataframe with all variables (cases, hospitalisation, ICU, mortality, recovered)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>Code</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'Code' not found</span></div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -156,7 +151,7 @@ Alternative source here: https://covid19.isciii.es/</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Sebastian Funk.</p>
+  <p>Developed by Sam Abbott, Joel Hellewell, Katharine Sherratt, Hamish Gibbs, James Munday, Paul Campbell, Sebastian Funk.</p>
 </div>
 
 <div class="pkgdown">

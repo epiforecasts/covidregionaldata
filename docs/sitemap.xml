@@ -4,6 +4,15 @@
     <loc>epiforecasts.io/NCoVUtils//index.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/format_ecdc_data.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/get_belgium_regional_cases.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/get_canada_regional_cases.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/NCoVUtils//reference/get_ecdc_cases.html</loc>
   </url>
   <url>
@@ -29,6 +38,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/NCoVUtils//reference/get_linelist.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/NCoVUtils//reference/get_spain_regional_cases.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/NCoVUtils//reference/get_total_cases.html</loc>

@@ -139,7 +139,6 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 #&gt;     ch &lt;- memoise::cache_filesystem(".cache")
 #&gt;     mem_read &lt;- memoise::memoise(readr::read_csv, cache = ch)
 #&gt;     get_daily_files = function(date) {
-#&gt;         message("Reading in data from the ", date)
 #&gt;         suppressMessages(suppressWarnings(mem_read(gsub("__date__", 
 #&gt;             format(date, "%Y%m%d"), x = path))))
 #&gt;     }
@@ -161,7 +160,7 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 #&gt;         as.character()) %&gt;% dplyr::group_by(region, date) %&gt;% 
 #&gt;         dplyr::summarise(cases = sum(cases)) %&gt;% dplyr::ungroup()
 #&gt;     regions &lt;- data.frame(region = c("Abruzzo", "Basilicata", 
-#&gt;         "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", 
+#&gt;         "Calabria", "Campania", "Emilia-Romagna", "Friuli Venezia Giulia", 
 #&gt;         "Lazio", "Liguria", "Lombardia", "Marche", "Molise", 
 #&gt;         "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", 
 #&gt;         "Trentino-Alto Adige", "Umbria", "Valle d'Aosta", "Veneto"), 
@@ -170,7 +169,7 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 #&gt;     cases &lt;- cases %&gt;% dplyr::left_join(regions, by = "region")
 #&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fab3d7bd2e8&gt;
+#&gt; &lt;bytecode: 0x7fddb252e180&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>day_of_cases</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>NCoVUtils</span><span class='kw ns'>::</span><span class='fu'>get_italy_regional_cases</span>() <span class='kw'>%&gt;%</span>
