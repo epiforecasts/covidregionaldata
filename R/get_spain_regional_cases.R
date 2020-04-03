@@ -4,7 +4,7 @@
 #' [Source](https://covid19.isciii.es/)
 #' @param dataset Character String specifying dataset: "cases_provincial", "hospitalisation_provincial", "icu_provincial", "mortality_provincial", "recovered_provincial", "all". Default: "cases_provincial".
 #' @return A dataframe of specified Covid data. If dataset = "all", a dataframe with all variables (cases, hospitalisation, ICU, mortality, recovered)
-#' @importFrom dplyr select mutate filter left_join
+#' @importFrom dplyr select mutate filter left_join first
 #' @importFrom memoise cache_filesystem memoise
 #' @importFrom readr read_csv
 #' @importFrom lubridate dmy
@@ -83,7 +83,7 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
       dplyr::mutate(date = lubridate::dmy(date)) %>%
       dplyr::group_by(province) %>%
       dplyr::arrange(date, .by_group = T) %>%
-      dplyr::mutate(cases_daily = cases_cum - lag(cases_cum, default = first(cases_cum)),
+      dplyr::mutate(cases_daily = cases_cum - lag(cases_cum, default = dplyr::first(cases_cum)),
                     hospital_daily = hospital_cum - lag(hospital_cum, default = first(hospital_cum)),
                     icu_daily = icu_cum - lag(icu_cum, default = first(icu_cum)),
                     deaths_daily = deaths_cum - lag(deaths_cum, default = first(deaths_cum)),
