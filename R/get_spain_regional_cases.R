@@ -23,7 +23,7 @@
 #'
 #' regions <- rnaturalearth::ne_states("Spain", returnclass = "sf")
 #' regions_with_data <- regions %>%
-#'   mutate(region_shortcode = stringr::str_remove_all(region_cod, "^ES\\."), # Match codes to dataset
+#'   mutate(region_shortcode = stringr::str_remove_all(region_cod, "^ES\."), # Match codes to dataset
 #'          region_shortcode = stringr::str_replace(region_shortcode, "^PM$", "IB"), # Baleares
 #'          region_shortcode = stringr::str_replace(region_shortcode, "^MU$", "MC"), # Murcia
 #'          region_shortcode = stringr::str_replace(region_shortcode, "^NA$", "NC"), # Navarra
@@ -57,6 +57,7 @@
 #'
 #' ##Code
 #' get_spain_regional_cases
+
 get_spain_regional_cases <- function(dataset = "cases_provincial"){
 
   if(!dataset %in% c("cases_provincial", "hospitalisation_provincial", "icu_provincial", "mortality_provincial", "recovered_provincial", "all")) {
@@ -66,7 +67,7 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
     spain_default_all <- function() {
       # Set up
       province_name <- tibble::tibble(code = c("AN", "AR", "AS", "CB", "CE", "CL", "CM", "CN", "CT", "EX", "GA", "IB", "MC", "MD", "ME", "NC", "PV", "RI", "VC"),
-                                    name = c("Andalucía","Aragón","Principado de Asturias","Cantabria", "Ceuta", "Castilla y León", "Castilla-La Mancha", "Santa Cruz de Tenerife", "Cataluña", "Extremadura", "Galicia", "Islas Baleares", "Región de Murcia", "Comunidad de Madrid", "Melilla", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "Comunidad Valenciana"))
+                                    name = c("Andaluc\u00eda","Arag\u00f3n","Principado de Asturias","Cantabria", "Ceuta", "Castilla y Le\u00f3n", "Castilla-La Mancha", "Santa Cruz de Tenerife", "Catalu\u00f1a", "Extremadura", "Galicia", "Islas Baleares", "Regi\u00f3n de Murcia", "Comunidad de Madrid", "Melilla", "Comunidad Foral de Navarra", "Pa\u00eds Vasco", "La Rioja", "Comunidad Valenciana"))
 
       location <- "https://covid19.isciii.es/resources/serie_historica_acumulados.csv"
 
@@ -77,7 +78,7 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
       # Read data
       all_data <- suppressMessages(mem_read(location)) %>%
         dplyr::rename(province = 1, date = 2, cases_cum = 3, hospital_cum = 4, icu_cum = 5, deaths_cum = 6, recover_cum = 7) %>%
-        dplyr::left_join(province_name, by = c("province" = "name")) %>%
+        dplyr::left_join(province_name, by = c("province" = "code")) %>%
         dplyr::filter(is.na(date) == FALSE) %>%
         dplyr::mutate(date = lubridate::dmy(date)) %>%
         dplyr::group_by(province) %>%
@@ -95,24 +96,24 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
 
   if (dataset == "cases_provincial"){
     return(spain_default_all() %>%
-             select(province, date, cases_cum, cases_daily))
+             select(province, name, date, cases_cum, cases_daily))
 
   }else if (dataset == "hospitalisation_provincial"){
     return(cases_provincial <- spain_default_all() %>%
-             select(province, date, hospital_cum, hospital_daily))
-
+             select(province, name, date, cases_cum, cases_daily))
+    
   }else if (dataset == "icu_provincial"){
     return(icu_provincial <- spain_default_all() %>%
-             select(province, date, icu_cum, icu_daily))
-
+             select(province, name, date, cases_cum, cases_daily))
+    
   }else if (dataset == "mortality_provincial"){
     return(mortality_provincial <- spain_default_all() %>%
-             select(province, date, deaths_cum, deaths_daily))
-
+             select(province, name, date, cases_cum, cases_daily))
+    
   }else if (dataset == "recovered_provincial"){
     return(recovered_provincial <- spain_default_all() %>%
-             select(province, date, recover_cum, recover_daily))
-
+             select(province, name, date, cases_cum, cases_daily))
+    
   }else if (dataset == "all"){
     return(all <- spain_default_all())
   }
