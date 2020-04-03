@@ -15,7 +15,7 @@ Data from Santé Publique France https://github.com/opencovid19-fr/data
 \examples{
 
 ## Code
-get_france_regional_cases
+get_france_regional_cases()
 }
 \author{
 Paul Campbell @paulcampbell91

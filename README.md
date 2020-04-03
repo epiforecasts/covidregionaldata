@@ -26,35 +26,42 @@ See the individual function documentation for full details of present functional
 NCoVUtils::get_linelist()
 ```
 
-For individual region/city data outside of Hubei the following function has been provided:
-
-```r
-NCoVUtils::get_international_linelist()
-```
-
-Extract WHO case counts using:
+Extract international case counts compiled by WHO using:
 
 ```r
 NCoVUtils::get_who_cases()
 ```
 
-Extract ECDC case and deaths counts using:
+Extract international case counts compiled by ECDC using:
 
 ```r
 NCoVUtils::get_ecdc_cases()
 ```
 
-Extract total cases (and deaths) by region using:
+Extract total global cases (and deaths) by country using:
 
 ```r
 NCoVUtils::get_total_cases()
 ```
 
-Extract regional case counts from Italy:
+Extract non-pharmaceutical interventions by country using:
 
 ```r
-NCoVUtils::get_italy_regional_cases()
+NCoVUtils::get_interventions_data()
 ```
+
+Extract country-level regional cases from:  
+
+* Belgium  
+* Canada  
+* France  
+* Germany  
+* Italy  
+* Spain  
+* United Kingdom  
+* United States  
+* Japan  
+* Korea  
 
 See the function reference for a full list of data sets that package can be used to extract.
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reset Cache and Update all Local Data — reset_cache • NCoVUtils</title>
+<title>Format ECDC data for use with EpiNow analysis — format_ecdc_data • NCoVUtils</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Reset Cache and Update all Local Data — reset_cache" />
-<meta property="og:description" content="Reset Cache and Update all Local Data" />
+<meta property="og:title" content="Format ECDC data for use with EpiNow analysis — format_ecdc_data" />
+<meta property="og:description" content="Format ECDC data for use with EpiNow analysis" />
 
 
 
@@ -112,33 +112,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reset Cache and Update all Local Data</h1>
+    <h1>Format ECDC data for use with EpiNow analysis</h1>
     
-    <div class="hidden name"><code>reset_cache.Rd</code></div>
+    <div class="hidden name"><code>format_ecdc_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reset Cache and Update all Local Data</p>
+    <p>Format ECDC data for use with EpiNow analysis</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reset_cache</span>()</pre>
+    <pre class="usage"><span class='fu'>format_ecdc_data</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>data.frame returned by get_ecdc_cases function</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Null</p>
+    <p>data.frame with formatted ecdc case data by country</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## Code</span>
-<span class='no'>reset_cache</span></div><div class='output co'>#&gt; function () 
-#&gt; {
-#&gt;     unlink(".cache", recursive = TRUE)
-#&gt;     cache &lt;- memoise::cache_filesystem(".cache")
-#&gt;     return(invisible(NULL))
-#&gt; }
-#&gt; &lt;bytecode: 0x7fddb366dbd0&gt;
-#&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>format_ecdc_data</span>(<span class='fu'><a href='get_ecdc_cases.html'>get_ecdc_cases</a></span>(<span class='kw'>countries</span> <span class='kw'>=</span> <span class='st'>"France"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 95 x 3</span><span>
+#&gt;    date       region cases
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2019-12-31 France     0
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2020-01-01 France     0
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2020-01-02 France     0
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2020-01-03 France     0
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2020-01-04 France     0
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2020-01-05 France     0
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2020-01-06 France     0
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2020-01-07 France     0
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2020-01-08 France     0
+#&gt; </span><span style='color: #555555;'>10</span><span> 2020-01-09 France     0
+#&gt; </span><span style='color: #555555;'># … with 85 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

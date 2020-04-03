@@ -154,11 +154,11 @@ Source." />
 #&gt;     cases &lt;- webpage %&gt;% rvest::html_nodes("tr+ tr th+ .number") %&gt;% 
 #&gt;         rvest::html_text()
 #&gt;     cases &lt;- cbind(region, cases)
-#&gt;     cases &lt;- tidyr::as_tibble(cases) %&gt;% dplyr::filter(region != 
+#&gt;     cases &lt;- tibble::as_tibble(cases) %&gt;% dplyr::filter(region != 
 #&gt;         "Lazaretto") %&gt;% dplyr::mutate(cases = as.numeric(as.character(cases)))
 #&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fab40c10790&gt;
+#&gt; &lt;bytecode: 0x7fddb5ab8d60&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
