@@ -64,34 +64,35 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
     stop('Unknown input. Please specify dataset: "cases_provincial", "hospitalisation_provincial", "icu_provincial", "mortality_provincial", "recovered_provincial", "all". Default: "cases_provincial".')
   }
 
-    spain_default_all <- function() {
-      # Set up
-      province_name <- tibble::tibble(code = c("AN", "AR", "AS", "CB", "CE", "CL", "CM", "CN", "CT", "EX", "GA", "IB", "MC", "MD", "ME", "NC", "PV", "RI", "VC"),
-                                    name = c("Andaluc\u00eda","Arag\u00f3n","Principado de Asturias","Cantabria", "Ceuta", "Castilla y Le\u00f3n", "Castilla-La Mancha", "Santa Cruz de Tenerife", "Catalu\u00f1a", "Extremadura", "Galicia", "Islas Baleares", "Regi\u00f3n de Murcia", "Comunidad de Madrid", "Melilla", "Comunidad Foral de Navarra", "Pa\u00eds Vasco", "La Rioja", "Comunidad Valenciana"))
+  spain_default_all <- function() {
+    # Set up
+    province_name <- tibble::tibble(code = c("AN", "AR", "AS", "CB", "CE", "CL", "CM", "CN", "CT", "EX", "GA", "IB", "MC", "MD", "ME", "NC", "PV", "RI", "VC"),
+                                  name = c("Andaluc\u00eda","Arag\u00f3n","Principado de Asturias","Cantabria", "Ceuta", "Castilla y Le\u00f3n", "Castilla-La Mancha", "Santa Cruz de Tenerife", "Catalu\u00f1a", "Extremadura", "Galicia", "Islas Baleares", "Regi\u00f3n de Murcia", "Comunidad de Madrid", "Melilla", "Comunidad Foral de Navarra", "Pa\u00eds Vasco", "La Rioja", "Comunidad Valenciana"))
 
-      location <- "https://covid19.isciii.es/resources/serie_historica_acumulados.csv"
+    location <- "https://covid19.isciii.es/resources/serie_historica_acumulados.csv"
 
-      # Cache
-      ch <- memoise::cache_filesystem(".cache")
-      mem_read <- memoise::memoise(readr::read_csv, cache = ch)
+    # Cache
+    ch <- memoise::cache_filesystem(".cache")
+    mem_read <- memoise::memoise(readr::read_csv, cache = ch)
 
-      # Read data
-      all_data <- suppressMessages(mem_read(location)) %>%
-        dplyr::rename(province = 1, date = 2, cases_cum = 3, hospital_cum = 4, icu_cum = 5, deaths_cum = 6, recover_cum = 7) %>%
-        dplyr::left_join(province_name, by = c("province" = "code")) %>%
-        dplyr::filter(is.na(date) == FALSE) %>%
-        dplyr::mutate(date = lubridate::dmy(date)) %>%
-        dplyr::group_by(province) %>%
-        dplyr::arrange(date, .by_group = T) %>%
-        dplyr::mutate(cases_daily = cases_cum - lag(cases_cum, default = first(cases_cum)),
-                      hospital_daily = hospital_cum - lag(hospital_cum, default = first(hospital_cum)),
-                      icu_daily = icu_cum - lag(icu_cum, default = first(icu_cum)),
-                      deaths_daily = deaths_cum - lag(deaths_cum, default = first(deaths_cum)),
-                      recover_daily = recover_cum - lag(recover_cum, default = first(recover_cum))
-                      )
-      all_data[is.na(all_data)] = 0
+    # Read data
+    all_data <- suppressMessages(mem_read(location)) %>%
+      dplyr::rename(province = 1, date = 2, cases_cum = 3, hospital_cum = 4, icu_cum = 5, deaths_cum = 6, recover_cum = 7) %>%
+      dplyr::left_join(province_name, by = c("province" = "code")) %>%
+      dplyr::filter(is.na(date) == FALSE) %>%
+      dplyr::mutate(date = lubridate::dmy(date)) %>%
+      dplyr::group_by(province) %>%
+      dplyr::arrange(date, .by_group = T) %>%
+      dplyr::mutate(cases_daily = cases_cum - lag(cases_cum, default = first(cases_cum)),
+                    hospital_daily = hospital_cum - lag(hospital_cum, default = first(hospital_cum)),
+                    icu_daily = icu_cum - lag(icu_cum, default = first(icu_cum)),
+                    deaths_daily = deaths_cum - lag(deaths_cum, default = first(deaths_cum)),
+                    recover_daily = recover_cum - lag(recover_cum, default = first(recover_cum))
+                    )
+    all_data[is.na(all_data)] = 0
+    all_data[all_data < 0] = 0
 
-      return(all_data)
+    return(all_data)
   }
 
   if (dataset == "cases_provincial"){
