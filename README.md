@@ -61,7 +61,8 @@ Extract country-level regional cases from:
 * United Kingdom  
 * United States  
 * Japan  
-* Korea  
+* Korea
+* Afghanistan
 
 See the function reference for a full list of data sets that package can be used to extract.
 
