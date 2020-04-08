@@ -55,8 +55,7 @@ Imports:
     xml2,
     rvest,
     janitor,
-    jsonlite,
-    googlesheets4
+    jsonlite
 Suggests:
     pkgdown,
     testthat
