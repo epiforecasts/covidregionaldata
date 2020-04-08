@@ -101,23 +101,23 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
 
   if (dataset == "cases_provincial"){
     return(spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, cases_cum, cases_daily))
 
   }else if (dataset == "hospitalisation_provincial"){
     return(cases_provincial <- spain_default_all() %>%
-             select(province, name, date, hospital_cum, hospital_daily))
+             dplyr::select(province, name, date, hospital_cum, hospital_daily))
     
   }else if (dataset == "icu_provincial"){
     return(icu_provincial <- spain_default_all() %>%
-             select(province, name, date, icu_cum, icu_daily))
+             dplyr::select(province, name, date, icu_cum, icu_daily))
     
   }else if (dataset == "mortality_provincial"){
     return(mortality_provincial <- spain_default_all() %>%
-             select(province, name, date, deaths_cum, deaths_daily))
+             dplyr::select(province, name, date, deaths_cum, deaths_daily))
     
   }else if (dataset == "recovered_provincial"){
     return(recovered_provincial <- spain_default_all() %>%
-             select(province, name, date, recover_cum, recover_daily))
+             dplyr::select(province, name, date, recover_cum, recover_daily))
     
   }else if (dataset == "all"){
     return(all <- spain_default_all())
