@@ -1,4 +1,6 @@
-test_that("get_ecdc cases works as expected", {
+source('./custom_tests/expect_colname.R')
+
+test_that("get_ecdc_cases works as expected", {
 
   d <- get_ecdc_cases(countries = "France")
   expect_is(d, "data.frame")
@@ -7,3 +9,12 @@ test_that("get_ecdc cases works as expected", {
 
 })
 
+test_that("get_ecdc_cases data source is unchanged", {
+  
+  base <- readr::read_csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv")
+  
+  expected_colnames = c("dateRep", "day", "month", "year", "cases", "deaths", "countriesAndTerritories", "geoId", "countryterritoryCode", "popData2018")
+  
+  sapply(expected_colnames, expect_colname, colnames = colnames(base))
+  
+})
