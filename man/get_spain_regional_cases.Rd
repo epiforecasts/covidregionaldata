@@ -62,6 +62,4 @@ es_mainland +
 
 }
 
-##Code
-get_spain_regional_cases
 }

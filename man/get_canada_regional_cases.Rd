@@ -19,8 +19,13 @@ Data is available at https://www.canada.ca/en/public-health/services/diseases/20
 \examples{
 
 \dontrun{
-
- get_canada_regional_cases(out = 'timeseries')
-
+ total_cases = get_canada_regional_cases(out = "total")
+ 
+ rnaturalearth::ne_states(country = "canada", returnclass="sf") \%>\% 
+   dplyr::left_join(total_cases, by = c('name_en' = 'province')) \%>\% 
+   ggplot2::ggplot() +
+   ggplot2::theme_void() +
+   ggplot2::geom_sf(aes(fill = cases_confirmed)) +
+   ggplot2::labs(fill = 'Confirmed Cases')  
 }
 }

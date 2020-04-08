@@ -55,8 +55,6 @@
 #'
 #' }
 #'
-#' ##Code
-#' get_spain_regional_cases
 
 get_spain_regional_cases <- function(dataset = "cases_provincial"){
 
