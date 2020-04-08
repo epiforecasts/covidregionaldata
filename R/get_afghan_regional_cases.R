@@ -8,7 +8,6 @@
 #'
 #'
 #' @return A dataframe of daily Afghan provincial cases and deaths
-#' @importFrom googlesheets4 read_sheet
 #' @importFrom purrr map_dfr map_chr
 #' @importFrom dplyr transmute arrange
 #' @importFrom tidyr complete full_seq
@@ -20,17 +19,22 @@
 
 get_afghan_regional_cases <- function() {
   
-  url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg"
+  url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
 
   #download
-  data <- googlesheets4::read_sheet(
-    url,
-    sheet = 1
-    )
+  cls <- c(
+      Province = "character",
+      Cases = "integer",
+      Deaths = "integer",
+      Recoveries = "integer",
+      Active.Cases = "integer",
+      Date = "Date"
+  )
+  data <- read.csv(url, stringsAsFactors = FALSE, colClass = cls)
 
   #reformat
   data <- dplyr::transmute(data,
-    date = as.Date(Date),
+    date = Date,
     country = "Afghanistan",
     province = stringr::str_replace(Province, " Province", ""),
     cases = Cases,
@@ -44,9 +48,9 @@ get_afghan_regional_cases <- function() {
     country,
     province,
     fill = list(
-        cases = NA_real_,
-        deaths = NA_real_,
-        recoveries = NA_real_
+        cases = NA_integer_,
+        deaths = NA_integer_,
+        recoveries = NA_integer_
         )
     )
 
