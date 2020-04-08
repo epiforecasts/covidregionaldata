@@ -30,7 +30,7 @@ data <- get_spain_regional_cases()
 
 regions <- rnaturalearth::ne_states("Spain", returnclass = "sf")
 regions_with_data <- regions \%>\%
-  mutate(region_shortcode = stringr::str_remove_all(region_cod, "^ES\."), # Match codes to dataset
+  mutate(region_shortcode = stringr::str_remove_all(region_cod, "^ES\\."), # Match codes to dataset
          region_shortcode = stringr::str_replace(region_shortcode, "^PM$", "IB"), # Baleares
          region_shortcode = stringr::str_replace(region_shortcode, "^MU$", "MC"), # Murcia
          region_shortcode = stringr::str_replace(region_shortcode, "^NA$", "NC"), # Navarra
