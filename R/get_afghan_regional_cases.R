@@ -1,7 +1,7 @@
 #' Afghan Provincial Daily Case Counts
 #'
 #' @description Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province
-#' The data is stored in a google sheet. Requires authentication through google account to work.
+#' The data is stored in a google sheet, which is read as a csv.
 #' 
 #' 
 #' @author Flavio Finger @ffinger
