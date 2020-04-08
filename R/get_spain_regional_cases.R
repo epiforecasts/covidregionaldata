@@ -7,6 +7,7 @@
 #' @importFrom dplyr select mutate filter left_join first
 #' @importFrom memoise cache_filesystem memoise
 #' @importFrom readr read_csv
+#' @importFrom tidyr replace_na
 #' @importFrom lubridate dmy
 #' @export
 #' @examples
@@ -55,8 +56,6 @@
 #'
 #' }
 #'
-#' ##Code
-#' get_spain_regional_cases
 
 get_spain_regional_cases <- function(dataset = "cases_provincial"){
 
@@ -87,33 +86,38 @@ get_spain_regional_cases <- function(dataset = "cases_provincial"){
                     hospital_daily = hospital_cum - lag(hospital_cum, default = first(hospital_cum)),
                     icu_daily = icu_cum - lag(icu_cum, default = first(icu_cum)),
                     deaths_daily = deaths_cum - lag(deaths_cum, default = first(deaths_cum)),
-                    recover_daily = recover_cum - lag(recover_cum, default = first(recover_cum))
-                    )
-    all_data[is.na(all_data)] = 0
-    all_data[all_data < 0] = 0
+                    recover_daily = recover_cum - lag(recover_cum, default = first(recover_cum))) %>% 
+      tidyr::replace_na(list(cases_cum = 0, hospital_cum = 0, icu_cum = 0, deaths_cum = 0,
+                             recover_cum = 0, cases_daily = 0, hospital_daily = 0, icu_daily = 0,
+                             deaths_daily = 0, recover_daily = 0)) %>% 
+      dplyr::mutate(cases_daily = replace(cases_daily, cases_daily < 0 , 0),
+                    hospital_daily = replace(hospital_daily, hospital_daily < 0 , 0),
+                    icu_daily = replace(icu_daily, icu_daily < 0 , 0),
+                    deaths_daily = replace(deaths_daily, deaths_daily < 0 , 0),
+                    recover_daily = replace(recover_daily, recover_daily < 0 , 0))
 
     return(all_data)
   }
 
   if (dataset == "cases_provincial"){
     return(spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, cases_cum, cases_daily))
 
   }else if (dataset == "hospitalisation_provincial"){
     return(cases_provincial <- spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, hospital_cum, hospital_daily))
     
   }else if (dataset == "icu_provincial"){
     return(icu_provincial <- spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, icu_cum, icu_daily))
     
   }else if (dataset == "mortality_provincial"){
     return(mortality_provincial <- spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, deaths_cum, deaths_daily))
     
   }else if (dataset == "recovered_provincial"){
     return(recovered_provincial <- spain_default_all() %>%
-             select(province, name, date, cases_cum, cases_daily))
+             dplyr::select(province, name, date, recover_cum, recover_daily))
     
   }else if (dataset == "all"){
     return(all <- spain_default_all())
