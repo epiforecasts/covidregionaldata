@@ -36,7 +36,7 @@ get_interventions_data <- function() {
 
   temp <- tempdir()
   filename <- "interventions.xlsx"
-  download.file(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
+  mem_download(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
 
   readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
     janitor::clean_names() %>%
