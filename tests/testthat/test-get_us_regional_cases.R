@@ -29,5 +29,4 @@ test_that("get_us_regional_cases data source is unchanged", {
   
   sapply(expected_colnames, expect_colname, colnames = colnames(base))
   
-  
 })
