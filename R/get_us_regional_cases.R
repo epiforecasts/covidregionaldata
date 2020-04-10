@@ -45,6 +45,7 @@ get_us_regional_cases <- function(level = 'state', out = 'timeseries'){
   get_nyt_state <- function(path, out){
     
     cases <- mem_read(path) %>% 
+      dplyr::arrange(date) %>% 
       dplyr::group_by(state) %>% 
       dplyr::mutate(cases = c(0, diff(cases)),
                     deaths = c(0, diff(deaths))) %>%
@@ -70,6 +71,7 @@ get_us_regional_cases <- function(level = 'state', out = 'timeseries'){
   get_nyt_county <- function(path, out){
     
     cases <- mem_read(path) %>% 
+      dplyr::arrange(date) %>% 
       dplyr::group_by(fips) %>% 
       tidyr::drop_na(fips) %>% 
       dplyr::mutate(cases = c(0, diff(cases)),
