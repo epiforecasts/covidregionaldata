@@ -10,7 +10,6 @@
 #' @importFrom xml2 read_html url_absolute
 #' @importFrom rvest html_node html_attr
 #' @importFrom readxl read_excel
-#' @importFrom janitor clean_names
 #' @importFrom dplyr mutate_if
 #' @importFrom lubridate is.POSIXct as_date
 #' @importFrom utils download.file
@@ -36,9 +35,11 @@ get_interventions_data <- function() {
 
   temp <- tempdir()
   filename <- "interventions.xlsx"
-  mem_download(dl_url, destfile = file.path(temp, filename), quiet = TRUE)
+  mem_download(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
 
-  readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
-    janitor::clean_names() %>%
+  data <- readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
     dplyr::mutate_if(lubridate::is.POSIXct, lubridate::as_date)
+  names(data) <- tolower(names(data))
+  
+  return(data)
 }
