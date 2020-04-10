@@ -10,7 +10,6 @@
 #' @importFrom xml2 read_html url_absolute
 #' @importFrom rvest html_node html_attr
 #' @importFrom readxl read_excel
-#' @importFrom janitor clean_names
 #' @importFrom dplyr mutate_if
 #' @importFrom lubridate is.POSIXct as_date
 #' @importFrom utils download.file
