@@ -38,7 +38,9 @@ get_interventions_data <- function() {
   filename <- "interventions.xlsx"
   mem_download(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
 
-  readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
-    janitor::clean_names() %>%
+  data <- readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
     dplyr::mutate_if(lubridate::is.POSIXct, lubridate::as_date)
+  names(data) <- tolower(names(data))
+  
+  return(data)
 }
