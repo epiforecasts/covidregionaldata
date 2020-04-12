@@ -12,7 +12,7 @@
 
 ## Installation
 
-Install the package and all dependencies with: 
+Install the package and all dependencies with:
 
 ```r
 remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
@@ -20,57 +20,84 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ## Usage
 
-See the individual function documentation for full details of present functionality. The main function imports and cleans the linelist. 
+### Worldwide data
 
-```r
-NCoVUtils::get_linelist()
-```
+There are three sources of worldwide, country-level data on cases. One also includes deaths.
 
-Extract international case counts compiled by WHO using:
+1. Extract total global cases and deaths by country using:
+  + ```NCoVUtils::get_total_cases()```
+2. Extract international case counts compiled by the WHO using:
+  + ```NCoVUtils::get_who_cases()```
+3. Extract international case counts compiled by ECDC using:
+  + ```NCoVUtils::get_ecdc_cases()```
 
-```r
-NCoVUtils::get_who_cases()
-```
+A further function for worldwide data extracts non-pharmaceutical interventions by country:
 
-Extract international case counts compiled by ECDC using:
+* ```NCoVUtils::get_interventions_data()```
 
-```r
-NCoVUtils::get_ecdc_cases()
-```
+And anonymised international patient linelist data can be imported and cleaned with:
 
-Extract total global cases (and deaths) by country using:
+* ```NCoVUtils::get_linelist()```
 
-```r
-NCoVUtils::get_total_cases()
-```
+### Sub-national data
 
-Extract non-pharmaceutical interventions by country using:
+We currently have functions to extract sub-national level data for 11 countries. These are typically at the admin-1 level, the largest regions available. We are also working on joining the data to standard georeferencing codes to allow easy mapping.
 
-```r
-NCoVUtils::get_interventions_data()
-```
+For most countries, subnational cases can be extracted by using the following:
 
-Extract country-level regional cases from:  
+* ```NCoVUtils::get_[country]_regional_cases()```
 
-* Belgium  
-* Canada  
-* France  
-* Germany  
-* Italy  
-* Spain  
-* United Kingdom  
-* United States  
-* Japan  
-* Korea
-* Afghanistan
+But exceptions are given  below.
 
-See the function reference for a full list of data sets that package can be used to extract.
+Currently we include functions for sub-national data in the following countries:
+
+Europe
+
+  +	Belgium
+
+  +	France
+
+  + Germany
+
+  +	Italy
+
+  +	Spain
+
+  + United Kingdom - use `NCoVUtils::get_uk_nhs_region_cases()`
+
+Americas
+
+  +	Canada
+
+  +	United States - use `NCoVUtils::get_us_regional_cases()`
+
+Eastern Mediterranean
+
+  + Afghanistan
+
+Western Pacific
+
+  + Korea
+
+  + Japan
+
+South-East Asia
+
+  + None currently available
+
+Africa
+
+  + None currently available
+
+
+We are working to include more countries.
+
 
 ## Development
 
 ### Set up
 
-Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with: 
+Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:
 
 ```r
 remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
@@ -87,7 +114,7 @@ Rscript inst/scripts/render_output.R
 ### Docker
 
 
-This package is developed in a docker container based on the tidyverse docker image. 
+This package is developed in a docker container based on the tidyverse docker image.
 
 To build the docker image run (from the `NCoVUtils` directory):
 
