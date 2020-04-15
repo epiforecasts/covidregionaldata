@@ -41,8 +41,12 @@ get_canada_regional_cases <- function(out = "timeseries"){
              date = lubridate::dmy(date)) %>% 
       dplyr::rename(province = prname, province_fr = prnameFR, cases_probable = numprob, 
              deaths = numdeaths, recovered = numrecover, cases_confirmed = numtoday) %>% 
-      replace_na(list(recovered = 0, cases_confirmed = 0))
-    
+      tidyr::replace_na(list(cases_probable = 0, deaths = 0, recovered = 0, cases_confirmed = 0)) %>% 
+      dplyr::mutate(cases_probable = replace(cases_probable, cases_probable < 0 , 0),
+                    deaths = replace(deaths, deaths < 0 , 0),
+                    recovered = replace(recovered, recovered < 0 , 0),
+                    cases_confirmed = replace(cases_confirmed, cases_confirmed < 0 , 0))
+
     return(data)
     
   }
@@ -56,7 +60,7 @@ get_canada_regional_cases <- function(out = "timeseries"){
                     numrecover = as.numeric(gsub("N/A", 0, numrecover))) %>% 
       dplyr::rename(province = prname, province_fr = prnameFR, cases_probable = numprob, 
                     deaths = numdeaths, recovered = numrecover, cases_confirmed = numtoday) %>% 
-      replace_na(list(recovered = 0, cases_confirmed = 0)) %>% 
+      tidyr::replace_na(list(cases_probable = 0, deaths = 0, recovered = 0, cases_confirmed = 0)) %>% 
       dplyr::group_by(pruid) %>% 
       dplyr::summarise(province = unique(province), 
                        province_fr = unique(province_fr),
@@ -64,7 +68,11 @@ get_canada_regional_cases <- function(out = "timeseries"){
                        deaths = sum(deaths),
                        recovered = sum(recovered),
                        cases_confirmed = sum(cases_confirmed)) %>% 
-      dplyr::arrange(-cases_confirmed)
+      dplyr::arrange(-cases_confirmed) %>% 
+      dplyr::mutate(cases_probable = replace(cases_probable, cases_probable < 0 , 0),
+                    deaths = replace(deaths, deaths < 0 , 0),
+                    recovered = replace(recovered, recovered < 0 , 0),
+                    cases_confirmed = replace(cases_confirmed, cases_confirmed < 0 , 0))
     
     return(data)
     
