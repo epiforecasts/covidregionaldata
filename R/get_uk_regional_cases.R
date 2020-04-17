@@ -68,7 +68,7 @@ get_uk_regional_cases <- function(geography = "regional") {
                   cases = ifelse(cases < 0 , 0, cases)) %>%
     dplyr::select(date, region, cases)
 
-  ni_cases <- filter(uk_cases, Country == "Northern Ireland") %>%
+  ni_cases <- dplyr::filter(uk_cases, Country == "Northern Ireland") %>%
     dplyr::group_by(date) %>%
     dplyr::summarise(TotalCases = sum(TotalCases)) %>%
     dplyr::mutate(region = "Northern Ireland",
@@ -77,7 +77,7 @@ get_uk_regional_cases <- function(geography = "regional") {
                   cases = ifelse(cases < 0 , 0, cases)) %>%
     dplyr::select(date, region, cases)
 
-  scotland_cases <- filter(uk_cases, Country == "Scotland") %>%
+  scotland_cases <- dplyr::filter(uk_cases, Country == "Scotland") %>%
     dplyr::group_by(Area) %>%
     dplyr::mutate(region = Area,
                   index = 1:dplyr::n(),
