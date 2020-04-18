@@ -89,9 +89,14 @@ get_uk_regional_cases <- function(geography = "regional") {
     dplyr::select(date, region, cases)
 
   # Join UK
-  uk_cases_join <- dplyr::bind_rows(scotland_cases, ni_cases, wales_cases, eng_cases)
+  uk_cases_join <- dplyr::bind_rows(scotland_cases, ni_cases,
+                                    wales_cases, eng_cases)
 
-  return(uk_cases_join)
+  ## Remove spurious regions
+  uk_cases <- uk_cases_join %>%
+    dplyr::filter(!region %in% "Golden Jubilee National Hospital")
+
+  return(uk_cases)
   }
 
   uk_utla <- function() {
