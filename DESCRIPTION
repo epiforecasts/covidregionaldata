@@ -55,7 +55,8 @@ Imports:
     xml2,
     rvest,
     janitor,
-    jsonlite
+    jsonlite,
+    reshape2
 Suggests:
     pkgdown,
     testthat
