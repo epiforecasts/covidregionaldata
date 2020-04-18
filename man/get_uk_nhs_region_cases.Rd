@@ -17,7 +17,7 @@ get_uk_nhs_region_cases
 
 \dontrun{
 uk_shp <- readRDS("uk_shp.rds")
-cases <- NCoVUtils::get_uk_nhs_region_cases()
+cases <- NCoVUtils::get_uk_regional_cases()
 cases <- cases[1:23,]
 uk_shp \%>\%
 dplyr::full_join(cases, by = "region") \%>\%

@@ -1,6 +1,8 @@
 #' Get UK daily cases
 #'
 #' @description Get UK regional cases.
+#' @param geography Character string identifying the scale at which to extract data. Defaults to "regiona" with "utla" also
+#' supported.
 #' @return A dataframe of case counts in English and Scottish regions, and Wales and Northern Ireland
 #' @export
 #' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise
@@ -14,13 +16,13 @@
 #'
 #' \dontrun{
 #' uk <- get_uk_regional_cases(geography = "regional") %>%
-#'   filter(date == max(date-3))
+#'   dplyr::filter(date == max(date - 3))
 #' eng_kml <- "https://opendata.arcgis.com/datasets/4fcca2a47fed4bfaa1793015a18537ac_4.kml?outSR=%7B%22latestWkid%22%3A27700%2C%22wkid%22%3A27700%7D"
 #' download.file(eng_kml, "uk_regions.kml")
 #' eng_kml <- sf::st_read("uk_regions.kml")
 #' region_names <- c("North East", "North West", "Yorkshire and The Humber", "East Midlands", "West Midlands", "East of England", "London", "South East", "South West")
 #' eng_kml$Name <- region_names
-#' eng_kml_data <- left_join(eng_kml, uk, by = c("Name" = "region"))
+#' eng_kml_data <- dplyr::left_join(eng_kml, uk, by = c("Name" = "region"))
 #'
 #' ggplot2::ggplot(data = eng_kml_data, ggplot2::aes(fill = cases)) +
 #'   ggplot2::geom_sf()
@@ -61,7 +63,7 @@ get_uk_regional_cases <- function(geography = "regional") {
 
   wales_cases <- dplyr::filter(uk_cases, Country == "Wales") %>%
     dplyr::group_by(date) %>%
-    dplyr::summarise(TotalCases = sum(TotalCases)) %>%
+    dplyr::summarise(TotalCases = sum(TotalCases, na.rm = TRUE)) %>%
     dplyr::mutate(region = "Wales",
                   index = 1:dplyr::n(),
                   cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
@@ -70,7 +72,7 @@ get_uk_regional_cases <- function(geography = "regional") {
 
   ni_cases <- dplyr::filter(uk_cases, Country == "Northern Ireland") %>%
     dplyr::group_by(date) %>%
-    dplyr::summarise(TotalCases = sum(TotalCases)) %>%
+    dplyr::summarise(TotalCases = sum(TotalCases, na.rm = TRUE)) %>%
     dplyr::mutate(region = "Northern Ireland",
                   index = 1:dplyr::n(),
                   cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
