@@ -15,17 +15,38 @@
 #' get_uk_regional_cases
 #'
 #' \dontrun{
-#' uk <- get_uk_regional_cases(geography = "regional") %>%
-#'   dplyr::filter(date == max(date - 3))
-#' eng_kml <- "https://opendata.arcgis.com/datasets/4fcca2a47fed4bfaa1793015a18537ac_4.kml?outSR=%7B%22latestWkid%22%3A27700%2C%22wkid%22%3A27700%7D"
-#' download.file(eng_kml, "uk_regions.kml")
-#' eng_kml <- sf::st_read("uk_regions.kml")
-#' region_names <- c("North East", "North West", "Yorkshire and The Humber", "East Midlands", "West Midlands", "East of England", "London", "South East", "South West")
-#' eng_kml$Name <- region_names
-#' eng_kml_data <- dplyr::left_join(eng_kml, uk, by = c("Name" = "region"))
+#' ## Mapping UK regions
+#' uk_regions <- get_uk_regional_cases(geography = "regional")
 #'
-#' ggplot2::ggplot(data = eng_kml_data, ggplot2::aes(fill = cases)) +
+#' # Merge Midlands, and N East and Yorkshire, to match shapefile
+#' midlands <- uk_region_data %>%
+#'   dplyr::filter(stringr::str_detect(region, "Midlands")) %>%
+#'   dplyr::group_by(date) %>%
+#'   dplyr::summarise(cases = sum(cases)) %>%
+#'   dplyr::mutate(region = "Midlands")
+#'
+#' ne_yorks <- uk_region_data %>%
+#'   dplyr::filter(region %in% c("Yorkshire and The Humber", "North East")) %>%
+#'   dplyr::group_by(date) %>%
+#'   dplyr::summarise(cases = sum(cases)) %>%
+#'   dplyr::mutate(region = "North East and Yorkshire")
+#'
+#' # Filter to latest date by region
+#' uk_regions <- uk_region_data %>%
+#'   dplyr::filter(!stringr::str_detect(region, "Midlands")) %>%
+#'   dplyr::bind_rows(midlands, ne_yorks) %>%
+#'   dplyr::group_by(region) %>%
+#'   dplyr::filter(date == max(date)) %>%
+#'   dplyr::ungroup()
+#'
+#' # Bind and map
+#' uk_shp <- readRDS("uk_shp.rds")
+#' uk_map <- dplyr::left_join(uk_shp, uk_regions, by = c("region" = "region"))
+#' uk_map %>%
+#'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
 #'   ggplot2::geom_sf()
+#' }
+#'
 #' }
 #'
 
@@ -37,7 +58,8 @@ get_uk_regional_cases <- function(geography = "regional") {
   }
 
   # Path to data
-  path_eng <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/raw/phe/coronavirus-covid-19-number-of-cases-in-uk-2020-04-16.json"
+  path_eng <- path_eng <- paste0("https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/raw/phe/coronavirus-covid-19-number-of-cases-in-uk-", Sys.Date()-1, ".json")
+
   path_uk <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
 
 
