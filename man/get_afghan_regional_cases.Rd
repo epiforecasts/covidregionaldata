@@ -11,7 +11,7 @@ A dataframe of daily Afghan provincial cases and deaths
 }
 \description{
 Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province
-The data is stored in a google sheet, which is read as a csv.
+The cumulative data is stored in a google sheet, which is read as a csv and de-cumulated.
 }
 \examples{
 
