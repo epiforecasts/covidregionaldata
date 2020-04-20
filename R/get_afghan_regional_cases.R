@@ -1,7 +1,7 @@
 #' Afghan Provincial Daily Case Counts
 #'
 #' @description Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province
-#' The data is stored in a google sheet, which is read as a csv.
+#' The cumulative data is stored in a google sheet, which is read as a csv and de-cumulated.
 #' 
 #' 
 #' @author Flavio Finger @ffinger
@@ -9,8 +9,8 @@
 #'
 #' @return A dataframe of daily Afghan provincial cases and deaths
 #' @importFrom purrr map_dfr map_chr
-#' @importFrom dplyr transmute arrange
-#' @importFrom tidyr complete full_seq
+#' @importFrom dplyr transmute arrange mutate group_by ungroup
+#' @importFrom tidyr complete full_seq fill
 #' @export
 #' @examples
 #'
@@ -42,7 +42,7 @@ get_afghan_regional_cases <- function() {
     recovered = Recoveries
     )
 
-  # fill gaps with NA
+  # put NA where gaps
   data <- tidyr::complete(data,
     date = tidyr::full_seq(date, period  = 1),
     country,
@@ -50,9 +50,25 @@ get_afghan_regional_cases <- function() {
     fill = list(
         cases = NA_integer_,
         deaths = NA_integer_,
-        recoveries = NA_integer_
+        recovered = NA_integer_
         )
     )
+
+  # fill NA with previous values
+  data <- dplyr::ungroup(tidyr::fill(
+      dplyr::group_by(data, country, province),
+      cases,
+      deaths,
+      recovered
+    ))
+
+  # de-cumulate
+  data <- dplyr::ungroup(dplyr::mutate(
+      dplyr::group_by(data, country, province),
+      cases = c(0, diff(cases)),
+      deaths = c(0, diff(deaths)),
+      recovered = c(0, diff(recovered))
+    ))
 
   # arrange
   data <- dplyr::arrange(data, date, country, province)
