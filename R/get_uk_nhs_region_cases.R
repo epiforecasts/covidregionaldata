@@ -13,7 +13,7 @@
 #'
 #' \dontrun{
 #' uk_shp <- readRDS("uk_shp.rds")
-#' cases <- NCoVUtils::get_uk_nhs_region_cases()
+#' cases <- NCoVUtils::get_uk_regional_cases()
 #' cases <- cases[1:23,]
 #' uk_shp %>%
 #' dplyr::full_join(cases, by = "region") %>%
@@ -21,8 +21,9 @@
 #' }
 get_uk_nhs_region_cases <- function() {
 
+  warning("The soource data for this function is no longer updated. Try get_uk_regional_cases for similar data")
   # Path to csv
-  path <- "https://raw.githubusercontent.com/emmadoughty/Daily_COVID-19/master/Data/COVID19_cum.csv"
+  path <- "https://raw.githubusercontent.com/emmadoughty/Daily_COVID-19/8a0ea87f40edf746519afdb4d1e7ed95c816df1e/Data/COVID19_cum.csv"
 
   cases <- readr::read_csv(file = path)
 
