@@ -2,7 +2,7 @@
 #'
 #'
 #' @description Fetches COVID case counts by region in Germany.
-#' This data was collated by Jan-Philip Gehrcke (gh: jgehrcke) and is available at:
+#' This data is sourced from the Robert Koch Institute, was collated by Jan-Philip Gehrcke (gh: jgehrcke), and is available at:
 #' https://github.com/jgehrcke/covid-19-germany-gae
 #' @return A dataframe of case counts in German regions
 #' @export
@@ -33,7 +33,7 @@
 
 get_germany_regional_cases <- function() {
 
-  path <- "https://raw.githubusercontent.com/jgehrcke/covid-19-germany-gae/master/data.csv"
+  path <- "https://raw.githubusercontent.com/jgehrcke/covid-19-germany-gae/master/cases-rki-by-state.csv"
 
   ## Set up cache
   ch <- memoise::cache_filesystem(".cache")
@@ -44,23 +44,8 @@ get_germany_regional_cases <- function() {
   cases <- mem_read(file = path)
 
   cases <- cases %>%
-    dplyr::select(date = time_iso8601,
-                  "DE-BB" = `DE-BB_cases`,
-                  "DE-BW" = `DE-BW_cases`,
-                  "DE-BY" = `DE-BY_cases`,
-                  "DE-BE" = `DE-BE_cases`,
-                  "DE-HB" = `DE-HB_cases`,
-                  "DE-HH" = `DE-HH_cases`,
-                  "DE-HE" = `DE-HE_cases`,
-                  "DE-MV" = `DE-MV_cases`,
-                  "DE-NI" = `DE-NI_cases`,
-                  "DE-NW" = `DE-NW_cases`,
-                  "DE-RP" = `DE-RP_cases`,
-                  "DE-SL" = `DE-SL_cases`,
-                  "DE-SN" = `DE-SN_cases`,
-                  "DE-SH" = `DE-SH_cases`,
-                  "DE-ST" = `DE-ST_cases`,
-                  "DE-TH" = `DE-TH_cases`) %>%
+    dplyr::select(-sum_cases) %>%
+    dplyr::rename(date = time_iso8601) %>%
     tidyr::gather(key = "region_code", value = "total_cases", -date) %>%
     dplyr::group_by(region_code) %>%
     dplyr::mutate(
