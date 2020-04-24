@@ -29,7 +29,7 @@ get_interventions_data <- function() {
   # the file name sometimes changes so scrape the current URL rather than hard code it
   base_url <- "https://data.humdata.org"
   dl_url <- xml2::read_html(paste0(base_url, "/dataset/acaps-covid19-government-measures-dataset#")) %>%
-    rvest::html_node(css = ".ga-download") %>%
+    rvest::html_node(css = ".resource-item+ .resource-item .ga-download") %>%
     rvest::html_attr("href") %>%
     xml2::url_absolute(base_url)
 
@@ -40,6 +40,6 @@ get_interventions_data <- function() {
   data <- readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
     dplyr::mutate_if(lubridate::is.POSIXct, lubridate::as_date)
   names(data) <- tolower(names(data))
-  
+
   return(data)
 }

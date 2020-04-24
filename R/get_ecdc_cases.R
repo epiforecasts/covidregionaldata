@@ -36,10 +36,10 @@ get_ecdc_cases <- function (countries = NULL){
 
   d <- mem_read(base_url) %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
-    rename(geoid = geoId, country = countriesAndTerritories,
+    dplyr::rename(geoid = geoId, country = countriesAndTerritories,
            cases = cases, deaths = deaths,
            population_2018 = popData2018) %>%
-    select(-dateRep) %>%
+    dplyr::select(-dateRep) %>%
     dplyr::arrange(date) %>%
     dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
 
@@ -73,4 +73,3 @@ format_ecdc_data <- function(data = NULL) {
 
   return(out)
 }
-
