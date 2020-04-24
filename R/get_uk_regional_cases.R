@@ -40,7 +40,7 @@
 #'   dplyr::ungroup()
 #'
 #' # Bind and map
-#' uk_shp <- readRDS("uk_shp.rds")
+#' uk_shp <- readRDS("data-raw/uk_shp.rds")
 #' uk_map <- dplyr::left_join(uk_shp, uk_regions, by = c("region" = "region"))
 #' uk_map %>%
 #'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
