@@ -57,13 +57,13 @@ Europe
 
   +	Spain
 
-  + United Kingdom - use `NCoVUtils::get_uk_nhs_region_cases()`
+  + United Kingdom
 
 Americas
 
   +	Canada
 
-  +	United States - use `NCoVUtils::get_us_regional_cases()`
+  +	United States
 
 Eastern Mediterranean
 
