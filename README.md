@@ -24,11 +24,11 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 There are three sources of worldwide, country-level data on cases. One also includes deaths.
 
-1. Extract total global cases and deaths by country using:
-  + ```NCoVUtils::get_total_cases()```
-2. Extract international case counts compiled by the WHO using:
-  + ```NCoVUtils::get_who_cases()```
-3. Extract international case counts compiled by ECDC using:
+1. Extract total global cases and deaths by country, and specify source, using:
+  + ```NCoVUtils::get_total_cases(source = c("WHO", "ECDC"))```
+2. Extract daily international case and death counts compiled by the WHO using:
+  + ```NCoVUtils::get_who_cases(country = NULL, daily = TRUE))```
+3. Extract daily international case and death counts compiled by ECDC using:
   + ```NCoVUtils::get_ecdc_cases()```
 
 A further function for worldwide data extracts non-pharmaceutical interventions by country:
@@ -41,13 +41,7 @@ And anonymised international patient linelist data can be imported and cleaned w
 
 ### Sub-national data
 
-We currently have functions to extract sub-national level data for 11 countries. These are typically at the admin-1 level, the largest regions available. We are also working on joining the data to standard georeferencing codes to allow easy mapping.
-
-For most countries, subnational cases can be extracted by using the following:
-
-* ```NCoVUtils::get_[country]_regional_cases()```
-
-But exceptions are given  below.
+We have several functions to extract sub-national level data by country. These are typically at the admin-1 level, the largest regions available. We are also working on joining the data to standard georeferencing codes to allow easy mapping.
 
 Currently we include functions for sub-national data in the following countries:
 
