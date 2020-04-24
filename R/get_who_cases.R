@@ -38,7 +38,9 @@ get_who_cases <- function(country = NULL, daily = FALSE, cache = NULL) {
     cols <- colnames(who_cases)
     cols <- cols[!colnames(who_cases) %in% c("Date", "date", "SituationReport")]
     safe_diff <- purrr::safely(diff)
-
+    who_cases <- suppressWarnings(dplyr::mutate_at(who_cases,
+                                  .vars = cols,
+                                  ~ as.numeric(.)))
     who_cases <- dplyr::mutate_at(who_cases,
                                   .vars = cols,
                                   ~ . - dplyr::lag(., default = 0))
