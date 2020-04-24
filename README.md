@@ -22,7 +22,7 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ### Worldwide data
 
-There are three sources of worldwide, country-level data on cases. One also includes deaths.
+There are three sources of worldwide, country-level data on cases and deaths.
 
 1. Extract total global cases and deaths by country, and specify source, using:
   + ```NCoVUtils::get_total_cases(source = c("WHO", "ECDC"))```
