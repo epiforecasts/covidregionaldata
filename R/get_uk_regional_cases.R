@@ -1,16 +1,22 @@
 #' Get UK daily cases
 #'
-#' @description Get UK regional cases.
-#' @param geography Character string identifying the scale at which to extract data. Defaults to "regiona" with "utla" also
-#' supported.
-#' @return A dataframe of case counts in English and Scottish regions, and Wales and Northern Ireland
+#' @description Get UK cases by country or region
+#' @param geography Character string identifying which part of the UK to extract and at what scale
+#' Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
+#' Note that England always returns 9 English regions, and Nothern Ireland always returns as one country
+#' @return A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
 #' @export
 #' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise recode bind_rows
 #' @importFrom readr read_csv
 #' @importFrom tidyr fill
 #' @importFrom lubridate ymd
 #' @examples
-#' get_uk_regional_cases
+#' uk_countries <- get_uk_regional_cases(geography = "all countries")
+#' uk_regions <- get_uk_regional_cases(geography = "all regions")
+#' england <- get_uk_regional_cases(geography = "England")
+#' wales <- get_uk_regional_cases(geography = "Wales")
+#' scotland <- get_uk_regional_cases(geography = "Scotland")
+#' nireland <- get_uk_regional_cases(geography = "Northern Ireland")
 #'
 #' \dontrun{
 #' ## Mapping UK countries with English regions
@@ -62,10 +68,12 @@ get_uk_regional_cases <- function(geography = "all countries") {
 
 # Wales regional cases
   wales_cases_regional <- dplyr::filter(wales_scot_cases, Country == "Wales") %>%
+    dplyr::group_by(Area) %>%
     dplyr::mutate(region = Area,
                   index = 1:dplyr::n(),
                   cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
                   cases = ifelse(cases < 0 , 0, cases)) %>%
+    dplyr::ungroup() %>%
     dplyr::select(date, region, cases)
 
 # Scotland country cases
@@ -80,10 +88,12 @@ get_uk_regional_cases <- function(geography = "all countries") {
 
 # Scotland regional cases
   scotland_cases_regional <- dplyr::filter(wales_scot_cases, Country == "Scotland") %>%
+    dplyr::group_by(Area) %>%
     dplyr::mutate(region = Area,
                   index = 1:dplyr::n(),
                   cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
                   cases = ifelse(cases < 0 , 0, cases)) %>%
+    dplyr::ungroup() %>%
     dplyr::select(date, region, cases)
 
 
