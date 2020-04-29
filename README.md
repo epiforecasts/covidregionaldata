@@ -22,7 +22,7 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ### Worldwide data
 
-There are three sources of worldwide, country-level data on cases and deaths.
+There are two sources of worldwide, country-level data on cases and deaths.
 
 1. Extract total global cases and deaths by country, and specify source, using:
   + ```NCoVUtils::get_total_cases(source = c("WHO", "ECDC"))```
@@ -84,7 +84,7 @@ Africa
   + None currently available
 
 
-We are working to include more countries.
+We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/NCoVUtils/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/NCoVUtils/issues/81) and [#84](https://github.com/epiforecasts/NCoVUtils/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/NCoVUtils/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
 
 
 ## Development
