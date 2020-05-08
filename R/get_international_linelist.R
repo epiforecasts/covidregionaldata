@@ -34,7 +34,7 @@ get_international_linelist <- function(countries = NULL, cities = NULL, province
 
   ch <- memoise::cache_filesystem(".cache")
 
-  url <- "https://raw.githubusercontent.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.csv"
+  url <- "https://raw.github.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.tar.gz"
 
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
   linelist <- suppressWarnings(
