@@ -9,7 +9,7 @@
 #' @importFrom memoise cache_filesystem memoise
 #' @importFrom dplyr select group_by mutate summarise
 #' @importFrom readr read_csv
-#' @importFrom lubridate ymd
+#' @importFrom lubridate ymd_hms
 #' @examples
 #'
 #'
@@ -56,7 +56,7 @@ get_germany_regional_cases <- function(geography = "states") {
       cases = AnzahlFall,
       deaths = AnzahlTodesfall
     ) %>%
-    dplyr::mutate(date = lubridate::ymd(date))
+    dplyr::mutate(date = lubridate::ymd_hms(date))
 
   germany_state <- germany %>%
     dplyr::group_by(state, date) %>%
