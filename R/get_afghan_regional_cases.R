@@ -11,6 +11,7 @@
 #' @importFrom purrr map_dfr map_chr
 #' @importFrom dplyr transmute arrange mutate group_by ungroup
 #' @importFrom tidyr complete full_seq fill
+#' @importFrom stringr str_remove_all
 #' @export
 #' @examples
 #'
@@ -24,10 +25,10 @@ get_afghan_regional_cases <- function() {
   #download
   cls <- c(
       Province = "character",
-      Cases = "integer",
-      Deaths = "integer",
-      Recoveries = "integer",
-      Active.Cases = "integer",
+      Cases = "character",
+      Deaths = "character",
+      Recoveries = "character",
+      Active.Cases = "character",
       Date = "Date"
   )
   data <- read.csv(url, stringsAsFactors = FALSE, colClass = cls)
@@ -41,6 +42,16 @@ get_afghan_regional_cases <- function() {
     deaths = Deaths,
     recovered = Recoveries
     )
+
+  #transform (remove commas in numbers)
+  data <- dplyr::mutate(data,
+    cases = stringr::str_remove_all(cases, ","),
+    cases = as.integer(cases),
+    deaths = stringr::str_remove_all(deaths, ","),
+    deaths = as.integer(deaths),
+    recovered = stringr::str_remove_all(recovered, ","),
+    recovered = as.integer(recovered)
+  )
 
   # put NA where gaps
   data <- tidyr::complete(data,
