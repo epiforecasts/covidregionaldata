@@ -4,33 +4,39 @@
 \alias{get_uk_regional_cases}
 \title{Get UK daily cases}
 \usage{
-get_uk_regional_cases(geography = "regional")
+get_uk_regional_cases(geography = "all countries")
 }
 \arguments{
-\item{geography}{Character string identifying the scale at which to extract data. Defaults to "regiona" with "utla" also
-supported.}
+\item{geography}{Character string identifying which part of the UK to extract and at what scale
+Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
+Note that England always returns 9 English regions, and Nothern Ireland always returns as one country}
 }
 \value{
-A dataframe of case counts in English and Scottish regions, and Wales and Northern Ireland
+A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
 }
 \description{
-Get UK regional cases.
+Get UK cases by country or region
 }
 \examples{
-get_uk_regional_cases
+uk_countries <- get_uk_regional_cases(geography = "all countries")
+uk_regions <- get_uk_regional_cases(geography = "all regions")
+england <- get_uk_regional_cases(geography = "England")
+wales <- get_uk_regional_cases(geography = "Wales")
+scotland <- get_uk_regional_cases(geography = "Scotland")
+nireland <- get_uk_regional_cases(geography = "Northern Ireland")
 
 \dontrun{
-uk <- get_uk_regional_cases(geography = "regional") \%>\%
-  dplyr::filter(date == max(date - 3))
-eng_kml <- "https://opendata.arcgis.com/datasets/4fcca2a47fed4bfaa1793015a18537ac_4.kml?outSR=\%7B\%22latestWkid\%22\%3A27700\%2C\%22wkid\%22\%3A27700\%7D"
-download.file(eng_kml, "uk_regions.kml")
-eng_kml <- sf::st_read("uk_regions.kml")
-region_names <- c("North East", "North West", "Yorkshire and The Humber", "East Midlands", "West Midlands", "East of England", "London", "South East", "South West")
-eng_kml$Name <- region_names
-eng_kml_data <- dplyr::left_join(eng_kml, uk, by = c("Name" = "region"))
-
-ggplot2::ggplot(data = eng_kml_data, ggplot2::aes(fill = cases)) +
+## Mapping UK countries with English regions
+uk_countries <- get_uk_regional_cases(geography = "all countries") \%>\%
+  dplyr::filter(date == max(date))
+uk_map <- sf::st_read("data-raw/uk_NUTS_areas/NUTS_Level_1_January_2018_Ultra_Generalised_Clipped_Boundaries_in_the_United_Kingdom.shp") \%>\%
+  dplyr::mutate(nuts118nm = stringr::str_remove_all(nuts118nm, "\\\\s\\\\(England\\\\)")) \%>\%
+  dplyr::left_join(uk_countries, by = c("nuts118nm" = "region"))
+uk_map \%>\%
+  ggplot2::ggplot(ggplot2::aes(fill = cases)) +
   ggplot2::geom_sf()
+
 }
+
 
 }
