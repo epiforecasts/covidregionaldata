@@ -2,17 +2,17 @@
 % Please edit documentation in R/get_germany_regional_cases.R
 \name{get_germany_regional_cases}
 \alias{get_germany_regional_cases}
-\title{Get German daily cases by Bundeslander}
+\title{Get German daily cases by Bundeslander or Landkreis}
 \usage{
-get_germany_regional_cases()
+get_germany_regional_cases(geography = "states")
 }
 \value{
-A dataframe of case counts in German regions
+A dataframe of case and death counts in German regions
 }
 \description{
 Fetches COVID case counts by region in Germany.
-This data was collated by Jan-Philip Gehrcke (gh: jgehrcke) and is available at:
-https://github.com/jgehrcke/covid-19-germany-gae
+This data is sourced from the Robert Koch Institute:
+https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
 }
 \examples{
 
@@ -29,10 +29,11 @@ data <- get_germany_regional_cases() \%>\%
 
 regions_with_data <- regions \%>\%
   dplyr::left_join(data,
-                  by = c("iso_3166_2" = "region_code"))
+                  by = c("name" = "state"))
 
 ggplot2::ggplot(regions_with_data) +
   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 
 }
+
 }
