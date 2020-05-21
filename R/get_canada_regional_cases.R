@@ -8,7 +8,7 @@
 #' @importFrom readr read_csv
 #' @importFrom lubridate dmy
 
-get_canada_data <- function(){
+get_canada_regional_cases <- function(){
 
   # read in data
   url <- "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"

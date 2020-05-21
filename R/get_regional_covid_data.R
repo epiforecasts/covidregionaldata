@@ -15,7 +15,8 @@ get_regional_covid_data <- function(country, totals = FALSE){
   
   # get the correct data given the country
   get_data_function <- switch(country,
-                              "canada" = get_canada_data)
+                              "canada" = get_canada_regional_cases,
+                              "afghanistan" = get_afghan_regional_cases)
   data <- do.call(get_data_function, list())
   
   # add columns that aren't there already, clean up data
