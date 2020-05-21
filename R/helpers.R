@@ -3,7 +3,7 @@
 #' @param column A vector of numeric data (e.g. a data column) which corresponds to cumulative counts of a process
 #' @return A vector of numeric data which corresponds to daily counts
 get_daily_from_cumulative <- function(column) {
-  shifted <- c(0, diff(column))
+  shifted <- c(column[1], diff(column))
   return(shifted)
 }
 
@@ -24,7 +24,7 @@ add_extra_na_cols <- function(data) {
       colnames(data) <- c(original_col_names, colname)
     }
   }
-  return(data)
+  return(data.frame(data))
 }
 
 #' Helper to rename the region column in each dataset to the correct name for each country.
@@ -40,7 +40,7 @@ rename_region_column <- function(data, country) {
                      "afghanistan" = "province")
 
   data <- data %>% dplyr::rename(!!new_name := region)
-  return(data)
+  return(data.frame(data))
 }
 
 #' Set negative data to 0
@@ -49,17 +49,16 @@ rename_region_column <- function(data, country) {
 #' @importFrom dplyr %>% mutate
 #' @return a data.frame with all relevant data > 0.
 set_negative_values_to_zero <- function(data) {
-  data <- data %>% dplyr::mutate(cumulative_deaths = replace(cumulative_deaths, cumulative_deaths < 0, 0),
-                                 cumulative_cases = replace(cumulative_cases, cumulative_cases < 0, 0),
-                                 cumulative_recoveries = replace(cumulative_recoveries, cumulative_recoveries < 0, 0),
-                                 cumulative_hospitalisations = replace(cumulative_hospitalisations, cumulative_hospitalisations < 0, 0),
-                                 cumulative_tests = replace(cumulative_tests, cumulative_tests < 0, 0),
-                                 cases_today = replace(cases_today, cases_today < 0, 0),
-                                 deaths_today = replace(deaths_today, deaths_today < 0, 0),
-                                 recoveries_today = replace(recoveries_today, recoveries_today < 0, 0),
-                                 hospitalisations_today = replace(hospitalisations_today, hospitalisations_today < 0, 0),
-                                 tests_today = replace(tests_today, tests_today < 0, 0))
-  return(data)
+  numeric_col_names <- c('cumulative_deaths', 'cumulative_cases', 'cumulative_recoveries', 'cumulative_hospitalisations', 'cumulative_tests',
+                         'cases_today', 'deaths_today', 'recoveries_today', 'hospitalisations_today', 'tests_today')
+
+  for (numeric_col_name in numeric_col_names) {
+    if (numeric_col_name %in% colnames(data)){
+      data <- data %>% dplyr::mutate(!!numeric_col_name := replace(data[, numeric_col_name], data[, numeric_col_name] < 0, 0))
+    }
+  }
+
+  return(data.frame(data))
 }
 
 #' Add rows of NAs for dates where a region does not have any data
@@ -71,21 +70,8 @@ set_negative_values_to_zero <- function(data) {
 #' @return a data.frame with rows of NAs added.
 fill_empty_dates_with_na <- function(data) {
   data <- data %>%
-    tidyr::complete(date = tidyr::full_seq(data$date, period = 1),
-                    region,
-                    fill = list(
-                      cases_today = NA,
-                      cumulative_cases = NA,
-                      deaths_today = NA,
-                      cumulative_deaths = NA,
-                      recoveries_today = NA,
-                      cumulative_recoveries = NA,
-                      hospitalisations_today = NA,
-                      cumulative_hospitalisations = NA,
-                      tests_today = NA,
-                      cumulative_tests = NA)
-                    )
-  return(data)
+    tidyr::complete(date = tidyr::full_seq(data$date, period = 1), region)
+  return(data.frame(data))
 }
 
 #' Completes cumulative columns if rows were added with NAs.
@@ -96,14 +82,17 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom tidyr fill
 #' @return a data.frame with NAs filled in for cumulative data columns.
 complete_cumulative_columns <- function(data) {
-  data <- data %>%
-    dplyr::group_by(region) %>%
-    tidyr::fill(cumulative_cases,
-                cumulative_deaths,
-                cumulative_recoveries,
-                cumulative_hospitalisations,
-                cumulative_tests)
-  return(data)
+  cumulative_col_names <- c('cumulative_deaths', 'cumulative_cases', 'cumulative_recoveries', 'cumulative_hospitalisations', 'cumulative_tests')
+
+  for (cumulative_col_name in cumulative_col_names) {
+    if (cumulative_col_name %in% colnames(data)){
+      data <- data %>%
+                dplyr::group_by(region) %>%
+                tidyr::fill(cumulative_col_name)
+    }
+  }
+
+  return(data.frame(data))
 }
 
 
