@@ -17,6 +17,7 @@ get_canada_regional_cases <- function(){
     dplyr::select(pruid, prname, date, numtoday, numtotal, numdeaths, numrecover, numtested) %>%
     dplyr::filter(pruid != 1) %>%
     dplyr::select(-pruid) %>%
+
     # transform
     dplyr::mutate(prname = gsub("Repatriated travellers", "Repatriated Travellers", prname),
                   date = lubridate::dmy(date),
@@ -24,6 +25,7 @@ get_canada_regional_cases <- function(){
     dplyr::rename(region = prname, cumulative_deaths = numdeaths, cumulative_cases = numtotal,
                   cases_today = numtoday, cumulative_recoveries = numrecover, cumulative_tests = numtested) %>%
     tidyr::replace_na(list(cumulative_deaths = 0, cumulative_cases = 0, cumulative_recoveries = 0, cumulative_tests = 0)) %>%
+
     # get daily cases from cumulative
     dplyr::group_by(region) %>%
     dplyr::mutate(deaths_today = get_daily_from_cumulative(cumulative_deaths),

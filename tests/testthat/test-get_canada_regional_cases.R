@@ -1,30 +1,31 @@
-source('./custom_tests/expect_colname.R')
-
-test_that("get_canada_regional_cases cases works as expected", {
-  
-  base <- get_canada_regional_cases(out = 'timeseries')
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-  expect_true(sum(as.numeric(base$cases_probable) < 0) == 0)
-  expect_true(sum(as.numeric(base$deaths) < 0) == 0)
-  expect_true(sum(as.numeric(base$cases_confirmed) < 0) == 0)
-  
-  base <- get_canada_regional_cases(out = 'total')
-  expect_is(base, "data.frame")
-  expect_true(sum(as.numeric(base$cases_probable) < 0) == 0)
-  expect_true(sum(as.numeric(base$deaths) < 0) == 0)
-  expect_true(sum(as.numeric(base$cases_confirmed) < 0) == 0)
-  
+test_that("get_canada_regional_cases data source is unchanged", {
+  data <- readr::read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
+  expected_colnames = c("pruid", "prname", "prnameFR", "date", "numconf", "numprob",
+                        "numdeaths", "numtotal", "numtested", "numrecover", "percentrecover",
+                        "ratetested", "numtoday", "percentoday")
+  expect_true(all(expected_colnames %in% colnames(data)))
 })
 
-test_that("get_canada_regional_cases data source is unchanged", {
-  
-  base <- readr::read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
-  
-  expected_colnames = c("pruid", "prname", "prnameFR", "date", "numconf", "numprob", 
-                        "numdeaths", "numtotal", "numtested", "numrecover", "percentrecover", 
-                        "ratetested", "numtoday", "percentoday")
-  
-  sapply(expected_colnames, expect_colname, colnames = colnames(base))
-  
+test_that("get_canada_regional_cases returns the correct column names", {
+  expected_colnames <- c("region", "date", "cases_today", "cumulative_cases", "cumulative_deaths", "cumulative_recoveries",
+                         "cumulative_tests", "deaths_today", "recoveries_today", "tests_today")
+
+  returned_colnames <- colnames(get_canada_regional_cases())
+
+  expect_equal(expected_colnames, returned_colnames)
+})
+
+test_that("get_canada_regional_cases returns correct column types", {
+  data <- get_canada_regional_cases()
+  expect_is(data, "data.frame")
+  expect_is(data$region, "character")
+  expect_is(data$date, "Date")
+  expect_is(data$cases_today, "numeric")
+  expect_is(data$cumulative_cases, "numeric")
+  expect_is(data$deaths_today, "numeric")
+  expect_is(data$cumulative_deaths, "numeric")
+  expect_is(data$recoveries_today, "numeric")
+  expect_is(data$cumulative_recoveries, "numeric")
+  expect_is(data$tests_today, "numeric")
+  expect_is(data$cumulative_tests, "numeric")
 })
