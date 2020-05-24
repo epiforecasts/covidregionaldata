@@ -43,6 +43,7 @@ get_colombia_regional_cases <- function() {
                   cases = casos_confirmados, deaths = casos_fallecido, tests = pruebas) %>%
     dplyr::mutate(
                   date = lubridate::mdy(date),
+                  region = iconv(x = region, from = "UTF-8", to = "ASCII//TRANSLIT"),
                   region = stringr::str_replace_all(region, " D.C.", ""),
                   region = stringr::str_replace_all(region, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
                   region = stringr::str_to_sentence(region)
