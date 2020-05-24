@@ -12,6 +12,8 @@
 #' @importFrom tidyr complete full_seq fill
 #' @importFrom lubridate ymd
 #' @importFrom stringr str_remove_all
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_nodes html_table
 #' @export
 #' @examples
 #' ## Code
