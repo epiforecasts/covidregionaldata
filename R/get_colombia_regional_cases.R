@@ -11,6 +11,8 @@
 #' @importFrom readr read_csv
 #' @importFrom stringr str_replace_all str_to_sentence
 #' @importFrom tidyr complete full_seq fill
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_nodes html_table
 #' @examples
 #'
 #'
