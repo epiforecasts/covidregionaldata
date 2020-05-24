@@ -56,8 +56,7 @@ Imports:
     rvest,
     janitor,
     jsonlite,
-    reshape2,
-    rnaturalearth
+    reshape2
 Suggests:
     pkgdown,
     testthat
