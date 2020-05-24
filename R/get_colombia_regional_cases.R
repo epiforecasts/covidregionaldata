@@ -11,7 +11,6 @@
 #' @importFrom readr read_csv
 #' @importFrom stringr str_replace_all str_to_sentence
 #' @importFrom tidyr complete full_seq fill
-#' @importFrom rnaturalearth ne_states
 #' @examples
 #'
 #'
@@ -20,8 +19,9 @@
 #' regions <- rnaturalearth::ne_states("Colombia", returnclass = "sf")
 #' data <- get_colombia_regional_cases() %>%
 #'           dplyr::filter(date == max(date))
-#' region_with_data <- dplyr::left_join(regions, data, by = "iso_3166_2")
-#' ggplot2::ggplot(regions_with_data) +
+#' regions_with_data <- dplyr::left_join(regions, data, by = "iso_3166_2")
+#' regions_with_data %>%
+#'   ggplot2::ggplot() +
 #'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 #'}
 #'
@@ -42,7 +42,7 @@ get_colombia_regional_cases <- function() {
     dplyr::mutate(
                   date = lubridate::mdy(date),
                   region = stringr::str_replace_all(region, " D.C.", ""),
-                  region = stringr::str_replace_all(region, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "SAN ANDRES Y PROVIDENCIA"),
+                  region = stringr::str_replace_all(region, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
                   region = stringr::str_to_sentence(region)
     )
 
@@ -57,19 +57,25 @@ get_colombia_regional_cases <- function() {
       tests = ifelse(tests < 0, 0, tests)) %>%
     dplyr::ungroup()
 
-  # Get region ISO codes
-  co_map <- rnaturalearth::ne_states(country = "Colombia")
-  co_iso <- co_map@data %>%
-    dplyr::select(name, iso_3166_2) %>%
-    dplyr::mutate(name = stringr::str_to_sentence(name),
-                  name = stringr::str_replace_all(name, "á", "a"),
-                  name = stringr::str_replace_all(name, "í", "i"),
-                  name = stringr::str_replace_all(name, "ó", "o"),
-                  name = stringr::str_replace_all(name, "é", "e")
-                  )
+
+  # Get ISO codes
+  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
+  iso <- region_url %>%
+    xml2::read_html() %>%
+    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
+    rvest::html_table()
+  iso <- iso[[1]] %>%
+    dplyr::select(iso_3166_2 = Code, region = 2) %>%
+    dplyr::mutate(region = stringr::str_replace_all(region, "á", "a"),
+                  region = stringr::str_replace_all(region, "í", "i"),
+                  region = stringr::str_replace_all(region, "ó", "o"),
+                  region = stringr::str_replace_all(region, "é", "e"),
+                  region = stringr::str_replace_all(region, "Distrito Capital de ", ""),
+                  region = stringr::str_to_sentence(region))
 
   # Merge ISO codes with data
-  colombia <- dplyr::left_join(colombia, co_iso, by = c("region" = "name"))
+  colombia <- dplyr::left_join(colombia, iso, by = "region")
+
 
 return(colombia)
 
