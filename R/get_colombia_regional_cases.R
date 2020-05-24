@@ -62,16 +62,13 @@ get_colombia_regional_cases <- function() {
 
   # Get ISO codes
   region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
-  iso <- region_url %>%
+  iso_table <- region_url %>%
     xml2::read_html() %>%
     rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
     rvest::html_table()
-  iso <- iso[[1]] %>%
+  iso <- iso_table[[1]] %>%
     dplyr::select(iso_3166_2 = Code, region = 2) %>%
-    dplyr::mutate(region = stringr::str_replace_all(region, "á", "a"),
-                  region = stringr::str_replace_all(region, "í", "i"),
-                  region = stringr::str_replace_all(region, "ó", "o"),
-                  region = stringr::str_replace_all(region, "é", "e"),
+    dplyr::mutate(region = iconv(x = region, from = "UTF-8", to = "ASCII//TRANSLIT"),
                   region = stringr::str_replace_all(region, "Distrito Capital de ", ""),
                   region = stringr::str_to_sentence(region))
 
