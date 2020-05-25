@@ -9,6 +9,7 @@
 #' @importFrom dplyr select group_by ungroup mutate left_join
 #' @importFrom tidyr pivot_longer
 #' @importFrom readr read_csv
+#' @importFrom lubridate mdy
 #' @examples
 #'
 #'
@@ -39,7 +40,8 @@ get_russia_regional_cases <- function() {
   # Reshape
   russia <- russia %>%
     tidyr::pivot_longer(cols = 12:133, names_to = "date") %>%
-    dplyr::select(date, country = Country_Region, region = Province_State, cases = value)
+    dplyr::select(date, country = Country_Region, region = Province_State, cases = value) %>%
+    dplyr::mutate(date = lubridate::mdy(date))
 
   # Cumualative to daily
   russia <- dplyr::group_by(russia, region) %>%
