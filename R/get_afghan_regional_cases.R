@@ -27,16 +27,13 @@ get_afghan_regional_cases <- function(){
     #reformat
     dplyr::transmute(date = as.Date(Date),
                      region = stringr::str_replace(Province, " Province", ""),
-                     cumulative_cases = as.numeric(Cases),
-                     cumulative_deaths = as.numeric(Deaths),
-                     cumulative_recoveries = as.numeric(Recoveries)) %>%
+                     cumulative_cases = Cases,
+                     cumulative_deaths = Deaths,
+                     cumulative_recoveries = Recoveries) %>%
     #transform (remove commas in numbers)
-    dplyr::mutate(cumulative_cases = stringr::str_remove_all(cumulative_cases, ","),
-                  cumulative_cases = as.integer(cumulative_cases),
-                  cumulative_deaths = stringr::str_remove_all(cumulative_deaths, ","),
-                  cumulative_deaths = as.integer(cumulative_deaths),
-                  cumulative_recoveries = stringr::str_remove_all(cumulative_recoveries, ","),
-                  cumulative_recoveries = as.integer(cumulative_recoveries)) %>%
+    dplyr::mutate(cumulative_cases = as.numeric(stringr::str_remove_all(cumulative_cases, ",")),
+                  cumulative_deaths = as.numeric(stringr::str_remove_all(cumulative_deaths, ",")),
+                  cumulative_recoveries = as.numeric(stringr::str_remove_all(cumulative_recoveries, ","))) %>%
     # get daily cases
     dplyr::group_by(region) %>%
     dplyr::mutate(cases_today = get_daily_from_cumulative(cumulative_cases),

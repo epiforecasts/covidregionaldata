@@ -5,31 +5,37 @@
 #' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.
 #' @importFrom dplyr %>% group_by summarise arrange select
 #' @examples
-#' 
+#'
 #' \dontrun{
-#' 
+#'
 #'  get_regional_covid_data(country = "canada")
 #'
 #' }
 get_regional_covid_data <- function(country, totals = FALSE){
-  
+
+  if (!(is.character(country))){
+    stop("The country variable should be a character variable.")
+  }
+
   # get the correct data given the country
-  get_data_function <- switch(country,
+  get_data_function <- switch(tolower(country),
                               "canada" = get_canada_regional_cases,
-                              "afghanistan" = get_afghan_regional_cases)
+                              "afghanistan" = get_afghan_regional_cases,
+                              stop("There is no data for the country entered. It is likely haven't added data
+                                   for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
-  
+
   # add columns that aren't there already, clean up data
   data <- data %>%
     add_extra_na_cols() %>%
     set_negative_values_to_zero()
-  
+
   # sum up data if user requests totals
   if (totals) {
     data <- data %>%
       dplyr::group_by(region) %>%
-      dplyr::summarise(cumulative_deaths = sum(deaths_today, na.rm = TRUE),
-                       cumulative_cases = sum(cases_today, na.rm = TRUE),
+      dplyr::summarise(cumulative_cases = sum(cases_today, na.rm = TRUE),
+                       cumulative_deaths = sum(deaths_today, na.rm = TRUE),
                        cumulative_recoveries = sum(recoveries_today, na.rm = TRUE),
                        cumulative_hospitalisations = sum(hospitalisations_today, na.rm = TRUE),
                        cumulative_tests = sum(tests_today, na.rm = TRUE)) %>%
@@ -37,17 +43,16 @@ get_regional_covid_data <- function(country, totals = FALSE){
       rename_region_column(country)
     return(data)
   }
-  
+
   # select correct data, pad the dataset and rename the region column to country-specific
   data <- data  %>%
     dplyr::select(date, region, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
-                  recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations, 
-                  tests_today, cumulative_tests) %>% 
-    fill_empty_dates_with_na %>% 
+                  recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,
+                  tests_today, cumulative_tests) %>%
+    fill_empty_dates_with_na %>%
     complete_cumulative_columns %>%
-    rename_region_column(country) %>% 
+    rename_region_column(country) %>%
     dplyr::arrange(date)
-  
-  return(data)
-}
 
+  return(data.frame(data))
+}
