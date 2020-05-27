@@ -9,7 +9,7 @@ test_that("get_regional_covid_data returns error if there is no data for the cou
 })
 
 ## Happy case - set up
-source("tests/testthat/custom_tests/mock_data_for_get_regional_covid_data.R")
+source("custom_tests/mock_data_for_get_regional_covid_data.R")
 
 test_that("get_covid_regional_data returns correct data not using totals", {
   returned_data <- with_mock(get_canada_regional_cases = function() return(input_data), get_regional_covid_data("canada"))
