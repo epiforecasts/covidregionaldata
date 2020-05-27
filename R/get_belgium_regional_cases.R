@@ -1,96 +1,56 @@
 #' Fetch daily COVID cases by region for Belgium.
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 #' Data is available at https://epistat.wiv-isp.be/covid/
-#' @param dataset Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial". 
-#' @return A data.frame of specified Covid data. If dataset = "all", a named list of all available datasets. 
-#' @importFrom readr read_csv locale
-#' @importFrom dplyr rename_all 
-#' @examples
-#' 
-#' \dontrun{
-#' 
-#'  get_belgium_regional_cases(dataset = "testing_national")
+#' selects the relevant columns, sanitises various columns and gets the cumulative counts from daily count columns.
+#' @return A data.frame of COVID cases by region in Belgium, ready to be used by get_regional_covid_data()
+#' @importFrom readr read_csv locale cols
+#' @importFrom dplyr %>% select group_by tally rename full_join mutate
+#' @importFrom tidyr replace_na
+#' @importFrom lubridate dmy
 #'
-#' }
+get_belgium_regional_cases <- function(){
 
-get_belgium_regional_cases <- function(dataset = "cases_provincial"){
-  
-  if(!dataset %in% c("cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all")){
-    stop('Unknown input. Please specify dataset: "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial".')
-  }
-  
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
-  c_municipal <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_MUNI.csv"
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
-  t_national <- "https://epistat.sciensano.be/Data/COVID19BE_tests.csv"
-  
-  ch <- memoise::cache_filesystem(".cache")
-  
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-  
-  clean_belgium_data_default <- function(url){
-    
-    data <- mem_read(url, locale = readr::locale(encoding = "latin1"))
-    
-    return(data %>% dplyr::rename_all(tolower))
-    
-  }
-  
-  clean_t_national_data <- function(url){
-    
-    data = clean_belgium_data_default(url)
-    
-    data$date = as.Date(data$date, format = '%d/%m/%Y')
-    
-    return(data)
-    
-  }
-  
-  #c_municipal data has somewhat messy raw columns
-  clean_c_municipal_data <- function(url){
-    
-    data <- mem_read(url, locale = readr::locale(encoding = "latin1"))
-    
-    colnames(data) <- unlist(lapply(colnames(data), gsub, pattern = "TX_", replacement = ""))
-    
-    return(data %>% dplyr::rename_all(tolower))
-    
-  }
-  
-  if (dataset == "cases_provincial"){
-    
-    return(clean_belgium_data_default(c_provincial))
-    
-  }else if (dataset == "cases_municipal"){
-    
-    return(clean_c_municipal_data(c_municipal))
-    
-  }else if (dataset == "hospitalisation_provincial"){
-    
-    return(clean_belgium_data_default(h_provincial))
-    
-  }else if (dataset == "mortality_provincial"){
-    
-    return(clean_belgium_data_default(m_provincial))
-    
-  }else if (dataset == "testing_national"){
-   
-    return(clean_t_national_data(t_national))
-     
-  }else if (dataset == "all"){
-    
-    all_list = list()
-    
-    all_list[['cases_provincial']] = clean_belgium_data_default(c_provincial)
-    all_list[['cases_municipal']] = clean_c_municipal_data(c_municipal)
-    all_list[['hospitalisation_provincial']] = clean_belgium_data_default(h_provincial)
-    all_list[['mortality_provincial']] = clean_belgium_data_default(m_provincial)
-    all_list[['testing_national']] = clean_t_national_data(t_national)
-    
-    return(all_list)
-    
-  }
-  
+
+  cases_data <- readr::read_csv(c_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  hosp_data <- readr::read_csv(h_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  deaths_data <- readr::read_csv(m_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+
+
+  cases_data <- cases_data %>%
+    dplyr::select(DATE, REGION, CASES) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    tidyr::replace_na(list(REGION = "Unknown")) %>%
+    dplyr::group_by(DATE, REGION) %>%
+    dplyr::tally(CASES)
+
+  hosp_data <- hosp_data %>%
+    dplyr::select(DATE, REGION, NEW_IN) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    tidyr::replace_na(list(REGION = "Unknown")) %>%
+    dplyr::group_by(DATE, REGION) %>%
+    dplyr::tally(wt = NEW_IN)
+
+  deaths_data <- deaths_data %>%
+    dplyr::select(DATE, REGION, DEATHS) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    tidyr::replace_na(list(REGION = "Unknown")) %>%
+    dplyr::group_by(DATE, REGION) %>%
+    dplyr::tally(wt = DEATHS)
+
+
+  cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
+  data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
+
+  data <- data %>%
+    dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n) %>%
+    dplyr::group_by(region) %>%
+    dplyr::mutate(cumulative_cases = get_cumulative_from_daily(cases_today),
+                  cumulative_hospitalisations = get_cumulative_from_daily(hospitalisations_today),
+                  cumulative_deaths = get_cumulative_from_daily(deaths_today))
+
+  return(data)
 }
 

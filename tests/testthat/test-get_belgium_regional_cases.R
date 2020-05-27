@@ -1,57 +1,41 @@
-test_that("get_belgium_regional_cases cases works as expected", {
-  
-  base <- get_belgium_regional_cases()
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-
-  base <- get_belgium_regional_cases(dataset = "cases_municipal")
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-
-  base <- get_belgium_regional_cases(dataset = "hospitalisation_provincial")
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-  
-  base <- get_belgium_regional_cases(dataset = "mortality_provincial")
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-  expect_true(sum(as.numeric(base$deaths) < 0) == 0)
-  
-  base <- get_belgium_regional_cases(dataset = "testing_national")
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-  expect_true(sum(as.numeric(base$tests) < 0) == 0)
-  
-  base <- get_belgium_regional_cases(dataset = "all")
-  expect_is(base, "list")
-  lapply(base, expect_is, class='data.frame')
-  
-})
-
-
 test_that("get_belgium_regional_cases data sources are unchanged", {
-  
-  base <- readr::read_csv("https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv")
-  
-  expect_equal(colnames(base), c("DATE", "PROVINCE", "REGION", "AGEGROUP",  "SEX", "CASES"))
-  
-  base <- readr::read_csv("https://epistat.sciensano.be/Data/COVID19BE_CASES_MUNI.csv")
-  
-  expect_equal(colnames(base), c("DATE", "NIS5", "TX_DESCR_NL", "TX_DESCR_FR", "TX_ADM_DSTR_DESCR_NL", 
-                                 "TX_ADM_DSTR_DESCR_FR", "TX_PROV_DESCR_NL", "TX_PROV_DESCR_FR", "TX_RGN_DESCR_NL", 
-                                 "TX_RGN_DESCR_FR", "CASES"))
-  
-  base <- readr::read_csv("https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv")
-  
-  expect_equal(colnames(base), c("DATE", "PROVINCE", "REGION", "NR_REPORTING", "TOTAL_IN", "TOTAL_IN_ICU", 
-                                 "TOTAL_IN_RESP", "TOTAL_IN_ECMO", "NEW_IN", "NEW_OUT"))
-  
-  base <- readr::read_csv("https://epistat.sciensano.be/Data/COVID19BE_MORT.csv")
-  
-  expect_equal(colnames(base), c("DATE", "REGION", "AGEGROUP",  "SEX", "DEATHS"))
-  
-  base <- readr::read_csv("https://epistat.sciensano.be/Data/COVID19BE_tests.csv")
-  
-  expect_equal(colnames(base), c("DATE", "TESTS"))
+  c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
+  h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
+  m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
+
+  cases_data <- readr::read_csv(c_provincial, col_types = readr::cols())
+  cases_expected_colnames <- c("DATE", "PROVINCE", "REGION", "AGEGROUP", "SEX", "CASES")
+  expect_true(all(cases_expected_colnames %in% colnames(cases_data)))
+
+  hosp_data <- readr::read_csv(h_provincial, col_types = readr::cols())
+  hosp_expected_colnames <- c("DATE", "PROVINCE", "REGION", "NR_REPORTING", "TOTAL_IN", "TOTAL_IN_ICU",
+                              "TOTAL_IN_RESP", "TOTAL_IN_ECMO", "NEW_IN", "NEW_OUT")
+  expect_true(all(hosp_expected_colnames %in% colnames(hosp_data)))
+
+  deaths_data <- readr::read_csv(m_provincial, col_types = readr::cols())
+  deaths_expected_colnames <- c("DATE", "REGION", "AGEGROUP", "SEX", "DEATHS")
+  expect_true(all(deaths_expected_colnames %in% colnames(deaths_data)))
 })
 
+test_that("get_belgium_regional_cases returns the correct column names", {
+  expected_colnames <- c("region", "date", "cases_today", "cumulative_cases", "cumulative_deaths",
+                         "cumulative_hospitalisations", "deaths_today", "hospitalisations_today")
+
+  returned_colnames <- colnames(get_belgium_regional_cases())
+
+  expect_true(all(returned_colnames %in% expected_colnames))
+  expect_true(all(expected_colnames %in% returned_colnames))
+})
+
+test_that("get_belgium_regional_cases returns correct column types", {
+  data <- get_belgium_regional_cases()
+  expect_is(data, "data.frame")
+  expect_is(data$region, "character")
+  expect_is(data$date, "Date")
+  expect_is(data$cases_today, "numeric")
+  expect_is(data$cumulative_cases, "numeric")
+  expect_is(data$deaths_today, "numeric")
+  expect_is(data$cumulative_deaths, "numeric")
+  expect_is(data$hospitalisations_today, "numeric")
+  expect_is(data$cumulative_hospitalisations, "numeric")
+})

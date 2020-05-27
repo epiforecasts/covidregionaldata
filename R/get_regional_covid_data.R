@@ -21,6 +21,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
   get_data_function <- switch(tolower(country),
                               "canada" = get_canada_regional_cases,
                               "afghanistan" = get_afghan_regional_cases,
+                              "belgium" = get_belgium_regional_cases,
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
@@ -48,7 +49,10 @@ get_regional_covid_data <- function(country, totals = FALSE){
   data <- data  %>%
     dplyr::select(date, region, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
                   recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,
-                  tests_today, cumulative_tests) %>%
+                  tests_today, cumulative_tests)
+
+    data <- data %>%
+    tidyr::drop_na(date) %>%
     fill_empty_dates_with_na %>%
     complete_cumulative_columns %>%
     rename_region_column(country) %>%

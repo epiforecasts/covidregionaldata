@@ -47,7 +47,8 @@ add_extra_na_cols <- function(data) {
 rename_region_column <- function(data, country) {
   new_name <- switch(tolower(country),
                      "canada" = "province",
-                     "afghanistan" = "province")
+                     "afghanistan" = "province",
+                     "belgium" = "region")
 
   data <- data %>% dplyr::rename(!!new_name := region)
   return(data.frame(data))
