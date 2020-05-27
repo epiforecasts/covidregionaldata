@@ -7,7 +7,7 @@ test_that("get_daily_from_cumulative returns correct results", {
 })
 
 test_that("add_extra_na_cols is working", {
-  extra_col_names <- c("date", "province", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
+  extra_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
                       "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",
                       "cumulative_hospitalisations")
 

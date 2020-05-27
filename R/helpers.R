@@ -13,7 +13,7 @@ get_daily_from_cumulative <- function(column) {
 #' @param data a data.frame
 #' @return a data.frame with relevant NA columns added
 add_extra_na_cols <- function(data) {
-  expected_col_names <- c("date", "province", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
+  expected_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
                           "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",
                           "cumulative_hospitalisations")
 
