@@ -7,16 +7,25 @@
 get_afghan_regional_cases()
 }
 \value{
-A dataframe of daily Afghan provincial cases and deaths
+A dataframe of daily Afghan regional cases, deaths, and recovered
 }
 \description{
 Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province
 The cumulative data is stored in a google sheet, which is read as a csv and de-cumulated.
 }
 \examples{
-
+\dontrun{
 ## Code
 get_afghan_regional_cases()
+## Mapping
+regions <- rnaturalearth::ne_states(geounit = "Afghanistan", returnclass = "sf")
+data <- get_afghan_regional_cases() \%>\%
+  dplyr::filter(date == max(date))
+regions_with_data <- dplyr::left_join(regions, data, by = "iso_3166_2")
+regions_with_data \%>\%
+  ggplot2::ggplot(ggplot2::aes(fill = cases)) +
+  ggplot2::geom_sf()
+}
 }
 \author{
 Flavio Finger @ffinger

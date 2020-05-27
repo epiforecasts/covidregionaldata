@@ -27,7 +27,8 @@ brazil_latest <- get_brazil_regional_cases(geography = "states") \%>\%
 brazil_map <- rnaturalearth::ne_states(country = "Brazil", returnclass = "sf") \%>\%
   dplyr::mutate(state_code = stringr::str_remove_all(iso_3166_2, "BR-"))
 
-brazil_map_data <- dplyr::left_join(brazil_map, brazil_latest, by = c("state_code" = "state_code")) \%>\%
+brazil_map_data <- dplyr::left_join(brazil_map, brazil_latest,
+by = c("state_code" = "state_code")) \%>\%
   ggplot2::ggplot() +
   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 

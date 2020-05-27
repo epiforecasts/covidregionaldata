@@ -23,7 +23,8 @@
 #' brazil_map <- rnaturalearth::ne_states(country = "Brazil", returnclass = "sf") %>%
 #'   dplyr::mutate(state_code = stringr::str_remove_all(iso_3166_2, "BR-"))
 #'
-#' brazil_map_data <- dplyr::left_join(brazil_map, brazil_latest, by = c("state_code" = "state_code")) %>%
+#' brazil_map_data <- dplyr::left_join(brazil_map, brazil_latest,
+#' by = c("state_code" = "state_code")) %>%
 #'   ggplot2::ggplot() +
 #'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 #'
@@ -37,8 +38,14 @@ get_brazil_regional_cases <- function(geography = "states") {
 
   # Set region names
   names <- tibble::tibble(
-    state_name = c("Acre","Amapá","Amazonas","Pará","Rondônia","Roraima","Tocantins","Alagoas","Bahia","Ceará","Maranhão","Paraíba","Pernambuco","Piauí","Rio Grande do Norte","Sergipe","Espirito Santo","Minas Gerais","Rio de Janeiro","São Paulo","Paraná","Rio Grande do Sul","Santa Catarina","Distrito Federal","Goiás","Mato Grosso","Mato Grosso do Sul"),
-    state_code = c("AC","AP","AM","PA","RO","RR","TO", "AL","BA","CE","MA","PB","PE","PI","RN","SE", "ES","MG","RJ","SP", "PR","RS","SC", "DF","GO","MT","MS"),
+    state_name = c("Acre","Amapá","Amazonas","Pará","Rondônia","Roraima","Tocantins",
+                   "Alagoas","Bahia","Ceará","Maranhão","Paraíba","Pernambuco","Piauí",
+                   "Rio Grande do Norte","Sergipe","Espirito Santo","Minas Gerais","Rio de Janeiro",
+                   "São Paulo","Paraná","Rio Grande do Sul","Santa Catarina","Distrito Federal","Goiás",
+                   "Mato Grosso","Mato Grosso do Sul"),
+    state_code = c("AC","AP","AM","PA","RO","RR","TO", "AL","BA","CE","MA","PB",
+                   "PE","PI","RN","SE", "ES","MG","RJ","SP", "PR","RS","SC", "DF",
+                   "GO","MT","MS"),
     region_name = c(rep("Norte", 7), rep("Nordeste", 9), rep("Sudeste", 4), rep("Sul", 3), rep("Centro-Oeste", 4)))
 
   # Path to data

@@ -4,6 +4,7 @@
 #' @description Fetches COVID case counts by region in Germany.
 #' This data is sourced from the Robert Koch Institute:
 #' https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
+#' @param geography Character string indicating the geographic level to return.
 #' @return A dataframe of case and death counts in German regions
 #' @export
 #' @importFrom memoise cache_filesystem memoise
@@ -56,7 +57,8 @@ get_germany_regional_cases <- function(geography = "states") {
       cases = AnzahlFall,
       deaths = AnzahlTodesfall
     ) %>%
-    dplyr::mutate(date = lubridate::ymd_hms(date))
+    dplyr::mutate(date = lubridate::ymd_hms(date) %>%
+                    as.Date())
 
   germany_state <- germany %>%
     dplyr::group_by(state, date) %>%

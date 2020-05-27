@@ -6,6 +6,9 @@
 \usage{
 get_germany_regional_cases(geography = "states")
 }
+\arguments{
+\item{geography}{Character string indicating the geographic level to return.}
+}
 \value{
 A dataframe of case and death counts in German regions
 }

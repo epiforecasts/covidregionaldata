@@ -16,6 +16,7 @@
 #' @importFrom rvest html_nodes html_table
 #' @export
 #' @examples
+#' \dontrun{
 #' ## Code
 #' get_afghan_regional_cases()
 #' ## Mapping
@@ -26,6 +27,7 @@
 #' regions_with_data %>%
 #'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
 #'   ggplot2::geom_sf()
+#'}
 
 get_afghan_regional_cases <- function() {
 

@@ -14,7 +14,7 @@
 #'
 #'
 #'\dontrun{
-#'}
+#'
 #'
 
 # # Mapping
@@ -26,6 +26,7 @@
 #'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
 #'   ggplot2::geom_sf() +
 #'   ggplot2::coord_sf(xlim = c(20, max(sf::st_coordinates(regions_with_data))))
+#'   }
 
 get_russia_regional_cases <- function() {
 
