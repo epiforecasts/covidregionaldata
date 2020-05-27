@@ -14,6 +14,18 @@ test_that("get_cumulative_from_daily returns correct results", {
   expect_equal(cumulative_col, calculated_daily)
 })
 
+test_that("calculate_columns_from_existing_data returns correct results", {
+  cases_today <- c(0, 3, 2, NA_integer_, 0, 14, 1)
+  cumulative_deaths <- c(0, 5, 7, 10, 15, 18, 26)
+  input_data <- data.frame(cbind(cases_today, cumulative_deaths))
+
+  cumulative_cases <- c(0, 3, 5, 5, 5, 19, 20)
+  deaths_today <- c(0, 5, 2, 3, 5, 3, 8)
+  expected_data <- data.frame(cbind(cases_today, cumulative_deaths, cumulative_cases, deaths_today))
+
+  expect_equal(calculate_columns_from_existing_data(input_data), expected_data)
+})
+
 test_that("add_extra_na_cols is working", {
   extra_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
                       "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",

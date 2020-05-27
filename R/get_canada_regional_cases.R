@@ -24,13 +24,7 @@ get_canada_regional_cases <- function(){
                   numrecover = as.numeric(replace(numrecover, numrecover == "N/A", NA))) %>%
     dplyr::rename(region = prname, cumulative_deaths = numdeaths, cumulative_cases = numtotal,
                   cases_today = numtoday, cumulative_recoveries = numrecover, cumulative_tests = numtested) %>%
-    tidyr::replace_na(list(cumulative_deaths = 0, cumulative_cases = 0, cumulative_recoveries = 0, cumulative_tests = 0)) %>%
-
-    # get daily cases from cumulative
-    dplyr::group_by(region) %>%
-    dplyr::mutate(deaths_today = get_daily_from_cumulative(cumulative_deaths),
-                  recoveries_today = get_daily_from_cumulative(cumulative_recoveries),
-                  tests_today = get_daily_from_cumulative(cumulative_tests))
+    tidyr::replace_na(list(cumulative_deaths = 0, cumulative_cases = 0, cumulative_recoveries = 0, cumulative_tests = 0))
 
   return(data)
 }

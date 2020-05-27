@@ -18,8 +18,7 @@ test_that("get_belgium_regional_cases data sources are unchanged", {
 })
 
 test_that("get_belgium_regional_cases returns the correct column names", {
-  expected_colnames <- c("region", "date", "cases_today", "cumulative_cases", "cumulative_deaths",
-                         "cumulative_hospitalisations", "deaths_today", "hospitalisations_today")
+  expected_colnames <- c("region", "date", "cases_today", "deaths_today", "hospitalisations_today")
 
   returned_colnames <- colnames(get_belgium_regional_cases())
 
@@ -33,9 +32,6 @@ test_that("get_belgium_regional_cases returns correct column types", {
   expect_is(data$region, "character")
   expect_is(data$date, "Date")
   expect_is(data$cases_today, "numeric")
-  expect_is(data$cumulative_cases, "numeric")
   expect_is(data$deaths_today, "numeric")
-  expect_is(data$cumulative_deaths, "numeric")
   expect_is(data$hospitalisations_today, "numeric")
-  expect_is(data$cumulative_hospitalisations, "numeric")
 })

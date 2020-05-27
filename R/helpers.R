@@ -108,6 +108,28 @@ complete_cumulative_columns <- function(data) {
 }
 
 
+#' Cumulative counts from daily counts or daily counts from cumulative, dependent on which columns already exist
+#' @description Checks which columns are missing (cumulative/daily counts) and if one is present and the other not then calculates the second from the first
+#' @param data A data frame
+#' @return A data frame with extra columns if required
+calculate_columns_from_existing_data <- function(data) {
+  possible_counts <- c("cases", "deaths", "hospitalisations", "recoveries", "tests")
+
+  for (count in possible_counts) {
+    count_today_name <- paste0(count, "_today")
+    cumulative_count_name <- paste0("cumulative_", count)
+
+    if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
+      # in this case the daily count is there but there are no cumulative counts
+      data <- data %>% dplyr::mutate(!!cumulative_count_name := get_cumulative_from_daily(data[, count_today_name]))
+    } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
+      # in this case the cumulative counts are there but no daily counts
+      data <- data %>% dplyr::mutate(!!count_today_name := get_daily_from_cumulative(data[, cumulative_count_name]))
+    }
+  }
+
+  return(data)
+}
 
 
 

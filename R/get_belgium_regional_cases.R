@@ -45,12 +45,7 @@ get_belgium_regional_cases <- function(){
   data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
 
   data <- data %>%
-    dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n) %>%
-    dplyr::group_by(region) %>%
-    dplyr::mutate(cumulative_cases = get_cumulative_from_daily(cases_today),
-                  cumulative_hospitalisations = get_cumulative_from_daily(hospitalisations_today),
-                  cumulative_deaths = get_cumulative_from_daily(deaths_today))
-
+    dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
   return(data)
 }
 

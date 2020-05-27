@@ -29,6 +29,8 @@ get_regional_covid_data <- function(country, totals = FALSE){
 
   # add columns that aren't there already, clean up data
   data <- data %>%
+    dplyr::group_by(region) %>%
+    calculate_columns_from_existing_data() %>%
     add_extra_na_cols() %>%
     set_negative_values_to_zero()
 
