@@ -22,6 +22,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
                               "canada" = get_canada_regional_cases,
                               "afghanistan" = get_afghan_regional_cases,
                               "belgium" = get_belgium_regional_cases,
+                              "brazil" = get_brazil_regional_cases,
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
