@@ -17,7 +17,7 @@ Install the stable version of the package using
 
 ``` r
 install.packages("drat")
-drat::add("epiforecasts")
+drat:::add("epiforecasts")
 install.packages("NCoVUtils")
 ```
 
