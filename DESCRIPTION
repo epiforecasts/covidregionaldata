@@ -1,5 +1,5 @@
 Package: NCoVUtils
-Title: Utility functions for the Covid-19 outbreak
+Title: Data Extraction Tools for the Covid-19 Outbreak
 Version: 0.4.0
 Authors@R: c(person(given = "Sam Abbott",
            role = c("aut", "cre"),
@@ -33,7 +33,7 @@ Authors@R: c(person(given = "Sam Abbott",
     person("Sebastian", "Funk", 
             email = "sebastian.funk@lshtm.ac.uk", 
             role = c("aut")))
-Description: Utility functions for the 2019-NCoV outbreak.
+Description: Data extraction tools for the covid-19 outbreak.
 License: MIT + file LICENSE
 Depends: 
     R (>= 2.10)
