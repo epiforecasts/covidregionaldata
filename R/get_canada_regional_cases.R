@@ -5,7 +5,7 @@
 #' @return A data.frame of COVID cases by province in Canada, ready to be used by get_regional_covid_data()
 #' @importFrom dplyr %>% filter select mutate rename group_by
 #' @importFrom tidyr replace_na
-#' @importFrom readr read_csv
+#' @importFrom readr read_csv cols
 #' @importFrom lubridate dmy
 
 get_canada_regional_cases <- function(){
@@ -13,7 +13,7 @@ get_canada_regional_cases <- function(){
   # read in data
   url <- "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 
-  data <- readr::read_csv(url) %>%
+  data <- readr::read_csv(url, col_types = readr::cols()) %>%
     dplyr::select(pruid, prname, date, numtoday, numtotal, numdeaths, numrecover, numtested) %>%
     dplyr::filter(pruid != 1) %>%
     dplyr::select(-pruid) %>%

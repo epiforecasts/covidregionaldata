@@ -6,8 +6,9 @@
 #' @author Flavio Finger @ffinger
 #' @return A dataframe of daily Afghan provincial cases and deaths to be further processed by \function{get_regional_covid_data()}.
 #' @importFrom dplyr %>% transmute mutate group_by
-#' @importFrom readr read_csv
+#' @importFrom readr read_csv cols
 #' @importFrom stringr str_replace str_remove_all
+#' @importFrom lubridate dmy
 #' @examples
 #'
 #' ## Code
@@ -18,14 +19,14 @@ get_afghan_regional_cases <- function(){
   # read in data
   url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
 
-  data <- readr::read_csv(url)
+  data <- readr::read_csv(url, col_types = readr::cols())
   if (data[1,1] == "#adm1+name"){
     data <- data[-1, ]
   }
 
   data <- data %>%
     #reformat
-    dplyr::transmute(date = as.Date(Date),
+    dplyr::transmute(date = lubridate::ymd(Date),
                      region = stringr::str_replace(Province, " Province", ""),
                      cumulative_cases = Cases,
                      cumulative_deaths = Deaths,
