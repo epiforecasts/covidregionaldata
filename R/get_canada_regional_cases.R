@@ -10,15 +10,19 @@
 
 get_canada_regional_cases <- function(){
 
-  # read in data
+  # Path to data
   url <- "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 
-  data <- readr::read_csv(url, col_types = readr::cols()) %>%
+  # Set up cache
+  ch <- memoise::cache_filesystem(".cache")
+  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
+
+  data <- mem_read(file = url, col_types = readr::cols()) %>%
     dplyr::select(pruid, prname, date, numtoday, numtotal, numdeaths, numrecover, numtested) %>%
     dplyr::filter(pruid != 1) %>%
     dplyr::select(-pruid) %>%
 
-    # transform
+    # Transform
     dplyr::mutate(prname = gsub("Repatriated travellers", "Repatriated Travellers", prname),
                   date = lubridate::dmy(date),
                   numrecover = as.numeric(replace(numrecover, numrecover == "N/A", NA))) %>%

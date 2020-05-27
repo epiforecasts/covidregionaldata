@@ -10,15 +10,23 @@
 #'
 get_belgium_regional_cases <- function(){
 
+  # Paths to data
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
 
-  cases_data <- readr::read_csv(c_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
-  hosp_data <- readr::read_csv(h_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
-  deaths_data <- readr::read_csv(m_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  # Set up cache
+  ch <- memoise::cache_filesystem(".cache")
+  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
 
+  # Read data
+  data <- mem_read(file = url, col_types = readr::cols())
 
+  cases_data <- mem_read(file = c_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  hosp_data <- mem_read(file = h_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  deaths_data <- mem_read(file = m_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+
+  # Clean data
   cases_data <- cases_data %>%
     dplyr::select(DATE, REGION, CASES) %>%
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
@@ -41,11 +49,11 @@ get_belgium_regional_cases <- function(){
     dplyr::tally(wt = DEATHS)
 
 
+  # Join the three datasets and rename columns
   cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
-  data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
+  data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION")) %>%
+  dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
 
-  data <- data %>%
-    dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
   return(data)
 }
 

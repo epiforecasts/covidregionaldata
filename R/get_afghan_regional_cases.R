@@ -16,22 +16,27 @@
 
 get_afghan_regional_cases <- function(){
 
-  # read in data
+  # Path to data
   url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
 
-  data <- readr::read_csv(url, col_types = readr::cols())
+  # Set up cache
+  ch <- memoise::cache_filesystem(".cache")
+  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
+
+  # Read & clean data
+  data <- mem_read(file = url, col_types = readr::cols())
   if (data[1,1] == "#adm1+name"){
     data <- data[-1, ]
   }
 
   data <- data %>%
-    #reformat
+    # Reformat
     dplyr::transmute(date = lubridate::ymd(Date),
                      region = stringr::str_replace(Province, " Province", ""),
                      cumulative_cases = Cases,
                      cumulative_deaths = Deaths,
                      cumulative_recoveries = Recoveries) %>%
-    #transform (remove commas in numbers)
+    # Transform (remove commas in numbers)
     dplyr::mutate(cumulative_cases = as.numeric(stringr::str_remove_all(cumulative_cases, ",")),
                   cumulative_deaths = as.numeric(stringr::str_remove_all(cumulative_deaths, ",")),
                   cumulative_recoveries = as.numeric(stringr::str_remove_all(cumulative_recoveries, ",")))
