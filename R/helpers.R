@@ -7,6 +7,16 @@ get_daily_from_cumulative <- function(column) {
   return(shifted)
 }
 
+#' Cumulative counts from daily counts.
+#' @description Gets cumulative cases/deaths etc. from data which is in daily forms. Similar to cumsum() but deals with NAs by treating them as 0.
+#' @param column A vector of numeric data (e.g. a data column) which corresponds to daily counts of a process. Can contain NA
+#' @return A vector of numeric data which corresponds to cumulative counts
+get_cumulative_from_daily <- function(column) {
+  column[which(is.na(column))] <- 0
+  cum_sum <- cumsum(column)
+  return(cum_sum)
+}
+
 #' Add extra columns filled with NA values to a dataset.
 #' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the NCovUtils package return datasets
 #' of the same underlying structure (i.e. same columns).

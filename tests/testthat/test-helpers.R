@@ -6,6 +6,14 @@ test_that("get_daily_from_cumulative returns correct results", {
   expect_equal(column1, calculated_daily)
 })
 
+test_that("get_cumulative_from_daily returns correct results", {
+  column1 <- c(0, 3, 2, NA, 0, 14, 1)
+  cumulative_col <- c(0, 3, 5, 5, 5, 19, 20)
+  calculated_daily <- get_cumulative_from_daily(column1)
+
+  expect_equal(cumulative_col, calculated_daily)
+})
+
 test_that("add_extra_na_cols is working", {
   extra_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
                       "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",
