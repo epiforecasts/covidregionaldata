@@ -50,7 +50,8 @@ rename_region_column <- function(data, country) {
                      "afghanistan" = "province",
                      "belgium" = "region",
                      "brazil" = "state",
-                     "germany" = "bundesland")
+                     "germany" = "bundesland",
+                     "india" = "state")
 
   data <- data %>% dplyr::rename(!!new_name := region)
   return(data.frame(data))

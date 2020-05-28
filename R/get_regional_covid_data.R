@@ -24,6 +24,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
                               "belgium" = get_belgium_regional_cases,
                               "brazil" = get_brazil_regional_cases,
                               "germany" = get_germany_regional_cases,
+                              "india" = get_india_regional_cases,
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
