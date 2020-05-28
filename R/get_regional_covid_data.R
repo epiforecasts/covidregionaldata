@@ -23,6 +23,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
                               "afghanistan" = get_afghan_regional_cases,
                               "belgium" = get_belgium_regional_cases,
                               "brazil" = get_brazil_regional_cases,
+                              "germany" = get_germany_regional_cases,
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
@@ -30,7 +31,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
   # add columns that aren't there already, clean up data
   data <- data %>%
     dplyr::group_by(region) %>%
-    calculate_columns_from_existing_data() %>%
+    dplyr::do(calculate_columns_from_existing_data(.)) %>%
     add_extra_na_cols() %>%
     set_negative_values_to_zero()
 
@@ -48,7 +49,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
     return(data)
   }
 
-  # select correct data, pad the dataset and rename the region column to country-specific
+  # select correct data, pad the data set and rename the region column to country-specific
   data <- data  %>%
     dplyr::select(date, region, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
                   recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,

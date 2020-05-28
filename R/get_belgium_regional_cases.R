@@ -1,7 +1,7 @@
 #' Fetch daily COVID cases by region for Belgium.
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 #' Data is available at https://epistat.wiv-isp.be/covid/
-#' selects the relevant columns, sanitises various columns and gets the cumulative counts from daily count columns.
+#' selects and sanitises the relevant columns
 #' @return A data.frame of COVID cases by region in Belgium, ready to be used by get_regional_covid_data()
 #' @importFrom readr read_csv locale cols
 #' @importFrom dplyr %>% select group_by tally rename full_join mutate
@@ -18,9 +18,6 @@ get_belgium_regional_cases <- function(){
   # Set up cache
   ch <- memoise::cache_filesystem(".cache")
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  # Read data
-  data <- mem_read(file = url, col_types = readr::cols())
 
   cases_data <- mem_read(file = c_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
   hosp_data <- mem_read(file = h_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())

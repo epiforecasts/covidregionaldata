@@ -49,7 +49,8 @@ rename_region_column <- function(data, country) {
                      "canada" = "province",
                      "afghanistan" = "province",
                      "belgium" = "region",
-                     "brazil" = "state")
+                     "brazil" = "state",
+                     "germany" = "bundesland")
 
   data <- data %>% dplyr::rename(!!new_name := region)
   return(data.frame(data))
@@ -121,10 +122,10 @@ calculate_columns_from_existing_data <- function(data) {
 
     if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
-      data <- data %>% dplyr::mutate(!!cumulative_count_name := get_cumulative_from_daily(data[, count_today_name]))
+      data <- data %>% dplyr::mutate(!!cumulative_count_name := get_cumulative_from_daily(data[[count_today_name]]))
     } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
-      data <- data %>% dplyr::mutate(!!count_today_name := get_daily_from_cumulative(data[, cumulative_count_name]))
+      data <- data %>% dplyr::mutate(!!count_today_name := get_daily_from_cumulative(data[[cumulative_count_name]]))
     }
   }
 
