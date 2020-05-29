@@ -29,27 +29,30 @@ get_belgium_regional_cases <- function(){
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
-    dplyr::tally(CASES)
+    dplyr::tally(CASES) %>%
+    dplyr::ungroup()
 
   hosp_data <- hosp_data %>%
     dplyr::select(DATE, REGION, NEW_IN) %>%
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
-    dplyr::tally(wt = NEW_IN)
+    dplyr::tally(wt = NEW_IN) %>%
+    dplyr::ungroup()
 
   deaths_data <- deaths_data %>%
     dplyr::select(DATE, REGION, DEATHS) %>%
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
-    dplyr::tally(wt = DEATHS)
+    dplyr::tally(wt = DEATHS) %>%
+    dplyr::ungroup()
 
 
   # Join the three datasets and rename columns
   cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
   data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION")) %>%
-  dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
+          dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
 
   return(data)
 }

@@ -36,6 +36,10 @@ get_afghan_regional_cases <- function(){
                      cumulative_cases = Cases,
                      cumulative_deaths = Deaths,
                      cumulative_recoveries = Recoveries) %>%
+    dplyr::mutate(cumulative_cases = dplyr::recode(cumulative_cases, "–" = NA_character_),
+                  cumulative_deaths = dplyr::recode(cumulative_deaths, "–" = NA_character_),
+                  cumulative_recoveries = dplyr::recode(cumulative_recoveries, "–" = NA_character_)) %>%
+    tidyr::drop_na() %>%
     # Transform (remove commas in numbers)
     dplyr::mutate(cumulative_cases = as.numeric(stringr::str_remove_all(cumulative_cases, ",")),
                   cumulative_deaths = as.numeric(stringr::str_remove_all(cumulative_deaths, ",")),

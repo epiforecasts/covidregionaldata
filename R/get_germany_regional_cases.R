@@ -28,6 +28,8 @@ get_germany_regional_cases <- function() {
     dplyr::mutate(date = lubridate::as_date(lubridate::ymd_hms(date))) %>%
     dplyr::group_by(region, date) %>%
     dplyr::summarise(cases_today = as.numeric(sum(cases_today > 0)),
-                     deaths_today = as.numeric(sum(deaths_today > 0)))
+                     deaths_today = as.numeric(sum(deaths_today > 0))) %>%
+    dplyr::ungroup()
+
   return(data)
 }

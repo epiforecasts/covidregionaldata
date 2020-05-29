@@ -33,7 +33,8 @@ get_brazil_regional_cases <- function() {
     dplyr::summarise(cases_today = sum(cases_today),
                      cumulative_cases = sum(cumulative_cases),
                      deaths_today = sum(deaths_today),
-                     cumulative_deaths = sum(cumulative_deaths))
+                     cumulative_deaths = sum(cumulative_deaths)) %>%
+    dplyr::ungroup()
 
   # Return specified data
   return(data)
