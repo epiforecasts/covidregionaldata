@@ -45,7 +45,7 @@ for (i in 1:length(provinces)) {
 }
 
 ## Expected Output
-expected_data <- dplyr::bind_rows(expected_data_for_provinces) %>%
+expected_data <- suppressWarnings(dplyr::bind_rows(expected_data_for_provinces)) %>%
              dplyr::mutate(date = as.Date(date),
                            cases_today = as.numeric(cases_today),
                            cumulative_cases = as.numeric(cumulative_cases),

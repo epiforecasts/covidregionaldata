@@ -1,111 +1,53 @@
-
-#' Italian Regional Case Counts
-#'
+#' Italian Regional Covid-19 Data
 #'
 #' @description Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
-#' and is available on github: https://github.com/pcm-dpc/COVID-19
-#' @return A dataframe of Italian regional case counts.
+#' and is available on github: https://github.com/pcm-dpc/COVID-19. Cleans and sanitises ready for further use.
+#' @return A data frame of Italian regional case counts ready to be used by \code{get_regional_covid_data()}
 #' @export
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd
 #' @importFrom purrr map_dfr
-#' @importFrom dplyr mutate select arrange group_by n lag ungroup left_join
+#' @importFrom dplyr mutate select arrange group_by ungroup %>%
 #' @importFrom memoise cache_filesystem memoise
-#' @examples
 #'
-#' ## Code
-#' get_italy_regional_cases
-#'
-#' \dontrun{
-#' day_of_cases <- NCoVUtils::get_italy_regional_cases() %>%
-#' dplyr::filter(date == "2020-02-24")
-#'
-#' rnaturalearth::ne_states("Italy", returnclass = "sf") %>%
-#'  dplyr::group_by(provnum_ne) %>%
-#'  dplyr::summarise(geometry = sf::st_union(geometry)) %>%
-#'  dplyr::full_join(day_of_cases, by = c("provnum_ne" = "region_code")) %>%
-#'  ggplot2::ggplot(ggplot2::aes(fill=cases)) +
-#'  ggplot2::geom_sf()
-#' }
-
 get_italy_regional_cases <- function() {
 
   ## Path to data
-  path <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
-
+  url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
 
   ## Set up cache
   ch <- memoise::cache_filesystem(".cache")
-
-
   mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
 
   ## Function to get daily files
   get_daily_files = function(date){
-
-    suppressMessages(suppressWarnings(
-      mem_read(gsub("__date__", format(date, "%Y%m%d"), x=path))
-    ))
-
+      mem_read(file = gsub("__date__", format(date, "%Y%m%d"), x = url), col_types = readr::cols())
   }
 
   ## Extract daily data
-  start_date <- lubridate::ymd(20200224)
-  start_date <- as.Date(format(start_date, "%Y-%m-%d"))
+  start_date <- as.Date(format(lubridate::ymd(20200224), "%Y-%m-%d"))
   end_date <-  as.Date(Sys.Date() - 1)
 
   dates <- seq(start_date, end_date, by = "day")
-
-  cases <- purrr::map_dfr(dates,
-                          get_daily_files)
+  italy_data <- purrr::map_dfr(dates, get_daily_files)
 
   ## Clean variables
-  cases <- cases %>%
-    dplyr::mutate(date = as.Date(data),
-                  region = as.character(denominazione_regione),
-                  region_code = codice_regione,
-                  total_cases = totale_casi) %>%
-    dplyr::select(date, region, region_code, total_cases) %>%
-    dplyr::arrange(date) %>%
-    dplyr::group_by(region) %>%
-    dplyr::mutate(
-      index = 1:dplyr::n(),
-      cases = total_cases - ifelse(index == 1, 0, dplyr::lag(total_cases))) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(-index, -total_cases) %>%
-    ## Adjust negative cases by setting to 0
-    dplyr::mutate(cases = ifelse(cases < 0 , 0, cases))
+  italy_data <- italy_data %>%
+                  dplyr::mutate(date = as_date(lubridate::ymd_hms(data)),
+                                region = as.character(denominazione_regione),
+                                cumulative_cases = totale_casi,
+                                cumulative_deaths = deceduti,
+                                cumulative_tests = tamponi) %>%
+                  dplyr::select(date, region, cumulative_cases, cumulative_deaths, cumulative_tests) %>%
+                  dplyr::arrange(date) %>%
+                  dplyr::mutate(region = dplyr::recode(region,
+                                                       "P.A. Trento" = "Trentino-Alto Adige",
+                                                       "P.A. Bolzano" = "Trentino-Alto Adige") %>% as.character()) %>%
+                  dplyr::group_by(date, region) %>%
+                  dplyr::summarise(cumulative_cases = sum(cumulative_cases)) %>%
+                  dplyr::ungroup()
 
-
-  cases <- cases %>%
-    dplyr::mutate(region = dplyr::recode(region, "P.A. Trento" = "Trentino-Alto Adige",
-                                        "P.A. Bolzano" = "Trentino-Alto Adige") %>%
-                    as.character()) %>%
-    dplyr::group_by(region, date) %>%
-    dplyr::summarise(cases = sum(cases)) %>%
-    dplyr::ungroup()
-
-
-  regions <-  data.frame(region = c("Abruzzo", "Basilicata", "Calabria",
-                            "Campania", "Emilia-Romagna", "Friuli Venezia Giulia",
-                            "Lazio", "Liguria", "Lombardia",
-                            "Marche", "Molise", "Piemonte",
-                            "Puglia", "Sardegna", "Sicilia",
-                            "Toscana","Trentino-Alto Adige", "Umbria",
-                            "Valle d'Aosta", "Veneto"),
-                         region_code = c(15, 10, 11,
-                                         1, 21, 20,
-                                         6, 8, 17,
-                                         14, 18, 13,
-                                         9, 2, 4,
-                                         3, 19, 16,
-                                         12, 5),
-                         stringsAsFactors = FALSE)
-
-  cases <- cases %>%
-    dplyr::left_join(regions, by = "region")
-
-  return(cases)
+  return(italy_data)
 }
+
 

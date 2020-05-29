@@ -3,7 +3,7 @@
 #' @param country Character String specifying the country to get data from. For options see the documentation.
 #' @param totals Boolean. If TRUE, returns only totals count, if FALSE (default) returns the full dataset.
 #' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.
-#' @importFrom dplyr %>% group_by summarise arrange select
+#' @importFrom dplyr %>% group_by summarise arrange select ungroup
 #' @examples
 #'
 #' \dontrun{
@@ -25,6 +25,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
                               "brazil" = get_brazil_regional_cases,
                               "germany" = get_germany_regional_cases,
                               "india" = get_india_regional_cases,
+                              "italy" = get_italy_regional_cases,
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
@@ -34,7 +35,8 @@ get_regional_covid_data <- function(country, totals = FALSE){
     dplyr::group_by(region) %>%
     dplyr::do(calculate_columns_from_existing_data(.)) %>%
     add_extra_na_cols() %>%
-    set_negative_values_to_zero()
+    set_negative_values_to_zero() %>%
+    dplyr::ungroup()
 
   # sum up data if user requests totals
   if (totals) {
@@ -58,8 +60,8 @@ get_regional_covid_data <- function(country, totals = FALSE){
 
     data <- data %>%
     tidyr::drop_na(date) %>%
-    fill_empty_dates_with_na %>%
-    complete_cumulative_columns %>%
+    fill_empty_dates_with_na() %>%
+    complete_cumulative_columns() %>%
     rename_region_column(country) %>%
     dplyr::arrange(date)
 

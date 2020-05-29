@@ -51,7 +51,8 @@ rename_region_column <- function(data, country) {
                      "belgium" = "region",
                      "brazil" = "state",
                      "germany" = "bundesland",
-                     "india" = "state")
+                     "india" = "state",
+                     "italy" = "region")
 
   data <- data %>% dplyr::rename(!!new_name := region)
   return(data.frame(data))
@@ -132,8 +133,5 @@ calculate_columns_from_existing_data <- function(data) {
 
   return(data)
 }
-
-
-
 
 
