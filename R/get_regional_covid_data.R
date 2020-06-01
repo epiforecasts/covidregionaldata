@@ -29,6 +29,7 @@ get_regional_covid_data <- function(country, totals = FALSE){
                               stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
   data <- do.call(get_data_function, list())
+  iso_codes_table <- get_iso_codes(country)
 
   # add columns that aren't there already, clean up data
   data <- data %>%
@@ -47,21 +48,23 @@ get_regional_covid_data <- function(country, totals = FALSE){
                        cumulative_recoveries = sum(recoveries_today, na.rm = TRUE),
                        cumulative_hospitalisations = sum(hospitalisations_today, na.rm = TRUE),
                        cumulative_tests = sum(tests_today, na.rm = TRUE)) %>%
-      dplyr::arrange(-cumulative_cases) %>%
-      rename_region_column(country)
+      dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
+      dplyr::select(region, iso_code, cumulative_cases, cumulative_deaths,
+                    cumulative_recoveries, cumulative_hospitalisations, cumulative_tests) %>%
+      rename_region_column(country) %>%
+      dplyr::arrange(-cumulative_cases)
     return(data)
   }
 
   # select correct data, pad the data set and rename the region column to country-specific
-  data <- data  %>%
-    dplyr::select(date, region, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
-                  recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,
-                  tests_today, cumulative_tests)
-
     data <- data %>%
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
+    dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
+    dplyr::select(date, region, iso_code, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
+                  recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,
+                  tests_today, cumulative_tests) %>%
     rename_region_column(country) %>%
     dplyr::arrange(date)
 

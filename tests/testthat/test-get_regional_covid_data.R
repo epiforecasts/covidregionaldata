@@ -12,11 +12,15 @@ test_that("get_regional_covid_data returns error if there is no data for the cou
 source("custom_tests/mock_data_for_get_regional_covid_data.R")
 
 test_that("get_covid_regional_data returns correct data not using totals", {
-  returned_data <- with_mock(get_canada_regional_cases = function() return(input_data), get_regional_covid_data("canada"))
+  returned_data <- with_mock(get_iso_codes = function(country) return(iso_codes),
+                             get_canada_regional_cases = function() return(input_data),
+                                       get_regional_covid_data("canada"))
   expect_equal(expected_data, returned_data)
 })
 
 test_that("get_covid_regional_data returns correct data when using totals", {
-  returned_data <- with_mock(get_canada_regional_cases = function() return(input_data), get_regional_covid_data("canada", totals = TRUE))
+  returned_data <- with_mock(get_canada_iso_codes = function() return(iso_codes),
+                             get_canada_regional_cases = function() return(input_data),
+                                       get_regional_covid_data("canada", totals = TRUE))
   expect_equal(totals_data, returned_data)
 })
