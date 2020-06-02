@@ -3,6 +3,7 @@
 #' @param country Character String specifying the country to get data from. For options see the documentation.
 #' @param totals Boolean. If TRUE, returns only totals count, if FALSE (default) returns the full dataset.
 #' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.
+#' @export
 #' @importFrom dplyr %>% group_by summarise arrange select ungroup
 #' @examples
 #'

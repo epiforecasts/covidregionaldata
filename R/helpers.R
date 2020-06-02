@@ -135,6 +135,10 @@ calculate_columns_from_existing_data <- function(data) {
 }
 
 
+#' Convert data to Covid19R package data standard
+#' @description Converts wide format (time series) data into long format to meet the Covid19R package standard
+#' @param data A data frame / tibble
+#' @return A data frame in the Covid19R standard
 convert_to_covid19R_format <- function(data) {
   location_type <- colnames(data)[2]
 
@@ -163,8 +167,3 @@ convert_to_covid19R_format <- function(data) {
 
   return(data)
 }
-
-
-
-
-

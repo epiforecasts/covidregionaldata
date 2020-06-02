@@ -4,7 +4,7 @@
 #' The cumulative data is stored in a google sheet, which is read as a csv and de-cumulated.
 #'
 #' @author Flavio Finger @ffinger
-#' @return A dataframe of daily Afghan provincial cases and deaths to be further processed by \function{get_regional_covid_data()}.
+#' @return A dataframe of daily Afghan provincial cases and deaths to be further processed by `get_regional_covid_data()`.
 #' @importFrom dplyr %>% transmute mutate group_by
 #' @importFrom readr read_csv cols
 #' @importFrom stringr str_replace str_remove_all

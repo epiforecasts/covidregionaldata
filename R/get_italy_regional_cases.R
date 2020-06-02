@@ -3,7 +3,6 @@
 #' @description Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
 #' and is available on github: https://github.com/pcm-dpc/COVID-19. Cleans and sanitises ready for further use.
 #' @return A data frame of Italian regional case counts ready to be used by \code{get_regional_covid_data()}
-#' @export
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd
 #' @importFrom purrr map_dfr

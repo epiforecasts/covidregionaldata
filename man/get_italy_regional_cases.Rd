@@ -2,31 +2,14 @@
 % Please edit documentation in R/get_italy_regional_cases.R
 \name{get_italy_regional_cases}
 \alias{get_italy_regional_cases}
-\title{Italian Regional Case Counts}
+\title{Italian Regional Covid-19 Data}
 \usage{
 get_italy_regional_cases()
 }
 \value{
-A dataframe of Italian regional case counts.
+A data frame of Italian regional case counts ready to be used by \code{get_regional_covid_data()}
 }
 \description{
 Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
-and is available on github: https://github.com/pcm-dpc/COVID-19
-}
-\examples{
-
-## Code
-get_italy_regional_cases
-
-\dontrun{
-day_of_cases <- NCoVUtils::get_italy_regional_cases() \%>\%
-dplyr::filter(date == "2020-02-24")
-
-rnaturalearth::ne_states("Italy", returnclass = "sf") \%>\%
- dplyr::group_by(provnum_ne) \%>\%
- dplyr::summarise(geometry = sf::st_union(geometry)) \%>\%
- dplyr::full_join(day_of_cases, by = c("provnum_ne" = "region_code")) \%>\%
- ggplot2::ggplot(ggplot2::aes(fill=cases)) +
- ggplot2::geom_sf()
-}
+and is available on github: https://github.com/pcm-dpc/COVID-19. Cleans and sanitises ready for further use.
 }

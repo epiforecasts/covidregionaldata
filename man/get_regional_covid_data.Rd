@@ -4,7 +4,7 @@
 \alias{get_regional_covid_data}
 \title{The main function for NCovUtils which returns regional, daily-updated data for a given country - either in full or as a total for each region up to today's date.}
 \usage{
-get_regional_covid_data(country, totals = FALSE)
+get_regional_covid_data(country, totals = FALSE, long_format = TRUE)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}

@@ -4,23 +4,13 @@
 \alias{get_belgium_regional_cases}
 \title{Fetch daily COVID cases by region for Belgium.}
 \usage{
-get_belgium_regional_cases(dataset = "cases_provincial")
-}
-\arguments{
-\item{dataset}{Character String specifying dataset "cases_municipal", "cases_provincial", "hospitalisation_provincial", "mortality_provincial", "testing_national", "all". Default: "cases_provincial".}
+get_belgium_regional_cases()
 }
 \value{
-A data.frame of specified Covid data. If dataset = "all", a named list of all available datasets.
+A data.frame of COVID cases by region in Belgium, ready to be used by get_regional_covid_data()
 }
 \description{
 Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 Data is available at https://epistat.wiv-isp.be/covid/
-}
-\examples{
-
-\dontrun{
-
- get_belgium_regional_cases(dataset = "testing_national")
-
-}
+selects and sanitises the relevant columns
 }

@@ -2,34 +2,12 @@
 % Please edit documentation in R/get_brazil_regional_cases.R
 \name{get_brazil_regional_cases}
 \alias{get_brazil_regional_cases}
-\title{Brazil regional cases and deaths, daily time-series}
+\title{Brazil regional cases and deaths}
 \usage{
-get_brazil_regional_cases(geography = "states")
-}
-\arguments{
-\item{geography}{Character string specifying geography: "regions": n=5, or "states": n=27, or "municipalities": n=3180. Default: "states".}
+get_brazil_regional_cases()
 }
 \description{
 Extracts regional case and death counts for Brazil.
 Data available on Github, curated by Wesley Cota: DOI 10.1590/SciELOPreprints.362
 \href{https://github.com/wcota/covid19br}{Source}
-}
-\examples{
-get_brazil_regional_cases()
-
-\dontrun{
-
-# Mapping
-
-brazil_latest <- get_brazil_regional_cases(geography = "states") \%>\%
-  dplyr::filter(date == max(date))
-
-brazil_map <- rnaturalearth::ne_states(country = "Brazil", returnclass = "sf") \%>\%
-  dplyr::mutate(state_code = stringr::str_remove_all(iso_3166_2, "BR-"))
-
-brazil_map_data <- dplyr::left_join(brazil_map, brazil_latest, by = c("state_code" = "state_code")) \%>\%
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(ggplot2::aes(fill = cases))
-
-}
 }

@@ -2,38 +2,16 @@
 % Please edit documentation in R/get_germany_regional_cases.R
 \name{get_germany_regional_cases}
 \alias{get_germany_regional_cases}
-\title{Get German daily cases by Bundeslander or Landkreis}
+\title{Get German daily cases by Bundeslander}
 \usage{
-get_germany_regional_cases(geography = "states")
+get_germany_regional_cases()
 }
 \value{
-A dataframe of case and death counts in German regions
+A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
 }
 \description{
 Fetches COVID case counts by region in Germany.
 This data is sourced from the Robert Koch Institute:
 https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
-}
-\examples{
-
-
-\dontrun{
-country <- rnaturalearth::ne_countries(scale="large",
-                                        country = "Germany",
-                                        returnclass = 'sf')
-
-regions <- rnaturalearth::ne_states("Germany", returnclass = "sf")
-
-data <- get_germany_regional_cases() \%>\%
-  dplyr::filter(date == max(date))
-
-regions_with_data <- regions \%>\%
-  dplyr::left_join(data,
-                  by = c("name" = "state"))
-
-ggplot2::ggplot(regions_with_data) +
-  ggplot2::geom_sf(ggplot2::aes(fill = cases))
-
-}
-
+selects and sanitises the relevant columns
 }
