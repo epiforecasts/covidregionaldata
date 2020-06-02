@@ -11,7 +11,7 @@
 #'  get_regional_covid_data(country = "canada")
 #'
 #' }
-get_regional_covid_data <- function(country, totals = FALSE){
+get_regional_covid_data <- function(country, totals = FALSE, long_format = TRUE){
 
   if (!(is.character(country))){
     stop("The country variable should be a character variable.")
@@ -53,11 +53,11 @@ get_regional_covid_data <- function(country, totals = FALSE){
                     cumulative_recoveries, cumulative_hospitalisations, cumulative_tests) %>%
       rename_region_column(country) %>%
       dplyr::arrange(-cumulative_cases)
-    return(data)
+    return(tibble::tibble(data))
   }
 
   # select correct data, pad the data set and rename the region column to country-specific
-    data <- data %>%
+  data <- data %>%
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
@@ -68,5 +68,10 @@ get_regional_covid_data <- function(country, totals = FALSE){
     rename_region_column(country) %>%
     dplyr::arrange(date)
 
-  return(data.frame(data))
+  # Covid19R format
+  if (long_format) {
+    data <- convert_to_covid19R_format(data)
+  }
+
+  return(tibble::tibble(data))
 }

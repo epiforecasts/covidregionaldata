@@ -135,3 +135,36 @@ calculate_columns_from_existing_data <- function(data) {
 }
 
 
+convert_to_covid19R_format <- function(data) {
+  location_type <- colnames(data)[2]
+
+  data <- data %>%
+    tidyr::pivot_longer(-c(date, !!location_type, iso_code),  names_to = "data_type", values_to = "value")
+
+  data$location_code_type <- "iso-3166-2"
+  data$location_type <- location_type
+
+  data <- data %>%
+    dplyr::rename("location_code" = "iso_code",
+                  "location" = !!location_type) %>%
+    dplyr::mutate(data_type = dplyr::recode(data_type,
+                                            "cases_today" = "cases_new",
+                                            "deaths_today" = "deaths_new",
+                                            "recoveries_today" = "recoveries_new",
+                                            "hospitalisations_today" = "hospitalisations_new",
+                                            "tests_today" = "tests_new",
+                                            "cumulative_cases" = "cases_total",
+                                            "cumulative_deaths" = "deaths_total",
+                                            "cumulative_recoveries" = "recoveries_total",
+                                            "cumulative_hospitalisations" = "hospitalisations_total",
+                                            "cumulative_tests" = "tests_total")) %>%
+    dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
+    dplyr::arrange(date)
+
+  return(data)
+}
+
+
+
+
+
