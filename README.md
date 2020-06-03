@@ -20,6 +20,55 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ## Usage
 
+
+### Sub-national data
+
+There is one main function to extract sub-national level data by country. These are typically at the admin-1 level, the largest regions available. The data table also includes the ISO-3166-2 code for the region. 
+
+To access the sub-national data, use
+```NCoVUtils::get_regional_covid_data(<country_name>)```
+where country name is a string with the English name of the country (see list below). This is not case-sensitive.
+
+This returns a dataset with the following structure
+
+**date**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recoveries\_new**|**recoveries\_total**|**hospitalisations\_new**|**hospitalisations\_total**|**tests\_new**|**tests\_total**
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
+2020-05-24|Wallonia|BE-WAL|24|18194|16|3257|NA|NA|8|5126|NA|NA
+2020-05-25|Brussels|BE-BRU|27|5828|2|1436|NA|NA|6|2533|NA|NA
+2020-05-25|Flanders|BE-VLG|184|32376|14|4673|NA|NA|29|9428|NA|NA
+
+The columns returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then the column will be all NA values. Note that some rows may have NA in `*_new` columns if the data was missing from the source also. 
+
+Dates will always be in YYYY-MM-DD format; the region is typically at admin-1 level (largest subregions) and the ISO codes are ISO-3166-2 codes. 
+
+Columns with `*_new` names are new counts for the day/region in question. Columns with `*_total` names are cumulative counts for that region up to and including the date. 
+
+Currently we include functions for sub-national data in the following countries:
+
+Europe
+
+  +	Belgium
+
+  + Germany
+
+  +	Italy
+
+
+Americas
+
+  + Brazil
+
+  +	Canada
+
+
+Asia
+
+  + Afghanistan
+
+  + India
+
+
+
 ### Worldwide data
 
 There are two sources of worldwide, country-level data on cases and deaths.
@@ -39,101 +88,11 @@ And anonymised international patient linelist data can be imported and cleaned w
 
 * ```NCoVUtils::get_linelist()```
 
-### Sub-national data
-
-We have several functions to extract sub-national level data by country. These are typically at the admin-1 level, the largest regions available. We are also working on joining the data to standard georeferencing codes to allow easy mapping.
-
-Currently we include functions for sub-national data in the following countries:
-
-Europe
-
-  +	Belgium
-
-  +	France
-
-  + Germany
-
-  +	Italy
-
-  +	Spain
-
-  + United Kingdom
-
-Americas
-
-  +	Canada
-
-  +	United States
-
-Eastern Mediterranean
-
-  + Afghanistan
-
-Western Pacific
-
-  + Korea
-
-  + Japan
-
-South-East Asia
-
-  + None currently available
-
-Africa
-
-  + None currently available
 
 
-We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/NCoVUtils/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/NCoVUtils/issues/81) and [#84](https://github.com/epiforecasts/NCoVUtils/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/NCoVUtils/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
+
+
 
 
 ## Development
-
-### Set up
-
-Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:
-
-```r
-remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
-```
-
-### Render documentation
-
-Render the documentation with the following:
-
-```bash
-Rscript inst/scripts/render_output.R
-```
-
-### Docker
-
-
-This package is developed in a docker container based on the tidyverse docker image.
-
-To build the docker image run (from the `NCoVUtils` directory):
-
-```bash
-docker build . -t ncovutils
-```
-
-To run the docker image run:
-
-```bash
-docker run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils
-```
-
-The rstudio client can be found on port :8787 at your local machines ip. The default username:password is ncovutils:ncovutils, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.
-
-To mount a folder (from your current working directory - here assumed to be `tmp`) in the docker container to your local system use the following in the above docker run command (as given mounts the whole `ncovutils` directory to `tmp`).
-
-```{bash, eval = FALSE}
---mount type=bind,source=$(pwd)/tmp,target=/home/ncovutils
-```
-
-To access the command line run the following:
-
-```{bash, eval = FALSE}
-docker exec -ti ncovutils bash
-```
-
-Alternatively the package environment can be accessed via [binder](https://mybinder.org/v2/gh/epiforecasts/ncovutils/master?urlpath=rstudio).
+Developers who wish to contribute should read the System Maintenance Guide (SMG.md).
