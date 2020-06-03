@@ -7,7 +7,7 @@ test_that("get_brazil_regional_cases data source is unchanged", {
 })
 
 test_that("get_brazil_regional_cases returns the correct column names", {
-  expected_colnames <- c("region", "date", "cases_today", "cumulative_cases", "cumulative_deaths", "deaths_today")
+  expected_colnames <- c("region", "date", "cases_new", "cases_total", "deaths_total", "deaths_new")
 
   returned_colnames <- colnames(get_brazil_regional_cases())
 
@@ -20,8 +20,8 @@ test_that("get_brazil_regional_cases returns correct column types", {
   expect_is(data, "data.frame")
   expect_is(data$region, "character")
   expect_is(data$date, "Date")
-  expect_is(data$cases_today, "numeric")
-  expect_is(data$cumulative_cases, "numeric")
-  expect_is(data$deaths_today, "numeric")
-  expect_is(data$cumulative_deaths, "numeric")
+  expect_is(data$cases_new, "numeric")
+  expect_is(data$cases_total, "numeric")
+  expect_is(data$deaths_new, "numeric")
+  expect_is(data$deaths_total, "numeric")
 })

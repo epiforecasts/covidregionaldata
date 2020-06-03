@@ -44,16 +44,16 @@ get_regional_covid_data <- function(country, totals = FALSE, long_format = TRUE)
   if (totals) {
     data <- data %>%
       dplyr::group_by(region) %>%
-      dplyr::summarise(cumulative_cases = sum(cases_today, na.rm = TRUE),
-                       cumulative_deaths = sum(deaths_today, na.rm = TRUE),
-                       cumulative_recoveries = sum(recoveries_today, na.rm = TRUE),
-                       cumulative_hospitalisations = sum(hospitalisations_today, na.rm = TRUE),
-                       cumulative_tests = sum(tests_today, na.rm = TRUE)) %>%
+      dplyr::summarise(cases_total = sum(cases_new, na.rm = TRUE),
+                       deaths_total = sum(deaths_new, na.rm = TRUE),
+                       recoveries_total = sum(recoveries_new, na.rm = TRUE),
+                       hospitalisations_total = sum(hospitalisations_new, na.rm = TRUE),
+                       tests_total = sum(tests_new, na.rm = TRUE)) %>%
       dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
-      dplyr::select(region, iso_code, cumulative_cases, cumulative_deaths,
-                    cumulative_recoveries, cumulative_hospitalisations, cumulative_tests) %>%
+      dplyr::select(region, iso_code, cases_total, deaths_total,
+                    recoveries_total, hospitalisations_total, tests_total) %>%
       rename_region_column(country) %>%
-      dplyr::arrange(-cumulative_cases)
+      dplyr::arrange(-cases_total)
     return(tibble::tibble(data))
   }
 
@@ -63,9 +63,9 @@ get_regional_covid_data <- function(country, totals = FALSE, long_format = TRUE)
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
     dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
-    dplyr::select(date, region, iso_code, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
-                  recoveries_today, cumulative_recoveries, hospitalisations_today, cumulative_hospitalisations,
-                  tests_today, cumulative_tests) %>%
+    dplyr::select(date, region, iso_code, cases_new, cases_total, deaths_new, deaths_total,
+                  recoveries_new, recoveries_total, hospitalisations_new, hospitalisations_total,
+                  tests_new, tests_total) %>%
     rename_region_column(country) %>%
     dplyr::arrange(date)
 

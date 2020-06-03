@@ -9,8 +9,8 @@ test_that("get_italy_regional_cases data source is unchanged", {
 })
 
 test_that("get_italy_regional_cases returns the correct column names", {
-  expected_colnames <- c("region", "date", "cumulative_cases", "cumulative_deaths",
-                         "cumulative_tests")
+  expected_colnames <- c("region", "date", "cases_total", "deaths_total",
+                         "tests_total")
 
   returned_colnames <- colnames(get_italy_regional_cases())
 
@@ -23,7 +23,7 @@ test_that("get_italy_regional_cases returns correct column types", {
   expect_is(data, "data.frame")
   expect_is(data$region, "character")
   expect_is(data$date, "Date")
-  expect_is(data$cumulative_cases, "numeric")
-  expect_is(data$cumulative_deaths, "numeric")
-  expect_is(data$cumulative_tests, "numeric")
+  expect_is(data$cases_total, "numeric")
+  expect_is(data$deaths_total, "numeric")
+  expect_is(data$tests_total, "numeric")
 })

@@ -29,24 +29,24 @@ get_expected_data_for_get_regional_covid_data_tests <- function() {
     cumulative_counts_data_frame <- cumsum(count_data_frame)
     expected_data_for_province <- cbind(dates_and_province, count_data_frame, cumulative_counts_data_frame)
 
-    colnames(expected_data_for_province) <- c("date", "province", "cases_today", "deaths_today", "recoveries_today",
-                                              "hospitalisations_today","tests_today", "cumulative_cases", "cumulative_deaths",
-                                              "cumulative_recoveries",  "cumulative_hospitalisations", "cumulative_tests")
+    colnames(expected_data_for_province) <- c("date", "province", "cases_new", "deaths_new", "recoveries_new",
+                                              "hospitalisations_new","tests_new", "cases_total", "deaths_total",
+                                              "recoveries_total",  "hospitalisations_total", "tests_total")
 
     expected_data_for_province <- expected_data_for_province %>%
-      dplyr::select(date, province, cases_today, cumulative_cases, deaths_today, cumulative_deaths,
-                    recoveries_today, cumulative_recoveries, hospitalisations_today,
-                    cumulative_hospitalisations, tests_today, cumulative_tests)
+      dplyr::select(date, province, cases_new, cases_total, deaths_new, deaths_total,
+                    recoveries_new, recoveries_total, hospitalisations_new,
+                    hospitalisations_total, tests_new, tests_total)
 
-    expected_data_for_province$tests_today <- as.numeric(NA_integer_)
-    expected_data_for_province$cumulative_tests <-  as.numeric(NA_integer_)
+    expected_data_for_province$tests_new <- as.numeric(NA_integer_)
+    expected_data_for_province$tests_total <-  as.numeric(NA_integer_)
 
     expected_data_for_province[row_for_NA, 3:12] <-  as.numeric(NA_integer_)
 
-    expected_data_for_province <- expected_data_for_province %>% tidyr::fill(cumulative_cases,
-                                                                             cumulative_deaths,
-                                                                             cumulative_recoveries,
-                                                                             cumulative_hospitalisations)
+    expected_data_for_province <- expected_data_for_province %>% tidyr::fill(cases_total,
+                                                                             deaths_total,
+                                                                             recoveries_total,
+                                                                             hospitalisations_total)
 
     expected_data_for_provinces[[i]] <- expected_data_for_province
   }
@@ -54,21 +54,21 @@ get_expected_data_for_get_regional_covid_data_tests <- function() {
   ## Expected Output
   expected_data <- suppressWarnings(dplyr::bind_rows(expected_data_for_provinces)) %>%
     dplyr::mutate(date = as.Date(date),
-                  cases_today = as.numeric(cases_today),
-                  cumulative_cases = as.numeric(cumulative_cases),
-                  deaths_today = as.numeric(deaths_today),
-                  cumulative_deaths = as.numeric(cumulative_deaths),
-                  recoveries_today = as.numeric(recoveries_today),
-                  cumulative_recoveries = as.numeric(cumulative_recoveries),
-                  hospitalisations_today = as.numeric(hospitalisations_today),
-                  cumulative_hospitalisations = as.numeric(cumulative_hospitalisations)) %>%
+                  cases_new = as.numeric(cases_new),
+                  cases_total = as.numeric(cases_total),
+                  deaths_new = as.numeric(deaths_new),
+                  deaths_total = as.numeric(deaths_total),
+                  recoveries_new = as.numeric(recoveries_new),
+                  recoveries_total = as.numeric(recoveries_total),
+                  hospitalisations_new = as.numeric(hospitalisations_new),
+                  hospitalisations_total = as.numeric(hospitalisations_total)) %>%
     dplyr::arrange(date, province)
 
   expected_data <- dplyr::left_join(expected_data, iso_codes, by = c("province" = "region")) %>%
-    dplyr::select(date, province, iso_code, cases_today, cumulative_cases, deaths_today,
-                  cumulative_deaths, recoveries_today, cumulative_recoveries,
-                  hospitalisations_today, cumulative_hospitalisations, tests_today,
-                  cumulative_tests)
+    dplyr::select(date, province, iso_code, cases_new, cases_total, deaths_new,
+                  deaths_total, recoveries_new, recoveries_total,
+                  hospitalisations_new, hospitalisations_total, tests_new,
+                  tests_total)
 
   return(tibble::tibble(expected_data))
 }
@@ -89,8 +89,8 @@ get_expected_totals_data_for_get_regional_covid_data_tests <- function() {
   ## Totals data to test function when totals = TRUE
   totals_data <- expected_data[c(26:30), c(2, 3, 5, 7, 9, 11, 13)]
   totals_data[, 7] <- rep(0, 5)
-  colnames(totals_data) <- c("province", "iso_code", "cumulative_cases", "cumulative_deaths", "cumulative_recoveries", "cumulative_hospitalisations", "cumulative_tests")
-  totals_data <- totals_data %>% dplyr::arrange(-cumulative_cases)
+  colnames(totals_data) <- c("province", "iso_code", "cases_total", "deaths_total", "recoveries_total", "hospitalisations_total", "tests_total")
+  totals_data <- totals_data %>% dplyr::arrange(-cases_total)
 
   return(tibble::tibble(totals_data))
 }
@@ -117,7 +117,7 @@ get_input_data_for_complete_cumulative_columns_test <- function() {
 
   # add cumulative cases to partial data and then add NA rows
   partial_data <- expected_data[-c(6:9), ]
-  partial_data_with_cum_cases_na <- partial_data %>% dplyr::group_by(region) %>% dplyr::mutate(cumulative_cases = cumsum(cases))
+  partial_data_with_cum_cases_na <- partial_data %>% dplyr::group_by(region) %>% dplyr::mutate(cases_total = cumsum(cases))
   full_data_with_cum_cases_na <- fill_empty_dates_with_na(partial_data_with_cum_cases_na)
 
   return(full_data_with_cum_cases_na)
@@ -131,7 +131,7 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   full_data_with_cum_cases_filled <- fill_empty_dates_with_na(partial_data)
   full_data_with_cum_cases_filled <- arrange(full_data_with_cum_cases_filled, region, date)
   full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, c(1,5,5,15,2,7,7,18,3,3,3,15))
-  colnames(full_data_with_cum_cases_filled)[4] <- "cumulative_cases"
+  colnames(full_data_with_cum_cases_filled)[4] <- "cases_total"
 
   return(full_data_with_cum_cases_filled)
 }
@@ -155,9 +155,9 @@ get_input_data_for_covid19R_converter_test <- function() {
 
   data_values_matrix <- matrix(value, ncol = 10, byrow=TRUE)
   input_data <- cbind(dates_regions_iso, data_values_matrix)
-  colnames(input_data)[4:13] <- c("cases_today", "cumulative_cases", "deaths_today","cumulative_deaths",
-                                  "recoveries_today", "cumulative_recoveries", "hospitalisations_today",
-                                  "cumulative_hospitalisations", "tests_today", "cumulative_tests")
+  colnames(input_data)[4:13] <- c("cases_new", "cases_total", "deaths_new","deaths_total",
+                                  "recoveries_new", "recoveries_total", "hospitalisations_new",
+                                  "hospitalisations_total", "tests_new", "tests_total")
 
   return(input_data)
 }

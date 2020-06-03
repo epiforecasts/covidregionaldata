@@ -37,17 +37,17 @@ get_india_regional_cases <- function() {
   india_cases <- data %>%
     dplyr::filter(Status == "Confirmed") %>%
     dplyr::select(-Status, -TT) %>%
-    tidyr::pivot_longer(-Date, names_to = "state", values_to = "cases_today")
+    tidyr::pivot_longer(-Date, names_to = "state", values_to = "cases_new")
 
   india_deaths <- data %>%
     dplyr::filter(Status == "Deceased") %>%
     dplyr::select(-Status, -TT) %>%
-    tidyr::pivot_longer(-Date, names_to = "state", values_to = "deaths_today")
+    tidyr::pivot_longer(-Date, names_to = "state", values_to = "deaths_new")
 
   india_recoveries <- data %>%
     dplyr::filter(Status == "Recovered") %>%
     dplyr::select(-Status, -TT) %>%
-    tidyr::pivot_longer(-Date, names_to = "state", values_to = "recoveries_today")
+    tidyr::pivot_longer(-Date, names_to = "state", values_to = "recoveries_new")
 
   cases_and_death_data <- dplyr::full_join(india_cases, india_deaths, by = c("Date" = "Date", "state" = "state"))
   data <- dplyr::full_join(cases_and_death_data, india_recoveries, by = c("Date" = "Date", "state" = "state"))

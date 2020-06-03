@@ -52,7 +52,7 @@ get_belgium_regional_cases <- function(){
   # Join the three datasets and rename columns
   cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
   data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION")) %>%
-          dplyr::rename(date = DATE, region = REGION, cases_today = n.x, hospitalisations_today = n.y, deaths_today = n)
+          dplyr::rename(date = DATE, region = REGION, cases_new = n.x, hospitalisations_new = n.y, deaths_new = n)
 
   return(data)
 }

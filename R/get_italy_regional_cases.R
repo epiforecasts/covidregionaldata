@@ -34,16 +34,16 @@ get_italy_regional_cases <- function() {
   italy_data <- italy_data %>%
                   dplyr::mutate(date = as_date(lubridate::ymd_hms(data)),
                                 region = as.character(denominazione_regione),
-                                cumulative_cases = totale_casi,
-                                cumulative_deaths = deceduti,
-                                cumulative_tests = tamponi) %>%
-                  dplyr::select(date, region, cumulative_cases, cumulative_deaths, cumulative_tests) %>%
+                                cases_total = totale_casi,
+                                deaths_total = deceduti,
+                                tests_total = tamponi) %>%
+                  dplyr::select(date, region, cases_total, deaths_total, tests_total) %>%
                   dplyr::arrange(date) %>%
                   dplyr::mutate(region = dplyr::recode(region,
                                                        "P.A. Trento" = "Trentino-Alto Adige",
                                                        "P.A. Bolzano" = "Trentino-Alto Adige")) %>%
                   dplyr::group_by(date, region) %>%
-                  dplyr::mutate(cumulative_cases = sum(cumulative_cases)) %>%
+                  dplyr::mutate(cases_total = sum(cases_total)) %>%
                   dplyr::ungroup()
 
   return(italy_data)

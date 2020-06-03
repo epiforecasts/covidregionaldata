@@ -23,12 +23,12 @@ get_germany_regional_cases <- function() {
   data <- mem_read(file = url, col_types = readr::cols()) %>%
     dplyr::select(date = Meldedatum,
                   region = Bundesland,
-                  cases_today = AnzahlFall,
-                  deaths_today = AnzahlTodesfall) %>%
+                  cases_new = AnzahlFall,
+                  deaths_new = AnzahlTodesfall) %>%
     dplyr::mutate(date = lubridate::as_date(lubridate::ymd_hms(date))) %>%
     dplyr::group_by(region, date) %>%
-    dplyr::summarise(cases_today = as.numeric(sum(cases_today > 0)),
-                     deaths_today = as.numeric(sum(deaths_today > 0))) %>%
+    dplyr::summarise(cases_new = as.numeric(sum(cases_new > 0)),
+                     deaths_new = as.numeric(sum(deaths_new > 0))) %>%
     dplyr::ungroup()
 
   return(data)

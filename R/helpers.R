@@ -23,9 +23,9 @@ get_cumulative_from_daily <- function(column) {
 #' @param data a data.frame
 #' @return a data.frame with relevant NA columns added
 add_extra_na_cols <- function(data) {
-  expected_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
-                          "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",
-                          "cumulative_hospitalisations")
+  expected_col_names <- c("date", "region", "cases_new", "cases_total", "deaths_new", "deaths_total",
+                          "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
+                          "hospitalisations_total")
 
   for (colname in expected_col_names) {
     if (!(colname %in% colnames(data))) {
@@ -64,8 +64,8 @@ rename_region_column <- function(data, country) {
 #' @importFrom dplyr %>% mutate
 #' @return a data.frame with all relevant data > 0.
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c('cumulative_deaths', 'cumulative_cases', 'cumulative_recoveries', 'cumulative_hospitalisations', 'cumulative_tests',
-                         'cases_today', 'deaths_today', 'recoveries_today', 'hospitalisations_today', 'tests_today')
+  numeric_col_names <- c('deaths_total', 'cases_total', 'recoveries_total', 'hospitalisations_total', 'tests_total',
+                         'cases_new', 'deaths_new', 'recoveries_new', 'hospitalisations_new', 'tests_new')
 
   for (numeric_col_name in numeric_col_names) {
     if (numeric_col_name %in% colnames(data)){
@@ -97,7 +97,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom tidyr fill
 #' @return a data.frame with NAs filled in for cumulative data columns.
 complete_cumulative_columns <- function(data) {
-  cumulative_col_names <- c('cumulative_deaths', 'cumulative_cases', 'cumulative_recoveries', 'cumulative_hospitalisations', 'cumulative_tests')
+  cumulative_col_names <- c('deaths_total', 'cases_total', 'recoveries_total', 'hospitalisations_total', 'tests_total')
 
   for (cumulative_col_name in cumulative_col_names) {
     if (cumulative_col_name %in% colnames(data)){
@@ -119,8 +119,8 @@ calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hospitalisations", "recoveries", "tests")
 
   for (count in possible_counts) {
-    count_today_name <- paste0(count, "_today")
-    cumulative_count_name <- paste0("cumulative_", count)
+    count_today_name <- paste0(count, "_new")
+    cumulative_count_name <- paste0(count, "_total")
 
     if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
@@ -151,17 +151,6 @@ convert_to_covid19R_format <- function(data) {
   data <- data %>%
     dplyr::rename("location_code" = "iso_code",
                   "location" = !!location_type) %>%
-    dplyr::mutate(data_type = dplyr::recode(data_type,
-                                            "cases_today" = "cases_new",
-                                            "deaths_today" = "deaths_new",
-                                            "recoveries_today" = "recoveries_new",
-                                            "hospitalisations_today" = "hospitalisations_new",
-                                            "tests_today" = "tests_new",
-                                            "cumulative_cases" = "cases_total",
-                                            "cumulative_deaths" = "deaths_total",
-                                            "cumulative_recoveries" = "recoveries_total",
-                                            "cumulative_hospitalisations" = "hospitalisations_total",
-                                            "cumulative_tests" = "tests_total")) %>%
     dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
     dplyr::arrange(date)
 

@@ -33,17 +33,17 @@ get_afghan_regional_cases <- function(){
     # Reformat
     dplyr::transmute(date = lubridate::ymd(Date),
                      region = stringr::str_replace(Province, " Province", ""),
-                     cumulative_cases = Cases,
-                     cumulative_deaths = Deaths,
-                     cumulative_recoveries = Recoveries) %>%
-    dplyr::mutate(cumulative_cases = dplyr::recode(cumulative_cases, "–" = NA_character_),
-                  cumulative_deaths = dplyr::recode(cumulative_deaths, "–" = NA_character_),
-                  cumulative_recoveries = dplyr::recode(cumulative_recoveries, "–" = NA_character_)) %>%
+                     cases_total = Cases,
+                     deaths_total = Deaths,
+                     recoveries_total = Recoveries) %>%
+    dplyr::mutate(cases_total = dplyr::recode(cases_total, "–" = NA_character_),
+                  deaths_total = dplyr::recode(deaths_total, "–" = NA_character_),
+                  recoveries_total = dplyr::recode(recoveries_total, "–" = NA_character_)) %>%
     tidyr::drop_na() %>%
     # Transform (remove commas in numbers)
-    dplyr::mutate(cumulative_cases = as.numeric(stringr::str_remove_all(cumulative_cases, ",")),
-                  cumulative_deaths = as.numeric(stringr::str_remove_all(cumulative_deaths, ",")),
-                  cumulative_recoveries = as.numeric(stringr::str_remove_all(cumulative_recoveries, ",")))
+    dplyr::mutate(cases_total = as.numeric(stringr::str_remove_all(cases_total, ",")),
+                  deaths_total = as.numeric(stringr::str_remove_all(deaths_total, ",")),
+                  recoveries_total = as.numeric(stringr::str_remove_all(recoveries_total, ",")))
 
   return(data)
 }

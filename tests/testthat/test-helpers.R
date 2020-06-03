@@ -17,28 +17,28 @@ test_that("get_cumulative_from_daily returns correct results", {
 })
 
 test_that("calculate_columns_from_existing_data returns correct results", {
-  cases_today <- c(0, 3, 2, NA_integer_, 0, 14, 1)
-  cumulative_deaths <- c(0, 5, 7, 10, 15, 18, 26)
-  input_data <- data.frame(cbind(cases_today, cumulative_deaths))
+  cases_new <- c(0, 3, 2, NA_integer_, 0, 14, 1)
+  deaths_total <- c(0, 5, 7, 10, 15, 18, 26)
+  input_data <- data.frame(cbind(cases_new, deaths_total))
 
-  cumulative_cases <- c(0, 3, 5, 5, 5, 19, 20)
-  deaths_today <- c(0, 5, 2, 3, 5, 3, 8)
-  expected_data <- data.frame(cbind(cases_today, cumulative_deaths, cumulative_cases, deaths_today))
+  cases_total <- c(0, 3, 5, 5, 5, 19, 20)
+  deaths_new <- c(0, 5, 2, 3, 5, 3, 8)
+  expected_data <- data.frame(cbind(cases_new, deaths_total, cases_total, deaths_new))
 
   expect_equal(calculate_columns_from_existing_data(input_data), expected_data)
 })
 
 test_that("add_extra_na_cols is working", {
-  extra_col_names <- c("date", "region", "cases_today", "cumulative_cases", "deaths_today", "cumulative_deaths",
-                      "recoveries_today", "cumulative_recoveries", "tests_today", "cumulative_tests", "hospitalisations_today",
-                      "cumulative_hospitalisations")
+  extra_col_names <- c("date", "region", "cases_new", "cases_total", "deaths_new", "deaths_total",
+                      "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
+                      "hospitalisations_total")
 
   existing_col_names <- colnames(mtcars)
 
   new_dataset <- add_extra_na_cols(mtcars)
 
   expect_equal(c(existing_col_names, extra_col_names), colnames(new_dataset))
-  expect_true(all(is.na(new_dataset$cases_today)))
+  expect_true(all(is.na(new_dataset$cases_new)))
 })
 
 test_that("rename_region_column does so correctly", {
@@ -51,10 +51,10 @@ test_that("rename_region_column does so correctly", {
 
 test_that("set_negative_values_to_zero works", {
   df <- data.frame(matrix(c(rep(Sys.Date(), 100), 49:-50), ncol=2))
-  colnames(df) <- c("date", "cumulative_cases")
+  colnames(df) <- c("date", "cases_total")
 
   df_expected <- data.frame(matrix(c(rep(Sys.Date(), 100), c(49:0, rep(0, 50))), ncol=2))
-  colnames(df_expected) <- c("date", "cumulative_cases")
+  colnames(df_expected) <- c("date", "cases_total")
 
   df_actual <- set_negative_values_to_zero(df)
 
