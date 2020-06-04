@@ -6,7 +6,7 @@ This guide is for those wishing to contribute code to the NCoVUtils package. For
 We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/NCoVUtils/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/NCoVUtils/issues/81) and [#84](https://github.com/epiforecasts/NCoVUtils/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/NCoVUtils/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
 
 ## Set up
-Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:
+Set your working directory to the home directory of this project (or use the provided RStudio project). Install the analysis and all dependencies with:
 ```r
 remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 ```
@@ -47,23 +47,25 @@ Alternatively the package environment can be accessed via [binder](https://mybin
 
 ## Development
 ### Architecture
-NCoVUtils has one main data getter function which returns the same data (for each country) in different formats dependent on arguments that are passed in.
+NCoVUtils has three main data getter functions. They all return different formats of the same data. The majority of the functionality for all three functions is kept in the `get_regional_covid_data()` function. The three main functions are essentially wrappers around this with some formatting to reach the desired output. `get_regional_covid_data()` calls country-specific data getters (dependent on the country given by the user), and then mostly uses helpers from the `helper.R` file to clean and sanitise the data. 
 
-The getter follows the following steps (see picture below for a diagram).
+In general these are the steps it follows (see picture below for a diagram).
 
 1. Handling errors related to arguments.
 2. Getting data using the `get_<country>_regional_cases()` function for the relevant country.
 3. Getting the ISO codes for the country using `get_iso_codes(<country>)`
 4. Cleaning the data using some of the helper functions.
-5. _If_ the user requested totals only, summing up the data per region and returning the totals data.
+5. _If_ the user requested totals only, returning the data (summing up of the data is done in the `get_totals_only_regional_covid_data()` function).
 6. _If not_, further cleaning using the helper functions.
-7. Returning data in the requested (long or wide) format.
+7. Returning data in the wide format (`get_long_format_regional_covid_data()` then converts it to long format).
 
-![Architecture](architecture_main.png)
+<p align="center">
+  <img src="architecture_main.png" alt="architecture"/>
+</p>
 
 
 ### Common Tasks
-#### **Adding a new country to the `get_regional_covid_data()` function**
+#### **Adding a new country to the data getter functions**
 This is the most common task for developers. You will need a source of raw data before starting. Note that for the data to be suitable it must be:
 
 + reliable, valid and accurate 
@@ -90,7 +92,7 @@ If you need to write new functionality for the package, and the same functionali
 
 If writing a helper function, follow these steps:
 
-1. add your function to the `helpers.R` file. 
+1. Add your function to the `helpers.R` file. 
 
 2. Write unit tests (as above). At a minimum you should have a test which takes generic data (of a similar format as the data that the function is designed to use) and tests that the function handles it correctly. If there is a chance that user actions could cause the function to fail, then have tests to ensure that the function fails as expected in these instances.
 

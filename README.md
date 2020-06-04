@@ -20,14 +20,28 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 
 ## Usage
 
-
 ### Sub-national data
 
-There is one main function to extract sub-national level data by country. These are typically at the admin-1 level, the largest regions available. The data table also includes the ISO-3166-2 code for the region. 
+There are three main functions to extract sub-national level data by country. The underlying data for each function is the same - each function just formats the data differently. The regions used are currently at the admin-1 level, the largest regions available. The data table includes the ISO-3166-2 code for each region. Each function takes the country name (in English) as a string (see list below for available countries). The country string is not case-sensitive.
 
-To access the sub-national data, use
-```NCoVUtils::get_regional_covid_data(<country_name>)```
-where country name is a string with the English name of the country (see list below). This is not case-sensitive.
+The three ways to view the data (and the related functions) are:
+1. Long format - this is the standard used by the Covid19R package. To get data in this format use:
+```r
+NCoVUtils::get_long_format_regional_covid_data("Belgium")
+```
+
+This returns a dataset with the following structure
+
+**date**|**location**|**location\_type**|**location\_code**|**location\_code\_type**|**data\_type**|**value**
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
+2020-05-24|Wallonia|region|BE-WAL|iso-3166-2|tests\_total|NA
+2020-05-25|Brussels|region|BE-BRU|iso-3166-2|cases\_new|27
+2020-05-25|Brussels|region|BE-BRU|iso-3166-2|cases\_total|5828
+
+2. Wide format (aka time series format). To get data in this format use:
+```r
+NCoVUtils::get_wide_format_regional_covid_data("Belgium")
+```
 
 This returns a dataset with the following structure
 
@@ -37,11 +51,24 @@ This returns a dataset with the following structure
 2020-05-25|Brussels|BE-BRU|27|5828|2|1436|NA|NA|6|2533|NA|NA
 2020-05-25|Flanders|BE-VLG|184|32376|14|4673|NA|NA|29|9428|NA|NA
 
-The columns returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then the column will be all NA values. Note that some rows may have NA in `*_new` columns if the data was missing from the source also. 
+3. Totals only (cumulative data) up to the latest date available in the data (usually today's date or yesterday). To get data in this format use:
+```r
+NCoVUtils::get_totals_only_regional_covid_data("Belgium")
+```
 
-Dates will always be in YYYY-MM-DD format; the region is typically at admin-1 level (largest subregions) and the ISO codes are ISO-3166-2 codes. 
+This returns a dataset with the following structure
 
-Columns with `*_new` names are new counts for the day/region in question. Columns with `*_total` names are cumulative counts for that region up to and including the date. 
+**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recoveries\_total**|**hospitalisations\_total**|**tests\_total**
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
+Flanders|BE-VLG|32817|4731|0|9550|0
+Wallonia|BE-WAL|18489|3292|0|5187|0
+Brussels|BE-BRU|5914|1463|0|2560|0
+
+The data fields for counts returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then that data field will be all NA values (or 0 if accessing totals data). Note that some rows may have NA in `*_new` data fields if the data was missing from the source also. 
+
+Dates will always be in YYYY-MM-DD format and the ISO codes are ISO-3166-2 codes. 
+
+Data fields with `*_new` names are new counts for the day/region in question. Data fields with `*_total` names are cumulative counts for that region up to and including the date. 
 
 Currently we include functions for sub-national data in the following countries:
 
@@ -87,11 +114,6 @@ A further function for worldwide data extracts non-pharmaceutical interventions 
 And anonymised international patient linelist data can be imported and cleaned with:
 
 * ```NCoVUtils::get_linelist()```
-
-
-
-
-
 
 
 ## Development
