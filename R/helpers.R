@@ -156,3 +156,25 @@ convert_to_covid19R_format <- function(data) {
 
   return(data)
 }
+
+#' Custom CSV reading function
+#' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
+#' @param file A URL or filepath to a CSV
+#' @return A data table
+#' @importFrom memoise memoise cache_filesystem
+#' @importFrom readr read_csv cols
+csv_reader <- function(file, ...) {
+
+  read_csv_fun <- readr::read_csv
+
+  if (!is.null(getOption("useMemoise"))) {
+    if (getOption("useMemoise")) {
+      # Set up cache
+      ch <- memoise::cache_filesystem(".cache")
+      read_csv_fun <- memoise::memoise(readr::read_csv, cache = ch)
+    }
+  }
+
+  data <- read_csv_fun(file, col_types = readr::cols(), ...)
+  return(data)
+}

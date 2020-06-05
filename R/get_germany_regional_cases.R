@@ -16,11 +16,7 @@ get_germany_regional_cases <- function() {
   # Path to data
   url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
 
-  ## Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  data <- mem_read(file = url, col_types = readr::cols()) %>%
+  data <- csv_reader(file = url) %>%
     dplyr::select(date = Meldedatum,
                   region = Bundesland,
                   cases_new = AnzahlFall,
