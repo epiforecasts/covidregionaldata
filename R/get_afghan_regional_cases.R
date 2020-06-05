@@ -16,15 +16,9 @@
 
 get_afghan_regional_cases <- function(){
 
-  # Path to data
-  url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
-
-  # Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
   # Read & clean data
-  data <- mem_read(file = url, col_types = readr::cols())
+  url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
+  data <- csv_reader(file = url)
   if (data[1,1] == "#adm1+name"){
     data <- data[-1, ]
   }

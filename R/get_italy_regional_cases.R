@@ -14,13 +14,9 @@ get_italy_regional_cases <- function() {
   ## Path to data
   url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
 
-  ## Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
   ## Function to get daily files
   get_daily_files = function(date){
-      mem_read(file = gsub("__date__", format(date, "%Y%m%d"), x = url), col_types = readr::cols())
+      csv_reader(file = gsub("__date__", format(date, "%Y%m%d"), x = url))
   }
 
   ## Extract daily data

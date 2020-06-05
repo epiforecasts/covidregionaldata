@@ -25,14 +25,9 @@ get_india_regional_cases <- function() {
                "Puducherry", 	"Punjab", 	"Rajasthan", 	"Sikkim", 	"Tamil Nadu", 	"Telangana",
                "Tripura",  "Unknown",  "Uttar Pradesh", 	"Uttarakhand", 	"West Bengal"))
 
-  # Path to data
+  #  Read in data
   url <- "https://api.covid19india.org/csv/latest/state_wise_daily.csv"
-
-  ## Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  data <- mem_read(file = url, col_types = readr::cols())
+  data <- csv_reader(file = url)
 
   india_cases <- data %>%
     dplyr::filter(Status == "Confirmed") %>%

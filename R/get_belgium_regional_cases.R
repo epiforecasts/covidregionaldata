@@ -15,13 +15,9 @@ get_belgium_regional_cases <- function(){
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
 
-  # Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  cases_data <- mem_read(file = c_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
-  hosp_data <- mem_read(file = h_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
-  deaths_data <- mem_read(file = m_provincial, locale=readr::locale(encoding = "latin1"), col_types=readr::cols())
+  cases_data <- csv_reader(file = c_provincial, locale=readr::locale(encoding = "latin1"))
+  hosp_data <- csv_reader(file = h_provincial, locale=readr::locale(encoding = "latin1"))
+  deaths_data <- csv_reader(file = m_provincial, locale=readr::locale(encoding = "latin1"))
 
   # Clean data
   cases_data <- cases_data %>%

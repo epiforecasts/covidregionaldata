@@ -15,15 +15,10 @@ get_brazil_regional_cases <- function() {
     state_name = c("Acre","Amapá","Amazonas","Pará","Rondônia","Roraima","Tocantins","Alagoas","Bahia","Ceará","Maranhão","Paraíba","Pernambuco","Piauí","Rio Grande do Norte","Sergipe","Espirito Santo","Minas Gerais","Rio de Janeiro","São Paulo","Paraná","Rio Grande do Sul","Santa Catarina","Distrito Federal","Goiás","Mato Grosso","Mato Grosso do Sul"),
     state_code = c("AC","AP","AM","PA","RO","RR","TO", "AL","BA","CE","MA","PB","PE","PI","RN","SE", "ES","MG","RJ","SP", "PR","RS","SC", "DF","GO","MT","MS"))
 
-  # Path to data
+  # Read & clean data
   url <- "https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv"
 
-  # Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  # Read & clean data
-  data <- mem_read(file = url, col_types = readr::cols()) %>%
+  data <- csv_reader(file = url) %>%
     dplyr::mutate(date = lubridate::ymd(date)) %>%
     dplyr::filter(state != "TOTAL") %>%
     dplyr::left_join(names, by = c("state" = "state_code")) %>%
