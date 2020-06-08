@@ -169,7 +169,7 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 #&gt;     cases &lt;- cases %&gt;% dplyr::left_join(regions, by = "region")
 #&gt;     return(cases)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fa26f0b2b78&gt;
+#&gt; &lt;bytecode: 0x7fafbd5fc8e0&gt;
 #&gt; &lt;environment: namespace:NCoVUtils&gt;</div><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>day_of_cases</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>NCoVUtils</span><span class='kw ns'>::</span><span class='fu'>get_italy_regional_cases</span>() <span class='kw'>%&gt;%</span>
@@ -178,7 +178,7 @@ and is available on github: https://github.com/pcm-dpc/COVID-19</p>
 <span class='kw pkg'>rnaturalearth</span><span class='kw ns'>::</span><span class='fu'>ne_states</span>(<span class='st'>"Italy"</span>, <span class='kw'>returnclass</span> <span class='kw'>=</span> <span class='st'>"sf"</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>provnum_ne</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span>(<span class='kw'>geometry</span> <span class='kw'>=</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'>st_union</span>(<span class='no'>geometry</span>)) <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>full_join</a></span>(<span class='no'>day_of_cases</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"provnum_ne"</span> <span class='kw'>=</span> <span class='st'>"region_code"</span>)) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>full_join</a></span>(<span class='no'>day_of_cases</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"provnum_ne"</span> <span class='kw'>=</span> <span class='st'>"region_code"</span>)) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>ggplot</span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>aes</span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>cases</span>)) +
  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>geom_sf</span>()
 }</div></pre>

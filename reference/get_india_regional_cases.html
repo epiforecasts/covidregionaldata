@@ -156,7 +156,7 @@
   <span class='co'># Join  maps</span>
   <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>ladakh</span>) <span class='kw'>%&gt;%</span>
   <span class='co'># Join data</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></span>(<span class='no'>latest_cases</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"state"</span> <span class='kw'>=</span> <span class='st'>"name"</span>))
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span>(<span class='no'>latest_cases</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"state"</span> <span class='kw'>=</span> <span class='st'>"name"</span>))
 <span class='co'># Plot</span>
 <span class='no'>india_map</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>ggplot</span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>aes</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>cases</span>)) +

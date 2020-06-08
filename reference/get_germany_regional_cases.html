@@ -154,7 +154,7 @@ https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>date</span> <span class='kw'>==</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>date</span>))
 
 <span class='no'>regions_with_data</span> <span class='kw'>&lt;-</span> <span class='no'>regions</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></span>(<span class='no'>data</span>,
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span>(<span class='no'>data</span>,
                   <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"name"</span> <span class='kw'>=</span> <span class='st'>"state"</span>))
 
 <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'>ggplot</span>(<span class='no'>regions_with_data</span>) +
