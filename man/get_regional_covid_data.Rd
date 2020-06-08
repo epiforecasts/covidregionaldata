@@ -2,26 +2,18 @@
 % Please edit documentation in R/get_regional_covid_data.R
 \name{get_regional_covid_data}
 \alias{get_regional_covid_data}
-\title{The main function for NCovUtils which returns regional, daily-updated data for a given country - either in full or as a total for each region up to today's date.}
+\title{The main calculation function for NCovUtils which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.}
 \usage{
-get_regional_covid_data(country, totals = FALSE, long_format = TRUE)
+get_regional_covid_data(country, totals)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}
 
-\item{totals}{Boolean. If TRUE, returns only totals count, if FALSE (default) returns the full dataset.}
+\item{totals}{Boolean. If TRUE, returns only totals count, if FALSE returns the full dataset.}
 }
 \value{
-A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.
+A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country.
 }
 \description{
-Gets COVID-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.
-}
-\examples{
-
-\dontrun{
-
- get_regional_covid_data(country = "canada")
-
-}
+Gets Covid-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.
 }
