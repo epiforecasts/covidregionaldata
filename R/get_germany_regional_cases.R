@@ -40,7 +40,7 @@ get_germany_regional_cases <- function(geography = "states") {
     stop('Please specify geography: "states" (Bundesland), "districts" (Landkreis). Default: "states".')
   }
 
-  path <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
+  path <- "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
 
   ## Set up cache
   ch <- memoise::cache_filesystem(".cache")
