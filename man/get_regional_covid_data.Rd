@@ -4,15 +4,18 @@
 \alias{get_regional_covid_data}
 \title{The main calculation function for NCovUtils which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.}
 \usage{
-get_regional_covid_data(country, totals)
+get_regional_covid_data(country, totals, include_level_2_regions)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}
 
 \item{totals}{Boolean. If TRUE, returns only totals count, if FALSE returns the full dataset.}
+
+\item{include_level_2_regions}{Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+is not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
 }
 \value{
-A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country.
+A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
 }
 \description{
 Gets Covid-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.

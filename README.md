@@ -21,8 +21,7 @@ remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
 ## Usage
 
 ### Sub-national data
-
-There are three main functions to extract sub-national level data by country. The underlying data for each function is the same - each function just formats the data differently. The regions used are currently at the admin-1 level, the largest regions available. The data table includes the ISO-3166-2 code for each region. Each function takes the country name (in English) as a string (see list below for available countries). The country string is not case-sensitive.
+There are three main functions to extract sub-national level data by country. The underlying data for each function is the same - each function just formats the data differently. The data is stratified by region and (for two of the three formats) by date. The data table includes the ISO-3166-2 code for each region. Each function takes the country name (in English) as a string (see list below for available countries). The country string is not case-sensitive.
 
 The three ways to view the data (and the related functions) are:
 1. Long format - this is the standard used by the Covid19R package. To get data in this format use:
@@ -57,7 +56,7 @@ NCoVUtils::get_totals_only_regional_covid_data("Belgium")
 ```
 
 This returns a dataset with the following structure
-
+ 
 **region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recoveries\_total**|**hospitalisations\_total**|**tests\_total**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
 Flanders|BE-VLG|32817|4731|0|9550|0
@@ -70,11 +69,29 @@ Dates will always be in YYYY-MM-DD format and the ISO codes are ISO-3166-2 codes
 
 Data fields with `*_new` names are new counts for the day/region in question. Data fields with `*_total` names are cumulative counts for that region up to and including the date. 
 
-Currently we include functions for sub-national data in the following countries:
+#### Region Levels
+All countries have data for regions at the admin-1 level, the largest regions available (e.g. state in the USA). *Some* countries have data for regions at the admin-2 level (e.g. county in the USA). Requesting data stratified by Level 2 regions instead of Level 1 is done by using the `include_level_2_regions` logical argument in the functions above. Note that `NCoVUtils::get_long_format_regional_covid_data()` does not support this currently. 
+
+The datasets will also have the corresponding level 1 region included along with its ISO-3166-2 code. 
+
+For an example of requesting Level 2 regions:
+```r
+NCoVUtils::get_wide_format_regional_covid_data("Belgium", include_level_2_regions = TRUE)
+```
+
+This returns a dataset with the following structure
+**date**|**province**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recoveries\_new**|**recoveries\_total**|**hospitalisations\_new**|**hospitalisations\_total**|**tests\_new**|**tests\_total**
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
+2020-05-24|Antwerpen|Flanders|BE-VLG|16|7905|NA|NA|NA|NA|5|2510|NA|NA
+2020-05-24|BrabantWallon|Wallonia|BE-WAL|4|1421|NA|NA|NA|NA|0|224|NA|NA
+2020-05-24|Brussels|Brussels|BE-BRU|7|5804|NA|NA|NA|NA|4|2527|NA|NA
+
+
+Currently we include functions for sub-national data in the following countries (* indicates data for level 2 regions as well):
 
 Europe
 
-  +	Belgium
+  +	Belgium (*)
 
   + Germany
 

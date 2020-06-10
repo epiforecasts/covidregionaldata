@@ -9,7 +9,7 @@ test_that("get_india_regional_cases data source is unchanged", {
 })
 
 test_that("get_india_regional_cases returns the correct column names", {
-  expected_colnames <- c("region", "date", "cases_new",  "deaths_new", "recoveries_new")
+  expected_colnames <- c("region_level_1", "date", "cases_new",  "deaths_new", "recoveries_new")
 
   returned_colnames <- colnames(get_india_regional_cases())
 
@@ -20,7 +20,7 @@ test_that("get_india_regional_cases returns the correct column names", {
 test_that("get_india_regional_cases returns correct column types", {
   data <- get_india_regional_cases()
   expect_is(data, "data.frame")
-  expect_is(data$region, "character")
+  expect_is(data$region_level_1, "character")
   expect_is(data$date, "Date")
   expect_is(data$cases_new, "numeric")
   expect_is(data$deaths_new, "numeric")

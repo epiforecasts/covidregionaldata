@@ -4,10 +4,13 @@
 \alias{get_totals_only_regional_covid_data}
 \title{Return regional, daily-updated cumulative counts of Covid-19 data for a given country}
 \usage{
-get_totals_only_regional_covid_data(country)
+get_totals_only_regional_covid_data(country, include_level_2_regions = FALSE)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}
+
+\item{include_level_2_regions}{Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+is not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
 }
 \value{
 A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country, cumulative up to today's date.

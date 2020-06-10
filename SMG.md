@@ -75,16 +75,16 @@ This is the most common task for developers. You will need a source of raw data 
 
 You then need to follow these steps:
 
-1. Create a `get_<country>_regional_cases()` function. As described above, this needs to load the raw data, select *only* the relevant columns and change the names of the columns to the package standards. For some countries there may be multiple data sources, in which case using the `dplyr` join functions is recommended. There is no need to deal with NA values at this point, or to calculate new data.
+1. Create a `get_<country>_regional_cases()` function. As described above, this needs to load the raw data, select *only* the relevant columns and change the names of the columns to the package standards. For some countries there may be multiple data sources, in which case using the `dplyr` join functions is recommended. There is no need to deal with NA values at this point, or to calculate new data. If the country supports level 2 regions, you should create a `get_<country>_regional_cases_only_level_1_regions()` and `get_<country>_regional_cases_with_level_2_regions()`. While these will share code, it saves writing one function with messy and confusing if statements.
 
-2. Create unit tests for the function. At a minimum you should have tests which:
+2. Create unit tests for the function(s). At a minimum you should have tests which:
 + check if the data source is there, returns data and returns the expected columns
 + check that your function returns data columns with the correct names
 + check that your function returns data columns of the correct type (double for count data, character for metadata and Date for dates)
 
 3. Write documentation using `#'` roxygen styling and then call `roxygen2::roxygenise()` when done to update the manual and NAMESPACE. There is no need to export your function but be sure to import any functions you do use from other packages.
 
-4. Add your function in the switch() calls in the `get_regional_covid_data()`, `get_iso_codes()` and `rename_region_column()` functions. ISO-3166-2 codes can be found using Wikipedia.
+4. Add your function(s) in the switch() calls in the `get_regional_covid_data()`, `get_iso_codes()` and `rename_region_column()` functions. ISO-3166-2 codes can be found using Wikipedia.
 
 
 #### **Writing new helper functions**

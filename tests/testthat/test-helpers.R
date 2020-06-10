@@ -29,7 +29,7 @@ test_that("calculate_columns_from_existing_data returns correct results", {
 })
 
 test_that("add_extra_na_cols is working", {
-  extra_col_names <- c("date", "region", "cases_new", "cases_total", "deaths_new", "deaths_total",
+  extra_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
                       "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
                       "hospitalisations_total")
 
@@ -43,7 +43,7 @@ test_that("add_extra_na_cols is working", {
 
 test_that("rename_region_column does so correctly", {
   df <- data.frame(matrix(rnorm(100), ncol=10))
-  colnames(df)[1] <- "region"
+  colnames(df)[1] <- "region_level_1"
 
   expect_equal(colnames(rename_region_column(df, "canada"))[1], "province")
   expect_error(rename_region_column(df, "test"))
@@ -62,7 +62,7 @@ test_that("set_negative_values_to_zero works", {
 })
 
 test_that("fill_empty_dates_with_na fills empty dates with NA", {
-  expected_data <- get_expected_data_for_helpers()
+  expected_data <- get_expected_data_for_fill_empty_dates_with_na_test()
 
   # partial data deletes some rows (i.e. gets rid of some dates - all the ones with NA in cases)
   partial_data <- expected_data[-c(6:9), ]

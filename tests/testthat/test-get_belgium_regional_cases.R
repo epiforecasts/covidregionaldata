@@ -18,20 +18,44 @@ test_that("get_belgium_regional_cases data sources are unchanged", {
 })
 
 test_that("get_belgium_regional_cases returns the correct column names", {
-  expected_colnames <- c("region", "date", "cases_new", "deaths_new", "hospitalisations_new")
+  expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_new", "deaths_new", "hospitalisations_new")
+  returned_colnames_adm_level_1 <- colnames(get_belgium_regional_cases_only_level_1())
+  expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
+  expect_true(all(expected_colnames_adm_level_1 %in% returned_colnames_adm_level_1))
 
-  returned_colnames <- colnames(get_belgium_regional_cases())
 
-  expect_true(all(returned_colnames %in% expected_colnames))
-  expect_true(all(expected_colnames %in% returned_colnames))
+  expected_colnames_adm_level_2 <- c("region_level_1", "region_level_2", "date", "cases_new", "hospitalisations_new")
+  returned_colnames_adm_level_2 <- colnames(get_belgium_regional_cases_with_level_2())
+  expect_true(all(returned_colnames_adm_level_2 %in% expected_colnames_adm_level_2))
+  expect_true(all(expected_colnames_adm_level_2 %in% returned_colnames_adm_level_2))
 })
 
 test_that("get_belgium_regional_cases returns correct column types", {
-  data <- get_belgium_regional_cases()
+  data <- get_belgium_regional_cases_only_level_1()
+
   expect_is(data, "data.frame")
-  expect_is(data$region, "character")
+  expect_is(data$region_level_1, "character")
   expect_is(data$date, "Date")
   expect_is(data$cases_new, "numeric")
   expect_is(data$deaths_new, "numeric")
   expect_is(data$hospitalisations_new, "numeric")
+
+
+  data <- get_belgium_regional_cases_with_level_2()
+
+  expect_is(data, "data.frame")
+  expect_is(data$region_level_1, "character")
+  expect_is(data$region_level_2, "character")
+  expect_is(data$date, "Date")
+  expect_is(data$cases_new, "numeric")
+  expect_is(data$hospitalisations_new, "numeric")
+})
+
+
+test_that("get_belgium_regional_cases returns correct column types", {
+  adm_1_data <- get_belgium_regional_cases_only_level_1()
+  adm_2_data <- get_belgium_regional_cases_with_level_2()
+
+  expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 4)
+  expect_equal(length(unique(na.omit(adm_2_data$region_level_2))), 12)
 })

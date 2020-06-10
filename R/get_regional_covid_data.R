@@ -2,33 +2,77 @@
 #' @description Gets Covid-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.
 #' @param country Character String specifying the country to get data from. For options see the documentation.
 #' @param totals Boolean. If TRUE, returns only totals count, if FALSE returns the full dataset.
-#' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country.
+#' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+#' is not always available. In these cases the user will get a warning and the Level 1 data will be returned.
+#' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
 #' @importFrom dplyr %>% group_by left_join arrange select ungroup do
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
-get_regional_covid_data <- function(country, totals){
+get_regional_covid_data <- function(country, totals, include_level_2_regions){
+
+  #----------------------------------------------#
+  #-------------- ERROR HANDLING ----------------#
+  #----------------------------------------------#
 
   if (!(is.character(country))){
     stop("The country variable should be a character variable.")
   }
 
-  # get the correct data given the country
-  get_data_function <- switch(country,
-                              "canada" = get_canada_regional_cases,
-                              "afghanistan" = get_afghan_regional_cases,
-                              "belgium" = get_belgium_regional_cases,
-                              "brazil" = get_brazil_regional_cases,
-                              "germany" = get_germany_regional_cases,
-                              "india" = get_india_regional_cases,
-                              "italy" = get_italy_regional_cases,
-                              stop("There is no data for the country entered. It is likely haven't added data
+  if (!(is.logical(totals))){
+    stop("The totals variable should be a logical (TRUE/FALSE) variable.")
+  }
+
+  if (!(is.logical(include_level_2_regions))){
+    stop("The include_level_2_regions variable should be a logical (TRUE/FALSE) variable.")
+  }
+
+  countries_with_level_2_regions <- c("belgium")
+
+  if (include_level_2_regions & !(country %in% countries_with_level_2_regions)) {
+    warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
+    include_level_2_regions <- FALSE
+  }
+
+  #----------------------------------------------#
+
+  # find the correct data-getter
+  if (include_level_2_regions) {
+
+    get_data_function <- switch(country,
+                                "belgium" = get_belgium_regional_cases_with_level_2,
+                                stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
+
+  } else {
+
+    get_data_function <- switch(country,
+                                "canada" = get_canada_regional_cases,
+                                "afghanistan" = get_afghan_regional_cases,
+                                "belgium" = get_belgium_regional_cases_only_level_1,
+                                "brazil" = get_brazil_regional_cases,
+                                "germany" = get_germany_regional_cases,
+                                "india" = get_india_regional_cases,
+                                "italy" = get_italy_regional_cases,
+                                stop("There is no data for the country entered. It is likely haven't added data
+                                   for that country yet, or there was a spelling mistake."))
+
+  }
+
+  # get the data and iso codes for level 1 regions
   data <- do.call(get_data_function, list())
   iso_codes_table <- get_iso_codes(country)
 
+  # group data, dependent on admin levels required
+  if (include_level_2_regions) {
+    data <- data %>%
+      dplyr::group_by(region_level_1, region_level_2)
+  } else {
+    data <- data %>%
+      dplyr::group_by(region_level_1)
+  }
+
   # add columns that aren't there already, clean up data
   data <- data %>%
-    dplyr::group_by(region) %>%
     dplyr::do(calculate_columns_from_existing_data(.)) %>%
     add_extra_na_cols() %>%
     set_negative_values_to_zero() %>%
@@ -44,10 +88,22 @@ get_regional_covid_data <- function(country, totals){
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
-    dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
-    dplyr::select(date, region, iso_code, cases_new, cases_total, deaths_new, deaths_total,
+    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region"))
+
+  if (include_level_2_regions) {
+    data <- data %>%
+      dplyr::select(date, region_level_2, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
+                    recoveries_new, recoveries_total, hospitalisations_new, hospitalisations_total,
+                    tests_new, tests_total)
+
+  } else {
+    data <- data %>%
+    dplyr::select(date, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
                   recoveries_new, recoveries_total, hospitalisations_new, hospitalisations_total,
-                  tests_new, tests_total) %>%
+                  tests_new, tests_total)
+  }
+
+  data <- data %>%
     rename_region_column(country) %>%
     dplyr::arrange(date)
 
@@ -57,6 +113,8 @@ get_regional_covid_data <- function(country, totals){
 #' Return regional, daily-updated cumulative counts of Covid-19 data for a given country
 #' @description Gets cumulative COVID-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.
 #' @param country Character String specifying the country to get data from. For options see the documentation.
+#' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+#' is not always available. In these cases the user will get a warning and the Level 1 data will be returned.
 #' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country, cumulative up to today's date.
 #' @export
 #' @importFrom dplyr %>% group_by summarise left_join select ungroup arrange
@@ -68,24 +126,42 @@ get_regional_covid_data <- function(country, totals){
 #'  get_totals_only_regional_covid_data(country = "canada")
 #'
 #' }
-get_totals_only_regional_covid_data <- function(country) {
+get_totals_only_regional_covid_data <- function(country, include_level_2_regions = FALSE) {
 
   country <- tolower(country)
 
-  data <- get_regional_covid_data(country, totals = TRUE)
+  data <- get_regional_covid_data(country, totals = TRUE, include_level_2_regions = include_level_2_regions)
   iso_codes_table <- get_iso_codes(country)
 
   # sum up data if user requests totals
+  if (include_level_2_regions) {
+    data <- data %>%
+      dplyr::group_by(region_level_1, region_level_2)
+  } else {
+    data <- data %>%
+      dplyr::group_by(region_level_1)
+  }
+
   data <- data %>%
-    dplyr::group_by(region) %>%
     dplyr::summarise(cases_total = sum(cases_new, na.rm = TRUE),
                      deaths_total = sum(deaths_new, na.rm = TRUE),
                      recoveries_total = sum(recoveries_new, na.rm = TRUE),
                      hospitalisations_total = sum(hospitalisations_new, na.rm = TRUE),
                      tests_total = sum(tests_new, na.rm = TRUE)) %>%
-    dplyr::left_join(iso_codes_table, by = c("region", "region")) %>%
-    dplyr::select(region, iso_code, cases_total, deaths_total,
-                  recoveries_total, hospitalisations_total, tests_total) %>%
+    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region"))
+
+
+  if (include_level_2_regions) {
+    data <- data %>%
+      dplyr::select(region_level_2, region_level_1, iso_code, cases_total, deaths_total,
+                    recoveries_total, hospitalisations_total, tests_total)
+  } else {
+    data <- data %>%
+      dplyr::select(region_level_1, iso_code, cases_total, deaths_total,
+                    recoveries_total, hospitalisations_total, tests_total)
+  }
+
+  data <- data %>%
     rename_region_column(country) %>%
     dplyr::arrange(-cases_total)
 
@@ -95,6 +171,8 @@ get_totals_only_regional_covid_data <- function(country) {
 #' Return regional, daily-updated data for a given country in long (Covid19R / non-time-series) format
 #' @description Gets COVID-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country in long format.
 #' @param country Character String specifying the country to get data from. For options see the documentation.
+#' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+#' is not always available. In these cases the user will get a warning and the Level 1 data will be returned.
 #' @return A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.
 #' @importFrom tibble tibble
 #' @export
@@ -108,7 +186,7 @@ get_totals_only_regional_covid_data <- function(country) {
 get_long_format_regional_covid_data <- function(country) {
 
   country <- tolower(country)
-  data <- get_regional_covid_data(country, totals = FALSE)
+  data <- get_regional_covid_data(country, totals = FALSE, include_level_2_regions = FALSE)
 
   # Covid19R format
   data <- convert_to_covid19R_format(data)
@@ -129,9 +207,9 @@ get_long_format_regional_covid_data <- function(country) {
 #'  get_wide_format_regional_covid_data(country = "canada")
 #'
 #' }
-get_wide_format_regional_covid_data <- function(country) {
+get_wide_format_regional_covid_data <- function(country, include_level_2_regions = FALSE) {
   country <- tolower(country)
-  data <- get_regional_covid_data(country, totals = FALSE)
+  data <- get_regional_covid_data(country, totals = FALSE, include_level_2_regions = include_level_2_regions)
 
   return(tibble::tibble(data))
 }

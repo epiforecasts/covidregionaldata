@@ -26,7 +26,7 @@ get_afghan_regional_cases <- function(){
   data <- data %>%
     # Reformat
     dplyr::transmute(date = lubridate::ymd(Date),
-                     region = stringr::str_replace(Province, " Province", ""),
+                     region_level_1 = stringr::str_replace(Province, " Province", ""),
                      cases_total = Cases,
                      deaths_total = Deaths,
                      recoveries_total = Recoveries) %>%

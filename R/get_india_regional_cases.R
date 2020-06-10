@@ -17,7 +17,7 @@ get_india_regional_cases <- function() {
              "DL", 	"GA", 	"GJ", 	"HR", 	"HP", 	"JK", 	"JH", 	"KA", 	"KL",
              "LA", 	"LD", 	"MP", 	"MH", 	"MN", 	"ML", 	"MZ", 	"NL", 	"OR",
              "PY", 	"PB", 	"RJ", 	"SK", 	"TN", 	"TG", 	"TR",   "UN",	  "UP", 	"UT", 	"WB"),
-    region = c("Andaman and Nicobar", 	"Andhra Pradesh", 	"Arunachal Pradesh", 	"Assam", 	"Bihar",
+    region_level_1 = c("Andaman and Nicobar", 	"Andhra Pradesh", 	"Arunachal Pradesh", 	"Assam", 	"Bihar",
                "Chandigarh", 	"Chhattisgarh", 	"Dadra and Nagar Haveli", 	"Daman and Diu",
                "NCT of Delhi", 	"Goa", 	"Gujarat", 	"Haryana", 	"Himachal Pradesh", 	"Jammu and Kashmir",
                "Jharkhand", 	"Karnataka", 	"Kerala", 	"Ladakh", 	"Lakshadweep", 	"Madhya Pradesh",

@@ -23,7 +23,7 @@ get_cumulative_from_daily <- function(column) {
 #' @param data a data.frame
 #' @return a data.frame with relevant NA columns added
 add_extra_na_cols <- function(data) {
-  expected_col_names <- c("date", "region", "cases_new", "cases_total", "deaths_new", "deaths_total",
+  expected_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
                           "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
                           "hospitalisations_total")
 
@@ -45,16 +45,25 @@ add_extra_na_cols <- function(data) {
 #' @importFrom dplyr %>% rename
 #' @return a data.frame with the column renamed to a sensible name
 rename_region_column <- function(data, country) {
-  new_name <- switch(tolower(country),
-                     "canada" = "province",
-                     "afghanistan" = "province",
-                     "belgium" = "region",
-                     "brazil" = "state",
-                     "germany" = "bundesland",
-                     "india" = "state",
-                     "italy" = "region")
 
-  data <- data %>% dplyr::rename(!!new_name := region)
+  level_1_region_name <- switch(tolower(country),
+                               "canada" = "province",
+                               "afghanistan" = "province",
+                               "belgium" = "region",
+                               "brazil" = "state",
+                               "germany" = "bundesland",
+                               "india" = "state",
+                               "italy" = "region")
+
+  data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
+
+  if ("region_level_2" %in% colnames(data)) {
+    level_2_region_name <- switch(tolower(country),
+                                "belgium" = "province")
+
+    data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
+  }
+
   return(data.frame(data))
 }
 
@@ -84,8 +93,15 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tidyr complete full_seq
 #' @return a data.frame with rows of NAs added.
 fill_empty_dates_with_na <- function(data) {
-  data <- data %>%
-    tidyr::complete(date = tidyr::full_seq(data$date, period = 1), region)
+
+  if ("region_level_2" %in% colnames(data)) {
+    data <- data %>%
+      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_2, region_level_1))
+  } else {
+    data <- data %>%
+      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), region_level_1)
+  }
+
   return(data.frame(data))
 }
 
@@ -101,9 +117,15 @@ complete_cumulative_columns <- function(data) {
 
   for (cumulative_col_name in cumulative_col_names) {
     if (cumulative_col_name %in% colnames(data)){
-      data <- data %>%
-                dplyr::group_by(region) %>%
-                tidyr::fill(cumulative_col_name)
+      if ("region_level_2" %in% colnames(data)) {
+        data <- data %>%
+          dplyr::group_by(region_level_1, region_level_2) %>%
+          tidyr::fill(cumulative_col_name)
+      } else {
+        data <- data %>%
+          dplyr::group_by(region_level_1) %>%
+          tidyr::fill(cumulative_col_name)
+      }
     }
   }
 

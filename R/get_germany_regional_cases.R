@@ -18,11 +18,11 @@ get_germany_regional_cases <- function() {
 
   data <- csv_reader(file = url) %>%
     dplyr::select(date = Meldedatum,
-                  region = Bundesland,
+                  region_level_1 = Bundesland,
                   cases_new = AnzahlFall,
                   deaths_new = AnzahlTodesfall) %>%
     dplyr::mutate(date = lubridate::as_date(lubridate::ymd_hms(date))) %>%
-    dplyr::group_by(region, date) %>%
+    dplyr::group_by(region_level_1, date) %>%
     dplyr::summarise(cases_new = as.numeric(sum(cases_new > 0)),
                      deaths_new = as.numeric(sum(deaths_new > 0))) %>%
     dplyr::ungroup()

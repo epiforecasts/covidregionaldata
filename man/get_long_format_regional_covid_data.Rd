@@ -8,6 +8,9 @@ get_long_format_regional_covid_data(country)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}
+
+\item{include_level_2_regions}{Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region data
+is not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
 }
 \value{
 A data.frame with data related to cases, deaths, hospitalisations, recoveries and testing for regions within the given country. Either totals only or full data.

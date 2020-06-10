@@ -4,7 +4,7 @@
 \alias{get_wide_format_regional_covid_data}
 \title{Return regional, daily-updated data for a given country in wide (time-series) format.}
 \usage{
-get_wide_format_regional_covid_data(country)
+get_wide_format_regional_covid_data(country, include_level_2_regions = FALSE)
 }
 \arguments{
 \item{country}{Character String specifying the country to get data from. For options see the documentation.}

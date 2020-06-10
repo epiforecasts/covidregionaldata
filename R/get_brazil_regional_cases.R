@@ -22,9 +22,9 @@ get_brazil_regional_cases <- function() {
     dplyr::mutate(date = lubridate::ymd(date)) %>%
     dplyr::filter(state != "TOTAL") %>%
     dplyr::left_join(names, by = c("state" = "state_code")) %>%
-    dplyr::select(date, region = state_name, cases_new = newCases, cases_total = totalCases,
+    dplyr::select(date, region_level_1 = state_name, cases_new = newCases, cases_total = totalCases,
                   deaths_new = newDeaths, deaths_total = deaths) %>%
-    dplyr::group_by(date, region) %>%
+    dplyr::group_by(date, region_level_1) %>%
     dplyr::summarise(cases_new = sum(cases_new),
                      cases_total = sum(cases_total),
                      deaths_new = sum(deaths_new),

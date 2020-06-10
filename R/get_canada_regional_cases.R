@@ -22,7 +22,7 @@ get_canada_regional_cases <- function(){
     dplyr::mutate(prname = gsub("Repatriated travellers", "Repatriated Travellers", prname),
                   date = lubridate::dmy(date),
                   numrecover = as.numeric(replace(numrecover, numrecover == "N/A", NA))) %>%
-    dplyr::rename(region = prname, deaths_total = numdeaths, cases_total = numtotal,
+    dplyr::rename(region_level_1 = prname, deaths_total = numdeaths, cases_total = numtotal,
                   cases_new = numtoday, recoveries_total = numrecover, tests_total = numtested) %>%
     tidyr::replace_na(list(deaths_total = 0, cases_total = 0, recoveries_total = 0, tests_total = 0))
 
