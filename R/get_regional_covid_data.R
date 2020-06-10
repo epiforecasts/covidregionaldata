@@ -26,7 +26,8 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
     stop("The include_level_2_regions variable should be a logical (TRUE/FALSE) variable.")
   }
 
-  countries_with_level_2_regions <- c("belgium")
+  countries_with_level_2_regions <- c("belgium",
+                                      "brazil")
 
   if (include_level_2_regions & !(country %in% countries_with_level_2_regions)) {
     warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
@@ -40,6 +41,7 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
 
     get_data_function <- switch(country,
                                 "belgium" = get_belgium_regional_cases_with_level_2,
+                                "brazil" = get_brazil_regional_cases_with_level_2,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
 
@@ -49,7 +51,7 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                                 "canada" = get_canada_regional_cases,
                                 "afghanistan" = get_afghan_regional_cases,
                                 "belgium" = get_belgium_regional_cases_only_level_1,
-                                "brazil" = get_brazil_regional_cases,
+                                "brazil" = get_brazil_regional_cases_only_level_1,
                                 "germany" = get_germany_regional_cases,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,

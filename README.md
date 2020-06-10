@@ -100,7 +100,7 @@ Europe
 
 Americas
 
-  + Brazil
+  + Brazil (*)
 
   +	Canada
 

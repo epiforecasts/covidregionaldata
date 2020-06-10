@@ -52,7 +52,7 @@ test_that("get_belgium_regional_cases returns correct column types", {
 })
 
 
-test_that("get_belgium_regional_cases returns correct column types", {
+test_that("get_belgium_regional_cases returns correct numbers of regions", {
   adm_1_data <- get_belgium_regional_cases_only_level_1()
   adm_2_data <- get_belgium_regional_cases_with_level_2()
 
