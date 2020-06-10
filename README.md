@@ -93,7 +93,7 @@ Europe
 
   +	Belgium (*)
 
-  + Germany
+  + Germany (*)
 
   +	Italy
 

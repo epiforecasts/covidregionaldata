@@ -60,7 +60,8 @@ rename_region_column <- function(data, country) {
   if ("region_level_2" %in% colnames(data)) {
     level_2_region_name <- switch(tolower(country),
                                 "belgium" = "province",
-                                "brazil" = "city")
+                                "brazil" = "city",
+                                "germany" = "landkreis")
 
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
