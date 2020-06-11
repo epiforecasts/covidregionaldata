@@ -1,4 +1,4 @@
-url: epiforecasts.io/NCoVUtils/
+url: epiforecasts.io/covidregionaldata/
 template:
   params:
     bootswatch: lumen
@@ -18,7 +18,7 @@ navbar:
       href: reference/index.html
   right:
     - icon: fa-github
-      href: https://github.com/epiforecasts/NCoVUtils
+      href: https://github.com/epiforecasts/covidregionaldata
 
 
 

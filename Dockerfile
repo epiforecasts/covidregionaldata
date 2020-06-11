@@ -4,10 +4,10 @@
 FROM rocker/verse:latest
 
 ## Copy files to working directory of server
-ADD . /home/rstudio/NCoVUtils
+ADD . /home/rstudio/covidregionaldata
 
 ## Set working directory to be this folder
-WORKDIR /home/rstudio/NCoVUtils
+WORKDIR /home/rstudio/covidregionaldata
 
 ## Install missing packages.
 RUN Rscript -e "devtools::install_dev_deps()"

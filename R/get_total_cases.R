@@ -48,14 +48,14 @@ get_total_cases <- function(source = 'WHO') {
   }
 
   if (source == 'WHO'){
-    total_cases <- NCoVUtils::get_who_cases()
+    total_cases <- covidregionaldata::get_who_cases()
 
     total_cases <- who_total_cases(total_cases)
     
     return(total_cases)
 
   }else if (source == 'ECDC'){
-    total_cases <- NCoVUtils::get_ecdc_cases()
+    total_cases <- covidregionaldata::get_ecdc_cases()
 
     total_cases <- ecdc_total_cases(total_cases)
     

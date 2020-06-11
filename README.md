@@ -1,10 +1,10 @@
 # Data extraction tools for the Covid-19 outbreak
 
-[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/NCoVUtils/master?urlpath=rstudio)
-![R-CMD-check](https://github.com/epiforecasts/NCoVUtils/workflows/R-CMD-check/badge.svg)
-[![Codecov test coverage](https://codecov.io/gh/epiforecasts/NCoVUtils/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/NCoVUtils?branch=master)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat)](https://github.com/epiforecasts/NCoVUtils)
-[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/NCoVUtils)
+[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
+![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)
+[![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
+[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/238177228.svg)](https://zenodo.org/badge/latestdoi/238177228)
 
 
@@ -18,13 +18,13 @@ Install the stable version of the package using
 ``` r
 install.packages("drat")
 drat:::add("epiforecasts")
-install.packages("NCoVUtils")
+install.packages("covidregionaldata")
 ```
 
 Install the development version of the package with:
 
 ``` r
-remotes::install_github("epiforecasts/NCoVUtils")
+remotes::install_github("epiforecasts/covidregionaldata")
 ```
 
 ## Usage
@@ -34,19 +34,19 @@ remotes::install_github("epiforecasts/NCoVUtils")
 There are two sources of worldwide, country-level data on cases and deaths.
 
 1. Extract total global cases and deaths by country, and specify source, using:
-  + ```NCoVUtils::get_total_cases(source = c("WHO", "ECDC"))```
+  + ```covidregionaldata::get_total_cases(source = c("WHO", "ECDC"))```
 2. Extract daily international case and death counts compiled by the WHO using:
-  + ```NCoVUtils::get_who_cases(country = NULL, daily = TRUE))```
+  + ```covidregionaldata::get_who_cases(country = NULL, daily = TRUE))```
 3. Extract daily international case and death counts compiled by ECDC using:
-  + ```NCoVUtils::get_ecdc_cases()```
+  + ```covidregionaldata::get_ecdc_cases()```
 
 A further function for worldwide data extracts non-pharmaceutical interventions by country:
 
-* ```NCoVUtils::get_interventions_data()```
+* ```covidregionaldata::get_interventions_data()```
 
 And anonymised international patient linelist data can be imported and cleaned with:
 
-* ```NCoVUtils::get_linelist()```
+* ```covidregionaldata::get_linelist()```
 
 ### Sub-national data
 
@@ -93,8 +93,7 @@ Africa
   + None currently available
 
 
-We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/NCoVUtils/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/NCoVUtils/issues/81) and [#84](https://github.com/epiforecasts/NCoVUtils/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/NCoVUtils/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
-
+We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/covidregionaldata/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/covidregionaldata/issues/81) and [#84](https://github.com/epiforecasts/covidregionaldata/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/covidregionaldata/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
 
 ## Development
 
@@ -103,7 +102,7 @@ We are working to improve and expand the package: please see the [Issues](https:
 Set your working directory to the home directory of this project (or use the provided Rstudio project). Install the analysis and all dependencies with:
 
 ```r
-remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
+remotes::install_github("epiforecasts/covidregionaldata", dependencies = TRUE)
 ```
 
 ### Render documentation
@@ -119,30 +118,30 @@ Rscript inst/scripts/render_output.R
 
 This package is developed in a docker container based on the tidyverse docker image.
 
-To build the docker image run (from the `NCoVUtils` directory):
+To build the docker image run (from the `covidregionaldata` directory):
 
 ```bash
-docker build . -t ncovutils
+docker build . -t covidregionaldata
 ```
 
 To run the docker image run:
 
 ```bash
-docker run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils
+docker run -d -p 8787:8787 --name covidregionaldata -e USER=covidregionaldata -e PASSWORD=covidregionaldata covidregionaldata
 ```
 
-The rstudio client can be found on port :8787 at your local machines ip. The default username:password is ncovutils:ncovutils, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.
+The rstudio client can be found on port :8787 at your local machines ip. The default username:password is covidregionaldata:covidregionaldata, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.
 
-To mount a folder (from your current working directory - here assumed to be `tmp`) in the docker container to your local system use the following in the above docker run command (as given mounts the whole `ncovutils` directory to `tmp`).
+To mount a folder (from your current working directory - here assumed to be `tmp`) in the docker container to your local system use the following in the above docker run command (as given mounts the whole `covidregionaldata` directory to `tmp`).
 
 ```{bash, eval = FALSE}
---mount type=bind,source=$(pwd)/tmp,target=/home/ncovutils
+--mount type=bind,source=$(pwd)/tmp,target=/home/covidregionaldata
 ```
 
 To access the command line run the following:
 
 ```{bash, eval = FALSE}
-docker exec -ti ncovutils bash
+docker exec -ti covidregionaldata bash
 ```
 
-Alternatively the package environment can be accessed via [binder](https://mybinder.org/v2/gh/epiforecasts/ncovutils/master?urlpath=rstudio).
+Alternatively the package environment can be accessed via [binder](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio).
