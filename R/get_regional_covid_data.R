@@ -98,18 +98,19 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
     data <- data %>%
       dplyr::select(date, region_level_2, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
                     recovered_new, recovered_total, hosp_new, hosp_total,
-                    tested_new, tested_total)
+                    tested_new, tested_total) %>%
+      dplyr::arrange(date, region_level_1, region_level_2)
 
   } else {
     data <- data %>%
     dplyr::select(date, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
                   recovered_new, recovered_total, hosp_new, hosp_total,
-                  tested_new, tested_total)
+                  tested_new, tested_total) %>%
+    dplyr::arrange(date, region_level_1)
   }
 
   data <- data %>%
-    rename_region_column(country) %>%
-    dplyr::arrange(date)
+    rename_region_column(country)
 
   return(tibble::tibble(data))
 }

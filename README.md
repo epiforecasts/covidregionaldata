@@ -33,7 +33,7 @@ This returns a dataset with the following structure
 
 **date**|**location**|**location\_type**|**location\_code**|**location\_code\_type**|**data\_type**|**value**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-2020-05-24|Wallonia|region|BE-WAL|iso-3166-2|tests\_total|NA
+2020-05-24|Wallonia|region|BE-WAL|iso-3166-2|tested\_total|NA
 2020-05-25|Brussels|region|BE-BRU|iso-3166-2|cases\_new|27
 2020-05-25|Brussels|region|BE-BRU|iso-3166-2|cases\_total|5828
 
@@ -44,7 +44,7 @@ NCoVUtils::get_wide_format_regional_covid_data("Belgium")
 
 This returns a dataset with the following structure
 
-**date**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recoveries\_new**|**recoveries\_total**|**hospitalisations\_new**|**hospitalisations\_total**|**tests\_new**|**tests\_total**
+**date**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recovered\_new**|**recovered\_total**|**hosp\_new**|**hosp\_total**|**tested\_new**|**tested\_total**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
 2020-05-24|Wallonia|BE-WAL|24|18194|16|3257|NA|NA|8|5126|NA|NA
 2020-05-25|Brussels|BE-BRU|27|5828|2|1436|NA|NA|6|2533|NA|NA
@@ -57,17 +57,22 @@ NCoVUtils::get_totals_only_regional_covid_data("Belgium")
 
 This returns a dataset with the following structure
  
-**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recoveries\_total**|**hospitalisations\_total**|**tests\_total**
+**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recoveries\_total**|**hosp\_total**|**tested\_total**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
 Flanders|BE-VLG|32817|4731|0|9550|0
 Wallonia|BE-WAL|18489|3292|0|5187|0
 Brussels|BE-BRU|5914|1463|0|2560|0
 
-The data fields for counts returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then that data field will be all NA values (or 0 if accessing totals data). Note that some rows may have NA in `*_new` data fields if the data was missing from the source also. 
+Dates will always be in YYYY-MM-DD format and the ISO codes are ISO-3166-2 codes. The data fields for counts returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then that data field will be all NA values (or 0 if accessing totals data). Note that some rows may have NA in `*_new` data fields if the data was missing from the source also. 
 
-Dates will always be in YYYY-MM-DD format and the ISO codes are ISO-3166-2 codes. 
+The counts included in data from NCoVUtils are
+* cases (number of confirmed cases)
+* deaths (number of confirmed deaths)
+* recovered (number of confirmed recoveries)
+* hosp (number of people admitted to hospital - note that `hosp_total` is cumulative total of people hospitalised, not total currently in hospital)
+* tested (number of tests completed)
 
-Data fields with `*_new` names are new counts for the day/region in question. Data fields with `*_total` names are cumulative counts for that region up to and including the date. 
+Each count data field will have either `_new` or `_total` as a suffix; those with `*_new` names are new counts for the day/region in question; those with `*_total` names are cumulative counts for that region up to and including the date. 
 
 #### Region Levels
 All countries have data for regions at the admin-1 level, the largest regions available (e.g. state in the USA). *Some* countries have data for regions at the admin-2 level (e.g. county in the USA). Requesting data stratified by Level 2 regions instead of Level 1 is done by using the `include_level_2_regions` logical argument in the functions above. Note that `NCoVUtils::get_long_format_regional_covid_data()` does not support this currently. 

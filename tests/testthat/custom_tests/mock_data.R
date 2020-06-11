@@ -70,13 +70,12 @@ get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions <- func
                   recovered_total = as.numeric(recovered_total),
                   hosp_new = as.numeric(hosp_new),
                   hosp_total = as.numeric(hosp_total)) %>%
-    dplyr::arrange(date, province)
-
-  expected_data <- dplyr::left_join(expected_data, iso_codes, by = c("province" = "region")) %>%
+    dplyr::left_join(iso_codes, by = c("province" = "region")) %>%
     dplyr::select(date, province, iso_code, cases_new, cases_total, deaths_new,
                   deaths_total, recovered_new, recovered_total,
                   hosp_new, hosp_total, tested_new,
-                  tested_total)
+                  tested_total) %>%
+    dplyr::arrange(date, province)
 
   return(tibble::tibble(expected_data))
 }
@@ -132,7 +131,9 @@ get_expected_data_for_get_regional_covid_data_tests_with_level_2_regions <- func
     dplyr::select(date, province, region, iso_code, cases_new, cases_total, deaths_new,
                          deaths_total, recovered_new, recovered_total,
                          hosp_new, hosp_total, tested_new,
-                         tested_total)
+                         tested_total) %>%
+    dplyr::arrange(date, region, province)
+
   return(data)
 }
 
