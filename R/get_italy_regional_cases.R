@@ -32,8 +32,8 @@ get_italy_regional_cases <- function() {
                                 region_level_1 = as.character(denominazione_regione),
                                 cases_total = totale_casi,
                                 deaths_total = deceduti,
-                                tests_total = tamponi) %>%
-                  dplyr::select(date, region_level_1, cases_total, deaths_total, tests_total) %>%
+                                tested_total = tamponi) %>%
+                  dplyr::select(date, region_level_1, cases_total, deaths_total, tested_total) %>%
                   dplyr::arrange(date) %>%
                   dplyr::mutate(region_level_1 = dplyr::recode(region_level_1,
                                                        "P.A. Trento" = "Trentino-Alto Adige",

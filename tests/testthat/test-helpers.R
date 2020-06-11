@@ -30,8 +30,8 @@ test_that("calculate_columns_from_existing_data returns correct results", {
 
 test_that("add_extra_na_cols is working", {
   extra_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
-                      "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
-                      "hospitalisations_total")
+                      "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
+                      "hosp_total")
 
   existing_col_names <- colnames(mtcars)
 

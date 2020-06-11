@@ -24,8 +24,8 @@ get_cumulative_from_daily <- function(column) {
 #' @return a data.frame with relevant NA columns added
 add_extra_na_cols <- function(data) {
   expected_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
-                          "recoveries_new", "recoveries_total", "tests_new", "tests_total", "hospitalisations_new",
-                          "hospitalisations_total")
+                          "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
+                          "hosp_total")
 
   for (colname in expected_col_names) {
     if (!(colname %in% colnames(data))) {
@@ -75,8 +75,8 @@ rename_region_column <- function(data, country) {
 #' @importFrom dplyr %>% mutate
 #' @return a data.frame with all relevant data > 0.
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c('deaths_total', 'cases_total', 'recoveries_total', 'hospitalisations_total', 'tests_total',
-                         'cases_new', 'deaths_new', 'recoveries_new', 'hospitalisations_new', 'tests_new')
+  numeric_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total',
+                         'cases_new', 'deaths_new', 'recovered_new', 'hosp_new', 'tested_new')
 
   for (numeric_col_name in numeric_col_names) {
     if (numeric_col_name %in% colnames(data)){
@@ -115,7 +115,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom tidyr fill
 #' @return a data.frame with NAs filled in for cumulative data columns.
 complete_cumulative_columns <- function(data) {
-  cumulative_col_names <- c('deaths_total', 'cases_total', 'recoveries_total', 'hospitalisations_total', 'tests_total')
+  cumulative_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total')
 
   for (cumulative_col_name in cumulative_col_names) {
     if (cumulative_col_name %in% colnames(data)){
@@ -167,10 +167,11 @@ convert_to_covid19R_format <- function(data) {
   location_type <- colnames(data)[2]
 
   data <- data %>%
+    dplyr::select(-hosp_total, -tested_new) %>%
     tidyr::pivot_longer(-c(date, !!location_type, iso_code),  names_to = "data_type", values_to = "value")
 
   data$location_code_type <- "iso-3166-2"
-  data$location_type <- location_type
+  data$location_type <- "state"
 
   data <- data %>%
     dplyr::rename("location_code" = "iso_code",

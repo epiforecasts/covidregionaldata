@@ -48,7 +48,7 @@ get_belgium_regional_cases_only_level_1 <- function(){
   # Join the three datasets and rename columns
   cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
   data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION")) %>%
-          dplyr::rename(date = DATE, region_level_1 = REGION, cases_new = n.x, hospitalisations_new = n.y, deaths_new = n)
+          dplyr::rename(date = DATE, region_level_1 = REGION, cases_new = n.x, hosp_new = n.y, deaths_new = n)
 
   return(data)
 }
@@ -96,7 +96,7 @@ get_belgium_regional_cases_with_level_2 <- function(){
 
   # Join the three datasets and rename columns
   data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "PROVINCE" = "PROVINCE", "REGION" = "REGION")) %>%
-    dplyr::rename(date = DATE, region_level_1 = REGION, region_level_2 = PROVINCE, cases_new = n.x, hospitalisations_new = n.y)
+    dplyr::rename(date = DATE, region_level_1 = REGION, region_level_2 = PROVINCE, cases_new = n.x, hosp_new = n.y)
 
   return(data)
 }

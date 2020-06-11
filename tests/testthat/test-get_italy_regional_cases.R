@@ -10,7 +10,7 @@ test_that("get_italy_regional_cases data source is unchanged", {
 
 test_that("get_italy_regional_cases returns the correct column names", {
   expected_colnames <- c("region_level_1", "date", "cases_total", "deaths_total",
-                         "tests_total")
+                         "tested_total")
 
   returned_colnames <- colnames(get_italy_regional_cases())
 
@@ -25,5 +25,5 @@ test_that("get_italy_regional_cases returns correct column types", {
   expect_is(data$date, "Date")
   expect_is(data$cases_total, "numeric")
   expect_is(data$deaths_total, "numeric")
-  expect_is(data$tests_total, "numeric")
+  expect_is(data$tested_total, "numeric")
 })

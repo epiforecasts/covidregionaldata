@@ -23,8 +23,8 @@ get_canada_regional_cases <- function(){
                   date = lubridate::dmy(date),
                   numrecover = as.numeric(replace(numrecover, numrecover == "N/A", NA))) %>%
     dplyr::rename(region_level_1 = prname, deaths_total = numdeaths, cases_total = numtotal,
-                  cases_new = numtoday, recoveries_total = numrecover, tests_total = numtested) %>%
-    tidyr::replace_na(list(deaths_total = 0, cases_total = 0, recoveries_total = 0, tests_total = 0))
+                  cases_new = numtoday, recovered_total = numrecover, tested_total = numtested) %>%
+    tidyr::replace_na(list(deaths_total = 0, cases_total = 0, recovered_total = 0, tested_total = 0))
 
   return(data)
 }

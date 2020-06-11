@@ -84,7 +84,7 @@ test_that("get_totals_only_regional_covid_data returns correct data - admin leve
 
 test_that("get_long_format_regional_covid_data returns correct long format data", {
   # Set up and run
-  input_data <- get_input_data_for_get_regional_covid_data_tests()
+  input_data <- get_input_data_for_get_regional_covid_data_tests_only_level_1_regions()
   iso_codes <- tibble::tibble(iso_code = c("NO", "EA", "SO", "WE", "VA"),
                               region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
   returned_data <- with_mock(get_canada_iso_codes = function(country) return(iso_codes),
@@ -92,7 +92,7 @@ test_that("get_long_format_regional_covid_data returns correct long format data"
                              get_long_format_regional_covid_data("canada"))
 
   # expected data
-  expected_data <- convert_to_covid19R_format(get_expected_data_for_get_regional_covid_data_tests())
+  expected_data <- convert_to_covid19R_format(get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions())
 
   expect_equal(expected_data, returned_data)
 })

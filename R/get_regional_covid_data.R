@@ -97,14 +97,14 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
   if (include_level_2_regions) {
     data <- data %>%
       dplyr::select(date, region_level_2, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
-                    recoveries_new, recoveries_total, hospitalisations_new, hospitalisations_total,
-                    tests_new, tests_total)
+                    recovered_new, recovered_total, hosp_new, hosp_total,
+                    tested_new, tested_total)
 
   } else {
     data <- data %>%
     dplyr::select(date, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
-                  recoveries_new, recoveries_total, hospitalisations_new, hospitalisations_total,
-                  tests_new, tests_total)
+                  recovered_new, recovered_total, hosp_new, hosp_total,
+                  tested_new, tested_total)
   }
 
   data <- data %>%
@@ -149,20 +149,20 @@ get_totals_only_regional_covid_data <- function(country, include_level_2_regions
   data <- data %>%
     dplyr::summarise(cases_total = sum(cases_new, na.rm = TRUE),
                      deaths_total = sum(deaths_new, na.rm = TRUE),
-                     recoveries_total = sum(recoveries_new, na.rm = TRUE),
-                     hospitalisations_total = sum(hospitalisations_new, na.rm = TRUE),
-                     tests_total = sum(tests_new, na.rm = TRUE)) %>%
+                     recovered_total = sum(recovered_new, na.rm = TRUE),
+                     hosp_total = sum(hosp_new, na.rm = TRUE),
+                     tested_total = sum(tested_new, na.rm = TRUE)) %>%
     dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region"))
 
 
   if (include_level_2_regions) {
     data <- data %>%
       dplyr::select(region_level_2, region_level_1, iso_code, cases_total, deaths_total,
-                    recoveries_total, hospitalisations_total, tests_total)
+                    recovered_total, hosp_total, tested_total)
   } else {
     data <- data %>%
       dplyr::select(region_level_1, iso_code, cases_total, deaths_total,
-                    recoveries_total, hospitalisations_total, tests_total)
+                    recovered_total, hosp_total, tested_total)
   }
 
   data <- data %>%

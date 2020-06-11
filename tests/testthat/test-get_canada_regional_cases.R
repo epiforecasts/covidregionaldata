@@ -7,7 +7,7 @@ test_that("get_canada_regional_cases data source is unchanged", {
 })
 
 test_that("get_canada_regional_cases returns the correct column names", {
-  expected_colnames <- c("region_level_1", "date", "cases_new", "cases_total", "deaths_total", "recoveries_total", "tests_total")
+  expected_colnames <- c("region_level_1", "date", "cases_new", "cases_total", "deaths_total", "recovered_total", "tested_total")
 
   returned_colnames <- colnames(get_canada_regional_cases())
 
@@ -23,6 +23,6 @@ test_that("get_canada_regional_cases returns correct column types", {
   expect_is(data$cases_new, "numeric")
   expect_is(data$cases_total, "numeric")
   expect_is(data$deaths_total, "numeric")
-  expect_is(data$recoveries_total, "numeric")
-  expect_is(data$tests_total, "numeric")
+  expect_is(data$recovered_total, "numeric")
+  expect_is(data$tested_total, "numeric")
 })

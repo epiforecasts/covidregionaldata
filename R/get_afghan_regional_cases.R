@@ -29,15 +29,15 @@ get_afghan_regional_cases <- function(){
                      region_level_1 = stringr::str_replace(Province, " Province", ""),
                      cases_total = Cases,
                      deaths_total = Deaths,
-                     recoveries_total = Recoveries) %>%
+                     recovered_total = Recoveries) %>%
     dplyr::mutate(cases_total = dplyr::recode(cases_total, "–" = NA_character_),
                   deaths_total = dplyr::recode(deaths_total, "–" = NA_character_),
-                  recoveries_total = dplyr::recode(recoveries_total, "–" = NA_character_)) %>%
+                  recovered_total = dplyr::recode(recovered_total, "–" = NA_character_)) %>%
     tidyr::drop_na() %>%
     # Transform (remove commas in numbers)
     dplyr::mutate(cases_total = as.numeric(stringr::str_remove_all(cases_total, ",")),
                   deaths_total = as.numeric(stringr::str_remove_all(deaths_total, ",")),
-                  recoveries_total = as.numeric(stringr::str_remove_all(recoveries_total, ",")))
+                  recovered_total = as.numeric(stringr::str_remove_all(recovered_total, ",")))
 
   return(data)
 }
