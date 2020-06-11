@@ -27,7 +27,7 @@ A linelist of case data
 This function downloads the latest non-Hubei linelist. It uses \code{memoise} to cache the
 results locally. To clear the cache and redownload the data use \code{reset_cache}. The cache will be located
 in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
-To account for this we keep a cache in the \code{NCoVUtils} GitHub repo which this function will fall back to with a warning if the source
+To account for this we keep a cache in the \code{covidregionaldata} GitHub repo which this function will fall back to with a warning if the source
 cannot be downloaded.
 }
 \examples{

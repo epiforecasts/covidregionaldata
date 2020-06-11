@@ -19,7 +19,7 @@ and is available on github: https://github.com/pcm-dpc/COVID-19
 get_italy_regional_cases
 
 \dontrun{
-day_of_cases <- NCoVUtils::get_italy_regional_cases() \%>\%
+day_of_cases <- covidregionaldata::get_italy_regional_cases() \%>\%
 dplyr::filter(date == "2020-02-24")
 
 rnaturalearth::ne_states("Italy", returnclass = "sf") \%>\%
