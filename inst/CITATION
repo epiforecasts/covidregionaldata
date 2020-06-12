@@ -1,7 +1,7 @@
-citHeader("To cite NCoVUtils in publications use:")
+citHeader("To cite covidregionaldata in publications use:")
 
 citEntry(entry = "Article",
-  title        = "NCoVUtils: Utility functions for the 2019-NCoV outbreak",
+  title        = "covidregionaldata: Utility functions for the 2019-NCoV outbreak",
   author       = personList(as.person("Sam Abbott"), as.person("Joel Hellewell"),
                             as.person("James D. Munday"), as.person("Katharine Sherratt"), as.person("Sebastian Funk")),
   journal      = "-",
@@ -13,6 +13,6 @@ citEntry(entry = "Article",
 
   textVersion  =
   paste("Sam Abbott, Joel Hellewell, James D. Munday, Katharine Sherratt, and Sebastian Funk (2020).",
-        "NCoVUtils: Utility functions for the 2019-NCoV outbreak,",
+        "covidregionaldata: Utility functions for the 2019-NCoV outbreak,",
         "DOI: 10.5281/zenodo.3635417")
 )

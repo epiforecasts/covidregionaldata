@@ -1,10 +1,10 @@
-# Utility functions for the Covid-19 outbreak
+# Data extraction tools for the Covid-19 outbreak
 
-[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/NCoVUtils/master?urlpath=rstudio)
-[![Build Status](https://travis-ci.com/epiforecasts/NCoVUtils.svg?branch=master)](https://travis-ci.com/epiforecasts/NCoVUtils)
-  [![Codecov test coverage](https://codecov.io/gh/epiforecasts/NCoVUtils/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/NCoVUtils?branch=master)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat)](https://github.com/epiforecasts/NCoVUtils)
-[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/NCoVUtils)
+[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
+![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)
+[![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
+[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/238177228.svg)](https://zenodo.org/badge/latestdoi/238177228)
 
 
@@ -12,10 +12,19 @@
 
 ## Installation
 
-Install the package and all dependencies with:
+Install the stable version of the package using
+[`{drat}`](https://epiforecasts.io/drat/):
 
-```r
-remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
+``` r
+install.packages("drat")
+drat:::add("epiforecasts")
+install.packages("covidregionaldata")
+```
+
+Install the development version of the package with:
+
+``` r
+remotes::install_github("epiforecasts/covidregionaldata")
 ```
 
 ## Usage
@@ -26,7 +35,7 @@ There are three main functions to extract sub-national level data by country. Th
 The three ways to view the data (and the related functions) are:
 1. Long format - this is the standard used by the Covid19R package. To get data in this format use:
 ```r
-NCoVUtils::get_long_format_regional_covid_data("Belgium")
+covidregionaldata::get_long_format_regional_covid_data("Belgium")
 ```
 
 This returns a dataset with the following structure
@@ -39,7 +48,7 @@ This returns a dataset with the following structure
 
 2. Wide format (aka time series format). To get data in this format use:
 ```r
-NCoVUtils::get_wide_format_regional_covid_data("Belgium")
+covidregionaldata::get_wide_format_regional_covid_data("Belgium")
 ```
 
 This returns a dataset with the following structure
@@ -52,7 +61,7 @@ This returns a dataset with the following structure
 
 3. Totals only (cumulative data) up to the latest date available in the data (usually today's date or yesterday). To get data in this format use:
 ```r
-NCoVUtils::get_totals_only_regional_covid_data("Belgium")
+covidregionaldata::get_totals_only_regional_covid_data("Belgium")
 ```
 
 This returns a dataset with the following structure
@@ -65,7 +74,7 @@ Brussels|BE-BRU|5914|1463|0|2560|0
 
 Dates will always be in YYYY-MM-DD format and the ISO codes are ISO-3166-2 codes. The data fields for counts returned will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then that data field will be all NA values (or 0 if accessing totals data). Note that some rows may have NA in `*_new` data fields if the data was missing from the source also. 
 
-The counts included in data from NCoVUtils are
+The counts included in data from covidregionaldata are
 * cases (number of confirmed cases)
 * deaths (number of confirmed deaths)
 * recovered (number of confirmed recoveries)
@@ -75,13 +84,13 @@ The counts included in data from NCoVUtils are
 Each count data field will have either `_new` or `_total` as a suffix; those with `*_new` names are new counts for the day/region in question; those with `*_total` names are cumulative counts for that region up to and including the date. 
 
 #### Region Levels
-All countries have data for regions at the admin-1 level, the largest regions available (e.g. state in the USA). *Some* countries have data for regions at the admin-2 level (e.g. county in the USA). Requesting data stratified by Level 2 regions instead of Level 1 is done by using the `include_level_2_regions` logical argument in the functions above. Note that `NCoVUtils::get_long_format_regional_covid_data()` does not support this currently. 
+All countries have data for regions at the admin-1 level, the largest regions available (e.g. state in the USA). *Some* countries have data for regions at the admin-2 level (e.g. county in the USA). Requesting data stratified by Level 2 regions instead of Level 1 is done by using the `include_level_2_regions` logical argument in the functions above. Note that `covidregionaldata::get_long_format_regional_covid_data()` does not support this currently. 
 
 The datasets will also have the corresponding level 1 region included along with its ISO-3166-2 code. 
 
 For an example of requesting Level 2 regions:
 ```r
-NCoVUtils::get_wide_format_regional_covid_data("Belgium", include_level_2_regions = TRUE)
+covidregionaldata::get_wide_format_regional_covid_data("Belgium", include_level_2_regions = TRUE)
 ```
 
 This returns a dataset with the following structure
@@ -123,19 +132,19 @@ Asia
 There are two sources of worldwide, country-level data on cases and deaths.
 
 1. Extract total global cases and deaths by country, and specify source, using:
-  + ```NCoVUtils::get_total_cases(source = c("WHO", "ECDC"))```
+  + ```covidregionaldata::get_total_cases(source = c("WHO", "ECDC"))```
 2. Extract daily international case and death counts compiled by the WHO using:
-  + ```NCoVUtils::get_who_cases(country = NULL, daily = TRUE))```
+  + ```covidregionaldata::get_who_cases(country = NULL, daily = TRUE))```
 3. Extract daily international case and death counts compiled by ECDC using:
-  + ```NCoVUtils::get_ecdc_cases()```
+  + ```covidregionaldata::get_ecdc_cases()```
 
 A further function for worldwide data extracts non-pharmaceutical interventions by country:
 
-* ```NCoVUtils::get_interventions_data()```
+* ```covidregionaldata::get_interventions_data()```
 
 And anonymised international patient linelist data can be imported and cleaned with:
 
-* ```NCoVUtils::get_linelist()```
+* ```covidregionaldata::get_linelist()```
 
 
 ## Development

@@ -1,4 +1,4 @@
 library(testthat)
-library(NCoVUtils)
+library(covidregionaldata)
 
-test_check("NCoVUtils")
+test_check("covidregionaldata")

@@ -18,7 +18,7 @@ get_cumulative_from_daily <- function(column) {
 }
 
 #' Add extra columns filled with NA values to a dataset.
-#' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the NCovUtils package return datasets
+#' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets
 #' of the same underlying structure (i.e. same columns).
 #' @param data a data.frame
 #' @return a data.frame with relevant NA columns added

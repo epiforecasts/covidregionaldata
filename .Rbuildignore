@@ -9,4 +9,5 @@
 ^.cache$
 ^codecov\.yml$
 ^data-raw$
+^\.github$
 ^dev-helpers\.R$

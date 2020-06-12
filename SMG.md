@@ -1,14 +1,14 @@
-# NCoVUtils System Maintenance Guide
+# covidregionaldata System Maintenance Guide
 
 ## Using this Guide
-This guide is for those wishing to contribute code to the NCoVUtils package. For details on how the package works and its general functionality, as well as installation, see the main README.md file in this repository. 
+This guide is for those wishing to contribute code to the covidregionaldata package. For details on how the package works and its general functionality, as well as installation, see the main README.md file in this repository. 
 
-We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/NCoVUtils/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/NCoVUtils/issues/81) and [#84](https://github.com/epiforecasts/NCoVUtils/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/NCoVUtils/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
+We are working to improve and expand the package: please see the [Issues](https://github.com/epiforecasts/covidregionaldata/issues) and feel free to comment. We are keen to standardise geocoding (issues [#81](https://github.com/epiforecasts/covidregionaldata/issues/81) and [#84](https://github.com/epiforecasts/covidregionaldata/issues/84)) and include data on priority countries ([#72](https://github.com/epiforecasts/covidregionaldata/issues/72)). As our capacity is limited, we would very much appreciate any help on these and welcome new pull requests.
 
 ## Set up
 Set your working directory to the home directory of this project (or use the provided RStudio project). Install the analysis and all dependencies with:
 ```r
-remotes::install_github("epiforecasts/NCoVUtils", dependencies = TRUE)
+remotes::install_github("epiforecasts/covidregionaldata", dependencies = TRUE)
 ```
 
 ### Render documentation
@@ -20,34 +20,34 @@ Rscript inst/scripts/render_output.R
 ### Docker
 This package is developed in a docker container based on the tidyverse docker image.
 
-To build the docker image run (from the `NCoVUtils` directory):
+To build the docker image run (from the `covidregionaldata` directory):
 ```bash
-docker build . -t ncovutils
+docker build . -t covidregionaldata
 ```
 
 To run the docker image run:
 ```bash
-docker run -d -p 8787:8787 --name ncovutils -e USER=ncovutils -e PASSWORD=ncovutils ncovutils
+docker run -d -p 8787:8787 --name covidregionaldata -e USER=covidregionaldata -e PASSWORD=covidregionaldata covidregionaldata
 ```
 
-The rstudio client can be found on port :8787 at your local machines IP. The default username:password is ncovutils:ncovutils, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.
+The rstudio client can be found on port :8787 at your local machines IP. The default username:password is covidregionaldata:covidregionaldata, set the user with -e USER=username, and the password with - e PASSWORD=newpasswordhere. The default is to save the analysis files into the user directory.
 
-To mount a folder (from your current working directory - here assumed to be `tmp`) in the docker container to your local system use the following in the above docker run command (as given mounts the whole `ncovutils` directory to `tmp`).
+To mount a folder (from your current working directory - here assumed to be `tmp`) in the docker container to your local system use the following in the above docker run command (as given mounts the whole `covidregionaldata` directory to `tmp`).
 
 ```{bash, eval = FALSE}
---mount type=bind,source=$(pwd)/tmp,target=/home/ncovutils
+--mount type=bind,source=$(pwd)/tmp,target=/home/covidregionaldata
 ```
 
 To access the command line run the following:
 ```{bash, eval = FALSE}
-docker exec -ti ncovutils bash
+docker exec -ti covidregionaldata bash
 ```
 
-Alternatively the package environment can be accessed via [binder](https://mybinder.org/v2/gh/epiforecasts/ncovutils/master?urlpath=rstudio).
+Alternatively the package environment can be accessed via [binder](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio).
 
 ## Development
 ### Architecture
-NCoVUtils has three main data getter functions. They all return different formats of the same data. The majority of the functionality for all three functions is kept in the `get_regional_covid_data()` function. The three main functions are essentially wrappers around this with some formatting to reach the desired output. `get_regional_covid_data()` calls country-specific data getters (dependent on the country given by the user), and then mostly uses helpers from the `helper.R` file to clean and sanitise the data. 
+covidregionaldata has three main data getter functions. They all return different formats of the same data. The majority of the functionality for all three functions is kept in the `get_regional_covid_data()` function. The three main functions are essentially wrappers around this with some formatting to reach the desired output. `get_regional_covid_data()` calls country-specific data getters (dependent on the country given by the user), and then mostly uses helpers from the `helper.R` file to clean and sanitise the data. 
 
 In general these are the steps it follows (see picture below for a diagram).
 

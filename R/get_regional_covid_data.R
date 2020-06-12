@@ -1,4 +1,4 @@
-#' The main calculation function for NCovUtils which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.
+#' The main calculation function for covidregionaldata which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.
 #' @description Gets Covid-19 data related to cases, deaths, hospitalisations, recoveries and testing for sub-regions of a given country.
 #' @param country Character String specifying the country to get data from. For options see the documentation.
 #' @param totals Boolean. If TRUE, returns only totals count, if FALSE returns the full dataset.
