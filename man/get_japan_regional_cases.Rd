@@ -10,3 +10,42 @@ get_japan_regional_cases()
 Extracts regional case counts for Japan.
 \href{https://mhlw-gis.maps.arcgis.com/apps/opsdashboard/index.html#/0c5d0502bbb54f9a8dddebca003631b8}{Source}.
 }
+\examples{
+get_japan_regional_cases()
+
+\dontrun{
+
+library(ggplot2)
+library(dplyr)
+
+ # Mapping: set up
+ data <- get_japan_regional_cases()
+
+ regions <- rnaturalearth::ne_states("Japan", returnclass = "sf")
+
+ regions_with_data <- regions \%>\%
+   dplyr::left_join(data, by = c("name" = "region")) \%>\%
+   dplyr::mutate(cases =  ifelse(is.na(cases), 0, cases)
+
+   # Map inset: Okinawa
+   jp_okinawa <- dplyr::filter(regions_with_data, name == "Okinawa")
+
+   jp_okinawa <- ggplot2::ggplot(jp_okinawa) +
+   ggplot2::geom_sf(ggplot2::aes(fill = cases)) +  ggplot2::coord_sf(datum = NA) +
+   ggplot2::xlab(jp_okinawa$region) +
+   ggplot2::theme_bw() +
+   ggplot2::theme(legend.position = "none")
+
+   ## Map: mainland with insets
+   jp_main <- dplyr::filter(regions_with_data, name != "Okinawa") \%>\%
+   ggplot2::ggplot() +
+   ggplot2::geom_sf(ggplot2::aes(fill = cases)) +
+   ggplot2::coord_sf(crs = sf::st_crs(4326), xlim = c(127, 146), ylim = c(29, 46)) +
+   ggplot2::theme_bw()
+
+   jp_main +
+   ggplot2::annotation_custom(
+   grob = ggplot2::ggplotGrob(jp_okinawa), xmin = 140,  xmax = 146,  ymin = 24,  ymax = 37)
+
+}
+}
