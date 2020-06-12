@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_regional_covid_data.R
 \name{get_regional_covid_data}
 \alias{get_regional_covid_data}
-\title{The main calculation function for NCovUtils which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.}
+\title{The main calculation function for covidregionaldata which returns regional, daily-updated data for a given country to be passed into the relevant exported wrapper function.}
 \usage{
 get_regional_covid_data(country, totals, include_level_2_regions)
 }

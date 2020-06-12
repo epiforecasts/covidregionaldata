@@ -13,6 +13,6 @@ add_extra_na_cols(data)
 a data.frame with relevant NA columns added
 }
 \description{
-Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the NCovUtils package return datasets
+Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets
 of the same underlying structure (i.e. same columns).
 }
