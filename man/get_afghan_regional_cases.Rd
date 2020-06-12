@@ -7,7 +7,7 @@
 get_afghan_regional_cases()
 }
 \value{
-A dataframe of daily Afghan regional cases, deaths, and recovered
+A dataframe of daily Afghan provincial cases and deaths to be further processed by \code{get_regional_covid_data()}.
 }
 \description{
 Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province

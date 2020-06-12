@@ -1,78 +1,59 @@
-#' Get German daily cases by Bundeslander or Landkreis
+#' Get German daily cases by Bundesland only
 #'
-#'
-#' @description Fetches COVID case counts by region in Germany.
+#' @description Fetches COVID case counts stratified by Bundesland in Germany.
 #' This data is sourced from the Robert Koch Institute:
 #' https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
-#' @param geography Character string indicating the geographic level to return.
-#' @return A dataframe of case and death counts in German regions
-#' @export
-#' @importFrom memoise cache_filesystem memoise
-#' @importFrom dplyr select group_by mutate summarise
-#' @importFrom readr read_csv
-#' @importFrom lubridate ymd_hms
-#' @examples
+#' selects and sanitises the relevant columns
+#' @return A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
+#' @importFrom dplyr select group_by mutate summarise %>%
+#' @importFrom lubridate ymd_hms as_date
 #'
+get_germany_regional_cases_only_level_1 <- function() {
+
+  # Path to data
+  url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
+
+  data <- csv_reader(file = url) %>%
+    dplyr::select(date = Meldedatum,
+                  region_level_1 = Bundesland,
+                  cases_new = AnzahlFall,
+                  deaths_new = AnzahlTodesfall) %>%
+    dplyr::mutate(date = lubridate::as_date(lubridate::ymd_hms(date))) %>%
+    dplyr::group_by(region_level_1, date) %>%
+    dplyr::summarise(cases_new = as.numeric(sum(cases_new > 0)),
+                     deaths_new = as.numeric(sum(deaths_new > 0))) %>%
+    dplyr::ungroup()
+
+  return(data)
+}
+
+#' Get German daily cases by Landkreis
 #'
-#'\dontrun{
-#'country <- rnaturalearth::ne_countries(scale="large",
-#'                                         country = "Germany",
-#'                                         returnclass = 'sf')
+#' @description Fetches COVID case counts stratified by Landkreis in Germany.
+#' This data is sourced from the Robert Koch Institute:
+#' https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
+#' selects and sanitises the relevant columns
+#' @return A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
+#' @importFrom dplyr select group_by mutate summarise %>%
+#' @importFrom lubridate ymd_hms as_date
 #'
-#'regions <- rnaturalearth::ne_states("Germany", returnclass = "sf")
-#'
-#'data <- get_germany_regional_cases() %>%
-#'   dplyr::filter(date == max(date))
-#'
-#'regions_with_data <- regions %>%
-#'   dplyr::left_join(data,
-#'                   by = c("name" = "state"))
-#'
-#'ggplot2::ggplot(regions_with_data) +
-#'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
-#'
-#'}
-#'
+get_germany_regional_cases_with_level_2 <- function() {
 
-get_germany_regional_cases <- function(geography = "states") {
+  # Path to data
+  url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
 
-  if(!geography %in% c("states", "districts")) {
-    stop('Please specify geography: "states" (Bundesland), "districts" (Landkreis). Default: "states".')
-  }
+  data <- csv_reader(file = url) %>%
+    dplyr::select(date = Meldedatum,
+                  region_level_1 = Bundesland,
+                  region_level_2 = Landkreis,
+                  cases_new = AnzahlFall,
+                  deaths_new = AnzahlTodesfall) %>%
+    dplyr::mutate(date = lubridate::as_date(lubridate::ymd_hms(date)),
+                  region_level_2 = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)", region_level_2, fixed = FALSE)) %>%
+    dplyr::group_by(region_level_1, region_level_2, date) %>%
+    dplyr::summarise(cases_new = as.numeric(sum(cases_new > 0)),
+                     deaths_new = as.numeric(sum(deaths_new > 0))) %>%
+    dplyr::ungroup()
 
-  path <- "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
-
-  ## Set up cache
-  ch <- memoise::cache_filesystem(".cache")
-
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-
-  germany <- mem_read(file = path) %>%
-    dplyr::select(
-      state_id = IdBundesland,
-      state = Bundesland,
-      district_id = IdLandkreis,
-      district = Landkreis,
-      date = Meldedatum,
-      cases = AnzahlFall,
-      deaths = AnzahlTodesfall
-    ) %>%
-    dplyr::mutate(date = lubridate::ymd_hms(date) %>%
-                    as.Date())
-
-  germany_state <- germany %>%
-    dplyr::group_by(state, date) %>%
-    dplyr::summarise(cases = sum(cases),
-                     deaths = sum(deaths))
-  germany_district <- germany %>%
-    dplyr::group_by(district, date) %>%
-    dplyr::summarise(cases = sum(cases),
-                     deaths = sum(deaths))
-
-
-  if (geography == "states"){
-    return(germany_state)
-  }else if (geography == "districts"){
-    return(germany_district)
-  }
+  return(data)
 }

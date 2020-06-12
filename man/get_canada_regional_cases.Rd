@@ -2,30 +2,15 @@
 % Please edit documentation in R/get_canada_regional_cases.R
 \name{get_canada_regional_cases}
 \alias{get_canada_regional_cases}
-\title{Fetch daily COVID cases by province for Canada}
+\title{Helper function to fetch daily COVID cases by province for Canada and do dataset-specific processing before passing to get_regional_covid_data()}
 \usage{
-get_canada_regional_cases(out = "timeseries")
-}
-\arguments{
-\item{out}{Character String specifying output data format "timeseries", "total", default: "timeseries".}
+get_canada_regional_cases()
 }
 \value{
-A data.frame of COVID cases by province in Canada
+A data.frame of COVID cases by province in Canada, ready to be used by get_regional_covid_data()
 }
 \description{
 Fetches daily COVID cases, and deaths by province collated by Provincial Canadian Health Authorities
 Data is available at https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html
-}
-\examples{
-
-\dontrun{
- total_cases = get_canada_regional_cases(out = "total")
- 
- rnaturalearth::ne_states(country = "canada", returnclass="sf") \%>\% 
-   dplyr::left_join(total_cases, by = c('name_en' = 'province')) \%>\% 
-   ggplot2::ggplot() +
-   ggplot2::theme_void() +
-   ggplot2::geom_sf(aes(fill = cases_confirmed)) +
-   ggplot2::labs(fill = 'Confirmed Cases')  
-}
+selects the relevant columns, sanitises various columns and gets the daily counts from cumulative columns.
 }
