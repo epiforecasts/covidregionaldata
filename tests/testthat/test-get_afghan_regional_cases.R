@@ -1,7 +1,8 @@
-test_that("get_afghan_regional_cases data source is unchanged", {
+test_that("get_afghan_regional_cases data source is unchanged and up to date", {
   data <- readr::read_csv("https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv")
   expected_colnames <- c("Province", "Cases", "Deaths", "Recoveries", "Active Cases", "Date")
   expect_true(all(expected_colnames %in% colnames(data)))
+  expect_true(max(as.Date(data$Date[-1]), na.rm = TRUE) > Sys.Date() - 7)
 })
 
 test_that("get_afghan_regional_cases returns the correct column names", {

@@ -1,4 +1,4 @@
-test_that("get_germany_regional_cases data source is unchanged", {
+test_that("get_germany_regional_cases data source is unchanged and up to date", {
 
   data <- readr::read_csv("https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv")
 
@@ -6,6 +6,7 @@ test_that("get_germany_regional_cases data source is unchanged", {
                         "AnzahlFall", "AnzahlTodesfall", "Meldedatum", "IdLandkreis", "Datenstand", "NeuerFall",
                         "NeuerTodesfall", "Refdatum", "NeuGenesen", "AnzahlGenesen", "IstErkrankungsbeginn", "Altersgruppe2")
   expect_true(all(expected_colnames %in% colnames(data)))
+  expect_true(max(as.Date(data$Meldedatum), na.rm = TRUE) > Sys.Date() - 7)
 })
 
 test_that("get_germany_regional_cases returns the correct column names", {
