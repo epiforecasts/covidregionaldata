@@ -1,110 +1,43 @@
-
 #' Fetch daily COVID cases by state for United States of America
-#' @description Fetches daily COVID cases by state or county collated by the
+#' @description Fetches daily COVID cases county collated by the
 #' New York Times
 #' Data is available at https://github.com/nytimes/covid-19-data
-#' @param level Character String specifying admin level "state", "county", default: "state".
-#' @param out Character String specifying output data format "timeseries", "total", default: "timeseries".
 #' @return A data.frame of COVID cases by region in the US
-#' @export
-#' @importFrom memoise cache_filesystem memoise
-#' @importFrom dplyr select summarise arrange group_by mutate ungroup 
-#' @importFrom readr read_csv
-#' @importFrom tidyr drop_na
-#' @examples
-#' get_us_regional_cases(level = 'state', out = 'timeseries')
-#'
-#' \dontrun{
-#'
-#'  regions <- rnaturalearth::ne_states("United States of America", returnclass = "sf")
-#'
-#'  cases <- get_us_regional_cases(out = 'total')
-#'
-#'  regions %>% dplyr::filter(name %in% cases$state) %>%
-#'  ggplot2::ggplot() + ggplot2::geom_sf()
-#'
-#' }
+#' @importFrom dplyr rename mutate
+get_us_regional_cases_with_level_2 <- function(){
+  
+  url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
 
-get_us_regional_cases <- function(level = 'state', out = 'timeseries'){
+  data <- csv_reader(url) %>% 
+      dplyr::rename(region_level_2 = county,
+                    region_level_1 = state,
+                    level_2_region_code = fips,
+                    cases_total = cases,
+                    deaths_total = deaths) %>% 
+      dplyr::mutate(cases_total = replace(cases_total, cases_total < 0 , 0),
+                    deaths_total = replace(deaths_total, deaths_total < 0 , 0))
+
+  return(data)
+}
+
+
+#' Fetch daily COVID cases by state for United States of America
+#' @description Fetches daily COVID cases county collated by the
+#' New York Times
+#' Data is available at https://github.com/nytimes/covid-19-data
+#' @return A data.frame of COVID cases by region in the US
+#' @importFrom dplyr rename mutate
+get_us_regional_cases_only_level_1 <- function(){
+
+  url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
   
-  if(!out %in% c('timeseries', 'total')){
-    stop('Unknown input. Please provide output format: "timeseries", "total". default = "timeseries"')
-  }
+  data <- csv_reader(url) %>% 
+    dplyr::rename(region_level_1 = state,
+                  cases_total = cases,
+                  deaths_total = deaths) %>% 
+    dplyr::mutate(cases_total = replace(cases_total, cases_total < 0 , 0),
+                  deaths_total = replace(deaths_total, deaths_total < 0 , 0)) %>%
+    dplyr::select(date, region_level_1, cases_total, deaths_total)
   
-  if(!level %in% c('state', 'county')){
-    stop('Unknown input. Please provide admin level: "state", "county". default = "state"')
-  }
-  
-  nyt_state_url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
-  nyt_county_url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
-  
-  ch <- memoise::cache_filesystem(".cache")
-  
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-  
-  get_nyt_state <- function(path, out){
-    
-    cases <- mem_read(path) %>% 
-      dplyr::arrange(date) %>% 
-      dplyr::group_by(state) %>% 
-      dplyr::mutate(cases = c(0, diff(cases)),
-                    deaths = c(0, diff(deaths))) %>%
-      dplyr::mutate(cases = replace(cases, cases < 0 , 0),
-                    deaths = replace(deaths, deaths < 0 , 0)) %>% 
-      dplyr::ungroup()
-    
-    
-    if (out == 'total'){
-      cases <- cases %>% 
-        dplyr::select(-date) %>% 
-        dplyr::group_by(state) %>% 
-        dplyr::summarise(fips = unique(fips),
-                         cases = sum(cases, na.rm = TRUE),
-                         deaths = sum(deaths, na.rm = TRUE)) %>% 
-        dplyr::arrange(-cases)
-    }
-    
-    return(cases)
-    
-  }
-  
-  get_nyt_county <- function(path, out){
-    
-    cases <- mem_read(path) %>% 
-      dplyr::arrange(date) %>% 
-      dplyr::group_by(fips) %>% 
-      tidyr::drop_na(fips) %>% 
-      dplyr::mutate(cases = c(0, diff(cases)),
-                    deaths = c(0, diff(deaths))) %>% 
-      dplyr::mutate(cases = replace(cases, cases < 0 , 0),
-                    deaths = replace(deaths, deaths < 0 , 0)) %>% 
-      dplyr::ungroup()
-    
-    if (out == 'total'){
-      cases <- cases %>%
-        tidyr::drop_na() %>% 
-        dplyr::select(-date) %>% 
-        dplyr::group_by(fips) %>%
-        dplyr::summarize(county = unique(county),
-                         state = unique(state),
-                         cases = sum(cases, na.rm = TRUE),
-                         deaths = sum(deaths, na.rm = TRUE)) %>% 
-        dplyr::arrange(-cases)
-    }
-    
-    
-    return(cases)
-    
-  }
-  
-  if (level == 'state'){
-    
-    return(get_nyt_state(nyt_state_url, out))
-    
-  }else if(level == 'county'){
-    
-    return(get_nyt_county(nyt_county_url, out))
-    
-  }
-  
+  return(data)
 }
