@@ -10,18 +10,9 @@
 #' @importFrom stringr str_replace str_remove_all
 #' @importFrom lubridate dmy
 #' @examples
-#' \dontrun{
+#'
 #' ## Code
 #' get_afghan_regional_cases()
-#' ## Mapping
-#' regions <- rnaturalearth::ne_states(geounit = "Afghanistan", returnclass = "sf")
-#' data <- get_afghan_regional_cases() %>%
-#'   dplyr::filter(date == max(date))
-#' regions_with_data <- dplyr::left_join(regions, data, by = "iso_3166_2")
-#' regions_with_data %>%
-#'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
-#'   ggplot2::geom_sf()
-#'}
 
 get_afghan_regional_cases <- function(){
 

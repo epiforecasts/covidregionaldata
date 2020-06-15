@@ -50,9 +50,9 @@
 
 get_japan_regional_cases <- function(){
   
-#  #Return error here. 
-#  print('This data source has changed. We are currently working to fix it.')
-#  return(tibble())
+  #  #Return error here. 
+  #  print('This data source has changed. We are currently working to fix it.')
+  #  return(tibble())
   
   # Locate source
   location <- "https://services8.arcgis.com/JdxivnCyd1rvJTrY/arcgis/rest/services/covid19_list_csv_EnglishView/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=No%20desc%2C%E7%A2%BA%E5%AE%9A%E6%97%A5%20desc&resultOffset=0&resultRecordCount=2000&cacheHint=true"
@@ -74,7 +74,6 @@ get_japan_regional_cases <- function(){
     dplyr::full_join(regions, by = c("region" = "value")) %>%
     dplyr::select(region, cases) %>%
     dplyr::mutate(cases = tidyr::replace_na(cases, 0))
-
+  
   return(data_df)
 }
-
