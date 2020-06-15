@@ -53,8 +53,7 @@ rename_region_column <- function(data, country) {
                                "brazil" = "state",
                                "germany" = "bundesland",
                                "india" = "state",
-                               "italy" = "region",
-                               "usa" = "state")
+                               "italy" = "region")
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
 
@@ -62,8 +61,7 @@ rename_region_column <- function(data, country) {
     level_2_region_name <- switch(tolower(country),
                                 "belgium" = "province",
                                 "brazil" = "city",
-                                "germany" = "landkreis",
-                                "usa" = "county")
+                                "germany" = "landkreis")
 
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
@@ -100,11 +98,10 @@ fill_empty_dates_with_na <- function(data) {
 
   if ("region_level_2" %in% colnames(data)) {
     data <- data %>%
-      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_2, level_2_region_code,
-                                                                                    region_level_1, iso_code))
+      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_2, region_level_1))
   } else {
     data <- data %>%
-      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_1, iso_code))
+      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), region_level_1)
   }
 
   return(data.frame(data))
@@ -124,11 +121,11 @@ complete_cumulative_columns <- function(data) {
     if (cumulative_col_name %in% colnames(data)){
       if ("region_level_2" %in% colnames(data)) {
         data <- data %>%
-          dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code) %>%
+          dplyr::group_by(region_level_1, region_level_2) %>%
           tidyr::fill(cumulative_col_name)
       } else {
         data <- data %>%
-          dplyr::group_by(region_level_1, iso_code,) %>%
+          dplyr::group_by(region_level_1) %>%
           tidyr::fill(cumulative_col_name)
       }
     }

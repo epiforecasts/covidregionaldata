@@ -7,29 +7,16 @@ get_iso_codes <- function(country) {
                          "canada" = get_canada_iso_codes,
                          "germany" = get_germany_iso_codes,
                          "india" = get_india_iso_codes,
-                         "italy" = get_italy_iso_codes,
-                         "usa" = get_us_iso_codes)
+                         "italy" = get_italy_iso_codes)
 
   iso_codes_table <- do.call(iso_code_fun, list())
 
   return(iso_codes_table)
 }
 
-get_level_2_region_codes <- function(country) {
-  
-  level_2_code_fun <- switch(country,
-                             "belgium" = get_belgium_level_2_codes,
-                             "brazil" = get_brazil_level_2_codes,
-                             "germany" = get_germany_level_2_codes,
-                             "usa" = get_us_level_2_codes)
-  
-  level_2_codes_table <- do.call(level_2_code_fun, list())
-  
-  return(level_2_codes_table)
-}
 
 
-## Level 1 regions
+
 get_afghan_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("AF-BAL", "AF-BAM", "AF-BDG", "AF-BDS", "AF-BGL", "AF-DAY", "AF-FRA", "AF-FYB",
@@ -111,51 +98,3 @@ get_italy_iso_codes <- function() {
   return(iso_codes)
 }
 
-get_us_iso_codes <- function() {
-  iso_codes <- tibble::tibble(
-    iso_code = c("US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
-                 "US-HI", "US-ID", "US-IL", "US-IN", "US-IA", "US-KS", "US-KY", "US-LA", "US-ME", "US-MD",
-                 "US-MA", "US-MI", "US-MN", "US-MS", "US-MO", "US-MT", "US-NE", "US-NV", "US-NH", "US-NJ",
-                 "US-NM", "US-NY", "US-NC", "US-ND", "US-OH", "US-OK", "US-OR", "US-PA", "US-RI", "US-SC",
-                 "US-SD", "US-TN", "US-TX", "US-UT", "US-VE", "US-VA", "US-WA", "US-WV", "US-WI", "US-WY",
-                 "US-DC", "US-AS", "US-GU", "US-MP", "US-PR", "US-UM", "US-VI"),
-    region = c("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
-               "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", 
-               "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", 
-               "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", 
-               "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-               "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
-               "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia",
-               "American Samoa", "Guam", "Northern Mariana Islands", "Puerto Rico", "Minor Outlying Islands",
-               "Virgin Islands"))
-  return(iso_codes)
-}
-
-
-## Level 2 regions
-get_belgium_level_2_codes <- function() {
-  region_codes <- tibble::tibble(
-    level_2_region_code = c("BE-VAN", "BE-BRU", "BE-WLG", "BE-VLI", "BE-VOV", "BE-VBR",
-                            "BE-VWV", "BE-WBR", "BE-WHT", "BE-WNA", NA, "BE-WLX"),
-    region = c("Antwerpen", "Brussels", "Liège", "Limburg", "OostVlaanderen", "VlaamsBrabant", 
-               "WestVlaanderen", "BrabantWallon", "Hainaut", "Namur", "Unknown", "Luxembourg"))
-  return(region_codes)
-}
-
-get_brazil_level_2_codes <- function() {
-  region_codes <- tibble::tibble(
-    level_2_region_code = NA,
-    region = NA)
-  return(region_codes)
-}
-
-get_germany_level_2_codes <- function() {
-  region_codes <- tibble::tibble(
-    level_2_region_code = NA,
-    region = NA)
-  return(region_codes)
-}
-
-get_us_level_2_codes <- function() {
-  return(NA)
-}

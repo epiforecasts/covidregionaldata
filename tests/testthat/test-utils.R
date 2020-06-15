@@ -45,12 +45,8 @@ test_that("rename_region_column does so correctly", {
   df <- data.frame(matrix(rnorm(100), ncol=10))
   colnames(df)[1] <- "region_level_1"
 
-  expect_error(rename_region_column(df, "test"))
   expect_equal(colnames(rename_region_column(df, "canada"))[1], "province")
-  
-  colnames(df)[1] <- "region_level_1"
-  colnames(df)[2] <- "region_level_2"
-  expect_equal(colnames(rename_region_column(df, "belgium"))[1:2], c("region", "province"))
+  expect_error(rename_region_column(df, "test"))
 })
 
 test_that("set_negative_values_to_zero works", {

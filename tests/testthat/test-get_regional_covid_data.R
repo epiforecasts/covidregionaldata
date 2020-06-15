@@ -42,11 +42,7 @@ test_that("get_wide_format_regional_covid_data returns correct wide format data 
   input_data <- get_input_data_for_get_regional_covid_data_tests_with_level_2_regions()
   iso_codes <- tibble::tibble(iso_code = c("ON", "TW", "US"),
                               region = c("Oneland", "Twoland", "USA"))
-  level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
-                                      region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
-  
   returned_data <- with_mock(get_iso_codes = function(country) return(iso_codes),
-                             get_level_2_region_codes = function(country)  return(level_2_region_codes),
                              get_belgium_regional_cases_with_level_2 = function() return(input_data),
                              get_wide_format_regional_covid_data("belgium", include_level_2_regions = TRUE))
 
@@ -76,11 +72,7 @@ test_that("get_totals_only_regional_covid_data returns correct data - admin leve
   input_data <- get_input_data_for_get_regional_covid_data_tests_with_level_2_regions()
   iso_codes <- tibble::tibble(iso_code = c("ON", "TW", "US"),
                               region = c("Oneland", "Twoland", "USA"))
-  level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
-                                      region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
-  
-  returned_data <- with_mock(get_iso_codes = function(country) return(iso_codes),
-                             get_level_2_region_codes = function(country) return(level_2_region_codes),
+  returned_data <- with_mock(get_belgium_iso_codes = function() return(iso_codes),
                              get_belgium_regional_cases_with_level_2 = function() return(input_data),
                              get_totals_only_regional_covid_data("belgium", include_level_2_regions = TRUE))
 
