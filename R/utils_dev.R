@@ -14,5 +14,22 @@ stop_using_memoise <- function() {
   }
 }
 
+#' Reset Cache and Update all Local Data
+#' @return Null
+#' @importFrom memoise cache_filesystem
+reset_cache <- function() {
+  unlink(".cache", recursive = TRUE)
+  cache <- memoise::cache_filesystem(".cache")
+  return(invisible(NULL))
+}
 
-
+#' Pipe operator
+#'
+#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
