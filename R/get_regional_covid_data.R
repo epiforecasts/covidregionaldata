@@ -28,7 +28,8 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
 
   countries_with_level_2_regions <- c("belgium",
                                       "brazil",
-                                      "germany")
+                                      "germany",
+                                      "usa")
 
   if (include_level_2_regions & !(country %in% countries_with_level_2_regions)) {
     warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
@@ -37,16 +38,20 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
 
   #----------------------------------------------#
 
-  # find the correct data-getter
+  # find the correct data-getter and ISO codes
   if (include_level_2_regions) {
 
     get_data_function <- switch(country,
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
+                                "usa" = get_us_regional_cases_with_level_2,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
-
+    
+    iso_codes_table <- get_iso_codes(country)
+    region_level_2_codes_table <- get_level_2_region_codes(country)
+    
   } else {
 
     get_data_function <- switch(country,
@@ -57,22 +62,31 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                                 "germany" = get_germany_regional_cases_only_level_1,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
+                                "usa" = get_us_regional_cases_only_level_1,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
+    
+    iso_codes_table <- get_iso_codes(country)
 
   }
 
-  # get the data and iso codes for level 1 regions
-  data <- do.call(get_data_function, list())
-  iso_codes_table <- get_iso_codes(country)
+  # get the data and ISO codes for level 1 regions
+  data <- do.call(get_data_function, list()) %>% 
+    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region")) 
+  
+  # add level 2 if needed (note USA data has FIPS codes already)
+  if (include_level_2_regions & country != "usa") {
+    data <- data %>%   
+      dplyr::left_join(region_level_2_codes_table, by = c("region_level_2" = "region")) 
+  }
 
-  # group data, dependent on admin levels required
+  # group data, dependent on region levels required
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::group_by(region_level_1, region_level_2)
+      dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code)
   } else {
     data <- data %>%
-      dplyr::group_by(region_level_1)
+      dplyr::group_by(region_level_1, iso_code)
   }
 
   # add columns that aren't there already, clean up data
@@ -82,7 +96,7 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
     set_negative_values_to_zero() %>%
     dplyr::ungroup()
 
-
+  # return now if totals only data is requested
   if (totals) {
     return(tibble::tibble(data))
   }
@@ -91,12 +105,12 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
   data <- data %>%
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
-    complete_cumulative_columns() %>%
-    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region"))
+    complete_cumulative_columns()
 
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::select(date, region_level_2, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
+      dplyr::select(date, region_level_2, level_2_region_code, region_level_1, iso_code, 
+                    cases_new, cases_total, deaths_new, deaths_total,
                     recovered_new, recovered_total, hosp_new, hosp_total,
                     tested_new, tested_total) %>%
       dplyr::arrange(date, region_level_1, region_level_2)
@@ -134,17 +148,19 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
 get_totals_only_regional_covid_data <- function(country, include_level_2_regions = FALSE) {
 
   country <- tolower(country)
-
   data <- get_regional_covid_data(country, totals = TRUE, include_level_2_regions = include_level_2_regions)
-  iso_codes_table <- get_iso_codes(country)
 
+  if (!("region_level_2" %in% colnames(data))) {
+    include_level_2_regions <- FALSE
+  }
+  
   # sum up data if user requests totals
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::group_by(region_level_1, region_level_2)
+      dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code)
   } else {
     data <- data %>%
-      dplyr::group_by(region_level_1)
+      dplyr::group_by(region_level_1, iso_code)
   }
 
   data <- data %>%
@@ -152,13 +168,12 @@ get_totals_only_regional_covid_data <- function(country, include_level_2_regions
                      deaths_total = sum(deaths_new, na.rm = TRUE),
                      recovered_total = sum(recovered_new, na.rm = TRUE),
                      hosp_total = sum(hosp_new, na.rm = TRUE),
-                     tested_total = sum(tested_new, na.rm = TRUE)) %>%
-    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region"))
-
+                     tested_total = sum(tested_new, na.rm = TRUE))
 
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::select(region_level_2, region_level_1, iso_code, cases_total, deaths_total,
+      dplyr::select(region_level_2, level_2_region_code,
+                    region_level_1, iso_code, cases_total, deaths_total,
                     recovered_total, hosp_total, tested_total)
   } else {
     data <- data %>%

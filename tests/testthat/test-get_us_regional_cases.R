@@ -1,32 +1,48 @@
-source('./custom_tests/expect_colname.R')
-
-test_that("get_us_regional_cases cases works as expected", {
+test_that("get_us_regional_cases data source is unchanged", {
   
-  base <- get_us_regional_cases(level = 'state', out = 'timeseries')
-  expect_is(base, "data.frame")
-  expect_is(base$date, "Date")
-  expect_true(sum(as.numeric(base$cases) < 0) == 0)
-  expect_true(sum(as.numeric(base$deaths) < 0) == 0)
+  data <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
+  expected_colnames = c("date", "state", "fips", "cases", "deaths")
+  expect_true(all(expected_colnames %in% colnames(data)))
   
-  base <- get_us_regional_cases(level = 'county', out = 'total')
-  expect_is(base, "data.frame")
-  expect_true(sum(as.numeric(base$cases) < 0) == 0)
-  expect_true(sum(as.numeric(base$deaths) < 0) == 0)
+  data <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+  expected_colnames = c("date", "county", "state", "fips", "cases", "deaths")
+  expect_true(all(expected_colnames %in% colnames(data)))
   
 })
 
-test_that("get_us_regional_cases data source is unchanged", {
+
+test_that("get_us_regional_cases returns correct column names", {
+  expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_total", "deaths_total")
+  returned_colnames_adm_level_1 <- colnames(get_us_regional_cases_only_level_1())
+  expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
+  expect_true(all(expected_colnames_adm_level_1 %in% returned_colnames_adm_level_1))
   
-  base <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
   
-  expected_colnames = c("date", "state", "fips", "cases", "deaths")
+  expected_colnames_adm_level_2 <- c("region_level_1", "region_level_2", "level_2_region_code",
+                                     "date", "cases_total", "deaths_total")
+  returned_colnames_adm_level_2 <- colnames(get_us_regional_cases_with_level_2())
+  expect_true(all(returned_colnames_adm_level_2 %in% expected_colnames_adm_level_2))
+  expect_true(all(expected_colnames_adm_level_2 %in% returned_colnames_adm_level_2))
+})
+
+
+test_that("get_us_regional_cases returns correct column types", {
+  data <- get_us_regional_cases_only_level_1()
   
-  sapply(expected_colnames, expect_colname, colnames = colnames(base))
+  expect_is(data, "data.frame")
+  expect_is(data$region_level_1, "character")
+  expect_is(data$date, "Date")
+  expect_is(data$cases_total, "numeric")
+  expect_is(data$deaths_total, "numeric")
   
-  base <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
   
-  expected_colnames = c("date", "county", "state", "fips", "cases", "deaths")
+  data <- get_us_regional_cases_with_level_2()
   
-  sapply(expected_colnames, expect_colname, colnames = colnames(base))
-  
+  expect_is(data, "data.frame")
+  expect_is(data$region_level_1, "character")
+  expect_is(data$region_level_2, "character")
+  expect_is(data$level_2_region_code, "character")
+  expect_is(data$date, "Date")
+  expect_is(data$cases_total, "numeric")
+  expect_is(data$deaths_total, "numeric")
 })
