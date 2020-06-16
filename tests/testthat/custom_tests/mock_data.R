@@ -125,13 +125,17 @@ get_expected_data_for_get_regional_covid_data_tests_with_level_2_regions <- func
   data$region <- rep(c("Oneland", "Oneland", "Twoland", "USA", "Twoland"), 6)
   iso_codes <- tibble::tibble(iso_code = c("ON", "TW", "US"),
                               region = c("Oneland", "Twoland", "USA"))
+  level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
+                                      region = c("Northland", "Eastland", "Southland", 
+                                                 "Westland", "Virginia"))
 
   data <- data %>%
     dplyr::left_join(iso_codes, by = "region") %>%
-    dplyr::select(date, province, region, iso_code, cases_new, cases_total, deaths_new,
-                         deaths_total, recovered_new, recovered_total,
-                         hosp_new, hosp_total, tested_new,
-                         tested_total) %>%
+    dplyr::left_join(level_2_region_codes, by = c("province" = "region")) %>%
+    dplyr::select(date, province, level_2_region_code, region, iso_code, 
+                  cases_new, cases_total, deaths_new, deaths_total, 
+                  recovered_new, recovered_total, hosp_new, hosp_total, 
+                  tested_new, tested_total) %>%
     dplyr::arrange(date, region, province)
 
   return(data)
@@ -144,10 +148,14 @@ get_expected_totals_data_for_get_regional_covid_data_tests_with_level_2_regions 
   data$region <- c("Oneland", "USA", "Twoland", "Twoland", "Oneland")
   iso_codes <- tibble::tibble(iso_code = c("ON", "TW", "US"),
                               region = c("Oneland", "Twoland", "USA"))
-
+  level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
+                                      region = c("Northland", "Eastland", "Southland", 
+                                                 "Westland", "Virginia"))
+  
   data <- data %>%
     dplyr::left_join(iso_codes, by = "region") %>%
-    dplyr::select(province, region, iso_code, cases_total, deaths_total,
+    dplyr::left_join(level_2_region_codes, by = c("province" = "region")) %>%
+    dplyr::select(province, level_2_region_code, region, iso_code, cases_total, deaths_total,
                   recovered_total, hosp_total, tested_total)
 
   return(tibble::tibble(data))
@@ -160,13 +168,18 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
   ## Setup the last two
   dates <- c("2020-01-31", "2020-02-01", "2020-02-02", "2020-02-03")
   regions <- c("Northland", "Eastland", "Wisconsin")
+  
+  iso_codes <- tibble::tibble(region = regions,
+                              iso_code = c("NO", "EA", "WI"))
 
   # full data is data with all dates/regions + some NAs in the cases column
   expected_data <- data.frame(expand.grid(dates, regions))
   colnames(expected_data) <- c("date", "region_level_1")
   expected_data$date <- as.Date(expected_data$date)
   expected_data$region_level_1 <- as.character(expected_data$region_level_1)
-  expected_data <- expected_data %>% dplyr::arrange(date, region_level_1)
+  expected_data <- expected_data %>%
+    dplyr::arrange(date, region_level_1) %>%
+    dplyr::left_join(iso_codes, by = c("region_level_1" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
   return(expected_data)
 }
@@ -190,7 +203,7 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   full_data_with_cum_cases_filled <- fill_empty_dates_with_na(partial_data)
   full_data_with_cum_cases_filled <- arrange(full_data_with_cum_cases_filled, region_level_1, date)
   full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, c(1,5,5,15,2,7,7,18,3,3,3,15))
-  colnames(full_data_with_cum_cases_filled)[4] <- "cases_total"
+  colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 
   return(full_data_with_cum_cases_filled)
 }
