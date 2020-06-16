@@ -1,4 +1,4 @@
-test_that("get_india_regional_cases data source is unchanged", {
+test_that("get_india_regional_cases data source is unchanged and up to date", {
   data <- readr::read_csv("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
   expected_colnames <- c("Date", "Status", "TT", "AN", 	"AP", 	"AR", 	"AS", 	"BR", 	"CH", 	"CT", 	"DN",
                          "DD", 	"DL", 	"GA", 	"GJ", 	"HR", 	"HP", 	"JK", 	"JH",
@@ -6,6 +6,7 @@ test_that("get_india_regional_cases data source is unchanged", {
                          "MZ", 	"NL", 	"OR", 	"PY", 	"PB", 	"RJ", 	"SK", 	"TN",
                          "TG", 	"TR", 	"UP", 	"UT", 	"WB")
   expect_true(all(expected_colnames %in% colnames(data)))
+  expect_true(max(lubridate::dmy(data$Date), na.rm = TRUE) > Sys.Date() - 7)
 })
 
 test_that("get_india_regional_cases returns the correct column names", {

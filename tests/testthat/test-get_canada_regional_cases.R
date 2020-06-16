@@ -1,9 +1,10 @@
-test_that("get_canada_regional_cases data source is unchanged", {
+test_that("get_canada_regional_cases data source is unchanged and up to date", {
   data <- readr::read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
   expected_colnames <- c("pruid", "prname", "prnameFR", "date", "numconf", "numprob",
                         "numdeaths", "numtotal", "numtested", "numrecover", "percentrecover",
                         "ratetested", "numtoday", "percentoday")
   expect_true(all(expected_colnames %in% colnames(data)))
+  expect_true(max(lubridate::dmy(data$date), na.rm = TRUE) > Sys.Date() - 7)
 })
 
 test_that("get_canada_regional_cases returns the correct column names", {
