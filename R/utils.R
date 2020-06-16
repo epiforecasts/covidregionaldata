@@ -206,3 +206,16 @@ csv_reader <- function(file, ...) {
   data <- read_csv_fun(file, col_types = readr::cols(), ...)
   return(data)
 }
+
+
+append_region_codes <- function(data, iso_codes_table, by = NULL, ...) {
+  # checks for NULL table ----------------------------
+  if (is.null(iso_codes_table)) {
+    return(data)
+  }
+  
+  # left_join
+  data <- dplyr::left_join(data, iso_codes_table, by = by, ...)
+  return(data)
+}
+
