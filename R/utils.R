@@ -54,7 +54,8 @@ rename_region_column <- function(data, country) {
                                "germany" = "bundesland",
                                "india" = "state",
                                "italy" = "region",
-                               "usa" = "state")
+                               "usa" = "state",
+                               "uk" = "region")
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
 
@@ -63,7 +64,8 @@ rename_region_column <- function(data, country) {
                                 "belgium" = "province",
                                 "brazil" = "city",
                                 "germany" = "landkreis",
-                                "usa" = "county")
+                                "usa" = "county",
+                                "uk" = "authority")
 
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
