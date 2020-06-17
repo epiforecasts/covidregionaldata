@@ -16,7 +16,7 @@ get_uk_regional_cases_only_level_1 <- function() {
   eng_regional_data <- csv_reader(url_eng) %>%
     dplyr::filter(`Area type` == "Region") %>%
     dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
-    dplyr::select(date, region_level_1 = "Area name", cases_new = "Daily lab-confirmed cases") %>%
+    dplyr::select(date, region_level_1 = "Area name", iso_code = "Area code", cases_new = "Daily lab-confirmed cases") %>%
     dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new))
 
   # Wales, NI & Scotland --------------------------------------------------------
@@ -24,12 +24,12 @@ get_uk_regional_cases_only_level_1 <- function() {
   wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
     dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
     tidyr::replace_na(list(TotalCases = 0)) %>%
-    dplyr::group_by(Date, Country) %>%
+    dplyr::group_by(Date, Country, AreaCode) %>%
     dplyr::summarise(cases_total = sum(TotalCases)) %>%
     dplyr::mutate(date = lubridate::ymd(Date)) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(cases_new = get_cumulative_from_daily(cases_total)) %>%
-    dplyr::select(date, region_level_1 = "Country", cases_new, cases_total) 
+    dplyr::select(date, region_level_1 = "Country", iso_code = "AreaCode", cases_new, cases_total) 
 
   # Return specified dataset ----------------------------------------------------------
   data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
@@ -113,6 +113,7 @@ get_authority_lookup_table <- function() {
   ni_auth <- authority_data %>%
     dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
                   iso_code = "CTRY17CD", region_level_1 = "CTRY17NM") %>% 
+    dplyr::filter(region_level_1 == "Northern Ireland") %>%
     dplyr::distinct() %>%
     tidyr::drop_na(region_level_2)
   
