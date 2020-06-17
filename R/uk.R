@@ -10,6 +10,8 @@
 #' @importFrom tidyr fill
 #' @importFrom lubridate ymd
 get_uk_regional_cases_only_level_1 <- function() {
+  
+  authority_lookup_table <- get_authority_lookup_table() %>% dplyr::select(iso_code, region_level_1) %>% dplyr::distinct()
 
   # England ----------------------------------------------------------------
   url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
@@ -17,20 +19,27 @@ get_uk_regional_cases_only_level_1 <- function() {
     dplyr::filter(`Area type` == "Region") %>%
     dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
     dplyr::select(date, region_level_1 = "Area name", iso_code = "Area code", cases_new = "Daily lab-confirmed cases") %>%
-    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new))
+    dplyr::arrange(date) %>%
+    dplyr::group_by(region_level_1, iso_code) %>%
+    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>%
+    dplyr::ungroup()
 
   # Wales, NI & Scotland --------------------------------------------------------
   url_wales_scot_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
   wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
     dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
+    dplyr::distinct() %>%
     tidyr::replace_na(list(TotalCases = 0)) %>%
-    dplyr::group_by(Date, Country, AreaCode) %>%
+    dplyr::group_by(Date, Country) %>%
     dplyr::summarise(cases_total = sum(TotalCases)) %>%
     dplyr::mutate(date = lubridate::ymd(Date)) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(cases_new = get_cumulative_from_daily(cases_total)) %>%
-    dplyr::select(date, region_level_1 = "Country", iso_code = "AreaCode", cases_new, cases_total) 
-
+    dplyr::group_by(Country) %>%
+    dplyr::mutate(cases_new = get_daily_from_cumulative(cases_total)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(date, region_level_1 = "Country", cases_new, cases_total)  %>% 
+    dplyr::left_join(authority_lookup_table, by = "region_level_1")
+  
   # Return specified dataset ----------------------------------------------------------
   data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
     dplyr::arrange(date)
