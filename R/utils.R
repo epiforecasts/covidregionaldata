@@ -47,15 +47,17 @@ add_extra_na_cols <- function(data) {
 rename_region_column <- function(data, country) {
 
   level_1_region_name <- switch(tolower(country),
-                               "canada" = "province",
                                "afghanistan" = "province",
                                "belgium" = "region",
                                "brazil" = "state",
+                               "canada" = "province",
+                               "colombia" = "departamento",
                                "germany" = "bundesland",
                                "india" = "state",
                                "italy" = "region",
-                               "usa" = "state",
-                               "uk" = "region")
+                               "russia" = "region",
+                               "uk" = "region",
+                               "usa" = "state")
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
 
@@ -64,8 +66,8 @@ rename_region_column <- function(data, country) {
                                 "belgium" = "province",
                                 "brazil" = "city",
                                 "germany" = "landkreis",
-                                "usa" = "county",
-                                "uk" = "authority")
+                                "uk" = "authority",
+                                "usa" = "county")
 
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
