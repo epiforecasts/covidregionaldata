@@ -18,7 +18,7 @@ This data is sourced from https://github.com/grwlf/COVID-19_plus_Russia#data-sou
 
 \dontrun{
 
-
+Mapping
 regions <- rnaturalearth::ne_states(geounit = "Russia", returnclass = "sf")
 data <- get_russia_regional_cases() \%>\%
   dplyr::filter(date == max(date))
