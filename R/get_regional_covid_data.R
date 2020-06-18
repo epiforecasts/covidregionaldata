@@ -29,7 +29,8 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
   countries_with_level_2_regions <- c("belgium",
                                       "brazil",
                                       "germany",
-                                      "usa")
+                                      "usa",
+                                      "uk")
 
   if (include_level_2_regions & !(country %in% countries_with_level_2_regions)) {
     warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
@@ -46,6 +47,7 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
                                 "usa" = get_us_regional_cases_with_level_2,
+                                "uk" = get_uk_regional_cases_with_level_2,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
@@ -63,21 +65,24 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
                                 "usa" = get_us_regional_cases_only_level_1,
+                                "uk" = get_uk_regional_cases_only_level_1,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
     iso_codes_table <- get_iso_codes(country)
 
   }
-
-  # get the data and ISO codes for level 1 regions
-  data <- do.call(get_data_function, list()) %>% 
-    dplyr::left_join(iso_codes_table, by = c("region_level_1" = "region")) 
   
-  # add level 2 if needed (note USA data has FIPS codes already)
-  if (include_level_2_regions & country != "usa") {
-    data <- data %>%   
-      dplyr::left_join(region_level_2_codes_table, by = c("region_level_2" = "region")) 
+  # get the data and ISO codes for level 1 regions
+  data <- do.call(get_data_function, list())
+  
+  data <- data %>% append_region_codes(iso_codes_table, 
+                                       by = c("region_level_1" = "region")) 
+  
+  # add level 2 if needed
+  if (include_level_2_regions) {
+    data <- data %>% append_region_codes(region_level_2_codes_table,
+                                         by = c("region_level_2" = "region")) 
   }
 
   # group data, dependent on region levels required
@@ -114,7 +119,6 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                     recovered_new, recovered_total, hosp_new, hosp_total,
                     tested_new, tested_total) %>%
       dplyr::arrange(date, region_level_1, region_level_2)
-
   } else {
     data <- data %>%
     dplyr::select(date, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,

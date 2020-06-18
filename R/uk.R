@@ -5,129 +5,143 @@
 #' Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
 #' Note that England always returns 9 English regions, and Nothern Ireland always returns as one country
 #' @return A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
-#' @export
 #' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise recode bind_rows
 #' @importFrom readr read_csv
 #' @importFrom tidyr fill
 #' @importFrom lubridate ymd
-#' @examples
-#' uk_countries <- get_uk_regional_cases(geography = "all countries")
-#' uk_regions <- get_uk_regional_cases(geography = "all regions")
-#' england <- get_uk_regional_cases(geography = "England")
-#' wales <- get_uk_regional_cases(geography = "Wales")
-#' scotland <- get_uk_regional_cases(geography = "Scotland")
-#' nireland <- get_uk_regional_cases(geography = "Northern Ireland")
-#'
-#' \dontrun{
-#' ## Mapping UK countries with English regions
-#' uk_countries <- get_uk_regional_cases(geography = "all countries") %>%
-#'   dplyr::filter(date == max(date))
-#' uk_map <- sf::st_read("data-raw/uk_NUTS_areas/NUTS_Level_1_January_2018_Ultra_Generalised_Clipped_Boundaries_in_the_United_Kingdom.shp") %>%
-#'   dplyr::mutate(nuts118nm = stringr::str_remove_all(nuts118nm, "\\s\\(England\\)")) %>%
-#'   dplyr::left_join(uk_countries, by = c("nuts118nm" = "region"))
-#' uk_map %>%
-#'   ggplot2::ggplot(ggplot2::aes(fill = cases)) +
-#'   ggplot2::geom_sf()
-#'
-#' }
-#'
-#'
+get_uk_regional_cases_only_level_1 <- function() {
+  
+  authority_lookup_table <- get_authority_lookup_table() %>% dplyr::select(iso_code, region_level_1) %>% dplyr::distinct()
 
-
-get_uk_regional_cases <- function(geography = "all countries") {
-
-  if(!geography %in% c("all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales")) {
-    stop('Please specify geography: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales". Default: "all countries".')
-  }
-
-# England ----------------------------------------------------------------
-  path_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
-  eng_cases <- suppressMessages(readr::read_csv(file = path_eng)) %>%
+  # England ----------------------------------------------------------------
+  url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
+  eng_regional_data <- csv_reader(url_eng) %>%
     dplyr::filter(`Area type` == "Region") %>%
     dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
-    dplyr::select(date, region = "Area name", cases = "Daily lab-confirmed cases") %>%
+    dplyr::select(date, region_level_1 = "Area name", iso_code = "Area code", cases_new = "Daily lab-confirmed cases") %>%
+    dplyr::arrange(date) %>%
+    dplyr::group_by(region_level_1, iso_code) %>%
+    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>%
+    dplyr::ungroup()
+
+  # Wales, NI & Scotland --------------------------------------------------------
+  url_wales_scot_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
+  wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
+    dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
+    dplyr::distinct() %>%
+    tidyr::replace_na(list(TotalCases = 0)) %>%
+    dplyr::group_by(Date, Country) %>%
+    dplyr::summarise(cases_total = sum(TotalCases)) %>%
+    dplyr::mutate(date = lubridate::ymd(Date)) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(Country) %>%
+    dplyr::mutate(cases_new = get_daily_from_cumulative(cases_total)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(date, region_level_1 = "Country", cases_new, cases_total)  %>% 
+    dplyr::left_join(authority_lookup_table, by = "region_level_1")
+  
+  # Return specified dataset ----------------------------------------------------------
+  data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
     dplyr::arrange(date)
-
-# Wales & Scotland --------------------------------------------------------
-# Data source
-  path_wales_scot <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
-  wales_scot_cases <- suppressMessages(readr::read_csv(file = path_wales_scot)) %>%
-    dplyr::mutate(TotalCases = suppressWarnings(as.numeric(TotalCases)),
-                  date = lubridate::ymd(Date)) %>%
-    dplyr::filter(!Area %in% "Golden Jubilee National Hospital")
-
-  # Wales country cases
-  wales_cases_country <- dplyr::filter(wales_scot_cases, Country == "Wales") %>%
-    dplyr::group_by(date) %>%
-    dplyr::summarise(TotalCases = sum(TotalCases, na.rm = TRUE)) %>%
-    dplyr::mutate(region = "Wales",
-                  index = 1:dplyr::n(),
-                  cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
-                  cases = ifelse(cases < 0 , 0, cases)) %>%
-    dplyr::select(date, region, cases)
-
-# Wales regional cases
-  wales_cases_regional <- dplyr::filter(wales_scot_cases, Country == "Wales") %>%
-    dplyr::group_by(Area) %>%
-    dplyr::mutate(region = Area,
-                  index = 1:dplyr::n(),
-                  cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
-                  cases = ifelse(cases < 0 , 0, cases)) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(date, region, cases)
-
-# Scotland country cases
-  scotland_cases_country <- dplyr::filter(wales_scot_cases, Country == "Scotland") %>%
-    dplyr::group_by(date) %>%
-    dplyr::summarise(TotalCases = sum(TotalCases, na.rm = TRUE)) %>%
-    dplyr::mutate(region = "Scotland",
-                  index = 1:dplyr::n(),
-                  cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
-                  cases = ifelse(cases < 0 , 0, cases)) %>%
-    dplyr::select(date, region, cases)
-
-# Scotland regional cases
-  scotland_cases_regional <- dplyr::filter(wales_scot_cases, Country == "Scotland") %>%
-    dplyr::group_by(Area) %>%
-    dplyr::mutate(region = Area,
-                  index = 1:dplyr::n(),
-                  cases = TotalCases - ifelse(index == 1, 0, dplyr::lag(TotalCases)),
-                  cases = ifelse(cases < 0 , 0, cases)) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(date, region, cases)
-
-
-# Northern Ireland --------------------------------------------------------
-# Note: only available at country level
-  path_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-totals-northern-ireland.csv"
-  ni_cases <- suppressMessages(readr::read_csv(file = path_ni)) %>%
-    dplyr::mutate(index = 1:dplyr::n(),
-                  cases = ConfirmedCases - ifelse(index == 1, 0, dplyr::lag(ConfirmedCases)),
-                  cases = ifelse(cases < 0 , 0, cases),
-                  date = lubridate::ymd(Date),
-                  region = "Northern Ireland") %>%
-    dplyr::select(date, region, cases)
-
-
-# Return specified dataset ----------------------------------------------------------
-
-if (geography == "England"){
-  return(eng_cases)
-}else if (geography == "Wales"){
-  return(wales_cases_regional)
-}else if (geography == "Scotland"){
-  return(scotland_cases_regional)
-}else if (geography == "Northern Ireland"){
-  return(ni_cases)
-
-}else if (geography == "all countries"){
-  country_join <- dplyr::bind_rows(scotland_cases_country, ni_cases, wales_cases_country, eng_cases, .id = "country") %>%
-    dplyr::mutate(country = dplyr::recode(country, "1" = "Scotland", "2" = "Northern Ireland", "3" = "Wales", "4" = "England"))
-  return(country_join)
-}else if (geography == "all regions"){
-  regional_join <- dplyr::bind_rows(scotland_cases_regional, ni_cases, wales_cases_regional, eng_cases, .id = "country") %>%
-    dplyr::mutate(country = dplyr::recode(country, "1" = "Scotland", "2" = "Northern Ireland", "3" = "Wales", "4" = "England"))
-  return(regional_join)
+  
+  return(data)
 }
 
+
+
+
+#' Get UK daily cases
+#'
+#' @description Get UK cases by country or region
+#' @param geography Character string identifying which part of the UK to extract and at what scale
+#' Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
+#' Note that England always returns 9 English regions, and Nothern Ireland always returns as one country
+#' @return A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
+#' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise recode bind_rows
+#' @importFrom readr read_csv
+#' @importFrom tidyr fill
+#' @importFrom lubridate ymd
+get_uk_regional_cases_with_level_2 <- function() {
+
+  authority_lookup_table <- get_authority_lookup_table()
+  
+  # England ----------------------------------------------------------------
+  url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
+  eng_regional_data <- csv_reader(url_eng) %>%
+    dplyr::filter(`Area type` == "Upper tier local authority") %>%
+    dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
+    dplyr::select(date, region_level_2 = "Area name", cases_new = "Daily lab-confirmed cases") %>%
+    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>% 
+    dplyr::left_join(authority_lookup_table, by = "region_level_2") 
+
+  # Wales, NI & Scotland ----------------------------------------------------
+  url_wales_scot_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
+  wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
+    dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
+    tidyr::replace_na(list(TotalCases = 0)) %>%
+    dplyr::group_by(Date, Area, Country) %>%
+    dplyr::summarise(cases_total = sum(TotalCases)) %>%
+    dplyr::mutate(date = lubridate::ymd(Date)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(cases_new = get_cumulative_from_daily(cases_total),
+                  Area = dplyr::recode(Area, 
+                                       "North Down and Ards" = "Ards and North Down",
+                                       "Armagh, Banbridge and Craigavon" = "Armagh City, Banbridge and Craigavon",
+                                       "Derry and Strabane" = "Derry City and Strabane")) %>%
+    dplyr::select(date, region_level_2 = "Area", region_level_1 = "Country", cases_new, cases_total) %>% 
+    dplyr::left_join(authority_lookup_table, by = c("region_level_2", "region_level_1"))
+  
+  # Return specified dataset ----------------------------------------------------------
+  data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
+    dplyr::arrange(date)
+  
+  return(data)
 }
+
+
+get_authority_lookup_table <- function() {
+  
+  # Look-up table for Authority Structures ----------------------------------
+  authority_data <- readr::read_csv("https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv",
+                                    col_types = readr::cols(WD17NMW = readr::col_character(),
+                                                            CTY17CD = readr::col_character(),
+                                                            CTY17NM = readr::col_character()))
+  
+  unitary_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM", 
+                  iso_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  upper_tier_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
+                  iso_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  ni_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
+                  iso_code = "CTRY17CD", region_level_1 = "CTRY17NM") %>% 
+    dplyr::filter(region_level_1 == "Northern Ireland") %>%
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  other_auths <- tibble::tibble(level_2_region_code = c("S0800015", "S0800016", "S0800017", "S0800029", "S0800019", "S0800020",
+                                                        "S0800031", "S0800022", "S0800032", "S0800024", "S0800025", "S0800026",
+                                                        "S0800030", "S0800028", "W11000028", "W11000023", "W11000029",
+                                                        "W11000030", "W11000025", "W11000024", "W11000031", "E06000058", "E06000053"),
+                                region_level_2 = c("Ayrshire and Arran", "Borders", "Dumfries and Galloway", "Fife",
+                                                   "Forth Valley", "Grampian", "Greater Glasgow and Clyde", "Highland",
+                                                   "Lanarkshire", "Lothian", "Orkney", "Shetland", "Tayside", "Western Isles",
+                                                   "Aneurin Bevan", "Betsi Cadwaladr", "Cardiff and Vale", "Cwm Taf",
+                                                   "Hywel Dda", "Powys", "Swansea Bay", "Bournemouth, Christchurch and Poole",
+                                                   "Cornwall and Isles of Scilly"),
+                                iso_code = c(rep("S92000003", 14), rep("W92000004", 7), rep("E92000001", 2)),
+                                region_level_1 = c(rep("Scotland", 14), rep("Wales", 7), rep("South West", 2)))
+  
+  
+  authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, ni_auth, other_auths)
+  
+  return(authority_lookup_table)
+}
+

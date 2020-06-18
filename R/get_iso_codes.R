@@ -8,7 +8,8 @@ get_iso_codes <- function(country) {
                          "germany" = get_germany_iso_codes,
                          "india" = get_india_iso_codes,
                          "italy" = get_italy_iso_codes,
-                         "usa" = get_us_iso_codes)
+                         "usa" = get_us_iso_codes,
+                         "uk" = get_uk_iso_codes)
 
   iso_codes_table <- do.call(iso_code_fun, list())
 
@@ -21,7 +22,8 @@ get_level_2_region_codes <- function(country) {
                              "belgium" = get_belgium_level_2_codes,
                              "brazil" = get_brazil_level_2_codes,
                              "germany" = get_germany_level_2_codes,
-                             "usa" = get_us_level_2_codes)
+                             "usa" = get_us_level_2_codes,
+                             "uk" = get_uk_level_2_codes)
   
   level_2_codes_table <- do.call(level_2_code_fun, list())
   
@@ -131,6 +133,9 @@ get_us_iso_codes <- function() {
   return(iso_codes)
 }
 
+get_uk_iso_codes <- function() {
+  return(NULL)
+}
 
 ## Level 2 regions
 get_belgium_level_2_codes <- function() {
@@ -157,5 +162,10 @@ get_germany_level_2_codes <- function() {
 }
 
 get_us_level_2_codes <- function() {
-  return(NA)
+  return(NULL)
 }
+
+get_uk_level_2_codes <- function() {
+  return(NULL)
+}
+
