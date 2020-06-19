@@ -46,8 +46,8 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
-                                "usa" = get_us_regional_cases_with_level_2,
                                 "uk" = get_uk_regional_cases_with_level_2,
+                                "usa" = get_us_regional_cases_with_level_2,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
@@ -57,15 +57,17 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
   } else {
 
     get_data_function <- switch(country,
-                                "canada" = get_canada_regional_cases,
                                 "afghanistan" = get_afghan_regional_cases,
                                 "belgium" = get_belgium_regional_cases_only_level_1,
                                 "brazil" = get_brazil_regional_cases_only_level_1,
+                                "canada" = get_canada_regional_cases,
+                                "colombia" = get_colombia_regional_cases,
                                 "germany" = get_germany_regional_cases_only_level_1,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
-                                "usa" = get_us_regional_cases_only_level_1,
+                                "russia" = get_russia_regional_cases,
                                 "uk" = get_uk_regional_cases_only_level_1,
+                                "usa" = get_us_regional_cases_only_level_1,
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
@@ -75,7 +77,6 @@ get_regional_covid_data <- function(country, totals, include_level_2_regions){
   
   # get the data and ISO codes for level 1 regions
   data <- do.call(get_data_function, list())
-  
   data <- data %>% append_region_codes(iso_codes_table, 
                                        by = c("region_level_1" = "region")) 
   

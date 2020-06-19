@@ -5,11 +5,13 @@ get_iso_codes <- function(country) {
                          "belgium" = get_belgium_iso_codes,
                          "brazil" = get_brazil_iso_codes,
                          "canada" = get_canada_iso_codes,
+                         "colombia" = get_colombia_iso_codes,
                          "germany" = get_germany_iso_codes,
                          "india" = get_india_iso_codes,
                          "italy" = get_italy_iso_codes,
-                         "usa" = get_us_iso_codes,
-                         "uk" = get_uk_iso_codes)
+                         "russia" = get_russia_iso_codes,
+                         "uk" = get_uk_iso_codes,
+                         "usa" = get_us_iso_codes)
 
   iso_codes_table <- do.call(iso_code_fun, list())
 
@@ -22,8 +24,8 @@ get_level_2_region_codes <- function(country) {
                              "belgium" = get_belgium_level_2_codes,
                              "brazil" = get_brazil_level_2_codes,
                              "germany" = get_germany_level_2_codes,
-                             "usa" = get_us_level_2_codes,
-                             "uk" = get_uk_level_2_codes)
+                             "uk" = get_uk_level_2_codes,
+                             "usa" = get_us_level_2_codes)
   
   level_2_codes_table <- do.call(level_2_code_fun, list())
   
@@ -113,6 +115,41 @@ get_italy_iso_codes <- function() {
   return(iso_codes)
 }
 
+get_russia_iso_codes <- function() {
+  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:RU"
+  iso_table <- region_url %>%
+    xml2::read_html() %>%
+    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
+    rvest::html_table(fill=TRUE)
+  iso_code <- iso_table[[1]][-1,]$Code
+  
+  iso_codes <- tibble::tibble(
+    iso_code = c(iso_code, "UA-40", "UA-43"), 
+    region = c("Adygea Republic", "Altai Republic", "Bashkortostan Republic", "Buryatia Republic",
+    "Chechen Republic", "Chuvashia Republic", "Dagestan Republic", "Ingushetia Republic", 
+    "Kabardino-Balkarian Republic", "Kalmykia Republic", "Karachay-Cherkess Republic", "Karelia Republic",
+    "Khakassia Republic", "Komi Republic", "Mari El Republic", "Mordovia Republic",
+    "Sakha (Yakutiya) Republic", "North Ossetia - Alania Republic", "Tatarstan Republic",
+    "Tyva Republic",  "Udmurt Republic",  "Altai Krai", "Kamchatka Krai",
+    "Khabarovsk Krai",  "Krasnodar Krai", "Krasnoyarsk Krai", "Perm Krai", "Primorsky Krai", "Stavropol Krai",
+    "Zabaykalsky Krai", "Amur Oblast", "Arkhangelsk Oblast", "Astrakhan Oblast", "Belgorod Oblast",
+    "Bryansk Oblast", "Chelyabinsk Oblast",  "Irkutsk Oblast", "Ivanovo Oblast",
+    "Kaliningrad Oblast", "Kaluga Oblast", "Kemerovo Oblast", "Kirov Oblast",
+    "Kostroma Oblast", "Kurgan Oblast", "Kursk Oblast", "Leningrad Oblast",
+    "Lipetsk Oblast", "Magadan Oblast", "Moscow Oblast", "Murmansk Oblast",
+    "Nizhny Novgorod Oblast", "Novgorod Oblast", "Novosibirsk Oblast", "Omsk Oblast",
+    "Orenburg Oblast",  "Orel Oblast",  "Penza Oblast", "Pskov Oblast",
+    "Rostov Oblast", "Ryazan Oblast", "Sakhalin Oblast",  "Samara Oblast",
+    "Saratov Oblast", "Smolensk Oblast", "Sverdlovsk Oblast",  "Tambov Oblast",
+    "Tomsk Oblast", "Tula Oblast", "Tver Oblast",  "Tyumen Oblast",  "Ulyanovsk Oblast",
+    "Vladimir Oblast", "Volgograd Oblast",  "Vologda Oblast",  "Voronezh Oblast",
+    "Yaroslavl Oblast", "Moscow", "Saint Petersburg", "Jewish Autonomous Okrug", "Chukotka Autonomous Okrug",
+    "Khanty-Mansi Autonomous Okrug", "Nenets Autonomous Okrug", "Yamalo-Nenets Autonomous Okrug", "Sevastopol",
+    "Republic of Crimea"))
+  
+  return(iso_codes)
+}
+
 get_us_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
@@ -134,6 +171,10 @@ get_us_iso_codes <- function() {
 }
 
 get_uk_iso_codes <- function() {
+  return(NULL)
+}
+
+get_colombia_iso_codes <- function() {
   return(NULL)
 }
 

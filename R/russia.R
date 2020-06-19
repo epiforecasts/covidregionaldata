@@ -15,9 +15,7 @@
 #'
 #'\dontrun{
 #'
-#'
-
-# # Mapping
+#' Mapping
 #' regions <- rnaturalearth::ne_states(geounit = "Russia", returnclass = "sf")
 #' data <- get_russia_regional_cases() %>%
 #'   dplyr::filter(date == max(date))
@@ -31,36 +29,13 @@
 get_russia_regional_cases <- function() {
 
   # Read data
-  path <- "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv"
-
-  # Using cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
-  russia <- mem_read(path)
+  url <- "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv"
 
   # Reshape
-  russia <- russia %>%
-    tidyr::pivot_longer(cols = 12:133, names_to = "date") %>%
-    dplyr::select(date, country = Country_Region, region = Province_State, cases = value) %>%
+  russia <- csv_reader(url) %>%
+    tidyr::pivot_longer(cols = 12:tidyr::last_col(), names_to = "date") %>%
+    dplyr::select(date, region_level_1 = Province_State, cases_total = value) %>%
     dplyr::mutate(date = lubridate::mdy(date))
-
-  # Cumualative to daily
-  russia <- dplyr::group_by(russia, region) %>%
-    dplyr::mutate(
-      cases = c(cases[1], diff(cases)),
-      cases = ifelse(cases < 0, 0, cases)) %>%
-    dplyr::ungroup()
-
-  # Join to ISO region codes
-  iso_path <- "https://raw.githubusercontent.com/ZFTurbo/Covid-19-spread-prediction/master/input/russia_regions.csv"
-  iso <- suppressMessages(readr::read_csv(iso_path)) %>%
-    dplyr::select(iso_3166_2 = iso_code, region = csse_province_state) %>%
-    dplyr::mutate(
-      region = stringr::str_replace_all(region, "Republic of Altay", "Altay Republic"),
-      region = ifelse(iso_3166_2 == "RU-NEN", "Nenetskiy autonomous oblast", region),
-      region = ifelse(iso_3166_2 == "RU-CHU", "Chukotskiy autonomous oblast", region)
-      )
-  russia <- dplyr::left_join(russia, iso, by = "region")
 
   return(russia)
 

@@ -27,39 +27,20 @@
 #'   ggplot2::geom_sf(ggplot2::aes(fill = cases))
 #'}
 #'
-
 get_colombia_regional_cases <- function() {
 
   # Source data
-  path <- "https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv"
-
-  # Set cache
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
+  url <- "https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv"
 
   # Read & rename
-  colombia <- mem_read(path) %>%
-    dplyr::select(date = fecha, region = departamento,
-                  cases = casos_confirmados, deaths = casos_fallecido, tests = pruebas) %>%
-    dplyr::mutate(
-                  date = lubridate::mdy(date),
-                  region = iconv(x = region, from = "UTF-8", to = "ASCII//TRANSLIT"),
-                  region = stringr::str_replace_all(region, " D.C.", ""),
-                  region = stringr::str_replace_all(region, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
-                  region = stringr::str_to_sentence(region)
-    )
-
-  # Daily from cumulative
-  colombia <- dplyr::group_by(colombia, region) %>%
-    dplyr::mutate(
-      cases = c(cases[1], diff(cases)),
-      cases = ifelse(cases < 0, 0, cases),
-      deaths = c(deaths[1], diff(deaths)),
-      deaths = ifelse(deaths < 0, 0, deaths),
-      tests = c(tests[1], diff(tests)),
-      tests = ifelse(tests < 0, 0, tests)) %>%
-    dplyr::ungroup()
-
+  colombia <- csv_reader(url) %>%
+    dplyr::select(date = fecha, region_level_1 = departamento,
+                  cases_total = casos_confirmados, deaths_total = casos_fallecido, tested_total = pruebas) %>%
+    dplyr::mutate(date = lubridate::mdy(date),
+                  region_level_1 = iconv(region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
+                  region_level_1 = stringr::str_replace_all(region_level_1, " D.C.", ""),
+                  region_level_1 = stringr::str_replace_all(region_level_1, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
+                  region_level_1 = stringr::str_to_sentence(region_level_1))
 
   # Get ISO codes
   region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
@@ -68,15 +49,13 @@ get_colombia_regional_cases <- function() {
     rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
     rvest::html_table()
   iso <- iso_table[[1]] %>%
-    dplyr::select(iso_3166_2 = Code, region = 2) %>%
-    dplyr::mutate(region = iconv(x = region, from = "UTF-8", to = "ASCII//TRANSLIT"),
-                  region = stringr::str_replace_all(region, "Distrito Capital de ", ""),
-                  region = stringr::str_to_sentence(region))
+    dplyr::select(iso_code = Code, region_level_1 = 2) %>%
+    dplyr::mutate(region_level_1 = iconv(x = region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
+                  region_level_1 = stringr::str_replace_all(region_level_1, "Distrito Capital de ", ""),
+                  region_level_1 = stringr::str_to_sentence(region_level_1))
 
   # Merge ISO codes with data
-  colombia <- dplyr::left_join(colombia, iso, by = "region")
+  colombia <- dplyr::left_join(colombia, iso, by = "region_level_1")
 
-
-return(colombia)
-
+  return(colombia)
 }
