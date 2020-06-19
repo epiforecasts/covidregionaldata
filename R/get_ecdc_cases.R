@@ -38,7 +38,7 @@ get_ecdc_cases <- function (countries = NULL){
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
     dplyr::rename(geoid = geoId, country = countriesAndTerritories,
            cases = cases, deaths = deaths,
-           population_2018 = popData2018) %>%
+           population_2019 = popData2019) %>%
     dplyr::select(-dateRep) %>%
     dplyr::arrange(date) %>%
     dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
