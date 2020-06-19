@@ -54,7 +54,8 @@ rename_region_column <- function(data, country) {
                                "germany" = "bundesland",
                                "india" = "state",
                                "italy" = "region",
-                               "usa" = "state")
+                               "usa" = "state",
+                               "uk" = "region")
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
 
@@ -63,7 +64,8 @@ rename_region_column <- function(data, country) {
                                 "belgium" = "province",
                                 "brazil" = "city",
                                 "germany" = "landkreis",
-                                "usa" = "county")
+                                "usa" = "county",
+                                "uk" = "authority")
 
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
@@ -206,3 +208,16 @@ csv_reader <- function(file, ...) {
   data <- read_csv_fun(file, col_types = readr::cols(), ...)
   return(data)
 }
+
+
+append_region_codes <- function(data, iso_codes_table, by = NULL, ...) {
+  # checks for NULL table ----------------------------
+  if (is.null(iso_codes_table)) {
+    return(data)
+  }
+  
+  # left_join
+  data <- dplyr::left_join(data, iso_codes_table, by = by, ...)
+  return(data)
+}
+

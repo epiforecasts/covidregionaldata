@@ -2,7 +2,7 @@ test_that("get_germany_regional_cases data source is unchanged and up to date", 
 
   data <- readr::read_csv("https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv")
 
-  expected_colnames = c("FID", "IdBundesland", "Bundesland", "Landkreis", "Altersgruppe", "Geschlecht",
+  expected_colnames = c("ObjectID", "IdBundesland", "Bundesland", "Landkreis", "Altersgruppe", "Geschlecht",
                         "AnzahlFall", "AnzahlTodesfall", "Meldedatum", "IdLandkreis", "Datenstand", "NeuerFall",
                         "NeuerTodesfall", "Refdatum", "NeuGenesen", "AnzahlGenesen", "IstErkrankungsbeginn", "Altersgruppe2")
   expect_true(all(expected_colnames %in% colnames(data)))
