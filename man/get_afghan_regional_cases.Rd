@@ -2,21 +2,20 @@
 % Please edit documentation in R/afghanistan.R
 \name{get_afghan_regional_cases}
 \alias{get_afghan_regional_cases}
-\title{Afghan Provincial Daily Case Counts}
+\title{Afghan Regional Daily COVID-19 Count Data}
 \usage{
 get_afghan_regional_cases()
 }
 \value{
-A dataframe of daily Afghan provincial cases and deaths to be further processed by \code{get_regional_covid_data()}.
+A data frame of daily Afghan provincial cases and deaths, stratified by state,
+to be further processed by \code{get_regional_covid_data()}.
 }
 \description{
-Data from HDX https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province
-The cumulative data is stored in a google sheet, which is read as a csv and de-cumulated.
-}
-\examples{
-
-## Code
-get_afghan_regional_cases()
+Fetches daily COVID-19 data for Afghanistan by province.
+Data from HDX \url{https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province}.
+The cumulative data is stored in a Google sheet
+(\url{https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv}),
+which is read as a CSV and sanitised.
 }
 \author{
 Flavio Finger @ffinger

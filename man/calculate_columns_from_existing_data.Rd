@@ -13,5 +13,6 @@ calculate_columns_from_existing_data(data)
 A data frame with extra columns if required
 }
 \description{
-Checks which columns are missing (cumulative/daily counts) and if one is present and the other not then calculates the second from the first
+Checks which columns are missing (cumulative/daily counts) and if one is present and the other not
+then calculates the second from the first.
 }

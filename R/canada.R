@@ -1,16 +1,16 @@
-#' Helper function to fetch daily COVID cases by province for Canada and do dataset-specific processing before passing to get_regional_covid_data()
-#' @description Fetches daily COVID cases, and deaths by province collated by Provincial Canadian Health Authorities
-#' Data is available at https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html
-#' selects the relevant columns, sanitises various columns and gets the daily counts from cumulative columns.
-#' @return A data.frame of COVID cases by province in Canada, ready to be used by get_regional_covid_data()
-#' @importFrom dplyr %>% filter select mutate rename group_by
+#' Canadian Regional Daily COVID-19 Count Data - Provinces
+#' 
+#' @description Extracts daily COVID-19 data for Canada, stratified by province. 
+#' Data available at  \url{https://health-infobase.canada.ca/src/data/covidLive/covid19.csv}. 
+#' It is loaded and then sanitised.
+#' @return A data frame of COVID cases by province in Canada, ready to be used by \code{get_regional_covid_data()}.
+#' @importFrom dplyr %>% filter select mutate rename
 #' @importFrom tidyr replace_na
-#' @importFrom readr read_csv cols
 #' @importFrom lubridate dmy
-
+#' 
 get_canada_regional_cases <- function(){
 
-  # Read + clean data
+  # Read + clean data --------------------------------------------------------
   url <- "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 
   data <- csv_reader(file = url) %>%
@@ -18,7 +18,7 @@ get_canada_regional_cases <- function(){
     dplyr::filter(pruid != 1) %>%
     dplyr::select(-pruid) %>%
 
-    # Transform
+  # Transform --------------------------------------------------------------
     dplyr::mutate(prname = gsub("Repatriated travellers", "Repatriated Travellers", prname),
                   date = lubridate::dmy(date),
                   numrecover = as.numeric(replace(numrecover, numrecover == "N/A", NA))) %>%

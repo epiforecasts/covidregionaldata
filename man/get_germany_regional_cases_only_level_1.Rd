@@ -2,16 +2,15 @@
 % Please edit documentation in R/germany.R
 \name{get_germany_regional_cases_only_level_1}
 \alias{get_germany_regional_cases_only_level_1}
-\title{Get German daily cases by Bundesland only}
+\title{German Regional Daily COVID-19 Count Data - Bundesland}
 \usage{
 get_germany_regional_cases_only_level_1()
 }
 \value{
-A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
+A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{get_regional_covid_data()}.
 }
 \description{
-Fetches COVID case counts stratified by Bundesland in Germany.
-This data is sourced from the Robert Koch Institute:
-https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
-selects and sanitises the relevant columns
+Extracts daily COVID-19 data for Germany, stratified by Bundesland.
+Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}.
+It is loaded and then sanitised.
 }

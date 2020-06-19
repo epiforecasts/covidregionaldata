@@ -7,10 +7,10 @@
 complete_cumulative_columns(data)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{a data table}
 }
 \value{
-a data.frame with NAs filled in for cumulative data columns.
+a tibble with NAs filled in for cumulative data columns.
 }
 \description{
 If a dataset had a row of NAs added to it (using fill_empty_dates_with_na) then cumulative data columns will have NAs which can cause

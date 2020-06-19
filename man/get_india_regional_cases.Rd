@@ -2,13 +2,15 @@
 % Please edit documentation in R/india.R
 \name{get_india_regional_cases}
 \alias{get_india_regional_cases}
-\title{Get India daily COVID data}
+\title{Indian Regional Daily COVID-19 Count Data - State}
 \usage{
 get_india_regional_cases()
 }
 \value{
-A dataframe of daily India data to be further processed by \function{get_regional_covid_data()}.
+A data frame of daily COVID cases for India by state, to be further processed by \code{get_regional_covid_data()}.
 }
 \description{
-Get Indian cases, deaths and recoveries by state
+Extracts daily COVID-19 data for India, stratified by State
+Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}.
+It is loaded and then sanitised.
 }

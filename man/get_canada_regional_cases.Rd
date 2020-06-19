@@ -2,15 +2,15 @@
 % Please edit documentation in R/canada.R
 \name{get_canada_regional_cases}
 \alias{get_canada_regional_cases}
-\title{Helper function to fetch daily COVID cases by province for Canada and do dataset-specific processing before passing to get_regional_covid_data()}
+\title{Canadian Regional Daily COVID-19 Count Data - Provinces}
 \usage{
 get_canada_regional_cases()
 }
 \value{
-A data.frame of COVID cases by province in Canada, ready to be used by get_regional_covid_data()
+A data frame of COVID cases by province in Canada, ready to be used by \code{get_regional_covid_data()}.
 }
 \description{
-Fetches daily COVID cases, and deaths by province collated by Provincial Canadian Health Authorities
-Data is available at https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html
-selects the relevant columns, sanitises various columns and gets the daily counts from cumulative columns.
+Extracts daily COVID-19 data for Canada, stratified by province.
+Data available at  \url{https://health-infobase.canada.ca/src/data/covidLive/covid19.csv}.
+It is loaded and then sanitised.
 }

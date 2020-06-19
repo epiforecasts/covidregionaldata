@@ -2,15 +2,15 @@
 % Please edit documentation in R/usa.R
 \name{get_us_regional_cases_with_level_2}
 \alias{get_us_regional_cases_with_level_2}
-\title{Fetch daily COVID cases by state for United States of America}
+\title{US Regional Daily COVID-19 Count Data - Counties}
 \usage{
 get_us_regional_cases_with_level_2()
 }
 \value{
-A data.frame of COVID cases by region in the US
+A data frame of daily COVID cases for the US by county, to be further processed by \code{get_regional_covid_data()}.
 }
 \description{
-Fetches daily COVID cases county collated by the
-New York Times
-Data is available at https://github.com/nytimes/covid-19-data
+Extracts daily COVID-19 data for the USA, stratified by county.
+Data available at \url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv}.
+It is loaded and then sanitised.
 }

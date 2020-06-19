@@ -1,14 +1,14 @@
-#' Get UK daily cases
+#' UK Regional Daily COVID-19 Count Data - Region
 #'
-#' @description Get UK cases by country or region
-#' @param geography Character string identifying which part of the UK to extract and at what scale
-#' Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
-#' Note that England always returns 9 English regions, and Nothern Ireland always returns as one country
-#' @return A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
-#' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise recode bind_rows
-#' @importFrom readr read_csv
-#' @importFrom tidyr fill
+#' @description Extracts daily COVID-19 data for the UK, stratified by region. 
+#' Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}. 
+#' Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
+#' It is loaded and then sanitised.
+#' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_covid_data()}.
+#' @importFrom dplyr mutate select filter arrange group_by ungroup distinct bind_rows left_join arrange %>%
+#' @importFrom tidyr replace_na
 #' @importFrom lubridate ymd
+#' 
 get_uk_regional_cases_only_level_1 <- function() {
   
   authority_lookup_table <- get_authority_lookup_table() %>% dplyr::select(iso_code, region_level_1) %>% dplyr::distinct()
@@ -47,20 +47,17 @@ get_uk_regional_cases_only_level_1 <- function() {
   return(data)
 }
 
-
-
-
-#' Get UK daily cases
+#' UK Regional Daily COVID-19 Count Data - Authority
 #'
-#' @description Get UK cases by country or region
-#' @param geography Character string identifying which part of the UK to extract and at what scale
-#' Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
-#' Note that England always returns 9 English regions, and Nothern Ireland always returns as one country
-#' @return A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
-#' @importFrom dplyr mutate select filter arrange group_by ungroup n lag summarise recode bind_rows
-#' @importFrom readr read_csv
-#' @importFrom tidyr fill
+#' @description Extracts daily COVID-19 data for the UK, stratified by region. 
+#' Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}. 
+#' Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
+#' It is loaded and then sanitised.
+#' @return A data frame of daily COVID cases for the UK by local authority, to be further processed by \code{get_regional_covid_data()}.
+#' @importFrom dplyr mutate select filter arrange group_by ungroup distinct bind_rows left_join arrange %>%
+#' @importFrom tidyr replace_na
 #' @importFrom lubridate ymd
+#' 
 get_uk_regional_cases_with_level_2 <- function() {
 
   authority_lookup_table <- get_authority_lookup_table()
@@ -98,7 +95,16 @@ get_uk_regional_cases_with_level_2 <- function() {
   return(data)
 }
 
-
+#' Lookup table for local authority structure for the UK
+#'
+#' @description Gets data from \url{https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv}
+#' and then uses this to create a table of authorities and their corresponding higher level regions
+#' @return A tibble of UK local authorities
+#' @importFrom readr read_csv cols col_character
+#' @importFrom dplyr select %>% distinct filter bind_rows
+#' @importFrom tidyr drop_na
+#' @importFrom tibble tibble
+#' 
 get_authority_lookup_table <- function() {
   
   # Look-up table for Authority Structures ----------------------------------
@@ -139,7 +145,7 @@ get_authority_lookup_table <- function() {
                                 iso_code = c(rep("S92000003", 14), rep("W92000004", 7), rep("E92000001", 2)),
                                 region_level_1 = c(rep("Scotland", 14), rep("Wales", 7), rep("South West", 2)))
   
-  
+  # Join tables ---------------------------------------------------
   authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, ni_auth, other_auths)
   
   return(authority_lookup_table)

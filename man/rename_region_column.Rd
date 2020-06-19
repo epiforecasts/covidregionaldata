@@ -7,12 +7,12 @@
 rename_region_column(data, country)
 }
 \arguments{
-\item{data}{a data.frame with a region column}
+\item{data}{a data frame with a region_level_1 column and optionally a region_level_2 column}
 
 \item{country}{a string with the country of interest}
 }
 \value{
-a data.frame with the column renamed to a sensible name
+a tibble with the column renamed to a sensible name
 }
 \description{
 The package relies on column name 'region' during processing but this often isn't the most sensible name for the column

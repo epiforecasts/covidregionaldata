@@ -1,3 +1,9 @@
+# Mains -------------------------------------------------------------------------------------
+
+#' Get a table of ISO codes for a specified country
+#' @param country a string with a country specified
+#' @return a tibble of regions and their corresponding ISO codes
+#' @importFrom tibble tibble
 get_iso_codes <- function(country) {
 
   iso_code_fun <- switch(country,
@@ -18,6 +24,10 @@ get_iso_codes <- function(country) {
   return(iso_codes_table)
 }
 
+#' Get a table of level 2 region codes (FIPS, ONS, ISO) for a specified country
+#' @param country a string with a country specified
+#' @return a tibble of regions and their corresponding level 2 region codes
+#' @importFrom tibble tibble
 get_level_2_region_codes <- function(country) {
   
   level_2_code_fun <- switch(country,
@@ -32,8 +42,11 @@ get_level_2_region_codes <- function(country) {
   return(level_2_codes_table)
 }
 
+# Level 1 regions -------------------------------------------------------------------------------------
 
-## Level 1 regions
+#' Afghan ISO codes
+#' @importFrom tibble tibble
+#' 
 get_afghan_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("AF-BAL", "AF-BAM", "AF-BDG", "AF-BDS", "AF-BGL", "AF-DAY", "AF-FRA", "AF-FYB",
@@ -47,6 +60,9 @@ get_afghan_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Belgian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_belgium_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
@@ -54,6 +70,9 @@ get_belgium_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Brazilian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_brazil_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("BR-AC", "BR-AL", "BR-AM", "BR-AP", "BR-BA", "BR-CE", "BR-DF", "BR-ES", "BR-FN",
@@ -67,6 +86,9 @@ get_brazil_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Canadian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_canada_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL", "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE", "CA-QC", "CA-SK", "CA-YT"),
@@ -76,6 +98,9 @@ get_canada_iso_codes <- function() {
     return(iso_codes)
 }
 
+#' German ISO codes
+#' @importFrom tibble tibble
+#' 
 get_germany_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH", "DE-MV",
@@ -86,6 +111,9 @@ get_germany_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Indian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_india_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("IN-AN", "IN-AP", "IN-AR", "IN-AS", "IN-BR", "IN-CH", "IN-CT", "IN-DD", "IN-DL",
@@ -103,6 +131,9 @@ get_india_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Italian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_italy_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("IT-21", "IT-23", "IT-25", "IT-32", "IT-34", "IT-36", "IT-42", "IT-45", "IT-52",
@@ -115,6 +146,9 @@ get_italy_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' Russian ISO codes
+#' @importFrom tibble tibble
+#' 
 get_russia_iso_codes <- function() {
   region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:RU"
   iso_table <- region_url %>%
@@ -150,6 +184,9 @@ get_russia_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' US ISO codes
+#' @importFrom tibble tibble
+#' 
 get_us_iso_codes <- function() {
   iso_codes <- tibble::tibble(
     iso_code = c("US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
@@ -170,15 +207,23 @@ get_us_iso_codes <- function() {
   return(iso_codes)
 }
 
+#' UK ISO codes (NULL - they're in the raw data already)
+#' 
 get_uk_iso_codes <- function() {
   return(NULL)
 }
 
+#' Colombia ISO codes (NULL - they're in the raw data already)
+#' 
 get_colombia_iso_codes <- function() {
   return(NULL)
 }
 
-## Level 2 regions
+# Level 2 regions -------------------------------------------------------------------------------------
+
+#' Beligan Provincial ISO codes
+#' @importFrom tibble tibble
+#' 
 get_belgium_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = c("BE-VAN", "BE-BRU", "BE-WLG", "BE-VLI", "BE-VOV", "BE-VBR",
@@ -188,6 +233,9 @@ get_belgium_level_2_codes <- function() {
   return(region_codes)
 }
 
+#' Brazilian level 2 codes (not available currently)
+#' @importFrom tibble tibble
+#' 
 get_brazil_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = NA,
@@ -195,6 +243,9 @@ get_brazil_level_2_codes <- function() {
   return(region_codes)
 }
 
+#' German level 2 codes (not available currently)
+#' @importFrom tibble tibble
+#' 
 get_germany_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = NA,
@@ -202,10 +253,16 @@ get_germany_level_2_codes <- function() {
   return(region_codes)
 }
 
+#' US level 2 codes (FIPS) (Included in original function)
+#' @importFrom tibble tibble
+#' 
 get_us_level_2_codes <- function() {
   return(NULL)
 }
 
+#' UK level 2 codes (ONS) (Included in original function)
+#' @importFrom tibble tibble
+#' 
 get_uk_level_2_codes <- function() {
   return(NULL)
 }

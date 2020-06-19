@@ -1,16 +1,15 @@
-#' Get German daily cases by Bundesland only
+#' German Regional Daily COVID-19 Count Data - Bundesland
 #'
-#' @description Fetches COVID case counts stratified by Bundesland in Germany.
-#' This data is sourced from the Robert Koch Institute:
-#' https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
-#' selects and sanitises the relevant columns
-#' @return A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
-#' @importFrom dplyr select group_by mutate summarise %>%
+#' @description Extracts daily COVID-19 data for Germany, stratified by Bundesland. 
+#' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}. 
+#' It is loaded and then sanitised.
+#' @return A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{get_regional_covid_data()}.
+#' @importFrom dplyr select group_by mutate summarise %>% ungroup
 #' @importFrom lubridate ymd_hms as_date
-#'
+#' 
 get_germany_regional_cases_only_level_1 <- function() {
-
-  # Path to data
+  
+  # Read data --------------------------------------------------------------------
   url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
 
   data <- csv_reader(file = url) %>%
@@ -27,19 +26,17 @@ get_germany_regional_cases_only_level_1 <- function() {
   return(data)
 }
 
-#' Get German daily cases by Landkreis
+#' German Regional Daily COVID-19 Count Data - Landkreis
 #'
-#' @description Fetches COVID case counts stratified by Landkreis in Germany.
-#' This data is sourced from the Robert Koch Institute:
-#' https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0
-#' selects and sanitises the relevant columns
-#' @return A data.frame of COVID cases by region in Germany, ready to be used by get_regional_covid_data()
-#' @importFrom dplyr select group_by mutate summarise %>%
+#' @description Extracts daily COVID-19 data for Germany, stratified by Landkreis. 
+#' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}. 
+#' It is loaded and then sanitised.
+#' @return A data.frame of COVID cases by Landkreis in Germany, ready to be used by get_regional_covid_data().
+#' @importFrom dplyr select group_by mutate summarise %>% ungroup
 #' @importFrom lubridate ymd_hms as_date
-#'
 get_germany_regional_cases_with_level_2 <- function() {
 
-  # Path to data
+  # Read data --------------------------------------------------------------------
   url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
 
   data <- csv_reader(file = url) %>%
