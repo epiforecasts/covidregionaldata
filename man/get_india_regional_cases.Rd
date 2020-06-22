@@ -7,7 +7,7 @@
 get_india_regional_cases()
 }
 \value{
-A dataframe of daily India data to be further processed by \function{get_regional_covid_data()}.
+A dataframe of daily India data to be further processed by \code{\link[=get_regional_covid_data]{get_regional_covid_data()}}.
 }
 \description{
 Get Indian cases, deaths and recoveries by state
