@@ -1,7 +1,7 @@
 #' Get India daily COVID data
 #'
 #' @description Get Indian cases, deaths and recoveries by state
-#' @return A dataframe of daily India data to be further processed by \function{get_regional_covid_data()}.
+#' @return A dataframe of daily India data to be further processed by [get_regional_covid_data()].
 #' @importFrom tibble tibble
 #' @importFrom tidyr pivot_longer
 #' @importFrom dplyr mutate select filter rename left_join %>% full_join
