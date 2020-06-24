@@ -14,8 +14,15 @@ get_daily_from_cumulative <- function(column) {
 #' @return A vector of numeric data which corresponds to cumulative counts
 #' 
 get_cumulative_from_daily <- function(column) {
+  if (all(is.na(column))){
+    return(column)
+  }
+  
+  first_non_na <- min(which(!is.na(column)))
+  column <- column[first_non_na:length(column)]
   column[which(is.na(column))] <- 0
   cum_sum <- cumsum(column)
+  cum_sum <- c(rep(NA, first_non_na - 1), cum_sum)
   return(cum_sum)
 }
 
@@ -94,7 +101,7 @@ set_negative_values_to_zero <- function(data) {
 
   for (numeric_col_name in numeric_col_names) {
     if (numeric_col_name %in% colnames(data)){
-      data <- data %>% dplyr::mutate(!!numeric_col_name := replace(data[, numeric_col_name], data[, numeric_col_name] < 0, 0))
+      data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
     }
   }
 
@@ -141,11 +148,13 @@ complete_cumulative_columns <- function(data) {
       if ("region_level_2" %in% colnames(data)) {
         data <- data %>%
           dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code) %>%
-          tidyr::fill(cumulative_col_name)
+          tidyr::fill(cumulative_col_name) %>%
+          dplyr::ungroup()
       } else {
         data <- data %>%
           dplyr::group_by(region_level_1, iso_code,) %>%
-          tidyr::fill(cumulative_col_name)
+          tidyr::fill(cumulative_col_name) %>%
+          dplyr::ungroup()
       }
     }
   }
@@ -163,7 +172,7 @@ complete_cumulative_columns <- function(data) {
 #' @importFrom tibble tibble
 #' 
 calculate_columns_from_existing_data <- function(data) {
-  possible_counts <- c("cases", "deaths", "hospitalisations", "recoveries", "tests")
+  possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
 
   for (count in possible_counts) {
     count_today_name <- paste0(count, "_new")
@@ -276,7 +285,8 @@ totalise_data <- function(data, include_level_2_regions) {
                      deaths_total = sum(deaths_new, na.rm = TRUE),
                      recovered_total = sum(recovered_new, na.rm = TRUE),
                      hosp_total = sum(hosp_new, na.rm = TRUE),
-                     tested_total = sum(tested_new, na.rm = TRUE))
+                     tested_total = sum(tested_new, na.rm = TRUE)) %>%
+    dplyr::ungroup()
   
   # Select correct data -------------------------------------------------
   if (include_level_2_regions) {
@@ -290,10 +300,6 @@ totalise_data <- function(data, include_level_2_regions) {
                     recovered_total, hosp_total, tested_total)
   }
   
-  # Rename region columns and arrange -----------------------------------
-  data <- data %>%
-    rename_region_column(country) %>%
-    dplyr::arrange(-cases_total)
   
   return(tibble::tibble(data))
 }
