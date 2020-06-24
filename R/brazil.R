@@ -4,7 +4,7 @@
 #' Data available on Github, curated by Wesley Cota: DOI 10.1590/SciELOPreprints.362
 #' \url{https://github.com/wcota/covid19br}. It is loaded and then sanitised.
 #' @return A data frame of daily Brazilian  Covid-19 data stratified by state,
-#' to be further processed by \code{get_regional_covid_data()}.
+#' to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr %>% mutate filter select left_join group_by summarise
 #' @importFrom lubridate ymd
 #' @importFrom tibble tibble

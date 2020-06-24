@@ -266,4 +266,3 @@ get_us_level_2_codes <- function() {
 get_uk_level_2_codes <- function() {
   return(NULL)
 }
-

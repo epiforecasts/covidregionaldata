@@ -8,7 +8,7 @@
 #'
 #' @author Flavio Finger @ffinger
 #' @return A data frame of daily Afghan provincial cases and deaths, stratified by state,
-#' to be further processed by \code{get_regional_covid_data()}.
+#' to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr %>% transmute mutate recode
 #' @importFrom stringr str_replace str_remove_all
 #' @importFrom lubridate dmy

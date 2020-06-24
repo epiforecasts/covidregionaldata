@@ -3,7 +3,7 @@
 #' @description Extracts daily COVID-19 data for Colombia, stratified by departamento. 
 #' Data available at  \url{https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv}. 
 #' It is loaded and then sanitised.
-#' @return A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_covid_data()}.
+#' @return A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr select left_join mutate %>%
 #' @importFrom lubridate mdy
 #' @importFrom stringr str_replace_all str_to_sentence

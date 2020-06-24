@@ -3,7 +3,7 @@
 #' @description Fetches daily COVID-19 data from Sciensano, the Belgian Institute for Health.
 #' Data is available at \url{https://epistat.wiv-isp.be/covid/}.
 #' It is loaded and then sanitised.
-#' @return A data frame of COVID cases by Region in Belgium, stratified by region, ready to be used by \code{get_regional_covid_data()}.
+#' @return A data frame of COVID cases by Region in Belgium, stratified by region, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr %>% select group_by tally rename full_join mutate ungroup
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate ymd
@@ -60,7 +60,7 @@ get_belgium_regional_cases_only_level_1 <- function() {
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
 #' Data is available at \url{https://epistat.wiv-isp.be/covid/}.
 #' It is then loaded and sanitised.
-#' @return A data frame of COVID cases by province in Belgium, stratified by province, ready to be used by get_regional_covid_data().
+#' @return A data frame of COVID cases by province in Belgium, stratified by province, ready to be used by get_regional_data().
 #' @importFrom dplyr %>% select group_by tally rename full_join mutate ungroup
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate ymd

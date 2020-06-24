@@ -1,5 +1,5 @@
 #### These functions are exported and used to meet the Covid19R standard https://covid19r.github.io/documentation/standardized-package-functions.html
-#### They are essentially wrappers around get_regional_covid_data
+#### They are essentially wrappers around get_regional_data
 
 #' Get daily Afghan COVID-19 count data by Province (Wilåyat)
 #' @description Fetches  COVID-19 count data, stratified by date and province.
@@ -7,7 +7,7 @@
 #' @return A tibble of COVID cases by province in Afghanistan.
 #' @export
 refresh_covidregionaldata_afghanistan <- function() {  
-  data <- get_regional_covid_data("afghanistan", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("afghanistan", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -18,7 +18,7 @@ refresh_covidregionaldata_afghanistan <- function() {
 #' @return A tibble of COVID cases by province in Belgium.
 #' @export
 refresh_covidregionaldata_belgium <- function() {
-  data <- get_regional_covid_data("belgium", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("belgium", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -29,7 +29,7 @@ refresh_covidregionaldata_belgium <- function() {
 #' @return A tibble of COVID cases by province in Brazil
 #' @export
 refresh_covidregionaldata_brazil <- function() {
-  data <- get_regional_covid_data("brazil", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("brazil", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -40,7 +40,7 @@ refresh_covidregionaldata_brazil <- function() {
 #' @return A tibble of COVID cases by province in Canada.
 #' @export
 refresh_covidregionaldata_canada<- function() {
-  data <- get_regional_covid_data("canada", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("canada", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -51,7 +51,7 @@ refresh_covidregionaldata_canada<- function() {
 #' @return A tibble of COVID cases by province in Germany.
 #' @export
 refresh_covidregionaldata_germany <- function() {
-  data <- get_regional_covid_data("germany", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("germany", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -62,7 +62,7 @@ refresh_covidregionaldata_germany <- function() {
 #' @return A tibble of COVID cases by province in India
 #' @export
 refresh_covidregionaldata_india <- function() {
-  data <- get_regional_covid_data("india", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("india", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -73,7 +73,7 @@ refresh_covidregionaldata_india <- function() {
 #' @return A tibble of COVID cases by province in Italy.
 #' @export
 refresh_covidregionaldata_italy <- function() {
-  data <- get_regional_covid_data("italy", totals = FALSE, include_level_2_regions = FALSE)
+  data <- get_regional_data("italy", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }

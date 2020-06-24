@@ -13,7 +13,8 @@
 #' @importFrom dplyr %>% group_by arrange select ungroup do
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
-#' @examples 
+#' @export
+#' @examples
 #' 
 #' \dontrun{
 #'  get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
@@ -111,7 +112,9 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
 
   # Totalise and return if totals data is requested -------------------------------------------
   if (totals) {
-    data <- totalise_data(data, include_level_2_regions = include_level_2_regions)
+    data <- totalise_data(data, include_level_2_regions = include_level_2_regions) %>%
+      rename_region_column(country) %>%
+      dplyr::arrange(-cases_total)
     return(tibble::tibble(data))
   }
 

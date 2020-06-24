@@ -7,7 +7,7 @@ test_that("get_colombia_regional_cases data source is unchanged and up to date",
 
 test_that("get_colombia_regional_cases returns the correct column names", {
   expected_colnames <- c("region_level_1", "date", "cases_total", "deaths_total",
-                         "tested_total", "iso_3166_2")
+                         "tested_total", "iso_code")
   
   returned_colnames <- colnames(get_colombia_regional_cases())
   
@@ -23,5 +23,5 @@ test_that("get_colombia_regional_cases returns correct column types", {
   expect_is(data$cases_total, "numeric")
   expect_is(data$deaths_total, "numeric")
   expect_is(data$tested_total, "numeric")
-  expect_is(data$iso_3166_2, "character")
+  expect_is(data$iso_code, "character")
 })
