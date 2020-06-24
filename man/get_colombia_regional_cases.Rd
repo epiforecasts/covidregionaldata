@@ -2,29 +2,15 @@
 % Please edit documentation in R/colombia.R
 \name{get_colombia_regional_cases}
 \alias{get_colombia_regional_cases}
-\title{Get Colombia daily cases}
+\title{Colombian Regional Daily COVID-19 Count Data - Department}
 \usage{
 get_colombia_regional_cases()
 }
 \value{
-A dataframe of case, death and testing counts in Colombian regions
+A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_data()}.
 }
 \description{
-Fetches COVID case, death, and test counts by region
-Sourced from Ideas Col: https://github.com/ideascol/covid19
-}
-\examples{
-
-
-\dontrun{
-
-regions <- rnaturalearth::ne_states("Colombia", returnclass = "sf")
-data <- get_colombia_regional_cases() \%>\%
-          dplyr::filter(date == max(date))
-regions_with_data <- dplyr::left_join(regions, data, by = "iso_3166_2")
-regions_with_data \%>\%
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(ggplot2::aes(fill = cases))
-}
-
+Extracts daily COVID-19 data for Colombia, stratified by departamento.
+Data available at  \url{https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv}.
+It is loaded and then sanitised.
 }

@@ -2,12 +2,16 @@
 % Please edit documentation in R/brazil.R
 \name{get_brazil_regional_cases_only_level_1}
 \alias{get_brazil_regional_cases_only_level_1}
-\title{Brazil regional cases and deaths stratifying by Admin Level 1 region (state)}
+\title{Brazilian Regional Daily COVID-19 Count Data - States}
 \usage{
 get_brazil_regional_cases_only_level_1()
 }
+\value{
+A data frame of daily Brazilian  Covid-19 data stratified by state,
+to be further processed by \code{get_regional_data()}.
+}
 \description{
-Extracts regional case and death counts for Brazil, stratified by state.
+Extracts daily COVID-19 data for Brazil, stratified by state.
 Data available on Github, curated by Wesley Cota: DOI 10.1590/SciELOPreprints.362
-\href{https://github.com/wcota/covid19br}{Source}
+\url{https://github.com/wcota/covid19br}. It is loaded and then sanitised.
 }

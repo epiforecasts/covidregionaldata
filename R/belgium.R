@@ -1,16 +1,17 @@
-#' Fetch daily COVID cases with only Admin Level 1 region (region) for Belgium
-#' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
-#' Data is available at https://epistat.wiv-isp.be/covid/
-#' selects and sanitises the relevant columns
-#' @return A data.frame of COVID cases by admin level 1 region in Belgium, ready to be used by get_regional_covid_data()
-#' @importFrom readr read_csv locale cols
-#' @importFrom dplyr %>% select group_by tally rename full_join mutate
+#' Belgian Regional Daily COVID-19 Count Data - Regions Only
+#' 
+#' @description Fetches daily COVID-19 data from Sciensano, the Belgian Institute for Health.
+#' Data is available at \url{https://epistat.wiv-isp.be/covid/}.
+#' It is loaded and then sanitised.
+#' @return A data frame of COVID cases by Region in Belgium, stratified by region, ready to be used by \code{get_regional_data()}.
+#' @importFrom dplyr %>% select group_by tally rename full_join mutate ungroup
 #' @importFrom tidyr replace_na
-#' @importFrom lubridate dmy
-#'
-get_belgium_regional_cases_only_level_1 <- function(){
+#' @importFrom lubridate ymd
+#' @importFrom readr locale
+#' 
+get_belgium_regional_cases_only_level_1 <- function() {
 
-  # Paths to data
+  # Paths to data ---------------------------------------------------------------
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
@@ -19,7 +20,7 @@ get_belgium_regional_cases_only_level_1 <- function(){
   hosp_data <- csv_reader(file = h_provincial, locale=readr::locale(encoding = "UTF-8"))
   deaths_data <- csv_reader(file = m_provincial, locale=readr::locale(encoding = "UTF-8"))
 
-  # Clean data
+  # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
     dplyr::select(DATE, REGION, CASES) %>%
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
@@ -45,7 +46,7 @@ get_belgium_regional_cases_only_level_1 <- function(){
     dplyr::ungroup()
 
 
-  # Join the three datasets and rename columns
+  # Join the three datasets and rename columns -----------------------------------
   cases_and_hosp_data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "REGION" = "REGION"))
   data <- dplyr::full_join(cases_and_hosp_data, deaths_data, by = c("DATE" = "DATE", "REGION" = "REGION")) %>%
           dplyr::rename(date = DATE, region_level_1 = REGION, cases_new = n.x, hosp_new = n.y, deaths_new = n)
@@ -54,19 +55,19 @@ get_belgium_regional_cases_only_level_1 <- function(){
 }
 
 
-#' Fetch daily COVID cases including Admin Level 2 region (Province) for Belgium
+#' Belgian Provincial Daily COVID-19 Count Data - Regions and Provinces
+#' 
 #' @description Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
-#' Data is available at https://epistat.wiv-isp.be/covid/
-#' selects and sanitises the relevant columns. Also includes Level 1 region
-#' @return A data.frame of COVID cases by admin level 2 region in Belgium, ready to be used by get_regional_covid_data()
-#' @importFrom readr read_csv locale cols
-#' @importFrom dplyr %>% select group_by tally rename full_join mutate
+#' Data is available at \url{https://epistat.wiv-isp.be/covid/}.
+#' It is then loaded and sanitised.
+#' @return A data frame of COVID cases by province in Belgium, stratified by province, ready to be used by get_regional_data().
+#' @importFrom dplyr %>% select group_by tally rename full_join mutate ungroup
 #' @importFrom tidyr replace_na
-#' @importFrom lubridate dmy
-#'
+#' @importFrom lubridate ymd
+#' @importFrom readr locale
 get_belgium_regional_cases_with_level_2 <- function(){
 
-  # Paths to data
+  # Paths to data ---------------------------------------------------------------
   c_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
@@ -75,7 +76,7 @@ get_belgium_regional_cases_with_level_2 <- function(){
   hosp_data <- csv_reader(file = h_provincial, locale=readr::locale(encoding = "UTF-8"))
   deaths_data <- csv_reader(file = m_provincial, locale=readr::locale(encoding = "UTF-8"))
 
-  # Clean data
+  # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
     dplyr::select(DATE, REGION, PROVINCE, CASES) %>%
     dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
@@ -94,7 +95,7 @@ get_belgium_regional_cases_with_level_2 <- function(){
     dplyr::tally(wt = NEW_IN) %>%
     dplyr::ungroup()
 
-  # Join the three datasets and rename columns
+  # Join the three datasets and rename columns -----------------------------------
   data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "PROVINCE" = "PROVINCE", "REGION" = "REGION")) %>%
     dplyr::rename(date = DATE, region_level_1 = REGION, region_level_2 = PROVINCE, cases_new = n.x, hosp_new = n.y)
 

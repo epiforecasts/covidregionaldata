@@ -2,12 +2,12 @@
 % Please edit documentation in R/brazil.R
 \name{get_brazil_regional_cases_with_level_2}
 \alias{get_brazil_regional_cases_with_level_2}
-\title{Brazil regional cases and deaths stratiftinf by Admin Level 2 region (city)}
+\title{Brazilian Regional Daily COVID-19 Count Data - Cities}
 \usage{
 get_brazil_regional_cases_with_level_2()
 }
 \description{
-Extracts regional case and death counts for Brazil, stratified by city
+Extracts regional case and death counts for Brazil, stratified by city.
 Data available on Github, curated by Wesley Cota: DOI 10.1590/SciELOPreprints.362
-\href{https://github.com/wcota/covid19br}{Source}
+\url{https://github.com/wcota/covid19br}. It is loaded and then sanitised.
 }

@@ -11,5 +11,5 @@ A tibble of COVID cases by province in Italy.
 }
 \description{
 Fetches  COVID-19 count data, stratified by date and region.
-Data sourced from https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-<date>.csv.
+Data sourced from https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-\emph{\strong{date}}.csv.
 }

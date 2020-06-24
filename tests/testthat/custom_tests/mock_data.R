@@ -9,8 +9,8 @@
 ## is used for - some are used for multiple tests.
 ##--------------------------------------------------#
 
-# get_regional_covid_data() tests - with only Level 1 regions
-get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions <- function() {
+# get_regional_data() tests - with only Level 1 regions
+get_expected_data_for_get_regional_data_tests_only_level_1_regions <- function() {
   ## Dates/provinces
   dates <- c("2020-01-31", "2020-02-01", "2020-02-02", "2020-02-03", "2020-02-04", "2020-02-05")
   provinces <- c("Northland", "Eastland", "Southland", "Westland", "Virginia")
@@ -80,8 +80,8 @@ get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions <- func
   return(tibble::tibble(expected_data))
 }
 
-get_input_data_for_get_regional_covid_data_tests_only_level_1_regions <- function() {
-  expected_data <- get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions()
+get_input_data_for_get_regional_data_tests_only_level_1_regions <- function() {
+  expected_data <- get_expected_data_for_get_regional_data_tests_only_level_1_regions()
 
   ## To get the correct input -> delete NA columns, and rows with NAs in them
   input_data <- expected_data[, -c(3, 12, 13)]
@@ -90,8 +90,8 @@ get_input_data_for_get_regional_covid_data_tests_only_level_1_regions <- functio
   return(input_data)
 }
 
-get_expected_totals_data_for_get_regional_covid_data_tests_only_level_1_regions <- function() {
-  expected_data <- get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions()
+get_expected_totals_data_for_get_regional_data_tests_only_level_1_regions <- function() {
+  expected_data <- get_expected_data_for_get_regional_data_tests_only_level_1_regions()
 
   ## Totals data to test function when totals = TRUE
   totals_data <- expected_data[c(26:30), c(2, 3, 5, 7, 9, 11, 13)]
@@ -103,9 +103,9 @@ get_expected_totals_data_for_get_regional_covid_data_tests_only_level_1_regions 
 }
 
 
-# get_regional_covid_data() tests - including Level 2 regions
-get_input_data_for_get_regional_covid_data_tests_with_level_2_regions <- function() {
-  data <- get_input_data_for_get_regional_covid_data_tests_only_level_1_regions()
+# get_regional_data() tests - including Level 2 regions
+get_input_data_for_get_regional_data_tests_with_level_2_regions <- function() {
+  data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
   colnames(data)[2] <- "region_level_2"
   regions_table <- tibble::tibble(region_level_2 = c("Northland", "Eastland", "Southland", "Westland", "Virginia"),
                                   region_level_1 = c("Oneland", "Oneland", "Twoland", "Twoland", "USA"))
@@ -119,8 +119,8 @@ get_input_data_for_get_regional_covid_data_tests_with_level_2_regions <- functio
   return(data)
 }
 
-get_expected_data_for_get_regional_covid_data_tests_with_level_2_regions <- function() {
-  data <- get_expected_data_for_get_regional_covid_data_tests_only_level_1_regions()
+get_expected_data_for_get_regional_data_tests_with_level_2_regions <- function() {
+  data <- get_expected_data_for_get_regional_data_tests_only_level_1_regions()
   data <- data[, -3]
   data$region <- rep(c("Oneland", "Oneland", "Twoland", "USA", "Twoland"), 6)
   iso_codes <- tibble::tibble(iso_code = c("ON", "TW", "US"),
@@ -141,8 +141,8 @@ get_expected_data_for_get_regional_covid_data_tests_with_level_2_regions <- func
   return(data)
 }
 
-get_expected_totals_data_for_get_regional_covid_data_tests_with_level_2_regions <- function() {
-  data <- get_expected_totals_data_for_get_regional_covid_data_tests_only_level_1_regions()
+get_expected_totals_data_for_get_regional_data_tests_with_level_2_regions <- function() {
+  data <- get_expected_totals_data_for_get_regional_data_tests_only_level_1_regions()
 
   data <- data[, -2]
   data$region <- c("Oneland", "USA", "Twoland", "Twoland", "Oneland")
@@ -181,7 +181,7 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
     dplyr::arrange(date, region_level_1) %>%
     dplyr::left_join(iso_codes, by = c("region_level_1" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
-  return(expected_data)
+  return(tibble::tibble(expected_data))
 }
 
 get_input_data_for_complete_cumulative_columns_test <- function() {
@@ -202,10 +202,10 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   # manually add cumulative cases to get expected data
   full_data_with_cum_cases_filled <- fill_empty_dates_with_na(partial_data)
   full_data_with_cum_cases_filled <- arrange(full_data_with_cum_cases_filled, region_level_1, date)
-  full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, c(1,5,5,15,2,7,7,18,3,3,3,15))
+  full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, as.integer(c(1,5,5,15,2,7,7,18,3,3,3,15)))
   colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 
-  return(full_data_with_cum_cases_filled)
+  return(tibble::tibble(full_data_with_cum_cases_filled))
 }
 
 

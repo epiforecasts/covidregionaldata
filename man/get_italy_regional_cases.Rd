@@ -2,14 +2,15 @@
 % Please edit documentation in R/italy.R
 \name{get_italy_regional_cases}
 \alias{get_italy_regional_cases}
-\title{Italian Regional Covid-19 Data}
+\title{Regional Daily COVID-19 Count Data}
 \usage{
 get_italy_regional_cases()
 }
 \value{
-A data frame of Italian regional case counts ready to be used by \code{get_regional_covid_data()}
+A data frame of daily COVID cases for Italy by region, to be further processed by \code{get_regional_data()}.
 }
 \description{
-Fetches COVID data by region. Data is collated by the Italian Department of Civil Protection
-and is available on github: https://github.com/pcm-dpc/COVID-19. Cleans and sanitises ready for further use.
+Extracts daily COVID-19 data for Italy, stratified by Region.
+Data available at  \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv}.
+It is loaded and then sanitised.
 }

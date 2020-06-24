@@ -7,10 +7,10 @@
 set_negative_values_to_zero(data)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{a data table}
 }
 \value{
-a data.frame with all relevant data > 0.
+a tibble with all relevant data > 0.
 }
 \description{
 Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.

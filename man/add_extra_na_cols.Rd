@@ -7,10 +7,10 @@
 add_extra_na_cols(data)
 }
 \arguments{
-\item{data}{a data.frame}
+\item{data}{a data table}
 }
 \value{
-a data.frame with relevant NA columns added
+a tibble with relevant NA columns added
 }
 \description{
 Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets

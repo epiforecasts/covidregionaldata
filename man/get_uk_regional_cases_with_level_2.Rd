@@ -2,18 +2,16 @@
 % Please edit documentation in R/uk.R
 \name{get_uk_regional_cases_with_level_2}
 \alias{get_uk_regional_cases_with_level_2}
-\title{Get UK daily cases}
+\title{UK Regional Daily COVID-19 Count Data - Authority}
 \usage{
 get_uk_regional_cases_with_level_2()
 }
-\arguments{
-\item{geography}{Character string identifying which part of the UK to extract and at what scale
-Defaults to "all countries". Options are: "all countries", "all regions", "England", "Scotland", "Northern Ireland", "Wales".
-Note that England always returns 9 English regions, and Nothern Ireland always returns as one country}
-}
 \value{
-A dataframe of case counts. By default returns cases in English regions, and Scotland, Wales, and Northern Ireland
+A data frame of daily COVID cases for the UK by local authority, to be further processed by \code{get_regional_data()}.
 }
 \description{
-Get UK cases by country or region
+Extracts daily COVID-19 data for the UK, stratified by region.
+Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}.
+Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
+It is loaded and then sanitised.
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/belgium.R
 \name{get_belgium_regional_cases_only_level_1}
 \alias{get_belgium_regional_cases_only_level_1}
-\title{Fetch daily COVID cases with only Admin Level 1 region (region) for Belgium}
+\title{Belgian Regional Daily COVID-19 Count Data - Regions Only}
 \usage{
 get_belgium_regional_cases_only_level_1()
 }
 \value{
-A data.frame of COVID cases by admin level 1 region in Belgium, ready to be used by get_regional_covid_data()
+A data frame of COVID cases by Region in Belgium, stratified by region, ready to be used by \code{get_regional_data()}.
 }
 \description{
-Fetches daily COVID data from Sciensano, the Belgian Institute for Health.
-Data is available at https://epistat.wiv-isp.be/covid/
-selects and sanitises the relevant columns
+Fetches daily COVID-19 data from Sciensano, the Belgian Institute for Health.
+Data is available at \url{https://epistat.wiv-isp.be/covid/}.
+It is loaded and then sanitised.
 }

@@ -19,11 +19,11 @@ test_that("get_cumulative_from_daily returns correct results", {
 test_that("calculate_columns_from_existing_data returns correct results", {
   cases_new <- c(0, 3, 2, NA_integer_, 0, 14, 1)
   deaths_total <- c(0, 5, 7, 10, 15, 18, 26)
-  input_data <- data.frame(cbind(cases_new, deaths_total))
+  input_data <- tibble::tibble(cases_new, deaths_total)
 
   cases_total <- c(0, 3, 5, 5, 5, 19, 20)
   deaths_new <- c(0, 5, 2, 3, 5, 3, 8)
-  expected_data <- data.frame(cbind(cases_new, deaths_total, cases_total, deaths_new))
+  expected_data <- tibble::tibble(cases_new, deaths_total, cases_total, deaths_new)
 
   expect_equal(calculate_columns_from_existing_data(input_data), expected_data)
 })
@@ -57,7 +57,7 @@ test_that("set_negative_values_to_zero works", {
   df <- data.frame(matrix(c(rep(Sys.Date(), 100), 49:-50), ncol=2))
   colnames(df) <- c("date", "cases_total")
 
-  df_expected <- data.frame(matrix(c(rep(Sys.Date(), 100), c(49:0, rep(0, 50))), ncol=2))
+  df_expected <- tibble::tibble(data.frame(matrix(c(rep(Sys.Date(), 100), c(49:0, rep(0, 50))), ncol=2)))
   colnames(df_expected) <- c("date", "cases_total")
 
   df_actual <- set_negative_values_to_zero(df)
@@ -75,10 +75,12 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
 })
 
 test_that("complete_cumulative_columns works", {
-  data_with_cum_cases_na <- get_input_data_for_complete_cumulative_columns_test()
-  data_with_cum_cases_filled <- get_expected_data_for_complete_cumulative_columns_test()
+  input_data <- get_input_data_for_complete_cumulative_columns_test()
+  expected_data <- get_expected_data_for_complete_cumulative_columns_test()
 
-  expect_equal(complete_cumulative_columns(data_with_cum_cases_na), data_with_cum_cases_filled)
+  actual_data <- complete_cumulative_columns(input_data)
+  
+  expect_equal(actual_data, expected_data)
 })
 
 test_that("convert_to_Covid19R_format converts correctly", {
