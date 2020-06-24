@@ -7,7 +7,7 @@
 get_belgium_regional_cases_with_level_2()
 }
 \value{
-A data frame of COVID cases by province in Belgium, stratified by province, ready to be used by get_regional_covid_data().
+A data frame of COVID cases by province in Belgium, stratified by province, ready to be used by get_regional_data().
 }
 \description{
 Fetches daily COVID data from Sciensano, the Belgian Institute for Health.

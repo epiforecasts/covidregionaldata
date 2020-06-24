@@ -11,6 +11,8 @@
 #' @inheritParams get_international_linelist
 #' @importFrom memoise cache_filesystem memoise
 #' @importFrom readr read_csv
+#' @importFrom httr GET write_disk
+#' @importFrom readxl read_excel
 #' @importFrom dplyr mutate rename select arrange filter
 #' @examples
 #'
@@ -31,7 +33,30 @@ get_ecdc_cases <- function (countries = NULL){
   )
 
   if ("try-error" %in% class(error)) {
-    stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
+    message("csv unavailable, trying alternative")
+    
+    url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
+    httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
+    data <- readxl::read_excel(tf) %>%
+      dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
+      dplyr::rename(geoid = geoId, country = countriesAndTerritories,
+                    cases = cases, deaths = deaths,
+                    population_2019 = popData2019) %>%
+      dplyr::select(-dateRep) %>%
+      dplyr::arrange(date) %>%
+      dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
+    
+    if (!is.null(countries)) {
+      data <- data %>%
+        dplyr::filter(country %in% countries)
+    }
+    
+    return(data)
+    
+    if ("try-error" %in% class(error)) {
+      stop(paste0("No data found. Check ECDC source here: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"))
+    }
+    
   }
 
   d <- mem_read(base_url) %>%

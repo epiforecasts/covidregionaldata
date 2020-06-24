@@ -7,7 +7,7 @@
 get_germany_regional_cases_only_level_1()
 }
 \value{
-A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{get_regional_covid_data()}.
+A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Germany, stratified by Bundesland.

@@ -7,7 +7,7 @@
 get_italy_regional_cases()
 }
 \value{
-A data frame of daily COVID cases for Italy by region, to be further processed by \code{get_regional_covid_data()}.
+A data frame of daily COVID cases for Italy by region, to be further processed by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Italy, stratified by Region.

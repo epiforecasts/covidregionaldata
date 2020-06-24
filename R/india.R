@@ -3,7 +3,7 @@
 #' @description Extracts daily COVID-19 data for India, stratified by State 
 #' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}. 
 #' It is loaded and then sanitised.
-#' @return A data frame of daily COVID cases for India by state, to be further processed by \code{get_regional_data()}.
+#' @return A dataframe of daily India data to be further processed by [get_regional_data()].
 #' @importFrom tibble tibble
 #' @importFrom tidyr pivot_longer
 #' @importFrom dplyr mutate select filter rename left_join %>% full_join mutate

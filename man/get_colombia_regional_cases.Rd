@@ -7,7 +7,7 @@
 get_colombia_regional_cases()
 }
 \value{
-A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_covid_data()}.
+A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Colombia, stratified by departamento.

@@ -7,7 +7,7 @@
 get_russia_regional_cases()
 }
 \value{
-A data frame of daily COVID cases for Russia by region, to be further processed by \code{get_regional_covid_data()}.
+A data frame of daily COVID cases for Russia by region, to be further processed by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Russia, stratified by Region.

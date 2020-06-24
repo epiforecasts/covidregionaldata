@@ -7,7 +7,7 @@
 get_germany_regional_cases_with_level_2()
 }
 \value{
-A data.frame of COVID cases by Landkreis in Germany, ready to be used by get_regional_covid_data().
+A data.frame of COVID cases by Landkreis in Germany, ready to be used by get_regional_data().
 }
 \description{
 Extracts daily COVID-19 data for Germany, stratified by Landkreis.

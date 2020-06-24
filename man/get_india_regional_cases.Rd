@@ -7,7 +7,7 @@
 get_india_regional_cases()
 }
 \value{
-A data frame of daily COVID cases for India by state, to be further processed by \code{get_regional_covid_data()}.
+A dataframe of daily India data to be further processed by \code{\link[=get_regional_data]{get_regional_data()}}.
 }
 \description{
 Extracts daily COVID-19 data for India, stratified by State

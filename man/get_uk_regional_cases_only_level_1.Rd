@@ -7,7 +7,7 @@
 get_uk_regional_cases_only_level_1()
 }
 \value{
-A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_covid_data()}.
+A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for the UK, stratified by region.

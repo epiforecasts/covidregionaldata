@@ -8,7 +8,7 @@ get_brazil_regional_cases_only_level_1()
 }
 \value{
 A data frame of daily Brazilian  Covid-19 data stratified by state,
-to be further processed by \code{get_regional_covid_data()}.
+to be further processed by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Brazil, stratified by state.
