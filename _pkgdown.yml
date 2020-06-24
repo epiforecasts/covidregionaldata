@@ -23,19 +23,20 @@ navbar:
 
 
 reference:
-  - title: Get data
-    desc: Functions to import and clean data
+  - title: Get Regional Data
+    desc: Function to import and clean regional data
     contents:
-      - contains("get_")
+      - get_regional_data
+      
+  - title: Get Global Data
+    desc: Functions to import and clean global data
+    contents:
+      - get_total_cases
+      - get_who_data
       - format_ecdc_data
 
-  - title: Sample from the serial interval distribution
-    desc: Functions that parameterise distributions based on a mean and standard deviation
-    contents:
-       - rgamma_with_mean_sd
-       - rweibull_with_mean_sd
-
-  - title: Utilities
-    desc: Package utilities
-    contents:
-      - reset_cache
+  - title: Other helpful functions
+    desc: Functions to import and clean global data
+    contents: 
+      - get_linelist
+      - get_interventions_data
