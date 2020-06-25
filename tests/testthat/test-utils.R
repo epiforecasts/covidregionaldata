@@ -1,5 +1,3 @@
-source("custom_tests/mock_data.R")
-
 test_that("get_daily_from_cumulative returns correct results", {
   column1 <- c(0, 3, 2, 10, 0, 14, 1)
   cumulative_col <- cumsum(column1)

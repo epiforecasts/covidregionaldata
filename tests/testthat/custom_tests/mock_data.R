@@ -190,7 +190,7 @@ get_input_data_for_complete_cumulative_columns_test <- function() {
   # add cumulative cases to partial data and then add NA rows
   partial_data <- expected_data[-c(6:9), ]
   partial_data_with_cum_cases_na <- partial_data %>% dplyr::group_by(region_level_1) %>% dplyr::mutate(cases_total = cumsum(cases))
-  full_data_with_cum_cases_na <- fill_empty_dates_with_na(partial_data_with_cum_cases_na)
+  full_data_with_cum_cases_na <- covidregionaldata::fill_empty_dates_with_na(partial_data_with_cum_cases_na)
 
   return(full_data_with_cum_cases_na)
 }

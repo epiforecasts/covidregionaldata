@@ -18,10 +18,6 @@ test_that("get_regional_data returns error if totals arg is not logical", {
 #-----------------------------------------#
 #---------- Happy case - set up ----------#
 #-----------------------------------------#
-
-## this file contains functions which create data specifically for these tests
-source("custom_tests/mock_data.R")
-
 test_that("get_regional_data returns correct time series data - admin level 1 regions only", {
   # Set up and run
   input_data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
