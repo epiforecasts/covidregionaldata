@@ -216,7 +216,17 @@ get_uk_iso_codes <- function() {
 #' Colombia ISO codes (NULL - they're in the raw data already)
 #' 
 get_colombia_iso_codes <- function() {
-  return(NULL)
+  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
+  iso_table <- region_url %>%
+    xml2::read_html() %>%
+    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
+    rvest::html_table()
+  iso <- iso_table[[1]] %>%
+    dplyr::select(iso_code = Code, region_level_1 = 2) %>%
+    dplyr::mutate(region_level_1 = iconv(x = region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
+                  region_level_1 = stringr::str_replace_all(region_level_1, "Distrito Capital de ", ""),
+                  region_level_1 = stringr::str_to_sentence(region_level_1))
+  return(iso)
 }
 
 # Level 2 regions -------------------------------------------------------------------------------------
