@@ -241,17 +241,20 @@ calculate_columns_from_existing_data <- function(data) {
 #' 
 convert_to_covid19R_format <- function(data) {
   location_type <- colnames(data)[2]
+  location_code_type <- colnames(data)[3]
 
   data <- data %>%
     dplyr::select(-hosp_total, -tested_new) %>%
-    tidyr::pivot_longer(-c(date, !!location_type, level_1_region_code),  names_to = "data_type", values_to = "value")
-
-  data$location_code_type <- "iso-3166-2"
-  data$location_type <- "state"
+    tidyr::pivot_longer(-c(date, !!location_type, !!location_code_type),  names_to = "data_type", values_to = "value")
 
   data <- data %>%
-    dplyr::rename("location_code" = "level_1_region_code",
-                  "location" = !!location_type) %>%
+    dplyr::rename("location_code" = !!location_code_type,
+                  "location" = !!location_type) 
+  
+  data$location_code_type <- location_code_type
+  data$location_type <- location_type
+  
+  data <- data %>%
     dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
     dplyr::arrange(date)
 
