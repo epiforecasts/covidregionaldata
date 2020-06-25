@@ -150,7 +150,7 @@ get_italy_region_codes <- function() {
 #' @importFrom tibble tibble
 #' 
 get_russia_region_codes <- function() {
-  region_url <- "https://en.wikipedia.org/wiki/region_3166-2:RU"
+  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:RU"
   region_table <- region_url %>%
     xml2::read_html() %>%
     rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
