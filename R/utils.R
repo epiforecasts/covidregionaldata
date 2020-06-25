@@ -88,6 +88,47 @@ rename_region_column <- function(data, country) {
   return(tibble::tibble(data))
 }
 
+#' Helper to rename the region code column in each dataset to the correct code type for each country (e.g. ISO-3166-2).
+#' @description The package relies on column name 'region_level_1_code' etc. during processing but this often isn't the most 
+#' sensible name for the column (e.g. iso-3166-2 makes more sense for US states). This simply renames the column as the final step in 
+#' processing before returning data to the user.
+#' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
+#' @param country a string with the country of interest
+#' @return a tibble with the column(s) renamed to a sensible name
+#' @importFrom dplyr %>% rename
+#' @importFrom tibble tibble
+#' 
+rename_region_code_column <- function(data, country) {
+  
+  level_1_region_code_name <- switch(tolower(country),
+                                  "afghanistan" = "iso_3166_2",
+                                  "belgium" = "iso_3166_2",
+                                  "brazil" = "iso_3166_2",
+                                  "canada" = "iso_3166_2",
+                                  "colombia" = "iso_3166_2",
+                                  "germany" = "iso_3166_2",
+                                  "india" = "iso_3166_2",
+                                  "italy" = "iso_3166_2",
+                                  "russia" = "iso_3166_2",
+                                  "uk" = "ons_code",
+                                  "usa" = "iso_3166_2")
+  
+  data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
+  
+  if ("level_2_region_code" %in% colnames(data)) {
+    level_2_region_code_name <- switch(tolower(country),
+                                  "belgium" = "iso_3166_2_province",
+                                  "brazil" = "level_2_region_code",
+                                  "germany" = "level_2_region_code",
+                                  "uk" = "ons_code",
+                                  "usa" = "fips")
+    
+    data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)
+  }
+  
+  return(tibble::tibble(data))
+}
+
 #' Set negative data to 0
 #' @description Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.
 #' @param data a data table
@@ -123,10 +164,10 @@ fill_empty_dates_with_na <- function(data) {
   if ("region_level_2" %in% colnames(data)) {
     data <- data %>%
       tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_2, level_2_region_code,
-                                                                                    region_level_1, iso_code))
+                                                                                    region_level_1, level_1_region_code))
   } else {
     data <- data %>%
-      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_1, iso_code))
+      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_1, level_1_region_code))
   }
 
   return(tibble::tibble(data))
@@ -147,13 +188,13 @@ complete_cumulative_columns <- function(data) {
     if (cumulative_col_name %in% colnames(data)){
       if ("region_level_2" %in% colnames(data)) {
         data <- data %>%
-          dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code) %>%
-          tidyr::fill(cumulative_col_name) %>%
+          dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code) %>%
+          tidyr::fill(all_of(cumulative_col_name)) %>%
           dplyr::ungroup()
       } else {
         data <- data %>%
-          dplyr::group_by(region_level_1, iso_code,) %>%
-          tidyr::fill(cumulative_col_name) %>%
+          dplyr::group_by(region_level_1, level_1_region_code,) %>%
+          tidyr::fill(all_of(cumulative_col_name)) %>%
           dplyr::ungroup()
       }
     }
@@ -200,17 +241,20 @@ calculate_columns_from_existing_data <- function(data) {
 #' 
 convert_to_covid19R_format <- function(data) {
   location_type <- colnames(data)[2]
+  location_code_type <- colnames(data)[3]
 
   data <- data %>%
     dplyr::select(-hosp_total, -tested_new) %>%
-    tidyr::pivot_longer(-c(date, !!location_type, iso_code),  names_to = "data_type", values_to = "value")
-
-  data$location_code_type <- "iso-3166-2"
-  data$location_type <- "state"
+    tidyr::pivot_longer(-c(date, !!location_type, !!location_code_type),  names_to = "data_type", values_to = "value")
 
   data <- data %>%
-    dplyr::rename("location_code" = "iso_code",
-                  "location" = !!location_type) %>%
+    dplyr::rename("location_code" = !!location_code_type,
+                  "location" = !!location_type) 
+  
+  data$location_code_type <- location_code_type
+  data$location_type <- location_type
+  
+  data <- data %>%
     dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
     dplyr::arrange(date)
 
@@ -244,19 +288,19 @@ csv_reader <- function(file, ...) {
 #' Custom left_join function
 #' @description Checks if table that is being added is NULL and then uses left_join
 #' @param data a data table
-#' @param iso_codes_table a table of ISO codes which will be left_join (optionally NULL)
+#' @param region_codes_table a table of region codes which will be left_join (optionally NULL)
 #' @param by see dplyr::left_join() description of by parameter
 #' @param ... optional arguments passed into dplyr::left_join()
 #' @return A data table
 #' @importFrom dplyr left_join
 #' @importFrom tibble tibble
 #' 
-left_join_region_codes <- function(data, iso_codes_table, by = NULL, ...) {
-  if (is.null(iso_codes_table)) {
+left_join_region_codes <- function(data, region_codes_table, by = NULL, ...) {
+  if (is.null(region_codes_table)) {
     return(data)
   }
   
-  data <- dplyr::left_join(data, iso_codes_table, by = by, ...)
+  data <- dplyr::left_join(data, region_codes_table, by = by, ...)
   return(tibble::tibble(data))
 }
 
@@ -273,10 +317,10 @@ totalise_data <- function(data, include_level_2_regions) {
   # Group the data ------------------------------------------------------
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code)
+      dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code)
   } else {
     data <- data %>%
-      dplyr::group_by(region_level_1, iso_code)
+      dplyr::group_by(region_level_1, level_1_region_code)
   }
   
   # Total the data ------------------------------------------------------
@@ -292,11 +336,11 @@ totalise_data <- function(data, include_level_2_regions) {
   if (include_level_2_regions) {
     data <- data %>%
       dplyr::select(region_level_2, level_2_region_code,
-                    region_level_1, iso_code, cases_total, deaths_total,
+                    region_level_1, level_1_region_code, cases_total, deaths_total,
                     recovered_total, hosp_total, tested_total)
   } else {
     data <- data %>%
-      dplyr::select(region_level_1, iso_code, cases_total, deaths_total,
+      dplyr::select(region_level_1, level_1_region_code, cases_total, deaths_total,
                     recovered_total, hosp_total, tested_total)
   }
   

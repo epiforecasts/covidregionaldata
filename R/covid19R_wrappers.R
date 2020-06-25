@@ -39,8 +39,19 @@ refresh_covidregionaldata_brazil <- function() {
 #' Data sourced from https://health-infobase.canada.ca/src/data/covidLive/covid19.csv.
 #' @return A tibble of COVID cases by province in Canada.
 #' @export
-refresh_covidregionaldata_canada<- function() {
+refresh_covidregionaldata_canada <- function() {
   data <- get_regional_data("canada", totals = FALSE, include_level_2_regions = FALSE)
+  data <- convert_to_covid19R_format(data)
+  return(tibble::tibble(data))
+}
+
+#' Get daily Colombian COVID-19 count data by Department (Departamento).
+#' @description Fetches  COVID-19 count data, stratified by date and region.
+#' Data sourced from https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv.
+#' @return A tibble of COVID cases by province in Colombia.
+#' @export
+refresh_covidregionaldata_colombia <- function() {
+  data <- get_regional_data("colombia", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -74,6 +85,40 @@ refresh_covidregionaldata_india <- function() {
 #' @export
 refresh_covidregionaldata_italy <- function() {
   data <- get_regional_data("italy", totals = FALSE, include_level_2_regions = FALSE)
+  data <- convert_to_covid19R_format(data)
+  return(tibble::tibble(data))
+}
+
+#' Get daily Russian COVID-19 count data by Russian region.
+#' @description Fetches  COVID-19 count data, stratified by date and region.
+#' Data sourced from https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv.
+#' @return A tibble of COVID cases by province in Russia.
+#' @export
+refresh_covidregionaldata_russia <- function() {
+  data <- get_regional_data("russia", totals = FALSE, include_level_2_regions = FALSE)
+  data <- convert_to_covid19R_format(data)
+  return(tibble::tibble(data))
+}
+
+#' Get daily UK COVID-19 count data by EU-defined region
+#' @description Fetches  COVID-19 count data, stratified by date and region.
+#' Data sourced from https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv and
+#' https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv.
+#' @return A tibble of COVID cases by EU region in UK.
+#' @export
+refresh_covidregionaldata_uk <- function() {
+  data <- get_regional_data("uk", totals = FALSE, include_level_2_regions = FALSE)
+  data <- convert_to_covid19R_format(data)
+  return(tibble::tibble(data))
+}
+
+#' Get daily USA COVID-19 count data by state.
+#' @description Fetches  COVID-19 count data, stratified by date and region.
+#' Data sourced from https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv.
+#' @return A tibble of COVID cases by state in USA
+#' @export
+refresh_covidregionaldata_usa <- function() {
+  data <- get_regional_data("usa", totals = FALSE, include_level_2_regions = FALSE)
   data <- convert_to_covid19R_format(data)
   return(tibble::tibble(data))
 }
@@ -134,6 +179,17 @@ get_info_covidregionaldata <- function() {
     "state",
     "country",
     FALSE,
+    
+    "covidregionaldata_colombia",
+    "covidregionaldata",
+    "refresh_covidregionaldata_colombia",
+    "Daily Covid-19 count data for Departments of Colombia",
+    "https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv",
+    "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
+    "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
+    "state",
+    "country",
+    FALSE,
 
     "covidregionaldata_germany",
     "covidregionaldata",
@@ -162,6 +218,40 @@ get_info_covidregionaldata <- function() {
     "refresh_covidregionaldata_italy",
     "Daily Covid-19 count data for regions (Regioni) of Italy",
     "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-<date>.csv",
+    "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
+    "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
+    "state",
+    "country",
+    FALSE,
+    
+    "covidregionaldata_russia",
+    "covidregionaldata",
+    "refresh_covidregionaldata_russia",
+    "Daily Covid-19 count data for Regions of Russia",
+    "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",
+    "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
+    "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
+    "state",
+    "country",
+    FALSE,
+    
+    "covidregionaldata_uk",
+    "covidregionaldata",
+    "refresh_covidregionaldata_uk",
+    "Daily Covid-19 count data for EU-defined regions of the UK",
+    "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv, 
+    https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv",
+    "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
+    "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
+    "state",
+    "country",
+    FALSE,
+    
+    "covidregionaldata_usa",
+    "covidregionaldata",
+    "refresh_covidregionaldata_usa",
+    "Daily Covid-19 count data for states of the US",
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv",
     "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
     "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
     "state",
