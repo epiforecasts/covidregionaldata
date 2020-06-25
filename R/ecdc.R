@@ -20,37 +20,29 @@
 #' get_ecdc_cases(countries = "France")
 #'
 #' ## Code
-get_ecdc_cases <- function (countries = NULL){
+get_ecdc_cases <- function (){
   # Get latest update
-  base_url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
-
-  ## Set up caching
-  ch <- memoise::cache_filesystem(".cache")
-  mem_read <- memoise::memoise(readr::read_csv, cache = ch)
+  url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
 
   error <- suppressMessages(
-    suppressWarnings(try(readr::read_csv(file = base_url), silent = TRUE))
+    suppressWarnings(try(readr::read_csv(file = url), silent = TRUE))
   )
 
   if ("try-error" %in% class(error)) {
-    message("csv unavailable, trying alternative")
+    message("csv unavailable, trying alternative with temp file")
     
     url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
     httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
-    data <- readxl::read_excel(tf) %>%
+      data <-  readxl::read_excel(tf) %>%
       dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
-      dplyr::rename(geoid = geoId, country = countriesAndTerritories,
-                    cases = cases, deaths = deaths,
+      dplyr::rename(iso_code = geoId, country = countriesAndTerritories,
+                    continent = continentExp, cases_new = cases, deaths_new = deaths,
                     population_2019 = popData2019) %>%
-      dplyr::select(-dateRep) %>%
+      dplyr::select(date, continent, country, iso_code, population_2019, cases_new, deaths_new) %>%
       dplyr::arrange(date) %>%
-      dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
-    
-    if (!is.null(countries)) {
-      data <- data %>%
-        dplyr::filter(country %in% countries)
-    }
-    
+      dplyr::mutate(cases_new = ifelse(cases_new < 0, 0, cases_new),
+                    country = stringr::str_replace_all(country, "_", " "))
+
     return(data)
     
     if ("try-error" %in% class(error)) {
@@ -59,19 +51,17 @@ get_ecdc_cases <- function (countries = NULL){
     
   }
 
-  d <- mem_read(base_url) %>%
+  data <- csv_reader(file = url) %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
-    dplyr::rename(geoid = geoId, country = countriesAndTerritories,
-           cases = cases, deaths = deaths,
-           population_2019 = popData2019) %>%
-    dplyr::select(-dateRep) %>%
+    dplyr::rename(iso_code = geoId, country = countriesAndTerritories,
+                  continent = continentExp, cases_new = cases, deaths_new = deaths,
+                  population_2019 = popData2019) %>%
+    dplyr::select(date, continent, country, iso_code, population_2019, cases_new, deaths_new) %>%
     dplyr::arrange(date) %>%
-    dplyr::mutate(cases = ifelse(cases < 0, 0, cases))
+    dplyr::mutate(cases_new = ifelse(cases_new < 0, 0, cases_new),
+                  country = stringr::str_replace_all(country, "_", " "))
 
-  if (!is.null(countries)) {
-    d <- d %>% dplyr::filter(country %in% countries)
-  }
-  return(d)
+
 }
 
 
@@ -91,10 +81,9 @@ get_ecdc_cases <- function (countries = NULL){
 format_ecdc_data <- function(data = NULL) {
 
   out <- data %>%
-    dplyr::select(date, region = country, cases) %>%
+    dplyr::select(date, region = country, cases = cases_new) %>%
     dplyr::arrange(region, date) %>%
-    dplyr::filter(region != "Cases_on_an_international_conveyance_Japan") %>%
-    dplyr::mutate(region = stringr::str_replace_all(region, "_", " "))
+    dplyr::filter(region != "Cases_on_an_international_conveyance_Japan")
 
   return(out)
 }
