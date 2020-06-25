@@ -47,7 +47,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     include_level_2_regions <- FALSE
   }
 
-  # Find the correct data-getter and ISO codes ----------------------------------------
+  # Find the correct data-getter and region codes ----------------------------------------
   if (include_level_2_regions) {
 
     get_data_function <- switch(country,
@@ -59,7 +59,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
-    iso_codes_table <- get_iso_codes(country)
+    region_codes_table <- get_region_codes(country)
     region_level_2_codes_table <- get_level_2_region_codes(country)
     
   } else {
@@ -79,13 +79,13 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 stop("There is no data for the country entered. It is likely haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
-    iso_codes_table <- get_iso_codes(country)
+    region_codes_table <- get_region_codes(country)
 
   }
   
-  # Get the data and ISO codes for level 1 regions ------------------------------------
+  # Get the data and region codes for level 1 regions ------------------------------------
   data <- do.call(get_data_function, list())
-  data <- data %>% left_join_region_codes(iso_codes_table, 
+  data <- data %>% left_join_region_codes(region_codes_table, 
                                        by = c("region_level_1" = "region")) 
   
   # And add level 2 if needed ---------------------------------------------------------
@@ -97,10 +97,10 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   # Group data, dependent on region levels required -----------------------------------
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::group_by(region_level_1, iso_code, region_level_2, level_2_region_code)
+      dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code)
   } else {
     data <- data %>%
-      dplyr::group_by(region_level_1, iso_code)
+      dplyr::group_by(region_level_1, level_1_region_code)
   }
 
   # Add columns that aren't there already, clean up data ------------------------------
@@ -110,11 +110,12 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     set_negative_values_to_zero() %>%
     dplyr::ungroup()
 
-  # Totalise and return if totals data is requested -------------------------------------------
+  # Totalise and return if totals data is requested ----------------------------------
   if (totals) {
     data <- totalise_data(data, include_level_2_regions = include_level_2_regions) %>%
+      dplyr::arrange(-cases_total) %>%
       rename_region_column(country) %>%
-      dplyr::arrange(-cases_total)
+      rename_region_code_column(country)
     return(tibble::tibble(data))
   }
 
@@ -127,14 +128,14 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   # Select and arrange the data -------------------------------------------------------
   if (include_level_2_regions) {
     data <- data %>%
-      dplyr::select(date, region_level_2, level_2_region_code, region_level_1, iso_code, 
+      dplyr::select(date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
                     cases_new, cases_total, deaths_new, deaths_total,
                     recovered_new, recovered_total, hosp_new, hosp_total,
                     tested_new, tested_total) %>%
       dplyr::arrange(date, region_level_1, region_level_2)
   } else {
     data <- data %>%
-    dplyr::select(date, region_level_1, iso_code, cases_new, cases_total, deaths_new, deaths_total,
+    dplyr::select(date, region_level_1, level_1_region_code, cases_new, cases_total, deaths_new, deaths_total,
                   recovered_new, recovered_total, hosp_new, hosp_total,
                   tested_new, tested_total) %>%
     dplyr::arrange(date, region_level_1)
@@ -142,7 +143,8 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
 
   # Rename the region column to country-specific --------------------------------------
   data <- data %>%
-    rename_region_column(country)
+    rename_region_column(country) %>%
+    rename_region_code_column(country)
 
   return(tibble::tibble(data))
 }
