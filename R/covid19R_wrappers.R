@@ -1,7 +1,7 @@
 #### These functions are exported and used to meet the Covid19R standard https://covid19r.github.io/documentation/standardized-package-functions.html
 #### They are essentially wrappers around get_regional_data
 
-#' Get daily Afghan COVID-19 count data by Province (Wilåyat)
+#' Get daily Afghan COVID-19 count data by Province (Wilayat)
 #' @description Fetches  COVID-19 count data, stratified by date and province.
 #' Data sourced from https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv.
 #' @return A tibble of COVID cases by province in Afghanistan.
@@ -137,7 +137,7 @@ get_info_covidregionaldata <- function() {
     "covidregionaldata_afghanistan",
     "covidregionaldata",
     "refresh_covidregionaldata_afghanistan",
-    "Daily Covid-19 count data for Provinces (Wilåyat) of Afghanistan",
+    "Daily Covid-19 count data for Provinces (Wil\u0101yat) of Afghanistan",
     "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv",
     "https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE",
     "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
@@ -148,7 +148,7 @@ get_info_covidregionaldata <- function() {
     "covidregionaldata_belgium",
     "covidregionaldata",
     "refresh_covidregionaldata_belgium",
-    "Daily Covid-19 count data for Regions (Régions) of Belgium",
+    "Daily Covid-19 count data for Regions (R\u00E9gions) of Belgium",
     "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv,
     https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv,
     https://epistat.sciensano.be/Data/COVID19BE_MORT.csv",

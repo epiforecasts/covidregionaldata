@@ -30,9 +30,9 @@ get_afghan_regional_cases <- function(){
                      cases_total = Cases,
                      deaths_total = Deaths,
                      recovered_total = Recoveries) %>%
-    dplyr::mutate(cases_total = dplyr::recode(cases_total, "–" = NA_character_),
-                  deaths_total = dplyr::recode(deaths_total, "–" = NA_character_),
-                  recovered_total = dplyr::recode(recovered_total, "–" = NA_character_)) %>%
+    dplyr::mutate(cases_total = dplyr::recode(cases_total, "<E2><80><93>" = NA_character_),
+                  deaths_total = dplyr::recode(deaths_total, "<E2><80><93>" = NA_character_),
+                  recovered_total = dplyr::recode(recovered_total, "<E2><80><93>" = NA_character_)) %>%
     tidyr::drop_na() %>%
   # Transform (remove commas in numbers) ----------------------------------------------------
     dplyr::mutate(cases_total = as.numeric(stringr::str_remove_all(cases_total, ",")),

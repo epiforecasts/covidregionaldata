@@ -79,10 +79,10 @@ get_brazil_region_codes <- function() {
              "BR-GO", "BR-MA", "BR-MG", "BR-MS", "BR-MT", "BR-PA", "BR-PB", "BR-PE", "BR-PI",
              "BR-PR", "BR-RJ", "BR-RN", "BR-RO", "BR-RR", "BR-RS", "BR-SC", "BR-SE", "BR-SP",
              "BR-TO"),
-    region = c("Acre", "Alagoas", "Amazonas", "Amapá", "Bahia", "Ceará", "Distrito Federal",
-               "Espirito Santo", "Fernando de Noronha", "Goiás", "Maranhão", "Minas Gerais", "Mato Grosso do Sul", "Mato Grosso",
-               "Pará", "Paraíba", "Pernambuco", "Piauí", "Paraná", "Rio de Janeiro", "Rio Grande do Norte",
-               "Rondônia", "Roraima", "Rio Grande do Sul", "Santa Catarina", "Sergipe", "São Paulo", "Tocantins"))
+    region = c("Acre", "Alagoas", "Amazonas", "Amap\u00E1", "Bahia", "Cear\u00E1", "Distrito Federal",
+               "Espirito Santo", "Fernando de Noronha", "Goi\u00E1s", "Maranh\u00E3o", "Minas Gerais", "Mato Grosso do Sul", "Mato Grosso",
+               "Par\u00E1", "Para\u00EDba", "Pernambuco", "Piau\u00ED", "Paran\u00E1", "Rio de Janeiro", "Rio Grande do Norte",
+               "Rond\u00F4nia", "Roraima", "Rio Grande do Sul", "Santa Catarina", "Sergipe", "S\u00E3o Paulo", "Tocantins"))
   return(region_codes)
 }
 
@@ -105,9 +105,9 @@ get_germany_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH", "DE-MV",
              "DE-NI", "DE-NW", "DE-RP", "DE-SH", "DE-SL", "DE-SN", "DE-ST", "DE-TH"),
-    region = c("Brandenburg", "Berlin", "Baden-Württemberg", "Bayern", "Bremen", "Hessen",
+    region = c("Brandenburg", "Berlin", "Baden-W\u00FCrttemberg", "Bayern", "Bremen", "Hessen",
                "Hamburg", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen",
-               "Rheinland-Pfalz", "Schleswig-Holstein", "Saarland", "Sachsen", "Sachsen-Anhalt", "Thüringen"))
+               "Rheinland-Pfalz", "Schleswig-Holstein", "Saarland", "Sachsen", "Sachsen-Anhalt", "Th\u00FCringen"))
   return(region_codes)
 }
 
@@ -238,7 +238,7 @@ get_belgium_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = c("BE-VAN", "BE-BRU", "BE-WLG", "BE-VLI", "BE-VOV", "BE-VBR",
                             "BE-VWV", "BE-WBR", "BE-WHT", "BE-WNA", NA, "BE-WLX"),
-    region = c("Antwerpen", "Brussels", "Liège", "Limburg", "OostVlaanderen", "VlaamsBrabant", 
+    region = c("Antwerpen", "Brussels", "Li\u00E8ge", "Limburg", "OostVlaanderen", "VlaamsBrabant", 
                "WestVlaanderen", "BrabantWallon", "Hainaut", "Namur", "Unknown", "Luxembourg"))
   return(region_codes)
 }

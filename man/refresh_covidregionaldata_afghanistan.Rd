@@ -2,7 +2,7 @@
 % Please edit documentation in R/covid19R_wrappers.R
 \name{refresh_covidregionaldata_afghanistan}
 \alias{refresh_covidregionaldata_afghanistan}
-\title{Get daily Afghan COVID-19 count data by Province (Wilåyat)}
+\title{Get daily Afghan COVID-19 count data by Province (Wilayat)}
 \usage{
 refresh_covidregionaldata_afghanistan()
 }
