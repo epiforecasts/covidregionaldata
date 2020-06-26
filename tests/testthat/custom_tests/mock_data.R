@@ -190,7 +190,7 @@ get_input_data_for_complete_cumulative_columns_test <- function() {
   # add cumulative cases to partial data and then add NA rows
   partial_data <- expected_data[-c(6:9), ]
   partial_data_with_cum_cases_na <- partial_data %>% dplyr::group_by(region_level_1) %>% dplyr::mutate(cases_total = cumsum(cases))
-  full_data_with_cum_cases_na <- covidregionaldata::fill_empty_dates_with_na(partial_data_with_cum_cases_na)
+  full_data_with_cum_cases_na <- covidregionaldata:::fill_empty_dates_with_na(partial_data_with_cum_cases_na)
 
   return(full_data_with_cum_cases_na)
 }
@@ -200,8 +200,8 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   partial_data <- expected_data[-c(6:9), ]
 
   # manually add cumulative cases to get expected data
-  full_data_with_cum_cases_filled <- fill_empty_dates_with_na(partial_data)
-  full_data_with_cum_cases_filled <- arrange(full_data_with_cum_cases_filled, region_level_1, date)
+  full_data_with_cum_cases_filled <- covidregionaldata:::fill_empty_dates_with_na(partial_data)
+  full_data_with_cum_cases_filled <- dplyr::arrange(full_data_with_cum_cases_filled, region_level_1, date)
   full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, as.integer(c(1,5,5,15,2,7,7,18,3,3,3,15)))
   colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 
@@ -219,7 +219,7 @@ get_input_data_for_covid19R_converter_test <- function() {
 
   dates_and_regions <- data.frame(expand.grid(dates, regions, stringsAsFactors = FALSE))
   colnames(dates_and_regions) <- c("date", "region")
-  dates_regions_iso <- dplyr::left_join(dates_and_regions, region_table, by = c("region" = "regions")) %>% arrange(date)
+  dates_regions_iso <- dplyr::left_join(dates_and_regions, region_table, by = c("region" = "regions")) %>% dplyr::arrange(date)
 
   set.seed(181)
   value <- floor(runif(120, 0, 100))
@@ -255,8 +255,8 @@ get_expected_data_for_covid19R_converter_test <- function() {
     expected_data <- cbind(exp_data_start, data.frame(value))
     expected_data$data_type <- rep(c("cases_new", "cases_total", "deaths_new", "deaths_total", "recovered_new", "recovered_total",
                                      "hosp_new", "tested_total"), 12)
-    expected_data$location_type <- "state"
-    expected_data$location_code_type <- "iso-3166-2"
+    expected_data$location_type <- "region"
+    expected_data$location_code_type <- "level_1_region_code"
 
     expected_data <- expected_data %>% dplyr::select(date, location, location_type, location_code, location_code_type,	data_type, value)
   return(tibble::tibble(expected_data))
