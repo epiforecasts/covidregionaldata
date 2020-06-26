@@ -11,3 +11,6 @@
 ^data-raw$
 ^\.github$
 ^dev-helpers\.R$
+^.*.png$
+^.*.vsdx$
+SMG.md
