@@ -264,6 +264,7 @@ convert_to_covid19R_format <- function(data) {
 #' Custom CSV reading function
 #' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
 #' @param file A URL or filepath to a CSV
+#' @param ... extra parameters to be passed to readr::read_cs
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom readr read_csv cols
@@ -308,7 +309,7 @@ left_join_region_codes <- function(data, region_codes_table, by = NULL, ...) {
 #' 
 #' @description Get totals data given the time series data.
 #' @param data a data table
-#' @param include_level_2_regons Boolean. Are level 2 regions included in the data
+#' @param include_level_2_regions Boolean. Are level 2 regions included in the data
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by %>%  summarise select arrange
 #' @importFrom tibble tibble

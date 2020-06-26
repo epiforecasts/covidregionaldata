@@ -8,6 +8,8 @@ csv_reader(file, ...)
 }
 \arguments{
 \item{file}{A URL or filepath to a CSV}
+
+\item{...}{extra parameters to be passed to readr::read_cs}
 }
 \value{
 A data table

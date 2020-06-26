@@ -18,17 +18,13 @@ test_that("get_regional_data returns error if totals arg is not logical", {
 #-----------------------------------------#
 #---------- Happy case - set up ----------#
 #-----------------------------------------#
-
-## this file contains functions which create data specifically for these tests
-source("custom_tests/mock_data.R")
-
 test_that("get_regional_data returns correct time series data - admin level 1 regions only", {
   # Set up and run
   input_data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
   region_codes <- tibble::tibble(level_1_region_code = c("NO", "EA", "SO", "WE", "VA"),
                               region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
-  returned_data <- with_mock(get_canada_region_codes = function(country) return(region_codes),
-                             get_canada_regional_cases = function() return(input_data),
+  returned_data <- with_mock("covidregionaldata:::get_canada_region_codes" = function(country) return(region_codes),
+                             "covidregionaldata:::get_canada_regional_cases" = function() return(input_data),
                              get_regional_data("canada", include_level_2_regions = FALSE))
 
   # expected data
@@ -45,9 +41,9 @@ test_that("get_regional_data returns correct time series - incl. admin level 2 r
   level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
                                       region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
   
-  returned_data <- with_mock(get_region_codes = function(country) return(region_codes),
-                             get_level_2_region_codes = function(country)  return(level_2_region_codes),
-                             get_belgium_regional_cases_with_level_2 = function() return(input_data),
+  returned_data <- with_mock("covidregionaldata:::get_region_codes" = function(country) return(region_codes),
+                             "covidregionaldata:::get_level_2_region_codes" = function(country)  return(level_2_region_codes),
+                             "covidregionaldata:::get_belgium_regional_cases_with_level_2" = function() return(input_data),
                              get_regional_data("belgium", include_level_2_regions = TRUE))
 
   # expected data
@@ -61,8 +57,8 @@ test_that("get_regional_data returns correct totals data - admin level 1 regions
   input_data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
   region_codes <- tibble::tibble(level_1_region_code = c("NO", "EA", "SO", "WE", "VA"),
                               region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
-  returned_data <- with_mock(get_canada_region_codes = function() return(region_codes),
-                             get_canada_regional_cases = function() return(input_data),
+  returned_data <- with_mock("covidregionaldata:::get_canada_region_codes" = function() return(region_codes),
+                             "covidregionaldata:::get_canada_regional_cases" = function() return(input_data),
                              get_regional_data("canada", totals = TRUE, include_level_2_regions = FALSE))
 
   # expected data
@@ -79,9 +75,9 @@ test_that("get_regional_data returns correct totals data - incl. admin level 2 r
   level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
                                       region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
   
-  returned_data <- with_mock(get_region_codes = function(country) return(region_codes),
-                             get_level_2_region_codes = function(country) return(level_2_region_codes),
-                             get_belgium_regional_cases_with_level_2 = function() return(input_data),
+  returned_data <- with_mock("covidregionaldata:::get_region_codes" = function(country) return(region_codes),
+                             "covidregionaldata:::get_level_2_region_codes" = function(country) return(level_2_region_codes),
+                             "covidregionaldata:::get_belgium_regional_cases_with_level_2" = function() return(input_data),
                              get_regional_data("belgium", totals = TRUE, include_level_2_regions = TRUE))
 
   # expected data

@@ -13,11 +13,11 @@ get_brazil_regional_cases_only_level_1 <- function() {
 
   # Set region names ----------------------------------------------------------------------
   names <- tibble::tibble(
-    state_name = c("Acre", "Amapá", "Amazonas", "Pará", "Rondônia", "Roraima",
-                   "Tocantins", "Alagoas", "Bahia", "Ceará", "Maranhão", "Paraíba",
-                   "Pernambuco", "Piauí", "Rio Grande do Norte", "Sergipe", "Espirito Santo",
-                   "Minas Gerais", "Rio de Janeiro", "São Paulo", "Paraná", "Rio Grande do Sul", 
-                   "Santa Catarina", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
+    state_name = c("Acre", "Amap\u00E1", "Amazonas", "Par\u00E1", "Rond\u00F4nia", "Roraima",
+                   "Tocantins", "Alagoas", "Bahia", "Cear\u00E1", "Maranh\u00E3o", "Para\u00EDba",
+                   "Pernambuco", "Piau\u00ED", "Rio Grande do Norte", "Sergipe", "Espirito Santo",
+                   "Minas Gerais", "Rio de Janeiro", "S\u00E3o Paulo", "Paran\u00E1", "Rio Grande do Sul", 
+                   "Santa Catarina", "Distrito Federal", "Goi\u00E1s", "Mato Grosso", "Mato Grosso do Sul"),
     state_code = c("AC", "AP", "AM", "PA", "RO", "RR", "TO", "AL", "BA", "CE", "MA", "PB", "PE", 
                    "PI", "RN", "SE", "ES", "MG", "RJ", "SP", "PR", "RS", "SC", "DF", "GO", "MT", "MS"))
 
@@ -52,11 +52,11 @@ get_brazil_regional_cases_with_level_2 <- function() {
 
   # Set region names ----------------------------------------------------------------------
   names <- tibble::tibble(
-    state_name = c("Acre", "Amapá", "Amazonas", "Pará", "Rondônia", "Roraima",
-                   "Tocantins", "Alagoas", "Bahia", "Ceará", "Maranhão", "Paraíba",
-                   "Pernambuco", "Piauí", "Rio Grande do Norte", "Sergipe", "Espirito Santo",
-                   "Minas Gerais", "Rio de Janeiro", "São Paulo", "Paraná", "Rio Grande do Sul", 
-                   "Santa Catarina", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
+    state_name = c("Acre", "Amap\u00E1", "Amazonas", "Par\u00E1", "Rond\u00F4nia", "Roraima",
+                   "Tocantins", "Alagoas", "Bahia", "Cear\u00E1", "Maranh\u00E3o", "Para\u00EDba",
+                   "Pernambuco", "Piau\u00ED", "Rio Grande do Norte", "Sergipe", "Espirito Santo",
+                   "Minas Gerais", "Rio de Janeiro", "S\u00E3o Paulo", "Paran\u00E1", "Rio Grande do Sul", 
+                   "Santa Catarina", "Distrito Federal", "Goi\u00E1s", "Mato Grosso", "Mato Grosso do Sul"),
     state_code = c("AC", "AP", "AM", "PA", "RO", "RR", "TO", "AL", "BA", "CE", "MA", "PB", "PE", 
                    "PI", "RN", "SE", "ES", "MG", "RJ", "SP", "PR", "RS", "SC", "DF", "GO", "MT", "MS"))
   
@@ -67,7 +67,7 @@ get_brazil_regional_cases_with_level_2 <- function() {
     dplyr::mutate(date = lubridate::ymd(date)) %>%
     dplyr::filter(state != "TOTAL") %>%
     dplyr::mutate(city = gsub("/[A-Z]*", "", city)) %>%
-    dplyr::mutate(city = dplyr::recode(city, "CASO SEM LOCALIZAÇÃO DEFINIDA" = "Unknown City")) %>%
+    dplyr::mutate(city = dplyr::recode(city, "CASO SEM LOCALIZA<c3><87><c3><83>O DEFINIDA" = "Unknown City")) %>%
     dplyr::left_join(names, by = c("state" = "state_code")) %>%
     dplyr::select(date, region_level_1 = state_name, region_level_2 = city, cases_new = newCases, cases_total = totalCases,
                   deaths_new = newDeaths, deaths_total = deaths) %>%

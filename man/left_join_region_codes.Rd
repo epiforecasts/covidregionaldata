@@ -4,12 +4,12 @@
 \alias{left_join_region_codes}
 \title{Custom left_join function}
 \usage{
-left_join_region_codes(data, iso_codes_table, by = NULL, ...)
+left_join_region_codes(data, region_codes_table, by = NULL, ...)
 }
 \arguments{
 \item{data}{a data table}
 
-\item{iso_codes_table}{a table of ISO codes which will be left_join (optionally NULL)}
+\item{region_codes_table}{a table of region codes which will be left_join (optionally NULL)}
 
 \item{by}{see dplyr::left_join() description of by parameter}
 
