@@ -79,7 +79,7 @@ get_who_cases <- function() {
   # Get data
   json_url <- "https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json"
   
-  raw <- jsonlite::fromJSON(json_url, flatten = F)
+  raw <- read_fun(json_url, flatten = F)
   
   raw <- as.data.frame(raw$rows)
   
