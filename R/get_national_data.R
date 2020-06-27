@@ -4,14 +4,13 @@
 #' Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
 #' cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format. 
 #' 
-#' @param country Character A string specifying the country to get data from. Not case dependent. Defaults to all countries.
-#' Name should be the English name.
+#' @param country Character A string specifying the country to get data from. Not case or language dependent. Defaults to all countries.
 #' @param totals Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.
 #' @param source Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to ECDC.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.
 #' @importFrom dplyr %>% group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
-#' @importFrom tibble tibble
+#' @importFrom countrycode countryname
 #' @export
 #' @examples
 #' 
@@ -23,49 +22,32 @@
 get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
   
   # Error handling -------------------------------------------------------------------
-  if (!is.null(country) & !(is.character(country))){
-    stop("The country variable should be a character variable.")
-  }
-  
+
   if (!(is.logical(totals))){
     stop("The totals variable should be a logical (TRUE/FALSE) variable.")
   }
 
-  if (!is.null(source) & !(is.character(source))){
+  if (!(is.character(source))){
     stop("The source variable should be a character variable ('WHO' or 'ECDC').")
   }
-  
   
  source <- tolower(source)
  
 # Match country name -----------------------------------------------------
  
-  input_country_name <- tolower(country) # Set to a different variable name to avoid mixups with "country" var in data
-  if(length(input_country_name) == 0){input_country_name <- NULL} # Reset to NULL to return all countries
-
-  if (!is.null(input_country_name)) {
-
-    name_match <- read.csv(here::here("data-raw", "country_names.csv"), colClasses = "character", na.strings = "")
-
-      if (!input_country_name %in% name_match$name_lower) {
-        match1 <- grep(input_country_name, name_match$name_lower)
-        match2 <- grep(input_country_name, name_match$name_alternative1)
-        match3 <- grep(input_country_name, name_match$name_alternative2)
-        if(length(match1) != 0 & length(match1) == 1) {
-          input_country_name <- name_match[match1,2]
-        } else {
-        if(length(match2) != 0 & length(match2) == 1){
-          input_country_name <- name_match[match2,2]
-          } else {
-            if(length(match3) != 0 & length(match3) == 1) {
-              input_country_name <- name_match[match3,2]
-            } else {
-          stop("The country name is not recognised or returns more than one country. Suggest checking against UN standard spelling.")
-            }
-          }
-        }
-      }
-  }
+ # Set to NULL to return all countries 
+ if (missing(country)){
+   input_country_name <- NULL
+ }
+ 
+ # Standardise country name 
+ if (!(missing(country))){
+ input_country_name <- country
+ input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
+   if(is.na(input_country_name)){
+     stop("Country name not recognised. Please enter a character string, with no abbreviation.")
+   }
+ }
   
   # Find the correct data-getter and ISO codes ----------------------------------------
 
@@ -81,12 +63,8 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
  # Filter to country -------------------------------------------------------
  
  if (!is.null(input_country_name)){
-   
    data <- data %>%
-     dplyr::mutate(country_lower = tolower(country)) %>%
-     dplyr::filter(country_lower %in% input_country_name) %>%
-     dplyr::select(-country_lower)
-   
+     dplyr::filter(country %in% input_country_name)
  }  
  
  
@@ -122,13 +100,27 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
     dplyr::rename("country" = "region_level_1")
-  
+ 
+
+# Return data -------------------------------------------------------------
+
   if(source == "ecdc"){
     
     data <- data %>%
       dplyr::group_by(country) %>%
-      tidyr::fill(continent, population_2019, .direction = "up") %>%
+      tidyr::fill(population_2019, un_region, .direction = "up") %>%
       dplyr::ungroup()
+    
+    data <- data %>%
+      dplyr::select(date, un_region, country, iso_code, population_2019,
+                    cases_new, cases_total,
+                    deaths_new, deaths_total,
+                    recovered_new, recovered_total,
+                    hosp_new, hosp_total,
+                    tested_new, tested_total) %>%
+      dplyr::arrange(date, country)
+    
+    return(data)
     
   }
   
@@ -136,20 +128,20 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     
     data <- data %>%
       dplyr::group_by(country) %>%
-      tidyr::fill(who_region, .direction = "up") %>%
+      tidyr::fill(who_region, un_region, .direction = "up") %>%
       dplyr::ungroup()
+    
+    data <- data %>%
+      dplyr::select(date, un_region, who_region, country, iso_code, 
+                    cases_new, cases_total,
+                    deaths_new, deaths_total,
+                    recovered_new, recovered_total,
+                    hosp_new, hosp_total,
+                    tested_new, tested_total) %>%
+      dplyr::arrange(date, country)
+    
+    return(data)
     
   }
   
-  # Arrange and return data -------------------------------------------------------
-  
-  data <- data %>%
-    dplyr::select(date, dplyr::everything(), country, iso_code, cases_new, cases_total, deaths_new, deaths_total,
-                  recovered_new, recovered_total, hosp_new, hosp_total,
-                  tested_new, tested_total) %>%
-    dplyr::arrange(date, country)
-  
-
-return(tibble::tibble(data))
-
 }
