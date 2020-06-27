@@ -1,5 +1,3 @@
-source("custom_tests/mock_data.R")
-
 test_that("get_daily_from_cumulative returns correct results", {
   column1 <- c(0, 3, 2, 10, 0, 14, 1)
   cumulative_col <- cumsum(column1)
@@ -53,12 +51,25 @@ test_that("rename_region_column does so correctly", {
   expect_equal(colnames(rename_region_column(df, "belgium"))[1:2], c("region", "province"))
 })
 
+test_that("rename_region_code_column does so correctly", {
+  df <- data.frame(matrix(rnorm(100), ncol=10))
+  colnames(df)[1] <- "level_1_region_code"
+  
+  expect_error(rename_region_code_column(df, "test"))
+  expect_equal(colnames(rename_region_code_column(df, "canada"))[1], "iso_3166_2")
+  
+  colnames(df)[1] <- "level_1_region_code"
+  colnames(df)[2] <- "level_2_region_code"
+  expect_equal(colnames(rename_region_code_column(df, "usa"))[1:2], c("iso_3166_2", "fips"))
+})
+
 test_that("set_negative_values_to_zero works", {
-  df <- data.frame(matrix(c(rep(Sys.Date(), 100), 49:-50), ncol=2))
+  dates <- c(rep(Sys.Date(), 100))
+  values <- 49:-50
+  df <- tibble::tibble(date = dates, cases_total = values)
   colnames(df) <- c("date", "cases_total")
 
-  df_expected <- tibble::tibble(data.frame(matrix(c(rep(Sys.Date(), 100), c(49:0, rep(0, 50))), ncol=2)))
-  colnames(df_expected) <- c("date", "cases_total")
+  df_expected <- tibble::tibble(date = dates, cases_total = c(49:0, rep(0, 50)))
 
   df_actual <- set_negative_values_to_zero(df)
 

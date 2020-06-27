@@ -25,20 +25,5 @@ get_colombia_regional_cases <- function() {
                   region_level_1 = stringr::str_replace_all(region_level_1, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
                   region_level_1 = stringr::str_to_sentence(region_level_1))
 
-  # Get ISO codes -----------------------------------------------------------------
-  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
-  iso_table <- region_url %>%
-    xml2::read_html() %>%
-    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
-    rvest::html_table()
-  iso <- iso_table[[1]] %>%
-    dplyr::select(iso_code = Code, region_level_1 = 2) %>%
-    dplyr::mutate(region_level_1 = iconv(x = region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
-                  region_level_1 = stringr::str_replace_all(region_level_1, "Distrito Capital de ", ""),
-                  region_level_1 = stringr::str_to_sentence(region_level_1))
-
-  # Merge ISO codes with data ------------------------------------------------------
-  colombia <- dplyr::left_join(colombia, iso, by = "region_level_1")
-
   return(colombia)
 }

@@ -9,7 +9,7 @@ totalise_data(data, include_level_2_regions)
 \arguments{
 \item{data}{a data table}
 
-\item{include_level_2_regons}{Boolean. Are level 2 regions included in the data}
+\item{include_level_2_regions}{Boolean. Are level 2 regions included in the data}
 }
 \value{
 A data table, totalled up
