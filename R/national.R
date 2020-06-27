@@ -74,6 +74,8 @@ get_who_cases <- function() {
       ch <- memoise::cache_filesystem(".cache")
       read_fun <- memoise::memoise(jsonlite::fromJSON, cache = ch)
     }
+  }else{
+    read_fun <- jsonlite::fromJSON
   }
   
   # Get data
