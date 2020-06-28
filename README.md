@@ -1,4 +1,4 @@
-# Data extraction tools for the Covid-19 outbreak
+# Subnational data for the Covid-19 outbreak
 
 [![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
 ![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)
@@ -7,7 +7,9 @@
 [![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/238177228.svg)](https://zenodo.org/badge/latestdoi/238177228)
 
-## Installation
+This R package is a gateway to subnational and national level Covid-19 data. For all countries, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests.
+
+## 1 Installation
 
 Install the stable version of the package using
 [`{drat}`](https://epiforecasts.io/drat/):
@@ -24,21 +26,38 @@ Install the development version of the package with:
 remotes::install_github("epiforecasts/covidregionaldata")
 ```
 
-## Usage
+## 2 Quick start
+To get worldwide time-series data by country (sourced from the ECDC), use `get_national_data()`:
+``` r
+covidregionaldata::get_national_data()
+```
 
-### Sub-national data
-The function which returns sub-national level data by country is `covidregionaldata::get_regional_data()`.
+To get time-series data for subnational regions of a specific country, for example by local authority in the UK, use `get_regional_data()`:
 
-This function takes 3 arguments:
+```r
+covidregionaldata::get_regional_data(country = "UK", include_level_2_regions = TRUE)
+```
+Subnational regions are only available in some countries. See below section 4, "Coverage".
+
+## 3 Usage
+### 3.1 Sub-national time-series data
+#### 3.1.1 Accessing sub-national data
+Access sub-national level data for a specific country over time by using `covidregionaldata::get_regional_data()`.
+
+This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below.
+
+The function takes 3 arguments:
 * `country` - the English name of the country of interest. Not case sensitive
 * `totals` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be a table of total counts (one row per region) _or_ time series data (one row per region/date combination).
-* `include_level_2_regions` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be stratified by admin level 1 region (usually the largest subregion available) or admin level 2 region (usually the second largest). 
+* `include_level_2_regions` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be stratified by admin level 1 region (usually the largest subregion available) or admin level 2 region (usually the second largest).
 
-For example:
-``` r
-covidregionaldata::get_regional_data("Belgium")
+This returns a dataset with one row for each region for each date. For all regions, dates span from the first date until the last date that data are available for any region in the country. This means there are no gaps in the structure of the data, although NAs fill in where data are not available.
+
+For example, data for Belgium Level 1 regions over time can be accessed using:
+```r
+get_regional_data(country = "Belgium")
 ```
-This returns a dataset with the following structure
+This returns a dataset in this format:
 
 **date**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recovered\_new**|**recovered\_total**|**hosp\_new**|**hosp\_total**|**tested\_new**|**tested\_total**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
@@ -46,28 +65,16 @@ This returns a dataset with the following structure
 2020-05-25|Brussels|BE-BRU|26|5838|2|1421|NA|NA|6|2533|NA|NA
 2020-05-25|Flanders|BE-VLG|183|32381|14|4681|NA|NA|29|9334|NA|NA
 
-#### Totals
-For totals data, use the `totals` argument.
+#### 3.1.2 Level 1 and Level 2 regions
+All countries included in the package (see section 4, "Coverage") have data for regions at the admin-1 level, the largest administrative unit of the country (e.g. state in the USA). Some countries also have data for smaller areas at the admin-2 level (e.g. county in the USA).
 
-``` r
-covidregionaldata::get_regional_data("Belgium", totals = TRUE)
-```
-This returns a dataset with the following structure
- 
-**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recovered\_total**|**hosp\_total**|**tested\_total**
-:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-Flanders|BE-VLG|34195|4878|0|9694|0
-Wallonia|BE-WAL|19093|3362|0|5321|0
-Brussels|BE-BRU|6229|1482|0|2657|0
+Data for Level 2 units can be returned by using the `include_level_2_regions = TRUE` argument. The dataset will still show the corresponding Level 1 region.
 
-#### Level 2 regions
-All countries have data for regions at the admin-1 level, usually the largest regions available (e.g. state in the USA). *Some* countries have data for regions at the admin-2 level (e.g. county in the USA). Requesting data stratified by Level 2 regions instead of Level 1 is done by using the `include_level_2_regions` logical argument as discussed above. The datasets will also have the corresponding level 1 region included along with its corresponding code. 
-
-For an example of requesting Level 2 regions:
+An example of a country with Level 2 units is Belgium, where Level 2 units are Belgian provinces:
 ```r
 covidregionaldata::get_regional_data("Belgium", include_level_2_regions = TRUE)
 ```
-This returns a dataset with the following structure
+This returns a dataset with the format:
 
 **date**|**province**|**level\_2\_region\_code**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recovered\_new**|**recovered\_total**|**hosp\_new**|**hosp\_total**|**tested\_new**|**tested\_total**
 :-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
@@ -75,18 +82,82 @@ This returns a dataset with the following structure
 2020-05-24|Antwerpen|BE-VAN|Flanders|BE-VLG|16|7905|NA|NA|NA|NA|5|2510|NA|NA
 2020-05-24|Limburg|BE-VLI|Flanders|BE-VLG|14|6126|NA|NA|NA|NA|2|1848|NA|NA
 
+#### 3.1.3 Totals
+For totalled data up to the most recent date available, use the `totals` argument.
 
-### Data Glossary
-The possible data columns that will be returned by `get_regional_data()` are listed below. 
-Note that Date is not included if `totals` is FALSE, and level 2 region/level 2 region code are not included if `include_level_2_regions` is FALSE.
+``` r
+covidregionaldata::get_regional_data("Belgium", totals = TRUE)
+```
+This returns a dataset with one row for each region, in the same format:
 
-The columns returned for each country will _always_ be the same for standardisation reasons, though if the corresponding data was missing from the original source then that data field will be all NA values (or 0 if accessing totals data). Some rows may also be all NA in `*_new` data cells if the data for that date was missing from the source also. 
+**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recovered\_total**|**hosp\_total**|**tested\_total**
+:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
+Flanders|BE-VLG|34195|4878|0|9694|0
+Wallonia|BE-WAL|19093|3362|0|5321|0
+Brussels|BE-BRU|6229|1482|0|2657|0
+
+### 3.2 Worldwide data
+#### 3.2.1 Accessing national data
+Both the World Health Organisation (WHO) and European Centre for Disease Control (ECDC) provide worldwide national data. Access national level data for any country using:
+
+```r
+covidregionaldata::get_national_data()
+```
+
+This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below.
+
+This function takes 3 optional arguments:
+* `country` (optional) - a country name (in any language) for which to return national level data. This argument permits any country in the United Nations and reported by the specified data source (ECDC or WHO). If not specified, all countries will be returned.
+
+* `source` (optional, default is "ECDC") - the data source for national data. Either "ECDC" or "WHO".
+
+* `totals` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be a table of total counts (one row per country) or time series data (one row per country/date combination).
+
+This returns data in the same structure as `get_regional_data()`. This means there are no gaps in the structure of the data by country over time, and NAs fill in where data are not available.
+
+#### 3.2.2 Accessing national interventions
+A further function for worldwide data extracts non-pharmaceutical interventions by country:
+
+* ```covidregionaldata::get_interventions_data()```
+
+#### 2.3 Accessing a patient linelist
+And anonymised international patient linelist data can be imported and cleaned with:
+
+* ```covidregionaldata::get_linelist()```
+
+## 4 Sub-national coverage
+We include sub-national data in the following countries. These are the accepted country names when using `get_regional_data(country = "")`.
+
+**Continent** | **Country**|**Level 1**|**Level 2**
+:-----:| :-----:|:-----:|:-----:
+Europe | Belgium | Region | Province
+Europe | Germany | Bundesländ | Landkreise
+Europe | UK | NHS region | Local authority
+Europe | Italy | Region | NA
+Europe | Russia | Region | NA
+Americas | Brazil | State | City
+Americas | USA | State | County
+Americas | Canada | Province | NA
+Americas | Colombia | Department  | NA
+Asia | Afghanistan | Province | NA
+Asia | India | States | NA
+
+We are hoping to expand over time (see section 6 "Development").
+
+## 5 Data glossary
+#### 5.1 Subnational data
+
+The data columns that will be returned by `get_regional_data()` are listed below.
+
+To standardise across countries and regions, the columns returned for each country will _always_ be the same. If the corresponding data was missing from the original source then that data field is filled with NA values (or 0 if accessing totals data).
+
+Note that Date is not included if the `totals` argument is set to TRUE. Level 2 region/level 2 region code are not included if the `include_level_2_regions` argument is set to FALSE.
 
 * `date`: the date that the counts were reported (YYYY-MM-DD).
-* `level 1 region`: The level 1 region. This column will be named differently for different countries (e.g. state, province).
-* `level 1 region code`: A standard code for the level 1 region. The column will be named differently for different countries (e.g. iso_3166_2, ons).
-* `level 2 region`: The level 2 region. This column will be named differently for different countries (e.g. city, county).
-* `level 2 region code`: A standard code for the level 2 region. The column will be named differently for different countries (e.g. iso_3166_2, fips).
+* `level 1 region`: the level 1 region name. This column will be named differently for different countries (e.g. state, province).
+* `level 1 region code`: a standard code for the level 1 region. The column name reflects the specific administrative code used. Typically data returns the iso_3166_2 standard, although where not available the column will be named differently to reflect its source.
+* `level 2 region`: the level 2 region name. This column will be named differently for different countries (e.g. city, county).
+* `level 2 region code`: a standard code for the level 2 region. The column will be named differently for different countries (e.g. `fips` in the USA).
 * `cases_new`: new reported cases for that day
 * `cases_total`: total reported cases up to and including that day
 * `deaths_new`: new reported deaths for that day
@@ -98,58 +169,12 @@ The columns returned for each country will _always_ be the same for standardisat
 * `tested_new`: tests for that day
 * `tested_total`: total tests completed up to and including that day
 
-### Coverage
-Currently we include functions for sub-national data in the following countries (* indicates data for level 2 regions as well):
-
-Europe
-
-  +	Belgium (*)
-
-  + Germany (*)
-
-  +	Italy
-
-  + Russia
-
-  + UK (*)
+#### 5.2 National data
+In addition to the above, the following columns are included when using `get_national_data()`.
+* `un_region`: country geographical region defined by the United Nations.
+* `who_region`: only included when `source = "WHO"`. Country geographical region defined by WHO.
+* `population_2019`: only included when `source = "ECDC"` (the default). Total country population estimate in 2019.
 
 
-Americas
-
-  + Brazil (*)
-
-  +	Canada
-
-  + Colombia
-
-  + USA (*)
-
-
-Asia
-
-  + Afghanistan
-
-  + India
-
-
-## Worldwide data
-Worldwide data is also included in the package to aid analysis. There are three sources of worldwide, country-level data on cases and deaths.
-
-1. Extract total global cases and deaths by country, and specify source, using:
-  + ```covidregionaldata::get_total_cases(source = c("WHO", "ECDC"))```
-2. Extract daily international case and death counts compiled by the WHO using:
-  + ```covidregionaldata::get_who_cases(country = NULL, daily = TRUE))```
-3. Extract daily international case and death counts compiled by ECDC using:
-  + ```covidregionaldata::get_ecdc_cases()```
-
-A further function for worldwide data extracts non-pharmaceutical interventions by country:
-
-* ```covidregionaldata::get_interventions_data()```
-
-And anonymised international patient linelist data can be imported and cleaned with:
-
-* ```covidregionaldata::get_linelist()```
-
-
-## Development
-Developers who wish to contribute should read the System Maintenance Guide (SMG.md).
+## 6 Development
+We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the System Maintenance Guide (SMG.md).
