@@ -9,7 +9,6 @@
 #'
 #'
 #' @return A dataframe of International case counts published by ECDC.
-#' @inheritParams get_international_linelist
 #' @importFrom readr read_csv
 #' @importFrom httr GET write_disk
 #' @importFrom readxl read_excel
