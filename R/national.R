@@ -17,7 +17,6 @@
 #' @importFrom countrycode countryname
 #'
 #'
-#' ## Code
 get_ecdc_cases <- function(){
   
   # Try csv from ECDC
@@ -60,7 +59,7 @@ get_ecdc_cases <- function(){
 #' @description Downloads the latest WHO case data.
 #'
 #' @return A tibble of all WHO data by date
-#' @importFrom jsonlite from JSON
+#' @importFrom jsonlite fromJSON
 #' @importFrom here here
 #' @importFrom dplyr mutate
 #' @importFrom countrycode countrycode

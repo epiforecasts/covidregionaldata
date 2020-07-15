@@ -6,7 +6,6 @@
 #' @importFrom rvest html_nodes html_text
 #' @importFrom dplyr filter mutate
 #' @importFrom tibble as_tibble
-#' @export
 #' @examples
 #'
 #'\dontrun{

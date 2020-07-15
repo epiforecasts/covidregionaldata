@@ -9,7 +9,6 @@
 #' @importFrom readr read_csv
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate dmy
-#' @export
 #' @examples
 #'
 #' \dontrun{

@@ -8,7 +8,6 @@
 #' @importFrom dplyr mutate filter select group_by summarise n full_join
 #' @importFrom lubridate as_datetime
 #' @importFrom memoise cache_filesystem memoise
-#' @export
 #' @examples
 #' get_japan_regional_cases()
 #'
