@@ -25,8 +25,11 @@ get_austria_regional_cases <- function() {
   
   zp_dat <- lapply(zp, function(x){
     if(file.exists(x))
-      tryCatch(tmp <- read.csv(unz(x)),
-               error = function(e){})
+      # Check for CSV
+      # skip "Bezirke.js" for the time being
+      file <- grepl("csv.zip", x)
+      if(file)
+        tmp <- read.csv(unz(x, "Bezirke.csv"), header = TRUE, sep = ";")
     return(tmp)
   })
   
@@ -43,19 +46,28 @@ get_austria_regional_cases <- function() {
   dat <- do.call(rbind, dat)
   names(dat)[3] <- "time"
   
-  # TODO Extract info on region and date/time from zip
-  # and remove potential duplicates between the two formats
-  
-  #dat2 <- sapply(1 : length(zp_dat),
-  #              function(x){
-  #                grab <- zp_dat[x]
-  #                grab <- grab[[1]]
-  #                cbind(grab$bezirke, grab$timestamp)
-  #              })
+  # Extract info on region and date/time from zip
+  dat2 <- sapply(1 : length(zp_dat),
+                 function(x){
+                   if(is.data.frame(zp_dat[[x]])){
+                     grab <- zp_dat[[x]]
+                     names(grab) <- tolower(names(grab))
+                     if("timestamp" %in% names(grab)){
+                      save <- as.data.frame(cbind(grab$anzahl, as.character(grab$bezirk),
+                            as.character(grab$timestamp)))
+                      names(save) <- c("freq", "bezirk", "time")
+                      return(save)}
+                     # TODO Manually add dates where missing
+                    }})
   # Combine this
-  #dat2 <- do.call(rbind, dat2)
-  #names(dat2)[3] <- "time"
+  dat2 <- sapply(dat2, na.omit)
+  dat2 <- do.call(rbind, dat2)
   
+  # Combine old and new data
+  dat <- rbind(dat, dat2[, names(dat)])
+  # TODO remove duplicates
+  
+  # Add NUTS info  
   nuts <- data.frame(bezirk = c("Amstetten", "Baden", "Bludenz", "Braunau am Inn",
                              "Bregenz", "Bruck an der Leitha", "Bruck-Mürzzuschlag",
                              "Deutschlandsberg", "Dornbirn", "Eferding",
