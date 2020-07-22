@@ -38,14 +38,15 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
  # Set to NULL to return all countries 
  if (missing(country)){
    input_country_name <- NULL
- }
- 
- # Standardise country name 
- if (!(missing(country))){
- input_country_name <- country
- input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
-   if(is.na(input_country_name)){
-     stop("Country name not recognised. Please enter a character string, with no abbreviation.")
+
+    } else {
+      
+      # Standardise country name 
+      input_country_name <- country
+      input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
+      
+      if(is.na(input_country_name)){
+       stop("Country name not recognised. Please enter a character string, with no abbreviation.")
    }
  }
   

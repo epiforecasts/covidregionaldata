@@ -23,8 +23,8 @@ get_ecdc_cases <- function(){
   raw <- try(csv_reader(file = url))
   
   # If no csv ,try excel
-  if ("try-error" %in% class(data)) {
-    message("csv unavailable, trying alternative with temp file.")
+  if ("try-error" %in% class(raw)) {
+    message("ECDC csv unavailable, trying alternative with temp file.")
     url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
     httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
     raw <-  readxl::read_excel(tf)
