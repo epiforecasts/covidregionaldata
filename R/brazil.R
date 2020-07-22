@@ -31,10 +31,10 @@ get_brazil_regional_cases_only_level_1 <- function() {
     dplyr::select(date, region_level_1 = state_name, cases_new = newCases, cases_total = totalCases,
                   deaths_new = newDeaths, deaths_total = deaths) %>%
     dplyr::group_by(date, region_level_1) %>%
-    dplyr::summarise(cases_new = sum(cases_new),
-                     cases_total = sum(cases_total),
-                     deaths_new = sum(deaths_new),
-                     deaths_total = sum(deaths_total)) %>%
+    dplyr::summarise(cases_new = sum(as.numeric(cases_new)),
+                     cases_total = sum(as.numeric(cases_total)),
+                     deaths_new = sum(as.numeric(deaths_new)),
+                     deaths_total = sum(as.numeric(deaths_total)), .groups = "drop_last") %>%
     dplyr::ungroup()
 
   return(data)
@@ -72,10 +72,10 @@ get_brazil_regional_cases_with_level_2 <- function() {
     dplyr::select(date, region_level_1 = state_name, region_level_2 = city, cases_new = newCases, cases_total = totalCases,
                   deaths_new = newDeaths, deaths_total = deaths) %>%
     dplyr::group_by(date, region_level_1, region_level_2) %>%
-    dplyr::summarise(cases_new = sum(cases_new),
-                     cases_total = sum(cases_total),
-                     deaths_new = sum(deaths_new),
-                     deaths_total = sum(deaths_total)) %>%
+    dplyr::summarise(cases_new = sum(as.numeric(cases_new)),
+                     cases_total = sum(as.numeric(cases_total)),
+                     deaths_new = sum(as.numeric(deaths_new)),
+                     deaths_total = sum(as.numeric(deaths_total)), .groups = "drop_last") %>%
     dplyr::ungroup()
   
   return(data)

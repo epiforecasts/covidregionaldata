@@ -84,22 +84,22 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
   if (totals) {
     
     data <- data %>%
-      dplyr::rename(region_level_1 = country) %>%
+      dplyr::rename("region_level_1" = "country",  "level_1_region_code" = "iso_code") %>%
       totalise_data(include_level_2_regions = FALSE) %>%
       dplyr::select(-recovered_total, -hosp_total, -tested_total) %>%
       dplyr::arrange(-cases_total) %>%
-      dplyr::rename(country = region_level_1)
+      dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")
     
     return(tibble::tibble(data))
   }
 
   # Pad the data set ------------------------------------------------------------------
   data <- data %>%
-    dplyr::rename("region_level_1" = "country") %>%
+    dplyr::rename("region_level_1" = "country", "level_1_region_code" = "iso_code") %>%
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
-    dplyr::rename("country" = "region_level_1")
+    dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")
  
 
 # Return data -------------------------------------------------------------
