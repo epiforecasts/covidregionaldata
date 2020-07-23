@@ -1,0 +1,61 @@
+---
+title: "covidregionaldata-release"
+author: "Kath Sherratt"
+date: "22/07/2020"
+output: html_document
+---
+
+### README - on separate README branch
+
+- [x] switch around regional/national
+- [x] remove drat and replace with CRAN
+- [x] development: link to SMG
+
+### Code
+
+CODE
+
+- [ ] Complete passing tests without warnings or notes
+  - [X] UK
+  - [x] Russia (not up to date) (fix attempt failed - translation from russian text)
+  - [x] Colombia (not up to date) (fixed - new data source)
+  - [x] Intnl linelist
+  - [X] Add delay read-in and processing (save to data-raw)
+
+FILES
+
+- [X] Delete: dev folder contents
+
+NAMESPACE
+
+- [ ] Remove deps to <15, including:
+  - [x] janitor
+  - [x] reshape2
+  - [x] rvest / xml2 / httr (one only) - LEFT AS IS - all interdependent
+  - [x] data.table - switch to tidyverse or add as a "suggest" not an import
+  - [x] R.utils
+
+### Github
+- [x] delete travis yaml
+
+Sam:
+
+- [ ] codecov
+- [ ] epinow2 .github/workflows -> test coverage yaml -> copy into same folder in covidregionaldata
+- [ ] RMD check badge -> point to webpage for Actions (as on EpiNow2)
+
+### CRAN release
+
+- devtools::release()
+  - winbuilder
+  - [ ] devtools::check_rhub()
+
+### Publicise
+
+- [ ] NCoVUtils publicise
+- [ ] Covid19R - open an issue
+- [ ] RWeekly
+- [ ] Twitter
+
+
+

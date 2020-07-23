@@ -59,7 +59,6 @@ get_ecdc_cases <- function(){
 #'
 #' @return A tibble of all WHO data by date
 #' @importFrom jsonlite fromJSON
-#' @importFrom here here
 #' @importFrom dplyr mutate
 #' @importFrom countrycode countrycode
 

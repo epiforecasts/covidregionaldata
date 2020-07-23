@@ -12,5 +12,5 @@ A data frame of COVID cases by department in Colombia, ready to be used by \code
 \description{
 Extracts daily COVID-19 data for Colombia, stratified by departamento.
 Data available at  \url{https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv}.
-It is loaded and then sanitised.
+It is loaded and then cleaned.
 }

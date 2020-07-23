@@ -41,7 +41,6 @@ License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
 Imports:
-    here,
     readr,
     dplyr,
     tibble,
@@ -50,19 +49,16 @@ Imports:
     magrittr,
     memoise,
     lubridate,
-    data.table,
     tidyr,
     httr,
     yaml,
     readxl,
-    R.utils,
     xml2,
     rvest,
-    janitor,
     jsonlite,
-    reshape2,
     countrycode
 Suggests:
+    data.table,
     pkgdown,
     testthat
 Encoding: UTF-8

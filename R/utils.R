@@ -348,3 +348,25 @@ totalise_data <- function(data, include_level_2_regions) {
   
   return(tibble::tibble(data))
 }
+
+
+# Global variables --------------------------------------------------------
+
+utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", "casos",
+                         "AnzahlTodesfall", "Area", "Bundesland", "CASES", "Cases",
+                         "Code", "Country", "DATE", "DEATHS", "Date", "Deaths", "Landkreis", "Meldedatum", 
+                         "NEW_IN", "PROVINCE", "Province", "Province_State", "REGION", "Recoveries", "Specimen", 
+                         "date", "Status", "TT", "TotalCases", "all_of", "cases", "cases_new", "cases_total", 
+                         "casos_confirmados", "casos_fallecido", "city", "countriesAndTerritories",
+                         "country", "county", "data", "data_type", "dateRep", "deaths", "deaths_new", 
+                         "deaths_total", "deceduti", "denominazione_regione", "departamento", "fecha", "fips", "geoId", 
+                         "hosp_new", "hosp_total", "iso_code", "level_1_region_code", "level_2_region_code", 
+                         "location", "location_code", "n", "n.x", "n.y", "newCases", "newDeaths", "numdeaths", 
+                         "numrecover", "numtested", "numtoday", "numtotal", "popData2019", "population_2019", 
+                         "prname", "province", "pruebas", "pruid", "recovered_new", "recovered_total",  "region_level_1",
+                         "region_level_2", "state", "state_name", "tamponi", "tested_new",
+                         "Area", "type", "ID", "Specimen", "date", "date_admission_hospital", "date_confirm", 
+                         "date_confirmation", "date_death_or_discharge", "date_onset",
+                         "date_onset_symptoms", "days_onset_to_report", "id", "read.csv", "tested_total",
+                         "totalCases", "totale_casi", "un_region", "untar", "value", "who_region"))
+
