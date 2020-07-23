@@ -38,14 +38,15 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
  # Set to NULL to return all countries 
  if (missing(country)){
    input_country_name <- NULL
- }
- 
- # Standardise country name 
- if (!(missing(country))){
- input_country_name <- country
- input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
-   if(is.na(input_country_name)){
-     stop("Country name not recognised. Please enter a character string, with no abbreviation.")
+
+    } else {
+      
+      # Standardise country name 
+      input_country_name <- country
+      input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
+      
+      if(is.na(input_country_name)){
+       stop("Country name not recognised. Please enter a character string, with no abbreviation.")
    }
  }
   
@@ -84,22 +85,22 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
   if (totals) {
     
     data <- data %>%
-      dplyr::rename(region_level_1 = country) %>%
+      dplyr::rename("region_level_1" = "country",  "level_1_region_code" = "iso_code") %>%
       totalise_data(include_level_2_regions = FALSE) %>%
       dplyr::select(-recovered_total, -hosp_total, -tested_total) %>%
       dplyr::arrange(-cases_total) %>%
-      dplyr::rename(country = region_level_1)
+      dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")
     
     return(tibble::tibble(data))
   }
 
   # Pad the data set ------------------------------------------------------------------
   data <- data %>%
-    dplyr::rename("region_level_1" = "country") %>%
+    dplyr::rename("region_level_1" = "country", "level_1_region_code" = "iso_code") %>%
     tidyr::drop_na(date) %>%
     fill_empty_dates_with_na() %>%
     complete_cumulative_columns() %>%
-    dplyr::rename("country" = "region_level_1")
+    dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")
  
 
 # Return data -------------------------------------------------------------

@@ -23,7 +23,8 @@ get_belgium_regional_cases_only_level_1 <- function() {
   # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
     dplyr::select(DATE, REGION, CASES) %>%
-    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE),
+                  CASES = as.numeric(CASES)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
     dplyr::tally(CASES) %>%
@@ -31,7 +32,8 @@ get_belgium_regional_cases_only_level_1 <- function() {
 
   hosp_data <- hosp_data %>%
     dplyr::select(DATE, REGION, NEW_IN) %>%
-    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE),
+                  NEW_IN = as.numeric(NEW_IN)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
     dplyr::tally(wt = NEW_IN) %>%
@@ -39,7 +41,8 @@ get_belgium_regional_cases_only_level_1 <- function() {
 
   deaths_data <- deaths_data %>%
     dplyr::select(DATE, REGION, DEATHS) %>%
-    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE),
+                  DEATHS = as.numeric(DEATHS)) %>%
     tidyr::replace_na(list(REGION = "Unknown")) %>%
     dplyr::group_by(DATE, REGION) %>%
     dplyr::tally(wt = DEATHS) %>%
@@ -74,12 +77,13 @@ get_belgium_regional_cases_with_level_2 <- function(){
 
   cases_data <- csv_reader(file = c_provincial, locale=readr::locale(encoding = "UTF-8"))
   hosp_data <- csv_reader(file = h_provincial, locale=readr::locale(encoding = "UTF-8"))
-  deaths_data <- csv_reader(file = m_provincial, locale=readr::locale(encoding = "UTF-8"))
+  # deaths_data <- csv_reader(file = m_provincial, locale=readr::locale(encoding = "UTF-8")) # not available at level2
 
   # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
     dplyr::select(DATE, REGION, PROVINCE, CASES) %>%
-    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE),
+                  CASES = as.numeric(CASES)) %>%
     tidyr::replace_na(list(REGION = "Unknown",
                            PROVINCE = "Unknown")) %>%
     dplyr::group_by(DATE, PROVINCE, REGION) %>%
@@ -88,12 +92,14 @@ get_belgium_regional_cases_with_level_2 <- function(){
 
   hosp_data <- hosp_data %>%
     dplyr::select(DATE, REGION, PROVINCE, NEW_IN) %>%
-    dplyr::mutate(DATE = lubridate::ymd(DATE)) %>%
+    dplyr::mutate(DATE = lubridate::ymd(DATE),
+                  NEW_IN = as.numeric(NEW_IN)) %>%
     tidyr::replace_na(list(REGION = "Unknown",
                            PROVINCE = "Unknown")) %>%
     dplyr::group_by(DATE, PROVINCE, REGION) %>%
     dplyr::tally(wt = NEW_IN) %>%
     dplyr::ungroup()
+
 
   # Join the three datasets and rename columns -----------------------------------
   data <- dplyr::full_join(cases_data, hosp_data, by = c("DATE" = "DATE", "PROVINCE" = "PROVINCE", "REGION" = "REGION")) %>%

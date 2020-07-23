@@ -9,7 +9,6 @@
 #'
 #'
 #' @return A dataframe of International case counts published by ECDC.
-#' @inheritParams get_international_linelist
 #' @importFrom readr read_csv
 #' @importFrom httr GET write_disk
 #' @importFrom readxl read_excel
@@ -17,7 +16,6 @@
 #' @importFrom countrycode countryname
 #'
 #'
-#' ## Code
 get_ecdc_cases <- function(){
   
   # Try csv from ECDC
@@ -25,8 +23,8 @@ get_ecdc_cases <- function(){
   raw <- try(csv_reader(file = url))
   
   # If no csv ,try excel
-  if ("try-error" %in% class(data)) {
-    message("csv unavailable, trying alternative with temp file.")
+  if ("try-error" %in% class(raw)) {
+    message("ECDC csv unavailable, trying alternative with temp file.")
     url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
     httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
     raw <-  readxl::read_excel(tf)
@@ -60,8 +58,7 @@ get_ecdc_cases <- function(){
 #' @description Downloads the latest WHO case data.
 #'
 #' @return A tibble of all WHO data by date
-#' @importFrom jsonlite from JSON
-#' @importFrom here here
+#' @importFrom jsonlite fromJSON
 #' @importFrom dplyr mutate
 #' @importFrom countrycode countrycode
 

@@ -11,7 +11,9 @@
 #' 
 get_uk_regional_cases_only_level_1 <- function() {
   
-  authority_lookup_table <- get_authority_lookup_table() %>% dplyr::select(iso_code, region_level_1) %>% dplyr::distinct()
+  authority_lookup_table <- get_authority_lookup_table() %>% 
+    dplyr::select(iso_code, region_level_1) %>% 
+    dplyr::distinct()
 
   # England ----------------------------------------------------------------
   url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
@@ -31,7 +33,7 @@ get_uk_regional_cases_only_level_1 <- function() {
     dplyr::distinct() %>%
     tidyr::replace_na(list(TotalCases = 0)) %>%
     dplyr::group_by(Date, Country) %>%
-    dplyr::summarise(cases_total = sum(TotalCases)) %>%
+    dplyr::summarise(cases_total = sum(TotalCases), .groups = "drop_last") %>%
     dplyr::mutate(date = lubridate::ymd(Date)) %>%
     dplyr::ungroup() %>%
     dplyr::group_by(Country) %>%
@@ -77,7 +79,7 @@ get_uk_regional_cases_with_level_2 <- function() {
     dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
     tidyr::replace_na(list(TotalCases = 0)) %>%
     dplyr::group_by(Date, Area, Country) %>%
-    dplyr::summarise(cases_total = sum(TotalCases)) %>%
+    dplyr::summarise(cases_total = sum(TotalCases), .groups = "drop_last") %>%
     dplyr::mutate(date = lubridate::ymd(Date)) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(cases_new = get_cumulative_from_daily(cases_total),

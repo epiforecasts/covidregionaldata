@@ -4,27 +4,18 @@
 \alias{get_international_linelist}
 \title{Get International Linelist Data}
 \usage{
-get_international_linelist(
-  countries = NULL,
-  cities = NULL,
-  provinces = NULL,
-  clean = TRUE
-)
+get_international_linelist(clean_dates = TRUE, report_delay_only = FALSE)
 }
 \arguments{
-\item{countries}{Character vector identifying the countries to extract data for.}
+\item{clean_dates}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
 
-\item{cities}{Character vector identifying the cities to extract data for.}
-
-\item{provinces}{Character vector identifying the provinces to extract data for.}
-
-\item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
+\item{report_delay_only}{Logical, defaults to \code{FALSE}. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned}
 }
 \value{
 A linelist of case data
 }
 \description{
-This function downloads the latest non-Hubei linelist. It uses \code{memoise} to cache the
+This function downloads the latest international linelist. It uses \code{memoise} to cache the
 results locally. To clear the cache and redownload the data use \code{reset_cache}. The cache will be located
 in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
 To account for this we keep a cache in the \code{covidregionaldata} GitHub repo which this function will fall back to with a warning if the source

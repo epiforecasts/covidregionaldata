@@ -1,10 +1,8 @@
 test_that("get_italy_regional_cases data source is unchanged and up to date", {
-  url <- paste0("https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-", format(as.Date(Sys.Date() - 1), "%Y%m%d"), ".csv")
+  url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
   data <- readr::read_csv(url)
-  expected_colnames <- c( "data", "stato", "codice_regione", "denominazione_regione", "lat",
-                         "long", "ricoverati_con_sintomi", "terapia_intensiva", "totale_ospedalizzati", "isolamento_domiciliare",
-                         "totale_positivi", "variazione_totale_positivi", "nuovi_positivi", "dimessi_guariti", "deceduti",
-                         "totale_casi", "tamponi", "casi_testati", "note_it", "note_en")
+  expected_colnames <- c("data", "stato", "codice_regione", "denominazione_regione", 
+                         "deceduti", "totale_casi", "tamponi")
   expect_true(all(expected_colnames %in% colnames(data)))
   expect_true(max(as.Date(data$data), na.rm = TRUE) > Sys.Date() - 7)
 })

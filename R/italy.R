@@ -10,19 +10,10 @@
 #'
 get_italy_regional_cases <- function() {
 
-  ## Function to get daily files --------------------------------------------
-  url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv"
+  ## Function to get timeseries --------------------------------------------
+  url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
   
-  get_daily_files = function(date){
-      csv_reader(file = gsub("__date__", format(date, "%Y%m%d"), x = url))
-  }
-
-  ## Extract daily data -----------------------------------------------------
-  start_date <- as.Date(format(lubridate::ymd(20200224), "%Y-%m-%d"))
-  end_date <-  as.Date(Sys.Date() - 1)
-
-  dates <- seq(start_date, end_date, by = "day")
-  italy_data <- purrr::map_dfr(dates, get_daily_files)
+  italy_data <- suppressWarnings(csv_reader(url))
 
   ## Clean data -------------------------------------------------------------
   italy_data <- italy_data %>%
