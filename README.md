@@ -14,10 +14,17 @@ This R package is a gateway to subnational and national level Covid-19 data. For
 Install from CRAN:
 
 ``` r
+install.packages("covidregionaldata")
+```
+Install the stable development version of the package with:
+
+```r
 install.packages("drat")
+drat:::add("epiforecasts")
+install.packages("covidregionaldata")
 ```
 
-Install the development version of the package with:
+Install the unstable development version of the package with:
 
 ``` r
 remotes::install_github("epiforecasts/covidregionaldata")
@@ -175,4 +182,4 @@ In addition to the above, the following columns are included when using `get_nat
 
 
 ## Development
-We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/SMG.md).
+We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/inst/smg/SMG.md).
