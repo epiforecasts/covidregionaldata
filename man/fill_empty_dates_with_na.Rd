@@ -13,7 +13,7 @@ fill_empty_dates_with_na(data)
 a tibble with rows of NAs added.
 }
 \description{
-THere are points, particularly early during data collection, where data was not collected for all regions.
+There are points, particularly early during data collection, where data was not collected for all regions.
 This function finds dates which have data for some regions, but not all, and adds rows of NAs for the missing regions.
 This is mainly for reasons of completeness.
 }

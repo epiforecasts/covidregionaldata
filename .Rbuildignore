@@ -15,3 +15,4 @@
 ^.*.vsdx$
 SMG.md
 ^smg$
+^cran-comments\.md$
