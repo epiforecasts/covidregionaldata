@@ -100,5 +100,5 @@ test_that("convert_to_Covid19R_format converts correctly", {
 
   returned <- convert_to_covid19R_format(input_data)
 
-  expect_equal(convert_to_covid19R_format(input_data), expected_data)
+  expect_equal(returned, expected_data)
 })
