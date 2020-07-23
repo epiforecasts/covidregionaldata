@@ -1,5 +1,6 @@
 test_that("get_germany_regional_cases data source is unchanged and up to date", {
-
+  skip_on_cran()
+  
   data <- readr::read_csv("https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv")
 
   expected_colnames = c("ObjectId", "IdBundesland", "Bundesland", "Landkreis", "Altersgruppe", "Geschlecht",
@@ -10,6 +11,8 @@ test_that("get_germany_regional_cases data source is unchanged and up to date", 
 })
 
 test_that("get_germany_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_new", "deaths_new")
   returned_colnames_adm_level_1 <- colnames(get_germany_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
@@ -23,6 +26,8 @@ test_that("get_germany_regional_cases returns the correct column names", {
 })
 
 test_that("get_germany_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_germany_regional_cases_only_level_1()
 
   expect_is(data, "data.frame")
@@ -43,6 +48,8 @@ test_that("get_germany_regional_cases returns correct column types", {
 })
 
 test_that("get_germany_regional_cases returns correct numbers of regions", {
+  skip_on_cran()
+  
   adm_1_data <- get_germany_regional_cases_only_level_1()
   adm_2_data <- get_germany_regional_cases_with_level_2()
 

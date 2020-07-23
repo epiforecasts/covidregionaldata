@@ -1,4 +1,5 @@
 test_that("get_us_regional_cases data source is unchanged", {
+  skip_on_cran()
   
   data <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
   expected_colnames = c("date", "state", "fips", "cases", "deaths")
@@ -12,6 +13,8 @@ test_that("get_us_regional_cases data source is unchanged", {
 
 
 test_that("get_us_regional_cases returns correct column names", {
+  skip_on_cran()
+  
   expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_total", "deaths_total")
   returned_colnames_adm_level_1 <- colnames(get_us_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
@@ -27,6 +30,8 @@ test_that("get_us_regional_cases returns correct column names", {
 
 
 test_that("get_us_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_us_regional_cases_only_level_1()
   
   expect_is(data, "data.frame")

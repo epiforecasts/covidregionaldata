@@ -1,4 +1,6 @@
 test_that("get_india_regional_cases data source is unchanged and up to date", {
+  skip_on_cran()
+  
   data <- readr::read_csv("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
   expected_colnames <- c("Date", "Status", "TT", "AN", 	"AP", 	"AR", 	"AS", 	"BR", 	"CH", 	"CT", 	"DN",
                          "DD", 	"DL", 	"GA", 	"GJ", 	"HR", 	"HP", 	"JK", 	"JH",
@@ -10,6 +12,8 @@ test_that("get_india_regional_cases data source is unchanged and up to date", {
 })
 
 test_that("get_india_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames <- c("region_level_1", "date", "cases_new",  "deaths_new", "recovered_new")
 
   returned_colnames <- colnames(get_india_regional_cases())
@@ -19,6 +23,8 @@ test_that("get_india_regional_cases returns the correct column names", {
 })
 
 test_that("get_india_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_india_regional_cases()
   expect_is(data, "data.frame")
   expect_is(data$region_level_1, "character")
