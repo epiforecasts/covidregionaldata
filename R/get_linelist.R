@@ -1,10 +1,6 @@
-#' Get International Linelist Data
+#' Get Linelist Data
 #'
-#' @description This function downloads the latest international linelist. It uses `memoise` to cache the
-#' results locally. To clear the cache and redownload the data use `reset_cache`. The cache will be located
-#' in the directory at which the function is run. As this linelist is experiencing a high user demand it may not always be available.
-#' To account for this we keep a cache in the `covidregionaldata` GitHub repo which this function will fall back to with a warning if the source
-#' cannot be downloaded.
+#' @description This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
 #' @param clean_dates Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
 #' @param report_delay_only Logical, defaults to `FALSE`. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned
 #' @importFrom dplyr if_else select mutate filter
@@ -15,8 +11,8 @@
 #' @author Sam Abbott <sam.abbott@lshtm.ac.uk>
 #' @examples
 #'
-#'get_international_linelist
-get_international_linelist <- function(clean_dates = TRUE, report_delay_only = FALSE) {
+#'get_linelist
+get_linelist <- function(clean_dates = TRUE, report_delay_only = FALSE) {
 
   message("Downloading linelist")
   
@@ -31,27 +27,10 @@ get_international_linelist <- function(clean_dates = TRUE, report_delay_only = F
   if (any(class(linelist) %in% "try-error") | nrow(linelist) == 1) {
     
     if(nrow(linelist) == 1){
-      message("Problem reading linelist")
+      stop("Problem reading linelist")
     } else {
-      message("Problem getting linelist source")
+      stop("Problem getting linelist source")
     }
-    
-    date <- list.files("data-raw/linelist-delays")[1]
-    date <- sub("linelist-delays-", "", date)
-    date <- sub(".csv", "", date)
-    
-    message(paste0("Using the covidregionaldata cache for report delays. Cache may not be up to date: downloaded on ", date))
-
-    path <- paste0("data-raw/linelist-delays/linelist-delays-", date, ".csv")
-
-      linelist <- suppressWarnings(
-        suppressMessages(
-          read.csv(path) %>%
-            tibble::as_tibble()
-        )
-      )
-      
-      return(linelist)
   }
 
 
@@ -78,5 +57,4 @@ get_international_linelist <- function(clean_dates = TRUE, report_delay_only = F
   }
 
   return(linelist)
-
 }
