@@ -72,7 +72,7 @@ A further function for worldwide data extracts non-pharmaceutical interventions 
 #### Accessing a patient linelist
 Patient linelist data is useful for exploring delays and lags in reporting. An anonymised international patient linelist can be imported and cleaned with:
 
-* ```covidregionaldata::get_international_linelist()```
+* ```covidregionaldata::get_linelist()```
 
 ### Sub-national time-series data
 #### Accessing sub-national data
