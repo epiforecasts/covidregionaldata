@@ -65,7 +65,8 @@ Imports:
 Suggests:
     data.table,
     pkgdown,
-    testthat
+    testthat,
+    spelling
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
