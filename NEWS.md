@@ -1,3 +1,7 @@
+# covidregionaldata 0.5.0 
+
+* Release candidate.
+
 # covidregionaldata 0.4.0
 
 * Added functions to extract regional cases for Spain, Japan, South Korea, the United Kingom, and the United States.

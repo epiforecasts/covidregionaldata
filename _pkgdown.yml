@@ -29,14 +29,13 @@ reference:
       - get_regional_data
       
   - title: Get Global Data
-    desc: Functions to import and clean global data
+    desc: Function to import and clean global data
     contents:
-      - get_total_cases
-      - get_who_data
-      - format_ecdc_data
+      - get_national_data
 
-  - title: Other helpful functions
+  - title: Get other Covid-19 Data
     desc: Functions to import and clean global data
     contents: 
       - get_linelist
       - get_interventions_data
+  

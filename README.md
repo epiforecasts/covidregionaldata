@@ -1,23 +1,30 @@
 # Subnational data for the Covid-19 outbreak
 
 [![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
-![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)
+[![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.3.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.5.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
 [![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
-[![DOI](https://zenodo.org/badge/238177228.svg)](https://zenodo.org/badge/latestdoi/238177228)
+[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
-This R package is a gateway to subnational and national level Covid-19 data. For all countries, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests.
+An interface to subnational and national level Covid-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as linelist data and links to intervention data sets.
 
 ## Installation
 
 Install from CRAN:
 
 ``` r
+install.packages("covidregionaldata")
+```
+Install the stable development version of the package with:
+
+```r
 install.packages("drat")
+drat:::add("epiforecasts")
+install.packages("covidregionaldata")
 ```
 
-Install the development version of the package with:
+Install the unstable development version of the package with:
 
 ``` r
 remotes::install_github("epiforecasts/covidregionaldata")
@@ -65,7 +72,7 @@ A further function for worldwide data extracts non-pharmaceutical interventions 
 #### Accessing a patient linelist
 Patient linelist data is useful for exploring delays and lags in reporting. An anonymised international patient linelist can be imported and cleaned with:
 
-* ```covidregionaldata::get_international_linelist()```
+* ```covidregionaldata::get_linelist()```
 
 ### Sub-national time-series data
 #### Accessing sub-national data
@@ -175,4 +182,4 @@ In addition to the above, the following columns are included when using `get_nat
 
 
 ## Development
-We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/SMG.md).
+We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/inst/smg/SMG.md).

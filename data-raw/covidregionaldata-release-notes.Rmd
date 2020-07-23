@@ -15,7 +15,7 @@ output: html_document
 
 CODE
 
-- [ ] Complete passing tests without warnings or notes
+- [x] Complete passing tests without warnings or notes
   - [X] UK
   - [x] Russia (not up to date) (fix attempt failed - translation from russian text)
   - [x] Colombia (not up to date) (fixed - new data source)
@@ -28,7 +28,7 @@ FILES
 
 NAMESPACE
 
-- [ ] Remove deps to <15, including:
+- [x] Remove deps to <15, including:
   - [x] janitor
   - [x] reshape2
   - [x] rvest / xml2 / httr (one only) - LEFT AS IS - all interdependent
@@ -40,9 +40,9 @@ NAMESPACE
 
 Sam:
 
-- [ ] codecov
-- [ ] epinow2 .github/workflows -> test coverage yaml -> copy into same folder in covidregionaldata
-- [ ] RMD check badge -> point to webpage for Actions (as on EpiNow2)
+- [x] codecov
+- [x] epinow2 .github/workflows -> test coverage yaml -> copy into same folder in covidregionaldata
+- [x] RMD check badge -> point to webpage for Actions (as on EpiNow2)
 
 ### CRAN release
 
