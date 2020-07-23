@@ -1,4 +1,6 @@
 test_that("get_canada_regional_cases data source is unchanged and up to date", {
+  skip_on_cran()
+  
   data <- readr::read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
   expected_colnames <- c("pruid", "prname", "prnameFR", "date", "numconf", "numprob",
                         "numdeaths", "numtotal", "numtested", "numrecover", "percentrecover",
@@ -8,6 +10,8 @@ test_that("get_canada_regional_cases data source is unchanged and up to date", {
 })
 
 test_that("get_canada_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames <- c("region_level_1", "date", "cases_new", "cases_total", "deaths_total", "recovered_total", "tested_total")
 
   returned_colnames <- colnames(get_canada_regional_cases())
@@ -17,6 +21,8 @@ test_that("get_canada_regional_cases returns the correct column names", {
 })
 
 test_that("get_canada_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_canada_regional_cases()
   expect_is(data, "data.frame")
   expect_is(data$region_level_1, "character")

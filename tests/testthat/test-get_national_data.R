@@ -1,4 +1,5 @@
 test_that("get_national_data returns ECDC data", {
+  skip_on_cran()
 
   d <- get_national_data(country = "France")
   
@@ -9,6 +10,7 @@ test_that("get_national_data returns ECDC data", {
 })
 
 test_that("get_national_data returns WHO data", {
+  skip_on_cran()
   
   d <- get_national_data(country = "France", source = "WHO")
   
@@ -20,6 +22,7 @@ test_that("get_national_data returns WHO data", {
 
 
 test_that("get_ecdc_cases works as expected", {
+  skip_on_cran()
   
   url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
   ecdc <- try(readr::read_csv(url))
@@ -39,6 +42,7 @@ test_that("get_ecdc_cases works as expected", {
 
 
 test_that("get_who_cases works as expected", {
+  skip_on_cran()
   
   json_url <- "https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json"
   who <- jsonlite::fromJSON(json_url, flatten = F)

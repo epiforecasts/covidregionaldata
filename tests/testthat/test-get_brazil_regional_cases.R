@@ -1,4 +1,6 @@
 test_that("get_brazil_regional_cases data source is unchanged and up to date", {
+  skip_on_cran()
+  
   data <- readr::read_csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv")
   expected_colnames <- c("date", "country", "state", "city", "ibgeID", "newDeaths", "deaths",
                          "newCases", "totalCases", "deaths_per_100k_inhabitants", "totalCases_per_100k_inhabitants",
@@ -8,6 +10,8 @@ test_that("get_brazil_regional_cases data source is unchanged and up to date", {
 })
 
 test_that("get_brazil_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_new", "cases_total", "deaths_total", "deaths_new")
   returned_colnames_adm_level_1 <- colnames(get_brazil_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
@@ -21,6 +25,8 @@ test_that("get_brazil_regional_cases returns the correct column names", {
 })
 
 test_that("get_brazil_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_brazil_regional_cases_only_level_1()
 
   expect_is(data, "data.frame")

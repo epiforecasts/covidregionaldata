@@ -1,4 +1,6 @@
 test_that("get_afghan_regional_cases data source is unchanged and up to date", {
+  skip_on_cran()
+  
   data <- readr::read_csv("https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv")
   expected_colnames <- c("Province", "Cases", "Deaths", "Recoveries", "Active Cases", "Date")
   expect_true(all(expected_colnames %in% colnames(data)))
@@ -6,6 +8,8 @@ test_that("get_afghan_regional_cases data source is unchanged and up to date", {
 })
 
 test_that("get_afghan_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames <- c("region_level_1", "date", "cases_total", "deaths_total",
                          "recovered_total")
 
@@ -16,6 +20,8 @@ test_that("get_afghan_regional_cases returns the correct column names", {
 })
 
 test_that("get_afghan_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_afghan_regional_cases()
   expect_is(data, "data.frame")
   expect_is(data$region_level_1, "character")

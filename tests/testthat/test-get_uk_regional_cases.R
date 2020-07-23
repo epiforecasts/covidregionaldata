@@ -1,4 +1,6 @@
 test_that("get_uk_regional_cases data source is unchanged and up to date", {
+  skip_on_cran()
+  
   eng_data <- readr::read_csv("https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv")
   eng_expected_colnames = c("Area name", "Area code", "Area type", "Specimen date", "Daily lab-confirmed cases",
                         "Previously reported daily cases", "Change in daily cases", "Cumulative lab-confirmed cases", 
@@ -13,6 +15,8 @@ test_that("get_uk_regional_cases data source is unchanged and up to date", {
 })
 
 test_that("get_uk_regional_cases returns the correct column names", {
+  skip_on_cran()
+  
   expected_colnames_adm_level_1 <- c("region_level_1", "date", "iso_code", "cases_new", "cases_total")
   returned_colnames_adm_level_1 <- colnames(get_uk_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
@@ -26,6 +30,8 @@ test_that("get_uk_regional_cases returns the correct column names", {
 })
 
 test_that("get_uk_regional_cases returns correct column types", {
+  skip_on_cran()
+  
   data <- get_uk_regional_cases_only_level_1()
   
   expect_is(data, "data.frame")
@@ -49,6 +55,8 @@ test_that("get_uk_regional_cases returns correct column types", {
 })
 
 test_that("get_uk_regional_cases returns correct numbers of regions", {
+  skip_on_cran()
+  
   adm_1_data <- get_uk_regional_cases_only_level_1()
   adm_2_data <- get_uk_regional_cases_with_level_2()
   
