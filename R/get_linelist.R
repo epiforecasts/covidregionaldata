@@ -10,28 +10,41 @@
 #' @export
 #' @author Sam Abbott <sam.abbott@lshtm.ac.uk>
 #' @examples
+#'\dontrun{
+#'# Get the complete linelist
+#' get_linelist()
+#' 
+#'# Return the report delay only
+#' get_linelist(report_delay_only = TRUE)
 #'
-#'get_linelist
+#'}
 get_linelist <- function(clean_dates = TRUE, report_delay_only = FALSE) {
-
-  message("Downloading linelist")
   
-  url <- "https://raw.github.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.tar.gz"
+  tmpdir <- tempdir()
+  linelist <- try(csv_reader(file.path(tmpdir, "latestdata.csv")))
   
-  download.file(url, destfile = "tmp.tar.gz")
-  
-  linelist <- untar("tmp.tar.gz", files = "latestdata.csv") %>%
-    tibble::as_tibble()
-  
-  
-  if (any(class(linelist) %in% "try-error") | nrow(linelist) == 1) {
+  if (any(class(linelist) %in% "try-error")) {
+    message("Downloading linelist")
     
-    if(nrow(linelist) == 1){
-      stop("Problem reading linelist")
-    } else {
-      stop("Problem getting linelist source")
+    url <- "https://raw.github.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.tar.gz"
+    
+
+    download.file(url, destfile = file.path(tmpdir, "tmp.tar.gz"))
+    
+    untar(file.path(tmpdir, "tmp.tar.gz"), files = "latestdata.csv", exdir = tmpdir)
+    
+    linelist <- try(csv_reader(file.path(tmpdir, "latestdata.csv")))
+    
+    if (any(class(linelist) %in% "try-error")) {
+      
+      if(nrow(linelist) == 1){
+        stop("Problem reading linelist")
+      } else {
+        stop("Problem getting linelist source")
+      }
     }
   }
+ 
 
 
   if (clean_dates) {

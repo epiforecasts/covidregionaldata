@@ -7,7 +7,7 @@
 [![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
-This R package is a gateway to subnational and national level Covid-19 data. For all countries, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests.
+An interface to subnational and national level Covid-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as linelist data and links to intervention data sets.
 
 ## Installation
 

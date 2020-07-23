@@ -1,9 +1,9 @@
 Package: covidregionaldata
-Title: Data Extraction Tools for the Covid-19 Outbreak
+Title: Subnational Data for the Covid-19 Outbreak
 Version: 0.5.0
 Authors@R: c(person(given = "Sam Abbott",
            role = c("aut", "cre"),
-           email = "contact@samabbott.co.uk",
+           email = "sam.abbott@lshtm.ac.uk",
            comment = c(ORCID = "0000-0001-8057-8037")),
     person("Katharine", "Sherratt",
            email = "katharine.sherratt@lshtm.ac.uk",
@@ -36,7 +36,11 @@ Authors@R: c(person(given = "Sam Abbott",
     person("Sebastian", "Funk",
             email = "sebastian.funk@lshtm.ac.uk",
             role = c("aut")))
-Description: Data extraction tools for the covid-19 outbreak.
+Description: An interface to subnational and national level Covid-19 data. 
+             For all countries supported, this includes a daily time-series of cases. 
+             Wherever available we also provide  data on deaths, hospitalisations, and tests.
+             National level data is also supported using a range of data sources as well as 
+             linelist data and links to intervention data sets.
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
