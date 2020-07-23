@@ -231,7 +231,7 @@ get_colombia_region_codes <- function() {
 
 # Level 2 regions -------------------------------------------------------------------------------------
 
-#' Beligan Provincial region codes
+#' Belgian Provincial region codes
 #' @importFrom tibble tibble
 #' 
 get_belgium_level_2_codes <- function() {

@@ -150,7 +150,7 @@ set_negative_values_to_zero <- function(data) {
 }
 
 #' Add rows of NAs for dates where a region does not have any data
-#' @description THere are points, particularly early during data collection, where data was not collected for all regions. 
+#' @description There are points, particularly early during data collection, where data was not collected for all regions. 
 #' This function finds dates which have data for some regions, but not all, and adds rows of NAs for the missing regions. 
 #' This is mainly for reasons of completeness.
 #' @param data a data table

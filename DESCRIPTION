@@ -41,6 +41,7 @@ Description: An interface to subnational and national level Covid-19 data.
              Wherever available we also provide  data on deaths, hospitalisations, and tests.
              National level data is also supported using a range of data sources as well as 
              linelist data and links to intervention data sets.
+Language: en-gb
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
@@ -64,7 +65,8 @@ Imports:
 Suggests:
     data.table,
     pkgdown,
-    testthat
+    testthat,
+    spelling
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
