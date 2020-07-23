@@ -16,3 +16,4 @@
 SMG.md
 ^smg$
 ^cran-comments\.md$
+^CRAN-RELEASE$
