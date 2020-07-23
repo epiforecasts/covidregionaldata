@@ -15,6 +15,5 @@
 # 
 # complete_list <- dated_list[!is.na(date_onset)]
 # 
-# have_onset <- complete_list[, .N, by = country]
-# 
-# have_onset <- have_onset[, `:=`(p = N/sum(N) * 100)]
+# have_onset <- data.table::copy(complete_list)[, .N, by = country][, `:=`(p = N/sum(N) * 100)]
+
