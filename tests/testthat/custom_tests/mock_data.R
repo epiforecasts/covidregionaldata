@@ -231,7 +231,7 @@ get_input_data_for_covid19R_converter_test <- function() {
                                   "recovered_new", "recovered_total", "hosp_new",
                                   "hosp_total", "tested_new", "tested_total")
 
-  return(input_data)
+  return(tibble::tibble(input_data))
 }
 
 get_expected_data_for_covid19R_converter_test <- function() {
