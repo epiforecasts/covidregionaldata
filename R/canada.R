@@ -1,13 +1,13 @@
 #' Canadian Regional Daily COVID-19 Count Data - Provinces
-#' 
-#' @description Extracts daily COVID-19 data for Canada, stratified by province. 
-#' Data available at  \url{https://health-infobase.canada.ca/src/data/covidLive/covid19.csv}. 
+#'
+#' @description Extracts daily COVID-19 data for Canada, stratified by province.
+#' Data available at  \url{https://health-infobase.canada.ca}. 
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by province in Canada, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr %>% filter select mutate rename
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate dmy
-#' 
+#'
 get_canada_regional_cases <- function(){
 
   # Read + clean data --------------------------------------------------------
@@ -33,4 +33,3 @@ get_canada_regional_cases <- function(){
 
   return(data)
 }
-

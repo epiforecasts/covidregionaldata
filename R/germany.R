@@ -1,14 +1,14 @@
 #' German Regional Daily COVID-19 Count Data - Bundesland
 #'
-#' @description Extracts daily COVID-19 data for Germany, stratified by Bundesland. 
-#' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}. 
+#' @description Extracts daily COVID-19 data for Germany, stratified by Bundesland.
+#' Data available at  \url{https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0}. 
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr select group_by mutate summarise %>% ungroup
 #' @importFrom lubridate ymd_hms as_date
-#' 
+#'
 get_germany_regional_cases_only_level_1 <- function() {
-  
+
   # Read data --------------------------------------------------------------------
   url <- "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
 
@@ -28,8 +28,8 @@ get_germany_regional_cases_only_level_1 <- function() {
 
 #' German Regional Daily COVID-19 Count Data - Landkreis
 #'
-#' @description Extracts daily COVID-19 data for Germany, stratified by Landkreis. 
-#' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}. 
+#' @description Extracts daily COVID-19 data for Germany, stratified by Landkreis.
+#' Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}.
 #' It is loaded and then sanitised.
 #' @return A data.frame of COVID cases by Landkreis in Germany, ready to be used by get_regional_data().
 #' @importFrom dplyr select group_by mutate summarise %>% ungroup
