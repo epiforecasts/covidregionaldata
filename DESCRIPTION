@@ -42,8 +42,8 @@ Description: An interface to subnational and national level Covid-19 data.
              National level data is also supported using a range of data sources as well as
              linelist data and links to intervention data sets.
              Data sources include: global data (ECDC: <https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide>;
-             WHO <https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json>,
-             <https://covid19.who.in>; ACAPS interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
+             WHO <https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json>, <https://covid19.who.in>;
+             ACAPS interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
              patient linelist: <https://github.com/beoutbreakprepared/nCoV2019>),
              regional data (Afghanistan: <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
              Belgium: <https://epistat.wiv-isp.be/covid>;
