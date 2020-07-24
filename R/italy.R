@@ -1,7 +1,7 @@
 #' Regional Daily COVID-19 Count Data
 #'
 #' @description Extracts daily COVID-19 data for Italy, stratified by Region. 
-#' Data available at  \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv}. 
+#' Data available at  \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}. 
 #' It is loaded and then sanitised.
 #' @return A data frame of daily COVID cases for Italy by region, to be further processed by \code{get_regional_data()}.
 #' @importFrom lubridate ymd as_date

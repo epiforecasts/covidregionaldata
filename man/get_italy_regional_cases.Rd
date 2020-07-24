@@ -11,6 +11,6 @@ A data frame of daily COVID cases for Italy by region, to be further processed b
 }
 \description{
 Extracts daily COVID-19 data for Italy, stratified by Region.
-Data available at  \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-__date__.csv}.
+Data available at  \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}.
 It is loaded and then sanitised.
 }
