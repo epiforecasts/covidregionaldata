@@ -61,7 +61,7 @@ Description: An interface to subnational and national level Covid-19 data.
              - USA: <https://github.com/nytimes/covid-19-data>
              Additional geocoding data:
              - Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>
-             - Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>
+             - Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU> .
 Language: en-gb
 License: MIT + file LICENSE
 Depends:
