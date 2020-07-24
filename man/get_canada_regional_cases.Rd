@@ -11,6 +11,6 @@ A data frame of COVID cases by province in Canada, ready to be used by \code{get
 }
 \description{
 Extracts daily COVID-19 data for Canada, stratified by province.
-Data available at  \url{https://health-infobase.canada.ca/src/data/covidLive/covid19.csv}.
+Data available at  \url{https://health-infobase.canada.ca}.
 It is loaded and then sanitised.
 }

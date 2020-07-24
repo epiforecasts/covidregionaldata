@@ -11,6 +11,6 @@ A data frame of COVID cases by Bundesland in Germany, ready to be used by \code{
 }
 \description{
 Extracts daily COVID-19 data for Germany, stratified by Bundesland.
-Data available at  \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}.
+Data available at  \url{https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0}.
 It is loaded and then sanitised.
 }
