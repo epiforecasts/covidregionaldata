@@ -15,4 +15,5 @@ This is a resubmission. In this version I have:
 
 * Fixed the broken link in get_italy_regional_cases.
 * Added a list of supported datasets with links to the package description.
+* Fixed WHO link in description.
 * Updated the CITATION
