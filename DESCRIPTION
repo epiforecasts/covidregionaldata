@@ -41,27 +41,23 @@ Description: An interface to subnational and national level Covid-19 data.
              Wherever available we also provide  data on deaths, hospitalisations, and tests.
              National level data is also supported using a range of data sources as well as
              linelist data and links to intervention data sets.
-             Data sources include -
-             Global data:
-             - ECDC <https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide>
-             - WHO <https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json>, <https://covid19.who.in>
-             - Interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>
-             - Linelist: <https://github.com/beoutbreakprepared/nCoV2019>
-             Regional data:
-             - Afghanistan: <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>
-             - Belgium: <https://epistat.wiv-isp.be/covid>
-             - Brazil: <https://github.com/wcota/covid19br>
-             - Canada: <https://health-infobase.canada.ca/>
-             - Colombia: <https://github.com/danielcs88/colombia_covid-19>
-             - Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>
-             - India: <https://api.covid19india.org/>
-             - Italy: <https://github.com/pcm-dpc/COVID-19>
-             - Russia: <https://github.com/grwlf/COVID-19_plus_Russia>
-             - UK: <https://coronavirus.data.gov.uk>, <https://github.com/tomwhite/covid-19-uk-data>
-             - USA: <https://github.com/nytimes/covid-19-data>
-             Additional geocoding data:
-             - Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>
-             - Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU> .
+             Data sources include: global data (ECDC: <https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide>;
+             WHO <https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json>,
+             <https://covid19.who.in>; ACAPS interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
+             patient linelist: <https://github.com/beoutbreakprepared/nCoV2019>),
+             regional data (Afghanistan: <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
+             Belgium: <https://epistat.wiv-isp.be/covid>;
+             Brazil: <https://github.com/wcota/covid19br>;
+             Canada: <https://health-infobase.canada.ca/>;
+             Colombia: <https://github.com/danielcs88/colombia_covid-19>;
+             Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
+             India: <https://api.covid19india.org/>;
+             Italy: <https://github.com/pcm-dpc/COVID-19>;
+             Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;
+             UK: <https://coronavirus.data.gov.uk>, <https://github.com/tomwhite/covid-19-uk-data>;
+             USA: <https://github.com/nytimes/covid-19-data>),
+             and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>;
+             Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
 Language: en-gb
 License: MIT + file LICENSE
 Depends:
