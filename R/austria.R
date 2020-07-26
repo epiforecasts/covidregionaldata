@@ -9,11 +9,14 @@ get_austria_regional_cases <- function() {
                 destfile = temp)
   
   # Unzip the repo
+  unzip(zipfile = temp)
   p <- unzip(zipfile = temp)
   
   # Split by filetype
-  rd <- p[grep(pattern = ".rds", x = p)]
-  zp <- p[grep(pattern = ".zip", x = p)]
+  rd <- p[grep(pattern = "[0-9].rds", x = p)] # remove files containing non-case data
+                                              # whose file names do not end with a number followed by .rds
+  zp <- p[grep(pattern = "csv.zip", x = p)] # changed ".zip" to "csv.zip" because of 
+                                            # .js files which cause error later on
   
   # Extract data
   rd_dat <- lapply(rd, function(x){
@@ -24,48 +27,90 @@ get_austria_regional_cases <- function() {
   })
   
   zp_dat <- lapply(zp, function(x){
-    if(file.exists(x))
-      # Check for CSV
-      # skip "Bezirke.js" for the time being
-      file <- grepl("csv.zip", x)
-      if(file)
-        tmp <- read.csv(unz(x, "Bezirke.csv"), header = TRUE, sep = ";")
+    if(file.exists(x)){
+      tmp <- read.csv(unzip(x, files = "Bezirke.csv"), header = TRUE, sep = ";")
+      
+      # add timestamp for those files that don't have one
+      if(!("timestamp" %in% tolower(names(tmp)))){
+        # for those that have time and date in filename
+        if(nchar(x) == 69){ 
+          datetime <- substr(x, 42, 56)
+          timestamp <- strptime(datetime, format = "%Y%m%d_%H%M%S", tz = "Europe/Vienna")
+          timestamp <- format(timestamp, "%Y-%m-%d %H:%M:%S")
+        } else if(nchar(x) == 62){
+          # for those that don't have time in filename
+          # set time to 00:00:00 accordingly with datasets published later
+          datetime <- paste0(substr(x, 42, 49), "000000")
+          timestamp <- strptime(datetime, format = "%Y%m%d%H%M%S", tz = "Europe/Vienna")
+          timestamp <- format(timestamp, "%Y-%m-%d %H:%M:%S")
+        } else {
+          stop("error is in adding timestamp to unzipped csv files in zp_dat") # for debugging
+        }
+        tmp <- cbind(tmp, "time" = timestamp)
+      }
+    }
     return(tmp)
   })
   
-  # TODO provide info on which files experience errors
+  # for debugging: check whether all files were imported
+  #length(rd_dat) + length(zp_dat) == length(p[!grepl("js.zip", p)])
   
-  # Extract info on region and date/time from rds
-  dat <- sapply(1 : length(rd_dat),
+  # Extract info on region, cases and date/time from rds
+  dat <- lapply(1 : length(rd_dat),
                 function(x){
-                  grab <- rd_dat[x]
-                  grab <- grab[[1]]
-                  cbind(grab$bezirke, grab$timestamp)
+                  grab <- rd_dat[[x]]
+                  return(cbind(grab$bezirke, 
+                               "time" = format(grab$timestamp, "%Y-%m-%d %H:%M:%S")))
                 })
-  # Combine this
-  dat <- do.call(rbind, dat)
-  names(dat)[3] <- "time"
   
-  # Extract info on region and date/time from zip
-  dat2 <- sapply(1 : length(zp_dat),
-                 function(x){
-                   if(is.data.frame(zp_dat[[x]])){
-                     grab <- zp_dat[[x]]
-                     names(grab) <- tolower(names(grab))
-                     if("timestamp" %in% names(grab)){
-                      save <- as.data.frame(cbind(grab$anzahl, as.character(grab$bezirk),
-                            as.character(grab$timestamp)))
-                      names(save) <- c("freq", "bezirk", "time")
-                      return(save)}
-                     # TODO Manually add dates where missing
-                    }})
   # Combine this
-  dat2 <- sapply(dat2, na.omit)
+  
+  dat <- do.call(rbind, dat)
+  
+  # Extract info on region, cases and date/time from zip
+  dat2 <- lapply(1 : length(zp_dat), function(x){
+    if(is.data.frame(zp_dat[[x]])){
+      grab <- zp_dat[[x]]
+      names(grab) <- tolower(names(grab))
+      if("timestamp" %in% names(grab)){
+        grab$time <- gsub("T", " ", grab$timestamp) # for consistency
+      }
+      save <- as.data.frame(cbind(as.character(grab$bezirk), grab$anzahl, 
+                                  as.character(grab$time)))
+      names(save) <- c("bezirk", "freq", "time")
+      return(save)
+    } else {
+      stop("error in creation of dat2")
+    }
+  })
+  
+  # Combine this
+  #dat2 <- sapply(dat2, na.omit) # I don't think this is needed
   dat2 <- do.call(rbind, dat2)
   
   # Combine old and new data
-  dat <- rbind(dat, dat2[, names(dat)])
-  # TODO remove duplicates
+  dat <- rbind(dat, dat2)
+  
+  # Fix inconsistent naming of districts
+  names_fix <- c("Braunau", "Kirchdorf", "Ried", "Stadt Linz", "Stadt Steyr", "Stadt Wels")
+  dat$bezirk <- sapply(dat$bezirk, function(x){
+    if (x == "Braunau") out <- "Braunau am Inn"
+    else if (x == "Kirchdorf") out <- "Kirchdorf an der Krems"
+    else if (x == "Ried") out <- "Ried im Innkreis"
+    else if (x == "Stadt Linz") out <- "Linz(Stadt)"
+    else if (x == "Stadt Steyr") out <- "Steyr(Stadt)"
+    else if (x == "Stadt Wels") out <- "Wels(Stadt)"
+    else out <- x
+    return(out)
+  })
+  
+  # TODO remove duplicates --> apparently there are none
+  #vec <- sapply(unique(dat$bezirk), function(x){
+  #  idx <- which(dat$bezirk == x)
+  #  times <- dat[idx, "time"]
+  #  ind <- length(times) == length(unique(times))
+  #})
+  #any(isFALSE(vec))
   
   # Add NUTS info  
   nuts <- data.frame(bezirk = c("Amstetten", "Baden", "Bludenz", "Braunau am Inn",
