@@ -64,7 +64,6 @@ get_austria_regional_cases <- function() {
                 })
   
   # Combine this
-  
   dat <- do.call(rbind, dat)
   
   # Extract info on region, cases and date/time from zip
@@ -171,7 +170,7 @@ get_austria_regional_cases <- function() {
   nuts$lvl2 <- substr(nuts$lvl3, 1, nchar(nuts$lvl3) - 1)
   nuts$lvl1 <- substr(nuts$lvl3, 1, nchar(nuts$lvl3) - 2)
   
-  dat <- plyr::join(dat, nuts, by = "bezirk")
+  dat <- dplyr::left_join(dat, nuts, by = "bezirk")
     
   return(as.data.frame(dat))
 }
