@@ -55,7 +55,7 @@ get_ecdc_cases <- function(){
 
 #' Download the most recent WHO case data
 #'
-#' @description Downloads the latest WHO case data.
+#' @description Downloads the latest WHO case data from https://covid19.who.int
 #'
 #' @return A tibble of all WHO data by date
 #' @importFrom jsonlite fromJSON
@@ -65,32 +65,13 @@ get_ecdc_cases <- function(){
 
 get_who_cases <- function() {
   
-  if (!is.null(getOption("useMemoise"))) {
-    if (getOption("useMemoise")) {
-      # Set up cache
-      ch <- memoise::cache_filesystem(".cache")
-      read_fun <- memoise::memoise(jsonlite::fromJSON, cache = ch)
-    }
-  }else{
-    read_fun <- jsonlite::fromJSON
-  }
-  
   # Get data
-  json_url <- "https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json"
+  url <- "https://covid19.who.int/WHO-COVID-19-global-data.csv"
   
-  raw <- read_fun(json_url, flatten = F)
+  raw <- csv_reader(url)
   
-  raw <- as.data.frame(raw$rows)
-  
-  colnames(raw) <- c("date", "iso_code", "who_region", "cases_new", "cases_total", "deaths_new", "deaths_total")
-  
-  # Reset columns to numeric or date where needed
-  cols <- c(1, 4:7)
-  raw[,cols] <- sapply(raw[,cols], as.character)
-  raw[,cols] <- sapply(raw[,cols], as.numeric)
-  
-  raw$date <- as.Date(as.POSIXct(raw$date / 1000, origin="1970-01-01"))
-  
+  colnames(raw) <- c("date", "iso_code", "country", "who_region", "cases_new", "cases_total", "deaths_new", "deaths_total")
+
   # Add standard country names
   who <- raw %>%
     dplyr::mutate(country = countrycode::countrycode(iso_code, 
@@ -98,7 +79,8 @@ get_who_cases <- function() {
                   un_region = countrycode::countrycode(iso_code, 
                                                        origin = "iso2c", destination = "un.region.name", warn = FALSE),
                   # Correct for Kosovo
-                  un_region = ifelse(iso_code == "XK", "Europe", un_region))
+                  un_region = ifelse(iso_code == "XK", "Europe", un_region),
+                  country = ifelse(iso_code == "XK", "Kosovo", country))
   
   return(who)
   
