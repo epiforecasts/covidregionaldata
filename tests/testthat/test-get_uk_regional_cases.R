@@ -17,7 +17,7 @@ test_that("get_uk_regional_cases data source is unchanged and up to date", {
 test_that("get_uk_regional_cases returns the correct column names", {
   skip_on_cran()
   
-  expected_colnames_adm_level_1 <- c("region_level_1", "date", "iso_code", "cases_new", "cases_total")
+  expected_colnames_adm_level_1 <- c("region_level_1", "date", "level_1_region_code", "cases_new", "cases_total")
   returned_colnames_adm_level_1 <- colnames(get_uk_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
   expect_true(all(expected_colnames_adm_level_1 %in% returned_colnames_adm_level_1))
@@ -37,7 +37,7 @@ test_that("get_uk_regional_cases returns correct column types", {
   expect_is(data, "data.frame")
   expect_is(data$region_level_1, "character")
   expect_is(data$date, "Date")
-  expect_is(data$iso_code, "character")
+  expect_is(data$level_1_region_code, "character")
   expect_is(data$cases_new, "numeric")
   expect_is(data$cases_total, "numeric")
   

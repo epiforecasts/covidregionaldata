@@ -44,7 +44,8 @@ get_uk_regional_cases_only_level_1 <- function() {
   
   # Return specified dataset ----------------------------------------------------------
   data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
-    dplyr::arrange(date)
+    dplyr::arrange(date) %>%
+    dplyr::rename(level_1_region_code = iso_code)
   
   return(data)
 }
