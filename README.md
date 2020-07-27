@@ -3,7 +3,7 @@
 [![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
 [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.5.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.6.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
 [![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
