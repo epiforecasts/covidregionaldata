@@ -4,8 +4,9 @@
 [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
 [![develVersion](https://img.shields.io/badge/devel%20version-0.6.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata)
-[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
+[![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
+
 
 An interface to subnational and national level Covid-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as linelist data and links to intervention data sets.
 
@@ -31,6 +32,9 @@ remotes::install_github("epiforecasts/covidregionaldata")
 ```
 
 ## Quick start
+
+[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
+
 To get worldwide time-series data by country (sourced from the ECDC), use `get_national_data()`:
 ``` r
 covidregionaldata::get_national_data()
