@@ -4,19 +4,18 @@ get_austria_regional_cases <- function() {
   path <- "https://github.com/statistikat/coronaDAT/archive/master.zip"
   
   # Download repo
-  temp <- tempfile()
-  download.file(url = path,
-                destfile = temp)
+  if(!(dir.exists("tempdir"))) dir.create("tempdir")
+  temp <- tempfile(tmpdir = "tempdir")
+  download.file(url = path, destfile = temp, exdir = "tempdir")
   
   # Unzip the repo
-  unzip(zipfile = temp)
-  p <- unzip(zipfile = temp)
+  p <- unzip(zipfile = temp, exdir = "tempdir")
   
   # Split by filetype
   rd <- p[grep(pattern = "[0-9].rds", x = p)] # remove files containing non-case data
-                                              # whose file names do not end with a number followed by .rds
+  # whose file names do not end with a number followed by .rds
   zp <- p[grep(pattern = "csv.zip", x = p)] # changed ".zip" to "csv.zip" because of 
-                                            # .js files which cause error later on
+  # .js files which cause error later on
   
   # Extract data
   rd_dat <- lapply(rd, function(x){
@@ -28,23 +27,25 @@ get_austria_regional_cases <- function() {
   
   zp_dat <- lapply(zp, function(x){
     if(file.exists(x)){
-      tmp <- read.csv(unzip(x, files = "Bezirke.csv"), header = TRUE, sep = ";")
+      tmp <- read.csv(unzip(x, files = "Bezirke.csv", exdir = "tempdir"), header = TRUE, sep = ";")
       
       # add timestamp for those files that don't have one
       if(!("timestamp" %in% tolower(names(tmp)))){
+        
+        # see if time is in filename
+        indicator <- grepl("\\/[0-9]{8}_[0-9]{6}_orig_csv.zip", x)
+        
         # for those that have time and date in filename
-        if(nchar(x) == 69){ 
-          datetime <- substr(x, 42, 56)
+        if(indicator){
+          datetime <- regmatches(x, regexpr("[0-9]{8}_[0-9]{6}", x))
           timestamp <- strptime(datetime, format = "%Y%m%d_%H%M%S", tz = "Europe/Vienna")
           timestamp <- format(timestamp, "%Y-%m-%d %H:%M:%S")
-        } else if(nchar(x) == 62){
+        } else {
           # for those that don't have time in filename
           # set time to 00:00:00 accordingly with datasets published later
-          datetime <- paste0(substr(x, 42, 49), "000000")
+          datetime <- paste0(regmatches(x, regexpr("[0-9]{8}", x)), "000000")
           timestamp <- strptime(datetime, format = "%Y%m%d%H%M%S", tz = "Europe/Vienna")
           timestamp <- format(timestamp, "%Y-%m-%d %H:%M:%S")
-        } else {
-          stop("error is in adding timestamp to unzipped csv files in zp_dat") # for debugging
         }
         tmp <- cbind(tmp, "time" = timestamp)
       }
@@ -113,39 +114,39 @@ get_austria_regional_cases <- function() {
   
   # Add NUTS info  
   nuts <- data.frame(bezirk = c("Amstetten", "Baden", "Bludenz", "Braunau am Inn",
-                             "Bregenz", "Bruck an der Leitha", "Bruck-Mürzzuschlag",
-                             "Deutschlandsberg", "Dornbirn", "Eferding",
-                             "Eisenstadt(Stadt)", "Eisenstadt-Umgebung", "Feldkirch",
-                             "Feldkirchen", "Freistadt", "Gänserndorf", "Gmünd",
-                             "Gmunden", "Graz(Stadt)", "Graz-Umgebung",
-                             "Grieskirchen", "Gröbming", "Hallein", "Hartberg-Fürstenfeld",
-                             "Hermagor", "Hollabrunn", "Imst", "Innsbruck-Land",
-                             "Innsbruck-Stadt", "Jennersdorf", "Kirchdorf an der Krems",
-                             "Kitzbühel", "Klagenfurt Land", "Klagenfurt Stadt",
-                             "Korneuburg", "Krems an der Donau(Stadt)", "Krems(Land)",
-                             "Kufstein", "Landeck", "Leibnitz", "Leoben", "Lienz",
-                             "Liezen", "Lilienfeld", "Linz(Stadt)", "Linz-Land",
-                             "Mattersburg", "Melk", "Mistelbach", "Mödling", "Murau",
-                             "Murtal", "Neunkirchen", "Neusiedl am See", "Oberpullendorf",
-                             "Oberwart", "Perg", "Reutte", "Ried im Innkreis",
-                             "Rohrbach", "Salzburg(Stadt)", "Salzburg-Umgebung",
-                             "Sankt Johann im Pongau", "Sankt Pölten(Land)",
-                             "Sankt Pölten(Stadt)", "Sankt Veit an der Glan",
-                             "Schärding", "Scheibbs", "Schwaz", "Spittal an der Drau",
-                             "Steyr(Stadt)", "Steyr-Land", "Südoststeiermark",
-                             "Tamsweg", "Tulln", "Urfahr-Umgebung", "Villach Land",
-                             "Villach Stadt", "Vöcklabruck", "Voitsberg", "Völkermarkt",
-                             "Waidhofen an der Thaya", "Waidhofen an der Ybbs(Stadt)",
-                             "Weiz", "Wels(Stadt)", "Wels-Land", "Wien  1.",
-                             "Wien  2.", "Wien  3.", "Wien  4.", "Wien  5.",
-                             "Wien  6.", "Wien  7.", "Wien  8.", "Wien  9.",
-                             "Wien 10.", "Wien 11.", "Wien 12.", "Wien 13.",
-                             "Wien 14.", "Wien 15.", "Wien 16.", "Wien 17.",
-                             "Wien 18.", "Wien 19.", "Wien 20.", "Wien 21.",
-                             "Wien 22.", "Wien 23.", "Wiener Neustadt(Land)",
-                             "Wiener Neustadt(Stadt)", "Wolfsberg", "Zell am See",
-                             "Zwettl", "Horn", "Güssing", "Wien(Stadt)",
-                             "Liezen (inkl. Gröbming)"),
+                                "Bregenz", "Bruck an der Leitha", "Bruck-Mürzzuschlag",
+                                "Deutschlandsberg", "Dornbirn", "Eferding",
+                                "Eisenstadt(Stadt)", "Eisenstadt-Umgebung", "Feldkirch",
+                                "Feldkirchen", "Freistadt", "Gänserndorf", "Gmünd",
+                                "Gmunden", "Graz(Stadt)", "Graz-Umgebung",
+                                "Grieskirchen", "Gröbming", "Hallein", "Hartberg-Fürstenfeld",
+                                "Hermagor", "Hollabrunn", "Imst", "Innsbruck-Land",
+                                "Innsbruck-Stadt", "Jennersdorf", "Kirchdorf an der Krems",
+                                "Kitzbühel", "Klagenfurt Land", "Klagenfurt Stadt",
+                                "Korneuburg", "Krems an der Donau(Stadt)", "Krems(Land)",
+                                "Kufstein", "Landeck", "Leibnitz", "Leoben", "Lienz",
+                                "Liezen", "Lilienfeld", "Linz(Stadt)", "Linz-Land",
+                                "Mattersburg", "Melk", "Mistelbach", "Mödling", "Murau",
+                                "Murtal", "Neunkirchen", "Neusiedl am See", "Oberpullendorf",
+                                "Oberwart", "Perg", "Reutte", "Ried im Innkreis",
+                                "Rohrbach", "Salzburg(Stadt)", "Salzburg-Umgebung",
+                                "Sankt Johann im Pongau", "Sankt Pölten(Land)",
+                                "Sankt Pölten(Stadt)", "Sankt Veit an der Glan",
+                                "Schärding", "Scheibbs", "Schwaz", "Spittal an der Drau",
+                                "Steyr(Stadt)", "Steyr-Land", "Südoststeiermark",
+                                "Tamsweg", "Tulln", "Urfahr-Umgebung", "Villach Land",
+                                "Villach Stadt", "Vöcklabruck", "Voitsberg", "Völkermarkt",
+                                "Waidhofen an der Thaya", "Waidhofen an der Ybbs(Stadt)",
+                                "Weiz", "Wels(Stadt)", "Wels-Land", "Wien  1.",
+                                "Wien  2.", "Wien  3.", "Wien  4.", "Wien  5.",
+                                "Wien  6.", "Wien  7.", "Wien  8.", "Wien  9.",
+                                "Wien 10.", "Wien 11.", "Wien 12.", "Wien 13.",
+                                "Wien 14.", "Wien 15.", "Wien 16.", "Wien 17.",
+                                "Wien 18.", "Wien 19.", "Wien 20.", "Wien 21.",
+                                "Wien 22.", "Wien 23.", "Wiener Neustadt(Land)",
+                                "Wiener Neustadt(Stadt)", "Wolfsberg", "Zell am See",
+                                "Zwettl", "Horn", "Güssing", "Wien(Stadt)",
+                                "Liezen (inkl. Gröbming)", "Rust(Stadt)"),
                      lvl3 = c("AT121", "AT127", "AT341", "AT311", "AT341",
                               "AT127", "AT223", "AT225", "AT342", "AT312",
                               "AT112", "AT112", "AT342", "AT212", "AT313",
@@ -165,13 +166,45 @@ get_austria_regional_cases <- function() {
                               "AT213", "AT124", "AT121", "AT224", "AT312",
                               "AT312", rep("AT130", 23), "AT122", "AT122",
                               "AT213", "AT322", "AT124", "AT124", "AT113",
-                              "AT130", "AT222"),
+                              "AT130", "AT222", "AT112"),
                      stringsAsFactors = FALSE)
   nuts$lvl2 <- substr(nuts$lvl3, 1, nchar(nuts$lvl3) - 1)
   nuts$lvl1 <- substr(nuts$lvl3, 1, nchar(nuts$lvl3) - 2)
   
   dat <- dplyr::left_join(dat, nuts, by = "bezirk")
-    
+  
+  # add historical data
+  
+  path <- "https://raw.githubusercontent.com/botic/ogd-demo-covid19-at/master/data/2020-03-18/covid19-2020-03-18-bezirke.csv"
+  ref <- read.csv(path)[, 1:2]
+  ref$bezirk <- gsub(",.+", "", ref$bezirk)
+  
+  path <- "https://raw.githubusercontent.com/botic/ogd-demo-covid19-at/master/data/2020-03-18/covid19-2020-03-18-verlauf-bezirke.csv"
+  hist_dat <- read.csv(path)
+  hist_dat <- dplyr::left_join(hist_dat, ref, by = "gkz") %>% select(datum, neu_positive_tests, bezirk)
+  
+  ref <- dat[, c("bezirk", "lvl3", "lvl2", "lvl1")][-which(duplicated(dat$bezirk) == TRUE), ]
+  hist_dat <- left_join(hist_dat, ref, by = "bezirk")
+  
+  ## get cumulative cases to be consistent with rest of the data
+  hist_dat_list <- lapply(unique(hist_dat$bezirk), function(x){
+    df <- hist_dat[hist_dat$bezirk == x, ]
+    df$freq <- numeric(nrow(df))
+    df$freq[1] <- df$neu_positive_tests[1]
+    if(nrow(df) != 1){
+      for(i in 2:nrow(df)) df$freq[i] <- df$neu_positive_tests[i] + df$freq[i-1]
+    }
+    return(df)
+  })
+  
+  hist_dat_df <- do.call(rbind, hist_dat_list) %>% arrange(datum, bezirk) %>% 
+    select(bezirk, freq, datum, lvl3, lvl2, lvl1) %>% rename("time" = datum)
+  
+  dat <- rbind(hist_dat_df, dat)
+  
+  # get rid of temporary directory
+  unlink("tempdir", recursive = TRUE)
+  
   return(as.data.frame(dat))
 }
 
