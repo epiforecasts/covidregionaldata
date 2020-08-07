@@ -10,7 +10,8 @@
 #' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
 #' Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
-#' @importFrom dplyr %>% group_by arrange select ungroup do
+#' @importFrom dplyr %>% group_by arrange select ungroup do mutate
+#' @importFrom stringr str_trim
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
 #' @export
@@ -34,7 +35,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   if (!(is.logical(include_level_2_regions))){
     stop("The include_level_2_regions variable should be a logical (TRUE/FALSE) variable.")
   }
-
+ 
   country <- tolower(country)
   countries_with_level_2_regions <- c("belgium",
                                       "brazil",
@@ -85,11 +86,13 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   
   # Get the data and region codes for level 1 regions ------------------------------------
   data <- do.call(get_data_function, list())
+  data <- dplyr::mutate(data, region_level_1 = stringr::str_trim(region_level_1, side = "both"))
   data <- data %>% left_join_region_codes(region_codes_table, 
                                        by = c("region_level_1" = "region")) 
   
   # And add level 2 if needed ---------------------------------------------------------
   if (include_level_2_regions) {
+    data <- dplyr::mutate(data, region_level_2 = stringr::str_trim(region_level_2, side = "both"))
     data <- data %>% left_join_region_codes(region_level_2_codes_table,
                                          by = c("region_level_2" = "region")) 
   }

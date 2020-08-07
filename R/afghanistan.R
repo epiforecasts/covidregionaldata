@@ -10,7 +10,7 @@
 #' @return A data frame of daily Afghan provincial cases and deaths, stratified by state,
 #' to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr %>% transmute mutate recode
-#' @importFrom stringr str_replace str_remove_all
+#' @importFrom stringr str_replace str_remove_all str_trim
 #' @importFrom lubridate dmy
 #' @importFrom tidyr drop_na
 #' 
@@ -26,7 +26,9 @@ get_afghan_regional_cases <- function(){
   # Reformat -------------------------------------------------------------------------------
   data <- data %>%
     dplyr::transmute(date = lubridate::ymd(Date),
-                     region_level_1 = stringr::str_replace(Province, " Province", ""),
+                     region_level_1 = Province %>% 
+                       stringr::str_remove_all("Province") %>% 
+                       stringr::str_trim(side = "both"),
                      cases_total = Cases,
                      deaths_total = Deaths,
                      recovered_total = Recoveries) %>%
