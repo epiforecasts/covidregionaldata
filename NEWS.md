@@ -1,3 +1,9 @@
+# covidregionaldata 0.6.0 
+
+* Added whitespace trimming to all regional data functions. 
+* Fixed region codes for Colombia.
+* Fixed region name cleaning for afghanistan.
+
 # covidregionaldata 0.5.0 
 
 * Release candidate.

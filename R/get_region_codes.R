@@ -222,10 +222,10 @@ get_colombia_region_codes <- function() {
     rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
     rvest::html_table()
   region <- region_table[[1]] %>%
-    dplyr::select(level_1_region_code = Code, region_level_1 = 2) %>%
-    dplyr::mutate(region_level_1 = iconv(x = region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
-                  region_level_1 = stringr::str_replace_all(region_level_1, "Distrito Capital de ", ""),
-                  region_level_1 = stringr::str_to_sentence(region_level_1))
+    dplyr::select(level_1_region_code = Code, region = 2) %>%
+    dplyr::mutate(region = iconv(x = region, from = "UTF-8", to = "ASCII//TRANSLIT"),
+                  region = stringr::str_replace_all(region, "Distrito Capital de ", ""),
+                  region = stringr::str_to_sentence(region))
   return(region)
 }
 
