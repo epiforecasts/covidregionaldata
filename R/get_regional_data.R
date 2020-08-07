@@ -26,7 +26,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   if (!(is.character(country))){
     stop("The country variable should be a character variable.")
   }
-
+ 
   if (!(is.logical(totals))){
     stop("The totals variable should be a logical (TRUE/FALSE) variable.")
   }
