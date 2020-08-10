@@ -65,7 +65,7 @@ Imports:
     magrittr,
     memoise,
     lubridate,
-    tidyr,
+    tidyr (>= 1.0.0),
     httr,
     yaml,
     readxl,
