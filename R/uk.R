@@ -18,7 +18,7 @@ get_uk_regional_cases_only_level_1 <- function() {
   # England ----------------------------------------------------------------
   url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
   eng_regional_data <- csv_reader(url_eng) %>%
-    dplyr::filter(`Area type` == "Region") %>%
+    dplyr::filter(`Area type` == "region") %>%
     dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
     dplyr::select(date, region_level_1 = "Area name", iso_code = "Area code", cases_new = "Daily lab-confirmed cases") %>%
     dplyr::arrange(date) %>%
@@ -68,7 +68,7 @@ get_uk_regional_cases_with_level_2 <- function() {
   # England ----------------------------------------------------------------
   url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
   eng_regional_data <- csv_reader(url_eng) %>%
-    dplyr::filter(`Area type` == "Upper tier local authority") %>%
+    dplyr::filter(`Area type` == "utla") %>%
     dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
     dplyr::select(date, region_level_2 = "Area name", cases_new = "Daily lab-confirmed cases") %>%
     dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>% 
