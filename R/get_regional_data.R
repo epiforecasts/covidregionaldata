@@ -21,7 +21,9 @@
 #'  get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
 #' }
 #' 
-get_regional_data <- function(country, totals = FALSE, include_level_2_regions = FALSE){
+get_regional_data <- function(country, 
+                              totals = FALSE, 
+                              include_level_2_regions = FALSE) {
 
   # Error handling -------------------------------------------------------------------
   if (!(is.character(country))){
@@ -47,6 +49,26 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
     include_level_2_regions <- FALSE
   }
+  
+
+  # UK data has extra variables and separate format ----------------------------------------------
+  if (country == "uk") {
+    
+    if (include_level_2_regions) {
+      
+      uk_level_2 <- get_uk_regional_cases_with_level_2()
+      
+      return(uk_level_2)
+      
+    } else {
+      
+      uk_level_1 <- get_uk_regional_cases_only_level_1()
+      
+      return(uk_level_1)
+      
+    }
+  }
+    
 
   # Find the correct data-getter and region codes ----------------------------------------
   if (include_level_2_regions) {
@@ -55,9 +77,9 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
-                                "uk" = get_uk_regional_cases_with_level_2,
+                                # "uk" = get_uk_regional_cases_with_level_2,
                                 "usa" = get_us_regional_cases_with_level_2,
-                                stop("There is no data for the country entered. It is likely haven't added data
+                                stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
     region_codes_table <- get_region_codes(country)
@@ -75,9 +97,9 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
                                 "russia" = get_russia_regional_cases,
-                                "uk" = get_uk_regional_cases_only_level_1,
+                                # "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
-                                stop("There is no data for the country entered. It is likely haven't added data
+                                stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
     region_codes_table <- get_region_codes(country)
@@ -150,4 +172,5 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     rename_region_code_column(country)
 
   return(tibble::tibble(data))
+  
 }

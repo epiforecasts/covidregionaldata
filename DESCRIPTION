@@ -49,8 +49,8 @@ Description: An interface to subnational and national level Covid-19 data.
     Canada: <https://health-infobase.canada.ca/>; Colombia: <https://github.com/danielcs88/colombia_covid-19>;
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
-    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>, 
-    <https://github.com/tomwhite/covid-19-uk-data>; USA: <https://github.com/nytimes/covid-19-data>),
+    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>;
+    USA: <https://github.com/nytimes/covid-19-data>),
     and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>; Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
 Language: en-gb
 License: MIT + file LICENSE
