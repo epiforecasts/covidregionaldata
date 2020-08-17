@@ -10,7 +10,7 @@
 #' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
 #' Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
-#' @importFrom dplyr %>% group_by arrange select ungroup do mutate
+#' @importFrom dplyr %>% group_by arrange select ungroup do mutate everything
 #' @importFrom stringr str_trim
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
@@ -23,7 +23,8 @@
 #' 
 get_regional_data <- function(country, 
                               totals = FALSE, 
-                              include_level_2_regions = FALSE) {
+                              include_level_2_regions = FALSE,
+                              rename_region = TRUE) {
 
   # Error handling -------------------------------------------------------------------
   if (!(is.character(country))){
@@ -49,26 +50,6 @@ get_regional_data <- function(country,
     warning("The data for that country doesn't have data at Admin Level 2. Returning data for Admin Level 1 only.")
     include_level_2_regions <- FALSE
   }
-  
-
-  # UK data has extra variables and separate format ----------------------------------------------
-  if (country == "uk") {
-    
-    if (include_level_2_regions) {
-      
-      uk_level_2 <- get_uk_regional_cases_with_level_2()
-      
-      return(uk_level_2)
-      
-    } else {
-      
-      uk_level_1 <- get_uk_regional_cases_only_level_1()
-      
-      return(uk_level_1)
-      
-    }
-  }
-    
 
   # Find the correct data-getter and region codes ----------------------------------------
   if (include_level_2_regions) {
@@ -77,7 +58,7 @@ get_regional_data <- function(country,
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
-                                # "uk" = get_uk_regional_cases_with_level_2,
+                                "uk" = get_uk_regional_cases_with_level_2,
                                 "usa" = get_us_regional_cases_with_level_2,
                                 stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
@@ -97,7 +78,7 @@ get_regional_data <- function(country,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
                                 "russia" = get_russia_regional_cases,
-                                # "uk" = get_uk_regional_cases_only_level_1,
+                                "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
                                 stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
@@ -115,7 +96,8 @@ get_regional_data <- function(country,
   # And add level 2 if needed ---------------------------------------------------------
   if (include_level_2_regions) {
     data <- dplyr::mutate(data, region_level_2 = stringr::str_trim(region_level_2, side = "both"))
-    data <- data %>% left_join_region_codes(region_level_2_codes_table,
+    data <- data %>% 
+      left_join_region_codes(region_level_2_codes_table,
                                          by = c("region_level_2" = "region")) 
   }
 
@@ -156,21 +138,23 @@ get_regional_data <- function(country,
       dplyr::select(date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
                     cases_new, cases_total, deaths_new, deaths_total,
                     recovered_new, recovered_total, hosp_new, hosp_total,
-                    tested_new, tested_total) %>%
+                    tested_new, tested_total, dplyr::everything()) %>%
       dplyr::arrange(date, region_level_1, region_level_2)
   } else {
     data <- data %>%
     dplyr::select(date, region_level_1, level_1_region_code, cases_new, cases_total, deaths_new, deaths_total,
                   recovered_new, recovered_total, hosp_new, hosp_total,
-                  tested_new, tested_total) %>%
+                  tested_new, tested_total, dplyr::everything()) %>%
     dplyr::arrange(date, region_level_1)
   }
 
   # Rename the region column to country-specific --------------------------------------
+  if (rename_region) {
   data <- data %>%
     rename_region_column(country) %>%
     rename_region_code_column(country)
-
+  }
+  
   return(tibble::tibble(data))
   
 }
