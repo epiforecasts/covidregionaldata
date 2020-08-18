@@ -1,156 +1,187 @@
 #' UK Regional Daily COVID-19 Count Data - Region
 #'
-#' @description Extracts daily COVID-19 data for the UK, stratified by region. 
-#' Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}. 
-#' Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
-#' It is loaded and then sanitised.
+#' @description Extracts daily COVID-19 data for the UK, stratified by region and nation. 
+#' Data source:
+#' 
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
-#' @importFrom dplyr mutate select filter arrange group_by ungroup distinct bind_rows left_join arrange %>%
-#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate rename bind_rows %>%
+#' @importFrom stringr str_detect
+#' @importFrom purrr map
 #' @importFrom lubridate ymd
 #' 
 get_uk_regional_cases_only_level_1 <- function() {
   
-  authority_lookup_table <- get_authority_lookup_table() %>% 
-    dplyr::select(iso_code, region_level_1) %>% 
-    dplyr::distinct()
-
-  # England ----------------------------------------------------------------
-  url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
-  eng_regional_data <- csv_reader(url_eng) %>%
-    dplyr::filter(`Area type` == "region") %>%
-    dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
-    dplyr::select(date, region_level_1 = "Area name", iso_code = "Area code", cases_new = "Daily lab-confirmed cases") %>%
-    dplyr::arrange(date) %>%
-    dplyr::group_by(region_level_1, iso_code) %>%
-    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>%
-    dplyr::ungroup()
-
-  # Wales, NI & Scotland --------------------------------------------------------
-  url_wales_scot_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
-  wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
-    dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
-    dplyr::distinct() %>%
-    tidyr::replace_na(list(TotalCases = 0)) %>%
-    dplyr::group_by(Date, Country) %>%
-    dplyr::summarise(cases_total = sum(TotalCases), .groups = "drop_last") %>%
-    dplyr::mutate(date = lubridate::ymd(Date)) %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(Country) %>%
-    dplyr::mutate(cases_new = get_daily_from_cumulative(cases_total)) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(date, region_level_1 = "Country", cases_new, cases_total)  %>% 
-    dplyr::left_join(authority_lookup_table, by = "region_level_1")
+# Get UK data -------------------------------------------------------------
   
-  # Return specified dataset ----------------------------------------------------------
-  data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
-    dplyr::arrange(date) %>%
-    dplyr::rename(level_1_region_code = iso_code)
+  # Set up API query
+  query_filters <- list(nation = "areaType=nation",
+                        region = "areaType=region")
+  
+  # Get data for nations and regions
+  data_list <- purrr::map(query_filters, get_uk_data)
+
+# Reshape for covidregionaldata -------------------------------------------
+
+  # Add or rename standardised variables 
+  data <- dplyr::bind_rows(data_list$nation, data_list$region) %>%
+    dplyr::mutate(date = lubridate::ymd(date),
+                  # Cases and deaths are by publish date for Scotland, Wales, NI; 
+                  #   but by specimen date and date of death for England
+                  cases_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                      newCasesBySpecimenDate,
+                                      newCasesByPublishDate),
+                  cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                      cumCasesBySpecimenDate,
+                                      cumCasesByPublishDate)) %>%
+    # Deaths (28 day), hospitalisations and tested variables are consistent across nations
+    dplyr::rename(deaths_new = newDeaths28DaysByPublishDate,
+                  deaths_total = cumDeaths28DaysByPublishDate,
+                  hosp_new = newAdmissions,
+                  hosp_total = cumAdmissions,
+                  tested_new = newTestsByPublishDate,
+                  tested_total = cumTestsByPublishDate,
+                  region_level_1 = areaName,
+                  level_1_region_code = areaCode)
   
   return(data)
+
 }
 
-#' UK Regional Daily COVID-19 Count Data - Authority
+
+#' UK Regional Daily COVID-19 Count Data - UTLA
 #'
-#' @description Extracts daily COVID-19 data for the UK, stratified by region. 
-#' Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}. 
-#' Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
-#' It is loaded and then sanitised.
-#' @return A data frame of daily COVID cases for the UK by local authority, to be further processed by \code{get_regional_data()}.
-#' @importFrom dplyr mutate select filter arrange group_by ungroup distinct bind_rows left_join arrange %>%
-#' @importFrom tidyr replace_na
+#' @description Extracts daily COVID-19 data for the UK, stratified by Upper Tier Local Authority 
+#' Data source:
+#' 
+#' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
+#' @importFrom dplyr bind_rows mutate rename %>%
+#' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
 get_uk_regional_cases_with_level_2 <- function() {
 
-  authority_lookup_table <- get_authority_lookup_table()
+# Get UK data -------------------------------------------------------------
   
-  # England ----------------------------------------------------------------
-  url_eng <- "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv"
-  eng_regional_data <- csv_reader(url_eng) %>%
-    dplyr::filter(`Area type` == "utla") %>%
-    dplyr::mutate(date = lubridate::ymd(`Specimen date`)) %>%
-    dplyr::select(date, region_level_2 = "Area name", cases_new = "Daily lab-confirmed cases") %>%
-    dplyr::mutate(cases_total = get_cumulative_from_daily(cases_new)) %>% 
-    dplyr::left_join(authority_lookup_table, by = "region_level_2") 
-
-  # Wales, NI & Scotland ----------------------------------------------------
-  url_wales_scot_ni <- "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv"
-  wales_scot_ni_data <- csv_reader(url_wales_scot_ni) %>%
-    dplyr::filter(Country %in% c("Wales", "Scotland", "Northern Ireland")) %>%
-    tidyr::replace_na(list(TotalCases = 0)) %>%
-    dplyr::group_by(Date, Area, Country) %>%
-    dplyr::summarise(cases_total = sum(TotalCases), .groups = "drop_last") %>%
-    dplyr::mutate(date = lubridate::ymd(Date)) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(cases_new = get_cumulative_from_daily(cases_total),
-                  Area = dplyr::recode(Area, 
-                                       "North Down and Ards" = "Ards and North Down",
-                                       "Armagh, Banbridge and Craigavon" = "Armagh City, Banbridge and Craigavon",
-                                       "Derry and Strabane" = "Derry City and Strabane")) %>%
-    dplyr::select(date, region_level_2 = "Area", region_level_1 = "Country", cases_new, cases_total) %>% 
-    dplyr::left_join(authority_lookup_table, by = c("region_level_2", "region_level_1"))
+  # Get data for nations and regions
+  data_lv2 <- get_uk_data(filters = list(utla = "areaType=utla"), progress_bar = TRUE)
   
-  # Return specified dataset ----------------------------------------------------------
-  data <- dplyr::bind_rows(eng_regional_data, wales_scot_ni_data) %>%
-    dplyr::arrange(date)
+  # Reshape for covidregionaldata -------------------------------------------
+  data_lv2 <- data_lv2 %>%
+    dplyr::mutate(date = lubridate::ymd(date),
+                  # Cases and deaths are by publish date for Scotland, Wales, NI; 
+                  #   but by specimen date and date of death for England
+                  cases_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                     newCasesBySpecimenDate,
+                                     newCasesByPublishDate),
+                  cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                       cumCasesBySpecimenDate,
+                                       cumCasesByPublishDate)) %>%
+    # Hospitalisations and tested variables are consistent across nations
+    dplyr::rename(deaths_new = newDeaths28DaysByPublishDate,
+                  deaths_total = cumDeaths28DaysByPublishDate,
+                  hosp_new = newAdmissions,
+                  hosp_total = cumAdmissions,
+                  tested_new = newTestsByPublishDate,
+                  tested_total = cumTestsByPublishDate,
+                  region_level_2 = areaName,
+                  level_2_region_code = areaCode)
   
-  return(data)
+  return(data_lv2)
+  
 }
 
-#' Lookup table for local authority structure for the UK
-#'
-#' @description Gets data from \url{https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv}
-#' and then uses this to create a table of authorities and their corresponding higher level regions
-#' @return A tibble of UK local authorities
-#' @importFrom readr read_csv cols col_character
-#' @importFrom dplyr select %>% distinct filter bind_rows
-#' @importFrom tidyr drop_na
-#' @importFrom tibble tibble
+
+
+
+
+
+# Fetch data function ----------------------------------------------------------------
+
+
+#' Get UK data - helper function to get data for a single valid area type
 #' 
-get_authority_lookup_table <- function() {
+#' @description UK data download helper. Code adapted from PHE Coronavirus API for R:
+#'   available at https://github.com/publichealthengland/coronavirus-dashboard-api-R-sdk
+#' @param filters Query filters for UK data e.g. "areaType=nation"
+#' @param progress_bar Display a progress bar, useful for level 2 which takes a while to load
+#' @return A dataframe with all variables available in public UK data
+#' @importFrom dplyr %>%  
+#' @importFrom jsonlite fromJSON toJSON
+#' @importFrom httr VERB content timeout http_status
+#' 
+
+get_uk_data <- function(filters, progress_bar = FALSE) {
   
-  # Look-up table for Authority Structures ----------------------------------
-  authority_data <- readr::read_csv("https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv",
-                                    col_types = readr::cols(WD17NMW = readr::col_character(),
-                                                            CTY17CD = readr::col_character(),
-                                                            CTY17NM = readr::col_character()))
+  api_endpoint <- "https://api.coronavirus.data.gov.uk/v1/data"
   
-  unitary_auth <- authority_data %>%
-    dplyr::select(level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM", 
-                  iso_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
-    dplyr::distinct() %>%
-    tidyr::drop_na(region_level_2)
+  uk_variables = list(
+    # --- Standard variables for covidregionaldata --- #
+    # 
+    "date", "areaName", "areaCode",
+    # Cases by date of specimen
+    "newCasesBySpecimenDate", "cumCasesBySpecimenDate",
+    # Cases by date of report
+    "newCasesByPublishDate", "cumCasesByPublishDate",
+    # deaths
+    "newDeaths28DaysByPublishDate", "cumDeaths28DaysByPublishDate",
+    # Tests - all
+    "newTestsByPublishDate", "cumTestsByPublishDate",
+    # Hospital - admissions
+    "newAdmissions", "cumAdmissions", 
+    #
+    # --- Additional non-standard variables --- #
+    # Hospital
+    "cumAdmissionsByAge", "covidOccupiedMVBeds", 
+    "hospitalCases", "plannedCapacityByPublishDate",
+    # Tests by pillar
+    "newPillarOneTestsByPublishDate", "newPillarTwoTestsByPublishDate", 
+    "newPillarThreeTestsByPublishDate", "newPillarFourTestsByPublishDate"
+  )
+  names(uk_variables) <- uk_variables
   
-  upper_tier_auth <- authority_data %>%
-    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
-                  iso_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
-    dplyr::distinct() %>%
-    tidyr::drop_na(region_level_2)
+  results <- list()
+  current_page <- 1
   
-  ni_auth <- authority_data %>%
-    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
-                  iso_code = "CTRY17CD", region_level_1 = "CTRY17NM") %>% 
-    dplyr::filter(region_level_1 == "Northern Ireland") %>%
-    dplyr::distinct() %>%
-    tidyr::drop_na(region_level_2)
+  if (progress_bar) {
+    pb <- txtProgressBar(min = 0, max = 45, style = 3)
+  }
+  repeat {
+    
+    response <- httr::VERB("GET", 
+                           url = api_endpoint, 
+                           query = list(
+                             filters = filters, 
+                             structure = jsonlite::toJSON(uk_variables, auto_unbox = TRUE, pretty = FALSE),
+                             page = current_page), 
+                           httr::timeout(20))
+    
+    if (response$status_code >= 400) {
+      err_msg = httr::http_status(response)
+      stop(err_msg)
+    } else if (response$status_code == 204) {
+      break
+    }
+    
+    # Convert response from binary to JSON:
+    json_text <- httr::content(response, "text")
+    dt <- jsonlite::fromJSON(json_text)
+    results <- rbind(results, dt$data)
+    
+    if (is.null( dt$pagination$`next`)) {
+      break
+    }
+    
+    current_page <- current_page + 1
+    
+    if (progress_bar) {
+      setTxtProgressBar(pb, current_page)
+    }
+    
+  }
   
-  other_auths <- tibble::tibble(level_2_region_code = c("S0800015", "S0800016", "S0800017", "S0800029", "S0800019", "S0800020",
-                                                        "S0800031", "S0800022", "S0800032", "S0800024", "S0800025", "S0800026",
-                                                        "S0800030", "S0800028", "W11000028", "W11000023", "W11000029",
-                                                        "W11000030", "W11000025", "W11000024", "W11000031", "E06000058", "E06000053"),
-                                region_level_2 = c("Ayrshire and Arran", "Borders", "Dumfries and Galloway", "Fife",
-                                                   "Forth Valley", "Grampian", "Greater Glasgow and Clyde", "Highland",
-                                                   "Lanarkshire", "Lothian", "Orkney", "Shetland", "Tayside", "Western Isles",
-                                                   "Aneurin Bevan", "Betsi Cadwaladr", "Cardiff and Vale", "Cwm Taf",
-                                                   "Hywel Dda", "Powys", "Swansea Bay", "Bournemouth, Christchurch and Poole",
-                                                   "Cornwall and Isles of Scilly"),
-                                iso_code = c(rep("S92000003", 14), rep("W92000004", 7), rep("E92000001", 2)),
-                                region_level_1 = c(rep("Scotland", 14), rep("Wales", 7), rep("South West", 2)))
-  
-  # Join tables ---------------------------------------------------
-  authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, ni_auth, other_auths)
-  
-  return(authority_lookup_table)
+  return(results)
 }
+
+
+
 

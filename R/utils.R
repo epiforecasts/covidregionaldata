@@ -110,7 +110,7 @@ rename_region_code_column <- function(data, country) {
                                   "india" = "iso_3166_2",
                                   "italy" = "iso_3166_2",
                                   "russia" = "iso_3166_2",
-                                  "uk" = "ons_code",
+                                  "uk" = "ons_region_code",
                                   "usa" = "iso_3166_2")
   
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
@@ -120,7 +120,7 @@ rename_region_code_column <- function(data, country) {
                                   "belgium" = "iso_3166_2_province",
                                   "brazil" = "level_2_region_code",
                                   "germany" = "level_2_region_code",
-                                  "uk" = "ons_code",
+                                  "uk" = "utla_code",
                                   "usa" = "fips")
     
     data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)
@@ -368,5 +368,10 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "Area", "type", "ID", "Specimen", "date", "date_admission_hospital", "date_confirm", 
                          "date_confirmation", "date_death_or_discharge", "date_onset",
                          "date_onset_symptoms", "days_onset_to_report", "id", "read.csv", "tested_total",
-                         "totalCases", "totale_casi", "un_region", "untar", "value", "who_region"))
+                         "totalCases", "totale_casi", "un_region", "untar", "value", "who_region",
+                         "areaCode", "areaName", "cumAdmissions", "cumCasesByPublishDate",
+                         "cumCasesBySpecimenDate", "cumDeaths28DaysByPublishDate",
+                         "cumTestsByPublishDate", "data_list", "newAdmissions", "newCasesByPublishDate",
+                         "newCasesBySpecimenDate", "newDeaths28DaysByPublishDate",
+                         "newTestsByPublishDate", "setTxtProgressBar", "txtProgressBar"))
 

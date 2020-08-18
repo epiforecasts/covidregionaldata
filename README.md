@@ -178,6 +178,8 @@ Note that Date is not included if the `totals` argument is set to TRUE. Level 2 
 * `tested_new`: tests for that day
 * `tested_total`: total tests completed up to and including that day
 
+The exception to this is data for the UK. This is in its raw state, as regions have separate and sometimes incompatible data reporting.
+
 #### National data
 In addition to the above, the following columns are included when using `get_national_data()`.
 * `un_region`: country geographical region defined by the United Nations.
