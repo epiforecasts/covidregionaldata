@@ -38,4 +38,8 @@ reference:
     contents: 
       - get_linelist
       - get_interventions_data
+  - title: Utilities
+    desc: Utility functions that either help manage data or provide additional information.
+    contents:
+      - get_info_covidregionaldata
   

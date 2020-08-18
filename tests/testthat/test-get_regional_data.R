@@ -100,3 +100,28 @@ test_that("get_regional_data returns correct totals data - incl. admin level 2 r
   expect_equal(totals_data, returned_data)
 })
 
+
+
+test_that("get_regional_data returns correct unlocalised data - incl. admin level 2 regions", {
+  skip_on_cran()
+  
+  # Set up and run
+  input_data <- get_input_data_for_get_regional_data_tests_with_level_2_regions()
+  region_codes <- tibble::tibble(level_1_region_code = c("ON", "TW", "US"),
+                                 region = c("Oneland", "Twoland", "USA"))
+  level_2_region_codes <- tibble::tibble(level_2_region_code = c("NO", "EA", "SO", "WE", "VA"),
+                                         region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"))
+  
+  returned_data <- with_mock("covidregionaldata:::get_region_codes" = function(country) return(region_codes),
+                             "covidregionaldata:::get_level_2_region_codes" = function(country) return(level_2_region_codes),
+                             "covidregionaldata:::get_belgium_regional_cases_with_level_2" = function() return(input_data),
+                             get_regional_data("belgium", include_level_2_regions = TRUE, localise_regions = FALSE))
+  
+  # expected data
+  expected_data <- get_expected_data_for_get_regional_data_tests_with_level_2_regions() %>% 
+    dplyr::rename(region_level_2 = province, region_level_1 = region)
+  
+  expect_equal(expected_data, returned_data)
+})
+
+
