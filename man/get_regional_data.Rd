@@ -4,7 +4,12 @@
 \alias{get_regional_data}
 \title{The main calculation function for covidregionaldata. The majority of the work is done in this function.}
 \usage{
-get_regional_data(country, totals = FALSE, include_level_2_regions = FALSE)
+get_regional_data(
+  country,
+  totals = FALSE,
+  include_level_2_regions = FALSE,
+  localise_regions = TRUE
+)
 }
 \arguments{
 \item{country}{Character A string specifying the country to get data from. Not case dependent.
@@ -14,6 +19,8 @@ Name should be the English name. For a list of options see the README.}
 
 \item{include_level_2_regions}{Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
 Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
+
+\item{localise_regions}{Logical, defaults to TRUE. Should region names be localised.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
