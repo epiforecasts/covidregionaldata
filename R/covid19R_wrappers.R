@@ -129,13 +129,15 @@ refresh_covidregionaldata_usa <- function() {
 #' @export
 get_info_covidregionaldata <- function() {
   tibble::tribble(
-    ~data_set_name, ~package_name, ~function_to_get_data,
+    ~data_set_name, ~package_name, ~name_to_access_with,
+    ~function_to_get_data,
     ~data_details, ~data_url, ~license_url,
     ~data_types, ~location_types,
     ~spatial_extent, ~has_geospatial_info,
 
     "covidregionaldata_afghanistan",
     "covidregionaldata",
+    "afghanistan",
     "refresh_covidregionaldata_afghanistan",
     "Daily Covid-19 count data for Provinces (Wil\u0101yat) of Afghanistan",
     "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv",
@@ -147,6 +149,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_belgium",
     "covidregionaldata",
+    "belgium",
     "refresh_covidregionaldata_belgium",
     "Daily Covid-19 count data for Regions (R\u00E9gions) of Belgium",
     "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv,
@@ -160,6 +163,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_brazil",
     "covidregionaldata",
+    "brazil",
     "refresh_covidregionaldata_brazil",
     "Daily Covid-19 count data for States (Estados) of Brazil",
     "https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv",
@@ -171,6 +175,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_canada",
     "covidregionaldata",
+    "canada",
     "refresh_covidregionaldata_canada",
     "Daily Covid-19 count data for Provinces/Territories of Canada",
     "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv",
@@ -182,6 +187,7 @@ get_info_covidregionaldata <- function() {
     
     "covidregionaldata_colombia",
     "covidregionaldata",
+    "colombia",
     "refresh_covidregionaldata_colombia",
     "Daily Covid-19 count data for Departments of Colombia",
     "https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv",
@@ -193,6 +199,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_germany",
     "covidregionaldata",
+    "germany",
     "refresh_covidregionaldata_germany",
     "Daily Covid-19 count data for states (Bundeslander) of Germany",
     "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv",
@@ -204,6 +211,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_india",
     "covidregionaldata",
+    "india",
     "refresh_covidregionaldata_india",
     "Daily Covid-19 count data for States/Union Territories of India",
     "https://api.covid19india.org/csv/latest/state_wise_daily.csv",
@@ -215,6 +223,7 @@ get_info_covidregionaldata <- function() {
 
     "covidregionaldata_italy",
     "covidregionaldata",
+    "italy",
     "refresh_covidregionaldata_italy",
     "Daily Covid-19 count data for regions (Regioni) of Italy",
     "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-<date>.csv",
@@ -226,6 +235,7 @@ get_info_covidregionaldata <- function() {
     
     "covidregionaldata_russia",
     "covidregionaldata",
+    "russia",
     "refresh_covidregionaldata_russia",
     "Daily Covid-19 count data for Regions of Russia",
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",
@@ -237,6 +247,7 @@ get_info_covidregionaldata <- function() {
     
     "covidregionaldata_uk",
     "covidregionaldata",
+    "uk",
     "refresh_covidregionaldata_uk",
     "Daily Covid-19 count data for EU-defined regions of the UK",
     "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv, 
@@ -249,6 +260,7 @@ get_info_covidregionaldata <- function() {
     
     "covidregionaldata_usa",
     "covidregionaldata",
+    "usa",
     "refresh_covidregionaldata_usa",
     "Daily Covid-19 count data for states of the US",
     "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv",
