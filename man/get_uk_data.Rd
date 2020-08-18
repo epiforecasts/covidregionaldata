@@ -8,6 +8,8 @@ get_uk_data(filters, progress_bar = FALSE)
 }
 \arguments{
 \item{filters}{Query filters for UK data e.g. "areaType=nation"}
+
+\item{progress_bar}{Display a progress bar, useful for level 2 which takes a while to load}
 }
 \value{
 A dataframe with all variables available in public UK data
