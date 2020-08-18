@@ -36,10 +36,8 @@ test_that("get_uk_regional_cases returns correct column types", {
   data <- get_uk_regional_cases_with_level_2()
   
   expect_is(data, "data.frame")
-  expect_is(data$region_level_1, "character")
   expect_is(data$region_level_2, "character")
   expect_is(data$date, "Date")
-  expect_is(data$iso_code, "character")
   expect_is(data$level_2_region_code, "character")
 })
 
