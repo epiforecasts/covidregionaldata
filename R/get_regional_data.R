@@ -9,6 +9,7 @@
 #' @param totals Boolean. If TRUE, returns totalled data per region up to today's date. If FALSE, returns the full dataset stratified by date and region.
 #' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
 #' Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.
+#' @param localise_regions Logical, defaults to TRUE. Should region names be localised.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
 #' @importFrom dplyr %>% group_by arrange select ungroup do mutate
 #' @importFrom stringr str_trim
@@ -21,7 +22,8 @@
 #'  get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
 #' }
 #' 
-get_regional_data <- function(country, totals = FALSE, include_level_2_regions = FALSE){
+get_regional_data <- function(country, totals = FALSE, include_level_2_regions = FALSE,
+                              localise_regions = TRUE){
 
   # Error handling -------------------------------------------------------------------
   if (!(is.character(country))){
@@ -116,38 +118,37 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   # Totalise and return if totals data is requested ----------------------------------
   if (totals) {
     data <- totalise_data(data, include_level_2_regions = include_level_2_regions) %>%
-      dplyr::arrange(-cases_total) %>%
-      rename_region_column(country) %>%
-      rename_region_code_column(country)
-    return(tibble::tibble(data))
-  }
-
-  # Pad the data set ------------------------------------------------------------------
-  data <- data %>%
-    tidyr::drop_na(date) %>%
-    fill_empty_dates_with_na() %>%
-    complete_cumulative_columns()
-
-  # Select and arrange the data -------------------------------------------------------
-  if (include_level_2_regions) {
+      dplyr::arrange(-cases_total)
+  }else{
+    # Pad the data set ------------------------------------------------------------------
     data <- data %>%
-      dplyr::select(date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
-                    cases_new, cases_total, deaths_new, deaths_total,
-                    recovered_new, recovered_total, hosp_new, hosp_total,
-                    tested_new, tested_total) %>%
-      dplyr::arrange(date, region_level_1, region_level_2)
-  } else {
-    data <- data %>%
-    dplyr::select(date, region_level_1, level_1_region_code, cases_new, cases_total, deaths_new, deaths_total,
-                  recovered_new, recovered_total, hosp_new, hosp_total,
-                  tested_new, tested_total) %>%
-    dplyr::arrange(date, region_level_1)
+      tidyr::drop_na(date) %>%
+      fill_empty_dates_with_na() %>%
+      complete_cumulative_columns()
+    
+    # Select and arrange the data -------------------------------------------------------
+    if (include_level_2_regions) {
+      data <- data %>%
+        dplyr::select(date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
+                      cases_new, cases_total, deaths_new, deaths_total,
+                      recovered_new, recovered_total, hosp_new, hosp_total,
+                      tested_new, tested_total) %>%
+        dplyr::arrange(date, region_level_1, region_level_2)
+    } else {
+      data <- data %>%
+        dplyr::select(date, region_level_1, level_1_region_code, cases_new, cases_total, deaths_new, deaths_total,
+                      recovered_new, recovered_total, hosp_new, hosp_total,
+                      tested_new, tested_total) %>%
+        dplyr::arrange(date, region_level_1)
+    }
   }
-
+  
   # Rename the region column to country-specific --------------------------------------
-  data <- data %>%
-    rename_region_column(country) %>%
-    rename_region_code_column(country)
+  if (localise_regions) {
+    data <- rename_region_column(data, country)
+  }
+  
+  data <- rename_region_code_column(data, country)
 
   return(tibble::tibble(data))
 }

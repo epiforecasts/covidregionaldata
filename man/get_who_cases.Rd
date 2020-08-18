@@ -10,5 +10,5 @@ get_who_cases()
 A tibble of all WHO data by date
 }
 \description{
-Downloads the latest WHO case data.
+Downloads the latest WHO case data from https://covid19.who.int
 }
