@@ -2,16 +2,14 @@
 % Please edit documentation in R/uk.R
 \name{get_uk_regional_cases_with_level_2}
 \alias{get_uk_regional_cases_with_level_2}
-\title{UK Regional Daily COVID-19 Count Data - Authority}
+\title{UK Regional Daily COVID-19 Count Data - UTLA}
 \usage{
 get_uk_regional_cases_with_level_2()
 }
 \value{
-A data frame of daily COVID cases for the UK by local authority, to be further processed by \code{get_regional_data()}.
+A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 }
 \description{
-Extracts daily COVID-19 data for the UK, stratified by region.
-Data for England available at  \url{https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv}.
-Data for Wales, Scotland and Northern Ireland available at \url{https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv}.
-It is loaded and then sanitised.
+Extracts daily COVID-19 data for the UK, stratified by Upper Tier Local Authority
+Data source:
 }
