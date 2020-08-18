@@ -103,6 +103,7 @@ get_uk_regional_cases_with_level_2 <- function() {
 #' @description UK data download helper. Code adapted from PHE Coronavirus API for R:
 #'   available at https://github.com/publichealthengland/coronavirus-dashboard-api-R-sdk
 #' @param filters Query filters for UK data e.g. "areaType=nation"
+#' @param progress_bar Display a progress bar, useful for level 2 which takes a while to load
 #' @return A dataframe with all variables available in public UK data
 #' @importFrom dplyr %>%  
 #' @importFrom jsonlite fromJSON toJSON
