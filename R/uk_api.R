@@ -66,7 +66,7 @@ get_uk_regional_cases_with_level_2 <- function() {
   data_lv2 <- get_uk_data(filters = list(utla = "areaType=utla"), progress_bar = TRUE)
   
   # Reshape for covidregionaldata -------------------------------------------
-  data <- dplyr::bind_rows(data_list$nation, data_list$region) %>%
+  data_lv2 <- data_lv2 %>%
     dplyr::mutate(date = lubridate::ymd(date),
                   # Cases and deaths are by publish date for Scotland, Wales, NI; 
                   #   but by specimen date and date of death for England
@@ -83,8 +83,8 @@ get_uk_regional_cases_with_level_2 <- function() {
                   hosp_total = cumAdmissions,
                   tested_new = newTestsByPublishDate,
                   tested_total = cumTestsByPublishDate,
-                  region_level_1 = areaName,
-                  level_1_region_code = areaCode)
+                  region_level_2 = areaName,
+                  level_2_region_code = areaCode)
   
   return(data_lv2)
   
