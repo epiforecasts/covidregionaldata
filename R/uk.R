@@ -54,7 +54,7 @@ get_uk_regional_cases_only_level_1 <- function() {
 #' Data source:
 #' 
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
-#' @importFrom dplyr bind_rows mutate rename everything left_join %>%
+#' @importFrom dplyr bind_rows mutate rename select left_join %>%
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
