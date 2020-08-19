@@ -54,7 +54,7 @@ get_uk_regional_cases_only_level_1 <- function() {
 #' Data source:
 #' 
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
-#' @importFrom dplyr bind_rows mutate rename %>%
+#' @importFrom dplyr bind_rows mutate rename everything left_join %>%
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
@@ -63,10 +63,12 @@ get_uk_regional_cases_with_level_2 <- function() {
 # Get UK data -------------------------------------------------------------
   
   # Get data for nations and regions
-  data_lv2 <- get_uk_data(filters = list(utla = "areaType=utla"), progress_bar = TRUE)
+  data <- get_uk_data(filters = list(utla = "areaType=utla"), progress_bar = TRUE)
   
   # Reshape for covidregionaldata -------------------------------------------
-  data_lv2 <- data_lv2 %>%
+  authority_lookup_table <- get_authority_lookup_table()
+  
+  data_lv2 <- data %>%
     dplyr::mutate(date = lubridate::ymd(date),
                   # Cases and deaths are by publish date for Scotland, Wales, NI; 
                   #   but by specimen date and date of death for England
@@ -84,8 +86,21 @@ get_uk_regional_cases_with_level_2 <- function() {
                   tested_new = newTestsByPublishDate,
                   tested_total = cumTestsByPublishDate,
                   region_level_2 = areaName,
-                  level_2_region_code = areaCode)
-  
+                  level_2_region_code = areaCode) %>%
+  # Join local authority codes to level 1 regions
+    dplyr::left_join(authority_lookup_table, by = "region_level_2") %>%
+    dplyr::rename(level_2_region_code = level_2_region_code.x) %>%
+    dplyr::select(-level_2_region_code.y) %>%
+    dplyr::mutate(region_level_1 = ifelse(grepl("^W", level_2_region_code), "Wales",
+                                               ifelse(grepl("^S", level_2_region_code), 
+                                                      "Scotland", 
+                                                      ifelse(grepl("^N", level_2_region_code),
+                                                             "Northern Ireland", region_level_1))),
+                  level_1_region_code = ifelse(region_level_1 == "Scotland", "S92000003",
+                                               ifelse(region_level_1 == "Wales", "W92000004",
+                                                      ifelse(region_level_1 == "Northern Ireland", 
+                                                             "N92000002", level_1_region_code))))
+    
   return(data_lv2)
   
 }
@@ -183,5 +198,62 @@ get_uk_data <- function(filters, progress_bar = FALSE) {
 }
 
 
+# Join level 1 and 2 codes ------------------------------------------------
+
+#' Lookup table for local authority structure for the UK
+#'
+#' @description Gets data from \url{https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv}
+#' and then uses this to create a table of authorities and their corresponding higher level regions
+#' @return A tibble of UK local authorities
+#' @importFrom readr read_csv cols col_character
+#' @importFrom dplyr select %>% distinct filter bind_rows
+#' @importFrom tidyr drop_na
+#' @importFrom tibble tibble
+
+get_authority_lookup_table <- function() {
+  
+  # Look-up table for Authority Structures ----------------------------------
+  authority_data <- readr::read_csv("https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv",
+                                    col_types = readr::cols(WD17NMW = readr::col_character(),
+                                                            CTY17CD = readr::col_character(),
+                                                            CTY17NM = readr::col_character()))
+  
+  unitary_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM", 
+                  level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  upper_tier_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
+                  level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM") %>% 
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  ni_auth <- authority_data %>%
+    dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
+                  level_1_region_code = "CTRY17CD", region_level_1 = "CTRY17NM") %>% 
+    dplyr::filter(region_level_1 == "Northern Ireland") %>%
+    dplyr::distinct() %>%
+    tidyr::drop_na(region_level_2)
+  
+  other_auths <- tibble::tibble(level_2_region_code = c("S0800015", "S0800016", "S0800017", "S0800029", "S0800019", "S0800020",
+                                                        "S0800031", "S0800022", "S0800032", "S0800024", "S0800025", "S0800026",
+                                                        "S0800030", "S0800028", "W11000028", "W11000023", "W11000029",
+                                                        "W11000030", "W11000025", "W11000024", "W11000031", "E06000058", "E06000053"),
+                                region_level_2 = c("Ayrshire and Arran", "Borders", "Dumfries and Galloway", "Fife",
+                                                   "Forth Valley", "Grampian", "Greater Glasgow and Clyde", "Highland",
+                                                   "Lanarkshire", "Lothian", "Orkney", "Shetland", "Tayside", "Western Isles",
+                                                   "Aneurin Bevan", "Betsi Cadwaladr", "Cardiff and Vale", "Cwm Taf",
+                                                   "Hywel Dda", "Powys", "Swansea Bay", "Bournemouth, Christchurch and Poole",
+                                                   "Cornwall and Isles of Scilly"),
+                                level_1_region_code = c(rep("S92000003", 14), rep("W92000004", 7), rep("E92000001", 2)),
+                                region_level_1 = c(rep("Scotland", 14), rep("Wales", 7), rep("South West", 2)))
+  
+  # Join tables ---------------------------------------------------
+  authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, ni_auth, other_auths)
+  
+  return(authority_lookup_table)
+}
 
 
