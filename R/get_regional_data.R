@@ -147,9 +147,8 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   # Rename the region column to country-specific --------------------------------------
   if (localise_regions) {
     data <- rename_region_column(data, country)
+    data <- rename_region_code_column(data, country)
   }
-  
-  data <- rename_region_code_column(data, country)
   
   return(tibble::tibble(data))
 }
