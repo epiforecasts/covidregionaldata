@@ -373,5 +373,6 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "cumCasesBySpecimenDate", "cumDeaths28DaysByPublishDate",
                          "cumTestsByPublishDate", "data_list", "newAdmissions", "newCasesByPublishDate",
                          "newCasesBySpecimenDate", "newDeaths28DaysByPublishDate",
-                         "newTestsByPublishDate", "setTxtProgressBar", "txtProgressBar"))
+                         "newTestsByPublishDate", "setTxtProgressBar", "txtProgressBar",
+                         "level_2_region_code.x", "level_2_region_code.y"))
 
