@@ -50,3 +50,35 @@ test_that("get_who_cases works as expected", {
   expect_equal(ncol(who), 8)
   
 })
+
+
+test_that("get_ecdc_cases returns a region for every country", {
+  skip_on_cran()
+  
+  library(dplyr)
+  
+  all_countries <- get_national_data(source = "ecdc")
+  
+  all_countries <- all_countries %>%  
+    dplyr::filter(is.na(un_region)) %>% 
+    dplyr::group_by(country) %>% 
+    dplyr::tally()
+  
+  expect_true(nrow(all_countries) == 0)
+})
+
+
+test_that("get_who_cases returns a region for every country", {
+  skip_on_cran()
+  
+  library(dplyr)
+  
+  all_countries <- get_national_data(source = "who")
+  
+  all_countries <- all_countries %>%  
+    dplyr::filter(is.na(un_region), !is.na(country)) %>% 
+    dplyr::group_by(country) %>% 
+    dplyr::tally()
+  
+  expect_true(nrow(all_countries) == 0)
+})

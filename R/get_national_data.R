@@ -79,7 +79,6 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     add_extra_na_cols() %>%
     set_negative_values_to_zero() %>%
     dplyr::ungroup()
-  
 
   # Totalise and return if totals data is requested -------------------------------------------
   if (totals) {
@@ -109,7 +108,7 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     
     data <- data %>%
       dplyr::group_by(country) %>%
-      tidyr::fill(population_2019, un_region, .direction = "up") %>%
+      tidyr::fill(population_2019, un_region, .direction = "updown") %>%
       dplyr::ungroup()
     
     data <- data %>%
@@ -129,7 +128,7 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     
     data <- data %>%
       dplyr::group_by(country) %>%
-      tidyr::fill(who_region, un_region, .direction = "up") %>%
+      tidyr::fill(who_region, un_region, .direction = "updown") %>%
       dplyr::ungroup()
     
     data <- data %>%

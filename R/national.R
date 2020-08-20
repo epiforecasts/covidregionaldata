@@ -42,12 +42,19 @@ get_ecdc_cases <- function(){
     dplyr::mutate(cases_new = ifelse(cases_new < 0, 0, cases_new),
                   country = stringr::str_replace_all(country, "_", " "),
                   country = countrycode::countryname(country, destination = "country.name.en", warn = FALSE),
+                  iso_code = ifelse(country == "Namibia", "NA", iso_code),
                   un_region = countrycode::countrycode(iso_code, origin = "iso2c", destination = "un.region.name", warn = FALSE),
                   # Correct for Kosovo
-                  un_region = ifelse(iso_code == "XK", "Europe", un_region))
+                  un_region = ifelse(iso_code == "XK", "Europe", un_region),
+                  # Correct of UK
+                  un_region = ifelse(iso_code == "UK", "Europe", un_region),
+                  # Correct for Greece
+                  un_region = ifelse(iso_code == "EL", "Europe", un_region),
+                  # Correct for Taiwan
+                  un_region = ifelse(iso_code == "TW", "Asia", un_region))
+
   
   return(data)
-  
 }
 
 
@@ -83,7 +90,6 @@ get_who_cases <- function() {
                   country = ifelse(iso_code == "XK", "Kosovo", country))
   
   return(who)
-  
 }
 
 
