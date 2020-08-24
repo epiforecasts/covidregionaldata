@@ -32,11 +32,15 @@ get_uk_regional_cases_only_level_1 <- function() {
                                       newCasesByPublishDate),
                   cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
                                       cumCasesBySpecimenDate,
-                                      cumCasesByPublishDate)) %>%
-    # Deaths (28 day), hospitalisations and tested variables are consistent across nations
-    dplyr::rename(deaths_new = newDeaths28DaysByPublishDate,
-                  deaths_total = cumDeaths28DaysByPublishDate,
-                  hosp_new = newAdmissions,
+                                      cumCasesByPublishDate),
+                  deaths_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                      newDeaths28DaysByDeathDate,
+                                      newDeaths28DaysByPublishDate),
+                  deaths_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                        cumDeaths28DaysByDeathDate,
+                                        cumDeaths28DaysByPublishDate)) %>%
+    # Hospitalisations and tested variables are consistent across nations
+    dplyr::rename(hosp_new = newAdmissions,
                   hosp_total = cumAdmissions,
                   tested_new = newTestsByPublishDate,
                   tested_total = cumTestsByPublishDate,
@@ -77,11 +81,15 @@ get_uk_regional_cases_with_level_2 <- function() {
                                      newCasesByPublishDate),
                   cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
                                        cumCasesBySpecimenDate,
-                                       cumCasesByPublishDate)) %>%
+                                       cumCasesByPublishDate),
+                  deaths_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                      newDeaths28DaysByDeathDate,
+                                      newDeaths28DaysByPublishDate),
+                  deaths_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                                        cumDeaths28DaysByDeathDate,
+                                        cumDeaths28DaysByPublishDate)) %>%
     # Hospitalisations and tested variables are consistent across nations
-    dplyr::rename(deaths_new = newDeaths28DaysByPublishDate,
-                  deaths_total = cumDeaths28DaysByPublishDate,
-                  hosp_new = newAdmissions,
+    dplyr::rename(hosp_new = newAdmissions,
                   hosp_total = cumAdmissions,
                   tested_new = newTestsByPublishDate,
                   tested_total = cumTestsByPublishDate,
@@ -137,8 +145,10 @@ get_uk_data <- function(filters, progress_bar = FALSE) {
     "newCasesBySpecimenDate", "cumCasesBySpecimenDate",
     # Cases by date of report
     "newCasesByPublishDate", "cumCasesByPublishDate",
-    # deaths
+    # deaths by date of report
     "newDeaths28DaysByPublishDate", "cumDeaths28DaysByPublishDate",
+    # deaths by date of death
+    "newDeaths28DaysByDeathDate", "cumDeaths28DaysByDeathDate",
     # Tests - all
     "newTestsByPublishDate", "cumTestsByPublishDate",
     # Hospital - admissions
