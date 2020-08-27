@@ -45,7 +45,7 @@ Description: An interface to subnational and national level Covid-19 data.
     ACAPS interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
     patient linelist: <https://github.com/beoutbreakprepared/nCoV2019>),
     regional data (Afghanistan: <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
-    Belgium: <https://epistat.wiv-isp.be/covid>; Brazil: <https://github.com/wcota/covid19br>;
+    Belgium: <https://epistat.wiv-isp.be/covid/>; Brazil: <https://github.com/wcota/covid19br>;
     Canada: <https://health-infobase.canada.ca/>; Colombia: <https://github.com/danielcs88/colombia_covid-19>;
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;

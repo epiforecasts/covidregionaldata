@@ -33,7 +33,7 @@ remotes::install_github("epiforecasts/covidregionaldata")
 
 ## Quick start
 
-[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata)
+[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata/)
 
 To get worldwide time-series data by country (sourced from the ECDC), use `get_national_data()`:
 ``` r
