@@ -4,10 +4,10 @@
 \alias{get_linelist}
 \title{Get Linelist Data}
 \usage{
-get_linelist(clean_dates = TRUE, report_delay_only = FALSE)
+get_linelist(clean = TRUE, report_delay_only = FALSE)
 }
 \arguments{
-\item{clean_dates}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
+\item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
 
 \item{report_delay_only}{Logical, defaults to \code{FALSE}. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned}
 }

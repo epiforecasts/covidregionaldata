@@ -1,7 +1,7 @@
 #' Get Linelist Data
 #'
 #' @description This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
-#' @param clean_dates Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
+#' @param clean Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
 #' @param report_delay_only Logical, defaults to `FALSE`. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom lubridate dmy
@@ -18,7 +18,7 @@
 #' get_linelist(report_delay_only = TRUE)
 #'
 #'}
-get_linelist <- function(clean_dates = TRUE, report_delay_only = FALSE) {
+get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
   
   tmpdir <- tempdir()
   linelist <- try(csv_reader(file.path(tmpdir, "latestdata.csv")))
@@ -47,17 +47,23 @@ get_linelist <- function(clean_dates = TRUE, report_delay_only = FALSE) {
  
 
 
-  if (clean_dates) {
+  if (clean) {
     
     linelist <- linelist %>%
       dplyr::mutate(date_confirm = suppressWarnings(lubridate::dmy(date_confirmation)),
                     date_onset = suppressWarnings(lubridate::dmy(date_onset_symptoms)),
                     date_admission_hospital = suppressWarnings(lubridate::dmy(date_admission_hospital)),
                     date_death_or_discharge = suppressWarnings(lubridate::dmy(date_death_or_discharge)),
-                    days_onset_to_report = as.integer(as.Date(date_confirm) - as.Date(date_onset))) %>%
-      dplyr::select(id = ID, country, 
+                    death = ifelse(outcome %in% c("dead", "death", "died", "deceases", "Dead", "Death", "Died", "Deceased"), 
+                                   TRUE, FALSE),
+                    delay_onset_report = as.integer(as.Date(date_confirm) - as.Date(date_onset)),
+                    delay_onset_admission = as.integer(as.Date(date_admission_hospital) - as.Date(date_onset)),
+                    delay_onset_death = ifelse(death == TRUE,
+                                               as.integer(as.Date(date_death_or_discharge) - as.Date(date_onset)),
+                                               NA)) %>%
+      dplyr::select(id = ID, country, death,
                     date_onset, date_confirm, date_admission_hospital, date_death_or_discharge,
-                    days_onset_to_report)
+                    delay_onset_report, delay_onset_admission, delay_onset_death)
     
   }
   
