@@ -1,3 +1,13 @@
+# covidregionaldata 0.7.0 
+
+## Breaking changes
+
+* `get_linelist`: argument `clean` changed to `clean_dates` to reflect slight change in use case.
+
+## Changes
+
+* Additional delays added to `get_linelist` when `clean_dates = TRUE`.
+
 # covidregionaldata 0.6.0 
 
 * Added whitespace trimming to all regional data functions. 
