@@ -1,7 +1,7 @@
 #' Get Linelist Data
 #'
 #' @description This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
-#' @param clean_dates Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
+#' @param clean Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
 #' @param report_delay_only Logical, defaults to `FALSE`. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom lubridate dmy
