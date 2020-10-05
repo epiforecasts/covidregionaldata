@@ -10,6 +10,7 @@
 #' @param include_level_2_regions Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
 #' Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.
 #' @param localise_regions Logical, defaults to TRUE. Should region names be localised.
+#' @param ... pass additional arguments to regional function calls 
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
 #' @importFrom dplyr %>% group_by arrange select ungroup do mutate everything
 #' @importFrom stringr str_trim
@@ -23,7 +24,8 @@
 #' }
 #' 
 get_regional_data <- function(country, totals = FALSE, include_level_2_regions = FALSE,
-                              localise_regions = TRUE){
+                              localise_regions = TRUE,
+                              ...){
 
   # Error handling -------------------------------------------------------------------
   if (!(is.character(country))){
@@ -87,7 +89,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   }
   
   # Get the data and region codes for level 1 regions ------------------------------------
-  data <- do.call(get_data_function, list())
+  data <- do.call(get_data_function, list(...))
   data <- dplyr::mutate(data, region_level_1 = stringr::str_trim(region_level_1, side = "both"))
   data <- data %>% left_join_region_codes(region_codes_table, 
                                        by = c("region_level_1" = "region")) 

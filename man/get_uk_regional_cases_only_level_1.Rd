@@ -4,7 +4,11 @@
 \alias{get_uk_regional_cases_only_level_1}
 \title{UK Regional Daily COVID-19 Count Data - Region}
 \usage{
-get_uk_regional_cases_only_level_1()
+get_uk_regional_cases_only_level_1(nhsregions = FALSE)
+}
+\arguments{
+\item{nhsregions}{Return subnational English regions using NHS region boundaries instead of PHE boundaries.
+Also means that subnational English hospital admissions are "first admissions", excluding re-admissions. Defaults to FALSE}
 }
 \value{
 A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.

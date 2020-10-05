@@ -375,5 +375,6 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "newCasesBySpecimenDate", "newDeaths28DaysByPublishDate",
                          "newTestsByPublishDate", "setTxtProgressBar", "txtProgressBar",
                          "level_2_region_code.x", "level_2_region_code.y", "cumDeaths28DaysByDeathDate", "newDeaths28DaysByDeathDate",
-                         "outcome", "death", "delay_onset_report", "delay_onset_admission", "delay_onset_death"))
+                         "outcome", "death", "delay_onset_report", "delay_onset_admission", "delay_onset_death",
+                         "hosp_new_first_admissions"))
 
