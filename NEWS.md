@@ -6,6 +6,9 @@
 
 ## Changes
 
+* Added new option to return UK data by NHS region. This will also return "first admissions" hospital data (excludes readmissions). Specify 'nhsregions = TRUE'. Default is FALSE, returning ONS regions as before.
+* Fixed inconsistent reference dates for variables in UK data. cases_new and cases_total now by "Specimen date" (date of test), while deaths_new and deaths_total are by "Date of death", for all regions and nations.
+
 * Additional delays added to `get_linelist` when `clean_dates = TRUE`.
 
 # covidregionaldata 0.6.0 

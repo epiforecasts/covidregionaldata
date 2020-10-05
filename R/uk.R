@@ -6,10 +6,13 @@
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 #' @param nhsregions Return subnational English regions using NHS region boundaries instead of PHE boundaries. 
 #' Also means that subnational English hospital admissions are "first admissions", excluding re-admissions. Defaults to FALSE
-#' @importFrom dplyr mutate rename bind_rows %>%
+#' @importFrom dplyr mutate rename bind_rows group_by summarise %>%
 #' @importFrom stringr str_detect
 #' @importFrom purrr map
-#' @importFrom lubridate ymd
+#' @importFrom lubridate ymd year month
+#' @importFrom readxl read_excel
+#' @importFrom tibble as_tibble
+#' @importFrom tidyr pivot_longer
 #' @importFrom utils download.file
 #' 
 get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
@@ -42,13 +45,14 @@ get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
                   tested_total = cumTestsByPublishDate,
                   region_level_1 = areaName,
                   level_1_region_code = areaCode)
-
 # NHS regions -------------------------------------------------------------
   # Separate NHS data is available for "first" admissions, excluding readmissions.
   #   This is available for England + English regions only.
   #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
   #     Section 2, "2. Estimated new hospital cases"
   if(nhsregions){
+    message("Arranging data by NHS region. 
+Also adding new variable: hosp_new_first_admissions. This is NHS data for first hospital admissions, which excludes readmissions. This is available for England and English regions only.")
     # Download NHS xlsx
     nhs_url <- paste0("https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
                       lubridate::year(Sys.Date()), "/",
@@ -103,6 +107,11 @@ data_phe_to_nhs <- data %>%
                     level_1_region_code = NA)
     
     return(data_merged_nhs)
+  } else {
+    
+    message("Returning UK data by ONS region.
+Test and hospital admissions data are unavailable for sub-national ONS regions.
+To get hospital admissions data, include argument 'nhsregions = TRUE'. This returns data by NHS region.")
   }
   
   return(data)
