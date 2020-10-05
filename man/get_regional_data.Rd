@@ -8,7 +8,8 @@ get_regional_data(
   country,
   totals = FALSE,
   include_level_2_regions = FALSE,
-  localise_regions = TRUE
+  localise_regions = TRUE,
+  ...
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ Name should be the English name. For a list of options see the README.}
 Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
 
 \item{localise_regions}{Logical, defaults to TRUE. Should region names be localised.}
+
+\item{...}{pass additional arguments to regional function calls}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
