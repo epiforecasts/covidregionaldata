@@ -4,12 +4,15 @@
 #' Data source:
 #' 
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
+#' @param nhsregions Return subnational English regions using NHS region boundaries instead of PHE boundaries. 
+#' Also means that subnational English hospital admissions are "first admissions", excluding re-admissions. Defaults to FALSE
 #' @importFrom dplyr mutate rename bind_rows %>%
 #' @importFrom stringr str_detect
 #' @importFrom purrr map
 #' @importFrom lubridate ymd
+#' @importFrom utils download.file
 #' 
-get_uk_regional_cases_only_level_1 <- function() {
+get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
   
 # Get UK data -------------------------------------------------------------
   
@@ -25,27 +28,82 @@ get_uk_regional_cases_only_level_1 <- function() {
   # Add or rename standardised variables 
   data <- dplyr::bind_rows(data_list$nation, data_list$region) %>%
     dplyr::mutate(date = lubridate::ymd(date),
-                  # Cases and deaths are by publish date for Scotland, Wales, NI; 
-                  #   but by specimen date and date of death for England
-                  cases_new = ifelse(stringr::str_detect(areaCode, "^E"), 
-                                      newCasesBySpecimenDate,
-                                      newCasesByPublishDate),
-                  cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
-                                      cumCasesBySpecimenDate,
-                                      cumCasesByPublishDate),
-                  deaths_new = ifelse(stringr::str_detect(areaCode, "^E"), 
-                                      newDeaths28DaysByDeathDate,
-                                      newDeaths28DaysByPublishDate),
-                  deaths_total = ifelse(stringr::str_detect(areaCode, "^E"), 
-                                        cumDeaths28DaysByDeathDate,
-                                        cumDeaths28DaysByPublishDate)) %>%
-    # Hospitalisations and tested variables are consistent across nations
+                  # Cases and deaths by specimen date and date of death 
+                  #   for all nations + regions
+                  cases_new = newCasesBySpecimenDate,
+                  cases_total = cumCasesBySpecimenDate,
+                  deaths_new = newDeaths28DaysByDeathDate,
+                  deaths_total = cumDeaths28DaysByDeathDate) %>%
+    # Hospitalisations and tested variables are only available for nations (not regions)
+    #   sub-national English regions are available in the NHS data below (with arg nhsregions = TRUE)
     dplyr::rename(hosp_new = newAdmissions,
                   hosp_total = cumAdmissions,
                   tested_new = newTestsByPublishDate,
                   tested_total = cumTestsByPublishDate,
                   region_level_1 = areaName,
                   level_1_region_code = areaCode)
+
+# NHS regions -------------------------------------------------------------
+  # Separate NHS data is available for "first" admissions, excluding readmissions.
+  #   This is available for England + English regions only.
+  #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
+  #     Section 2, "2. Estimated new hospital cases"
+  if(nhsregions){
+    # Download NHS xlsx
+    nhs_url <- paste0("https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
+                      lubridate::year(Sys.Date()), "/",
+                      ifelse(lubridate::month(Sys.Date())<10, 
+                             paste0(0,lubridate::month(Sys.Date())),
+                             lubridate::month(Sys.Date())),
+                      "/COVID-19-daily-admissions-",
+                      gsub("-", "", as.character(Sys.Date()-1)),
+                      ".xlsx")
+    
+    tmp <- paste0(tempdir(), "\\nhs.xlsx")
+    
+    download.file(nhs_url, destfile = tmp, mode = "wb")
+
+    # Clean NHS data
+    adm_new <- suppressMessages(readxl::read_excel(tmp,
+                                                   sheet = 1,
+                                                   range = readxl::cell_limits(c(28, 2), c(36, NA))) %>%
+                                  t())
+    colnames(adm_new) <- adm_new[1,]
+    adm_new <- adm_new[2:nrow(adm_new),]
+    adm_new <- adm_new %>%
+      tibble::as_tibble() %>%
+      dplyr::mutate(date = seq.Date(from = as.Date("2020-08-01"), by = 1, length.out = nrow(.))) %>%
+      tidyr::pivot_longer(-date, names_to = "region_level_1", values_to = "hosp_new_first_admissions") %>%
+      dplyr::mutate(region_level_1 = ifelse(region_level_1 == "ENGLAND", "England", region_level_1),
+                    hosp_new_first_admissions = as.numeric(hosp_new_first_admissions))
+    
+
+# Merge PHE data into NHS regions -----------------------------------------
+data_phe_to_nhs <- data %>%
+      dplyr::select(-level_1_region_code) %>%
+      dplyr::mutate(region_level_1 = ifelse(region_level_1 == "East Midlands" | region_level_1 == "West Midlands",
+                                            "Midlands", region_level_1),
+                    region_level_1 = ifelse(region_level_1 == "Yorkshire and The Humber" | region_level_1 == "North East",
+                                            "North East and Yorkshire", region_level_1)) %>%
+      dplyr::group_by(date, region_level_1) %>%
+      dplyr::summarise(cases_new = sum(cases_new, na.rm=T),
+                       cases_total = sum(cases_total, na.rm=T),
+                       deaths_new = sum(deaths_new, na.rm=T),
+                       deaths_total = sum(deaths_total, na.rm=T),
+                       hosp_new = sum(hosp_new, na.rm=T),
+                       hosp_total = sum(hosp_total, na.rm=T),
+                       .groups = "drop")
+    
+    # Merge PHE and NHS data
+    data_merged_nhs <- dplyr::left_join(data_phe_to_nhs, adm_new, by = c("region_level_1", "date")) %>%
+      # Create a blended variable that uses "all" hospital admissions (includes readmissions) for devolved nations
+      #   and "first" hospital admissions for England + English regions
+      dplyr::mutate(hosp_new_blend = ifelse(region_level_1 %in% c("Wales", "Scotland", "Northern Ireland"), 
+                                        hosp_new, hosp_new_first_admissions),
+                    level_1_region_code = NA)
+    
+    return(data_merged_nhs)
+  }
   
   return(data)
 
