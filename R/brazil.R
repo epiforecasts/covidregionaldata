@@ -22,7 +22,7 @@ get_brazil_regional_cases_only_level_1 <- function() {
                    "PI", "RN", "SE", "ES", "MG", "RJ", "SP", "PR", "RS", "SC", "DF", "GO", "MT", "MS"))
 
   # Read & clean data ---------------------------------------------------------------------
-  url <- "https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv"
+  url <- "https://github.com/wcota/covid19br/raw/master/cases-brazil-cities-time.csv.gz"
 
   data <- csv_reader(file = url) %>%
     dplyr::mutate(date = lubridate::ymd(date)) %>%
@@ -61,7 +61,7 @@ get_brazil_regional_cases_with_level_2 <- function() {
                    "PI", "RN", "SE", "ES", "MG", "RJ", "SP", "PR", "RS", "SC", "DF", "GO", "MT", "MS"))
   
   # Read & clean data ---------------------------------------------------------------------
-  url <- "https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv"
+  url <- "https://github.com/wcota/covid19br/raw/master/cases-brazil-cities-time.csv.gz"
 
   data <- csv_reader(file = url) %>%
     dplyr::mutate(date = lubridate::ymd(date)) %>%
