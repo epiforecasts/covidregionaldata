@@ -70,8 +70,8 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
   if(report_delay_only){
     
     linelist <- dplyr::filter(linelist,
-                              !is.na(days_onset_to_report)) %>%
-      dplyr::select(id, country, date_onset, days_onset_to_report)
+                              !is.na(delay_onset_report)) %>%
+      dplyr::select(id, country, date_onset, delay_onset_report)
     
   }
 
