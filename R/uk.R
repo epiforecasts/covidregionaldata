@@ -235,7 +235,9 @@ get_uk_data <- function(filters, progress_bar = FALSE) {
   current_page <- 1
   
   if (progress_bar) {
-    pb <- txtProgressBar(min = 0, max = 45, style = 3)
+    pb <- txtProgressBar(min = 0, 
+                         max = (217*as.numeric(Sys.Date() - as.Date("2020-01-03"))/2500), 
+                         style = 3)
   }
   repeat {
     
