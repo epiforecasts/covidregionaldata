@@ -283,7 +283,7 @@ get_uk_data <- function(filters, progress_bar = FALSE) {
 #' and then uses this to create a table of authorities and their corresponding higher level regions
 #' @return A tibble of UK local authorities
 #' @importFrom readr read_csv cols col_character
-#' @importFrom dplyr select %>% distinct filter bind_rows
+#' @importFrom dplyr select %>% distinct filter bind_rows arrange
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
 
@@ -325,7 +325,7 @@ get_authority_lookup_table <- function() {
   authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, country_auth, other_auths)
   
   authority_lookup_table <- authority_lookup_table %>% 
-    dplyr::arrange(desc(level_1_region_code)) %>% 
+    dplyr::arrange(level_1_region_code) %>% 
     dplyr::distinct(level_2_region_code, region_level_2, .keep_all = TRUE)
   
   return(authority_lookup_table)
