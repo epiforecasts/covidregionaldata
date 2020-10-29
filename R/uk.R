@@ -307,30 +307,26 @@ get_authority_lookup_table <- function() {
     dplyr::distinct() %>%
     tidyr::drop_na(region_level_2)
   
-  ni_auth <- authority_data %>%
+  country_auth <- authority_data %>%
     dplyr::select(level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM", 
                   level_1_region_code = "CTRY17CD", region_level_1 = "CTRY17NM") %>% 
-    dplyr::filter(region_level_1 == "Northern Ireland") %>%
+    dplyr::filter(region_level_1 %in% c("Northern Ireland", "Scotland", "Wales")) %>%
     dplyr::distinct() %>%
     tidyr::drop_na(region_level_2)
   
-  other_auths <- tibble::tibble(level_2_region_code = c("S0800015", "S0800016", "S0800017", "S0800029", "S0800019", "S0800020",
-                                                        "S0800031", "S0800022", "S0800032", "S0800024", "S0800025", "S0800026",
-                                                        "S0800030", "S0800028", "W11000028", "W11000023", "W11000029",
-                                                        "W11000030", "W11000025", "W11000024", "W11000031", "E06000058", "E06000053"),
-                                region_level_2 = c("Ayrshire and Arran", "Borders", "Dumfries and Galloway", "Fife",
-                                                   "Forth Valley", "Grampian", "Greater Glasgow and Clyde", "Highland",
-                                                   "Lanarkshire", "Lothian", "Orkney", "Shetland", "Tayside", "Western Isles",
-                                                   "Aneurin Bevan", "Betsi Cadwaladr", "Cardiff and Vale", "Cwm Taf",
-                                                   "Hywel Dda", "Powys", "Swansea Bay", "Bournemouth, Christchurch and Poole",
-                                                   "Cornwall and Isles of Scilly"),
-                                level_1_region_code = c(rep("S92000003", 14), rep("W92000004", 7), rep("E92000001", 2)),
-                                region_level_1 = c(rep("Scotland", 14), rep("Wales", 7), rep("South West", 2)))
+  other_auths <- tibble::tibble(level_2_region_code = c("E06000058", "E06000052", "E09000012"),
+                                region_level_2 = c("Bournemouth, Christchurch and Poole", 
+                                                   "Cornwall and Isles of Scilly",
+                                                   "Hackney and City of London"),
+                                level_1_region_code = c(rep("E92000001", 3)),
+                                region_level_1 = c("South West", "South West", "London"))
   
   # Join tables ---------------------------------------------------
-  authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, ni_auth, other_auths)
+  authority_lookup_table <- dplyr::bind_rows(unitary_auth, upper_tier_auth, country_auth, other_auths)
+  
+  authority_lookup_table <- authority_lookup_table %>% 
+    dplyr::arrange(desc(level_1_region_code)) %>% 
+    dplyr::distinct(level_2_region_code, region_level_2, .keep_all = TRUE)
   
   return(authority_lookup_table)
 }
-
-
