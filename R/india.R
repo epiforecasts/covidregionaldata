@@ -28,20 +28,20 @@ get_india_regional_cases <- function() {
   #  Read in data --------------------------------------------------------------------
   url <- "https://api.covid19india.org/csv/latest/state_wise_daily.csv"
   data <- csv_reader(file = url)
-
+  
   india_cases <- data %>%
     dplyr::filter(Status == "Confirmed") %>%
-    dplyr::select(-Status, -TT) %>%
+    dplyr::select(Date, state_names[['code']]) %>%
     tidyr::pivot_longer(-Date, names_to = "state", values_to = "cases_new")
-
+  
   india_deaths <- data %>%
     dplyr::filter(Status == "Deceased") %>%
-    dplyr::select(-Status, -TT) %>%
+    dplyr::select(Date, state_names[['code']]) %>%
     tidyr::pivot_longer(-Date, names_to = "state", values_to = "deaths_new")
-
+  
   india_recoveries <- data %>%
     dplyr::filter(Status == "Recovered") %>%
-    dplyr::select(-Status, -TT) %>%
+    dplyr::select(Date, state_names[['code']]) %>%
     tidyr::pivot_longer(-Date, names_to = "state", values_to = "recovered_new")
 
   # Join datasets ---------------------------------------------------------------------
