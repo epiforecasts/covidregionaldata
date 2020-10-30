@@ -95,6 +95,8 @@ test_that("complete_cumulative_columns works", {
 })
 
 test_that("convert_to_Covid19R_format converts correctly", {
+  skip_on_cran()
+  
   input_data <- get_input_data_for_covid19R_converter_test()
   expected_data <- get_expected_data_for_covid19R_converter_test()
 
