@@ -10,8 +10,7 @@
 #' @importFrom xml2 read_html url_absolute
 #' @importFrom rvest html_node html_attr
 #' @importFrom readxl read_excel
-#' @importFrom dplyr mutate_if
-#' @importFrom lubridate is.POSIXct as_date
+#' @importFrom dplyr mutate
 #' @importFrom utils download.file
 #'
 #' @export
@@ -36,9 +35,12 @@ get_interventions_data <- function() {
   temp <- tempdir()
   filename <- "interventions.xlsx"
   mem_download(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
+  
+  # Read in data and correct excel dates
+  data <- suppressWarnings(readxl::read_excel(file.path(temp, filename), sheet = "Dataset", col_types = "text") %>%
+                             dplyr::mutate(ENTRY_DATE = as.Date((as.numeric(ENTRY_DATE)-2), origin = as.Date("1900-01-01")),
+                                           DATE_IMPLEMENTED = as.Date((as.numeric(DATE_IMPLEMENTED)-2), origin = as.Date("1900-01-01"))))
 
-  data <- readxl::read_excel(file.path(temp, filename), sheet = "Database") %>%
-    dplyr::mutate_if(lubridate::is.POSIXct, lubridate::as_date)
   names(data) <- tolower(names(data))
 
   return(data)
