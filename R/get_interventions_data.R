@@ -40,7 +40,6 @@ get_interventions_data <- function() {
   data <- suppressWarnings(readxl::read_excel(file.path(temp, filename), sheet = "Dataset", col_types = "text") %>%
                              dplyr::mutate(ENTRY_DATE = as.Date((as.numeric(ENTRY_DATE)-2), origin = as.Date("1900-01-01")),
                                            DATE_IMPLEMENTED = as.Date((as.numeric(DATE_IMPLEMENTED)-2), origin = as.Date("1900-01-01"))))
-
   names(data) <- tolower(names(data))
 
   return(data)
