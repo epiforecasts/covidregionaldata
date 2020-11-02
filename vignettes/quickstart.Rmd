@@ -101,7 +101,7 @@ usa_states %>% filter(state %in% c('New York', 'Texas', 'Florida')) %>%
 ```
 
 
-We can dig down further and get county information (a political subdivision of a state) by using the `include_level_2_regions = TRUE` argument to the function:
+We can dig down further and get county information (a political subdivision of a state) by using the `include_level_2_regions = TRUE` argument to `get_regional_data`:
 
 ```{r}
 usa_counties <- get_regional_data(country = "USA", include_level_2_regions = TRUE)
