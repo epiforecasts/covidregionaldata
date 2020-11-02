@@ -1,0 +1,135 @@
+---
+title: "quickstart"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{quickstart}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# covidregionaldata quickstart guide
+
+covidregionaldata is a package designed to extract national and regional Covid-19 data from internet sources for each day since the start of the pandemic, or aggregated over time. 
+
+For example, we could:
+
+* Get the Covid-19 cases and deaths for all countries for each day since the start of the pandemic.
+* Get the total Covid-19 cases and deaths for all countries up to today.
+* Get the number of new cases for each state in the United States over time.
+* Get the total number of deaths for all local authorities in the United Kingdom.
+
+We will demonstrate some of these items below, as well as some useful manipulations/visualisations.
+
+## Retrieving national cases and deaths for all dates
+
+Lets say that we want to get national data over time for all countries to see the evolution of the pandemic. To do this, we need to get the number of cases (positive test results) and deaths for each country and date since the pandemic started: Firstly load `covidregionaldata`, then call `get_national_data()`:
+
+```{r setup}
+library(covidregionaldata)
+all_countries <- get_national_data()
+```
+
+We can take a look at this data by printing it to the console:
+
+```{r}
+all_countries
+```
+
+We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can manipulate this using the tidyverse and plot out something easily, e.g., the total deaths in Italy over time.
+
+```{r fig.width=6, message=FALSE}
+library(dplyr)
+library(ggplot2)
+
+italy <- all_countries %>% 
+  filter(country == 'Italy')
+ggplot(italy, mapping = aes(x = date, y = deaths_total)) + 
+  geom_line()
+```
+
+We could have also filtered by country using `get_national_data(country = "Italy")` to achieve the same result.
+
+To plot the evolution of cases for several countries since the start of the pandemic, we could perform something like the following:
+
+```{r fig.width=6}
+some_countries <- all_countries %>% 
+  filter(country %in% c('Italy', 'United Kingdom', 'Spain', 'United States'))
+ggplot(some_countries, mapping = aes(x = date, y = cases_total, colour = country)) + 
+  geom_line()
+```
+
+To see this on a per capita basis, divide the cases by each nation's respective population:
+
+```{r fig.width=6}
+some_countries <- all_countries %>% 
+  filter(country %in% c('Italy', 'United Kingdom', 'Spain', 'United States')) %>%
+  mutate(cases_per_capita = deaths_total/population_2019)
+
+ggplot(some_countries, mapping = aes(x = date, y = cases_per_capita, colour = country)) + 
+  geom_line()
+```
+
+## Retrieving total cases and deaths for all countries up to today
+
+Using `get_national_data(totals = TRUE)` we can obtain total cases and deaths up to today for all nations. This is useful to get a snapshot of the current running total for each country - note how the data is sorted by the total number of cases:
+
+```{r}
+all_countries_totals <- get_national_data(totals = TRUE)
+all_countries_totals
+```
+
+## Retrieving regional data 
+
+As well as national data, we would also like to be able to retrieve hierachical regional data (e.g., States and counties in the US, regions and local authorities in the UK) and perform similar manipulations. To do this, we use `get_regional_data`. We'll get the state-level data for the United States over time:
+
+```{r}
+usa_states <- get_regional_data(country = "USA")
+```
+
+This retrieves the new and total cases and deaths for all states over time in the United States. Note that the `country` argument to the `get_regional_data` function must be specified. Lets plot out how the number of cases have evolved for a selection of states:
+
+```{r fig.width=6, warning=FALSE}
+usa_states %>% filter(state %in% c('New York', 'Texas', 'Florida')) %>% 
+  ggplot(aes(x = date, y = cases_total, colour = state)) + geom_line()
+```
+
+
+We can dig down further and get county information (a political subdivision of a state) by using the `include_level_2_regions = TRUE` argument to the function:
+
+```{r}
+usa_counties <- get_regional_data(country = "USA", include_level_2_regions = TRUE)
+usa_counties
+```
+
+Note the number of rows - there are more than 3000 counties in the US which when multiplied by the number of days since the start of the pandemic make this a very large download.
+
+The `totals` argument can also be used in `get_regional_data` to get an aggregated version over time:
+
+```{r}
+usa_states_totals <- get_regional_data(country = "USA", totals = TRUE)
+```
+
+Lets plot the total deaths for each state, ordered by total deaths:
+
+```{r fig.width=6}
+ggplot(usa_states_totals, aes(x = reorder(state, -deaths_total), y = deaths_total)) + 
+  geom_bar(stat = 'identity') + 
+  theme(axis.text.x = element_text(angle=90))
+```
+
+The same methodology will work for different countries, however note that `state` is now recognised as `bundesland` (aka federated state) in the German example below:
+
+```{r fig.width=6}
+german_region_totals <- get_regional_data(country = "Germany", totals = TRUE)
+ggplot(german_region_totals, aes(x = reorder(bundesland, -deaths_total), y = deaths_total)) + 
+  geom_bar(stat = 'identity') + 
+  theme(axis.text.x = element_text(angle=90))
+```
+
