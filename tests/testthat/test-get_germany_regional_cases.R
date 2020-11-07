@@ -54,7 +54,7 @@ test_that("get_germany_regional_cases returns correct numbers of regions", {
   adm_2_data <- get_germany_regional_cases_with_level_2()
 
   expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 16)
-  expect_equal(length(unique(na.omit(adm_2_data$region_level_2))), 413)
+  expect_gt(length(unique(na.omit(adm_2_data$region_level_2))), 400)
 })
 
 

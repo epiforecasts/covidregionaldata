@@ -94,11 +94,13 @@ test_that("complete_cumulative_columns works", {
   expect_equal(actual_data, expected_data)
 })
 
-test_that("convert_to_Covid19R_format converts correctly", {
-  input_data <- get_input_data_for_covid19R_converter_test()
-  expected_data <- get_expected_data_for_covid19R_converter_test()
-
-  returned <- convert_to_covid19R_format(input_data)
-
-  expect_equal(returned, expected_data)
-})
+#test_that("convert_to_Covid19R_format converts correctly", {
+#  skip_on_cran()
+#  
+#  input_data <- get_input_data_for_covid19R_converter_test()
+#  expected_data <- get_expected_data_for_covid19R_converter_test()
+#
+#  returned <- convert_to_covid19R_format(input_data)
+#
+#  expect_equal(returned, expected_data)
+#})
