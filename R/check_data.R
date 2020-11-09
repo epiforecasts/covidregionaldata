@@ -4,13 +4,12 @@
 #' @importFrom tibble tibble
 #' @importFrom purrr map
 #' @importFrom dplyr group_by filter bind_rows summarise pull rename
-#' @importFrom here here
 
 check_data_sources <- function(){
   
 # Get data ----------------------------------------------------------------
   # Get names of countries included in package
-  regions <- dir(here::here("R"))
+  regions <- dir("R")
   regions <- gsub(pattern = "\\.R", replacement = "", x = regions)
   
   # Remove non-country functions
