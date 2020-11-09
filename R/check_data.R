@@ -19,7 +19,7 @@ check_data_sources <- function(){
                   "get_interventions_data", "get_linelist", sep = "|")
   regions <- regions[!grepl(remove, regions)]
   
-  # Run each country - level 1
+  # Run each country - level 1 / level 2 where available
   country_data <- purrr::map(regions, 
                              ~ covidregionaldata::get_regional_data(country = .x, 
                                                                     localise_regions = FALSE,
