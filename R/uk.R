@@ -59,7 +59,7 @@ Also adding new variable: hosp_new_first_admissions. This is NHS data for first 
                       ifelse(lubridate::month(Sys.Date())<10, 
                              paste0(0,lubridate::month(Sys.Date())),
                              lubridate::month(Sys.Date())),
-                      "/COVID-19-daily-admissions-",
+                      "/COVID-19-daily-admissions-and-beds-",
                       gsub("-", "", as.character(Sys.Date()-1)),
                       ".xlsx")
     
