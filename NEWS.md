@@ -1,3 +1,7 @@
+# covidregionaldata 0.8.0 
+
+This release contains fixes to keep data sources current and adapt to upstream changes but adds no new features. 
+
 # covidregionaldata 0.7.0 
 
 ## Breaking changes
