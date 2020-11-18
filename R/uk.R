@@ -63,7 +63,7 @@ Also adding new variable: hosp_new_first_admissions. This is NHS data for first 
                       gsub("-", "", as.character(Sys.Date()-1)),
                       ".xlsx")
     
-    tmp <- paste0(tempdir(), "\\nhs.xlsx")
+    tmp <- file.path(tempdir(), "nhs.xlsx")
     
     download.file(nhs_url, destfile = tmp, mode = "wb")
 
