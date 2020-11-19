@@ -47,26 +47,32 @@ get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE, release_date 
                   tested_total = cumTestsByPublishDate,
                   region_level_1 = areaName,
                   level_1_region_code = areaCode)
+  
+  if (!is.null(release_date)) {
+    data <- dplyr::mutate(data, release_date = release_date)
+  }
 # NHS regions -------------------------------------------------------------
   # Separate NHS data is available for "first" admissions, excluding readmissions.
   #   This is available for England + English regions only.
   #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
   #     Section 2, "2. Estimated new hospital cases"
   if(nhsregions){
+    if (is.null(release_date)) {
+      release_date <- Sys.Date() - 1
+    }
     message("Arranging data by NHS region. 
 Also adding new variable: hosp_new_first_admissions. This is NHS data for first hospital admissions, which excludes readmissions. This is available for England and English regions only.")
     # Download NHS xlsx
     nhs_url <- paste0("https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
-                      lubridate::year(Sys.Date()), "/",
-                      ifelse(lubridate::month(Sys.Date())<10, 
-                             paste0(0,lubridate::month(Sys.Date())),
-                             lubridate::month(Sys.Date())),
+                      lubridate::year(release_date), "/",
+                      ifelse(lubridate::month(release_date)<10, 
+                             paste0(0,lubridate::month(release_date)),
+                             lubridate::month(release_date)),
                       "/COVID-19-daily-admissions-and-beds-",
-                      gsub("-", "", as.character(Sys.Date()-1)),
+                      gsub("-", "", as.character(release_date)),
                       ".xlsx")
     
     tmp <- file.path(tempdir(), "nhs.xlsx")
-    
     download.file(nhs_url, destfile = tmp, mode = "wb")
 
     # Clean NHS data
@@ -92,12 +98,12 @@ data_phe_to_nhs <- data %>%
                     region_level_1 = ifelse(region_level_1 == "Yorkshire and The Humber" | region_level_1 == "North East",
                                             "North East and Yorkshire", region_level_1)) %>%
       dplyr::group_by(date, region_level_1) %>%
-      dplyr::summarise(cases_new = sum(cases_new, na.rm=T),
-                       cases_total = sum(cases_total, na.rm=T),
-                       deaths_new = sum(deaths_new, na.rm=T),
-                       deaths_total = sum(deaths_total, na.rm=T),
-                       hosp_new = sum(hosp_new, na.rm=T),
-                       hosp_total = sum(hosp_total, na.rm=T),
+      dplyr::summarise(cases_new = sum(cases_new, na.rm=TRUE),
+                       cases_total = sum(cases_total, na.rm=TRUE),
+                       deaths_new = sum(deaths_new, na.rm=TRUE),
+                       deaths_total = sum(deaths_total, na.rm=TRUE),
+                       hosp_new = sum(hosp_new, na.rm=TRUE),
+                       hosp_total = sum(hosp_total, na.rm=TRUE),
                        .groups = "drop")
     
     # Merge PHE and NHS data
@@ -106,7 +112,8 @@ data_phe_to_nhs <- data %>%
       #   and "first" hospital admissions for England + English regions
       dplyr::mutate(hosp_new_blend = ifelse(region_level_1 %in% c("Wales", "Scotland", "Northern Ireland"), 
                                         hosp_new, hosp_new_first_admissions),
-                    level_1_region_code = NA)
+                    level_1_region_code = NA, 
+                    release_date = release_date)
     
     return(data_merged_nhs)
   } else {
@@ -177,8 +184,11 @@ get_uk_regional_cases_with_level_2 <- function(release_date = NULL) {
                                                ifelse(region_level_1 == "Wales", "W92000004",
                                                       ifelse(region_level_1 == "Northern Ireland", 
                                                              "N92000002", level_1_region_code))))
-  return(data_lv2)
   
+  if (!is.null(release_date)) {
+    data_lv2 <- dplyr::mutate(data_lv2, release_date = release_date)
+  }
+  return(data_lv2)
 }
 
 
