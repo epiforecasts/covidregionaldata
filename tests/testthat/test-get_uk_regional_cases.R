@@ -48,7 +48,7 @@ test_that("get_uk_regional_cases returns correct numbers of regions", {
   adm_2_data <- get_uk_regional_cases_with_level_2()
   
   expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 13)
-  expect_gt(length(unique(na.omit(adm_2_data$region_level_2))), 49)
+  expect_gt(length(unique(na.omit(adm_2_data$region_level_2))), 48)
 })
 
 test_that("get_uk_regional_cases returns data by date of release", {
