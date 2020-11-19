@@ -45,10 +45,10 @@ test_that("get_uk_regional_cases returns correct numbers of regions", {
   skip_on_cran()
   
   adm_1_data <- get_uk_regional_cases_only_level_1()
-  adm_2_data <- get_uk_regional_cases_with_level_2()
+  adm_2_data <- covidregionaldata:::get_uk_regional_cases_with_level_2()
   
   expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 13)
-  expect_gt(length(unique(na.omit(adm_2_data$region_level_2))), 200)
+  expect_gt(length(unique(na.omit(adm_2_data$region_level_2))), 49)
 })
 
 test_that("get_uk_regional_cases returns data by date of release", {
