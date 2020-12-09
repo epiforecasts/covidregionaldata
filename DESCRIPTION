@@ -86,7 +86,8 @@ Suggests:
     testthat,
     spelling,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
