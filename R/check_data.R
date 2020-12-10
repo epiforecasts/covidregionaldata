@@ -24,7 +24,6 @@ check_data_sources <- function(countries = c("afghanistan",
                                                                     include_level_2_regions = TRUE))
   names(country_data) <- countries
   
-
 # Filter to latest data for each subnational region -----------------------
   country_data_latest <- purrr::map(country_data,
                                     ~ .x %>%
@@ -41,7 +40,6 @@ check_data_sources <- function(countries = c("afghanistan",
                      deaths_new_na = sum(is.na(deaths_new)),
                      deaths_total_na = sum(is.na(deaths_total)),
                      .groups = "drop")
-  
   
   # Report ------------------------------------------------------------------
   test_country_out_of_date <- country_data_latest %>%
@@ -77,8 +75,7 @@ check_data_sources <- function(countries = c("afghanistan",
     dplyr::pull(country)
   if (length(test_regions_missing_deaths > 0)) {
     message(writeLines(text = c("* Some regions missing new or total deaths:", test_regions_missing_deaths)))
-  }
-
+    }
 # National and other data sets --------------------------------------------
   if (worldwide) {
   # Interventions
