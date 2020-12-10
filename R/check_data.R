@@ -3,10 +3,10 @@
 #' @param countries names of countries as in the "country.R" file name to check
 #' @param worldwide report on worldwide datasets - ECDC and WHO, interventions, linelist
 #' @return A tibble of latest dates for all sources and data checks for sub-national data
+#' @export
 #' @importFrom tibble tibble
 #' @importFrom purrr map
 #' @importFrom dplyr group_by filter bind_rows summarise pull rename
-
 check_data_sources <- function(countries = c("afghanistan",
                                              "belgium", "brazil",
                                              "canada", "colombia",
