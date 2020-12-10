@@ -1,0 +1,22 @@
+---
+title: "Automated data source checks"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+```{r setup}
+library(covidregionaldata)
+library(knitr)
+```
+
+```{r, message = FALSE, warning = FALSE}
+status <- check_data_sources(countries = c("afghanistan", "belgium", "brazil","canada",
+                                           "colombia","germany","india", "italy", "russia",
+                                           "uk", "usa"), worldwide = TRUE)
+kable(status)
+```
