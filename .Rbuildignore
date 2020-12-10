@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^inst$
 ^\.travis\.yml$
 ^_pkgdown\.yml$
 ^Dockerfile$
@@ -17,3 +16,5 @@ SMG.md
 ^smg$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^doc$
+^Meta$
