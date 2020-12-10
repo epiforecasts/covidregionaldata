@@ -44,7 +44,6 @@ check_data_sources <- function(countries = c("afghanistan",
   
   
   # Report ------------------------------------------------------------------
-
   test_country_out_of_date <- country_data_latest %>%
     dplyr::filter(min_date <= (Sys.Date() - 7)) %>%
     dplyr::pull(country)
@@ -81,9 +80,7 @@ check_data_sources <- function(countries = c("afghanistan",
   }
 
 # National and other data sets --------------------------------------------
-  
   if (worldwide) {
-  
   # Interventions
   interventions <- covidregionaldata::get_interventions_data()
   if (max(interventions$entry_date) < (Sys.Date() - 30)) {
@@ -113,21 +110,15 @@ check_data_sources <- function(countries = c("afghanistan",
                                                         max(national_who$date),
                                                         max(national_ecdc$date)))
   
-  
   # Return a df with data check results
   latest_checks <- country_data_latest %>%
     dplyr::rename(source = country) %>%
     dplyr::bind_rows(national_data_latest)
-  
-  }
-  
-  else {
+  }else {
     latest_checks <- country_data_latest %>%
       dplyr::rename(source = country)
   }
-  
 return(latest_checks)
-
 }
 
 
