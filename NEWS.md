@@ -1,3 +1,9 @@
+# covidregionaldata 0.8.2
+
+## Package updates
+
+* Updates the API backend used to extract UK data to V2. Adds a release date variable which can be used to return data releases from specified dates rather than the latest snapshot.
+
 # covidregionaldata 0.7.0 
 
 ## Breaking changes

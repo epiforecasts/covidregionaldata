@@ -4,7 +4,11 @@
 \alias{get_uk_regional_cases_with_level_2}
 \title{UK Regional Daily COVID-19 Count Data - UTLA}
 \usage{
-get_uk_regional_cases_with_level_2()
+get_uk_regional_cases_with_level_2(release_date = NULL)
+}
+\arguments{
+\item{release_date}{Date data was released. Default is to extract latest release.
+Dates should be in the format "yyyy-mm-dd".}
 }
 \value{
 A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.

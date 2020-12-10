@@ -6,6 +6,7 @@
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 #' @param nhsregions Return subnational English regions using NHS region boundaries instead of PHE boundaries. 
 #' Also means that subnational English hospital admissions are "first admissions", excluding re-admissions. Defaults to FALSE
+#' @inheritParams get_uk_data
 #' @importFrom dplyr mutate rename bind_rows group_by summarise %>%
 #' @importFrom stringr str_detect
 #' @importFrom purrr map
@@ -15,7 +16,7 @@
 #' @importFrom tidyr pivot_longer
 #' @importFrom utils download.file
 #' 
-get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
+get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE, release_date = NULL) {
   
 # Get UK data -------------------------------------------------------------
   
@@ -24,7 +25,8 @@ get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
                         region = "areaType=region")
   
   # Get data for nations and regions
-  data_list <- purrr::map(query_filters, get_uk_data)
+  data_list <- purrr::map(query_filters, get_uk_data,
+                          release_date = release_date)
 
 # Reshape for covidregionaldata -------------------------------------------
 
@@ -45,26 +47,35 @@ get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE) {
                   tested_total = cumTestsByPublishDate,
                   region_level_1 = areaName,
                   level_1_region_code = areaCode)
+  
+  if (!is.null(release_date)) {
+    data <- dplyr::mutate(data, release_date = release_date)
+  }
 # NHS regions -------------------------------------------------------------
   # Separate NHS data is available for "first" admissions, excluding readmissions.
   #   This is available for England + English regions only.
   #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
   #     Section 2, "2. Estimated new hospital cases"
   if(nhsregions){
+    if (is.null(release_date)) {
+      release_date <- Sys.Date() - 1
+    }
+    if (release_date < (Sys.Date() - 14)) {
+      stop("Data by NHS regions is only available in archived form for the last 14 days")
+    }
     message("Arranging data by NHS region. 
 Also adding new variable: hosp_new_first_admissions. This is NHS data for first hospital admissions, which excludes readmissions. This is available for England and English regions only.")
     # Download NHS xlsx
     nhs_url <- paste0("https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
-                      lubridate::year(Sys.Date()), "/",
-                      ifelse(lubridate::month(Sys.Date())<10, 
-                             paste0(0,lubridate::month(Sys.Date())),
-                             lubridate::month(Sys.Date())),
-                      "/COVID-19-daily-admissions-",
-                      gsub("-", "", as.character(Sys.Date()-1)),
+                      lubridate::year(release_date), "/",
+                      ifelse(lubridate::month(release_date)<10, 
+                             paste0(0,lubridate::month(release_date)),
+                             lubridate::month(release_date)),
+                      "/COVID-19-daily-admissions-and-beds-",
+                      gsub("-", "", as.character(release_date)),
                       ".xlsx")
     
-    tmp <- paste0(tempdir(), "\\nhs.xlsx")
-    
+    tmp <- file.path(tempdir(), "nhs.xlsx")
     download.file(nhs_url, destfile = tmp, mode = "wb")
 
     # Clean NHS data
@@ -90,12 +101,12 @@ data_phe_to_nhs <- data %>%
                     region_level_1 = ifelse(region_level_1 == "Yorkshire and The Humber" | region_level_1 == "North East",
                                             "North East and Yorkshire", region_level_1)) %>%
       dplyr::group_by(date, region_level_1) %>%
-      dplyr::summarise(cases_new = sum(cases_new, na.rm=T),
-                       cases_total = sum(cases_total, na.rm=T),
-                       deaths_new = sum(deaths_new, na.rm=T),
-                       deaths_total = sum(deaths_total, na.rm=T),
-                       hosp_new = sum(hosp_new, na.rm=T),
-                       hosp_total = sum(hosp_total, na.rm=T),
+      dplyr::summarise(cases_new = sum(cases_new, na.rm=TRUE),
+                       cases_total = sum(cases_total, na.rm=TRUE),
+                       deaths_new = sum(deaths_new, na.rm=TRUE),
+                       deaths_total = sum(deaths_total, na.rm=TRUE),
+                       hosp_new = sum(hosp_new, na.rm=TRUE),
+                       hosp_total = sum(hosp_total, na.rm=TRUE),
                        .groups = "drop")
     
     # Merge PHE and NHS data
@@ -104,7 +115,8 @@ data_phe_to_nhs <- data %>%
       #   and "first" hospital admissions for England + English regions
       dplyr::mutate(hosp_new_blend = ifelse(region_level_1 %in% c("Wales", "Scotland", "Northern Ireland"), 
                                         hosp_new, hosp_new_first_admissions),
-                    level_1_region_code = NA)
+                    level_1_region_code = NA, 
+                    release_date = release_date)
     
     return(data_merged_nhs)
   } else {
@@ -123,18 +135,18 @@ To get hospital admissions data, include argument 'nhsregions = TRUE'. This retu
 #'
 #' @description Extracts daily COVID-19 data for the UK, stratified by Upper Tier Local Authority 
 #' Data source:
-#' 
+#' @inheritParams get_uk_data
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr bind_rows mutate rename select left_join %>%
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
-get_uk_regional_cases_with_level_2 <- function() {
+get_uk_regional_cases_with_level_2 <- function(release_date = NULL) {
 
 # Get UK data -------------------------------------------------------------
   
   # Get data for nations and regions
-  data <- get_uk_data(filters = list(utla = "areaType=utla"), progress_bar = TRUE)
+  data <- get_uk_data(filters = list(utla = "areaType=utla"), release_date = release_date)
   
   # Reshape for covidregionaldata -------------------------------------------
   authority_lookup_table <- get_authority_lookup_table()
@@ -175,9 +187,11 @@ get_uk_regional_cases_with_level_2 <- function() {
                                                ifelse(region_level_1 == "Wales", "W92000004",
                                                       ifelse(region_level_1 == "Northern Ireland", 
                                                              "N92000002", level_1_region_code))))
-    
-  return(data_lv2)
   
+  if (!is.null(release_date)) {
+    data_lv2 <- dplyr::mutate(data_lv2, release_date = release_date)
+  }
+  return(data_lv2)
 }
 
 
@@ -190,24 +204,21 @@ get_uk_regional_cases_with_level_2 <- function() {
 
 #' Get UK data - helper function to get data for a single valid area type
 #' 
-#' @description UK data download helper. Code adapted from PHE Coronavirus API for R:
-#'   available at https://github.com/publichealthengland/coronavirus-dashboard-api-R-sdk
+#' @description UK data download helper. Data extracted using: 
+#' https://coronavirus.data.gov.uk/details/download
 #' @param filters Query filters for UK data e.g. "areaType=nation"
-#' @param progress_bar Display a progress bar, useful for level 2 which takes a while to load
+#' @param release_date Date data was released. Default is to extract latest release. 
+#' Dates should be in the format "yyyy-mm-dd".
 #' @return A dataframe with all variables available in public UK data
-#' @importFrom dplyr %>%  
-#' @importFrom jsonlite fromJSON toJSON
-#' @importFrom httr VERB content timeout http_status
+#' @importFrom dplyr %>%  full_join
+#' @importFrom purrr map safely reduce compact
+#' 
 #' 
 
-get_uk_data <- function(filters, progress_bar = FALSE) {
-  
-  api_endpoint <- "https://api.coronavirus.data.gov.uk/v1/data"
+get_uk_data <- function(filters, release_date = NULL) {
+  api_endpoint <- "https://api.coronavirus.data.gov.uk/v2/data"
   
   uk_variables = list(
-    # --- Standard variables for covidregionaldata --- #
-    # 
-    "date", "areaName", "areaCode",
     # Cases by date of specimen
     "newCasesBySpecimenDate", "cumCasesBySpecimenDate",
     # Cases by date of report
@@ -229,51 +240,31 @@ get_uk_data <- function(filters, progress_bar = FALSE) {
     "newPillarOneTestsByPublishDate", "newPillarTwoTestsByPublishDate", 
     "newPillarThreeTestsByPublishDate", "newPillarFourTestsByPublishDate"
   )
-  names(uk_variables) <- uk_variables
-  
-  results <- list()
-  current_page <- 1
-  
-  if (progress_bar) {
-    pb <- txtProgressBar(min = 0, 
-                         max = (217*as.numeric(Sys.Date() - as.Date("2020-01-03"))/2500), 
-                         style = 3)
+  # build a list of download links as limited to 4 variables per request
+  csv_links <- purrr::map(1:(ceiling(length(uk_variables) / 4)), 
+                          ~ paste0(api_endpoint, "?", unlist(filters), "&", 
+                                   paste(paste0("metric=",
+                                                uk_variables[(1 + 4 * (. - 1)):min((4*.), length(uk_variables))]), 
+                                         collapse = "&"),
+                                   "&format=csv"))
+  # add in release data if defined
+  if (!is.null(release_date)) {
+    csv_links <- purrr::map(csv_links, ~ paste0(., "&release=", release_date))
   }
-  repeat {
-    
-    response <- httr::VERB("GET", 
-                           url = api_endpoint, 
-                           query = list(
-                             filters = filters, 
-                             structure = jsonlite::toJSON(uk_variables, auto_unbox = TRUE, pretty = FALSE),
-                             page = current_page), 
-                           httr::timeout(20))
-    
-    if (response$status_code >= 400) {
-      err_msg = httr::http_status(response)
-      stop(err_msg)
-    } else if (response$status_code == 204) {
-      break
-    }
-    
-    # Convert response from binary to JSON:
-    json_text <- httr::content(response, "text")
-    dt <- jsonlite::fromJSON(json_text)
-    results <- rbind(results, dt$data)
-    
-    if (is.null( dt$pagination$`next`)) {
-      break
-    }
-    
-    current_page <- current_page + 1
-    
-    if (progress_bar) {
-      setTxtProgressBar(pb, current_page)
-    }
-    
+  # download and link all data into a single data frame
+  safe_reader <- purrr::safely(csv_reader)
+  csv <- purrr::map(csv_links, ~ safe_reader(.)[[1]])
+  csv <- purrr::compact(csv)
+  csv <- purrr::reduce(csv, dplyr::full_join, 
+                       by = c("date", "areaType", "areaCode", "areaName"))
+  if (is.null(csv)) {
+    stop("Data retrieval failed")
   }
-  
-  return(results)
+  # add release date as variable if missing
+  if (!is.null(release_date)) {
+    csv <- dplyr::mutate(csv, release_date = as.Date(release_date))
+  }
+  return(csv)
 }
 
 

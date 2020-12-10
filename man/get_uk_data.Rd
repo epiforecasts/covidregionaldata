@@ -4,17 +4,18 @@
 \alias{get_uk_data}
 \title{Get UK data - helper function to get data for a single valid area type}
 \usage{
-get_uk_data(filters, progress_bar = FALSE)
+get_uk_data(filters, release_date = NULL)
 }
 \arguments{
 \item{filters}{Query filters for UK data e.g. "areaType=nation"}
 
-\item{progress_bar}{Display a progress bar, useful for level 2 which takes a while to load}
+\item{release_date}{Date data was released. Default is to extract latest release.
+Dates should be in the format "yyyy-mm-dd".}
 }
 \value{
 A dataframe with all variables available in public UK data
 }
 \description{
-UK data download helper. Code adapted from PHE Coronavirus API for R:
-available at https://github.com/publichealthengland/coronavirus-dashboard-api-R-sdk
+UK data download helper. Data extracted using:
+https://coronavirus.data.gov.uk/details/download
 }
