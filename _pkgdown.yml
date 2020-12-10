@@ -11,6 +11,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Getting Started"
+      href: articles/quickstart.html
+    - text: "Data Status"
+      href: articles/data_checks.html  
     - text: News
       href: news/index.html
     - icon: fa-file-code-o
@@ -20,26 +24,23 @@ navbar:
     - icon: fa-github
       href: https://github.com/epiforecasts/covidregionaldata
 
-
-
 reference:
-  - title: Get Regional Data
-    desc: Function to import and clean regional data
+  - title: Get Covid-19 Data
+    desc: Functions that download datasets or provide information on available data.
     contents:
-      - get_regional_data
-      
-  - title: Get Global Data
-    desc: Function to import and clean global data
-    contents:
+      - get_info_covidregionaldata
       - get_national_data
-
-  - title: Get other Covid-19 Data
-    desc: Functions to import and clean global data
-    contents: 
+      - get_regional_data
       - get_linelist
       - get_interventions_data
   - title: Utilities
-    desc: Utility functions that either help manage data or provide additional information.
+    desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
-      - get_info_covidregionaldata
-  
+      - -get_info_covidregionaldata
+      - -get_national_data
+      - -get_linelist
+      - -get_interventions_data
+      - contains("get")
+      - contains("fill")
+      - contains("csv")
+      - contains("cumulative")
