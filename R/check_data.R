@@ -1,12 +1,20 @@
 #' Check data sources
 #' @description  Check that data are up to date and returning correctly
 #' @param countries names of countries as in the "country.R" file name to check
+#' @param worldwide report on worldwide datasets - ECDC and WHO, interventions, linelist
 #' @return A tibble of latest dates for all sources and data checks for sub-national data
 #' @importFrom tibble tibble
 #' @importFrom purrr map
 #' @importFrom dplyr group_by filter bind_rows summarise pull rename
 
-check_data_sources <- function(countries){
+check_data_sources <- function(countries = c("afghanistan",
+                                             "belgium", "brazil",
+                                             "canada", "colombia",
+                                             "germany",
+                                             "india", "italy",
+                                             "russia",
+                                             "uk", "usa"), 
+                               worldwide = TRUE) {
   
 # Get data ----------------------------------------------------------------
   # Run each country - level 1 / level 2 where available
@@ -14,7 +22,7 @@ check_data_sources <- function(countries){
                              ~ covidregionaldata::get_regional_data(country = .x, 
                                                                     localise_regions = FALSE,
                                                                     include_level_2_regions = TRUE))
-  names(country_data) <- regions
+  names(country_data) <- countries
   
 
 # Filter to latest data for each subnational region -----------------------
@@ -36,10 +44,7 @@ check_data_sources <- function(countries){
   
   
   # Report ------------------------------------------------------------------
-  if (!length(country_data_latest) == length(regions)) {
-    message(writeLines(text = "* Some countries failing to return any data"))
-  }
-  
+
   test_country_out_of_date <- country_data_latest %>%
     dplyr::filter(min_date <= (Sys.Date() - 7)) %>%
     dplyr::pull(country)
@@ -77,6 +82,8 @@ check_data_sources <- function(countries){
 
 # National and other data sets --------------------------------------------
   
+  if (worldwide) {
+  
   # Interventions
   interventions <- covidregionaldata::get_interventions_data()
   if (max(interventions$entry_date) < (Sys.Date() - 30)) {
@@ -106,10 +113,18 @@ check_data_sources <- function(countries){
                                                         max(national_who$date),
                                                         max(national_ecdc$date)))
   
+  
   # Return a df with data check results
   latest_checks <- country_data_latest %>%
     dplyr::rename(source = country) %>%
     dplyr::bind_rows(national_data_latest)
+  
+  }
+  
+  else {
+    latest_checks <- country_data_latest %>%
+      dplyr::rename(source = country)
+  }
   
 return(latest_checks)
 
