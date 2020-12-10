@@ -1,26 +1,16 @@
 #' Check data sources
 #' @description  Check that data are up to date and returning correctly
+#' @param countries names of countries as in the "country.R" file name to check
 #' @return A tibble of latest dates for all sources and data checks for sub-national data
 #' @importFrom tibble tibble
 #' @importFrom purrr map
 #' @importFrom dplyr group_by filter bind_rows summarise pull rename
 
-check_data_sources <- function(){
+check_data_sources <- function(countries){
   
 # Get data ----------------------------------------------------------------
-  # Get names of countries included in package
-  regions <- dir("R")
-  regions <- gsub(pattern = "\\.R", replacement = "", x = regions)
-  
-  # Remove non-country functions
-  remove <- paste("utils", "utils_dev", "get_region_codes", 
-                  "covid19R_wrappers", "check_data",
-                  "get_regional_data", "get_national_data", "national",
-                  "get_interventions_data", "get_linelist", sep = "|")
-  regions <- regions[!grepl(remove, regions)]
-  
   # Run each country - level 1 / level 2 where available
-  country_data <- purrr::map(regions, 
+  country_data <- purrr::map(countries, 
                              ~ covidregionaldata::get_regional_data(country = .x, 
                                                                     localise_regions = FALSE,
                                                                     include_level_2_regions = TRUE))
