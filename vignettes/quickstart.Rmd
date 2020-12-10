@@ -160,35 +160,21 @@ ggplot(german_region_totals, aes(x = reorder(bundesland, -deaths_total), y = dea
 
 ## Mapping data
 
-We can map Covid-19 data at national or subnational level, using any standard shapefile. In R, the `rnaturalearth` package already provides shapefiles for all country borders, and the largest (administrative level 1) subnational units for most countries. 
+We provide the relevant national and subnational ISO codes, or local alternatives, to enable mapping.  We can map Covid-19 data at national or subnational level, using any standard shapefile. In R, the `rnaturalearth` package already provides shapefiles for all country borders, and the largest (administrative level 1) subnational units for most countries.
 
-We provide the relevant national and subnational ISO codes, or local alternatives, to enable mapping. 
-
-We can map worldwide country shapefiles using `rnaturalearth::ne_countries()`, and join Covid-19 data to the map using the `iso_code`.
-
-In this example we use the `rnaturalearth` package to get a map of Indian states, and join Covid-19 data to these maps using the `iso_3166_2` column in both dataframes. We can plot using the `sf` package.
+For simplicity here we will use the `rworldmap` package, which uses data from `rnaturalearth` for national country borders and inbuilt mapping. We can join Covid-19 data to the map using the `iso_code`.
 
 ```{r fig.width=6}
-# Load rnaturalearth and sf packages
-library(rnaturalearth)
-library(sf)
-
-# Get map of Indian states
-india_map <- ne_states(country = "India", returnclass = "sf")
-
-# Get India state-level aggregate Covid-19 data
-india_region_totals <- get_regional_data(country = "India", totals = TRUE)
-
-# Join data to map
-india_map_with_data <- left_join(india_map, india_region_totals, by = "iso_3166_2")
-
-# Plot map using sf
-ggplot(india_map_with_data) +
-  geom_sf(aes(fill = deaths_total)) +
-  labs(fill = "All reported Covid-19 deaths by state") +
-  scale_fill_viridis_b(direction = -1, option = 5) +
-  theme_minimal()
-
+# Get latest worldwide ECDC data
+map_data <- covidregionaldata::get_national_data(totals = TRUE) %>%
+  rworldmap::joinCountryData2Map(joinCode = "ISO2", 
+                                 nameJoinColumn = "iso_code")
+# Produce map
+rworldmap::mapCountryData(map_data,
+                          nameColumnToPlot = "deaths_total",
+                          catMethod = "fixedWidth",
+                          mapTitle = "Total Covid-19 deaths to date",
+                          addLegend = TRUE)
 ```
 
 
