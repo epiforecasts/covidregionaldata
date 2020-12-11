@@ -1,5 +1,10 @@
 ---
 title: "Automated data source checks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Automated data source checks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}

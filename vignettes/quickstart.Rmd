@@ -1,6 +1,5 @@
 ---
 title: "Quick start"
-author: "Richard Boyes"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Quick start}
