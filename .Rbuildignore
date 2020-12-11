@@ -17,5 +17,6 @@ SMG.md
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^docs$
+^doc$
 ^Meta$
-^vignettes\data_checks.Rmd$
+^vignettes$
