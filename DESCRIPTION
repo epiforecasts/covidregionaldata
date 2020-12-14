@@ -61,7 +61,7 @@ Description: An interface to subnational and national level Covid-19 data.
     and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>; Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
 Language: en-gb
 License: MIT + file LICENSE
-URL: https:/epiforecasts.io/covidregionaldata,
+URL: https://epiforecasts.io/covidregionaldata,
     https://github.com/epiforecasts/covidregionaldata
 BugReports: https://github.com/epiforecasts/covidregionaldata/issues
 Depends:
