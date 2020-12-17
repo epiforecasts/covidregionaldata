@@ -4,7 +4,7 @@ test_that("get_national_data returns ECDC data", {
   
   expect_is(d, "data.frame")
   expect_true(all(d$country == "France"))
-  expect_true(sum(as.numeric(d$cases_new) < 0) == 0)
+  expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
 
 })
 
