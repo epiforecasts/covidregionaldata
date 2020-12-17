@@ -70,21 +70,6 @@ ggplot(some_countries, mapping = aes(x = date, y = cases_total, colour = country
   theme(legend.position = "bottom")
 ```
 
-Some of this difference is because of the size of each country's population. To compare cases on a per capita basis, divide cases by  population:
-
-```{r fig.width = 6}
-some_countries <- all_countries %>%
-  filter(country %in% c('Italy', 'United Kingdom', 'Spain', 'United States')) %>%
-  mutate(cases_per_capita = cases_total/population_2019)
-
-ggplot(some_countries, mapping = aes(x = date, y = cases_per_capita, colour = country)) +
-  geom_line() +
-  labs(x = NULL, y = "All reported Covid-19 cases per capita", colour = "Country") +
-  theme_minimal() +
-  theme(axis.title.y = element_text(hjust = 1),
-        legend.position = "bottom")
-```
-
 ## Retrieving total cases and deaths for all countries
 
 Using `get_national_data(totals = TRUE)` we can obtain total cases and deaths for all nations up to the latest date reported. This is useful to get a snapshot of the current running total for each country. Note how the data is sorted by the total number of cases:
@@ -161,7 +146,7 @@ We provide the relevant national and subnational ISO codes, or local alternative
 For simplicity here we will use the `rworldmap` package, which uses data from `rnaturalearth` for national country borders and inbuilt mapping. We can join Covid-19 data to the map using the `iso_code`.
 
 ```{r fig.width = 6}
-# Get latest worldwide ECDC data
+# Get latest worldwide WHO data
 map_data <- covidregionaldata::get_national_data(totals = TRUE) %>%
   rworldmap::joinCountryData2Map(joinCode = "ISO2", 
                                  nameJoinColumn = "iso_code")

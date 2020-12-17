@@ -35,7 +35,7 @@ remotes::install_github("epiforecasts/covidregionaldata")
 
 [![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata/)
 
-To get worldwide time-series data by country (sourced from the ECDC), use `get_national_data()`:
+To get worldwide time-series data by country (sourced from the WHO), use `get_national_data()`:
 ``` r
 covidregionaldata::get_national_data()
 ```
@@ -62,7 +62,7 @@ This returns daily new and cumulative (total) cases, and where available, deaths
 This function takes 3 optional arguments:
 * `country` (optional) - a country name (in any language) for which to return national level data. This argument permits any country in the United Nations and reported by the specified data source (ECDC or WHO). If not specified, all countries will be returned.
 
-* `source` (optional, default is "ECDC") - the data source for national data. Either "ECDC" or "WHO".
+* `source` (optional, default is "WHO") - the data source for national data. Either "ECDC" or "WHO".
 
 * `totals` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be a table of total counts (one row per country) or time series data (one row per country/date combination).
 

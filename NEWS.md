@@ -1,3 +1,12 @@
+# covidregionaldata 0.8.3
+
+Our main source for Covid-19 notification data, the ECDC, stopped producing daily data and switched to a weekly update released each Thursday. As an interim measure we have switched to our secondary source, the WHO, as the default. 
+
+## Other changes
+
+* Removed code that required ECDC variables to work. 
+* Update the ECDC source to pull data from the new weekly snapshots. Updated the variables. In a later update the downloading the now archived daily data will be made possible.
+
 # covidregionaldata 0.8.2
 
 * Updates the API backend used to extract UK data to V2. Adds a release date variable which can be used to return data releases from specified dates rather than the latest snapshot.

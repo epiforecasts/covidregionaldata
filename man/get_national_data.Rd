@@ -4,14 +4,14 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country = NULL, totals = FALSE, source = "ecdc")
+get_national_data(country = NULL, totals = FALSE, source = "who")
 }
 \arguments{
 \item{country}{Character A string specifying the country to get data from. Not case or language dependent. Defaults to all countries.}
 
 \item{totals}{Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.}
 
-\item{source}{Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to ECDC.}
+\item{source}{Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to WHO.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.

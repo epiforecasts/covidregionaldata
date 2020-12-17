@@ -6,7 +6,7 @@
 #' 
 #' @param country Character A string specifying the country to get data from. Not case or language dependent. Defaults to all countries.
 #' @param totals Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.
-#' @param source Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to ECDC.
+#' @param source Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to WHO.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.
 #' @importFrom dplyr %>% group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
@@ -18,40 +18,33 @@
 #'  get_national_data(country = "canada", totals = TRUE, source = "WHO")
 #' }
 #' 
-
-get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
-  
+get_national_data <- function(country = NULL, totals = FALSE, source = "who"){
   # Error handling -------------------------------------------------------------------
-
-  if (!(is.logical(totals))){
+  if (!(is.logical(totals))) {
     stop("The totals variable should be a logical (TRUE/FALSE) variable.")
   }
 
-  if (!(is.character(source))){
+  if (!(is.character(source))) {
     stop("The source variable should be a character variable ('WHO' or 'ECDC').")
   }
-  
  source <- tolower(source)
  
 # Match country name -----------------------------------------------------
  
  # Set to NULL to return all countries 
- if (missing(country)){
+ if (missing(country)) {
    input_country_name <- NULL
-
     } else {
-      
       # Standardise country name 
       input_country_name <- country
       input_country_name <- countrycode::countryname(input_country_name, destination = "country.name.en")
       
-      if(is.na(input_country_name)){
+      if(is.na(input_country_name)) {
        stop("Country name not recognised. Please enter a character string, with no abbreviation.")
    }
  }
   
   # Find the correct data-getter and ISO codes ----------------------------------------
-
     get_data_function <- switch(source,
                                 "ecdc" = get_ecdc_cases,
                                 "who" = get_who_cases,
@@ -62,13 +55,10 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
   data <- do.call(get_data_function, list())
  
  # Filter to country -------------------------------------------------------
- 
- if (!is.null(input_country_name)){
+ if (!is.null(input_country_name)) {
    data <- data %>%
      dplyr::filter(country %in% input_country_name)
  }  
- 
- 
   # Group data to country -----------------------------------
     data <- data %>%
       dplyr::group_by(country, iso_code)
@@ -92,7 +82,6 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     
     return(tibble::tibble(data))
   }
-
   # Pad the data set ------------------------------------------------------------------
   data <- data %>%
     dplyr::rename("region_level_1" = "country", "level_1_region_code" = "iso_code") %>%
@@ -101,11 +90,8 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
     complete_cumulative_columns() %>%
     dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")
  
-
 # Return data -------------------------------------------------------------
-
-  if(source == "ecdc"){
-    
+  if(source == "ecdc") {
     data <- data %>%
       dplyr::group_by(country) %>%
       tidyr::fill(population_2019, un_region, .direction = "updown") %>%
@@ -119,13 +105,9 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
                     hosp_new, hosp_total,
                     tested_new, tested_total) %>%
       dplyr::arrange(date, country)
-    
     return(data)
-    
   }
-  
-  if(source == "who"){
-    
+  if(source == "who") {
     data <- data %>%
       dplyr::group_by(country) %>%
       tidyr::fill(who_region, un_region, .direction = "updown") %>%
@@ -139,9 +121,6 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "ecdc"){
                     hosp_new, hosp_total,
                     tested_new, tested_total) %>%
       dplyr::arrange(date, country)
-    
     return(data)
-    
   }
-  
 }

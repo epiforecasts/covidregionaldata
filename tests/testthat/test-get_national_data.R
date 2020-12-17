@@ -1,7 +1,6 @@
 test_that("get_national_data returns ECDC data", {
   skip_on_cran()
-
-  d <- get_national_data(country = "France")
+  d <- get_national_data(country = "France", source = "ECDC")
   
   expect_is(d, "data.frame")
   expect_true(all(d$country == "France"))
@@ -16,7 +15,7 @@ test_that("get_national_data returns WHO data", {
   
   expect_is(d, "data.frame")
   expect_true(all(d$country == "France"))
-  expect_true(sum(as.numeric(d$cases_new) < 0) == 0)
+  expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
   
 })
 
@@ -33,7 +32,8 @@ test_that("get_ecdc_cases works as expected", {
     ecdc <-  readxl::read_excel(tf)
   }
   
-  necessary_cols <- c("geoId", "countriesAndTerritories", "cases", "deaths", "popData2019")
+  necessary_cols <- c("geoId", "countriesAndTerritories", "cases_weekly",
+                      "deaths_weekly", "popData2019")
   
   expect_is(ecdc, "data.frame")
   expect_true(all(necessary_cols %in% colnames(ecdc)))
@@ -43,12 +43,9 @@ test_that("get_ecdc_cases works as expected", {
 
 test_that("get_who_cases works as expected", {
   skip_on_cran()
-  
   url <- "https://covid19.who.int/WHO-COVID-19-global-data.csv"
   who <- readr::read_csv(url)
-  
   expect_equal(ncol(who), 8)
-  
 })
 
 
@@ -56,9 +53,7 @@ test_that("get_ecdc_cases returns a region for every country", {
   skip_on_cran()
   
   library(dplyr)
-  
   all_countries <- get_national_data(source = "ecdc")
-  
   all_countries <- all_countries %>%  
     dplyr::filter(is.na(un_region)) %>% 
     dplyr::group_by(country) %>% 
@@ -74,7 +69,6 @@ test_that("get_who_cases returns a region for every country", {
   library(dplyr)
   
   all_countries <- get_national_data(source = "who")
-  
   all_countries <- all_countries %>%  
     dplyr::filter(is.na(un_region), !is.na(country)) %>% 
     dplyr::group_by(country) %>% 

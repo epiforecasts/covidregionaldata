@@ -1,40 +1,25 @@
-
-# ECDC data ---------------------------------------------------------------
 #' ECDC International Case Counts: works within get_national_data
 #'
 #' @author Sam Abbott @seabbs
 #' @author D. van Muijen @dmuijen
 #' @author Kath Sherratt @kathsherratt
 #' @author Haze Lee @hazealign
-#'
-#'
 #' @return A dataframe of International case counts published by ECDC.
 #' @importFrom readr read_csv
 #' @importFrom httr GET write_disk
 #' @importFrom readxl read_excel
 #' @importFrom dplyr mutate rename select arrange filter
 #' @importFrom countrycode countryname
-#'
-#'
 get_ecdc_cases <- function(){
-  
   # Try csv from ECDC
   url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
   raw <- try(csv_reader(file = url))
-  
-  # If no csv ,try excel
-  if ("try-error" %in% class(raw)) {
-    message("ECDC csv unavailable, trying alternative with temp file.")
-    url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
-    httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
-    raw <-  readxl::read_excel(tf)
-  }
   
   # Clean data
   data <- raw %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
     dplyr::rename(iso_code = geoId, country = countriesAndTerritories,
-                  cases_new = cases, deaths_new = deaths,
+                  cases_new = cases_weekly, deaths_new = deaths_weekly,
                   population_2019 = popData2019) %>%
     dplyr::select(date, country, iso_code, population_2019, cases_new, deaths_new) %>%
     dplyr::arrange(date) %>%
@@ -52,13 +37,8 @@ get_ecdc_cases <- function(){
                   un_region = ifelse(iso_code == "EL", "Europe", un_region),
                   # Correct for Taiwan
                   un_region = ifelse(iso_code == "TW", "Asia", un_region))
-
-  
   return(data)
 }
-
-
-# WHO data ----------------------------------------------------------------
 
 #' Download the most recent WHO case data
 #'
@@ -68,15 +48,10 @@ get_ecdc_cases <- function(){
 #' @importFrom jsonlite fromJSON
 #' @importFrom dplyr mutate
 #' @importFrom countrycode countrycode
-
-
 get_who_cases <- function() {
-  
   # Get data
   url <- "https://covid19.who.int/WHO-COVID-19-global-data.csv"
-  
   raw <- csv_reader(url)
-  
   colnames(raw) <- c("date", "iso_code", "country", "who_region", "cases_new", "cases_total", "deaths_new", "deaths_total")
 
   # Add standard country names
@@ -88,8 +63,5 @@ get_who_cases <- function() {
                   # Correct for Kosovo
                   un_region = ifelse(iso_code == "XK", "Europe", un_region),
                   country = ifelse(iso_code == "XK", "Kosovo", country))
-  
   return(who)
 }
-
-
