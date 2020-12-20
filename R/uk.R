@@ -146,7 +146,7 @@ get_uk_regional_cases_with_level_2 <- function(release_date = NULL) {
 # Get UK data -------------------------------------------------------------
   
   # Get data for nations and regions
-  data <- get_uk_data(filters = list(utla = "areaType=utla"), release_date = release_date)
+  data <- get_uk_data(filters = list(ltla = "areaType=ltla"), release_date = release_date)
   
   # Reshape for covidregionaldata -------------------------------------------
   authority_lookup_table <- get_authority_lookup_table()
@@ -168,11 +168,7 @@ get_uk_regional_cases_with_level_2 <- function(release_date = NULL) {
                                         cumDeaths28DaysByDeathDate,
                                         cumDeaths28DaysByPublishDate)) %>%
     # Hospitalisations and tested variables are consistent across nations
-    dplyr::rename(hosp_new = newAdmissions,
-                  hosp_total = cumAdmissions,
-                  tested_new = newTestsByPublishDate,
-                  tested_total = cumTestsByPublishDate,
-                  region_level_2 = areaName,
+    dplyr::rename(region_level_2 = areaName,
                   level_2_region_code = areaCode) %>%
   # Join local authority codes to level 1 regions
     dplyr::left_join(authority_lookup_table, by = "region_level_2") %>%
