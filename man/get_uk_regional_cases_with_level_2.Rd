@@ -2,7 +2,7 @@
 % Please edit documentation in R/uk.R
 \name{get_uk_regional_cases_with_level_2}
 \alias{get_uk_regional_cases_with_level_2}
-\title{UK Regional Daily COVID-19 Count Data - UTLA}
+\title{UK Regional Daily COVID-19 Count Data - LTLA}
 \usage{
 get_uk_regional_cases_with_level_2(release_date = NULL)
 }

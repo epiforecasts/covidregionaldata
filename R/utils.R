@@ -120,7 +120,7 @@ rename_region_code_column <- function(data, country) {
                                   "belgium" = "iso_3166_2_province",
                                   "brazil" = "level_2_region_code",
                                   "germany" = "level_2_region_code",
-                                  "uk" = "utla_code",
+                                  "uk" = "ltla_code",
                                   "usa" = "fips")
     
     data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)

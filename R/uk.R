@@ -131,7 +131,7 @@ To get hospital admissions data, include argument 'nhsregions = TRUE'. This retu
 }
 
 
-#' UK Regional Daily COVID-19 Count Data - UTLA
+#' UK Regional Daily COVID-19 Count Data - LTLA
 #'
 #' @description Extracts daily COVID-19 data for the UK, stratified by Upper Tier Local Authority 
 #' Data source:
