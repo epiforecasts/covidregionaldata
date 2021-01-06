@@ -6,6 +6,12 @@ template:
 development:
   mode: release
 
+authors:
+  Sam Abbott:
+    href: "https://www.samabbott.co.uk/"
+  Sebastian Funk: 
+    href: "https://www.lshtm.ac.uk/aboutus/people/funk.sebastian"
+    
 navbar:
   type: inverse
   left:
