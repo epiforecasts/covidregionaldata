@@ -237,8 +237,8 @@ get_cuba_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("CU-07", "CU-05", "CU-03", "CU-09", "CU-11", "CU-12", "CU-10", "CU-15", "CU-04", "CU-01",
                             "CU-13", "CU-08", "CU-06", "CU-14", "CU-99", "CU-16"),
-    region =  c("Sancti Spíritus", "Villa Clara", "La Habana", "Camagüey", "Holguín", "Granma", "Las Tunas", "Artemisa", 
-                "Matanzas", "Pinar del Río", "Santiago de Cuba", "Ciego de Ávila", "Cienfuegos", "Guantánamo", "Isla de la Juventud",
+    region =  c("Sancti Sp\u00EDritus", "Villa Clara", "La Habana", "Camag\u00FCey", "Holgu\u00EDn", "Granma", "Las Tunas", "Artemisa", 
+                "Matanzas", "Pinar del R\u00EDo", "Santiago de Cuba", "Ciego de \u00C1vila", "Cienfuegos", "Guant\u00E1namo", "Isla de la Juventud",
                 "Mayabeque")   
   )
   return(region_codes)

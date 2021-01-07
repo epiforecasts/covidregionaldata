@@ -17,7 +17,14 @@ get_cuba_regional_cases <- function() {
     dplyr::select(date = fecha_confirmacion, region_level_1 = provincia, cases_new = n) %>%
     dplyr::filter(!is.na(region_level_1)) %>%
     dplyr::mutate(cases_new = as.numeric(cases_new),
-                  date = lubridate::as_date(lubridate::ymd(date)))
+                  date = lubridate::as_date(lubridate::ymd(date))) %>%
+    dplyr::mutate(region_level_1 = dplyr::recode(region_level_1,
+                                                 "Sancti Spíritus" = "Sancti Sp\u00EDritus",
+                                                 "Camagüey" = "Camag\u00FCey",
+                                                 "Holguín" = "Holgu\u00EDn",
+                                                 "Pinar del Río" = "Pinar del R\u00EDo",
+                                                 "Ciego de Ávila" = "Ciego de \u00C1vila",
+                                                 "Guantánamo" = "Guant\u00E1namo"))
   
   return(cuba_data)
 }
