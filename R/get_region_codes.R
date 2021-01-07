@@ -17,7 +17,8 @@ get_region_codes <- function(country) {
                          "italy" = get_italy_region_codes,
                          "russia" = get_russia_region_codes,
                          "uk" = get_uk_region_codes,
-                         "usa" = get_us_region_codes)
+                         "usa" = get_us_region_codes,
+                         "cuba" = get_cuba_region_codes)
 
   region_codes_table <- do.call(region_code_fun, list())
 
@@ -227,6 +228,20 @@ get_colombia_region_codes <- function() {
                   region = stringr::str_replace_all(region, "Distrito Capital de ", ""),
                   region = stringr::str_to_sentence(region))
   return(region)
+}
+
+
+#` Cuba region codes
+# `
+get_cuba_region_codes <- function() {
+  region_codes <- tibble::tibble(
+    level_1_region_code = c("CU-07", "CU-05", "CU-03", "CU-09", "CU-11", "CU-12", "CU-10", "CU-15", "CU-04", "CU-01",
+                            "CU-13", "CU-08", "CU-06", "CU-14", "CU-99", "CU-16"),
+    region =  c("Sancti Sp\u00EDritus", "Villa Clara", "La Habana", "Camag\u00FCey", "Holgu\u00EDn", "Granma", "Las Tunas", "Artemisa", 
+                "Matanzas", "Pinar del R\u00EDo", "Santiago de Cuba", "Ciego de \u00C1vila", "Cienfuegos", "Guant\u00E1namo", "Isla de la Juventud",
+                "Mayabeque")   
+  )
+  return(region_codes)
 }
 
 # Level 2 regions -------------------------------------------------------------------------------------
