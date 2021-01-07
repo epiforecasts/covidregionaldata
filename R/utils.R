@@ -1,31 +1,3 @@
-#' Daily counts from data that is in cumulative form.
-#' @description Gets daily counts from data column that is in cumulative form.
-#' @param column A vector of numeric data (e.g. a data column) which corresponds to cumulative counts of a process
-#' @return A vector of numeric data which corresponds to daily counts
-#' 
-get_daily_from_cumulative <- function(column) {
-  shifted <- c(column[1], diff(column))
-  return(shifted)
-}
-
-#' Cumulative counts from daily counts.
-#' @description Gets cumulative cases/deaths etc. from data which is in daily forms. Similar to cumsum() but deals with NAs by treating them as 0.
-#' @param column A vector of numeric data (e.g. a data column) which corresponds to daily counts of a process. Can contain NA
-#' @return A vector of numeric data which corresponds to cumulative counts
-#' 
-get_cumulative_from_daily <- function(column) {
-  if (all(is.na(column))){
-    return(column)
-  }
-  
-  first_non_na <- min(which(!is.na(column)))
-  column <- column[first_non_na:length(column)]
-  column[which(is.na(column))] <- 0
-  cum_sum <- cumsum(column)
-  cum_sum <- c(rep(NA, first_non_na - 1), cum_sum)
-  return(cum_sum)
-}
-
 #' Add extra columns filled with NA values to a dataset.
 #' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets
 #' of the same underlying structure (i.e. same columns).
@@ -141,7 +113,7 @@ set_negative_values_to_zero <- function(data) {
                          'cases_new', 'deaths_new', 'recovered_new', 'hosp_new', 'tested_new')
 
   for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)){
+    if (numeric_col_name %in% colnames(data)) {
       data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
     }
   }
@@ -185,7 +157,7 @@ complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total')
 
   for (cumulative_col_name in cumulative_col_names) {
-    if (cumulative_col_name %in% colnames(data)){
+    if (cumulative_col_name %in% colnames(data)) {
       if ("region_level_2" %in% colnames(data)) {
         data <- data %>%
           dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code) %>%
@@ -209,22 +181,30 @@ complete_cumulative_columns <- function(data) {
 #' then calculates the second from the first.
 #' @param data A data frame
 #' @return A data frame with extra columns if required
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr %>% mutate group_by_at arrange vars starts_with lag
+#' @importFrom tidyr replace_na
 #' @importFrom tibble tibble
 #' 
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
-
+  
   for (count in possible_counts) {
     count_today_name <- paste0(count, "_new")
     cumulative_count_name <- paste0(count, "_total")
 
     if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
-      data <- data %>% dplyr::mutate(!!cumulative_count_name := get_cumulative_from_daily(data[[count_today_name]]))
-    } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
+      data <- data %>% 
+        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
+        dplyr::arrange(date, .by_group = TRUE) %>%
+        dplyr::mutate(!!cumulative_count_name := cumsum(tidyr::replace_na(!!as.name(count_today_name), 0)))
+    
+      } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
-      data <- data %>% dplyr::mutate(!!count_today_name := get_daily_from_cumulative(data[[cumulative_count_name]]))
+      data <- data %>% 
+        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
+        dplyr::arrange(date, .by_group = TRUE) %>%
+        dplyr::mutate(!!count_today_name := (!!as.name(cumulative_count_name)) - dplyr::lag(!!as.name(cumulative_count_name)))
     }
   }
 
