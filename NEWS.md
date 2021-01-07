@@ -4,6 +4,7 @@ Our main source for Covid-19 notification data, the ECDC, stopped producing dail
 
 ## Other changes
 
+* Cuba - added new data for provinces (region level 1)
 * UK data - added option to get either lower tier or upper tier local authorities (level 2 regions). 
 * UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these don't fit into the existing data structure and are not available at lower level regions.
 * Removed code that required ECDC variables to work. 
