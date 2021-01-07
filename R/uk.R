@@ -60,8 +60,8 @@ get_uk_regional_cases_only_level_1 <- function(nhsregions = FALSE, release_date 
     if (is.null(release_date)) {
       release_date <- Sys.Date() - 1
     }
-    if (release_date < (Sys.Date() - 14)) {
-      stop("Data by NHS regions is only available in archived form for the last 14 days")
+    if (release_date < (Sys.Date() - 7)) {
+      stop("Data by NHS regions is only available in archived form for the last 7 days")
     }
     message("Arranging data by NHS region. 
 Also adding new variable: hosp_new_first_admissions. This is NHS data for first hospital admissions, which excludes readmissions. This is available for England and English regions only.")
@@ -229,9 +229,9 @@ get_uk_data <- function(filters, release_date = NULL) {
     "newAdmissions", "cumAdmissions", 
     #
     # --- Additional non-standard variables --- #
-    # Hospital
-    "cumAdmissionsByAge", "covidOccupiedMVBeds", 
-    "hospitalCases", "plannedCapacityByPublishDate",
+    # # # Hospital
+    # "cumAdmissionsByAge", "covidOccupiedMVBeds",
+    # "hospitalCases", "plannedCapacityByPublishDate",
     # Tests by pillar
     "newPillarOneTestsByPublishDate", "newPillarTwoTestsByPublishDate", 
     "newPillarThreeTestsByPublishDate", "newPillarFourTestsByPublishDate"
