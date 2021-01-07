@@ -131,22 +131,26 @@ To get hospital admissions data, include argument 'nhsregions = TRUE'. This retu
 }
 
 
-#' UK Regional Daily COVID-19 Count Data - LTLA
+#' UK Regional Daily COVID-19 Count Data - Local Authority level
 #'
-#' @description Extracts daily COVID-19 data for the UK, stratified by Upper Tier Local Authority 
+#' @description Extracts daily COVID-19 data for the UK, stratified by Local Authority
 #' Data source:
+#' @param resolution "utla" (default) or "ltla", depending on which geographical resolution is preferred
 #' @inheritParams get_uk_data
 #' @return A data frame of daily COVID cases for the UK by region, to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr bind_rows mutate rename select left_join %>%
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
-get_uk_regional_cases_with_level_2 <- function(release_date = NULL) {
+get_uk_regional_cases_with_level_2 <- function(resolution = "utla", release_date = NULL) {
 
 # Get UK data -------------------------------------------------------------
-  
+  resolution <- match.arg(resolution, choices = c("utla", "ltla"))
+  filters <- list(paste("areaType", resolution, sep = "="))
+  names(filters) <- resolution
+
   # Get data for nations and regions
-  data <- get_uk_data(filters = list(ltla = "areaType=ltla"), release_date = release_date)
+  data <- get_uk_data(filters = filters, release_date = release_date)
   
   # Reshape for covidregionaldata -------------------------------------------
   authority_lookup_table <- get_authority_lookup_table()
