@@ -58,6 +58,7 @@ Description: An interface to subnational and national level Covid-19 data.
     Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>, 
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
     USA: <https://github.com/nytimes/covid-19-data>),
+    Cuba: <https://covid19cubadata.github.io>,
     and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>; Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
 Language: en-gb
 License: MIT + file LICENSE

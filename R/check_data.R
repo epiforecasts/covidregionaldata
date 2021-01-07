@@ -9,7 +9,7 @@
 #' @importFrom dplyr group_by filter bind_rows summarise pull rename
 check_data_sources <- function(countries = c("afghanistan",
                                              "belgium", "brazil",
-                                             "canada", "colombia",
+                                             "cuba", "canada", "colombia",
                                              "germany",
                                              "india", "italy",
                                              "russia",

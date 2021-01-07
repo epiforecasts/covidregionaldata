@@ -148,6 +148,7 @@ Americas | Brazil | State | City
 Americas | USA | State | County
 Americas | Canada | Province | NA
 Americas | Colombia | Department  | NA
+Americas | Cuba | Province | NA
 Asia | Afghanistan | Province | NA
 Asia | India | States | NA
 

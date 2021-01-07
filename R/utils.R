@@ -42,7 +42,8 @@ rename_region_column <- function(data, country) {
                                "italy" = "region",
                                "russia" = "region",
                                "uk" = "region",
-                               "usa" = "state")
+                               "usa" = "state",
+                               "cuba" = "provincia")
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
 
@@ -83,7 +84,8 @@ rename_region_code_column <- function(data, country) {
                                   "italy" = "iso_3166_2",
                                   "russia" = "iso_3166_2",
                                   "uk" = "ons_region_code",
-                                  "usa" = "iso_3166_2")
+                                  "usa" = "iso_3166_2",
+                                  "cuba" = "iso_3166_2")
   
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
   
@@ -331,4 +333,5 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "iso_3166_2", "min_date", "max_date", "iso_na", 
                          "cases_new_na", "cases_total_na", "deaths_new_na", "deaths_total_na",
                          "ENTRY_DATE", "DATE_IMPLEMENTED",
-                         "cases_weekly", "deaths_weekly"))
+                         "cases_weekly", "deaths_weekly",
+                         "fecha_confirmacion", "provincia"))
