@@ -81,6 +81,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "russia" = get_russia_regional_cases,
                                 "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
+                                "cuba" = get_cuba_regional_cases,
                                 stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
     

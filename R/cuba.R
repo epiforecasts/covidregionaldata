@@ -13,17 +13,11 @@ get_cuba_regional_cases <- function() {
   
   ## Get daily case counts by province
   cuba_data <- cuba_data %>%
-    dplyr::select(province = provincia, date_confirmation = fecha_confirmacion) %>%
-    dplyr::count(date_confirmation, province)
-  
-  ## Pad out dates and rename
-  cuba_data %>%
-    dplyr::group_by(province) %>%
-    tidyr::complete(date_confirmation = seq.Date(from = min(cuba_data$date_confirmation),
-                                                 to = max(cuba_data$date_confirmation),
-                                                 by = "day"), fill = list(n = 0)) %>%
-    dplyr::select(date_confirmation, province, confirmed_cases = n)
-  
+    dplyr::count(fecha_confirmacion, provincia) %>%
+    dplyr::select(date = fecha_confirmacion, region_level_1 = provincia, cases_new = n) %>%
+    dplyr::filter(!is.na(region_level_1)) %>%
+    dplyr::mutate(cases_new = as.numeric(cases_new),
+                  date = lubridate::as_date(lubridate::ymd(date)))
   
   return(cuba_data)
 }
