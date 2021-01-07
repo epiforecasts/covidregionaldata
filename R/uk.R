@@ -142,10 +142,10 @@ To get hospital admissions data, include argument 'nhsregions = TRUE'. This retu
 #' @importFrom stringr str_detect
 #' @importFrom lubridate ymd
 #' 
-get_uk_regional_cases_with_level_2 <- function(resolution = c("utla", "ltla"), release_date = NULL) {
+get_uk_regional_cases_with_level_2 <- function(resolution = "utla", release_date = NULL) {
 
 # Get UK data -------------------------------------------------------------
-  resolution <- match.arg(resolution)
+  resolution <- match.arg(resolution, choices = c("utla", "ltla"))
   filters <- list(paste("areaType", resolution, sep = "="))
   names(filters) <- resolution
 
