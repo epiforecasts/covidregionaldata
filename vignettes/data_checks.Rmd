@@ -20,7 +20,7 @@ library(knitr)
 ```
 
 ```{r, message = FALSE, warning = FALSE}
-status <- check_data_sources(countries = c("afghanistan", "belgium", "brazil","canada",
+status <- check_data_sources(countries = c("afghanistan", "belgium", "brazil","canada", "cuba",
                                            "colombia","germany","india", "italy", "russia",
                                            "uk", "usa"), worldwide = TRUE)
 kable(status)
