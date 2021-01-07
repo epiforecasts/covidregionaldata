@@ -4,7 +4,7 @@
 #' Data available at \url{https://covid19cubadata.github.io/data/covid19-casos.csv}.
 #' @return A data frame of daily COVID cases for Cuba by province, to be further processed by \code{get_regional_data()}.
 #' @importFrom dplyr select count group_by mutate
-#' @importFrom lubridate ymd
+#' @importFrom lubridate ymd as_date
 get_cuba_regional_cases <- function() {
   
   ## Fetch case data
