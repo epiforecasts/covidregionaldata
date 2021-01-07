@@ -211,35 +211,6 @@ calculate_columns_from_existing_data <- function(data) {
   return(tibble::tibble(data))
 }
 
-#' Convert data to Covid19R package data standard
-#' @description Converts wide format (time series) data into long format to meet the Covid19R package standard
-#' @param data A data frame / tibble
-#' @return A data frame in the Covid19R standard
-#' @importFrom dplyr %>% select rename arrange
-#' @importFrom tidyr pivot_longer
-#' @importFrom tibble tibble
-#' 
-convert_to_covid19R_format <- function(data) {
-  location_type <- colnames(data)[2]
-  location_code_type <- colnames(data)[3]
-
-  data <- data %>%
-    dplyr::select(-hosp_total, -tested_new) %>%
-    tidyr::pivot_longer(-c(date, !!location_type, !!location_code_type),  names_to = "data_type", values_to = "value")
-
-  data <- data %>%
-    dplyr::rename("location_code" = !!location_code_type,
-                  "location" = !!location_type) 
-  
-  data$location_code_type <- location_code_type
-  data$location_type <- location_type
-  
-  data <- data %>%
-    dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
-    dplyr::arrange(date)
-
-  return(tibble::tibble(data))
-}
 
 #' Custom CSV reading function
 #' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
