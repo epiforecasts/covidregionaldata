@@ -9,7 +9,7 @@ get_cuba_regional_cases <- function() {
   
   ## Fetch case data
   url <- "https://covid19cubadata.github.io/data/covid19-casos.csv"
-  cuba_data <- csv_reader(url)
+  cuba_data <- suppressWarnings(csv_reader(url))
   
   ## Get daily case counts by province
   cuba_data <- cuba_data %>%
