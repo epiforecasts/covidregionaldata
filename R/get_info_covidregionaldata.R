@@ -97,7 +97,7 @@ get_info_covidregionaldata <- function() {
     "uk",
     "ONS/NHS regions",
     "local authority",
-    "options: nhsregions = TRUE; resolution = c('ltla', 'utla')",
+    "get_regional_data('uk', nhsregions = TRUE); get_regional_data('uk', include_level_2_regions = TRUE, resolution = c('ltla', 'utla'))",
     "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv, https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv",
     "cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total, hosp_new, tested_total",
 
@@ -139,7 +139,7 @@ get_info_covidregionaldata <- function() {
     "international public patient records",
     NA,
     NA,    
-    "options: clean = TRUE",
+    "get_linelist(clean = TRUE)",
     "https://github.com/beoutbreakprepared/nCoV2019",
     "id, country, death, date_onset, date_confirm, date_admission_hospital, date_death_or_discharge"
     
