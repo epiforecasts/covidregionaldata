@@ -4,7 +4,7 @@ Our main source for Covid-19 notification data, the ECDC, stopped producing dail
 
 ## Other changes
 
-* Replaced silently broken functions for converting cumulative to daily and vice versa.
+* Replaced silently broken functions for converting cumulative data to daily and vice versa.
 * Removed integration with Covid19R formatting.
 * Relevant up to date package information can be fetched using `get_info_covidregionaldata()`.
 * Cuba - added new data for provinces (region level 1).
