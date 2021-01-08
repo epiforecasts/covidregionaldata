@@ -2,6 +2,9 @@ url: epiforecasts.io/covidregionaldata/
 template:
   params:
     bootswatch: lumen
+    docsearch:
+      api_key: 721a43acf6af66699c04bd8b2af75ff1
+      index_name: epiforecasts
 
 development:
   mode: release
