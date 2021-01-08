@@ -4,11 +4,7 @@
 \alias{check_data_sources}
 \title{Check data sources}
 \usage{
-check_data_sources(
-  countries = c("afghanistan", "belgium", "brazil", "canada", "colombia", "germany",
-    "india", "italy", "russia", "uk", "usa"),
-  worldwide = TRUE
-)
+check_data_sources(countries = "all", worldwide = TRUE)
 }
 \arguments{
 \item{countries}{names of countries as in the "country.R" file name to check}

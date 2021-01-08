@@ -6,17 +6,19 @@
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom purrr map
-#' @importFrom dplyr group_by filter bind_rows summarise pull rename
-check_data_sources <- function(countries = c("afghanistan",
-                                             "belgium", "brazil",
-                                             "cuba", "canada", "colombia",
-                                             "germany",
-                                             "india", "italy",
-                                             "russia",
-                                             "uk", "usa"), 
+#' @importFrom dplyr %>% group_by filter bind_rows summarise pull rename
+check_data_sources <- function(countries = "all", 
                                worldwide = TRUE) {
   
 # Get data ----------------------------------------------------------------
+
+  # get country names
+  if (countries == "all") {
+    countries <- get_info_covidregionaldata() %>%
+      dplyr::filter(get_data_function == "get_regional_data") %>%
+      dplyr::pull(country)
+  }
+  
   # Run each country - level 1 / level 2 where available
   country_data <- purrr::map(countries, 
                              ~ covidregionaldata::get_regional_data(country = .x, 

@@ -1,31 +1,3 @@
-#' Daily counts from data that is in cumulative form.
-#' @description Gets daily counts from data column that is in cumulative form.
-#' @param column A vector of numeric data (e.g. a data column) which corresponds to cumulative counts of a process
-#' @return A vector of numeric data which corresponds to daily counts
-#' 
-get_daily_from_cumulative <- function(column) {
-  shifted <- c(column[1], diff(column))
-  return(shifted)
-}
-
-#' Cumulative counts from daily counts.
-#' @description Gets cumulative cases/deaths etc. from data which is in daily forms. Similar to cumsum() but deals with NAs by treating them as 0.
-#' @param column A vector of numeric data (e.g. a data column) which corresponds to daily counts of a process. Can contain NA
-#' @return A vector of numeric data which corresponds to cumulative counts
-#' 
-get_cumulative_from_daily <- function(column) {
-  if (all(is.na(column))){
-    return(column)
-  }
-  
-  first_non_na <- min(which(!is.na(column)))
-  column <- column[first_non_na:length(column)]
-  column[which(is.na(column))] <- 0
-  cum_sum <- cumsum(column)
-  cum_sum <- c(rep(NA, first_non_na - 1), cum_sum)
-  return(cum_sum)
-}
-
 #' Add extra columns filled with NA values to a dataset.
 #' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets
 #' of the same underlying structure (i.e. same columns).
@@ -48,88 +20,7 @@ add_extra_na_cols <- function(data) {
   return(tibble::tibble(data))
 }
 
-#' Helper to rename the region column in each dataset to the correct name for each country.
-#' @description The package relies on column name 'region' during processing but this often isn't the most sensible name for the column
-#' (e.g. state makes more sense for USA). This simply renames the column as the final step in processing before returning data to the user.
-#' @param data a data frame with a region_level_1 column and optionally a region_level_2 column
-#' @param country a string with the country of interest
-#' @return a tibble with the column renamed to a sensible name
-#' @importFrom dplyr %>% rename
-#' @importFrom tibble tibble
-#' 
-rename_region_column <- function(data, country) {
 
-  level_1_region_name <- switch(tolower(country),
-                               "afghanistan" = "province",
-                               "belgium" = "region",
-                               "brazil" = "state",
-                               "canada" = "province",
-                               "colombia" = "departamento",
-                               "germany" = "bundesland",
-                               "india" = "state",
-                               "italy" = "region",
-                               "russia" = "region",
-                               "uk" = "region",
-                               "usa" = "state",
-                               "cuba" = "provincia")
-
-  data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
-
-  if ("region_level_2" %in% colnames(data)) {
-    level_2_region_name <- switch(tolower(country),
-                                "belgium" = "province",
-                                "brazil" = "city",
-                                "germany" = "landkreis",
-                                "uk" = "authority",
-                                "usa" = "county")
-
-    data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
-  }
-
-  return(tibble::tibble(data))
-}
-
-#' Helper to rename the region code column in each dataset to the correct code type for each country (e.g. ISO-3166-2).
-#' @description The package relies on column name 'region_level_1_code' etc. during processing but this often isn't the most 
-#' sensible name for the column (e.g. iso-3166-2 makes more sense for US states). This simply renames the column as the final step in 
-#' processing before returning data to the user.
-#' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
-#' @param country a string with the country of interest
-#' @return a tibble with the column(s) renamed to a sensible name
-#' @importFrom dplyr %>% rename
-#' @importFrom tibble tibble
-#' 
-rename_region_code_column <- function(data, country) {
-  
-  level_1_region_code_name <- switch(tolower(country),
-                                  "afghanistan" = "iso_3166_2",
-                                  "belgium" = "iso_3166_2",
-                                  "brazil" = "iso_3166_2",
-                                  "canada" = "iso_3166_2",
-                                  "colombia" = "iso_3166_2",
-                                  "germany" = "iso_3166_2",
-                                  "india" = "iso_3166_2",
-                                  "italy" = "iso_3166_2",
-                                  "russia" = "iso_3166_2",
-                                  "uk" = "ons_region_code",
-                                  "usa" = "iso_3166_2",
-                                  "cuba" = "iso_3166_2")
-  
-  data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
-  
-  if ("level_2_region_code" %in% colnames(data)) {
-    level_2_region_code_name <- switch(tolower(country),
-                                  "belgium" = "iso_3166_2_province",
-                                  "brazil" = "level_2_region_code",
-                                  "germany" = "level_2_region_code",
-                                  "uk" = "ltla_code",
-                                  "usa" = "fips")
-    
-    data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)
-  }
-  
-  return(tibble::tibble(data))
-}
 
 #' Set negative data to 0
 #' @description Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.
@@ -143,7 +34,7 @@ set_negative_values_to_zero <- function(data) {
                          'cases_new', 'deaths_new', 'recovered_new', 'hosp_new', 'tested_new')
 
   for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)){
+    if (numeric_col_name %in% colnames(data)) {
       data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
     }
   }
@@ -187,7 +78,7 @@ complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total')
 
   for (cumulative_col_name in cumulative_col_names) {
-    if (cumulative_col_name %in% colnames(data)){
+    if (cumulative_col_name %in% colnames(data)) {
       if ("region_level_2" %in% colnames(data)) {
         data <- data %>%
           dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code) %>%
@@ -211,57 +102,37 @@ complete_cumulative_columns <- function(data) {
 #' then calculates the second from the first.
 #' @param data A data frame
 #' @return A data frame with extra columns if required
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr %>% mutate group_by_at arrange vars starts_with lag
+#' @importFrom tidyr replace_na
 #' @importFrom tibble tibble
 #' 
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
-
+  
   for (count in possible_counts) {
     count_today_name <- paste0(count, "_new")
     cumulative_count_name <- paste0(count, "_total")
 
     if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
-      data <- data %>% dplyr::mutate(!!cumulative_count_name := get_cumulative_from_daily(data[[count_today_name]]))
-    } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
+      data <- data %>% 
+        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
+        dplyr::arrange(date, .by_group = TRUE) %>%
+        dplyr::mutate(!!cumulative_count_name := cumsum(tidyr::replace_na(!!as.name(count_today_name), 0)))
+    
+      } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
-      data <- data %>% dplyr::mutate(!!count_today_name := get_daily_from_cumulative(data[[cumulative_count_name]]))
+      data <- data %>% 
+        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
+        dplyr::arrange(date, .by_group = TRUE) %>%
+        tidyr::fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
+        dplyr::mutate(!!count_today_name := (!!as.name(cumulative_count_name)) - dplyr::lag(!!as.name(cumulative_count_name), default = 0))
     }
   }
 
   return(tibble::tibble(data))
 }
 
-#' Convert data to Covid19R package data standard
-#' @description Converts wide format (time series) data into long format to meet the Covid19R package standard
-#' @param data A data frame / tibble
-#' @return A data frame in the Covid19R standard
-#' @importFrom dplyr %>% select rename arrange
-#' @importFrom tidyr pivot_longer
-#' @importFrom tibble tibble
-#' 
-convert_to_covid19R_format <- function(data) {
-  location_type <- colnames(data)[2]
-  location_code_type <- colnames(data)[3]
-
-  data <- data %>%
-    dplyr::select(-hosp_total, -tested_new) %>%
-    tidyr::pivot_longer(-c(date, !!location_type, !!location_code_type),  names_to = "data_type", values_to = "value")
-
-  data <- data %>%
-    dplyr::rename("location_code" = !!location_code_type,
-                  "location" = !!location_type) 
-  
-  data$location_code_type <- location_code_type
-  data$location_type <- location_type
-  
-  data <- data %>%
-    dplyr::select(date,	location,	location_type, location_code, location_code_type,	data_type, value) %>%
-    dplyr::arrange(date)
-
-  return(tibble::tibble(data))
-}
 
 #' Custom CSV reading function
 #' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
@@ -383,4 +254,4 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "cases_new_na", "cases_total_na", "deaths_new_na", "deaths_total_na",
                          "ENTRY_DATE", "DATE_IMPLEMENTED",
                          "cases_weekly", "deaths_weekly",
-                         "fecha_confirmacion", "provincia"))
+                         "fecha_confirmacion", "provincia", "get_data_function"))

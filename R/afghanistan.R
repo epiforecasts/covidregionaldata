@@ -18,13 +18,13 @@ get_afghan_regional_cases <- function(){
 
   # Read & clean data -----------------------------------------------------------------------
   url <- "https://docs.google.com/spreadsheets/d/1F-AMEDtqK78EA6LYME2oOsWQsgJi4CT3V_G4Uo-47Rg/export?format=csv"
-  data <- csv_reader(file = url)
+  data <- suppressWarnings(csv_reader(file = url))
   if (data[1,1] == "#adm1+name"){
     data <- data[-1, ]
   }
   
   # Reformat -------------------------------------------------------------------------------
-  data <- data %>%
+  data <- suppressWarnings(data %>%
     dplyr::transmute(date = lubridate::ymd(Date),
                      region_level_1 = Province %>% 
                        stringr::str_remove_all("Province") %>% 
@@ -39,7 +39,7 @@ get_afghan_regional_cases <- function(){
   # Transform (remove commas in numbers) ----------------------------------------------------
     dplyr::mutate(cases_total = as.numeric(stringr::str_remove_all(cases_total, ",")),
                   deaths_total = as.numeric(stringr::str_remove_all(deaths_total, ",")),
-                  recovered_total = as.numeric(stringr::str_remove_all(recovered_total, ",")))
+                  recovered_total = as.numeric(stringr::str_remove_all(recovered_total, ","))))
 
   return(data)
 }

@@ -1,6 +1,94 @@
-# Mains -------------------------------------------------------------------------------------
+# Setting up and localising the names of regions and regional geocodes
 
-#' Get a table of region codes for a specified country
+# Utils -------------------------------------------------------------------
+#' Helper to rename the region column in each dataset to the correct name for each country.
+#' @description The package relies on column name 'region' during processing but this often isn't the most sensible name for the column
+#' (e.g. state makes more sense for USA). This simply renames the column as the final step in processing before returning data to the user.
+#' @param data a data frame with a region_level_1 column and optionally a region_level_2 column
+#' @param country a string with the country of interest
+#' @return a tibble with the column renamed to a sensible name
+#' @importFrom dplyr %>% rename
+#' @importFrom tibble tibble
+#' 
+# Renaming the region name column
+rename_region_column <- function(data, country) {
+  
+  level_1_region_name <- switch(tolower(country),
+                                "afghanistan" = "province",
+                                "belgium" = "region",
+                                "brazil" = "state",
+                                "canada" = "province",
+                                "colombia" = "departamento",
+                                "germany" = "bundesland",
+                                "india" = "state",
+                                "italy" = "region",
+                                "russia" = "region",
+                                "uk" = "region",
+                                "usa" = "state",
+                                "cuba" = "provincia")
+  
+  data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
+  
+  if ("region_level_2" %in% colnames(data)) {
+    level_2_region_name <- switch(tolower(country),
+                                  "belgium" = "province",
+                                  "brazil" = "city",
+                                  "germany" = "landkreis",
+                                  "uk" = "authority",
+                                  "usa" = "county")
+    
+    data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
+  }
+  
+  return(tibble::tibble(data))
+}
+
+# Renaming the regional geocode column
+#' Helper to rename the region code column in each dataset to the correct code type for each country (e.g. ISO-3166-2).
+#' @description The package relies on column name 'region_level_1_code' etc. during processing but this often isn't the most 
+#' sensible name for the column (e.g. iso-3166-2 makes more sense for US states). This simply renames the column as the final step in 
+#' processing before returning data to the user.
+#' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
+#' @param country a string with the country of interest
+#' @return a tibble with the column(s) renamed to a sensible name
+#' @importFrom dplyr %>% rename
+#' @importFrom tibble tibble
+#' 
+rename_region_code_column <- function(data, country) {
+  
+  level_1_region_code_name <- switch(tolower(country),
+                                     "afghanistan" = "iso_3166_2",
+                                     "belgium" = "iso_3166_2",
+                                     "brazil" = "iso_3166_2",
+                                     "canada" = "iso_3166_2",
+                                     "colombia" = "iso_3166_2",
+                                     "germany" = "iso_3166_2",
+                                     "india" = "iso_3166_2",
+                                     "italy" = "iso_3166_2",
+                                     "russia" = "iso_3166_2",
+                                     "uk" = "ons_region_code",
+                                     "usa" = "iso_3166_2",
+                                     "cuba" = "iso_3166_2")
+  
+  data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
+  
+  if ("level_2_region_code" %in% colnames(data)) {
+    level_2_region_code_name <- switch(tolower(country),
+                                       "belgium" = "iso_3166_2_province",
+                                       "brazil" = "level_2_region_code",
+                                       "germany" = "level_2_region_code",
+                                       "uk" = "ltla_code",
+                                       "usa" = "fips")
+    
+    data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)
+  }
+  
+  return(tibble::tibble(data))
+}
+
+
+# Mains -------------------------------------------------------------------------------------
+#' Get a table of region codes to match with regional place names for a specified country
 #' @param country a string with a country specified
 #' @return a tibble of regions and their corresponding region codes
 #' @importFrom tibble tibble
@@ -291,3 +379,4 @@ get_us_level_2_codes <- function() {
 get_uk_level_2_codes <- function() {
   return(NULL)
 }
+

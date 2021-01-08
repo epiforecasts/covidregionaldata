@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_region_codes.R
 \name{get_region_codes}
 \alias{get_region_codes}
-\title{Get a table of region codes for a specified country}
+\title{Get a table of region codes to match with regional place names for a specified country}
 \usage{
 get_region_codes(country)
 }
@@ -13,5 +13,5 @@ get_region_codes(country)
 a tibble of regions and their corresponding region codes
 }
 \description{
-Get a table of region codes for a specified country
+Get a table of region codes to match with regional place names for a specified country
 }
