@@ -1,29 +1,17 @@
-test_that("get_daily_from_cumulative returns correct results", {
-  column1 <- c(0, 3, 2, 10, 0, 14, 1)
-  cumulative_col <- cumsum(column1)
-  calculated_daily <- get_daily_from_cumulative(cumulative_col)
-
-  expect_equal(column1, calculated_daily)
-})
-
-test_that("get_cumulative_from_daily returns correct results", {
-  column1 <- c(0, 3, 2, NA, 0, 14, 1)
-  cumulative_col <- c(0, 3, 5, 5, 5, 19, 20)
-  calculated_daily <- get_cumulative_from_daily(column1)
-
-  expect_equal(cumulative_col, calculated_daily)
-})
-
 test_that("calculate_columns_from_existing_data returns correct results", {
-  cases_new <- c(0, 3, 2, NA_integer_, 0, 14, 1)
-  deaths_total <- c(0, 5, 7, 10, 15, 18, 26)
-  input_data <- tibble::tibble(cases_new, deaths_total)
+  
+  input_data <- tibble::tibble("date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
+                               "region_level_1" = c(rep("A", 4), rep("B", 3)),
+                               "cases_new" = c(0,1,NA_integer_,1,   1,1,1),
+                               "deaths_total" = c(0,1,2,3,   1,NA_integer_,2))
 
-  cases_total <- c(0, 3, 5, 5, 5, 19, 20)
-  deaths_new <- c(0, 5, 2, 3, 5, 3, 8)
-  expected_data <- tibble::tibble(cases_new, deaths_total, cases_total, deaths_new)
-
-  expect_equal(calculate_columns_from_existing_data(input_data), expected_data)
+  calculated_data <- calculate_columns_from_existing_data(input_data)
+  cases_total <- c(0,1,1,2, 1,2,3)
+  deaths_new <- c(0,1,1,1, 1,0,1)
+  
+  expect_equal(calculated_data$cases_total, cases_total)
+  expect_equal(calculated_data$deaths_new, deaths_new)
+  
 })
 
 test_that("add_extra_na_cols is working", {

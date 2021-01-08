@@ -254,4 +254,4 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "cases_new_na", "cases_total_na", "deaths_new_na", "deaths_total_na",
                          "ENTRY_DATE", "DATE_IMPLEMENTED",
                          "cases_weekly", "deaths_weekly",
-                         "fecha_confirmacion", "provincia"))
+                         "fecha_confirmacion", "provincia", "get_data_function"))
