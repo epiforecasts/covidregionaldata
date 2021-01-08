@@ -206,6 +206,7 @@ calculate_columns_from_existing_data <- function(data) {
       data <- data %>% 
         dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
         dplyr::arrange(date, .by_group = TRUE) %>%
+        tidyr::fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         dplyr::mutate(!!count_today_name := (!!as.name(cumulative_count_name)) - dplyr::lag(!!as.name(cumulative_count_name)))
     }
   }
