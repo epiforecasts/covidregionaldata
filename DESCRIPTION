@@ -16,9 +16,9 @@ Authors@R: c(person(given = "Sam Abbott",
            email = "Hamish.Gibbs@lshtm.ac.uk",
            role = c("aut"),
            comment = c(ORCID = "0000-0003-4413-453X")),
-    person("Sophie", "Meakin", 
-           email = "sophie.meaking@lshtm.ac.uk", 
-           role = c("ctb")), 
+    person("Sophie", "Meakin",
+           email = "sophie.meaking@lshtm.ac.uk",
+           role = c("ctb")),
     person("Joel", "Hellewell",
            email = "joel.hellewell@lshtm.ac.uk",
            role = c("ctb"),
@@ -55,7 +55,7 @@ Description: An interface to subnational and national level Covid-19 data.
     Canada: <https://health-infobase.canada.ca/>; Colombia: <https://github.com/danielcs88/colombia_covid-19>;
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
-    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>, 
+    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>,
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
     USA: <https://github.com/nytimes/covid-19-data>),
     Cuba: <https://covid19cubadata.github.io>,
@@ -69,6 +69,7 @@ Depends:
     R (>= 2.10)
 Imports:
     readr,
+    vroom,
     dplyr,
     tibble,
     purrr,
