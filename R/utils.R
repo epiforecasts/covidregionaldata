@@ -137,25 +137,25 @@ calculate_columns_from_existing_data <- function(data) {
 #' Custom CSV reading function
 #' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
 #' @param file A URL or filepath to a CSV
-#' @param ... extra parameters to be passed to readr::read_cs
+#' @param ... extra parameters to be passed to vroom::vroom
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
-#' @importFrom readr read_csv cols
+#' @importFrom vroom vroom
 #' @importFrom tibble tibble
 #' 
 csv_reader <- function(file, ...) {
 
-  read_csv_fun <- readr::read_csv
+  read_csv_fun <- vroom::vroom
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
       ch <- memoise::cache_filesystem(".cache")
-      read_csv_fun <- memoise::memoise(readr::read_csv, cache = ch)
+      read_csv_fun <- memoise::memoise(vroom::vroom, cache = ch)
     }
   }
 
-  data <- read_csv_fun(file, col_types = readr::cols(), ...)
+  data <- read_csv_fun(file, ...)
   return(tibble::tibble(data))
 }
 
