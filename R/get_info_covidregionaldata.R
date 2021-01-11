@@ -94,6 +94,14 @@ get_info_covidregionaldata <- function() {
     "cases_total",
     
     "get_regional_data",
+    "south africa",
+    "provinces",
+    NA,
+    NA,
+    "https://github.com/dsfsi/covid19za",
+    "cases_total, deaths_total",
+    
+    "get_regional_data",
     "uk",
     "ONS/NHS regions",
     "local authority",

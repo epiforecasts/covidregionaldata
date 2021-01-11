@@ -25,7 +25,8 @@ rename_region_column <- function(data, country) {
                                 "russia" = "region",
                                 "uk" = "region",
                                 "usa" = "state",
-                                "cuba" = "provincia")
+                                "cuba" = "provincia",
+                                "south africa" = "province")
   
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
   
@@ -68,7 +69,8 @@ rename_region_code_column <- function(data, country) {
                                      "russia" = "iso_3166_2",
                                      "uk" = "ons_region_code",
                                      "usa" = "iso_3166_2",
-                                     "cuba" = "iso_3166_2")
+                                     "cuba" = "iso_3166_2",
+                                     "south africa" = "iso_3166_2")
   
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
   
@@ -106,7 +108,8 @@ get_region_codes <- function(country) {
                          "russia" = get_russia_region_codes,
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
-                         "cuba" = get_cuba_region_codes)
+                         "cuba" = get_cuba_region_codes,
+                         "south africa" = get_southafrica_region_codes)
 
   region_codes_table <- do.call(region_code_fun, list())
 
@@ -330,6 +333,12 @@ get_cuba_region_codes <- function() {
                 "Mayabeque")   
   )
   return(region_codes)
+}
+
+#' South Africa region codes (NULL - they're in the raw data already)
+#' 
+get_southafrica_region_codes <- function() {
+  return(NULL)
 }
 
 # Level 2 regions -------------------------------------------------------------------------------------
