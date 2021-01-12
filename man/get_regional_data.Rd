@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_regional_data.R
 \name{get_regional_data}
 \alias{get_regional_data}
-\title{The main calculation function for covidregionaldata. The majority of the work is done in this function.}
+\title{Fetch standardised sub-national Covid-19 data}
 \usage{
 get_regional_data(
   country,
@@ -29,7 +29,7 @@ Note that Level 2 region data Sis not always available. In these cases the user 
 A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
 }
 \description{
-Gets raw data using the country-specific function. Adds the region codes.
+The main calculation function for covidregionaldata. Gets raw data using the country-specific function. Adds the region codes.
 Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
 cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format.
 }

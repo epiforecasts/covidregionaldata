@@ -1,6 +1,6 @@
-#' The main calculation function for covidregionaldata. The majority of the work is done in this function.
+#' Fetch standardised sub-national Covid-19 data 
 #' 
-#' @description Gets raw data using the country-specific function. Adds the region codes. 
+#' @description The main calculation function for covidregionaldata. Gets raw data using the country-specific function. Adds the region codes. 
 #' Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
 #' cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format. 
 #' 
@@ -82,6 +82,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
                                 "cuba" = get_cuba_regional_cases,
+                                "south africa" = get_southafrica_regional_cases_only_level_1,
                                 stop("There is no data for the country entered. It is likely we haven't added data
                                    for that country yet, or there was a spelling mistake."))
     
