@@ -1,4 +1,5 @@
 # covidregionaldata 0.8.3
+Both Cuba and South Africa now have admin level 1 (provincia/province) data available in `get_regional_data()`.
 
 Our main source for Covid-19 notification data, the ECDC, stopped producing daily data and switched to a weekly update released each Thursday. As an interim measure we have switched to our secondary source, the WHO, as the default. 
 
@@ -7,7 +8,6 @@ Our main source for Covid-19 notification data, the ECDC, stopped producing dail
 * Replaced silently broken functions for converting cumulative data to daily and vice versa.
 * Removed integration with Covid19R formatting.
 * Relevant up to date package information can be fetched using `get_info_covidregionaldata()`.
-* Cuba - added new data for provinces (region level 1).
 * UK data - added option to get either lower tier or upper tier local authorities (level 2 regions). 
 * UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these don't fit into the existing data structure and are not available at lower level regions.
 * Removed code that required ECDC variables to work. 
