@@ -275,7 +275,6 @@ get_uk_data <- function(filters, release_date = NULL) {
 #' @description Gets data from \url{https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv}
 #' and then uses this to create a table of authorities and their corresponding higher level regions
 #' @return A tibble of UK local authorities
-#' @importFrom readr read_csv cols col_character
 #' @importFrom dplyr select %>% distinct filter bind_rows arrange
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
@@ -283,10 +282,10 @@ get_uk_data <- function(filters, release_date = NULL) {
 get_authority_lookup_table <- function() {
   
   # Look-up table for Authority Structures ----------------------------------
-  authority_data <- readr::read_csv("https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv",
-                                    col_types = readr::cols(WD17NMW = readr::col_character(),
-                                                            CTY17CD = readr::col_character(),
-                                                            CTY17NM = readr::col_character()))
+  authority_data <- vroom::vroom("https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv",
+                                    col_types = c(WD17NMW = col_character(),
+                                                  CTY17CD = col_character(),
+                                                  CTY17NM = col_character()))
   
   unitary_auth <- authority_data %>%
     dplyr::select(level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM", 

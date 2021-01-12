@@ -5,7 +5,6 @@
 #' @author Kath Sherratt @kathsherratt
 #' @author Haze Lee @hazealign
 #' @return A dataframe of International case counts published by ECDC.
-#' @importFrom readr read_csv
 #' @importFrom httr GET write_disk
 #' @importFrom readxl read_excel
 #' @importFrom dplyr mutate rename select arrange filter
