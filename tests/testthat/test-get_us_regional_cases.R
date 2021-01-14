@@ -1,11 +1,11 @@
 test_that("get_us_regional_cases data source is unchanged", {
   skip_on_cran()
   
-  data <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
+  data <- vroom::vroom("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
   expected_colnames = c("date", "state", "fips", "cases", "deaths")
   expect_true(all(expected_colnames %in% colnames(data)))
   
-  data <- readr::read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+  data <- vroom::vroom("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
   expected_colnames = c("date", "county", "state", "fips", "cases", "deaths")
   expect_true(all(expected_colnames %in% colnames(data)))
   

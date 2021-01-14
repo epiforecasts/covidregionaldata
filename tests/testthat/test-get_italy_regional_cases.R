@@ -2,7 +2,7 @@ test_that("get_italy_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
   url <- "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
-  data <- readr::read_csv(url)
+  data <- vroom::vroom(url)
   expected_colnames <- c("data", "stato", "codice_regione", "denominazione_regione", 
                          "deceduti", "totale_casi", "tamponi")
   expect_true(all(expected_colnames %in% colnames(data)))

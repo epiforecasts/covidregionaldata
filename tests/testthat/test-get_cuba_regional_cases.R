@@ -2,7 +2,7 @@ test_that("get_cuba_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
   url <- "https://covid19cubadata.github.io/data/covid19-casos.csv"
-  data <- readr::read_csv(url)
+  data <- vroom::vroom(url)
   expected_colnames <- c("fecha_confirmacion", "provincia")
   expect_true(all(expected_colnames %in% colnames(data)))
   expect_true(max(as.Date(data$fecha_confirmacion), na.rm = TRUE) > Sys.Date() - 7)

@@ -1,7 +1,7 @@
 test_that("get_india_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
-  data <- readr::read_csv("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
+  data <- vroom::vroom("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
   expected_colnames <- c("Date", "Status", "TT", "AN", 	"AP", 	"AR", 	"AS", 	"BR", 	"CH", 	"CT", 	"DN",
                          "DD", 	"DL", 	"GA", 	"GJ", 	"HR", 	"HP", 	"JK", 	"JH",
                          "KA", 	"KL", 	"LA", 	"LD", 	"MP", 	"MH", 	"MN", 	"ML",

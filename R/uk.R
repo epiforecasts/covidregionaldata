@@ -278,6 +278,7 @@ get_uk_data <- function(filters, release_date = NULL) {
 #' @importFrom dplyr select %>% distinct filter bind_rows arrange
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
+#' @importFrom vroom vroom col_character
 
 get_authority_lookup_table <- function() {
   

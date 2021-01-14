@@ -66,7 +66,6 @@ get_belgium_regional_cases_only_level_1 <- function() {
 #' @importFrom dplyr %>% select group_by tally rename full_join mutate ungroup
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate ymd
-#' @importFrom readr locale
 get_belgium_regional_cases_with_level_2 <- function(){
 
   # Paths to data ---------------------------------------------------------------

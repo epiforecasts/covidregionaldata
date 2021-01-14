@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
-Version: 0.8.3
+Version: 0.8.3.1
 Authors@R: c(person(given = "Sam Abbott",
            role = c("aut", "cre"),
            email = "sam.abbott@lshtm.ac.uk",
@@ -68,7 +68,6 @@ BugReports: https://github.com/epiforecasts/covidregionaldata/issues
 Depends:
     R (>= 2.10)
 Imports:
-    readr,
     vroom,
     dplyr,
     tibble,

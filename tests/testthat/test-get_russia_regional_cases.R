@@ -1,7 +1,7 @@
 # test_that("get_russia_regional_cases data source is unchanged and up to date", {
 #   skip_on_cran()
 #
-#   data <- readr::read_csv("https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv")
+#   data <- vroom::vroom("https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv")
 #   expected_colnames <- c("UID", "iso2", "iso3", "code3", "FIPS", "Admin2", "Province_State", "Country_Region",
 #                          "Lat", "Long_", "Combined_Key")
 #   expect_true(all(expected_colnames %in% colnames(data)))

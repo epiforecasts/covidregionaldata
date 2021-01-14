@@ -1,7 +1,7 @@
 test_that("get_germany_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
-  data <- readr::read_csv("https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv")
+  data <- vroom::vroom("https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv")
 
   expected_colnames = c("ObjectId", "IdBundesland", "Bundesland", "Landkreis", "Altersgruppe", "Geschlecht",
                         "AnzahlFall", "AnzahlTodesfall", "Meldedatum", "IdLandkreis", "Datenstand", "NeuerFall",

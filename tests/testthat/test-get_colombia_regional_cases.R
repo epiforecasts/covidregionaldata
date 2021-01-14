@@ -1,7 +1,7 @@
 test_that("get_colombia_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
-  data <- readr::read_csv("https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv")
+  data <- vroom::vroom("https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv")
   expected_colnames <- c("fecha", "departamento", "casos")
   expect_true(all(expected_colnames %in% colnames(data)))
   expect_true(max(lubridate::ymd(data$fecha), na.rm = TRUE) > Sys.Date() - 7)

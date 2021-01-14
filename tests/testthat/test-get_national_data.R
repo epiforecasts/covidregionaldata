@@ -24,7 +24,7 @@ test_that("get_ecdc_cases works as expected", {
   skip_on_cran()
   
   url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
-  ecdc <- try(readr::read_csv(url))
+  ecdc <- try(vroom::vroom(url))
   # If no csv, try excel
   if ("try-error" %in% class(ecdc)) {
     url_xl <- "https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-21.xlsx"
@@ -44,7 +44,7 @@ test_that("get_ecdc_cases works as expected", {
 test_that("get_who_cases works as expected", {
   skip_on_cran()
   url <- "https://covid19.who.int/WHO-COVID-19-global-data.csv"
-  who <- readr::read_csv(url)
+  who <- vroom::vroom(url)
   expect_equal(ncol(who), 8)
 })
 

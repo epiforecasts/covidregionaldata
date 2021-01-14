@@ -1,7 +1,7 @@
 test_that("get_canada_regional_cases data source is unchanged and up to date", {
   skip_on_cran()
   
-  data <- readr::read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
+  data <- vroom::vroom("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
   expected_colnames <- c("pruid", "prname", "prnameFR", "date", "numconf", "numprob",
                         "numdeaths", "numtotal", "numtested", "numrecover", "percentrecover",
                         "ratetested", "numtoday", "percentoday")
