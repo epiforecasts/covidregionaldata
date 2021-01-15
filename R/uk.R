@@ -157,18 +157,18 @@ get_uk_regional_cases_with_level_2 <- function(resolution = "utla", release_date
   
   data_lv2 <- data %>%
     dplyr::mutate(date = lubridate::ymd(date),
-                  # Cases and deaths are by publish date for Scotland, Wales, NI; 
-                  #   but by specimen date and date of death for England
-                  cases_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                  # Cases and deaths are by publish date for Scotland, Wales; 
+                  #   but by specimen date and date of death for England and NI
+                  cases_new = ifelse(stringr::str_detect(areaCode, "^[EN]"), 
                                      newCasesBySpecimenDate,
                                      newCasesByPublishDate),
-                  cases_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                  cases_total = ifelse(stringr::str_detect(areaCode, "^[EN]"), 
                                        cumCasesBySpecimenDate,
                                        cumCasesByPublishDate),
-                  deaths_new = ifelse(stringr::str_detect(areaCode, "^E"), 
+                  deaths_new = ifelse(stringr::str_detect(areaCode, "^[EN]"), 
                                       newDeaths28DaysByDeathDate,
                                       newDeaths28DaysByPublishDate),
-                  deaths_total = ifelse(stringr::str_detect(areaCode, "^E"), 
+                  deaths_total = ifelse(stringr::str_detect(areaCode, "^[EN]"), 
                                         cumDeaths28DaysByDeathDate,
                                         cumDeaths28DaysByPublishDate)) %>%
     # Hospitalisations and tested variables are consistent across nations

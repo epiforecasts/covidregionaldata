@@ -5,11 +5,15 @@
 * Level 1 admin data for Cuba
 * Level 1 admin data for South Africa
 
-## New features
+## Data set changes
 
 * UK data - added option to get either lower tier or upper tier local authorities (level 2 regions).
-* Relevant up to date package information can be fetched using `get_info_covidregionaldata()`.
+* Updated Northern Ireland case data to be by specimen date by default rather than by date of report as was previously the case. This means that in the UK all data except for data streams from Wales and Scotland are by date of specimen.
 * Switched to the WHO source as our default for national level data.
+
+## New features
+
+* Relevant up to date package information can be fetched using `get_info_covidregionaldata()`.
 * Switched to using `vroom` for faster `csv` downloads.
 
 ## Other changes
