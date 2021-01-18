@@ -26,7 +26,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
   if (any(class(linelist) %in% "try-error")) {
     message("Downloading linelist")
     
-    url <- "https://raw.github.com/beoutbreakprepared/nCoV2019/master/latest_data/latestdata.tar.gz"
+    url <- "https://github.com/beoutbreakprepared/nCoV2019/raw/master/latest_data/latestdata.tar.gz"
     
 
     download.file(url, destfile = file.path(tmpdir, "tmp.tar.gz"))
@@ -43,6 +43,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
         stop("Problem getting linelist source")
       }
     }
+    
   }
  
 
@@ -75,5 +76,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
     
   }
 
+  message("Note: This linelist covers January to June 2020. We will update when a new data source becomes available.")
+  
   return(linelist)
 }
