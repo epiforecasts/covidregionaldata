@@ -26,7 +26,7 @@ test_that("get_france_regional_cases returns the correct column names", {
   
   adm_level_2 <- get_france_regional_cases_with_level_2()
 
-  expect_setequal(colnames(adm_level_2), returned_colnames_adm_level_2)
+  expect_setequal(colnames(adm_level_2), expected_colnames_adm_level_2)
 })
 
 test_that("get_france_regional_cases returns correct column types", {
