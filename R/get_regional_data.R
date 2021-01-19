@@ -43,6 +43,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   country <- tolower(country)
   countries_with_level_2_regions <- c("belgium",
                                       "brazil",
+                                      "france",
                                       "germany",
                                       "usa",
                                       "uk")
@@ -58,6 +59,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     get_data_function <- switch(country,
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
+                                "france" = get_france_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
                                 "uk" = get_uk_regional_cases_with_level_2,
                                 "usa" = get_us_regional_cases_with_level_2,
@@ -75,6 +77,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "brazil" = get_brazil_regional_cases_only_level_1,
                                 "canada" = get_canada_regional_cases,
                                 "colombia" = get_colombia_regional_cases,
+                                "france" = get_france_regional_cases_only_level_1,
                                 "germany" = get_germany_regional_cases_only_level_1,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,

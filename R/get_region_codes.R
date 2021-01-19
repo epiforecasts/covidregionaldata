@@ -20,6 +20,7 @@ rename_region_column <- function(data, country) {
                                 "canada" = "province",
                                 "colombia" = "departamento",
                                 "germany" = "bundesland",
+                                "france" = "region",
                                 "india" = "state",
                                 "italy" = "region",
                                 "russia" = "region",
@@ -34,6 +35,7 @@ rename_region_column <- function(data, country) {
     level_2_region_name <- switch(tolower(country),
                                   "belgium" = "province",
                                   "brazil" = "city",
+                                  "france" = "departement",
                                   "germany" = "landkreis",
                                   "uk" = "authority",
                                   "usa" = "county")
@@ -102,6 +104,7 @@ get_region_codes <- function(country) {
                          "brazil" = get_brazil_region_codes,
                          "canada" = get_canada_region_codes,
                          "colombia" = get_colombia_region_codes,
+                         "france" = get_france_region_codes,
                          "germany" = get_germany_region_codes,
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
@@ -125,6 +128,7 @@ get_level_2_region_codes <- function(country) {
   level_2_code_fun <- switch(country,
                              "belgium" = get_belgium_level_2_codes,
                              "brazil" = get_brazil_level_2_codes,
+                             "france" = get_france_level_2_codes,
                              "germany" = get_germany_level_2_codes,
                              "uk" = get_uk_level_2_codes,
                              "usa" = get_us_level_2_codes)
@@ -372,6 +376,18 @@ get_germany_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = NA,
     region = NA)
+  return(region_codes)
+}
+
+get_france_level_2_codes <- function() {
+  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:FR"
+  region_table <- region_url %>%
+    xml2::read_html() %>%
+    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
+    rvest::html_table(fill=TRUE)
+  region_codes <- region_table[[2]] %>%
+    dplyr::select(level_2_region_code = Code,
+                  region = `Subdivision name`)
   return(region_codes)
 }
 
