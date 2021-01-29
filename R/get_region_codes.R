@@ -35,7 +35,7 @@ rename_region_column <- function(data, country) {
     level_2_region_name <- switch(tolower(country),
                                   "belgium" = "province",
                                   "brazil" = "city",
-                                  "france" = "departement",
+                                  "france" = "department",
                                   "germany" = "landkreis",
                                   "uk" = "authority",
                                   "usa" = "county")
@@ -66,6 +66,7 @@ rename_region_code_column <- function(data, country) {
                                      "canada" = "iso_3166_2",
                                      "colombia" = "iso_3166_2",
                                      "germany" = "iso_3166_2",
+                                     "france" = "iso_3166_2",
                                      "india" = "iso_3166_2",
                                      "italy" = "iso_3166_2",
                                      "russia" = "iso_3166_2",
@@ -81,6 +82,7 @@ rename_region_code_column <- function(data, country) {
                                        "belgium" = "iso_3166_2_province",
                                        "brazil" = "level_2_region_code",
                                        "germany" = "level_2_region_code",
+                                       "france" = "iso_3166_department",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
     
@@ -345,6 +347,13 @@ get_southafrica_region_codes <- function() {
   return(NULL)
 }
 
+#' France region codes (NULL - they're in the raw data already)
+#' 
+get_france_region_codes <- function() {
+  return(NULL)
+}
+
+
 # Level 2 regions -------------------------------------------------------------------------------------
 
 #' Belgian Provincial region codes
@@ -379,16 +388,9 @@ get_germany_level_2_codes <- function() {
   return(region_codes)
 }
 
+#' France level 2 codes (included in original function)
 get_france_level_2_codes <- function() {
-  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:FR"
-  region_table <- region_url %>%
-    xml2::read_html() %>%
-    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
-    rvest::html_table(fill=TRUE)
-  region_codes <- region_table[[2]] %>%
-    dplyr::select(level_2_region_code = Code,
-                  region = `Subdivision name`)
-  return(region_codes)
+  return(NULL)
 }
 
 #' US level 2 codes (FIPS) (Included in original function)

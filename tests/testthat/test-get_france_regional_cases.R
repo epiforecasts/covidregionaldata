@@ -15,14 +15,14 @@ test_that("get_france_regional_cases data source is unchanged and up to date", {
 test_that("get_france_regional_cases returns the correct column names", {
   skip_on_cran()
   
-  expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_new", "tested_new")
+  expected_colnames_adm_level_1 <- c("insee_code", "level_1_region_code", "region_level_1", "date", "cases_new", "tested_new")
   
   adm_level_1 <- get_france_regional_cases_only_level_1()
   
   expect_setequal(colnames(adm_level_1), expected_colnames_adm_level_1)
 
 
-  expected_colnames_adm_level_2 <- c("region_level_2", "date", "cases_new", "tested_new", "hosp_new", "deaths_new")
+  expected_colnames_adm_level_2 <- c("level_2_region_code", "region_level_2", "level_1_region_code", "region_level_1", "date", "cases_new", "tested_new", "hosp_new", "deaths_new")
   
   adm_level_2 <- get_france_regional_cases_with_level_2()
 
