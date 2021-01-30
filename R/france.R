@@ -1,9 +1,9 @@
-#' French Regional Daily COVID-19 Count Data - Région
+#' French Regional Daily COVID-19 Count Data - Region
 #'
-#' @description Extracts daily COVID-19 data for France, stratified by région.
+#' @description Extracts daily COVID-19 data for France, stratified by region.
 #' Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 #' It is loaded and then sanitised.
-#' @return A data frame of COVID cases by Région in France, ready to be used by \code{get_regional_data()}.
+#' @return A data frame of COVID cases by Region in France, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr %>% filter select mutate left_join rename
 #' @importFrom lubridate as_date ymd
 #' @importFrom tibble tibble
@@ -14,10 +14,9 @@ get_france_regional_cases_only_level_1 <- function() {
     iso_code = c("FR-ARA", "FR-BFC", "FR-BRE", "FR-CVL", "FR-20R", "FR-GES", "FR-GP", "FR-GF", "FR-HDF", "FR-IDF", "FR-RE", "FR-MQ", "FR-YT", 
                  "FR-NOR", "FR-NAQ", "FR-OCC", "FR-PDL", "FR-PAC", "FR-PM", "FR-BL", "FR-MF"),
     insee_code = c("84", "27", "53", "24", "94", "44", "01", "03", "32", "11", "04", "02", "06", "28", "75", "76", "52", "93", "05", "07", "08"),
-    region_level_1 = c("Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire", "Corse", "Grand-Est", "Guadeloupe", 
-                       "Guyane (française)", "Hauts-de-France", "Île-de-France", "La Réunion", "Martinique", "Mayotte", "Normandie", "Nouvelle-Aquitaine", 
-                       "Occitanie", "Pays-de-la-Loire", "Provence-Alpes-Côte-d’Azur", "Saint-Barthélemy", "Saint-Martin", "Saint-Pierre et Miquelon"))
-    
+    region_level_1 = c("Auvergne-Rhone-Alpes", "Bourgogne-Franche-Comte", "Bretagne", "Centre-Val de Loire", "Corse", "Grand-Est", "Guadeloupe", 
+                       "Guyane (francaise)", "Hauts-de-France", "Ile-de-France", "La Reunion", "Martinique", "Mayotte", "Normandie", "Nouvelle-Aquitaine", 
+                       "Occitanie", "Pays-de-la-Loire", "Provence-Alpes-Cote-d'Azur", "Saint-Barthelemy", "Saint-Martin", "Saint-Pierre et Miquelon"))
   
   
   # Read data --------------------------------------------------------------------
@@ -36,12 +35,12 @@ get_france_regional_cases_only_level_1 <- function() {
   return(cases_data)
 }
 
-#' French Regional Daily COVID-19 Count Data - Département
+#' French Regional Daily COVID-19 Count Data - Departement
 #'
-#' @description Extracts daily COVID-19 data for France, stratified by département.
+#' @description Extracts daily COVID-19 data for France, stratified by departement.
 #' Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 #' It is loaded and then sanitised.
-#' @return A data.frame of COVID cases by département in France, ready to be used by get_regional_data().
+#' @return A data.frame of COVID cases by departement in France, ready to be used by get_regional_data().
 #' @importFrom dplyr filter select mutate full_join left_join rename bind_rows
 #' @importFrom lubridate as_date ymd
 #' @importFrom xml2 read_html
@@ -60,7 +59,7 @@ get_france_regional_cases_with_level_2 <- function() {
   missing_level_2_codes = tibble::tibble(
     level_1_region_code = c("FR-PM", "FR-BL", "FR-MF"),
     level_2_region_code =  c("FR-977", "FR-978", "FR-975"),
-    region_level_1 = c("Saint-Barthélemy", "Saint-Martin", "Saint-Pierre et Miquelon"),
+    region_level_1 = c("Saint-Barthelemy", "Saint-Martin", "Saint-Pierre et Miquelon"),
     region_level_2 = region_level_1)
   
   level_2_codes <- level_2_codes_table[[2]] %>%

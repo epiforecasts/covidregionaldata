@@ -2,15 +2,15 @@
 % Please edit documentation in R/france.R
 \name{get_france_regional_cases_with_level_2}
 \alias{get_france_regional_cases_with_level_2}
-\title{French Regional Daily COVID-19 Count Data - Département}
+\title{French Regional Daily COVID-19 Count Data - Departement}
 \usage{
 get_france_regional_cases_with_level_2()
 }
 \value{
-A data.frame of COVID cases by département in France, ready to be used by get_regional_data().
+A data.frame of COVID cases by departement in France, ready to be used by get_regional_data().
 }
 \description{
-Extracts daily COVID-19 data for France, stratified by département.
+Extracts daily COVID-19 data for France, stratified by departement.
 Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 It is loaded and then sanitised.
 }
