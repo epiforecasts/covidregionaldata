@@ -35,7 +35,7 @@ rename_region_column <- function(data, country) {
     level_2_region_name <- switch(tolower(country),
                                   "belgium" = "province",
                                   "brazil" = "city",
-                                  "france" = "department",
+                                  "france" = "departement",
                                   "germany" = "landkreis",
                                   "uk" = "authority",
                                   "usa" = "county")
@@ -82,7 +82,7 @@ rename_region_code_column <- function(data, country) {
                                        "belgium" = "iso_3166_2_province",
                                        "brazil" = "level_2_region_code",
                                        "germany" = "level_2_region_code",
-                                       "france" = "iso_3166_department",
+                                       "france" = "iso_3166_departement",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
     

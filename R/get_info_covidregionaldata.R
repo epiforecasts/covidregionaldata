@@ -47,7 +47,7 @@ get_info_covidregionaldata <- function() {
     
     "get_regional_data",
     "colombia",
-    "departments",
+    "departamentos",
     NA,
     NA,
     "https://raw.githubusercontent.com/ideascol/covid19/master/data/data_dptos_trend.csv",

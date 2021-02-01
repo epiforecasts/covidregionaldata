@@ -1,6 +1,6 @@
 #' French Regional Daily COVID-19 Count Data - Region
 #'
-#' @description Extracts daily COVID-19 data for France, stratified by region.
+#' @description Extracts daily COVID-19 data for France, stratified by region and departement.
 #' Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by Region in France, ready to be used by \code{get_regional_data()}.
