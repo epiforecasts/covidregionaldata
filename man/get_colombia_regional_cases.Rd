@@ -2,12 +2,12 @@
 % Please edit documentation in R/colombia.R
 \name{get_colombia_regional_cases}
 \alias{get_colombia_regional_cases}
-\title{Colombian Regional Daily COVID-19 Count Data - Department}
+\title{Colombian Regional Daily COVID-19 Count Data - Departamento}
 \usage{
 get_colombia_regional_cases()
 }
 \value{
-A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_data()}.
+A data frame of COVID cases by departamento in Colombia, ready to be used by \code{get_regional_data()}.
 }
 \description{
 Extracts daily COVID-19 data for Colombia, stratified by departamento.

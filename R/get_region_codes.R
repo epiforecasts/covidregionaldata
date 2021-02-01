@@ -20,6 +20,7 @@ rename_region_column <- function(data, country) {
                                 "canada" = "province",
                                 "colombia" = "departamento",
                                 "germany" = "bundesland",
+                                "france" = "region",
                                 "india" = "state",
                                 "italy" = "region",
                                 "russia" = "region",
@@ -34,6 +35,7 @@ rename_region_column <- function(data, country) {
     level_2_region_name <- switch(tolower(country),
                                   "belgium" = "province",
                                   "brazil" = "city",
+                                  "france" = "departement",
                                   "germany" = "landkreis",
                                   "uk" = "authority",
                                   "usa" = "county")
@@ -64,6 +66,7 @@ rename_region_code_column <- function(data, country) {
                                      "canada" = "iso_3166_2",
                                      "colombia" = "iso_3166_2",
                                      "germany" = "iso_3166_2",
+                                     "france" = "iso_3166_2",
                                      "india" = "iso_3166_2",
                                      "italy" = "iso_3166_2",
                                      "russia" = "iso_3166_2",
@@ -79,6 +82,7 @@ rename_region_code_column <- function(data, country) {
                                        "belgium" = "iso_3166_2_province",
                                        "brazil" = "level_2_region_code",
                                        "germany" = "level_2_region_code",
+                                       "france" = "iso_3166_departement",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
     
@@ -102,6 +106,7 @@ get_region_codes <- function(country) {
                          "brazil" = get_brazil_region_codes,
                          "canada" = get_canada_region_codes,
                          "colombia" = get_colombia_region_codes,
+                         "france" = get_france_region_codes,
                          "germany" = get_germany_region_codes,
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
@@ -125,6 +130,7 @@ get_level_2_region_codes <- function(country) {
   level_2_code_fun <- switch(country,
                              "belgium" = get_belgium_level_2_codes,
                              "brazil" = get_brazil_level_2_codes,
+                             "france" = get_france_level_2_codes,
                              "germany" = get_germany_level_2_codes,
                              "uk" = get_uk_level_2_codes,
                              "usa" = get_us_level_2_codes)
@@ -341,6 +347,13 @@ get_southafrica_region_codes <- function() {
   return(NULL)
 }
 
+#' France region codes (NULL - they're in the raw data already)
+#' 
+get_france_region_codes <- function() {
+  return(NULL)
+}
+
+
 # Level 2 regions -------------------------------------------------------------------------------------
 
 #' Belgian Provincial region codes
@@ -373,6 +386,11 @@ get_germany_level_2_codes <- function() {
     level_2_region_code = NA,
     region = NA)
   return(region_codes)
+}
+
+#' France level 2 codes (included in original function)
+get_france_level_2_codes <- function() {
+  return(NULL)
 }
 
 #' US level 2 codes (FIPS) (Included in original function)

@@ -1,9 +1,9 @@
-#' Colombian Regional Daily COVID-19 Count Data - Department
+#' Colombian Regional Daily COVID-19 Count Data - Departamento
 #'
 #' @description Extracts daily COVID-19 data for Colombia, stratified by departamento.
 #' Data available at  \url{https://github.com/danielcs88/colombia_covid-19}.
 #' It is loaded and then cleaned.
-#' @return A data frame of COVID cases by department in Colombia, ready to be used by \code{get_regional_data()}.
+#' @return A data frame of COVID cases by departamento in Colombia, ready to be used by \code{get_regional_data()}.
 #' @importFrom dplyr select mutate %>%
 #' @importFrom lubridate mdy
 #' @importFrom stringr str_replace_all str_to_sentence

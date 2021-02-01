@@ -255,4 +255,6 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "ENTRY_DATE", "DATE_IMPLEMENTED",
                          "cases_weekly", "deaths_weekly",
                          "fecha_confirmacion", "provincia", "get_data_function",
-                         "col_character", "YYYYMMDD", "total"))
+                         "col_character", "YYYYMMDD", "total",
+                         "Subdivision name", "cl_age90", "jour", "reg", "P", "incid_hosp", "incid_dc", "dep",
+                         "In region(since 2016)", "Subdivision category", "Subdivision name (fr)"))

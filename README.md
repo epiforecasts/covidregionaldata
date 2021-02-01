@@ -140,6 +140,7 @@ We include sub-national data in the following countries. These are the accepted 
 **Continent** | **Country**|**Level 1**|**Level 2**
 :-----:| :-----:|:-----:|:-----:
 Europe | Belgium | Region | Province
+Europe | France  | Région | Département
 Europe | Germany | Bundesland | Landkreis
 Europe | UK | NHS region | Local authority
 Europe | Italy | Region | NA

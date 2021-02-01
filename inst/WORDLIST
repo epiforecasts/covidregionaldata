@@ -8,6 +8,7 @@ Codecov
 Cota
 Covid
 DD
+Département
 ECDC
 Github
 HDX
@@ -17,6 +18,7 @@ Limburg
 Linelist
 Muijen
 PHE
+Région
 SciELOPreprints
 Sciensano
 VLG
@@ -36,6 +38,7 @@ departamento
 develVersion
 dmuijen
 dplyr
+département
 etc
 ffinger
 filepath
@@ -57,6 +60,7 @@ org
 paulcampbell
 quickstart
 reparameterise
+région
 sam
 seabbs
 shapefiles

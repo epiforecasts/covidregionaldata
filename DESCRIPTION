@@ -41,7 +41,10 @@ Authors@R: c(person(given = "Sam Abbott",
             role = c("ctb")),
     person("Sebastian", "Funk",
             email = "sebastian.funk@lshtm.ac.uk",
-            role = c("aut")))
+            role = c("aut")),
+    person("Hugo", "Gruson",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0002-4094-1476")))
 Description: An interface to subnational and national level Covid-19 data.
     For all countries supported, this includes a daily time-series of cases.
     Wherever available we also provide  data on deaths, hospitalisations, and tests.
@@ -54,6 +57,7 @@ Description: An interface to subnational and national level Covid-19 data.
     Belgium: <https://epistat.wiv-isp.be/covid/>; Brazil: <https://github.com/wcota/covid19br>;
     Canada: <https://health-infobase.canada.ca/>; Colombia: <https://github.com/danielcs88/colombia_covid-19>;
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
+    France: <https://www.data.gouv.fr/fr/pages/donnees-coronavirus>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
     Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>,
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
