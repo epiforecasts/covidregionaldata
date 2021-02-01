@@ -83,8 +83,16 @@ get_info_covidregionaldata <- function() {
     NA,
     NA,
     "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-<date>.csv",
-    "cases_total,deaths_total, tested_total",
-
+    "cases_total, deaths_total, tested_total",
+    
+    "get_regional_data",
+    "france",
+    "r\u00e9gion",
+    "d\u00e9partement",
+    NA,
+    "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
+    "cases_new, deaths_new",
+    
     "get_regional_data",
     "russia",
     "regions",
