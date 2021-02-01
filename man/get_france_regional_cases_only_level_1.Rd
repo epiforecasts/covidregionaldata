@@ -10,7 +10,7 @@ get_france_regional_cases_only_level_1()
 A data frame of COVID cases by Region in France, ready to be used by \code{get_regional_data()}.
 }
 \description{
-Extracts daily COVID-19 data for France, stratified by region.
+Extracts daily COVID-19 data for France, stratified by region and departement.
 Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 It is loaded and then sanitised.
 }
