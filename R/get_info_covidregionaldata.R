@@ -91,8 +91,16 @@ get_info_covidregionaldata <- function() {
     "d\u00e9partement",
     NA,
     "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
-    "cases_new, deaths_new",
+    "cases_new, deaths_new", 
     
+    "get_regional_data",
+    "mexico",
+    "estados",
+    "municipios",
+    NA,
+    "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    "cases_new, deaths_new",
+
     "get_regional_data",
     "russia",
     "regions",
