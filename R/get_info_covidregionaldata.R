@@ -94,6 +94,14 @@ get_info_covidregionaldata <- function() {
     "cases_new, deaths_new",
     
     "get_regional_data",
+    "lithuania",
+    "county",
+    "municipality",
+    NA,
+    "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0",
+    "cases_new, deaths_new, recovered_new, cases_total, deaths_total, recovered_total",
+    
+    "get_regional_data",
     "russia",
     "regions",
     NA,
