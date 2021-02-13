@@ -114,6 +114,7 @@ get_region_codes <- function(country) {
                          "germany" = get_germany_region_codes,
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
+                         "lithuania" = get_lithuania_region_codes,
                          "russia" = get_russia_region_codes,
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
@@ -136,6 +137,7 @@ get_level_2_region_codes <- function(country) {
                              "brazil" = get_brazil_level_2_codes,
                              "france" = get_france_level_2_codes,
                              "germany" = get_germany_level_2_codes,
+                             "lithuania" = get_lithuania_level_2_codes,
                              "uk" = get_uk_level_2_codes,
                              "usa" = get_us_level_2_codes)
   
@@ -249,7 +251,7 @@ get_italy_region_codes <- function() {
 }
 
 #' Lithuanian region codes
-#' @importFrom tibble tibble
+#' @importFrom tibble tribble
 #' 
 get_lithuania_region_codes <- function() {
   
@@ -264,17 +266,20 @@ get_lithuania_region_codes <- function() {
   #   xml2::read_html() %>%
   #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
   #   rvest::html_table(fill = TRUE)
-  region_codes <- tibble::tibble(
-    level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN", 
-                            "LT-SA", "LT-TA", "LT-TE", "LT-UT", "LT-VL", NA_character_),
-    region = c("Alytaus apskritis", 
-               "Kauno apskritis", "Klaipėdos apskritis", "Marijampolės apskritis", 
-               "Panevėžio apskritis", "Šiaulių apskritis", "Tauragės apskritis", 
-               "Telšių apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
-    region_en = c("Alytus County", "Kaunas County", 
-                          "Klaipėda County", "Marijampolė County", "Panevėžys County", 
-                          "Šiauliai County", "Tauragė County", "Telšiai County", "Utena County", 
-                          "Vilnius County", "unstated"))
+  region_codes <- tibble::tribble(
+    ~level_1_region_code,                  ~region,           ~region_en,
+                  "LT-AL",      "Alytaus apskritis",      "Alytus County",
+                  "LT-KU",        "Kauno apskritis",      "Kaunas County",
+                  "LT-KL",    "Klaipėdos apskritis",    "Klaipėda County",
+                  "LT-MR", "Marijampolės apskritis", "Marijampolė County",
+                  "LT-PN",    "Panevėžio apskritis",   "Panevėžys County",
+                  "LT-SA",      "Šiaulių apskritis",    "Šiauliai County",
+                  "LT-TA",     "Tauragės apskritis",     "Tauragė County",
+                  "LT-TE",       "Telšių apskritis",     "Telšiai County",
+                  "LT-UT",       "Utenos apskritis",       "Utena County",
+                  "LT-VL",     "Vilniaus apskritis",     "Vilnius County",
+                  NA,            "nenustatyta",           "unstated"
+  )
   return(region_codes)
 }
 
@@ -428,6 +433,7 @@ get_france_level_2_codes <- function() {
 }
 
 #' Lithuania level 2 codes
+#' @importFrom tibble tribble
 get_lithuania_level_2_codes <- function() {
   # The following code, adjusted from a version for France, was initially used to
   # create lookup tables of Lithuanian municipality and country codes.
@@ -441,80 +447,70 @@ get_lithuania_level_2_codes <- function() {
   #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
   #   rvest::html_table(fill = TRUE)
   
-  region_codes <- tibble::tibble(
-    region_2_code = c("LT-01", "LT-02", "LT-03", "LT-04", "LT-05", 
-                      "LT-06", "LT-07", "LT-08", "LT-09", "LT-10", "LT-11", "LT-12", 
-                      "LT-13", "LT-14", "LT-16", "LT-15", "LT-17", "LT-18", "LT-19", 
-                      "LT-21", "LT-20", "LT-22", "LT-23", "LT-24", "LT-25", "LT-26", 
-                      "LT-27", "LT-28", "LT-29", "LT-30", "LT-31", "LT-32", "LT-33", 
-                      "LT-34", "LT-35", "LT-36", "LT-37", "LT-38", "LT-39", "LT-40", 
-                      "LT-41", "LT-42", "LT-44", "LT-43", "LT-45", "LT-46", "LT-47", 
-                      "LT-48", "LT-49", "LT-50", "LT-51", "LT-52", "LT-53", "LT-54", 
-                      "LT-55", "LT-56", "LT-57", "LT-58", "LT-59", "LT-60", NA_character_),
-    region = c("Akmenės r. sav.", 
-               "Alytaus m. sav.", "Alytaus r. sav.", "Anykščių r. sav.", 
-               "Birštono sav.", "Biržų r. sav.", "Druskininkų sav.", "Elektrėnų sav.", 
-               "Ignalinos r. sav.", "Jonavos r. sav.", "Joniškio r. sav.", 
-               "Jurbarko r. sav.", "Kaišiadorių r. sav.", "Kalvarijos sav.", 
-               "Kauno r. sav.", "Kauno m. sav.", "Kazlų Rūdos sav.", "Kėdainių r. sav.", 
-               "Kelmės r. sav.", "Klaipėdos r. sav.", "Klaipėdos m. sav.", 
-               "Kretingos r. sav.", "Kupiškio r. sav.", "Lazdijų r. sav.", 
-               "Marijampolės sav.", "Mažeikių r. sav.", "Molėtų r. sav.", 
-               "Neringos sav.", "Pagėgių sav.", "Pakruojo r. sav.", "Palangos m. sav.", 
-               "Panevėžio m. sav.", "Panevėžio r. sav.", "Pasvalio r. sav.", 
-               "Plungės r. sav.", "Prienų r. sav.", "Radviliškio r. sav.", 
-               "Raseinių r. sav.", "Rietavo sav.", "Rokiškio r. sav.", "Šakių r. sav.", 
-               "Šalčininkų r. sav.", "Šiaulių r. sav.", "Šiaulių m. sav.", 
-               "Šilalės r. sav.", "Šilutės r. sav.", "Širvintų r. sav.", 
-               "Skuodo r. sav.", "Švenčionių r. sav.", "Tauragės r. sav.", 
-               "Telšių r. sav.", "Trakų r. sav.", "Ukmergės r. sav.", "Utenos r. sav.", 
-               "Varėnos r. sav.", "Vilkaviškio r. sav.", "Vilniaus m. sav.", 
-               "Vilniaus r. sav.", "Visagino sav.", "Zarasų r. sav.", "nenustatyta"),
-    region_1_code = c("LT-SA", "LT-AL", "LT-AL", "LT-UT", "LT-KU",
-                      "LT-PN", "LT-AL", "LT-VL", "LT-UT", "LT-KU", #10
-                      "LT-SA", "LT-TA", "LT-KU", "LT-MR", "LT-KU",
-                      "LT-KU", "LT-MR", "LT-KU", "LT-SA", "LT-KL", #20
-                      "LT-KL", "LT-KL", "LT-PN", "LT-AL", "LT-MR",
-                      "LT-TE", "LT-UT", "LT-KL", "LT-TA", "LT-SA", #30
-                      "LT-KL", "LT-PN", "LT-PN", "LT-PN", "LT-TE",
-                      "LT-KU", "LT-SA", "LT-KU", "LT-TE", "LT-PN", #40 
-                      "LT-MR", "LT-VL", "LT-SA", "LT-SA", "LT-TA",
-                      "LT-KL", "LT-VL", "LT-KL", "LT-VL", "LT-TA", #50 
-                      "LT-TE", "LT-VL", "LT-VL", "LT-UT", "LT-AL",
-                      "LT-MR", "LT-VL", "LT-VL", "LT-UT", "LT-UT", NA_character_),
-    region_nomin = c("Akmenė", 
-                     "Alytaus miestas", "Alytus", "Anykščiai", "Birštono", "Biržai", 
-                     "Druskininkai", "Elektrėnai", "Ignalina", "Jonava", "Joniškis", 
-                     "Jurbarkas", "Kaišiadorys", "Kalvarijos", "Kaunas", "Kauno miestas", 
-                     "Kazlų Rūdos", "Kėdainiai", "Kelmė", "Klaipėda", "Klaipėdos miestas", 
-                     "Kretinga", "Kupiškis", "Lazdijai", "Marijampolė", "Mažeikiai", 
-                     "Molėtai", "Neringa", "Pagėgiai", "Pakruojis", "Palangos miestas", 
-                     "Panevėžio miestas", "Panevėžys", "Pasvalys", "Plungė", 
-                     "Prienai", "Radviliškis", "Raseiniai", "Rietavo", "Rokiškis", 
-                     "Šakiai", "Šalčininkai", "Šiauliai", "Šiaulių miestas", 
-                     "Šilalė", "Šilutė", "Širvintos", "Skuodas", "Švenčionys", 
-                     "Tauragė", "Telšiai", "Trakai", "Ukmergė", "Utena", "Varėna", 
-                     "Vilkaviškis", "Vilniaus miestas", "Vilnius", "Visaginas", "Zarasai", "unstated"),
-    region_type = c("district municipality", "city municipality", 
-                    "district municipality", "district municipality", "municipality", 
-                    "district municipality", "municipality", "municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "municipality", "district municipality", 
-                    "city municipality", "municipality", "district municipality", 
-                    "district municipality", "district municipality", "city municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "municipality", "municipality", "district municipality", "city municipality", 
-                    "city municipality", "district municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "city municipality", "district municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "district municipality", "district municipality", 
-                    "district municipality", "city municipality", "district municipality", 
-                    "municipality", "district municipality", NA_character_))
+  region_codes <- tibble::tribble(
+    ~level_2_region_code,               ~region,       ~region_nomin,            ~region_type,
+    "LT-01",     "Akmenės r. sav.",            "Akmenė", "district municipality",
+    "LT-02",     "Alytaus m. sav.",   "Alytaus miestas",     "city municipality",
+    "LT-03",     "Alytaus r. sav.",            "Alytus", "district municipality",
+    "LT-04",    "Anykščių r. sav.",         "Anykščiai", "district municipality",
+    "LT-05",       "Birštono sav.",          "Birštono",          "municipality",
+    "LT-06",       "Biržų r. sav.",            "Biržai", "district municipality",
+    "LT-07",    "Druskininkų sav.",      "Druskininkai",          "municipality",
+    "LT-08",      "Elektrėnų sav.",        "Elektrėnai",          "municipality",
+    "LT-09",   "Ignalinos r. sav.",          "Ignalina", "district municipality",
+    "LT-10",     "Jonavos r. sav.",            "Jonava", "district municipality",
+    "LT-11",    "Joniškio r. sav.",          "Joniškis", "district municipality",
+    "LT-12",    "Jurbarko r. sav.",         "Jurbarkas", "district municipality",
+    "LT-13", "Kaišiadorių r. sav.",       "Kaišiadorys", "district municipality",
+    "LT-14",     "Kalvarijos sav.",        "Kalvarijos",          "municipality",
+    "LT-16",       "Kauno r. sav.",            "Kaunas", "district municipality",
+    "LT-15",       "Kauno m. sav.",     "Kauno miestas",     "city municipality",
+    "LT-17",    "Kazlų Rūdos sav.",       "Kazlų Rūdos",          "municipality",
+    "LT-18",    "Kėdainių r. sav.",         "Kėdainiai", "district municipality",
+    "LT-19",      "Kelmės r. sav.",             "Kelmė", "district municipality",
+    "LT-21",   "Klaipėdos r. sav.",          "Klaipėda", "district municipality",
+    "LT-20",   "Klaipėdos m. sav.", "Klaipėdos miestas",     "city municipality",
+    "LT-22",   "Kretingos r. sav.",          "Kretinga", "district municipality",
+    "LT-23",    "Kupiškio r. sav.",          "Kupiškis", "district municipality",
+    "LT-24",     "Lazdijų r. sav.",          "Lazdijai", "district municipality",
+    "LT-25",   "Marijampolės sav.",       "Marijampolė", "district municipality",
+    "LT-26",    "Mažeikių r. sav.",         "Mažeikiai", "district municipality",
+    "LT-27",      "Molėtų r. sav.",           "Molėtai", "district municipality",
+    "LT-28",       "Neringos sav.",           "Neringa",          "municipality",
+    "LT-29",        "Pagėgių sav.",          "Pagėgiai",          "municipality",
+    "LT-30",    "Pakruojo r. sav.",         "Pakruojis", "district municipality",
+    "LT-31",    "Palangos m. sav.",  "Palangos miestas",     "city municipality",
+    "LT-32",   "Panevėžio m. sav.", "Panevėžio miestas",     "city municipality",
+    "LT-33",   "Panevėžio r. sav.",         "Panevėžys", "district municipality",
+    "LT-34",    "Pasvalio r. sav.",          "Pasvalys", "district municipality",
+    "LT-35",     "Plungės r. sav.",            "Plungė", "district municipality",
+    "LT-36",      "Prienų r. sav.",           "Prienai", "district municipality",
+    "LT-37", "Radviliškio r. sav.",       "Radviliškis", "district municipality",
+    "LT-38",    "Raseinių r. sav.",         "Raseiniai", "district municipality",
+    "LT-39",        "Rietavo sav.",           "Rietavo",          "municipality",
+    "LT-40",    "Rokiškio r. sav.",          "Rokiškis", "district municipality",
+    "LT-41",       "Šakių r. sav.",            "Šakiai", "district municipality",
+    "LT-42",  "Šalčininkų r. sav.",       "Šalčininkai", "district municipality",
+    "LT-44",     "Šiaulių r. sav.",          "Šiauliai", "district municipality",
+    "LT-43",     "Šiaulių m. sav.",   "Šiaulių miestas",     "city municipality",
+    "LT-45",     "Šilalės r. sav.",            "Šilalė", "district municipality",
+    "LT-46",     "Šilutės r. sav.",            "Šilutė", "district municipality",
+    "LT-47",    "Širvintų r. sav.",         "Širvintos", "district municipality",
+    "LT-48",      "Skuodo r. sav.",           "Skuodas", "district municipality",
+    "LT-49",  "Švenčionių r. sav.",        "Švenčionys", "district municipality",
+    "LT-50",    "Tauragės r. sav.",           "Tauragė", "district municipality",
+    "LT-51",      "Telšių r. sav.",           "Telšiai", "district municipality",
+    "LT-52",       "Trakų r. sav.",            "Trakai", "district municipality",
+    "LT-53",    "Ukmergės r. sav.",           "Ukmergė", "district municipality",
+    "LT-54",      "Utenos r. sav.",             "Utena", "district municipality",
+    "LT-55",     "Varėnos r. sav.",            "Varėna", "district municipality",
+    "LT-56", "Vilkaviškio r. sav.",       "Vilkaviškis", "district municipality",
+    "LT-57",    "Vilniaus m. sav.",  "Vilniaus miestas",     "city municipality",
+    "LT-58",    "Vilniaus r. sav.",           "Vilnius", "district municipality",
+    "LT-59",       "Visagino sav.",         "Visaginas",          "municipality",
+    "LT-60",      "Zarasų r. sav.",           "Zarasai", "district municipality",
+    NA,         "nenustatyta",          "unstated",                      NA
+  )
   return (region_codes)  
 }
 
