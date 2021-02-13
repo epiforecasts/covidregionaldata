@@ -15,13 +15,15 @@ test_that("get_lithuania_regional_cases data source is unchanged and up to date"
 test_that("get_lithuania_regional_cases returns the correct column names", {
   skip_on_cran()
   
-  expected_colnames_adm_level_1 <- c("region_level_1", "date", "cases_new", "deaths_new")
+  expected_colnames_adm_level_1 <- c( "date", "region_level_1", "cases_new", "cases_total",
+                                      "deaths_new", "deaths_total", "recovered_new", "recovered_total")
   returned_colnames_adm_level_1 <- colnames(get_lithuania_regional_cases_only_level_1())
   expect_true(all(returned_colnames_adm_level_1 %in% expected_colnames_adm_level_1))
   expect_true(all(expected_colnames_adm_level_1 %in% returned_colnames_adm_level_1))
 
 
-  expected_colnames_adm_level_2 <- c("region_level_1", "region_level_2", "date", "cases_new", "deaths_new")
+  expected_colnames_adm_level_2 <- c("date", "region_level_1", "region_level_2", "cases_new", "cases_total",
+                                     "deaths_new", "deaths_total", "recovered_new", "recovered_total")
   returned_colnames_adm_level_2 <- colnames(get_lithuania_regional_cases_with_level_2())
   expect_true(all(returned_colnames_adm_level_2 %in% expected_colnames_adm_level_2))
   expect_true(all(expected_colnames_adm_level_2 %in% returned_colnames_adm_level_2))
