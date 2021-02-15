@@ -142,16 +142,17 @@ calculate_columns_from_existing_data <- function(data) {
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
+#' @importFrom utils read.csv
 #' 
 csv_reader <- function(file, ...) {
 
-  read_csv_fun <- vroom::vroom
+  read_csv_fun <- utils::read.csv
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
       ch <- memoise::cache_filesystem(".cache")
-      read_csv_fun <- memoise::memoise(vroom::vroom, cache = ch)
+      read_csv_fun <- memoise::memoise(utils::read.csv, cache = ch)
     }
   }
 
