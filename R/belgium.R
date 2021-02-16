@@ -15,9 +15,9 @@ get_belgium_regional_cases_only_level_1 <- function() {
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
 
-  cases_data <- csv_reader(file = c_provincial)
-  hosp_data <- csv_reader(file = h_provincial)
-  deaths_data <- csv_reader(file = m_provincial)
+  cases_data <- csv_readr(file = c_provincial)
+  hosp_data <- csv_readr(file = h_provincial)
+  deaths_data <- csv_readr(file = m_provincial)
 
   # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
@@ -73,9 +73,9 @@ get_belgium_regional_cases_with_level_2 <- function(){
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
 
-  cases_data <- csv_reader(file = c_provincial)
-  hosp_data <- csv_reader(file = h_provincial)
-  # deaths_data <- csv_reader(file = m_provincial) # not available at level2
+  cases_data <- csv_readr(file = c_provincial)
+  hosp_data <- csv_readr(file = h_provincial)
+  # deaths_data <- csv_readr(file = m_provincial) # not available at level2
 
   # Clean data ------------------------------------------------------------------
   cases_data <- cases_data %>%
