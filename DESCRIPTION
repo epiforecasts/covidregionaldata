@@ -86,6 +86,7 @@ Imports:
     readxl,
     xml2,
     rvest,
+    readr,
     jsonlite,
     countrycode
 Suggests:
