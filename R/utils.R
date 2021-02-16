@@ -142,17 +142,16 @@ calculate_columns_from_existing_data <- function(data) {
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
-#' @importFrom utils read.csv
 #' 
 csv_reader <- function(file, ...) {
 
-  read_csv_fun <- utils::read.csv
+  read_csv_fun <- vroom::vroom
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
       ch <- memoise::cache_filesystem(".cache")
-      read_csv_fun <- memoise::memoise(utils::read.csv, cache = ch)
+      read_csv_fun <- memoise::memoise(vroom::vroom, cache = ch)
     }
   }
 
@@ -160,6 +159,32 @@ csv_reader <- function(file, ...) {
   return(tibble::tibble(data))
 }
 
+
+#' Custom CSV reading function
+#' @description Checks for use of memoise and then uses readr::read_csv, which appears
+#' more robust in loading some streams
+#' @param file A URL or filepath to a CSV
+#' @param ... extra parameters to be passed to readr::read_csv
+#' @return A data table
+#' @importFrom memoise memoise cache_filesystem
+#' @importFrom tibble tibble
+#' @importFrom readr read_csv
+#' 
+csv_readr <- function(file, ...) {
+  
+  read_csv_fun <- readr::read_csv
+  
+  if (!is.null(getOption("useMemoise"))) {
+    if (getOption("useMemoise")) {
+      # Set up cache
+      ch <- memoise::cache_filesystem(".cache")
+      read_csv_fun <- memoise::memoise(readr::read_csv, cache = ch)
+    }
+  }
+  
+  data <- read_csv_fun(file, ...)
+  return(tibble::tibble(data))
+}
 #' Custom left_join function
 #' @description Checks if table that is being added is NULL and then uses left_join
 #' @param data a data table

@@ -252,7 +252,7 @@ get_uk_data <- function(filters, release_date = NULL) {
     csv_links <- purrr::map(csv_links, ~ paste0(., "&release=", release_date))
   }
   # download and link all data into a single data frame
-  safe_reader <- purrr::safely(csv_reader)
+  safe_reader <- purrr::safely(csv_readr)
   csv <- purrr::map(csv_links, ~ safe_reader(.)[[1]])
   csv <- purrr::compact(csv)
   csv <- purrr::reduce(csv, dplyr::full_join, 
