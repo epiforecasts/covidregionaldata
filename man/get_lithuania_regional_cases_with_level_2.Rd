@@ -14,3 +14,41 @@ Extracts daily COVID-19 data for Lithuania, by municipality.
 Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 It is loaded and then sanitised.
 }
+\details{
+The following describes the data provided by the Official Statistics Portal
+\url{https://osp.stat.gov.lt}
+date - the reporting day during which the events occurred or at the end of
+which the accounting was performed
+municipality_code - code of the municipality assigned to persons
+municipality_name - the name of the municipality assigned to the persons
+population - population size according to the data of the beginning of 2021, according to the
+declared place of residence
+ab_pos_day - Number of positive antibody test responses, days
+ab_neg_day - Number of negative antibody test responses, days
+ab_tot_day - Number of antibody tests, daily
+ab_prc_day - Percentage of positive antibody test responses per day
+ag_pos_day - Number of positive antigen test responses, daily
+ag_neg_day - Number of negative antigen test responses, daily
+ag_tot_day - Number of antigen tests, daily
+ag_prc_day - Percentage of positive responses to antigen tests per day
+pcr_pos_day - number of positive PCR test responses, daily
+pcr_neg_day - Number of PCR test negative responses, daily
+pcr_tot_day - number of PCR tests per day
+pcr_prc_day - Percentage of positive PCR test responses per day
+dgn_pos_day - Number of positive answers to diagnostic tests / tests, days
+dgn_neg_day - Number of negative answers to diagnostic tests / tests, days
+dgn_prc_day - Number of diagnostic examinations / tests, days
+dgn_tot_day - Percentage of positive answers to diagnostic tests / tests per day
+dgn_tot_day_gmp - Number of diagnostic examinations / tests of samples collected at mobile points, days
+deaths_def1_day - The number of new deaths per day according to the (narrowest) COVID death definition No. 1. The definition can be found here
+deaths_def2_day - Number of new deaths per day according to COVID death definition No. 2. The definition can be found here
+deaths_def3_day - Number of new deaths per day according to COVID death definition No. 3. The definition can be found here
+deaths_population_day - Daily deaths in Lithuania (by date of death)
+incidence_day - Number of new COVID cases per day (laboratory or physician confirmed)
+incidence_cum - Total number of COVID cases (laboratory or physician confirmed)
+active_declared - Declared number of people with COVID
+active_statistical - Statistical number of people with COVID
+dead_cases - The number of dead persons who were ever diagnosed with COVID
+recovered_declared - Declared number of recovered live persons
+recovered_statistical - Statistical number of recovered live persons
+}

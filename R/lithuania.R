@@ -6,8 +6,7 @@
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.
-#' @importFrom dplyr %>% filter select mutate left_join rename across
-#' @importFrom lubridate as_date ymd
+#' @importFrom dplyr %>% across summarise group_by
 #' @importFrom tibble tibble
 
 get_lithuania_regional_cases_only_level_1 <- function() {
@@ -19,17 +18,17 @@ get_lithuania_regional_cases_only_level_1 <- function() {
   # level_1_lookup <- tibble::tibble(level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN", 
   #                                        "LT-SA", "LT-TA", "LT-TE", "LT-UT", "LT-VL", NA_character_),
   #                region_level_1 = c("Alytaus apskritis", 
-  #                                   "Kauno apskritis", "Klaipėdos apskritis", "Marijampolės apskritis", 
-  #                                   "Panevėžio apskritis", "Šiaulių apskritis", "Tauragės apskritis", 
-  #                                   "Telšių apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
+  #                                   "Kauno apskritis", "Klaip\u0117dos apskritis", "Marijampol\u0117s apskritis", 
+  #                                   "Panev\u0117\u017eio apskritis", "\u0160iauli\u0173 apskritis", "Taurag\u0117s apskritis", 
+  #                                   "Tel\u0161i\u0173 apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
   #                region_level_1_en = c("Alytus County", "Kaunas County", 
-  #                                      "Klaipėda County", "Marijampolė County", "Panevėžys County", 
-  #                                      "Šiauliai County", "Tauragė County", "Telšiai County", "Utena County", 
+  #                                      "Klaip\u0117da County", "Marijampol\u0117 County", "Panev\u0117\u017eys County", 
+  #                                      "\u0160iauliai County", "Taurag\u0117 County", "Tel\u0161iai County", "Utena County", 
   #                                      "Vilnius County", "unstated"))
   # 
   county_data <- get_lithuania_regional_cases_with_level_2() %>%
-    group_by(date,region_level_1) %>%
-    summarise(across(where(is.numeric), sum))
+    dplyr::group_by(date,region_level_1) %>%
+    dplyr::summarise(across(where(is.numeric), sum))
   
   return(county_data)
   
@@ -41,11 +40,49 @@ get_lithuania_regional_cases_only_level_1 <- function() {
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 #' It is loaded and then sanitised.
 #' @return A data.frame of COVID cases by municipality in Lithuania, ready to be used by get_regional_data().
-#' @importFrom dplyr filter select mutate full_join left_join rename bind_rows
+#' @importFrom dplyr %>% filter select mutate full_join left_join rename bind_rows
 #' @importFrom lubridate as_date ymd
 #' @importFrom xml2 read_html
 #' @importFrom rvest html_nodes html_table
 #' @importFrom tibble tibble
+#'
+#' @details 
+#' The following describes the data provided by the Official Statistics Portal
+#' \url{https://osp.stat.gov.lt}
+#' date - the reporting day during which the events occurred or at the end of
+#' which the accounting was performed
+#' municipality_code - code of the municipality assigned to persons
+#' municipality_name - the name of the municipality assigned to the persons
+#' population - population size according to the data of the beginning of 2021, according to the
+#' declared place of residence
+#' ab_pos_day - Number of positive antibody test responses, days
+#' ab_neg_day - Number of negative antibody test responses, days
+#' ab_tot_day - Number of antibody tests, daily
+#' ab_prc_day - Percentage of positive antibody test responses per day
+#' ag_pos_day - Number of positive antigen test responses, daily
+#' ag_neg_day - Number of negative antigen test responses, daily
+#' ag_tot_day - Number of antigen tests, daily
+#' ag_prc_day - Percentage of positive responses to antigen tests per day
+#' pcr_pos_day - number of positive PCR test responses, daily
+#' pcr_neg_day - Number of PCR test negative responses, daily
+#' pcr_tot_day - number of PCR tests per day
+#' pcr_prc_day - Percentage of positive PCR test responses per day
+#' dgn_pos_day - Number of positive answers to diagnostic tests / tests, days
+#' dgn_neg_day - Number of negative answers to diagnostic tests / tests, days
+#' dgn_prc_day - Number of diagnostic examinations / tests, days
+#' dgn_tot_day - Percentage of positive answers to diagnostic tests / tests per day
+#' dgn_tot_day_gmp - Number of diagnostic examinations / tests of samples collected at mobile points, days
+#' deaths_def1_day - The number of new deaths per day according to the (narrowest) COVID death definition No. 1. The definition can be found here
+#' deaths_def2_day - Number of new deaths per day according to COVID death definition No. 2. The definition can be found here
+#' deaths_def3_day - Number of new deaths per day according to COVID death definition No. 3. The definition can be found here
+#' deaths_population_day - Daily deaths in Lithuania (by date of death)
+#' incidence_day - Number of new COVID cases per day (laboratory or physician confirmed)
+#' incidence_cum - Total number of COVID cases (laboratory or physician confirmed)
+#' active_declared - Declared number of people with COVID
+#' active_statistical - Statistical number of people with COVID
+#' dead_cases - The number of dead persons who were ever diagnosed with COVID
+#' recovered_declared - Declared number of recovered live persons
+#' recovered_statistical - Statistical number of recovered live persons
 #'
 get_lithuania_regional_cases_with_level_2 <- function() {
 
@@ -58,196 +95,135 @@ get_lithuania_regional_cases_with_level_2 <- function() {
   # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
   # level_2_codes_table <- level_2_codes_url %>%
   #   xml2::read_html() %>%
-  #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
+  #   rvest::html_nodes(xpath = '//*[@id=\"mw-content-text\"]/div/table') %>%
   #   rvest::html_table(fill = TRUE)
 
   municipality_county_lookup <- tibble::tribble(
     ~region_level_2,          ~region_level_1,
-    "Akmenės r. sav.",      "Šiaulių apskritis",
+    "Akmen\u0117s r. sav.",      "\u0160iauli\u0173 apskritis",
     "Alytaus m. sav.",      "Alytaus apskritis",
     "Alytaus r. sav.",      "Alytaus apskritis",
-    "Anykščių r. sav.",       "Utenos apskritis",
-    "Birštono sav.",        "Kauno apskritis",
-    "Biržų r. sav.",    "Panevėžio apskritis",
-    "Druskininkų sav.",      "Alytaus apskritis",
-    "Elektrėnų sav.",     "Vilniaus apskritis",
+    "Anyk\u0161\u010di\u0173 r. sav.",       "Utenos apskritis",
+    "Bir\u0161tono sav.",        "Kauno apskritis",
+    "Bir\u017e\u0173 r. sav.",    "Panev\u0117\u017eio apskritis",
+    "Druskinink\u0173 sav.",      "Alytaus apskritis",
+    "Elektr\u0117n\u0173 sav.",     "Vilniaus apskritis",
     "Ignalinos r. sav.",       "Utenos apskritis",
     "Jonavos r. sav.",        "Kauno apskritis",
-    "Joniškio r. sav.",      "Šiaulių apskritis",
-    "Jurbarko r. sav.",     "Tauragės apskritis",
-    "Kaišiadorių r. sav.",        "Kauno apskritis",
-    "Kalvarijos sav.", "Marijampolės apskritis",
+    "Joni\u0161kio r. sav.",      "\u0160iauli\u0173 apskritis",
+    "Jurbarko r. sav.",     "Taurag\u0117s apskritis",
+    "Kai\u0161iadori\u0173 r. sav.",        "Kauno apskritis",
+    "Kalvarijos sav.", "Marijampol\u0117s apskritis",
     "Kauno r. sav.",        "Kauno apskritis",
     "Kauno m. sav.",        "Kauno apskritis",
-    "Kazlų Rūdos sav.", "Marijampolės apskritis",
-    "Kėdainių r. sav.",        "Kauno apskritis",
-    "Kelmės r. sav.",      "Šiaulių apskritis",
-    "Klaipėdos r. sav.",    "Klaipėdos apskritis",
-    "Klaipėdos m. sav.",    "Klaipėdos apskritis",
-    "Kretingos r. sav.",    "Klaipėdos apskritis",
-    "Kupiškio r. sav.",    "Panevėžio apskritis",
-    "Lazdijų r. sav.",      "Alytaus apskritis",
-    "Marijampolės sav.", "Marijampolės apskritis",
-    "Mažeikių r. sav.",       "Telšių apskritis",
-    "Molėtų r. sav.",       "Utenos apskritis",
-    "Neringos sav.",    "Klaipėdos apskritis",
-    "Pagėgių sav.",     "Tauragės apskritis",
-    "Pakruojo r. sav.",      "Šiaulių apskritis",
-    "Palangos m. sav.",    "Klaipėdos apskritis",
-    "Panevėžio m. sav.",    "Panevėžio apskritis",
-    "Panevėžio r. sav.",    "Panevėžio apskritis",
-    "Pasvalio r. sav.",    "Panevėžio apskritis",
-    "Plungės r. sav.",       "Telšių apskritis",
-    "Prienų r. sav.",        "Kauno apskritis",
-    "Radviliškio r. sav.",      "Šiaulių apskritis",
-    "Raseinių r. sav.",        "Kauno apskritis",
-    "Rietavo sav.",       "Telšių apskritis",
-    "Rokiškio r. sav.",    "Panevėžio apskritis",
-    "Šakių r. sav.", "Marijampolės apskritis",
-    "Šalčininkų r. sav.",     "Vilniaus apskritis",
-    "Šiaulių r. sav.",      "Šiaulių apskritis",
-    "Šiaulių m. sav.",      "Šiaulių apskritis",
-    "Šilalės r. sav.",     "Tauragės apskritis",
-    "Šilutės r. sav.",    "Klaipėdos apskritis",
-    "Širvintų r. sav.",     "Vilniaus apskritis",
-    "Skuodo r. sav.",    "Klaipėdos apskritis",
-    "Švenčionių r. sav.",     "Vilniaus apskritis",
-    "Tauragės r. sav.",     "Tauragės apskritis",
-    "Telšių r. sav.",       "Telšių apskritis",
-    "Trakų r. sav.",     "Vilniaus apskritis",
-    "Ukmergės r. sav.",     "Vilniaus apskritis",
+    "Kazl\u0173 R\u016bdos sav.", "Marijampol\u0117s apskritis",
+    "K\u0117daini\u0173 r. sav.",        "Kauno apskritis",
+    "Kelm\u0117s r. sav.",      "\u0160iauli\u0173 apskritis",
+    "Klaip\u0117dos r. sav.",    "Klaip\u0117dos apskritis",
+    "Klaip\u0117dos m. sav.",    "Klaip\u0117dos apskritis",
+    "Kretingos r. sav.",    "Klaip\u0117dos apskritis",
+    "Kupi\u0161kio r. sav.",    "Panev\u0117\u017eio apskritis",
+    "Lazdij\u0173 r. sav.",      "Alytaus apskritis",
+    "Marijampol\u0117s sav.", "Marijampol\u0117s apskritis",
+    "Ma\u017eeiki\u0173 r. sav.",       "Tel\u0161i\u0173 apskritis",
+    "Mol\u0117t\u0173 r. sav.",       "Utenos apskritis",
+    "Neringos sav.",    "Klaip\u0117dos apskritis",
+    "Pag\u0117gi\u0173 sav.",     "Taurag\u0117s apskritis",
+    "Pakruojo r. sav.",      "\u0160iauli\u0173 apskritis",
+    "Palangos m. sav.",    "Klaip\u0117dos apskritis",
+    "Panev\u0117\u017eio m. sav.",    "Panev\u0117\u017eio apskritis",
+    "Panev\u0117\u017eio r. sav.",    "Panev\u0117\u017eio apskritis",
+    "Pasvalio r. sav.",    "Panev\u0117\u017eio apskritis",
+    "Plung\u0117s r. sav.",       "Tel\u0161i\u0173 apskritis",
+    "Prien\u0173 r. sav.",        "Kauno apskritis",
+    "Radvili\u0161kio r. sav.",      "\u0160iauli\u0173 apskritis",
+    "Raseini\u0173 r. sav.",        "Kauno apskritis",
+    "Rietavo sav.",       "Tel\u0161i\u0173 apskritis",
+    "Roki\u0161kio r. sav.",    "Panev\u0117\u017eio apskritis",
+    "\u0160aki\u0173 r. sav.", "Marijampol\u0117s apskritis",
+    "\u0160al\u010dinink\u0173 r. sav.",     "Vilniaus apskritis",
+    "\u0160iauli\u0173 r. sav.",      "\u0160iauli\u0173 apskritis",
+    "\u0160iauli\u0173 m. sav.",      "\u0160iauli\u0173 apskritis",
+    "\u0160ilal\u0117s r. sav.",     "Taurag\u0117s apskritis",
+    "\u0160ilut\u0117s r. sav.",    "Klaip\u0117dos apskritis",
+    "\u0160irvint\u0173 r. sav.",     "Vilniaus apskritis",
+    "Skuodo r. sav.",    "Klaip\u0117dos apskritis",
+    "\u0160ven\u010dioni\u0173 r. sav.",     "Vilniaus apskritis",
+    "Taurag\u0117s r. sav.",     "Taurag\u0117s apskritis",
+    "Tel\u0161i\u0173 r. sav.",       "Tel\u0161i\u0173 apskritis",
+    "Trak\u0173 r. sav.",     "Vilniaus apskritis",
+    "Ukmerg\u0117s r. sav.",     "Vilniaus apskritis",
     "Utenos r. sav.",       "Utenos apskritis",
-    "Varėnos r. sav.",      "Alytaus apskritis",
-    "Vilkaviškio r. sav.", "Marijampolės apskritis",
+    "Var\u0117nos r. sav.",      "Alytaus apskritis",
+    "Vilkavi\u0161kio r. sav.", "Marijampol\u0117s apskritis",
     "Vilniaus m. sav.",     "Vilniaus apskritis",
     "Vilniaus r. sav.",     "Vilniaus apskritis",
     "Visagino sav.",       "Utenos apskritis",
-    "Zarasų r. sav.",       "Utenos apskritis",
+    "Zaras\u0173 r. sav.",       "Utenos apskritis",
     "nenustatyta",            "nenustatyta"
   )
-  # 
-  # level_2_lookup <- tibble::tibble(
-  #   region_2_code = c("LT-01", "LT-02", "LT-03", "LT-04", "LT-05", 
-  #                     "LT-06", "LT-07", "LT-08", "LT-09", "LT-10", "LT-11", "LT-12", 
-  #                     "LT-13", "LT-14", "LT-16", "LT-15", "LT-17", "LT-18", "LT-19", 
-  #                     "LT-21", "LT-20", "LT-22", "LT-23", "LT-24", "LT-25", "LT-26", 
-  #                     "LT-27", "LT-28", "LT-29", "LT-30", "LT-31", "LT-32", "LT-33", 
-  #                     "LT-34", "LT-35", "LT-36", "LT-37", "LT-38", "LT-39", "LT-40", 
-  #                     "LT-41", "LT-42", "LT-44", "LT-43", "LT-45", "LT-46", "LT-47", 
-  #                     "LT-48", "LT-49", "LT-50", "LT-51", "LT-52", "LT-53", "LT-54", 
-  #                     "LT-55", "LT-56", "LT-57", "LT-58", "LT-59", "LT-60", NA_character_),
-  #   osp_municipality_name = c("Akmenės r. sav.", 
-  #                             "Alytaus m. sav.", "Alytaus r. sav.", "Anykščių r. sav.", 
-  #                             "Birštono sav.", "Biržų r. sav.", "Druskininkų sav.", "Elektrėnų sav.", 
-  #                             "Ignalinos r. sav.", "Jonavos r. sav.", "Joniškio r. sav.", 
-  #                             "Jurbarko r. sav.", "Kaišiadorių r. sav.", "Kalvarijos sav.", 
-  #                             "Kauno r. sav.", "Kauno m. sav.", "Kazlų Rūdos sav.", "Kėdainių r. sav.", 
-  #                             "Kelmės r. sav.", "Klaipėdos r. sav.", "Klaipėdos m. sav.", 
-  #                             "Kretingos r. sav.", "Kupiškio r. sav.", "Lazdijų r. sav.", 
-  #                             "Marijampolės sav.", "Mažeikių r. sav.", "Molėtų r. sav.", 
-  #                             "Neringos sav.", "Pagėgių sav.", "Pakruojo r. sav.", "Palangos m. sav.", 
-  #                             "Panevėžio m. sav.", "Panevėžio r. sav.", "Pasvalio r. sav.", 
-  #                             "Plungės r. sav.", "Prienų r. sav.", "Radviliškio r. sav.", 
-  #                             "Raseinių r. sav.", "Rietavo sav.", "Rokiškio r. sav.", "Šakių r. sav.", 
-  #                             "Šalčininkų r. sav.", "Šiaulių r. sav.", "Šiaulių m. sav.", 
-  #                             "Šilalės r. sav.", "Šilutės r. sav.", "Širvintų r. sav.", 
-  #                             "Skuodo r. sav.", "Švenčionių r. sav.", "Tauragės r. sav.", 
-  #                             "Telšių r. sav.", "Trakų r. sav.", "Ukmergės r. sav.", "Utenos r. sav.", 
-  #                             "Varėnos r. sav.", "Vilkaviškio r. sav.", "Vilniaus m. sav.", 
-  #                             "Vilniaus r. sav.", "Visagino sav.", "Zarasų r. sav.", "nenustatyta"),
-  #   region_1_code = c("LT-SA", "LT-AL", "LT-AL", "LT-UT", "LT-KU",
-  #                     "LT-PN", "LT-AL", "LT-VL", "LT-UT", "LT-KU", #10
-  #                     "LT-SA", "LT-TA", "LT-KU", "LT-MR", "LT-KU",
-  #                     "LT-KU", "LT-MR", "LT-KU", "LT-SA", "LT-KL", #20
-  #                     "LT-KL", "LT-KL", "LT-PN", "LT-AL", "LT-MR",
-  #                     "LT-TE", "LT-UT", "LT-KL", "LT-TA", "LT-SA", #30
-  #                     "LT-KL", "LT-PN", "LT-PN", "LT-PN", "LT-TE",
-  #                     "LT-KU", "LT-SA", "LT-KU", "LT-TE", "LT-PN", #40 
-  #                     "LT-MR", "LT-VL", "LT-SA", "LT-SA", "LT-TA",
-  #                     "LT-KL", "LT-VL", "LT-KL", "LT-VL", "LT-TA", #50 
-  #                     "LT-TE", "LT-VL", "LT-VL", "LT-UT", "LT-AL",
-  #                     "LT-MR", "LT-VL", "LT-VL", "LT-UT", "LT-UT", NA_character_),
-  #   `Subdivision name` = c("Akmenė", 
-  #                          "Alytaus miestas", "Alytus", "Anykščiai", "Birštono", "Biržai", 
-  #                          "Druskininkai", "Elektrėnai", "Ignalina", "Jonava", "Joniškis", 
-  #                          "Jurbarkas", "Kaišiadorys", "Kalvarijos", "Kaunas", "Kauno miestas", 
-  #                          "Kazlų Rūdos", "Kėdainiai", "Kelmė", "Klaipėda", "Klaipėdos miestas", 
-  #                          "Kretinga", "Kupiškis", "Lazdijai", "Marijampolė", "Mažeikiai", 
-  #                          "Molėtai", "Neringa", "Pagėgiai", "Pakruojis", "Palangos miestas", 
-  #                          "Panevėžio miestas", "Panevėžys", "Pasvalys", "Plungė", 
-  #                          "Prienai", "Radviliškis", "Raseiniai", "Rietavo", "Rokiškis", 
-  #                          "Šakiai", "Šalčininkai", "Šiauliai", "Šiaulių miestas", 
-  #                          "Šilalė", "Šilutė", "Širvintos", "Skuodas", "Švenčionys", 
-  #                          "Tauragė", "Telšiai", "Trakai", "Ukmergė", "Utena", "Varėna", 
-  #                          "Vilkaviškis", "Vilniaus miestas", "Vilnius", "Visaginas", "Zarasai", "unstated"),
-  #   `Subdivision category` = c("district municipality", "city municipality", 
-  #                              "district municipality", "district municipality", "municipality", 
-  #                              "district municipality", "municipality", "municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "municipality", "district municipality", 
-  #                              "city municipality", "municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "city municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "municipality", "municipality", "district municipality", "city municipality", 
-  #                              "city municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "city municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "district municipality", "district municipality", 
-  #                              "district municipality", "city municipality", "district municipality", 
-  #                              "municipality", "district municipality", NA_character_))
-  # 
-  # level_1_lookup <- tibble::tibble(level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN", 
-  #                                                          "LT-SA", "LT-TA", "LT-TE", "LT-UT", "LT-VL", NA_character_),
-  #                                  region_level_1 = c("Alytaus apskritis", 
-  #                                                     "Kauno apskritis", "Klaipėdos apskritis", "Marijampolės apskritis", 
-  #                                                     "Panevėžio apskritis", "Šiaulių apskritis", "Tauragės apskritis", 
-  #                                                     "Telšių apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
-  #                                  region_level_1_en = c("Alytus County", "Kaunas County", 
-  #                                                        "Klaipėda County", "Marijampolė County", "Panevėžys County", 
-  #                                                        "Šiauliai County", "Tauragė County", "Telšiai County", "Utena County", 
-  #                                                        "Vilnius County", "unstated"))
-  # Read data --------------------------------------------------------------------
-  #cases_url <- "https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675"
-  #hosp_url <- "https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c"
-
-  cases_url <- "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0.csv"
   
-  cases_data <- csv_reader(file = cases_url) %>%
-    dplyr::select(date,
-                  region_level_2 = municipality_name,
-                  cases_new = confirmed_cases,
-                  cases_total = confirmed_cases_cumulative,
-                  deaths_new = deaths,
-                  deaths_total = deaths_cumulative,
-                  recovered_new = recovered_cases,
-                  recovered_total = recovered_cases_cumulative) %>%
-    dplyr::mutate(date = lubridate::as_date(date))
-
-  cases_wider <- left_join(cases_data,municipality_county_lookup, by=c("region_level_2")) %>%
-    select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
-           cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total)
+  # Read data --------------------------------------------------------------------
+  
+  #  cases_url <- "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0.csv"
+  cases_url <- "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
+  
+  osp_data <- csv_reader(file = cases_url) 
+  cases_data <- osp_data %>%
+    dplyr::filter(municipality_name != "Lietuva") %>%
+    dplyr::select(-object_id, -municipality_code) %>%
+  dplyr::mutate(
+    date = lubridate::as_date(date),
+    tested_new = ab_tot_day+ag_tot_day+pcr_tot_day,
+    deaths_new = daily_deaths_def3) %>%
+    dplyr::rename(cases_new=incidence,
+                  cases_total=cumulative_totals,
+                  region_level_2 = municipality_name) %>%
+    dplyr::left_join(municipality_county_lookup, by=c("region_level_2")) %>%
+    # dplyr::mutate(diff_tests = tested_new - dgn_tot_day,
+    #               incidence_diff = tested_new - ab_pos_day - ag_pos_day - pcr_pos_day - dgn_pos_day
+    #               ) %>%
+    dplyr::select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
+           cases_new, cases_total, deaths_new, tested_new, dplyr::everything())
+    # "ab_pos_day",
+    # "ab_neg_day",
+    # "ab_tot_day",
+    # "ab_prc_day",
+    # "ag_pos_day",
+    # "ag_neg_day",
+    # "ag_tot_day",
+    # "ag_prc_day",
+    # "pcr_pos_day",
+    # "pcr_neg_day",
+    # "pcr_tot_day",
+    # "pcr_prc_day",
+    # "dgn_pos_day",
+    # "dgn_neg_day",
+    # "dgn_tot_day",
+    # "dgn_prc_day",
+    # "dgn_tot_day_gmp",
+    # "daily_deaths_def1",
+    # "daily_deaths_def2",
+    # "daily_deaths_def3",
+    # "daily_deaths_all",
+    # "active_de_jure",
+    # "active_sttstcl",
+    # "dead_cases",
+    # "recovered_de_jure",
+    # recovered_sttstcl
     
+
+  # cases_wider <- left_join(cases_data,municipality_county_lookup, by=c("region_level_2")) %>%
+  #   select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
+  #          cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total)
+  #   
     ## This is the list of fields which we're trying to generate, copied from get_regional_data.R
     # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
     # cases_new, cases_total, deaths_new, deaths_total,
     # recovered_new, recovered_total, hosp_new, hosp_total,
     # tested_new, tested_total, dplyr::everything())
 
-  # The French code for loading hospital data is being kept here as a guide
-  # for when it is added for Lithuania.
-  
-  # hosp_data <- csv_reader(file = hosp_url) %>%
-  #   dplyr::select(date = jour,
-  #                 level_2_region_code = dep,
-  #                 hosp_new = incid_hosp,
-  #                 deaths_new = incid_dc) %>%
-  #   dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
-
-  data <- cases_wider
-  return(data)
+  return(cases_data)
 }
+
+
