@@ -1,11 +1,18 @@
 #' Lithuania Regional Daily COVID-19 Count Data - County
+#' @inherit get_lithuania_regional_cases_with_level_2
 #'
-#' @description Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis) 
+#' @description Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis)
 #' and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
 #' Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
+#' 
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
+#' 
 #' It is loaded and then sanitised.
+#' 
 #' @return A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.
+#' 
+#' @seealso [get_lithuania_regional_cases_with_level_2()]
+#' @md
 #' @importFrom dplyr %>% across summarise group_by
 #' @importFrom tibble tibble
 
@@ -14,84 +21,133 @@ get_lithuania_regional_cases_only_level_1 <- function() {
   # Lithuania only publishes data at the municipality level. To provide
   # data for the level 1 regions (Counties, Apskritis) we get the municipality
   # level data and aggregate it according to municipality
-  
-  # level_1_lookup <- tibble::tibble(level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN", 
+
+  # level_1_lookup <- tibble::tibble(level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN",
   #                                        "LT-SA", "LT-TA", "LT-TE", "LT-UT", "LT-VL", NA_character_),
-  #                region_level_1 = c("Alytaus apskritis", 
-  #                                   "Kauno apskritis", "Klaip\u0117dos apskritis", "Marijampol\u0117s apskritis", 
-  #                                   "Panev\u0117\u017eio apskritis", "\u0160iauli\u0173 apskritis", "Taurag\u0117s apskritis", 
+  #                region_level_1 = c("Alytaus apskritis",
+  #                                   "Kauno apskritis", "Klaip\u0117dos apskritis", "Marijampol\u0117s apskritis",
+  #                                   "Panev\u0117\u017eio apskritis", "\u0160iauli\u0173 apskritis", "Taurag\u0117s apskritis",
   #                                   "Tel\u0161i\u0173 apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
-  #                region_level_1_en = c("Alytus County", "Kaunas County", 
-  #                                      "Klaip\u0117da County", "Marijampol\u0117 County", "Panev\u0117\u017eys County", 
-  #                                      "\u0160iauliai County", "Taurag\u0117 County", "Tel\u0161iai County", "Utena County", 
+  #                region_level_1_en = c("Alytus County", "Kaunas County",
+  #                                      "Klaip\u0117da County", "Marijampol\u0117 County", "Panev\u0117\u017eys County",
+  #                                      "\u0160iauliai County", "Taurag\u0117 County", "Tel\u0161iai County", "Utena County",
   #                                      "Vilnius County", "unstated"))
-  # 
+  #
   county_data <- get_lithuania_regional_cases_with_level_2() %>%
     dplyr::group_by(date,region_level_1) %>%
     dplyr::summarise(across(where(is.numeric), sum))
-  
+
   return(county_data)
-  
+
 }
 
 #' Lithuanian Daily COVID-19 Count Data - Municipalities
 #'
 #' @description Extracts daily COVID-19 data for Lithuania, by municipality.
+#' 
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 #' It is loaded and then sanitised.
-#' @return A data.frame of COVID cases by municipality in Lithuania, ready to be used by get_regional_data().
+#' 
+#' @return A `data.frame` of COVID cases by municipality in Lithuania, ready to be used by `get_regional_data()`.
+#' 
+#' The OSP provides many data series in their table (see details).
+#' This function returns `cases_new`, `cases_total`, `deaths_new` and
+#' `tested_new`. 
+#' 
+#' It uses `deaths_def3_day` (the broadest definition for counting) from the
+#' OSP for the `deaths_new`.
+#' 
+#' @section OSP Data fields:
+#' The following describes the data provided by the
+#'  [Official Statistics Portal](https://osp.stat.gov.lt)
+#'
+#' | field | description |
+#' | :------ | :------------ |
+#' | `date` | the reporting day during which the events occurred or at the end of which the accounting was performed |
+#' | `municipality_code``*` | code of the municipality assigned to persons |
+#' | `municipality_name``+` | the name of the municipality assigned to the persons |
+#' | `population` | population size according to the data of the beginning of 2021, according to the declared place of residence |
+#' | `ab_pos_day` | Number of positive antibody test responses, days |
+#' | `ab_neg_day` | Number of negative antibody test responses, days |
+#' | `ab_tot_day` | Number of antibody tests, daily |
+#' | `ab_prc_day` | Percentage of positive antibody test responses per day |
+#' | `ag_pos_day` | Number of positive antigen test responses, daily |
+#' | `ag_neg_day` | Number of negative antigen test responses, daily |
+#' | `ag_tot_day` | Number of antigen tests, daily |
+#' | `ag_prc_day` | Percentage of positive responses to antigen tests per day |
+#' | `pcr_pos_day` | number of positive PCR test responses, daily |
+#' | `pcr_neg_day` | Number of PCR test negative responses, daily |
+#' | `pcr_tot_day` | number of PCR tests per day |
+#' | `pcr_prc_day` | Percentage of positive PCR test responses per day |
+#' | `dgn_pos_day` | Number of positive answers to diagnostic tests / tests, days |
+#' | `dgn_neg_day` | Number of negative answers to diagnostic tests / tests, days |
+#' | `dgn_prc_day` | Number of diagnostic examinations / tests, days |
+#' | `dgn_tot_day` | Percentage of positive answers to diagnostic tests / tests per day |
+#' | `dgn_tot_day_gmp` | Number of diagnostic examinations / tests of samples collected at mobile points, days |
+#' | `daily_deaths_def1` | The number of new deaths per day according to the (narrowest) COVID death definition No. 1.`#` |
+#' | `daily_deaths_def2` | Number of new deaths per day according to COVID death definition No. 2. `#`  |
+#' | `daily_deaths_def3` | Number of new deaths per day according to COVID death definition No. 3. `#` |
+#' | `daily_deaths_all` | Daily deaths in Lithuania (by date of death) |
+#' | `incidence_day`+ | Number of new COVID cases per day (laboratory or physician confirmed) |
+#' | `incidence_cum`+ | Total number of COVID cases (laboratory or physician confirmed) |
+#' | `active_de_jure` | Declared number of people with COVID |
+#' | `active_sttstcl` | Statistical number of people with COVID |
+#' | `dead_cases` | The number of dead persons who were ever diagnosed with COVID |
+#' | `recovered_de_jure` | Declared number of recovered live persons |
+#' | `recovered_sttstcl` | Statistical number of recovered live persons |
+#' 
+#' `*` The `municipality_code` is discarded since it does not correspond
+#' to ISO-3166:2 codes used elsewhere in the package.
+#' 
+#' `+` These fields are renamed but returned unmodified.
+#' 
+#' `#` Lithuania offers counts according to three 
+#' different definitions of whether a death is attributable to COVID-19.
+#' 
+#' @section Criteria for attributing deaths:
+#' 
+#' Beginning in February 2021 the OSP publishes death counts according to 
+#' three different criteria, from most to least strictly attributed to
+#' COVID-19.
+#' 
+#' 1. Number of deaths with COVID-19 (coronavirus infection) as the leading cause of death. The indicator is calculated by summing all registered records of medical form E106 (unique persons), in which the main cause of death is IPC disease codes U07.1 or U07.2. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+#'    The number of deaths reported in the last day is preliminary and increases by about 20-40% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+#' 2. Number of deaths with COVID-19 (coronavirus infection) of any cause of death.
+#'    The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07.5 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection). Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+#'    The number of deaths reported in the last day is preliminary and increases by about 20-40% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+#' 3. Number of deaths from any cause of COVID-19 or COVID-19 deaths due to non-external causes within 28 days.
+#'    The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection) and all records of medical form E106 (unique individuals) where the person died within the last 28 days after receiving a positive diagnostic response to the SARS-CoV-2 test or had an entry in medical form E025 with ICD disease code U07.2 or U07.1. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+#'    The number of deaths reported in the last day is preliminary and increases by about 20-40% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+#'
+#' @section De jure and statistical counts:
+#' 
+#' Beginning in February 2021 the OSP is making statistical estimates
+#' of the number of recovered and active cases, since review of the data
+#' showed that some cases individuals still considered as active cases
+#' had recovered, but not documented or registered as such.
+#' 
+#' These are listed as by the OSP as `active_de_jure` and
+#' `recovered_de_jure` (officially still considered sick),
+#' and `active_sttstcl` and `recovered_sttstcl` (an estimate of how
+#' many of these are still ill).
+#' 
+#' 
+#' @seealso [get_lithuania_regional_cases_only_level_1()]
 #' @importFrom dplyr %>% filter select mutate full_join left_join rename bind_rows
 #' @importFrom lubridate as_date ymd
 #' @importFrom xml2 read_html
 #' @importFrom rvest html_nodes html_table
 #' @importFrom tibble tibble
 #'
-#' @details 
-#' The following describes the data provided by the Official Statistics Portal
-#' \url{https://osp.stat.gov.lt}
-#' date - the reporting day during which the events occurred or at the end of
-#' which the accounting was performed
-#' municipality_code - code of the municipality assigned to persons
-#' municipality_name - the name of the municipality assigned to the persons
-#' population - population size according to the data of the beginning of 2021, according to the
-#' declared place of residence
-#' ab_pos_day - Number of positive antibody test responses, days
-#' ab_neg_day - Number of negative antibody test responses, days
-#' ab_tot_day - Number of antibody tests, daily
-#' ab_prc_day - Percentage of positive antibody test responses per day
-#' ag_pos_day - Number of positive antigen test responses, daily
-#' ag_neg_day - Number of negative antigen test responses, daily
-#' ag_tot_day - Number of antigen tests, daily
-#' ag_prc_day - Percentage of positive responses to antigen tests per day
-#' pcr_pos_day - number of positive PCR test responses, daily
-#' pcr_neg_day - Number of PCR test negative responses, daily
-#' pcr_tot_day - number of PCR tests per day
-#' pcr_prc_day - Percentage of positive PCR test responses per day
-#' dgn_pos_day - Number of positive answers to diagnostic tests / tests, days
-#' dgn_neg_day - Number of negative answers to diagnostic tests / tests, days
-#' dgn_prc_day - Number of diagnostic examinations / tests, days
-#' dgn_tot_day - Percentage of positive answers to diagnostic tests / tests per day
-#' dgn_tot_day_gmp - Number of diagnostic examinations / tests of samples collected at mobile points, days
-#' deaths_def1_day - The number of new deaths per day according to the (narrowest) COVID death definition No. 1. The definition can be found here
-#' deaths_def2_day - Number of new deaths per day according to COVID death definition No. 2. The definition can be found here
-#' deaths_def3_day - Number of new deaths per day according to COVID death definition No. 3. The definition can be found here
-#' deaths_population_day - Daily deaths in Lithuania (by date of death)
-#' incidence_day - Number of new COVID cases per day (laboratory or physician confirmed)
-#' incidence_cum - Total number of COVID cases (laboratory or physician confirmed)
-#' active_declared - Declared number of people with COVID
-#' active_statistical - Statistical number of people with COVID
-#' dead_cases - The number of dead persons who were ever diagnosed with COVID
-#' recovered_declared - Declared number of recovered live persons
-#' recovered_statistical - Statistical number of recovered live persons
-#'
+#' @md
 get_lithuania_regional_cases_with_level_2 <- function() {
 
   # The following code, adjusted from a version for France, was initially used to
   # create lookup tables of Lithuanian municipality and country codes.
-  # These were then adjusted to match the format used by the 
-  # Official Statistics Portal in their open data and are left as 
+  # These were then adjusted to match the format used by the
+  # Official Statistics Portal in their open data and are left as
   # hard-coded tibbles. These codes have not changed in ten years.
-  
+
   # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
   # level_2_codes_table <- level_2_codes_url %>%
   #   xml2::read_html() %>%
@@ -162,13 +218,13 @@ get_lithuania_regional_cases_with_level_2 <- function() {
     "Zaras\u0173 r. sav.",       "Utenos apskritis",
     "nenustatyta",            "nenustatyta"
   )
-  
+
   # Read data --------------------------------------------------------------------
-  
+
   #  cases_url <- "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0.csv"
   cases_url <- "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
-  
-  osp_data <- csv_reader(file = cases_url) 
+
+  osp_data <- csv_reader(file = cases_url)
   cases_data <- osp_data %>%
     dplyr::filter(municipality_name != "Lietuva") %>%
     dplyr::select(-object_id, -municipality_code) %>%
@@ -180,9 +236,9 @@ get_lithuania_regional_cases_with_level_2 <- function() {
                   cases_total=cumulative_totals,
                   region_level_2 = municipality_name) %>%
     dplyr::left_join(municipality_county_lookup, by=c("region_level_2")) %>%
-    # dplyr::mutate(diff_tests = tested_new - dgn_tot_day,
-    #               incidence_diff = tested_new - ab_pos_day - ag_pos_day - pcr_pos_day - dgn_pos_day
-    #               ) %>%
+     # dplyr::mutate(diff_tests = tested_new - dgn_tot_day,
+     #               incidence_diff = tested_new - ab_pos_day - ag_pos_day - pcr_pos_day - dgn_pos_day
+     #               ) %>%
     dplyr::select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
            cases_new, cases_total, deaths_new, tested_new, dplyr::everything())
     # "ab_pos_day",
@@ -211,19 +267,17 @@ get_lithuania_regional_cases_with_level_2 <- function() {
     # "dead_cases",
     # "recovered_de_jure",
     # recovered_sttstcl
-    
+
 
   # cases_wider <- left_join(cases_data,municipality_county_lookup, by=c("region_level_2")) %>%
   #   select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
   #          cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total)
-  #   
+  #
     ## This is the list of fields which we're trying to generate, copied from get_regional_data.R
-    # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code, 
+    # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code,
     # cases_new, cases_total, deaths_new, deaths_total,
     # recovered_new, recovered_total, hosp_new, hosp_total,
     # tested_new, tested_total, dplyr::everything())
 
   return(cases_data)
 }
-
-

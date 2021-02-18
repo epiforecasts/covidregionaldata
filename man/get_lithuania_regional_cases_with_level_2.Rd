@@ -7,48 +7,102 @@
 get_lithuania_regional_cases_with_level_2()
 }
 \value{
-A data.frame of COVID cases by municipality in Lithuania, ready to be used by get_regional_data().
+A \code{data.frame} of COVID cases by municipality in Lithuania, ready to be used by \code{get_regional_data()}.
+
+The OSP provides many data series in their table (see details).
+This function returns \code{cases_new}, \code{cases_total}, \code{deaths_new} and
+\code{tested_new}.
+
+It uses \code{deaths_def3_day} (the broadest definition for counting) from the
+OSP for the \code{deaths_new}.
 }
 \description{
 Extracts daily COVID-19 data for Lithuania, by municipality.
+
 Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 It is loaded and then sanitised.
 }
-\details{
-The following describes the data provided by the Official Statistics Portal
-\url{https://osp.stat.gov.lt}
-date - the reporting day during which the events occurred or at the end of
-which the accounting was performed
-municipality_code - code of the municipality assigned to persons
-municipality_name - the name of the municipality assigned to the persons
-population - population size according to the data of the beginning of 2021, according to the
-declared place of residence
-ab_pos_day - Number of positive antibody test responses, days
-ab_neg_day - Number of negative antibody test responses, days
-ab_tot_day - Number of antibody tests, daily
-ab_prc_day - Percentage of positive antibody test responses per day
-ag_pos_day - Number of positive antigen test responses, daily
-ag_neg_day - Number of negative antigen test responses, daily
-ag_tot_day - Number of antigen tests, daily
-ag_prc_day - Percentage of positive responses to antigen tests per day
-pcr_pos_day - number of positive PCR test responses, daily
-pcr_neg_day - Number of PCR test negative responses, daily
-pcr_tot_day - number of PCR tests per day
-pcr_prc_day - Percentage of positive PCR test responses per day
-dgn_pos_day - Number of positive answers to diagnostic tests / tests, days
-dgn_neg_day - Number of negative answers to diagnostic tests / tests, days
-dgn_prc_day - Number of diagnostic examinations / tests, days
-dgn_tot_day - Percentage of positive answers to diagnostic tests / tests per day
-dgn_tot_day_gmp - Number of diagnostic examinations / tests of samples collected at mobile points, days
-deaths_def1_day - The number of new deaths per day according to the (narrowest) COVID death definition No. 1. The definition can be found here
-deaths_def2_day - Number of new deaths per day according to COVID death definition No. 2. The definition can be found here
-deaths_def3_day - Number of new deaths per day according to COVID death definition No. 3. The definition can be found here
-deaths_population_day - Daily deaths in Lithuania (by date of death)
-incidence_day - Number of new COVID cases per day (laboratory or physician confirmed)
-incidence_cum - Total number of COVID cases (laboratory or physician confirmed)
-active_declared - Declared number of people with COVID
-active_statistical - Statistical number of people with COVID
-dead_cases - The number of dead persons who were ever diagnosed with COVID
-recovered_declared - Declared number of recovered live persons
-recovered_statistical - Statistical number of recovered live persons
+\section{OSP Data fields}{
+
+The following describes the data provided by the
+\href{https://osp.stat.gov.lt}{Official Statistics Portal}\tabular{ll}{
+   field \tab description \cr
+   \code{date} \tab the reporting day during which the events occurred or at the end of which the accounting was performed \cr
+   \verb{municipality_code``*} \tab code of the municipality assigned to persons \cr
+   \verb{municipality_name``+} \tab the name of the municipality assigned to the persons \cr
+   \code{population} \tab population size according to the data of the beginning of 2021, according to the declared place of residence \cr
+   \code{ab_pos_day} \tab Number of positive antibody test responses, days \cr
+   \code{ab_neg_day} \tab Number of negative antibody test responses, days \cr
+   \code{ab_tot_day} \tab Number of antibody tests, daily \cr
+   \code{ab_prc_day} \tab Percentage of positive antibody test responses per day \cr
+   \code{ag_pos_day} \tab Number of positive antigen test responses, daily \cr
+   \code{ag_neg_day} \tab Number of negative antigen test responses, daily \cr
+   \code{ag_tot_day} \tab Number of antigen tests, daily \cr
+   \code{ag_prc_day} \tab Percentage of positive responses to antigen tests per day \cr
+   \code{pcr_pos_day} \tab number of positive PCR test responses, daily \cr
+   \code{pcr_neg_day} \tab Number of PCR test negative responses, daily \cr
+   \code{pcr_tot_day} \tab number of PCR tests per day \cr
+   \code{pcr_prc_day} \tab Percentage of positive PCR test responses per day \cr
+   \code{dgn_pos_day} \tab Number of positive answers to diagnostic tests / tests, days \cr
+   \code{dgn_neg_day} \tab Number of negative answers to diagnostic tests / tests, days \cr
+   \code{dgn_prc_day} \tab Number of diagnostic examinations / tests, days \cr
+   \code{dgn_tot_day} \tab Percentage of positive answers to diagnostic tests / tests per day \cr
+   \code{dgn_tot_day_gmp} \tab Number of diagnostic examinations / tests of samples collected at mobile points, days \cr
+   \code{daily_deaths_def1} \tab The number of new deaths per day according to the (narrowest) COVID death definition No. 1.\verb{#} \cr
+   \code{daily_deaths_def2} \tab Number of new deaths per day according to COVID death definition No. 2. \verb{#} \cr
+   \code{daily_deaths_def3} \tab Number of new deaths per day according to COVID death definition No. 3. \verb{#} \cr
+   \code{daily_deaths_all} \tab Daily deaths in Lithuania (by date of death) \cr
+   \code{incidence_day}+ \tab Number of new COVID cases per day (laboratory or physician confirmed) \cr
+   \code{incidence_cum}+ \tab Total number of COVID cases (laboratory or physician confirmed) \cr
+   \code{active_de_jure} \tab Declared number of people with COVID \cr
+   \code{active_sttstcl} \tab Statistical number of people with COVID \cr
+   \code{dead_cases} \tab The number of dead persons who were ever diagnosed with COVID \cr
+   \code{recovered_de_jure} \tab Declared number of recovered live persons \cr
+   \code{recovered_sttstcl} \tab Statistical number of recovered live persons \cr
+}
+
+
+\code{*} The \code{municipality_code} is discarded since it does not correspond
+to ISO-3166:2 codes used elsewhere in the package.
+
+\code{+} These fields are renamed but returned unmodified.
+
+\verb{#} Lithuania offers counts according to three
+different definitions of whether a death is attributable to COVID-19.
+}
+
+\section{Criteria for attributing deaths}{
+
+
+Beginning in February 2021 the OSP publishes death counts according to
+three different criteria, from most to least strictly attributed to
+COVID-19.
+\enumerate{
+\item Number of deaths with COVID-19 (coronavirus infection) as the leading cause of death. The indicator is calculated by summing all registered records of medical form E106 (unique persons), in which the main cause of death is IPC disease codes U07.1 or U07.2. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+\item Number of deaths with COVID-19 (coronavirus infection) of any cause of death.
+The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07.5 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection). Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+\item Number of deaths from any cause of COVID-19 or COVID-19 deaths due to non-external causes within 28 days.
+The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection) and all records of medical form E106 (unique individuals) where the person died within the last 28 days after receiving a positive diagnostic response to the SARS-CoV-2 test or had an entry in medical form E025 with ICD disease code U07.2 or U07.1. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+}
+}
+
+\section{De jure and statistical counts}{
+
+
+Beginning in February 2021 the OSP is making statistical estimates
+of the number of recovered and active cases, since review of the data
+showed that some cases individuals still considered as active cases
+had recovered, but not documented or registered as such.
+
+These are listed as by the OSP as \code{active_de_jure} and
+\code{recovered_de_jure} (officially still considered sick),
+and \code{active_sttstcl} and \code{recovered_sttstcl} (an estimate of how
+many of these are still ill).
+}
+
+\seealso{
+\code{\link[=get_lithuania_regional_cases_only_level_1]{get_lithuania_regional_cases_only_level_1()}}
 }
