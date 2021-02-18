@@ -18,7 +18,7 @@ get_ecdc_cases <- function(){
   data <- raw %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
     dplyr::rename(iso_code = geoId, country = countriesAndTerritories,
-                  cases_new = cases_weekly, deaths_new = deaths_weekly,
+                  cases_new = cases, deaths_new = deaths,
                   population_2019 = popData2019) %>%
     dplyr::select(date, country, iso_code, population_2019, cases_new, deaths_new) %>%
     dplyr::arrange(date) %>%
@@ -26,11 +26,12 @@ get_ecdc_cases <- function(){
     dplyr::mutate(cases_new = ifelse(cases_new < 0, 0, cases_new),
                   country = stringr::str_replace_all(country, "_", " "),
                   country = countrycode::countryname(country, destination = "country.name.en", warn = FALSE),
+                  # Correct for Namibia
                   iso_code = ifelse(country == "Namibia", "NA", iso_code),
                   un_region = countrycode::countrycode(iso_code, origin = "iso2c", destination = "un.region.name", warn = FALSE),
                   # Correct for Kosovo
                   un_region = ifelse(iso_code == "XK", "Europe", un_region),
-                  # Correct of UK
+                  # Correct for UK
                   un_region = ifelse(iso_code == "UK", "Europe", un_region),
                   # Correct for Greece
                   un_region = ifelse(iso_code == "EL", "Europe", un_region),
