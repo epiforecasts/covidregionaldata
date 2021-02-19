@@ -91,7 +91,7 @@ get_info_covidregionaldata <- function() {
     "d\u00e9partement",
     NA,
     "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
-    "cases_new, deaths_new", 
+    "cases_new, tested_new",
     
     "get_regional_data",
     "mexico",
@@ -103,7 +103,7 @@ get_info_covidregionaldata <- function() {
 
     "get_regional_data",
     "russia",
-    "regions",
+    "Source no longer updated",
     NA,
     NA,
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",

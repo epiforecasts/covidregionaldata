@@ -84,7 +84,6 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
                                 "mexico" = get_mexico_regional_cases_only_level_1,
-                                "russia" = get_russia_regional_cases,
                                 "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
                                 "cuba" = get_cuba_regional_cases,

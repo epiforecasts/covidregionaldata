@@ -24,7 +24,6 @@ rename_region_column <- function(data, country) {
                                 "india" = "state",
                                 "italy" = "region",
                                 "mexico" = "estado",
-                                "russia" = "region",
                                 "uk" = "region",
                                 "usa" = "state",
                                 "cuba" = "provincia",
@@ -72,7 +71,6 @@ rename_region_code_column <- function(data, country) {
                                      "india" = "iso_3166_2",
                                      "italy" = "iso_3166_2",
                                      "mexico" = "iso_3166_2",
-                                     "russia" = "iso_3166_2",
                                      "uk" = "ons_region_code",
                                      "usa" = "iso_3166_2",
                                      "cuba" = "iso_3166_2",
@@ -115,7 +113,6 @@ get_region_codes <- function(country) {
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
                          "mexico" = get_mexico_region_codes,
-                         "russia" = get_russia_region_codes,
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
                          "cuba" = get_cuba_region_codes,
@@ -250,43 +247,6 @@ get_italy_region_codes <- function() {
   return(region_codes)
 }
 
-#' Russian region codes
-#' @importFrom tibble tibble
-#' 
-get_russia_region_codes <- function() {
-  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:RU"
-  region_table <- region_url %>%
-    xml2::read_html() %>%
-    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
-    rvest::html_table(fill=TRUE)
-  region_code <- region_table[[1]][-1,]$Code
-  
-  region_codes <- tibble::tibble(
-    level_1_region_code = c(region_code, "UA-40", "UA-43"), 
-    region = c("Adygea Republic", "Altai Republic", "Bashkortostan Republic", "Buryatia Republic",
-    "Chechen Republic", "Chuvashia Republic", "Dagestan Republic", "Ingushetia Republic", 
-    "Kabardino-Balkarian Republic", "Kalmykia Republic", "Karachay-Cherkess Republic", "Karelia Republic",
-    "Khakassia Republic", "Komi Republic", "Mari El Republic", "Mordovia Republic",
-    "Sakha (Yakutiya) Republic", "North Ossetia - Alania Republic", "Tatarstan Republic",
-    "Tyva Republic",  "Udmurt Republic",  "Altai Krai", "Kamchatka Krai",
-    "Khabarovsk Krai",  "Krasnodar Krai", "Krasnoyarsk Krai", "Perm Krai", "Primorsky Krai", "Stavropol Krai",
-    "Zabaykalsky Krai", "Amur Oblast", "Arkhangelsk Oblast", "Astrakhan Oblast", "Belgorod Oblast",
-    "Bryansk Oblast", "Chelyabinsk Oblast",  "Irkutsk Oblast", "Ivanovo Oblast",
-    "Kaliningrad Oblast", "Kaluga Oblast", "Kemerovo Oblast", "Kirov Oblast",
-    "Kostroma Oblast", "Kurgan Oblast", "Kursk Oblast", "Leningrad Oblast",
-    "Lipetsk Oblast", "Magadan Oblast", "Moscow Oblast", "Murmansk Oblast",
-    "Nizhny Novgorod Oblast", "Novgorod Oblast", "Novosibirsk Oblast", "Omsk Oblast",
-    "Orenburg Oblast",  "Orel Oblast",  "Penza Oblast", "Pskov Oblast",
-    "Rostov Oblast", "Ryazan Oblast", "Sakhalin Oblast",  "Samara Oblast",
-    "Saratov Oblast", "Smolensk Oblast", "Sverdlovsk Oblast",  "Tambov Oblast",
-    "Tomsk Oblast", "Tula Oblast", "Tver Oblast",  "Tyumen Oblast",  "Ulyanovsk Oblast",
-    "Vladimir Oblast", "Volgograd Oblast",  "Vologda Oblast",  "Voronezh Oblast",
-    "Yaroslavl Oblast", "Moscow", "Saint Petersburg", "Jewish Autonomous Okrug", "Chukotka Autonomous Okrug",
-    "Khanty-Mansi Autonomous Okrug", "Nenets Autonomous Okrug", "Yamalo-Nenets Autonomous Okrug", "Sevastopol",
-    "Republic of Crimea"))
-  
-  return(region_codes)
-}
 
 #' US region codes
 #' @importFrom tibble tibble
