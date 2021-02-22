@@ -103,7 +103,7 @@ get_info_covidregionaldata <- function() {
     
     "get_regional_data",
     "russia",
-    "regions",
+    "Source no longer updated",
     NA,
     NA,
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",

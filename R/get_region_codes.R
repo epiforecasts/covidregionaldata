@@ -9,10 +9,10 @@
 #' @return a tibble with the column renamed to a sensible name
 #' @importFrom dplyr %>% rename
 #' @importFrom tibble tibble
-#' 
+#'
 # Renaming the region name column
 rename_region_column <- function(data, country) {
-  
+
   level_1_region_name <- switch(tolower(country),
                                 "afghanistan" = "province",
                                 "belgium" = "region",
@@ -24,14 +24,13 @@ rename_region_column <- function(data, country) {
                                 "india" = "state",
                                 "italy" = "region",
                                 "lithuania" = "county",
-                                "russia" = "region",
                                 "uk" = "region",
                                 "usa" = "state",
                                 "cuba" = "provincia",
                                 "south africa" = "province")
-  
+
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
-  
+
   if ("region_level_2" %in% colnames(data)) {
     level_2_region_name <- switch(tolower(country),
                                   "belgium" = "province",
@@ -41,26 +40,26 @@ rename_region_column <- function(data, country) {
                                   "lithuania" = "municipality",
                                   "uk" = "authority",
                                   "usa" = "county")
-    
+
     data <- data %>% dplyr::rename(!!level_2_region_name := region_level_2)
   }
-  
+
   return(tibble::tibble(data))
 }
 
 # Renaming the regional geocode column
 #' Helper to rename the region code column in each dataset to the correct code type for each country (e.g. ISO-3166-2).
-#' @description The package relies on column name 'region_level_1_code' etc. during processing but this often isn't the most 
-#' sensible name for the column (e.g. iso-3166-2 makes more sense for US states). This simply renames the column as the final step in 
+#' @description The package relies on column name 'region_level_1_code' etc. during processing but this often isn't the most
+#' sensible name for the column (e.g. iso-3166-2 makes more sense for US states). This simply renames the column as the final step in
 #' processing before returning data to the user.
 #' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
 #' @param country a string with the country of interest
 #' @return a tibble with the column(s) renamed to a sensible name
 #' @importFrom dplyr %>% rename
 #' @importFrom tibble tibble
-#' 
+#'
 rename_region_code_column <- function(data, country) {
-  
+
   level_1_region_code_name <- switch(tolower(country),
                                      "afghanistan" = "iso_3166_2",
                                      "belgium" = "iso_3166_2",
@@ -72,14 +71,13 @@ rename_region_code_column <- function(data, country) {
                                      "india" = "iso_3166_2",
                                      "italy" = "iso_3166_2",
                                      "lithuania" = "iso_3166_2",
-                                     "russia" = "iso_3166_2",
                                      "uk" = "ons_region_code",
                                      "usa" = "iso_3166_2",
                                      "cuba" = "iso_3166_2",
                                      "south africa" = "iso_3166_2")
-  
+
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
-  
+
   if ("level_2_region_code" %in% colnames(data)) {
     level_2_region_code_name <- switch(tolower(country),
                                        "belgium" = "iso_3166_2_province",
@@ -89,10 +87,10 @@ rename_region_code_column <- function(data, country) {
                                        "lithuania" = "iso_3166_municipality",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
-    
+
     data <- data %>% dplyr::rename(!!level_2_region_code_name := level_2_region_code)
   }
-  
+
   return(tibble::tibble(data))
 }
 
@@ -115,7 +113,6 @@ get_region_codes <- function(country) {
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
                          "lithuania" = get_lithuania_region_codes,
-                         "russia" = get_russia_region_codes,
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
                          "cuba" = get_cuba_region_codes,
@@ -131,7 +128,7 @@ get_region_codes <- function(country) {
 #' @return a tibble of regions and their corresponding level 2 region codes
 #' @importFrom tibble tibble
 get_level_2_region_codes <- function(country) {
-  
+
   level_2_code_fun <- switch(country,
                              "belgium" = get_belgium_level_2_codes,
                              "brazil" = get_brazil_level_2_codes,
@@ -140,9 +137,9 @@ get_level_2_region_codes <- function(country) {
                              "lithuania" = get_lithuania_level_2_codes,
                              "uk" = get_uk_level_2_codes,
                              "usa" = get_us_level_2_codes)
-  
+
   level_2_codes_table <- do.call(level_2_code_fun, list())
-  
+
   return(level_2_codes_table)
 }
 
@@ -150,7 +147,7 @@ get_level_2_region_codes <- function(country) {
 
 #' Afghan region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_afghan_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("AF-BAL", "AF-BAM", "AF-BDG", "AF-BDS", "AF-BGL", "AF-DAY", "AF-FRA", "AF-FYB",
@@ -166,7 +163,7 @@ get_afghan_region_codes <- function() {
 
 #' Belgian region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_belgium_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
@@ -176,7 +173,7 @@ get_belgium_region_codes <- function() {
 
 #' Brazilian region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_brazil_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("BR-AC", "BR-AL", "BR-AM", "BR-AP", "BR-BA", "BR-CE", "BR-DF", "BR-ES", "BR-FN",
@@ -192,7 +189,7 @@ get_brazil_region_codes <- function() {
 
 #' Canadian region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_canada_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL", "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE", "CA-QC", "CA-SK", "CA-YT"),
@@ -204,7 +201,7 @@ get_canada_region_codes <- function() {
 
 #' German region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_germany_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH", "DE-MV",
@@ -217,7 +214,7 @@ get_germany_region_codes <- function() {
 
 #' Indian region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_india_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("IN-AN", "IN-AP", "IN-AR", "IN-AS", "IN-BR", "IN-CH", "IN-CT", "IN-DD", "IN-DL",
@@ -237,7 +234,7 @@ get_india_region_codes <- function() {
 
 #' Italian region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_italy_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("IT-21", "IT-23", "IT-25", "IT-32", "IT-34", "IT-36", "IT-42", "IT-45", "IT-52",
@@ -252,15 +249,15 @@ get_italy_region_codes <- function() {
 
 #' Lithuanian region codes
 #' @importFrom tibble tribble
-#' 
+#'
 get_lithuania_region_codes <- function() {
-  
+
   # The following code, adjusted from a version for France, was initially used to
   # create lookup tables of Lithuanian municipality and country codes.
-  # These were then adjusted to match the format used by the 
-  # Official Statistics Portal in their open data and are left as 
+  # These were then adjusted to match the format used by the
+  # Official Statistics Portal in their open data and are left as
   # hard-coded tibbles. These codes have not changed in ten years.
-  
+
   # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
   # level_2_codes_table <- level_2_codes_url %>%
   #   xml2::read_html() %>%
@@ -283,47 +280,9 @@ get_lithuania_region_codes <- function() {
   return(region_codes)
 }
 
-#' Russian region codes
-#' @importFrom tibble tibble
-#' 
-get_russia_region_codes <- function() {
-  region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:RU"
-  region_table <- region_url %>%
-    xml2::read_html() %>%
-    rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div/table') %>%
-    rvest::html_table(fill=TRUE)
-  region_code <- region_table[[1]][-1,]$Code
-  
-  region_codes <- tibble::tibble(
-    level_1_region_code = c(region_code, "UA-40", "UA-43"), 
-    region = c("Adygea Republic", "Altai Republic", "Bashkortostan Republic", "Buryatia Republic",
-    "Chechen Republic", "Chuvashia Republic", "Dagestan Republic", "Ingushetia Republic", 
-    "Kabardino-Balkarian Republic", "Kalmykia Republic", "Karachay-Cherkess Republic", "Karelia Republic",
-    "Khakassia Republic", "Komi Republic", "Mari El Republic", "Mordovia Republic",
-    "Sakha (Yakutiya) Republic", "North Ossetia - Alania Republic", "Tatarstan Republic",
-    "Tyva Republic",  "Udmurt Republic",  "Altai Krai", "Kamchatka Krai",
-    "Khabarovsk Krai",  "Krasnodar Krai", "Krasnoyarsk Krai", "Perm Krai", "Primorsky Krai", "Stavropol Krai",
-    "Zabaykalsky Krai", "Amur Oblast", "Arkhangelsk Oblast", "Astrakhan Oblast", "Belgorod Oblast",
-    "Bryansk Oblast", "Chelyabinsk Oblast",  "Irkutsk Oblast", "Ivanovo Oblast",
-    "Kaliningrad Oblast", "Kaluga Oblast", "Kemerovo Oblast", "Kirov Oblast",
-    "Kostroma Oblast", "Kurgan Oblast", "Kursk Oblast", "Leningrad Oblast",
-    "Lipetsk Oblast", "Magadan Oblast", "Moscow Oblast", "Murmansk Oblast",
-    "Nizhny Novgorod Oblast", "Novgorod Oblast", "Novosibirsk Oblast", "Omsk Oblast",
-    "Orenburg Oblast",  "Orel Oblast",  "Penza Oblast", "Pskov Oblast",
-    "Rostov Oblast", "Ryazan Oblast", "Sakhalin Oblast",  "Samara Oblast",
-    "Saratov Oblast", "Smolensk Oblast", "Sverdlovsk Oblast",  "Tambov Oblast",
-    "Tomsk Oblast", "Tula Oblast", "Tver Oblast",  "Tyumen Oblast",  "Ulyanovsk Oblast",
-    "Vladimir Oblast", "Volgograd Oblast",  "Vologda Oblast",  "Voronezh Oblast",
-    "Yaroslavl Oblast", "Moscow", "Saint Petersburg", "Jewish Autonomous Okrug", "Chukotka Autonomous Okrug",
-    "Khanty-Mansi Autonomous Okrug", "Nenets Autonomous Okrug", "Yamalo-Nenets Autonomous Okrug", "Sevastopol",
-    "Republic of Crimea"))
-  
-  return(region_codes)
-}
-
 #' US region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_us_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
@@ -333,9 +292,9 @@ get_us_region_codes <- function() {
                  "US-SD", "US-TN", "US-TX", "US-UT", "US-VE", "US-VA", "US-WA", "US-WV", "US-WI", "US-WY",
                  "US-DC", "US-AS", "US-GU", "US-MP", "US-PR", "US-UM", "US-VI"),
     region = c("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
-               "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", 
-               "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", 
-               "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", 
+               "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+               "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+               "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
                "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
                "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
                "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia",
@@ -345,13 +304,13 @@ get_us_region_codes <- function() {
 }
 
 #' UK region codes (NULL - they're in the raw data already)
-#' 
+#'
 get_uk_region_codes <- function() {
   return(NULL)
 }
 
 #' Colombia region codes
-#' 
+#'
 get_colombia_region_codes <- function() {
   region_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:CO"
   region_table <- region_url %>%
@@ -373,21 +332,21 @@ get_cuba_region_codes <- function() {
   region_codes <- tibble::tibble(
     level_1_region_code = c("CU-07", "CU-05", "CU-03", "CU-09", "CU-11", "CU-12", "CU-10", "CU-15", "CU-04", "CU-01",
                             "CU-13", "CU-08", "CU-06", "CU-14", "CU-99", "CU-16"),
-    region =  c("Sancti Sp\u00EDritus", "Villa Clara", "La Habana", "Camag\u00FCey", "Holgu\u00EDn", "Granma", "Las Tunas", "Artemisa", 
+    region =  c("Sancti Sp\u00EDritus", "Villa Clara", "La Habana", "Camag\u00FCey", "Holgu\u00EDn", "Granma", "Las Tunas", "Artemisa",
                 "Matanzas", "Pinar del R\u00EDo", "Santiago de Cuba", "Ciego de \u00C1vila", "Cienfuegos", "Guant\u00E1namo", "Isla de la Juventud",
-                "Mayabeque")   
+                "Mayabeque")
   )
   return(region_codes)
 }
 
 #' South Africa region codes (NULL - they're in the raw data already)
-#' 
+#'
 get_southafrica_region_codes <- function() {
   return(NULL)
 }
 
 #' France region codes (NULL - they're in the raw data already)
-#' 
+#'
 get_france_region_codes <- function() {
   return(NULL)
 }
@@ -397,19 +356,19 @@ get_france_region_codes <- function() {
 
 #' Belgian Provincial region codes
 #' @importFrom tibble tibble
-#' 
+#'
 get_belgium_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = c("BE-VAN", "BE-BRU", "BE-WLG", "BE-VLI", "BE-VOV", "BE-VBR",
                             "BE-VWV", "BE-WBR", "BE-WHT", "BE-WNA", NA, "BE-WLX"),
-    region = c("Antwerpen", "Brussels", "Li\u00E8ge", "Limburg", "OostVlaanderen", "VlaamsBrabant", 
+    region = c("Antwerpen", "Brussels", "Li\u00E8ge", "Limburg", "OostVlaanderen", "VlaamsBrabant",
                "WestVlaanderen", "BrabantWallon", "Hainaut", "Namur", "Unknown", "Luxembourg"))
   return(region_codes)
 }
 
 #' Brazilian level 2 codes (not available currently)
 #' @importFrom tibble tibble
-#' 
+#'
 get_brazil_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = NA,
@@ -419,7 +378,7 @@ get_brazil_level_2_codes <- function() {
 
 #' German level 2 codes (not available currently)
 #' @importFrom tibble tibble
-#' 
+#'
 get_germany_level_2_codes <- function() {
   region_codes <- tibble::tibble(
     level_2_region_code = NA,
@@ -437,16 +396,16 @@ get_france_level_2_codes <- function() {
 get_lithuania_level_2_codes <- function() {
   # The following code, adjusted from a version for France, was initially used to
   # create lookup tables of Lithuanian municipality and country codes.
-  # These were then adjusted to match the format used by the 
-  # Official Statistics Portal in their open data and are left as 
+  # These were then adjusted to match the format used by the
+  # Official Statistics Portal in their open data and are left as
   # hard-coded tibbles. These codes have not changed in ten years.
-  
+
   # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
   # level_2_codes_table <- level_2_codes_url %>%
   #   xml2::read_html() %>%
   #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
   #   rvest::html_table(fill = TRUE)
-  
+
   region_codes <- tibble::tribble(
     ~level_2_region_code,               ~region,       ~region_nomin,            ~region_type,
     "LT-01",     "Akmen\u0117s r. sav.",            "Akmen\u0117", "district municipality",
@@ -511,20 +470,19 @@ get_lithuania_level_2_codes <- function() {
     "LT-60",      "Zaras\u0173 r. sav.",           "Zarasai", "district municipality",
     NA,         "nenustatyta",          "unstated",                      NA
   )
-  return (region_codes)  
+  return (region_codes)
 }
 
 #' US level 2 codes (FIPS) (Included in original function)
 #' @importFrom tibble tibble
-#' 
+#'
 get_us_level_2_codes <- function() {
   return(NULL)
 }
 
 #' UK level 2 codes (ONS) (Included in original function)
 #' @importFrom tibble tibble
-#' 
+#'
 get_uk_level_2_codes <- function() {
   return(NULL)
 }
-

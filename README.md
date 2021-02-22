@@ -145,7 +145,6 @@ Europe | Germany | Bundesland | Landkreis
 Europe | UK | NHS region | Local authority
 Europe | Italy | Region | NA
 Europe | Lithuania | County | Municipality
-Europe | Russia | Region | NA
 Americas | Brazil | State | City
 Americas | USA | State | County
 Americas | Canada | Province | NA
