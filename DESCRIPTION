@@ -87,7 +87,8 @@ Imports:
     xml2,
     rvest,
     jsonlite,
-    countrycode
+    countrycode,
+    tidyselect
 Suggests:
     data.table,
     pkgdown,

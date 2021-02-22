@@ -264,18 +264,18 @@ get_lithuania_region_codes <- function() {
   #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
   #   rvest::html_table(fill = TRUE)
   region_codes <- tibble::tribble(
-    ~level_1_region_code,                  ~region,           ~region_en,
-                  "LT-AL",      "Alytaus apskritis",      "Alytus County",
-                  "LT-KU",        "Kauno apskritis",      "Kaunas County",
-                  "LT-KL",    "Klaipėdos apskritis",    "Klaipėda County",
-                  "LT-MR", "Marijampolės apskritis", "Marijampolė County",
-                  "LT-PN",    "Panevėžio apskritis",   "Panevėžys County",
-                  "LT-SA",      "Šiaulių apskritis",    "Šiauliai County",
-                  "LT-TA",     "Tauragės apskritis",     "Tauragė County",
-                  "LT-TE",       "Telšių apskritis",     "Telšiai County",
-                  "LT-UT",       "Utenos apskritis",       "Utena County",
-                  "LT-VL",     "Vilniaus apskritis",     "Vilnius County",
-                  NA,            "nenustatyta",           "unstated"
+    ~level_1_region_code,            ~region,                   ~region_en,
+    "LT-AL",             "Alytaus apskritis",              "Alytus County",
+    "LT-KU",               "Kauno apskritis",              "Kaunas County",
+    "LT-KL",      "Klaip\u0117dos apskritis",       "Klaip\u0117da County",
+    "LT-MR",   "Marijampol\u0117s apskritis",    "Marijampol\u0117 County",
+    "LT-PN", "Panev\u0117\u017eio apskritis", "Panev\u0117\u017eys County",
+    "LT-SA",   "\u0160iauli\u0173 apskritis",       "\u0160iauliai County",
+    "LT-TA",       "Taurag\u0117s apskritis",        "Taurag\u0117 County",
+    "LT-TE",    "Tel\u0161i\u0173 apskritis",        "Tel\u0161iai County",
+    "LT-UT",              "Utenos apskritis",               "Utena County",
+    "LT-VL",            "Vilniaus apskritis",             "Vilnius County",
+         NA,                   "nenustatyta",                   "unstated"
   )
   return(region_codes)
 }

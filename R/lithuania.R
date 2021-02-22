@@ -13,7 +13,8 @@
 #' 
 #' @seealso [get_lithuania_regional_cases_with_level_2()]
 #' @md
-#' @importFrom dplyr %>% across summarise group_by
+#' @importFrom dplyr %>% across summarise group_by 
+#' @importFrom tidyselect vars_select_helpers
 #' @importFrom tibble tibble
 
 get_lithuania_regional_cases_only_level_1 <- function() {
@@ -35,7 +36,7 @@ get_lithuania_regional_cases_only_level_1 <- function() {
   #
   county_data <- get_lithuania_regional_cases_with_level_2() %>%
     dplyr::group_by(date,region_level_1) %>%
-    dplyr::summarise(across(where(is.numeric), sum))
+    dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum))
 
   return(county_data)
 
