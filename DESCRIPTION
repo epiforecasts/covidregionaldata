@@ -59,11 +59,11 @@ Description: An interface to subnational and national level Covid-19 data.
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     France: <https://www.data.gouv.fr/fr/pages/donnees-coronavirus>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
-    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>,
+     UK: <https://coronavirus.data.gov.uk>,
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
     USA: <https://github.com/nytimes/covid-19-data>),
     Cuba: <https://covid19cubadata.github.io>,
-    and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>; Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
+    and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>).
 Language: en-gb
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata,
