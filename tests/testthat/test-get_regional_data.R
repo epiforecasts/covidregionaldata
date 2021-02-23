@@ -1,3 +1,6 @@
+## Load mock data functions
+source("custom_tests/mock_data.R")
+
 ## Errors are handled correctly
 test_that("get_regional_data returns error if country argument is not a string", {
   skip_on_cran()

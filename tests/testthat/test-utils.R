@@ -1,3 +1,6 @@
+## Load mock data functions
+source("custom_tests/mock_data.R")
+
 test_that("calculate_columns_from_existing_data returns correct results", {
   
   input_data <- tibble::tibble("date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),

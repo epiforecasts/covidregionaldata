@@ -5,18 +5,18 @@ test_that("get_belgium_regional_cases data sources are unchanged and up to date"
   h_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
   m_provincial <- "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
 
-  cases_data <- vroom::vroom(c_provincial)
+  cases_data <- readr::read_csv(c_provincial)
   cases_expected_colnames <- c("DATE", "PROVINCE", "REGION", "AGEGROUP", "SEX", "CASES")
   expect_true(all(cases_expected_colnames %in% colnames(cases_data)))
   expect_true(max(as.Date(cases_data$DATE), na.rm = TRUE) > Sys.Date() - 7)
 
-  hosp_data <- vroom::vroom(h_provincial)
+  hosp_data <- readr::read_csv(h_provincial)
   hosp_expected_colnames <- c("DATE", "PROVINCE", "REGION", "NR_REPORTING", "TOTAL_IN", "TOTAL_IN_ICU",
                               "TOTAL_IN_RESP", "TOTAL_IN_ECMO", "NEW_IN", "NEW_OUT")
   expect_true(all(hosp_expected_colnames %in% colnames(hosp_data)))
   expect_true(max(as.Date(hosp_data$DATE), na.rm = TRUE) > Sys.Date() - 7)
   
-  deaths_data <- vroom::vroom(m_provincial)
+  deaths_data <- readr::read_csv(m_provincial)
   deaths_expected_colnames <- c("DATE", "REGION", "AGEGROUP", "SEX", "DEATHS")
   expect_true(all(deaths_expected_colnames %in% colnames(deaths_data)))
   expect_true(max(as.Date(deaths_data$DATE), na.rm = TRUE) > Sys.Date() - 7)
