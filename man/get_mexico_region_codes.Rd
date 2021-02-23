@@ -2,10 +2,10 @@
 % Please edit documentation in R/get_region_codes.R
 \name{get_mexico_region_codes}
 \alias{get_mexico_region_codes}
-\title{Mexico level 1 codes (included in original function)}
+\title{Mexico level 1 codes (NULL)}
 \usage{
 get_mexico_region_codes()
 }
 \description{
-Mexico level 1 codes (included in original function)
+Mexico level 1 codes (NULL)
 }

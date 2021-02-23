@@ -37,7 +37,7 @@ rename_region_column <- function(data, country) {
                                   "brazil" = "city",
                                   "france" = "departement",
                                   "germany" = "landkreis",
-                                  "meixco" = "municipio",
+                                  "mexico" = "municipio",
                                   "uk" = "authority",
                                   "usa" = "county")
     
@@ -319,6 +319,11 @@ get_france_region_codes <- function() {
   return(NULL)
 }
 
+#' Mexico level 1 codes (NULL)
+get_mexico_region_codes <- function() {
+  return(NULL)
+}
+
 
 # Level 2 regions -------------------------------------------------------------------------------------
 
@@ -370,11 +375,6 @@ get_us_level_2_codes <- function() {
 #' @importFrom tibble tibble
 #' 
 get_uk_level_2_codes <- function() {
-  return(NULL)
-}
-
-#' Mexico level 1 codes (included in original function)
-get_mexico_region_codes <- function() {
   return(NULL)
 }
 
