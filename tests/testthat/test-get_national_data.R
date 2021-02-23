@@ -32,8 +32,8 @@ test_that("get_ecdc_cases works as expected", {
     ecdc <-  readxl::read_excel(tf)
   }
   
-  necessary_cols <- c("geoId", "countriesAndTerritories", "cases_weekly",
-                      "deaths_weekly", "popData2019")
+  necessary_cols <- c("geoId", "countriesAndTerritories", "cases",
+                      "deaths", "popData2019")
   
   expect_is(ecdc, "data.frame")
   expect_true(all(necessary_cols %in% colnames(ecdc)))
