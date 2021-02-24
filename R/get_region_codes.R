@@ -84,7 +84,7 @@ rename_region_code_column <- function(data, country) {
                                        "brazil" = "level_2_region_code",
                                        "germany" = "level_2_region_code",
                                        "france" = "iso_3166_departement",
-                                       "mexico" = "igeni_code",
+                                       "mexico" = "inegi_code",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
     
