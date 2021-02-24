@@ -8,8 +8,11 @@ Codecov
 Cota
 Covid
 DD
+Departamento
+Departement
 Département
 ECDC
+Estado
 Github
 HDX
 Kreise
@@ -17,6 +20,7 @@ Landkreis
 Limburg
 Linelist
 Muijen
+Municipio
 PHE
 Région
 SciELOPreprints
@@ -35,10 +39,10 @@ covid
 csv
 dd
 departamento
+departement
 develVersion
 dmuijen
 dplyr
-département
 etc
 ffinger
 filepath
@@ -60,7 +64,6 @@ org
 paulcampbell
 quickstart
 reparameterise
-région
 sam
 seabbs
 shapefiles

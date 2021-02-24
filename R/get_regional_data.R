@@ -45,6 +45,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                       "brazil",
                                       "france",
                                       "germany",
+                                      "mexico",
                                       "usa",
                                       "uk")
 
@@ -60,6 +61,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "belgium" = get_belgium_regional_cases_with_level_2,
                                 "brazil" = get_brazil_regional_cases_with_level_2,
                                 "france" = get_france_regional_cases_with_level_2,
+                                "mexico" = get_mexico_regional_cases_with_level_2,
                                 "germany" = get_germany_regional_cases_with_level_2,
                                 "uk" = get_uk_regional_cases_with_level_2,
                                 "usa" = get_us_regional_cases_with_level_2,
@@ -81,6 +83,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "germany" = get_germany_regional_cases_only_level_1,
                                 "india" = get_india_regional_cases,
                                 "italy" = get_italy_regional_cases,
+                                "mexico" = get_mexico_regional_cases_only_level_1,
                                 "uk" = get_uk_regional_cases_only_level_1,
                                 "usa" = get_us_regional_cases_only_level_1,
                                 "cuba" = get_cuba_regional_cases,
