@@ -9,8 +9,11 @@ Cota
 CoV
 Covid
 DD
+Departamento
+Departement
 Département
 ECDC
+Estado
 Github
 HDX
 ICD
@@ -21,6 +24,7 @@ Limburg
 Linelist
 Muijen
 osp
+Municipio
 PHE
 Région
 SARS
@@ -42,10 +46,10 @@ csv
 dd
 departement
 departamento
+departement
 develVersion
 dmuijen
 dplyr
-département
 etc
 ffinger
 filepath
@@ -68,7 +72,6 @@ org
 paulcampbell
 quickstart
 reparameterise
-région
 sam
 sav
 savivaldybe

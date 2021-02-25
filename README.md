@@ -150,6 +150,7 @@ Americas | USA | State | County
 Americas | Canada | Province | NA
 Americas | Colombia | Department  | NA
 Americas | Cuba | Province | NA
+Americas | Mexico | Estado | Municipio 
 Asia | Afghanistan | Province | NA
 Asia | India | States | NA
 

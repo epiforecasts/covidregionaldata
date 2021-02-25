@@ -24,6 +24,7 @@ rename_region_column <- function(data, country) {
                                 "india" = "state",
                                 "italy" = "region",
                                 "lithuania" = "county",
+                                "mexico" = "estado",
                                 "uk" = "region",
                                 "usa" = "state",
                                 "cuba" = "provincia",
@@ -38,6 +39,7 @@ rename_region_column <- function(data, country) {
                                   "france" = "departement",
                                   "germany" = "landkreis",
                                   "lithuania" = "municipality",
+                                  "mexico" = "municipio",
                                   "uk" = "authority",
                                   "usa" = "county")
 
@@ -71,6 +73,7 @@ rename_region_code_column <- function(data, country) {
                                      "india" = "iso_3166_2",
                                      "italy" = "iso_3166_2",
                                      "lithuania" = "iso_3166_2",
+                                     "mexico" = "iso_3166_2",
                                      "uk" = "ons_region_code",
                                      "usa" = "iso_3166_2",
                                      "cuba" = "iso_3166_2",
@@ -85,6 +88,7 @@ rename_region_code_column <- function(data, country) {
                                        "germany" = "level_2_region_code",
                                        "france" = "iso_3166_departement",
                                        "lithuania" = "iso_3166_municipality",
+                                       "mexico" = "inegi_code",
                                        "uk" = "ltla_code",
                                        "usa" = "fips")
 
@@ -113,6 +117,7 @@ get_region_codes <- function(country) {
                          "india" = get_india_region_codes,
                          "italy" = get_italy_region_codes,
                          "lithuania" = get_lithuania_region_codes,
+                         "mexico" = get_mexico_region_codes,
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
                          "cuba" = get_cuba_region_codes,
@@ -135,6 +140,7 @@ get_level_2_region_codes <- function(country) {
                              "france" = get_france_level_2_codes,
                              "germany" = get_germany_level_2_codes,
                              "lithuania" = get_lithuania_level_2_codes,
+                             "mexico" = get_mexico_level_2_codes,
                              "uk" = get_uk_level_2_codes,
                              "usa" = get_us_level_2_codes)
 
@@ -351,6 +357,11 @@ get_france_region_codes <- function() {
   return(NULL)
 }
 
+#' Mexico level 1 codes (NULL)
+get_mexico_region_codes <- function() {
+  return(NULL)
+}
+
 
 # Level 2 regions -------------------------------------------------------------------------------------
 
@@ -486,3 +497,9 @@ get_us_level_2_codes <- function() {
 get_uk_level_2_codes <- function() {
   return(NULL)
 }
+
+#' Mexico level 2 codes (included in original function)
+get_mexico_level_2_codes <- function() {
+  return(NULL)
+}
+

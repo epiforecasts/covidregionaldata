@@ -94,13 +94,21 @@ get_info_covidregionaldata <- function() {
     "cases_new, tested_new",
     
     "get_regional_data",
+
     "lithuania",
     "county",
     "municipality",
     NA,
     "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0",
     "cases_new, deaths_new, recovered_new, cases_total, deaths_total, recovered_total",
-    
+
+    "mexico",
+    "estados",
+    "municipios",
+    NA,
+    "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    "cases_new, deaths_new",
+
     "get_regional_data",
     "russia",
     "Source no longer updated",

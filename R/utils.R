@@ -285,5 +285,5 @@ utils::globalVariables(c(".", ":=", "AnzahlFall", "Area type", "Specimen date", 
                          "Subdivision name", "cl_age90", "jour", "reg", "P", "incid_hosp", "incid_dc", "dep",
                          "In region(since 2016)", "Subdivision category", "Subdivision name (fr)",
                          "ab_tot_day", "ag_tot_day","cumulative_totals", "daily_deaths_def3",
-                         "incidence", "municipality_code", "municipality_name", "object_id", "pcr_tot_day")
-                       )
+                         "incidence", "municipality_code", "municipality_name", "object_id", "pcr_tot_day",
+                         "poblacion", "nombre", "cve_ent", "inegi_state"))
