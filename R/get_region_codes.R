@@ -258,11 +258,11 @@ get_italy_region_codes <- function() {
 #'
 get_lithuania_region_codes <- function() {
 
-  # The following code, adjusted from a version for France, was initially used to
-  # create lookup tables of Lithuanian municipality and country codes.
-  # These were then adjusted to match the format used by the
-  # Official Statistics Portal in their open data and are left as
-  # hard-coded tibbles. These codes have not changed in ten years.
+  # The following code, adjusted from a version for France, was initially used
+  # to create lookup tables of Lithuanian municipality and country codes. These
+  # were then adjusted to match the format used by the Official Statistics
+  # Portal in their open data and are left as hard-coded tibbles. These codes
+  # have not changed in ten years.
 
   # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
   # level_2_codes_table <- level_2_codes_url %>%

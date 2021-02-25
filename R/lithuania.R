@@ -4,16 +4,16 @@
 #' @description Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis)
 #' and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
 #' Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
-#' 
+#'
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
-#' 
+#'
 #' It is loaded and then sanitised.
-#' 
+#'
 #' @return A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.
-#' 
+#'
 #' @seealso [get_lithuania_regional_cases_with_level_2()]
 #' @md
-#' @importFrom dplyr %>% across summarise group_by 
+#' @importFrom dplyr %>% across summarise group_by
 #' @importFrom tidyselect vars_select_helpers
 #' @importFrom tibble tibble
 
@@ -35,7 +35,7 @@ get_lithuania_regional_cases_only_level_1 <- function() {
   #                                      "Vilnius County", "unstated"))
   #
   county_data <- get_lithuania_regional_cases_with_level_2() %>%
-    dplyr::group_by(date,region_level_1) %>%
+    dplyr::group_by(date, region_level_1) %>%
     dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum))
 
   return(county_data)
@@ -45,19 +45,19 @@ get_lithuania_regional_cases_only_level_1 <- function() {
 #' Lithuanian Daily COVID-19 Count Data - Municipalities
 #'
 #' @description Extracts daily COVID-19 data for Lithuania, by municipality.
-#' 
+#'
 #' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
 #' It is loaded and then sanitised.
-#' 
+#'
 #' @return A `data.frame` of COVID cases by municipality in Lithuania, ready to be used by `get_regional_data()`.
-#' 
+#'
 #' The OSP provides many data series in their table (see details).
 #' This function returns `cases_new`, `cases_total`, `deaths_new` and
-#' `tested_new`. 
-#' 
+#' `tested_new`.
+#'
 #' It uses `deaths_def3_day` (the broadest definition for counting) from the
 #' OSP for the `deaths_new`.
-#' 
+#'
 #' @section OSP Data fields:
 #' The following describes the data provided by the
 #'  [Official Statistics Portal](https://osp.stat.gov.lt)
@@ -96,21 +96,21 @@ get_lithuania_regional_cases_only_level_1 <- function() {
 #' | `dead_cases` | The number of dead persons who were ever diagnosed with COVID |
 #' | `recovered_de_jure` | Declared number of recovered live persons |
 #' | `recovered_sttstcl` | Statistical number of recovered live persons |
-#' 
+#'
 #' `*` The `municipality_code` is discarded since it does not correspond
 #' to ISO-3166:2 codes used elsewhere in the package.
-#' 
+#'
 #' `+` These fields are renamed but returned unmodified.
-#' 
-#' `#` Lithuania offers counts according to three 
+#'
+#' `#` Lithuania offers counts according to three
 #' different definitions of whether a death is attributable to COVID-19.
-#' 
+#'
 #' @section Criteria for attributing deaths:
-#' 
-#' Beginning in February 2021 the OSP publishes death counts according to 
+#'
+#' Beginning in February 2021 the OSP publishes death counts according to
 #' three different criteria, from most to least strictly attributed to
 #' COVID-19.
-#' 
+#'
 #' 1. Number of deaths with COVID-19 (coronavirus infection) as the leading cause of death. The indicator is calculated by summing all registered records of medical form E106 (unique persons), in which the main cause of death is IPC disease codes U07.1 or U07.2. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
 #'    The number of deaths reported in the last day is preliminary and increases by about 20-40% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
 #' 2. Number of deaths with COVID-19 (coronavirus infection) of any cause of death.
@@ -121,18 +121,18 @@ get_lithuania_regional_cases_only_level_1 <- function() {
 #'    The number of deaths reported in the last day is preliminary and increases by about 20-40% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
 #'
 #' @section De jure and statistical counts:
-#' 
+#'
 #' Beginning in February 2021 the OSP is making statistical estimates
 #' of the number of recovered and active cases, since review of the data
 #' showed that some cases individuals still considered as active cases
 #' had recovered, but not documented or registered as such.
-#' 
+#'
 #' These are listed as by the OSP as `active_de_jure` and
 #' `recovered_de_jure` (officially still considered sick),
 #' and `active_sttstcl` and `recovered_sttstcl` (an estimate of how
 #' many of these are still ill).
-#' 
-#' 
+#'
+#'
 #' @seealso [get_lithuania_regional_cases_only_level_1()]
 #' @importFrom dplyr %>% filter select mutate full_join left_join rename bind_rows
 #' @importFrom lubridate as_date ymd
@@ -222,7 +222,6 @@ get_lithuania_regional_cases_with_level_2 <- function() {
 
   # Read data --------------------------------------------------------------------
 
-  #  cases_url <- "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0.csv"
   cases_url <- "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
 
   osp_data <- csv_reader(file = cases_url)
@@ -231,49 +230,15 @@ get_lithuania_regional_cases_with_level_2 <- function() {
     dplyr::select(-object_id, -municipality_code) %>%
   dplyr::mutate(
     date = lubridate::as_date(date),
-    tested_new = ab_tot_day+ag_tot_day+pcr_tot_day,
+    tested_new = ab_tot_day + ag_tot_day + pcr_tot_day,
     deaths_new = daily_deaths_def3) %>%
-    dplyr::rename(cases_new=incidence,
-                  cases_total=cumulative_totals,
+    dplyr::rename(cases_new = incidence,
+                  cases_total = cumulative_totals,
                   region_level_2 = municipality_name) %>%
-    dplyr::left_join(municipality_county_lookup, by=c("region_level_2")) %>%
-     # dplyr::mutate(diff_tests = tested_new - dgn_tot_day,
-     #               incidence_diff = tested_new - ab_pos_day - ag_pos_day - pcr_pos_day - dgn_pos_day
-     #               ) %>%
-    dplyr::select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
-           cases_new, cases_total, deaths_new, tested_new, dplyr::everything())
-    # "ab_pos_day",
-    # "ab_neg_day",
-    # "ab_tot_day",
-    # "ab_prc_day",
-    # "ag_pos_day",
-    # "ag_neg_day",
-    # "ag_tot_day",
-    # "ag_prc_day",
-    # "pcr_pos_day",
-    # "pcr_neg_day",
-    # "pcr_tot_day",
-    # "pcr_prc_day",
-    # "dgn_pos_day",
-    # "dgn_neg_day",
-    # "dgn_tot_day",
-    # "dgn_prc_day",
-    # "dgn_tot_day_gmp",
-    # "daily_deaths_def1",
-    # "daily_deaths_def2",
-    # "daily_deaths_def3",
-    # "daily_deaths_all",
-    # "active_de_jure",
-    # "active_sttstcl",
-    # "dead_cases",
-    # "recovered_de_jure",
-    # recovered_sttstcl
-
-
-  # cases_wider <- left_join(cases_data,municipality_county_lookup, by=c("region_level_2")) %>%
-  #   select(date, region_level_1, region_level_2, #level_2_region_code=region_2_code,
-  #          cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total)
-  #
+    dplyr::left_join(municipality_county_lookup, by = c("region_level_2")) %>%
+    dplyr::select(date, region_level_1, region_level_2,
+                  cases_new, cases_total, deaths_new, tested_new,
+                  dplyr::everything())
     ## This is the list of fields which we're trying to generate, copied from get_regional_data.R
     # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code,
     # cases_new, cases_total, deaths_new, deaths_total,
