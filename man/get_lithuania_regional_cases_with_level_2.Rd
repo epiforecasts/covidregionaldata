@@ -4,17 +4,34 @@
 \alias{get_lithuania_regional_cases_with_level_2}
 \title{Lithuanian Daily COVID-19 Count Data - Municipalities}
 \usage{
-get_lithuania_regional_cases_with_level_2()
+get_lithuania_regional_cases_with_level_2(
+  national_data = FALSE,
+  all_osp_fields = FALSE,
+  death_definition = "of"
+)
+}
+\arguments{
+\item{national_data}{A logical scalar. Should national values be
+returned?  (Defaults \code{FALSE})}
+
+\item{all_osp_fields}{A logical scalar. Should all the meaningful
+data fields from the OSP source be returned? (Defaults \code{FALSE})}
+
+\item{death_definition}{A character string. Determines which criteria
+for attributing deaths to COVID is used. Should be \code{"of"},
+\code{"with"}, or \code{"after"}. Can also be \code{"daily_deaths_def1"},
+\code{"daily_deaths_def2"}, or \code{"daily_deaths_def3"}. (Defaults
+to \code{"of"}, the strictest definition.)}
 }
 \value{
 A \code{data.frame} of COVID cases by municipality in Lithuania, ready to be used by \code{get_regional_data()}.
 
-The OSP provides many data series in their table (see details).
 This function returns \code{cases_new}, \code{cases_total}, \code{deaths_new} and
 \code{tested_new}.
 
-It uses \code{deaths_def3_day} (the broadest definition for counting) from the
-OSP for the \code{deaths_new}.
+By default it uses the \code{daily_deaths_def1} vector from the
+OSP for the \code{deaths_new}; this can be changed with the
+\code{death_definition} parameter.
 }
 \description{
 Extracts daily COVID-19 data for Lithuania, by municipality.
@@ -24,12 +41,18 @@ It is loaded and then sanitised.
 }
 \section{OSP Data fields}{
 
-The following describes the data provided by the
-\href{https://osp.stat.gov.lt}{Official Statistics Portal}\tabular{ll}{
+
+The\href{https://osp.stat.gov.lt}{Official Statistics Portal} provides
+many data series in their table.
+
+The full range of these vectors can be returned by setting
+\code{all_osp_fields} to \code{TRUE}.
+
+The following describes the data provided by the OSP.\tabular{ll}{
    field \tab description \cr
    \code{date} \tab the reporting day during which the events occurred or at the end of which the accounting was performed \cr
-   \verb{municipality_code``*} \tab code of the municipality assigned to persons \cr
-   \verb{municipality_name``+} \tab the name of the municipality assigned to the persons \cr
+   \code{municipality_code} \code{*} \tab code of the municipality assigned to persons \cr
+   \code{municipality_name} \code{+} \tab the name of the municipality assigned to the persons \cr
    \code{population} \tab population size according to the data of the beginning of 2021, according to the declared place of residence \cr
    \code{ab_pos_day} \tab Number of positive antibody test responses, days \cr
    \code{ab_neg_day} \tab Number of negative antibody test responses, days \cr
@@ -48,17 +71,18 @@ The following describes the data provided by the
    \code{dgn_prc_day} \tab Number of diagnostic examinations / tests, days \cr
    \code{dgn_tot_day} \tab Percentage of positive answers to diagnostic tests / tests per day \cr
    \code{dgn_tot_day_gmp} \tab Number of diagnostic examinations / tests of samples collected at mobile points, days \cr
-   \code{daily_deaths_def1} \tab The number of new deaths per day according to the (narrowest) COVID death definition No. 1.\verb{#} \cr
+   \code{daily_deaths_def1} \tab The number of new deaths per day according to the (narrowest) COVID death definition No. 1. \verb{#} \cr
    \code{daily_deaths_def2} \tab Number of new deaths per day according to COVID death definition No. 2. \verb{#} \cr
    \code{daily_deaths_def3} \tab Number of new deaths per day according to COVID death definition No. 3. \verb{#} \cr
    \code{daily_deaths_all} \tab Daily deaths in Lithuania (by date of death) \cr
-   \code{incidence_day}+ \tab Number of new COVID cases per day (laboratory or physician confirmed) \cr
-   \code{incidence_cum}+ \tab Total number of COVID cases (laboratory or physician confirmed) \cr
+   \code{incidence} + \tab Number of new COVID cases per day (laboratory or physician confirmed) \cr
+   \code{cumulative_totals} + \tab Total number of COVID cases (laboratory or physician confirmed) \cr
    \code{active_de_jure} \tab Declared number of people with COVID \cr
    \code{active_sttstcl} \tab Statistical number of people with COVID \cr
    \code{dead_cases} \tab The number of dead persons who were ever diagnosed with COVID \cr
    \code{recovered_de_jure} \tab Declared number of recovered live persons \cr
    \code{recovered_sttstcl} \tab Statistical number of recovered live persons \cr
+   \code{map_colors} \code{$} \tab The map colour-coding for the municipality, based on averages of test positivity and incidence per capita \cr
 }
 
 
@@ -69,6 +93,8 @@ to ISO-3166:2 codes used elsewhere in the package.
 
 \verb{#} Lithuania offers counts according to three
 different definitions of whether a death is attributable to COVID-19.
+
+\code{$} This field is not recalculated for counties and is deleted.
 }
 
 \section{Criteria for attributing deaths}{
@@ -78,21 +104,46 @@ Beginning in February 2021 the OSP publishes death counts according to
 three different criteria, from most to least strictly attributed to
 COVID-19.
 \enumerate{
-\item Number of deaths with COVID-19 (coronavirus infection) as the leading cause of death. The indicator is calculated by summing all registered records of medical form E106 (unique persons), in which the main cause of death is IPC disease codes U07.1 or U07.2. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
-The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
-\item Number of deaths with COVID-19 (coronavirus infection) of any cause of death.
-The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07.5 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection). Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
-The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
-\item Number of deaths from any cause of COVID-19 or COVID-19 deaths due to non-external causes within 28 days.
-The indicator is calculated by summing all registered records of the medical form E106 (unique persons), in which the ICD disease codes U07.1, U07.2, U07.3, U07.4, U07 are indicated as the main, direct, intermediate cause of death or other important pathological condition, or identified as related to COVID-19 disease (coronavirus infection) and all records of medical form E106 (unique individuals) where the person died within the last 28 days after receiving a positive diagnostic response to the SARS-CoV-2 test or had an entry in medical form E025 with ICD disease code U07.2 or U07.1. Deaths due to external causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
-The number of deaths reported in the last day is preliminary and increases by about 20-40\% in a few days. Such a "delay" in the data is natural: for example, for those who died last night, a death certificate is likely to be issued as soon as this report is published this morning.
+\item \emph{\code{of}} Number of deaths with COVID-19 (coronavirus infection) as
+the leading cause of death. The indicator is calculated by summing
+all registered records of medical form E106 (unique persons), in which
+the main cause of death is IPC disease codes U07.1 or U07.2. Deaths
+due to external causes are not included (ICD disease codes are V00-Y36,
+or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+\item \emph{\code{with}} Number of deaths with COVID-19 (coronavirus infection) of
+any cause of death.
+The indicator is calculated by summing all registered records of the
+medical form E106 (unique persons), in which the ICD disease codes
+U07.1, U07.2, U07.3, U07.4, U07.5 are indicated as the main, direct,
+intermediate cause of death or other important pathological condition,
+or identified as related to COVID-19 disease (coronavirus infection).
+Deaths due to external causes are not included (ICD disease codes
+are V00-Y36, or Y85-Y87, or Y89, or S00-T79, or T89-T98).
+\item \emph{\code{after}} Number of deaths from any cause of COVID-19 or COVID-19
+deaths due to non-external causes within 28 days.
+The indicator is calculated by summing all registered records of the
+medical form E106 (unique persons), in which the ICD disease codes
+U07.1, U07.2, U07.3, U07.4, U07 are indicated as the main, direct,
+intermediate cause of death or other important pathological condition,
+or identified as related to COVID-19 disease (coronavirus infection)
+and all records of medical form E106 (unique individuals) where the
+person died within the last 28 days after receiving a positive
+diagnostic response to the SARS-CoV-2 test or had an entry in medical
+form E025 with ICD disease code U07.2 or U07.1. Deaths due to external
+causes are not included (ICD disease codes are V00-Y36, or Y85-Y87, or
+Y89, or S00-T79, or T89-T98).
 }
+
+The number of deaths reported in the last day is preliminary and
+increases by about 20-40\% in a few days. Such a "delay" in the data is
+natural: for example, for those who died last night, a death certificate
+is likely to be issued as soon as this report is published this morning.
 }
 
 \section{De jure and statistical counts}{
 
 
-Beginning in February 2021 the OSP is making statistical estimates
+Beginning in February 2021 the OSP makes statistical estimates
 of the number of recovered and active cases, since review of the data
 showed that some cases individuals still considered as active cases
 had recovered, but not documented or registered as such.

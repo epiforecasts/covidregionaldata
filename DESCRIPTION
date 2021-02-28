@@ -89,7 +89,8 @@ Imports:
     readr,
     jsonlite,
     countrycode,
-    tidyselect
+    tidyselect,
+    rlang
 Suggests:
     data.table,
     pkgdown,
