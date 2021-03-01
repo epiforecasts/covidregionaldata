@@ -5,7 +5,7 @@
 #' and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
 #' Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
 #'
-#' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
+#' Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 #'
 #' It is loaded and then sanitised.
 #'
@@ -64,7 +64,7 @@ get_lithuania_regional_cases_only_level_1 <- function(national_data = FALSE,
 #'
 #' @description Extracts daily COVID-19 data for Lithuania, by municipality.
 #'
-#' Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
+#' Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 #' It is loaded and then sanitised.
 #'
 #'
@@ -86,6 +86,10 @@ get_lithuania_regional_cases_only_level_1 <- function(national_data = FALSE,
 #'    `"with"`, or `"after"`. Can also be `"daily_deaths_def1"`,
 #'    `"daily_deaths_def2"`, or `"daily_deaths_def3"`. (Defaults
 #'    to `"of"`, the strictest definition.)
+#' @param recovered_definition A character string. Determines whether
+#'   the count of officially-recovered (*de jure*) cases is used, or
+#'   the statistical estimate provided by OSP. Should be `"official"`
+#'   or `"statistical"`. (Defaults to `"official"`.)
 #'
 #' @section OSP Data fields:
 #'
@@ -204,11 +208,13 @@ get_lithuania_regional_cases_only_level_1 <- function(national_data = FALSE,
 #' @importFrom rvest html_nodes html_table
 #' @importFrom tibble tibble
 #' @importFrom rlang .data
+#' @importFrom tidyselect last_col
 #'
 #' @md
 get_lithuania_regional_cases_with_level_2 <- function(national_data = FALSE,
                                                       all_osp_fields = FALSE,
-                                                      death_definition = "of"
+                                                      death_definition = "of",
+                                                      recovered_definition = "official"
                                                       ) {
   # The following code, adjusted from a version for France, was initially used to
   # create lookup tables of Lithuanian municipality and country codes.
@@ -282,20 +288,21 @@ get_lithuania_regional_cases_with_level_2 <- function(national_data = FALSE,
     "Vilniaus r. sav.",     "Vilniaus apskritis",
     "Visagino sav.",       "Utenos apskritis",
     "Zaras\u0173 r. sav.",       "Utenos apskritis",
-    "nenustatyta",            "nenustatyta"
+    "nenustatyta",            "nenustatyta",
+    "Unknown",                "Unknown"
   )
+  
+  # Advertise the fine documentation.
+  message("Use ?get_lithuania_regional_cases_with_level_2() for more information on this dataset")
+  
   # Read data --------------------------------------------------------------------
   cases_url <- "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
   osp_data <- csv_reader(file = cases_url)
-  # If national_data is TRUE, then we do not want to match (and filter out)
-  # rows where municipality_name is Lietuva - this keeps the logic test out
-  # of the rest of the flow
+
+  # Process two params which let us switch what OSP fields are returned
+  # for the number of deaths and the number of recovered cases.
   #
-  if (national_data) {
-    national_municipality_name <- "NOT MATCHING Lietuva"
-  } else {
-    national_municipality_name <- "Lietuva"
-  }
+  # death_definition : default is "of"
   death_field <- switch(death_definition,
          of = "daily_deaths_def1",
          daily_deaths_def1 = "daily_deaths_def1",
@@ -312,26 +319,88 @@ get_lithuania_regional_cases_with_level_2 <- function(national_data = FALSE,
                    "\" not recognised, defaulting to \"of\""))
     death_field <- "daily_deaths_def1"
   }
-  cases_data <- osp_data %>%
-    dplyr::select(-object_id, -municipality_code) %>%
-    dplyr::filter(municipality_name != national_municipality_name) %>%
-  dplyr::mutate(
-    date = lubridate::as_date(date),
-    tested_new = .data$ab_tot_day + .data$ag_tot_day + .data$pcr_tot_day,
-    deaths_new = .data[[death_field]]) %>%
+  
+  # recovered_definition : default is "official"
+  recovered_field <- switch(recovered_definition,
+                        official = "recovered_de_jure",
+                        recovered_de_jure = "recovered_de_jure",
+                        de_jure = "recovered_de_jure",
+                        recovered_sttstcl = "recovered_sttstcl",
+                        statistical = "recovered_sttstcl",
+                        estimated = "recovered_sttstcl"
+                        )
+  # If recovered_definition doesn't match one of our possibilities, it will
+  # return NULL
+  #
+  if (is.null(death_field)) {
+    message(paste0("recovered_definition of \"", recovered_definition,
+                   "\" not recognised, defaulting to \"official\""))
+    recovered_field <- "recovered_de_jure"
+  }
+
+  # Build "unassigned" data by subtracting the aggregate from the countrywide
+  # total provided for Lietuva
+  
+  # Get relevant column names for differences (i.e. not percentages
+  # or qualitative)
+  sum_cols <- names(select(osp_data, "population":tidyselect::last_col()))
+  sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
+  
+  # Take the difference between national and sum of counties' data
+  unassigned <- osp_data %>%
+    dplyr::mutate(national = ifelse(.data$municipality_name == "Lietuva", "national", "municipality")) %>%
+    dplyr::group_by(date, .data$national) %>%
+    dplyr::summarise(across(tidyselect::all_of(sum_cols), ~ sum(.x, na.rm = TRUE))) %>%
+    dplyr::mutate(across(tidyselect::all_of(sum_cols), ~ dplyr::lead(.x, 1) - .x),
+                  municipality_name = "Unknown",
+                  ab_prc_day =
+                    dplyr::if_else(.data$ab_tot_day == 0, 0,
+                                   .data$ab_pos_day / .data$ab_tot_day),
+                  ag_prc_day =
+                    dplyr::if_else(.data$ag_tot_day == 0, 0,
+                                   .data$ag_pos_day / .data$ag_tot_day),
+                  pcr_prc_day =
+                    dplyr::if_else(.data$pcr_tot_day == 0, 0,
+                                   .data$pcr_pos_day / .data$pcr_tot_day),
+                  dgn_prc_day =
+                    dplyr::if_else(.data$dgn_tot_day == 0, 0,
+                                   .data$dgn_pos_day / .data$dgn_tot_day),
+                  map_colors = NA_character_) %>%
+    dplyr::filter(.data$national == "municipality") %>%
+    dplyr::select(-.data$national)
+  
+  # Join unknown locations to main dataset
+  osp_data_w_unassigned <- dplyr::bind_rows(
+    osp_data%>%select(-object_id,-municipality_code), unassigned)
+  
+  # Exclude national data based on user param (default = FALSE)
+  if (!national_data) {
+    osp_data_w_unassigned <- 
+      dplyr::filter(osp_data_w_unassigned,
+                    !.data$municipality_name == "Lietuva")
+  }
+  
+  cases_data <- osp_data_w_unassigned %>%
+    dplyr::mutate(
+      date = lubridate::as_date(date),
+      tested_new = .data$ab_tot_day + .data$ag_tot_day + .data$pcr_tot_day,
+      deaths_new = .data[[death_field]],
+      recovered_total = .data[[recovered_field]]) %>%
     dplyr::rename(cases_new = .data$incidence,
                   cases_total = .data$cumulative_totals,
                   region_level_2 = .data$municipality_name) %>%
     dplyr::left_join(municipality_county_lookup, by = c("region_level_2")) %>%
     dplyr::select(date, region_level_1, region_level_2,
-                  cases_new, cases_total, deaths_new, tested_new,
+                  cases_new, cases_total, deaths_new,
+                  tested_new, recovered_total,
                   dplyr::everything())
   # If we have not been asked to return all the OSP-provided data,
   # just select the core data sought by get_regional_data
+  # (default = FALSE)
   if (!all_osp_fields) {
     cases_data <- cases_data %>%
       dplyr::select(date, region_level_1, region_level_2,
-                    cases_new, cases_total, deaths_new, tested_new)
+                    cases_new, cases_total, deaths_new, tested_new, recovered_total)
   }
     ## This is the list of fields which we're trying to generate, copied from get_regional_data.R
     # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code,

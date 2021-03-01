@@ -31,7 +31,7 @@ Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis)
 and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
 Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
 
-Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
+Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 
 It is loaded and then sanitised.
 }

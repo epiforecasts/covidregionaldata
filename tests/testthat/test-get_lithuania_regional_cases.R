@@ -75,8 +75,8 @@ test_that("get_lithuania_regional_cases returns correct numbers of regions", {
   adm_1_data <- get_lithuania_regional_cases_only_level_1()
   adm_2_data <- get_lithuania_regional_cases_with_level_2()
 
-  expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 10)
-  expect_equal(length(unique(na.omit(adm_2_data$region_level_2))), 60)
+  expect_equal(length(unique(na.omit(adm_1_data$region_level_1))), 11)
+  expect_equal(length(unique(na.omit(adm_2_data$region_level_2))), 61)
 })
 
 

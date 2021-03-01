@@ -94,17 +94,17 @@ get_info_covidregionaldata <- function() {
     "cases_new, tested_new",
     
     "get_regional_data",
-
     "lithuania",
     "county",
     "municipality",
-    NA,
-    "https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0",
+    "get_regional_data('lithuania', national_data = FALSE, all_osp_fields = FALSE, death_definition = \"of\"); get_regional_data('lithuania', include_level_2_regions = TRUE, national_data = FALSE, all_osp_fields = FALSE, death_definition = \"of\")",
+    "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0",
     "cases_new, deaths_new, recovered_new, cases_total, deaths_total, recovered_total",
 
     "mexico",
     "estados",
     "municipios",
+    NA,
     NA,
     "https://datos.covid-19.conacyt.mx/#DownZCSV",
     "cases_new, deaths_new",

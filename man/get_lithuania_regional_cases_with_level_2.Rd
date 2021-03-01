@@ -7,7 +7,8 @@
 get_lithuania_regional_cases_with_level_2(
   national_data = FALSE,
   all_osp_fields = FALSE,
-  death_definition = "of"
+  death_definition = "of",
+  recovered_definition = "official"
 )
 }
 \arguments{
@@ -22,6 +23,11 @@ for attributing deaths to COVID is used. Should be \code{"of"},
 \code{"with"}, or \code{"after"}. Can also be \code{"daily_deaths_def1"},
 \code{"daily_deaths_def2"}, or \code{"daily_deaths_def3"}. (Defaults
 to \code{"of"}, the strictest definition.)}
+
+\item{recovered_definition}{A character string. Determines whether
+the count of officially-recovered (\emph{de jure}) cases is used, or
+the statistical estimate provided by OSP. Should be \code{"official"}
+or \code{"statistical"}. (Defaults to \code{"official"}.)}
 }
 \value{
 A \code{data.frame} of COVID cases by municipality in Lithuania, ready to be used by \code{get_regional_data()}.
@@ -36,7 +42,7 @@ OSP for the \code{deaths_new}; this can be changed with the
 \description{
 Extracts daily COVID-19 data for Lithuania, by municipality.
 
-Data available at \url{https://opendata.arcgis.com/datasets/45b76303953d40e2996a3da255bf8fe8_0}.
+Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 It is loaded and then sanitised.
 }
 \section{OSP Data fields}{
