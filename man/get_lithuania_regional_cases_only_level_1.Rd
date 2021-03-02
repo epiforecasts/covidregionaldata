@@ -7,7 +7,8 @@
 get_lithuania_regional_cases_only_level_1(
   national_data = FALSE,
   all_osp_fields = FALSE,
-  death_definition = "of"
+  death_definition = "of",
+  recovered_definition = "official"
 )
 }
 \arguments{
@@ -22,6 +23,11 @@ for attributing deaths to COVID is used. Should be \code{"of"},
 \code{"with"}, or \code{"after"}. Can also be \code{"daily_deaths_def1"},
 \code{"daily_deaths_def2"}, or \code{"daily_deaths_def3"}. (Defaults
 to \code{"of"}, the strictest definition.)}
+
+\item{recovered_definition}{A character string. Determines whether
+the count of officially-recovered (\emph{de jure}) cases is used, or
+the statistical estimate provided by OSP. Should be \code{"official"}
+or \code{"statistical"}. (Defaults to \code{"official"}.)}
 }
 \value{
 A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.

@@ -17,7 +17,8 @@
 #' @importFrom tidyselect vars_select_helpers
 get_lithuania_regional_cases_only_level_1 <- function(national_data = FALSE,
                                                       all_osp_fields = FALSE,
-                                                      death_definition = "of") {
+                                                      death_definition = "of",
+                                                      recovered_definition = "official") {
   # Lithuania only publishes data at the municipality level. To provide
   # data for the level 1 regions (Counties, Apskritis) we get the municipality
   # level data and aggregate it according to municipality
