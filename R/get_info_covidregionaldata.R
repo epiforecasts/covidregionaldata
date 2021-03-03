@@ -109,7 +109,7 @@ get_info_covidregionaldata <- function() {
     "https://datos.covid-19.conacyt.mx/#DownZCSV",
     "cases_new, deaths_new",
 
-    "get_regional_data",
+    NA,
     "russia",
     "Source no longer updated",
     NA,
