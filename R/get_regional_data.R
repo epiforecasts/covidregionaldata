@@ -72,7 +72,7 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     region_level_2_codes_table <- get_level_2_region_codes(country)
     
   } else {
-
+    # If country is not in list, set to NULL
     get_data_function <- switch(country,
                                 "afghanistan" = get_afghan_regional_cases,
                                 "belgium" = get_belgium_regional_cases_only_level_1,
@@ -88,11 +88,13 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "usa" = get_us_regional_cases_only_level_1,
                                 "cuba" = get_cuba_regional_cases,
                                 "south africa" = get_southafrica_regional_cases_only_level_1,
-                                stop("There is no data for the country entered. It is likely we haven't added data
-                                   for that country yet, or there was a spelling mistake."))
+                                NULL)
     
+    # if country data is from JHU, return just the JHU data
+    if (is.null(get_data_function)){
+      return(check_alternate_data_source(country))
+    }
     region_codes_table <- get_region_codes(country)
-
   }
   
   # Get the data and region codes for level 1 regions ------------------------------------

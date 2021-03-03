@@ -1,3 +1,34 @@
+#' Filter JHU data for target country
+#' @description Downloads daily covid data from JHU (via get_JHU_data)
+#' and subsets it for a given target country
+#' @param target_country A string with the country of interest
+#' @return A data frame of COVID cases for the target country
+#' @importFrom dplyr %>% filter select
+#' @importFrom rlang .data
+#' 
+check_alternate_data_source <- function(target_country){
+  warning("Country requested has no direct data source: using JHU for data")
+  # make first letter uppercase so it can find resource
+  target_country <- paste0(toupper(substr(target_country, 1, 1)),
+                          substr(target_country, 2, nchar(target_country)))
+  
+  # get the full data set
+  data <- get_JHU_data()
+  
+  # check country is in the data
+  if (!(target_country %in% unique(data$country))){
+    stop(paste0("Country '", target_country, "' has no data."))
+  }
+  
+  # filter data for requested country
+  data <- data %>% dplyr::filter(.data$country==target_country)
+  
+  # remove country column
+  data <- data %>% dplyr::select(-c(.data$country))
+  
+  return(data)
+}
+
 #' Download and clean data from JHU
 #' @description Downloads daily covid data from JHU 
 #' (https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
@@ -5,8 +36,12 @@
 #' @return A data frame of COVID cases for all countris listed by JHU, by country and region if avaliable
 #' @importFrom dplyr %>% select group_by rename mutate ungroup arrange lag first
 #' @importFrom tidyr %>% gather replace_na
+#' @importFrom rlang .data
 #' 
 get_JHU_data <- function(){
+  # bind variables to local function
+  
+  
   # Path to data & targets
   path <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"
   vals <-  c(
@@ -43,37 +78,44 @@ get_JHU_data <- function(){
   
   # clean data
   data <- data %>% 
-    dplyr::select(Date, `Province/State`, `Country/Region`, daily_confirmed, daily_deaths, daily_recovered) %>% 
-    dplyr::mutate(Date=lubridate::mdy(Date),
-                  daily_confirmed=as.numeric(daily_confirmed),
-                  daily_deaths=as.numeric(daily_deaths),
-                  daily_recovered=as.numeric(daily_recovered)) %>% 
-    tidyr::replace_na(list(`Province/State`="Unknown",
-                           `Country/Region`="Unknown")) %>% 
-    dplyr::rename(date=Date,
-                  region=`Province/State`,
-                  country=`Country/Region`,
-                  cases_total=daily_confirmed,
-                  deaths_total=daily_deaths,
-                  recovered_total=daily_recovered
-    )
+    dplyr::select(.data$Date, .data$`Province/State`, .data$`Country/Region`, .data$daily_confirmed, .data$daily_deaths, .data$daily_recovered) %>% 
+    dplyr::mutate(Date=lubridate::mdy(.data$Date),
+                  daily_confirmed=as.numeric(.data$daily_confirmed),
+                  daily_deaths=as.numeric(.data$daily_deaths),
+                  daily_recovered=as.numeric(.data$daily_recovered)) %>% 
+    dplyr::rename(date=.data$Date,
+                  region=.data$`Province/State`,
+                  country=.data$`Country/Region`,
+                  cases_total=.data$daily_confirmed,
+                  deaths_total=.data$daily_deaths,
+                  recovered_total=.data$daily_recovered) %>% 
+    tidyr::replace_na(list(region="Unknown",
+                           country="Unknown")) %>% 
   
   # calculate new cases/deaths/recovered (change from previous day)
   data <- data %>% 
     # sort by date ascending
     dplyr::arrange(date) %>%
     # group by the country and providence
-    dplyr::group_by_("country", "region") %>% 
+    dplyr::group_by(.data$country, .data$region) %>% 
     # subract previous row from target row
-    dplyr::mutate(cases_new=cases_total-dplyr::lag(cases_total, default = dplyr::first(cases_total)),
-                  deaths_new=deaths_total-dplyr::lag(deaths_total, default = dplyr::first(deaths_total)),
-                  recovered_new=recovered_total-dplyr::lag(recovered_total, default = dplyr::first(recovered_total))) %>%
+    dplyr::mutate(cases_new=.data$cases_total-dplyr::lag(.data$cases_total, default = dplyr::first(.data$cases_total)),
+                  deaths_new=.data$deaths_total-dplyr::lag(.data$deaths_total, default = dplyr::first(.data$deaths_total)),
+                  recovered_new=.data$recovered_total-dplyr::lag(.data$recovered_total, default = dplyr::first(.data$recovered_total))) %>%
     # arange date descending
-    dplyr::arrange(dplyr::desc(date)) %>% 
+    dplyr::arrange(dplyr::desc(.data$date)) %>% 
     # ungroup
     dplyr::ungroup() %>% 
     # reorder columns 
-    dplyr::select(date, country, region, cases_new, cases_total, deaths_new, deaths_total, recovered_new, recovered_total)
+    dplyr::select(.data$date,
+                  .data$country,
+                  .data$region,
+                  .data$cases_new,
+                  .data$cases_total,
+                  .data$deaths_new,
+                  .data$deaths_total,
+                  .data$recovered_new,
+                  .data$recovered_total)
   
   # return data
   return(data)
