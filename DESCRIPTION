@@ -39,6 +39,8 @@ Authors@R: c(person(given = "Sam Abbott",
     person("Sebastian", "Funk",
             email = "sebastian.funk@lshtm.ac.uk",
             role = c("aut")),
+    person("Joe", "Palmer",
+           role=c("cbt")),
     person("Hugo", "Gruson",
            role = c("ctb"),
            comment = c(ORCID = "0000-0002-4094-1476")))
