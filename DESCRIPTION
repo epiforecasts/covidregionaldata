@@ -87,7 +87,8 @@ Imports:
     rvest,
     readr,
     jsonlite,
-    countrycode
+    countrycode,
+    rlang
 Suggests:
     data.table,
     pkgdown,
