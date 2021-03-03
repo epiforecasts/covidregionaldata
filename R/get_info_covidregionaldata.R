@@ -93,7 +93,7 @@ get_info_covidregionaldata <- function() {
     "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
     "cases_new, tested_new",
     
-    "get_regional_data",
+    NA,
     "russia",
     "regions",
     NA,
