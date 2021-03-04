@@ -33,7 +33,7 @@ check_alternate_data_source <- function(target_country){
 #' @description Downloads daily covid data from JHU 
 #' (https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
 #' and formats the data
-#' @return A data frame of COVID cases for all countris listed by JHU, by country and region if avaliable
+#' @return A data frame of COVID cases for all countries listed by JHU, by country and region if available
 #' @importFrom dplyr %>% select group_by rename mutate ungroup arrange lag first
 #' @importFrom tidyr %>% gather replace_na
 #' @importFrom rlang .data
