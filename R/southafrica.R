@@ -3,7 +3,7 @@
 #' @description Fetches daily COVID-19 data 
 #' Data is available at \url{https://github.com/dsfsi/covid19za}.
 #' @return A data frame of COVID cases by province in South Africa ready to be used by \code{get_regional_data()}.
-#' @importFrom dplyr %>% bind_rows mutate left_join
+#' @importFrom dplyr bind_rows mutate left_join
 #' @importFrom tidyr pivot_longer pivot_wider
 #' @importFrom tibble tribble
 #' @importFrom lubridate dmy

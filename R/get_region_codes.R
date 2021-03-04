@@ -7,7 +7,7 @@
 #' @param data a data frame with a region_level_1 column and optionally a region_level_2 column
 #' @param country a string with the country of interest
 #' @return a tibble with the column renamed to a sensible name
-#' @importFrom dplyr %>% rename
+#' @importFrom dplyr rename
 #' @importFrom tibble tibble
 #' 
 # Renaming the region name column
@@ -55,7 +55,7 @@ rename_region_column <- function(data, country) {
 #' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
 #' @param country a string with the country of interest
 #' @return a tibble with the column(s) renamed to a sensible name
-#' @importFrom dplyr %>% rename
+#' @importFrom dplyr rename
 #' @importFrom tibble tibble
 #' 
 rename_region_code_column <- function(data, country) {

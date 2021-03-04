@@ -6,7 +6,7 @@
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom purrr map
-#' @importFrom dplyr %>% group_by filter bind_rows summarise pull rename
+#' @importFrom dplyr group_by filter bind_rows summarise pull rename
 check_data_sources <- function(countries = "all", 
                                worldwide = TRUE) {
   

@@ -210,7 +210,7 @@ get_uk_regional_cases_with_level_2 <- function(resolution = "utla", release_date
 #' @param release_date Date data was released. Default is to extract latest release. 
 #' Dates should be in the format "yyyy-mm-dd".
 #' @return A dataframe with all variables available in public UK data
-#' @importFrom dplyr %>%  full_join
+#' @importFrom dplyr  full_join
 #' @importFrom purrr map safely reduce compact
 #' 
 #' 

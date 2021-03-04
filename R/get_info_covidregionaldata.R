@@ -107,7 +107,7 @@ get_info_covidregionaldata <- function() {
     NA,
     NA,
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",
-    "cases_total",
+    NA,
     
     "get_regional_data",
     "south africa",

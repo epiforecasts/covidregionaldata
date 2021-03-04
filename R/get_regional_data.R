@@ -12,7 +12,7 @@
 #' @param localise_regions Logical, defaults to TRUE. Should region names be localised.
 #' @param ... pass additional arguments to regional function calls 
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
-#' @importFrom dplyr %>% group_by arrange select ungroup do mutate everything
+#' @importFrom dplyr group_by arrange select ungroup do mutate everything
 #' @importFrom stringr str_trim
 #' @importFrom tidyr drop_na
 #' @importFrom tibble tibble
