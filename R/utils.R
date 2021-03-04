@@ -246,8 +246,6 @@ totalise_data <- function(data, include_level_2_regions) {
 }
 
 
-# Global variables --------------------------------------------------------
-
 utils::globalVariables(c(
   ".", ":=", "AnzahlFall", "Area type", "Specimen date", "casos",
   "AnzahlTodesfall", "Area", "Bundesland", "CASES", "Cases",

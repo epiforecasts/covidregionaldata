@@ -94,6 +94,14 @@ get_info_covidregionaldata <- function() {
     "cases_new, tested_new",
 
     "get_regional_data",
+    "mexico",
+    "estados",
+    "municipios",
+    NA,
+    "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    "cases_new, deaths_new",
+
+    "get_regional_data",
     "russia",
     "Source no longer updated",
     NA,
