@@ -13,6 +13,7 @@
 # Renaming the region name column
 rename_region_column <- function(data, country) {
   
+  # default to region for JHU
   level_1_region_name <- switch(tolower(country),
                                 "afghanistan" = "province",
                                 "belgium" = "region",
@@ -27,7 +28,8 @@ rename_region_column <- function(data, country) {
                                 "uk" = "region",
                                 "usa" = "state",
                                 "cuba" = "provincia",
-                                "south africa" = "province")
+                                "south africa" = "province",
+                                "region")
   
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
   
@@ -74,8 +76,8 @@ rename_region_code_column <- function(data, country) {
                                      "uk" = "ons_region_code",
                                      "usa" = "iso_3166_2",
                                      "cuba" = "iso_3166_2",
-                                     "south africa" = "iso_3166_2")
-  
+                                     "south africa" = "iso_3166_2",
+                                     "iso_3166_2")
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
   
   if ("level_2_region_code" %in% colnames(data)) {
@@ -102,6 +104,7 @@ rename_region_code_column <- function(data, country) {
 #' @importFrom tibble tibble
 get_region_codes <- function(country) {
 
+  # if country not in swtich return NULL
   region_code_fun <- switch(country,
                          "afghanistan" = get_afghan_region_codes,
                          "belgium" = get_belgium_region_codes,
@@ -116,10 +119,14 @@ get_region_codes <- function(country) {
                          "uk" = get_uk_region_codes,
                          "usa" = get_us_region_codes,
                          "cuba" = get_cuba_region_codes,
-                         "south africa" = get_southafrica_region_codes)
-
-  region_codes_table <- do.call(region_code_fun, list())
-
+                         "south africa" = get_southafrica_region_codes,
+                         NULL)
+  
+  if (is.null(region_code_fun)){
+    region_codes_table <- NULL
+  }else{
+    region_codes_table <- do.call(region_code_fun, list())
+  }
   return(region_codes_table)
 }
 

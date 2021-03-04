@@ -90,15 +90,16 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
                                 "south africa" = get_southafrica_regional_cases_only_level_1,
                                 NULL)
     
-    # if country data is from JHU, return just the JHU data
-    if (is.null(get_data_function)){
-      return(check_alternate_data_source(country))
-    }
     region_codes_table <- get_region_codes(country)
   }
   
   # Get the data and region codes for level 1 regions ------------------------------------
-  data <- do.call(get_data_function, list(...))
+  if (is.null(get_data_function)){
+    # if no data for country requsted check alternative resources
+    data <- check_alternate_data_source(country)
+  }else{
+    data <- do.call(get_data_function, list(...))
+  }
   data <- dplyr::mutate(data, region_level_1 = stringr::str_trim(region_level_1, side = "both"))
   data <- data %>% left_join_region_codes(region_codes_table, 
                                        by = c("region_level_1" = "region")) 
@@ -119,14 +120,14 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
     data <- data %>%
       dplyr::group_by(region_level_1, level_1_region_code)
   }
-
+  
   # Add columns that aren't there already, clean up data ------------------------------
   data <- data %>%
     dplyr::do(calculate_columns_from_existing_data(.)) %>%
     add_extra_na_cols() %>%
     set_negative_values_to_zero() %>%
     dplyr::ungroup()
-
+  
   # Totalise and return if totals data is requested ----------------------------------
   if (totals) {
     data <- totalise_data(data, include_level_2_regions = include_level_2_regions) %>%
@@ -159,7 +160,6 @@ get_regional_data <- function(country, totals = FALSE, include_level_2_regions =
   if (localise_regions) {
     data <- rename_region_column(data, country)
   }
-  
   data <- rename_region_code_column(data, country)
   
   return(tibble::tibble(data))
