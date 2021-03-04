@@ -1,0 +1,66 @@
+---
+title: "How to add a data set"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to add a data set}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(covidregionaldata)
+```
+
+## Recipe for adding a new data set for `covidregionaldata`
+
+### Ingredients
+
+You need an open and accessible data source, preferably in the form of 
+a CSV file updated on a regular basis and accessible for download with a
+fixed (or programmably-predictable) URL.
+
+`covidregionaldata` provides an internal function, `csv_reader` which 
+does nearly all the hard work of downloading, caching and parsing such a
+CSV. 
+
+If you can, you may wish to download a local copy of your data source's
+CSV to work with. `covidregionaldata` internally uses [`vroom`](https://vroom.r-lib.org/index.html) to parse most CSV files.
+
+Run `vroom` on your local file, see what you get.
+
+## Create a new file with the name of your country
+
+This is the main working portion of your addition. It should provide at
+least one, maybe two, functions which download data from your data source,
+process it minimally and rename some columns where necessary so that other
+parts of the package can 
+
+### Add in `get_country_regional_cases_only_level_1` functions
+
+### Add in `get_country_regional_cases_with_level_2` functions
+
+## Add your new `get_` functions to get_regional_data
+
+## Add to get_info_covidregionaldata
+
+## Add to get_region_codes.R
+
+* Add in the local name of your level 1 administrative units
+* Add in the local name of your level 2 administrative units (if applicable)
+* Provide a function which provides a look-up table for level 1 administrative units
+  * tribble is useful for this, as is datapasta
+* Provide a function which provides a look-up table for level 2 administrative units (if applicable)
+
+## Add a line to README.md
+
+## Edit DESCRIPTION
+
+## Edit WORDLIST
+
