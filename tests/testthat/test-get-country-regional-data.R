@@ -1,7 +1,6 @@
 # Tests each dataset returned by countries specified in get_info_covidregionaldata
-
+source("custom_tests/skip_if_not_scheduled.R")
 if (!testthat:::on_cran()) {
-  source("custom_tests/skip_if_not_scheduled.R")
   if (lubridate::hour(Sys.time()) == 0) {
     source("custom_tests/get_data.R")
   }
