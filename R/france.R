@@ -4,7 +4,7 @@
 #' Data available at \url{https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/}.
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by Region in France, ready to be used by \code{get_regional_data()}.
-#' @importFrom dplyr %>% filter select mutate left_join rename
+#' @importFrom dplyr filter select mutate left_join rename
 #' @importFrom lubridate as_date ymd
 #' @importFrom tibble tibble
 

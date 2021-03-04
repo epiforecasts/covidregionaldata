@@ -93,13 +93,21 @@ get_info_covidregionaldata <- function() {
     "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
     "cases_new, tested_new",
     
+    "get_regional_data",
+    "mexico",
+    "estados",
+    "municipios",
+    NA,
+    "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    "cases_new, deaths_new",
+
     NA,
     "russia",
-    "regions",
+    "Source no longer updated",
     NA,
     NA,
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",
-    "cases_total",
+    NA,
     
     "get_regional_data",
     "south africa",

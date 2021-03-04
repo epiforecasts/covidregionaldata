@@ -1,13 +1,13 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
-Version: 0.8.3.1
+Version: 0.8.3.2
 Authors@R: c(person(given = "Sam Abbott",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "sam.abbott@lshtm.ac.uk",
            comment = c(ORCID = "0000-0001-8057-8037")),
     person("Katharine", "Sherratt",
            email = "katharine.sherratt@lshtm.ac.uk",
-           role = c("aut"),
+           role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4413-453X")),
     person("Jonnie", "Bevan",
             email = "jonnie.bevan@tessella.com",
@@ -23,9 +23,6 @@ Authors@R: c(person(given = "Sam Abbott",
            email = "joel.hellewell@lshtm.ac.uk",
            role = c("ctb"),
            comment = c(ORCID = "0000-0003-2683-0849")),
-    person("James", "Munday",
-           email = "james.munday@lshtm.ac.uk",
-           role = c("ctb")),
     person("Patrick", "Barks",
        email = "patrick.barks@epicentre.msf.org",
        role = c("ctb")),
@@ -42,6 +39,8 @@ Authors@R: c(person(given = "Sam Abbott",
     person("Sebastian", "Funk",
             email = "sebastian.funk@lshtm.ac.uk",
             role = c("aut")),
+    person("Joe", "Palmer",
+           role=c("ctb")),
     person("Hugo", "Gruson",
            role = c("ctb"),
            comment = c(ORCID = "0000-0002-4094-1476")))
@@ -59,11 +58,11 @@ Description: An interface to subnational and national level Covid-19 data.
     Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     France: <https://www.data.gouv.fr/fr/pages/donnees-coronavirus>;
     India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
-    Russia: <https://github.com/grwlf/COVID-19_plus_Russia>;  UK: <https://coronavirus.data.gov.uk>,
+     UK: <https://coronavirus.data.gov.uk>,
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
     USA: <https://github.com/nytimes/covid-19-data>),
     Cuba: <https://covid19cubadata.github.io>,
-    and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>; Russia: <https://en.wikipedia.org/wiki/ISO_3166-2:RU>).
+    and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>).
 Language: en-gb
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata,
@@ -86,6 +85,7 @@ Imports:
     readxl,
     xml2,
     rvest,
+    readr,
     jsonlite,
     countrycode
 Suggests:

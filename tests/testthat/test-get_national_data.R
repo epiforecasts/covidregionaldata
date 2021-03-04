@@ -1,7 +1,7 @@
 test_that("get_national_data returns ECDC data", {
   skip_on_cran()
   d <- get_national_data(country = "France", source = "ECDC")
-  
+
   expect_is(d, "data.frame")
   expect_true(all(d$country == "France"))
   expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
@@ -10,9 +10,9 @@ test_that("get_national_data returns ECDC data", {
 
 test_that("get_national_data returns WHO data", {
   skip_on_cran()
-  
+
   d <- get_national_data(country = "France", source = "WHO")
-  
+
   expect_is(d, "data.frame")
   expect_true(all(d$country == "France"))
   expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
@@ -22,7 +22,7 @@ test_that("get_national_data returns WHO data", {
 
 test_that("get_ecdc_cases works as expected", {
   skip_on_cran()
-  
+
   url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
   ecdc <- try(vroom::vroom(url))
   # If no csv, try excel
@@ -31,10 +31,10 @@ test_that("get_ecdc_cases works as expected", {
     httr::GET(url_xl, httr::write_disk(tf <- tempfile(fileext = ".xlsx")))
     ecdc <-  readxl::read_excel(tf)
   }
-  
-  necessary_cols <- c("geoId", "countriesAndTerritories", "cases_weekly",
-                      "deaths_weekly", "popData2019")
-  
+
+  necessary_cols <- c("geoId", "countriesAndTerritories", "cases",
+                      "deaths", "popData2019")
+
   expect_is(ecdc, "data.frame")
   expect_true(all(necessary_cols %in% colnames(ecdc)))
   
@@ -44,7 +44,7 @@ test_that("get_ecdc_cases works as expected", {
 test_that("get_who_cases works as expected", {
   skip_on_cran()
   url <- "https://covid19.who.int/WHO-COVID-19-global-data.csv"
-  who <- vroom::vroom(url)
+  who <- vroom::vroom(url, guess_max = 500)
   expect_equal(ncol(who), 8)
 })
 

@@ -4,7 +4,7 @@
 #' Data available at  \url{https://health-infobase.canada.ca}. 
 #' It is loaded and then sanitised.
 #' @return A data frame of COVID cases by province in Canada, ready to be used by \code{get_regional_data()}.
-#' @importFrom dplyr %>% filter select mutate rename
+#' @importFrom dplyr filter select mutate rename
 #' @importFrom tidyr replace_na
 #' @importFrom lubridate dmy
 #'

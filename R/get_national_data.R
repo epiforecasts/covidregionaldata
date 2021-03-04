@@ -8,7 +8,7 @@
 #' @param totals Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.
 #' @param source Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to WHO.
 #' @return A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.
-#' @importFrom dplyr %>% group_by arrange select ungroup do everything
+#' @importFrom dplyr group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
 #' @importFrom countrycode countryname
 #' @export

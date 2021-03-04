@@ -210,7 +210,7 @@ get_uk_regional_cases_with_level_2 <- function(resolution = "utla", release_date
 #' @param release_date Date data was released. Default is to extract latest release. 
 #' Dates should be in the format "yyyy-mm-dd".
 #' @return A dataframe with all variables available in public UK data
-#' @importFrom dplyr %>%  full_join
+#' @importFrom dplyr  full_join
 #' @importFrom purrr map safely reduce compact
 #' 
 #' 
@@ -252,7 +252,7 @@ get_uk_data <- function(filters, release_date = NULL) {
     csv_links <- purrr::map(csv_links, ~ paste0(., "&release=", release_date))
   }
   # download and link all data into a single data frame
-  safe_reader <- purrr::safely(csv_reader)
+  safe_reader <- purrr::safely(csv_readr)
   csv <- purrr::map(csv_links, ~ safe_reader(.)[[1]])
   csv <- purrr::compact(csv)
   csv <- purrr::reduce(csv, dplyr::full_join, 

@@ -144,12 +144,12 @@ Europe | France  | Région | Département
 Europe | Germany | Bundesland | Landkreis
 Europe | UK | NHS region | Local authority
 Europe | Italy | Region | NA
-Europe | Russia | Region | NA
 Americas | Brazil | State | City
 Americas | USA | State | County
 Americas | Canada | Province | NA
 Americas | Colombia | Department  | NA
 Americas | Cuba | Province | NA
+Americas | Mexico | Estado | Municipio 
 Asia | Afghanistan | Province | NA
 Asia | India | States | NA
 
