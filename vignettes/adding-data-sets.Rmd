@@ -33,34 +33,226 @@ CSV.
 If you can, you may wish to download a local copy of your data source's
 CSV to work with. `covidregionaldata` internally uses [`vroom`](https://vroom.r-lib.org/index.html) to parse most CSV files.
 
-Run `vroom` on your local file, see what you get.
+Run `vroom` on your local file, see what you get. Compare it with the 
+list of expected column names below to see what correspondences exist.
+
+### Expected column names
+
+`date`
+ : Date of data
+
+`region_level_2`
+ : Name of level 2 region
+
+`level_2_region_code`
+ : Code for level 2 region
+
+`region_level_1`
+ : Name of level 1 region
+
+`level_1_region_code`
+ : Code for level 2 region
+
+`cases_new`
+ : Number of new cases
+
+`cases_total`
+ : Total number of cases
+
+`deaths_new`
+ : New deaths
+
+`deaths_total`
+ : Total deaths due to COVID
+
+`recovered_new`
+ : Newly-recovered cases
+
+`recovered_total`
+ : Total recovered cases
+ 
+`hosp_new`
+ : Newly-hospitalised cases
+
+`hosp_total`
+ : Total hospitalised cases
+
+`tested_new`
+ : Number of new tests
+ 
+`tested_total`
+ : Total number of tests
 
 ## Create a new file with the name of your country
 
 This is the main working portion of your addition. It should provide at
 least one, maybe two, functions which download data from your data source,
-process it minimally and rename some columns where necessary so that other
-parts of the package can 
+process it minimally and rename some columns where necessary to match
+the expected column names so that users recognise them and other parts
+of the package can process them as necessary.
+
+### Essential of a `get_country_regional_cases...` function
+
+Load your data using the `csv_reader` function provided.
+
+```{r echo=TRUE, eval=FALSE}
+  # Read data 
+  cases_url <- "https://example-data.org/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
+  original_data <- csv_reader(file = cases_url)
+```
+
+Clean your data. You should probably use `lubridate::as_date` (or another function) to
+generate the `date` field.
+
+You may need to convert local region names, or adjust them. 
+
+You may want to remove fields which have no use to the end user (e.g., codes used
+for regions which do not correspond to ISO:3166 standards or the codes you will
+return).
+
+General practice is to only return the data fields which `covidregionaldata`
+processes and provides, as listed above. If you don't have all these fields,
+they will be calculated where possible or replaced with `NA` where appropriate.
+
+```{r eval=FALSE, echo=TRUE}
+cases_data <- original_data %>%
+      dplyr::select(
+        date, region_level_1, region_level_2,
+        cases_new, cases_total, deaths_new, tested_new, recovered_total
+      )
+```
 
 ### Add in `get_country_regional_cases_only_level_1` functions
+
+For any country where regional data is provided, level 1 data must be provided.
+
+Some countries only provide data at for level 2 regions. In this case, the
+data must be aggregated. You may then have the level 1 function call the
+level 2 function and aggregate the data. Somewhere you will need to provide
+the logic to determine the correspondence between level 2 regions and level
+1 regions.
 
 ### Add in `get_country_regional_cases_with_level_2` functions
 
 ## Add your new `get_` functions to get_regional_data
 
+Add the pair of the name of your country and the name of your
+`get_country_regional_cases_only_level_1` (or 
+`get_country_regional_cases`) function to the switch statement
+which sets the `get_data_function` for level 1 data return.
+
+If you provide data for level 2 regions:
+
+1. add the name of your country
+to the `countries_with_level_2_regions` list in `get_regional_data`; and
+2. add the pair of the name of your country and the name of your `get_country_regional_cases_with_level_2` function to the `switch` statement
+which chooses the `get_data_function` for level 2 data return.
+
+## Document your code
+
+To make the package work you will need to use `@importFrom` tags to 
+make external functions usable within your code.
+
+Provide additional information about the `@usage`, `@params` and `@value`
+
+If you have two `get_country_regional_data` functions (one for each level)
+may choose to write your documentation once then use `@inherit` to duplicate
+it from one to the other. Also use the `@seealso` function to tie your two
+functions together.
+
 ## Add to get_info_covidregionaldata
+
+Document in `get_info_covidregionaldata.R` what is now provided for the country.
+
+The table in this function expects
+
+`get_data_function`
+ : `get_regional_data` for country data
+ 
+`country`
+ :   The country name as a character string, all lower-case letters.
+ 
+`level_1_region`
+ :   The local name for a level 1 region, a character string; can be `NA`
+ 
+`level_2_region`
+ :   The local name for a level 2 region, a character string; can be `NA`
+ 
+`function_options`
+ :   The function declaration giving parameters, if the function takes params. `NA` otherwise. 
+ 
+`data_url`
+ :   The URL of the source data.
+ 
+`source_data_cols`
+ :   The columns which are present in raw data and provided by the `get_` function (to clarify which we have added in post-processing)
 
 ## Add to get_region_codes.R
 
 * Add in the local name of your level 1 administrative units
 * Add in the local name of your level 2 administrative units (if applicable)
 * Provide a function which provides a look-up table for level 1 administrative units
-  * tribble is useful for this, as is datapasta
+  * `tribble` is useful for this, as is `datapasta`
 * Provide a function which provides a look-up table for level 2 administrative units (if applicable)
 
 ## Add a line to README.md
 
+Add in a line in the table of countries with regional data
+in the `README.md` file to show that this data set is now
+available. 
+
+## Run `check_data_sources`
+
+There is another vignette to present the [data checks](data_checks.html), but
+you can also run a data check for your own country directly.
+
+```{r eval=FALSE, echo=TRUE}
+devtools::load_all(".")
+check_data_sources("countryname", worldwide = FALSE)
+```
+
+Among other things, this will show you how `vroom` is parsing your
+source data.
+
+
+## Run R-CMD Check
+
+Check the package.
+
+### Run `lintr`
+
+`lintr` will pedantically check your code for style. Note that the default
+line length for `covidregionaldata` is now set to 120, so you can ignore
+some of the warnings about line lengths.
+
+```{r eval=FALSE, echo=TRUE}
+lintr("R/countryname.R")
+```
+
+### Run `styler`
+
+`styler` will apply most of the fixes which you would have to do by
+hand to make `lintr` happier with your code.
+
+```{r eval=FALSE, echo=TRUE}
+styler::style_file("R/countryname.R")
+```
+
 ## Edit DESCRIPTION
+
+You may need to edit the `DESCRIPTION` file to add new package dependencies.
 
 ## Edit WORDLIST
 
+You will probably have added at least one or two new words which need to be
+added to the WORDLIST used by the spellchecker.
+
+## Extra credit: merging data sources
+
+The most interesting information for package
+users is the case and death data, but if you have data on hospitalisation,
+recovery, deaths, please work to include them.
+
+The data for your country may not present case and death data together with
+hospitalisation or testing data. If you can put more data together and
+present it in the format sought by `get_regional_data`, please do.
