@@ -18,7 +18,6 @@
 #'
 #' ## Code
 #' get_interventions_data
-
 get_interventions_data <- function() {
 
   ## Set up caching
@@ -34,12 +33,14 @@ get_interventions_data <- function() {
 
   temp <- tempdir()
   filename <- "interventions.xlsx"
-  mem_download(dl_url, destfile = file.path(temp, filename), mode = 'wb', quiet = TRUE)
-  
+  mem_download(dl_url, destfile = file.path(temp, filename), mode = "wb", quiet = TRUE)
+
   # Read in data and correct excel dates
   data <- suppressWarnings(readxl::read_excel(file.path(temp, filename), sheet = "Dataset", col_types = "text") %>%
-                             dplyr::mutate(ENTRY_DATE = as.Date((as.numeric(ENTRY_DATE)-2), origin = as.Date("1900-01-01")),
-                                           DATE_IMPLEMENTED = as.Date((as.numeric(DATE_IMPLEMENTED)-2), origin = as.Date("1900-01-01"))))
+    dplyr::mutate(
+      ENTRY_DATE = as.Date((as.numeric(ENTRY_DATE) - 2), origin = as.Date("1900-01-01")),
+      DATE_IMPLEMENTED = as.Date((as.numeric(DATE_IMPLEMENTED) - 2), origin = as.Date("1900-01-01"))
+    ))
   names(data) <- tolower(names(data))
 
   return(data)
