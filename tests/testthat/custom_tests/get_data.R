@@ -38,18 +38,18 @@ data_level_2 <- purrr::map(
   ~ safely_get_regional_data(country = .x, localise_regions = FALSE,
   include_level_2_regions = TRUE)
   )
-names(data_level_2_all) <- countries_level_2
+names(data_level_2) <- countries_level_2
 data_level_2 <- data_level_2 %>%
   purrr::keep(~ !is.null(.x))
 success_level_2 <- names(data_level_2)
 
-# Function for testing data types ------------------------------------------------------
+# Function for testing data types -----------------------------------------
 expect_data_type <- function(country, data_list, level = 1) {
-  expect_s3_class(data_list[[country]][["date"]], "Date")
-  expect_type(data_list[[country]][["cases_new"]], "double")
-  expect_type(data_list[[country]][["cases_total"]], "double")
-  expect_type(data_list[[country]][["region_level_1"]], "character")
+  testhat::expect_s3_class(data_list[[country]][["date"]], "Date")
+  testhat::expect_type(data_list[[country]][["cases_new"]], "double")
+  testhat::expect_type(data_list[[country]][["cases_total"]], "double")
+  testhat::expect_type(data_list[[country]][["region_level_1"]], "character")
   if (level == 2) {
-    expect_type(data_list[[country]][["region_level_2"]], "character")
+    testhat::expect_type(data_list[[country]][["region_level_2"]], "character")
   }
 }
