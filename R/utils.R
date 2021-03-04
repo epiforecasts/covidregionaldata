@@ -25,7 +25,7 @@ add_extra_na_cols <- function(data) {
 #' @description Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.
 #' @param data a data table
 #' @return a tibble with all relevant data > 0.
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr mutate
 #' @importFrom tibble tibble
 set_negative_values_to_zero <- function(data) {
   numeric_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total',
@@ -46,7 +46,6 @@ set_negative_values_to_zero <- function(data) {
 #' @param data a data table
 #' @return a tibble with rows of NAs added.
 #' @importFrom tibble tibble
-#' @importFrom dplyr %>%
 #' @importFrom tidyr complete full_seq
 fill_empty_dates_with_na <- function(data) {
 
@@ -66,7 +65,7 @@ fill_empty_dates_with_na <- function(data) {
 #' issues later. This function fills these values with the previous non-NA value.
 #' @param data a data table
 #' @return a tibble with NAs filled in for cumulative data columns.
-#' @importFrom dplyr %>% group_by
+#' @importFrom dplyr group_by
 #' @importFrom tidyr fill 
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total')
@@ -95,7 +94,7 @@ complete_cumulative_columns <- function(data) {
 #' then calculates the second from the first.
 #' @param data A data frame
 #' @return A data frame with extra columns if required
-#' @importFrom dplyr %>% mutate group_by_at arrange vars starts_with lag
+#' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
 #' @importFrom tidyr replace_na
 #' @importFrom tibble tibble
 calculate_columns_from_existing_data <- function(data) {
