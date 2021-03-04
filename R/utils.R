@@ -4,7 +4,6 @@
 #' @param data a data table
 #' @return a tibble with relevant NA columns added
 #' @importFrom tibble tibble
-#' 
 add_extra_na_cols <- function(data) {
   expected_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
                           "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
@@ -28,7 +27,6 @@ add_extra_na_cols <- function(data) {
 #' @return a tibble with all relevant data > 0.
 #' @importFrom dplyr %>% mutate
 #' @importFrom tibble tibble
-#' 
 set_negative_values_to_zero <- function(data) {
   numeric_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total',
                          'cases_new', 'deaths_new', 'recovered_new', 'hosp_new', 'tested_new')
@@ -38,7 +36,6 @@ set_negative_values_to_zero <- function(data) {
       data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
     }
   }
-
   return(tibble::tibble(data))
 }
 
@@ -51,7 +48,6 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tibble tibble
 #' @importFrom dplyr %>%
 #' @importFrom tidyr complete full_seq
-#' 
 fill_empty_dates_with_na <- function(data) {
 
   if ("region_level_2" %in% colnames(data)) {
@@ -62,7 +58,6 @@ fill_empty_dates_with_na <- function(data) {
     data <- data %>%
       tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_1, level_1_region_code))
   }
-
   return(tibble::tibble(data))
 }
 
@@ -72,8 +67,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @param data a data table
 #' @return a tibble with NAs filled in for cumulative data columns.
 #' @importFrom dplyr %>% group_by
-#' @importFrom tidyr fill
-#' 
+#' @importFrom tidyr fill 
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c('deaths_total', 'cases_total', 'recovered_total', 'hosp_total', 'tested_total')
 
@@ -92,7 +86,6 @@ complete_cumulative_columns <- function(data) {
       }
     }
   }
-
   return(tibble::tibble(data))
 }
 
@@ -105,7 +98,6 @@ complete_cumulative_columns <- function(data) {
 #' @importFrom dplyr %>% mutate group_by_at arrange vars starts_with lag
 #' @importFrom tidyr replace_na
 #' @importFrom tibble tibble
-#' 
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
   
@@ -142,7 +134,6 @@ calculate_columns_from_existing_data <- function(data) {
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
-#' 
 csv_reader <- function(file, ...) {
 
   read_csv_fun <- vroom::vroom
@@ -155,7 +146,7 @@ csv_reader <- function(file, ...) {
     }
   }
 
-  data <- read_csv_fun(file, ...)
+  data <- read_csv_fun(file, ..., guess_max = 500)
   return(tibble::tibble(data))
 }
 
@@ -169,7 +160,6 @@ csv_reader <- function(file, ...) {
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom tibble tibble
 #' @importFrom readr read_csv
-#' 
 csv_readr <- function(file, ...) {
   
   read_csv_fun <- readr::read_csv

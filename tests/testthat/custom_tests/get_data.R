@@ -10,7 +10,7 @@ countries <- get_info_covidregionaldata() %>%
 
 # insert stochastic waiting to break up API requests
 get_r_data <- function(...) {
-  Sys.sleep(sample(1:10, 1))
+  Sys.sleep(sample(1:5, 1))
   get_regional_data(...)
 }
 # Return failed attempts as NULL
@@ -50,6 +50,6 @@ expect_data_type <- function(country, data_list, level = 1) {
   testhat::expect_type(data_list[[country]][["cases_total"]], "double")
   testhat::expect_type(data_list[[country]][["region_level_1"]], "character")
   if (level == 2) {
-    testhat::expect_type(data_list[[country]][["region_level_2"]], "character")
+    testthat::expect_type(data_list[[country]][["region_level_2"]], "character")
   }
 }
