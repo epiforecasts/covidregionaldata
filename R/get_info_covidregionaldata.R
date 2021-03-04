@@ -44,7 +44,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv",
     "cases_new, cases_total, deaths_total, recovered_total, tested_total",
-    
+
     "get_regional_data",
     "colombia",
     "departamentos",
@@ -60,7 +60,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://covid19cubadata.github.io",
     "cases_new",
-    
+
     "get_regional_data",
     "germany",
     "bundeslander",
@@ -84,7 +84,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-<date>.csv",
     "cases_total, deaths_total, tested_total",
-    
+
     "get_regional_data",
     "france",
     "r\u00e9gion",
@@ -92,7 +92,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/",
     "cases_new, tested_new",
-    
+
     "get_regional_data",
     "mexico",
     "estados",
@@ -108,7 +108,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://raw.githubusercontent.com/grwlf/COVID-19_plus_Russia/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_RU.csv",
     NA,
-    
+
     "get_regional_data",
     "south africa",
     "provinces",
@@ -116,7 +116,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://github.com/dsfsi/covid19za",
     "cases_total, deaths_total",
-    
+
     "get_regional_data",
     "uk",
     "ONS/NHS regions",
@@ -141,7 +141,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://covid19.who.int",
     "cases_new, cases_total, deaths_new, deaths_total",
-    
+
     "get_national_data",
     "ecdc",
     NA,
@@ -149,7 +149,7 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
     "cases_new, deaths_new",
-    
+
     # other
     "get_interventions_data",
     "acaps policy interventions",
@@ -158,14 +158,13 @@ get_info_covidregionaldata <- function() {
     NA,
     "https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset",
     NA,
-    
+
     "get_linelist",
     "international public patient records",
     NA,
-    NA,    
+    NA,
     "get_linelist(clean = TRUE)",
     "https://github.com/beoutbreakprepared/nCoV2019",
     "id, country, death, date_onset, date_confirm, date_admission_hospital, date_death_or_discharge"
-    
-    )
+  )
 }

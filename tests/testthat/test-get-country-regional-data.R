@@ -18,8 +18,10 @@ test_that("Level 1 data has correct col types for date, region, cases", {
   skip_on_cran()
   skip_if_not_scheduled()
   for (country in success_level_1) {
-    expect_data_type(country = country,
-                     data_list = data_level_1)
+    expect_data_type(
+      country = country,
+      data_list = data_level_1
+    )
   }
 })
 # Admin level 2 -----------------------------------------------------------
@@ -34,8 +36,10 @@ test_that("Level 2 data has correct col types for date, region, and cases column
   skip_on_cran()
   skip_if_not_scheduled()
   for (country in success_level_2) {
-    expect_data_type(country = country,
-                     data_list = data_level_2,
-                     level = 2)
+    expect_data_type(
+      country = country,
+      data_list = data_level_2,
+      level = 2
+    )
   }
 })

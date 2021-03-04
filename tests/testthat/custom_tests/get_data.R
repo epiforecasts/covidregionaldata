@@ -1,4 +1,4 @@
-# Get data used in testing 
+# Get data used in testing
 #  - test-get-info-covidregionaldata
 #  - test-get-country-regional-data
 
@@ -6,7 +6,7 @@
 countries <- get_info_covidregionaldata() %>%
   dplyr::filter(
     get_data_function == "get_regional_data" & !is.na(source_data_cols)
-    )
+  )
 
 # insert stochastic waiting to break up API requests
 get_r_data <- function(...) {
@@ -21,9 +21,11 @@ countries_level_1 <- countries %>%
   dplyr::pull(country)
 data_level_1 <- purrr::map(
   countries_level_1,
-  ~ safely_get_regional_data(country = .x, localise_regions = FALSE,
-  include_level_2_regions = FALSE)
+  ~ safely_get_regional_data(
+    country = .x, localise_regions = FALSE,
+    include_level_2_regions = FALSE
   )
+)
 names(data_level_1) <- countries_level_1
 data_level_1 <- data_level_1 %>%
   purrr::keep(~ !is.null(.x))
@@ -35,9 +37,11 @@ countries_level_2 <- countries %>%
   dplyr::pull(country)
 data_level_2 <- purrr::map(
   countries_level_2,
-  ~ safely_get_regional_data(country = .x, localise_regions = FALSE,
-  include_level_2_regions = TRUE)
+  ~ safely_get_regional_data(
+    country = .x, localise_regions = FALSE,
+    include_level_2_regions = TRUE
   )
+)
 names(data_level_2) <- countries_level_2
 data_level_2 <- data_level_2 %>%
   purrr::keep(~ !is.null(.x))

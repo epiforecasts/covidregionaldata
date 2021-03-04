@@ -6,18 +6,20 @@
 #' @importFrom dplyr select count group_by mutate
 #' @importFrom lubridate ymd as_date
 get_cuba_regional_cases <- function() {
-  
+
   ## Fetch case data
   url <- "https://covid19cubadata.github.io/data/covid19-casos.csv"
   cuba_data <- suppressWarnings(csv_reader(url))
-  
+
   ## Get daily case counts by province
   cuba_data <- cuba_data %>%
     dplyr::count(fecha_confirmacion, provincia) %>%
     dplyr::select(date = fecha_confirmacion, region_level_1 = provincia, cases_new = n) %>%
     dplyr::filter(!is.na(region_level_1)) %>%
-    dplyr::mutate(cases_new = as.numeric(cases_new),
-                  date = lubridate::as_date(lubridate::ymd(date)))
-  
+    dplyr::mutate(
+      cases_new = as.numeric(cases_new),
+      date = lubridate::as_date(lubridate::ymd(date))
+    )
+
   return(cuba_data)
 }
