@@ -126,5 +126,3 @@ test_that("get_regional_data returns correct unlocalised data - incl. admin leve
   
   expect_equal(expected_data, returned_data)
 })
-
-
