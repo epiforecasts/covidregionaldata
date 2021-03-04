@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
-Version: 0.8.3.1
+Version: 0.8.3.2
 Authors@R: c(person(given = "Sam Abbott",
            role = c("aut"),
            email = "sam.abbott@lshtm.ac.uk",
@@ -39,6 +39,8 @@ Authors@R: c(person(given = "Sam Abbott",
     person("Sebastian", "Funk",
             email = "sebastian.funk@lshtm.ac.uk",
             role = c("aut")),
+    person("Joe", "Palmer",
+           role=c("ctb")),
     person("Hugo", "Gruson",
            role = c("ctb"),
            comment = c(ORCID = "0000-0002-4094-1476")))

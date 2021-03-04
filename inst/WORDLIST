@@ -17,9 +17,7 @@ Estado
 Estados
 Github
 HDX
-ICD
 INEGI
-IPC
 Kreise
 Landkreis
 Limburg
@@ -67,6 +65,7 @@ linelist
 linelists
 lshtm
 ltla
+magrittr
 memoise
 metacran
 nhsregions

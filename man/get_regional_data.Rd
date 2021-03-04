@@ -36,7 +36,7 @@ cleans and sanitises further. Adds rows and columns of NA values so that data is
 \examples{
 
 \dontrun{
- get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
+get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
 }
 
 }
