@@ -45,10 +45,10 @@ success_level_2 <- names(data_level_2)
 
 # Function for testing data types -----------------------------------------
 expect_data_type <- function(country, data_list, level = 1) {
-  testhat::expect_s3_class(data_list[[country]][["date"]], "Date")
-  testhat::expect_type(data_list[[country]][["cases_new"]], "double")
-  testhat::expect_type(data_list[[country]][["cases_total"]], "double")
-  testhat::expect_type(data_list[[country]][["region_level_1"]], "character")
+  testthat::expect_s3_class(data_list[[country]][["date"]], "Date")
+  testthat::expect_type(data_list[[country]][["cases_new"]], "double")
+  testthat::expect_type(data_list[[country]][["cases_total"]], "double")
+  testthat::expect_type(data_list[[country]][["region_level_1"]], "character")
   if (level == 2) {
     testthat::expect_type(data_list[[country]][["region_level_2"]], "character")
   }
