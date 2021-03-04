@@ -20,3 +20,4 @@ SMG.md
 ^doc$
 ^Meta$
 ^vignettes$
+^tests/testthat/\.cache$
