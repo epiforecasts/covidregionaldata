@@ -3,6 +3,13 @@
 #' @description Constructs a `covidregionaldata` class object for the
 #' target dataset of interest (see return). Returns an error if the requested
 #' dataset is not supported.
+#' @param country A character string specifying the country to get data from.
+#' Not case dependent. Name should be the English name. For a list of
+#' options see `available_datasets`.
+#' @param level A character string indicating the target administrative level
+#' of the data with the default being "1". Currently supported options are
+#' level 1 ("1) and level 2 ("2"). See `available_datasets` for supported
+#' options by dataset.
 #' @return A list containing target country name, administrative level of
 #' the data, and a list of information about the region codes. The list
 #' well be assigned a class start "crd_" and containing the target country
@@ -43,3 +50,9 @@ new_covidregionaldata <- function(country = character(), level = character(),
     structure(x, class = paste0("crd_", tar_country, "_", level))
     return(x)
 }
+
+
+download_regional
+
+
+downlo
