@@ -17,19 +17,20 @@ check_alternate_data_source <- function(target_country) {
     toupper(substr(target_country, 1, 1)),
     substr(target_country, 2, nchar(target_country))
   )
-  
+
   # check if country is in JHU locations with subnational data
   jhu_admin1 <- csv_reader("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv") %>%
     dplyr::filter(!is.na(.data$Province_State)) %>%
     dplyr::pull(.data$Country_Region) %>%
     unique()
-  
+
   # return error if no subnational data present
-  if (!target_country_ %in% jhu_admin1){
+  if (!target_country_ %in% jhu_admin1) {
     stop(paste0(
       "No public data available for '",
       target_country,
-      "'. Get national data with get_national_data()"))
+      "'. Get national data with get_national_data()"
+    ))
   }
 
   # get full data and filter for country
@@ -46,45 +47,28 @@ check_alternate_data_source <- function(target_country) {
 #' and formats the data
 #' @return A data frame of COVID cases for all countries listed by JHU,
 #' by country and region if available
-#' @importFrom dplyr %>% select group_by rename mutate ungroup arrange lag first
+#' @importFrom dplyr %>% select group_by rename mutate ungroup arrange
 #' @importFrom tidyr %>% pivot_longer replace_na
 #' @importFrom rlang .data
 #'
 get_jhu_data <- function() {
   # Paths
-  path <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"
+  main_path <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"
   vals <- c(
     "confirmed",
     "deaths",
     "recovered"
   )
 
-  # load individual dataframes
-  data_list <- replicate(3, data.frame())
-  for (i in seq_len(length(vals))) {
-    v <- vals[[i]]
-    wpath <- paste0(path, "time_series_covid19_", v, "_global.csv")
-    data <- csv_reader(file = wpath)
-
-    # convert to long format
-    colname <- paste0("daily_", v)
-    data <- data %>% tidyr::pivot_longer(
-      cols = 5:ncol(data),
-      names_to = "Date",
-      values_to = colname
-    )
-
-    # create row id for joining
-    data$id <- paste(data$`Province/State`,
-      data$`Country/Region`,
-      data$Date,
-      sep = "_"
-    )
-    data_list[[i]] <- data
-  }
+  # load data
+  paths <- paste0(main_path, "time_series_covid19_", vals, "_global.csv")
+  data_list <- purrr::map(paths, csv_reader)
+  names(data_list) <- paste0("daily_", vals)
+  data_list <- lapply(data_list, tidyr::pivot_longer, cols = 5:dplyr::last_col(), names_to = "Date", values_to = "value")
 
   # merge and clean data
-  data <- Reduce(function(...) merge(..., on = "id", all = T), data_list)
+  data <- dplyr::bind_rows(data_list, .id = "variable")
+  data <- tidyr::pivot_wider(data, names_from = variable, values_from = value)
   data <- data %>%
     dplyr::select(
       .data$Date,
@@ -112,38 +96,6 @@ get_jhu_data <- function() {
       region_level_1 = "Unknown",
       country = "Unknown"
     ))
-
-  # calculate new cases/deaths/recovered (change from previous day)
-  data <- data %>%
-    dplyr::arrange(.data$date) %>%
-    dplyr::group_by(.data$country, .data$region_level_1) %>%
-    dplyr::mutate(
-      cases_new = .data$cases_total -
-        dplyr::lag(.data$cases_total,
-          default = dplyr::first(.data$cases_total)
-        ),
-      deaths_new = .data$deaths_total -
-        dplyr::lag(.data$deaths_total,
-          default = dplyr::first(.data$deaths_total)
-        ),
-      recovered_new = .data$recovered_total -
-        dplyr::lag(.data$recovered_total,
-          default = dplyr::first(.data$recovered_total)
-        )
-    ) %>%
-    dplyr::arrange(dplyr::desc(.data$date)) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(
-      .data$date,
-      .data$country,
-      .data$region_level_1,
-      .data$cases_new,
-      .data$cases_total,
-      .data$deaths_new,
-      .data$deaths_total,
-      .data$recovered_new,
-      .data$recovered_total
-    )
 
   # insert place holder level_1_region_code
   data$level_1_region_code <- "Unknown"
