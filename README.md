@@ -293,29 +293,6 @@ This returns a dataset with one row for each region, in the same format:
 |  Brussels  |    BE-BRU     |       6229       |       1482        |          0           |      2657       |         0         |
 
 ## Sub-national coverage
-<<<<<<< HEAD
-=======
-We include sub-national data in the following countries. These are the accepted country names when using `get_regional_data(country = "")`.
-
-**Continent** | **Country**|**Level 1**|**Level 2**
-:-----:| :-----:|:-----:|:-----:
-Europe | Belgium | Region | Province
-Europe | France  | Région | Département
-Europe | Germany | Bundesland | Landkreis
-Europe | UK | NHS region | Local authority
-Europe | Italy | Region | NA
-Europe | Lithuania | County | Municipality
-Americas | Brazil | State | City
-Americas | USA | State | County
-Americas | Canada | Province | NA
-Americas | Colombia | Department  | NA
-Americas | Cuba | Province | NA
-Americas | Mexico | Estado | Municipio 
-Asia | Afghanistan | Province | NA
-Asia | India | States | NA
-
-We are hoping to expand over time (see below "Development").
->>>>>>> master
 
 We include sub-national data in the following countries. These are the
 accepted country names when using `get_regional_data(country = "")`.
