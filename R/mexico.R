@@ -12,6 +12,7 @@
 #' @importFrom rlang .data
 #' @importFrom tidyr pivot_longer
 mexico_api <- function(level = "estados", verbose = TRUE) {
+  . <- NULL
   level <- match.arg(level, choices = c("municipio", "estados"))
 
   if (level %in% "municipio") {

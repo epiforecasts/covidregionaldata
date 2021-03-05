@@ -29,8 +29,8 @@ new_covidregionaldata <- function(country = character(), level = "1",
   stopifnot(is.character(country))
   stopifnot(is.character(level))
 
-  countries <- available_datasets %>%
-    filter(get_data_function %in% "get_regional_data")
+  countries <- covidregionaldata::available_datasets %>%
+    filter(.data$get_data_function %in% "get_regional_data")
 
   tar_country <- match.arg(
     country,
@@ -38,7 +38,7 @@ new_covidregionaldata <- function(country = character(), level = "1",
   )
 
   target <- countries %>%
-    filter(country %in% tar_country)
+    filter(.data$country %in% tar_country)
 
   level <- match.arg(level, choices = c("1", "2"), several.ok = FALSE)
   tar_level <- paste0("level_", level, "_region")
@@ -48,9 +48,9 @@ new_covidregionaldata <- function(country = character(), level = "1",
                See available_datasets for supported options")
   }
 
-  codes <- region_codes %>%
-    filter(country %in% tar_country,
-           level %in% tar_level)
+  codes <- covidregionaldata::region_codes %>%
+    filter(.data$country %in% tar_country,
+           .data$level %in% tar_level)
 
   if (verbose) {
     message(
