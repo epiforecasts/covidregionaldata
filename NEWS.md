@@ -1,3 +1,12 @@
+# covidregionaldata 0.9.0
+
+This update contains a substantial package refactor and as such introduces some breaking changes. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
+
+
+## Changes
+
+* Available datasets not listed in `available_datasets`.
+
 # covidregionaldata 0.8.3
 
 ## New data sets

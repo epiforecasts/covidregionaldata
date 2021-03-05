@@ -1,13 +1,13 @@
-# Test get_info_covidregionaldata
-test_that("get_info_covidregionaldata returns dataframe", {
-  countries <- get_info_covidregionaldata() %>%
+# Test available_datasets
+test_that("available_datasets returns dataframe", {
+  countries <- available_datasets %>%
     dplyr::filter(get_data_function == "get_regional_data" & !is.na(source_data_cols))
 
   expect_s3_class(countries, "data.frame")
 })
 
-test_that("get_info_covidregionaldata returns at least 13 countries", {
-  countries <- get_info_covidregionaldata() %>%
+test_that("available_datasets returns at least 13 countries", {
+  countries <- available_datasets %>%
     dplyr::filter(get_data_function == "get_regional_data" & !is.na(source_data_cols))
 
   n_countries <- nrow(countries)
@@ -15,8 +15,8 @@ test_that("get_info_covidregionaldata returns at least 13 countries", {
   expect_gte(n_countries, 13)
 })
 
-test_that("get_info_covidregionaldata includes data source for all countries", {
-  countries <- get_info_covidregionaldata() %>%
+test_that("available_datasets includes data source for all countries", {
+  countries <- available_datasets %>%
     dplyr::filter(get_data_function == "get_regional_data" & !is.na(source_data_cols))
 
   n_countries <- nrow(countries)

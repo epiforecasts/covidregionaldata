@@ -35,13 +35,15 @@ navbar:
 
 reference:
   - title: Get Covid-19 Data
-    desc: Functions that download datasets or provide information on available data.
+    desc: Functions that download datasets and provide data cleaning.
     contents:
-      - get_info_covidregionaldata
       - get_national_data
       - get_regional_data
       - get_linelist
       - get_interventions_data
+  - title: Datasets
+    desc: Package datasets
+      - available_datasets
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:

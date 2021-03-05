@@ -21,3 +21,4 @@ SMG.md
 ^Meta$
 ^vignettes$
 ^tests/testthat/\.cache$
+\.lintr$
