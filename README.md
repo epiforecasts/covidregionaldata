@@ -144,6 +144,7 @@ Europe | France  | Région | Département
 Europe | Germany | Bundesland | Landkreis
 Europe | UK | NHS region | Local authority
 Europe | Italy | Region | NA
+Europe | Lithuania | County | Municipality
 Americas | Brazil | State | City
 Americas | USA | State | County
 Americas | Canada | Province | NA

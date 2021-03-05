@@ -2,25 +2,27 @@
 source("custom_tests/mock_data.R")
 
 test_that("calculate_columns_from_existing_data returns correct results", {
-  
-  input_data <- tibble::tibble("date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
-                               "region_level_1" = c(rep("A", 4), rep("B", 3)),
-                               "cases_new" = c(0,1,NA_integer_,1,   1,1,1),
-                               "deaths_total" = c(0,1,2,3,   1,NA_integer_,2))
+  input_data <- tibble::tibble(
+    "date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
+    "region_level_1" = c(rep("A", 4), rep("B", 3)),
+    "cases_new" = c(0, 1, NA_integer_, 1, 1, 1, 1),
+    "deaths_total" = c(0, 1, 2, 3, 1, NA_integer_, 2)
+  )
 
   calculated_data <- calculate_columns_from_existing_data(input_data)
-  cases_total <- c(0,1,1,2, 1,2,3)
-  deaths_new <- c(0,1,1,1, 1,0,1)
-  
+  cases_total <- c(0, 1, 1, 2, 1, 2, 3)
+  deaths_new <- c(0, 1, 1, 1, 1, 0, 1)
+
   expect_equal(calculated_data$cases_total, cases_total)
   expect_equal(calculated_data$deaths_new, deaths_new)
-  
 })
 
 test_that("add_extra_na_cols is working", {
-  extra_col_names <- c("cases_new", "cases_total", "deaths_new", "deaths_total",
-                      "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
-                      "hosp_total")
+  extra_col_names <- c(
+    "cases_new", "cases_total", "deaths_new", "deaths_total",
+    "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
+    "hosp_total"
+  )
 
   existing_col_names <- colnames(mtcars)
 
@@ -31,24 +33,24 @@ test_that("add_extra_na_cols is working", {
 })
 
 test_that("rename_region_column does so correctly", {
-  df <- data.frame(matrix(rnorm(100), ncol=10))
+  df <- data.frame(matrix(rnorm(100), ncol = 10))
   colnames(df)[1] <- "region_level_1"
 
   expect_error(rename_region_column(df, "test"))
   expect_equal(colnames(rename_region_column(df, "canada"))[1], "province")
-  
+
   colnames(df)[1] <- "region_level_1"
   colnames(df)[2] <- "region_level_2"
   expect_equal(colnames(rename_region_column(df, "belgium"))[1:2], c("region", "province"))
 })
 
 test_that("rename_region_code_column does so correctly", {
-  df <- data.frame(matrix(rnorm(100), ncol=10))
+  df <- data.frame(matrix(rnorm(100), ncol = 10))
   colnames(df)[1] <- "level_1_region_code"
-  
+
   expect_error(rename_region_code_column(df, "test"))
   expect_equal(colnames(rename_region_code_column(df, "canada"))[1], "iso_3166_2")
-  
+
   colnames(df)[1] <- "level_1_region_code"
   colnames(df)[2] <- "level_2_region_code"
   expect_equal(colnames(rename_region_code_column(df, "usa"))[1:2], c("iso_3166_2", "fips"))
@@ -81,6 +83,6 @@ test_that("complete_cumulative_columns works", {
   expected_data <- get_expected_data_for_complete_cumulative_columns_test()
 
   actual_data <- complete_cumulative_columns(input_data)
-  
+
   expect_equal(actual_data, expected_data)
 })
