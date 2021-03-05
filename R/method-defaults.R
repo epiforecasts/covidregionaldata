@@ -12,8 +12,8 @@
 download_regional.default <- function(region, verbose = TRUE, ...) {
   if (verbose) {
     warning(
-        "A download function has not been implemented for this datasource"
-        )
+      "A download function has not been implemented for this datasource"
+    )
   }
   region$raw <- NA
   return(region)
@@ -34,8 +34,8 @@ download_regional.default <- function(region, verbose = TRUE, ...) {
 clean_regional.default <- function(region, verbose = TRUE, ...) {
   if (verbose) {
     warning(
-        "A cleaning function has not been implemented for this data source"
-        )
+      "A cleaning function has not been implemented for this data source"
+    )
   }
   region$clean <- region$raw
   return(region)

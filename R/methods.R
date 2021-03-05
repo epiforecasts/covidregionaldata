@@ -11,7 +11,7 @@
 #' level 1 ("1) and level 2 ("2"). See `available_datasets` for supported
 #' options by dataset.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-#' messages and warnings be returned. 
+#' messages and warnings be returned.
 #' @return A list containing target country name, administrative level of
 #' the data, and a list of information about the region codes. The list
 #' well be assigned a class start "crd_" and containing the target country
@@ -49,8 +49,10 @@ new_covidregionaldata <- function(country = character(), level = "1",
   }
 
   codes <- covidregionaldata::region_codes %>%
-    filter(.data$country %in% tar_country,
-           .data$level %in% tar_level)
+    filter(
+      .data$country %in% tar_country,
+      .data$level %in% tar_level
+    )
 
   if (verbose) {
     message(

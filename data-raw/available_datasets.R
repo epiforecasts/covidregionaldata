@@ -1,6 +1,6 @@
 # Get meta information about the covidregionaldata datasets.
-available_datasets <-   
-tibble::tribble(
+available_datasets <-
+  tibble::tribble(
     ~get_data_function, # get_regional_data for country data
     ~country, # country name
     ~level_1_region, # local region name: see utils.R > rename_region_column
@@ -173,7 +173,9 @@ tibble::tribble(
   )
 
 available_datasets <- available_datasets %>%
-    dplyr::select(country, level_1_region, level_2_region, get_data_function,
-                  function_options, data_url, source_data_cols)
+  dplyr::select(
+    country, level_1_region, level_2_region, get_data_function,
+    function_options, data_url, source_data_cols
+  )
 
 usethis::use_data(available_datasets, overwrite = TRUE)

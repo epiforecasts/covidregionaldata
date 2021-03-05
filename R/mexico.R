@@ -17,7 +17,7 @@ mexico_api <- function(level = "estados", verbose = TRUE) {
 
   if (level %in% "municipio") {
     path <- "Downloads/filesDD.php?csvmun"
-  }else {
+  } else {
     path <- "Downloads/filesDD.php?csvaxd"
   }
   domain <- "https://datos.covid-19.conacyt.mx/"
@@ -37,22 +37,24 @@ mexico_api <- function(level = "estados", verbose = TRUE) {
       gsub('^a\\.href\\s+=\\s+"(.*)";', "\\1", .)
     }
 
- deceased_url <- gsub("Confirmados", "Defunciones", confirmed_url, fixed = TRUE)
+  deceased_url <- gsub("Confirmados", "Defunciones", confirmed_url, fixed = TRUE)
 
   read_data <- function(target, new_name) {
     if (verbose) {
       message("Downloading ", new_name)
     }
     csv_reader(file.path(domain, target)) %>%
-    select(- .data$poblacion) %>%
-    pivot_longer(-c("cve_ent", "nombre"),
-                 names_to = "date", values_to = new_name)
+      select(-.data$poblacion) %>%
+      pivot_longer(-c("cve_ent", "nombre"),
+        names_to = "date", values_to = new_name
+      )
   }
 
   confirmed <- read_data(confirmed_url, "cases_new")
   deceased <- read_data(deceased_url, "deaths_new")
   dat <- full_join(confirmed, deceased,
-                   by = c("cve_ent", "nombre", "date"))
+    by = c("cve_ent", "nombre", "date")
+  )
   return(dat)
 }
 
@@ -115,7 +117,7 @@ download_regional.crd_mexico_2 <- function(region, verbose = TRUE, ...) {
 #' }
 clean_regional.crd_mexico_1 <- function(region, verbose = TRUE, ...) {
   region$clean <- region$raw %>%
-      mutate(
+    mutate(
       region_level_1 = str_to_title(.data$nombre),
       region_level_1 = ifelse(region_level_1 == "Distrito Federal",
         "Ciudad de Mexico",
@@ -159,7 +161,9 @@ clean_regional.crd_mexico_2 <- function(region, verbose = TRUE, ...) {
       level_1_region_code = .data$iso_code,
       level_2_region_code = .data$cve_ent
     ) %>%
-    select(-.data$inegi_state, -.data$cve_ent, 
-           -.data$inegi_state, -.data$iso_code)
+    select(
+      -.data$inegi_state, -.data$cve_ent,
+      -.data$inegi_state, -.data$iso_code
+    )
   return(region)
 }

@@ -17,13 +17,13 @@
 #' \dontrun{
 #' # set up a data cache
 #' start_using_memoise()
-#' 
+#'
 #' # download the data (and keep all processing steps)
 #' get_regional_data(country = "mexico", steps = TRUE)
 #' }
 #'
 get_regional_data <- function(country, level = "1", totals = FALSE,
-                              localise = TRUE, verbose = TRUE, 
+                              localise = TRUE, verbose = TRUE,
                               steps = FALSE, ...) {
   # check data availability and define list
   region <- new_covidregionaldata(country, level = level, verbose = verbose)
@@ -35,11 +35,11 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region <- clean_regional(region, verbose = verbose)
 
   # non-specific cleaning and checks
-  #region <- process_regional(region, verbose = verbose)
+  # region <- process_regional(region, verbose = verbose)
 
-if (steps) {
-  return(region)
-}else{
-  return(region$processed)
-}
+  if (steps) {
+    return(region)
+  } else {
+    return(region$processed)
+  }
 }
