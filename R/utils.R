@@ -1,133 +1,6 @@
-#' Add extra columns filled with NA values to a dataset.
-#' @description Adds extra columns filled with NAs to a dataset. This ensures that all datasets from the covidregionaldata package return datasets
-#' of the same underlying structure (i.e. same columns).
-#' @param data a data table
-#' @return a tibble with relevant NA columns added
-#' @importFrom tibble tibble
-add_extra_na_cols <- function(data) {
-  expected_col_names <- c(
-    "cases_new", "cases_total", "deaths_new", "deaths_total",
-    "recovered_new", "recovered_total", "tested_new", "tested_total", "hosp_new",
-    "hosp_total"
-  )
-
-  for (colname in expected_col_names) {
-    if (!(colname %in% colnames(data))) {
-      original_col_names <- colnames(data)
-      data$newCol <- rep(NA_integer_, dim(data)[1])
-      colnames(data) <- c(original_col_names, colname)
-    }
-  }
-  return(tibble::tibble(data))
-}
-
-#' Set negative data to 0
-#' @description Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.
-#' @param data a data table
-#' @return a tibble with all relevant data > 0.
-#' @importFrom dplyr mutate
-#' @importFrom tibble tibble
-set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c(
-    "deaths_total", "cases_total", "recovered_total", "hosp_total", "tested_total",
-    "cases_new", "deaths_new", "recovered_new", "hosp_new", "tested_new"
-  )
-
-  for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)) {
-      data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
-    }
-  }
-  return(tibble::tibble(data))
-}
-
-#' Add rows of NAs for dates where a region does not have any data
-#' @description There are points, particularly early during data collection, where data was not collected for all regions.
-#' This function finds dates which have data for some regions, but not all, and adds rows of NAs for the missing regions.
-#' This is mainly for reasons of completeness.
-#' @param data a data table
-#' @return a tibble with rows of NAs added.
-#' @importFrom tibble tibble
-#' @importFrom tidyr complete full_seq
-fill_empty_dates_with_na <- function(data) {
-  if ("region_level_2" %in% colnames(data)) {
-    data <- data %>%
-      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(
-        region_level_2, level_2_region_code,
-        region_level_1, level_1_region_code
-      ))
-  } else {
-    data <- data %>%
-      tidyr::complete(date = tidyr::full_seq(data$date, period = 1), tidyr::nesting(region_level_1, level_1_region_code))
-  }
-  return(tibble::tibble(data))
-}
-
-#' Completes cumulative columns if rows were added with NAs.
-#' @description If a dataset had a row of NAs added to it (using fill_empty_dates_with_na) then cumulative data columns will have NAs which can cause
-#' issues later. This function fills these values with the previous non-NA value.
-#' @param data a data table
-#' @return a tibble with NAs filled in for cumulative data columns.
-#' @importFrom dplyr group_by
-#' @importFrom tidyr fill
-complete_cumulative_columns <- function(data) {
-  cumulative_col_names <- c("deaths_total", "cases_total", "recovered_total", "hosp_total", "tested_total")
-
-  for (cumulative_col_name in cumulative_col_names) {
-    if (cumulative_col_name %in% colnames(data)) {
-      if ("region_level_2" %in% colnames(data)) {
-        data <- data %>%
-          dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code) %>%
-          tidyr::fill(all_of(cumulative_col_name)) %>%
-          dplyr::ungroup()
-      } else {
-        data <- data %>%
-          dplyr::group_by(region_level_1, level_1_region_code, ) %>%
-          tidyr::fill(all_of(cumulative_col_name)) %>%
-          dplyr::ungroup()
-      }
-    }
-  }
-  return(tibble::tibble(data))
-}
-
-#' Cumulative counts from daily counts or daily counts from cumulative, dependent on which columns already exist
-#' @description Checks which columns are missing (cumulative/daily counts) and if one is present and the other not
-#' then calculates the second from the first.
-#' @param data A data frame
-#' @return A data frame with extra columns if required
-#' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
-#' @importFrom tidyr replace_na
-#' @importFrom tibble tibble
-calculate_columns_from_existing_data <- function(data) {
-  possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
-
-  for (count in possible_counts) {
-    count_today_name <- paste0(count, "_new")
-    cumulative_count_name <- paste0(count, "_total")
-
-    if (count_today_name %in% colnames(data) & !(cumulative_count_name %in% colnames(data))) {
-      # in this case the daily count is there but there are no cumulative counts
-      data <- data %>%
-        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
-        dplyr::arrange(date, .by_group = TRUE) %>%
-        dplyr::mutate(!!cumulative_count_name := cumsum(tidyr::replace_na(!!as.name(count_today_name), 0)))
-    } else if (!(count_today_name %in% colnames(data)) & cumulative_count_name %in% colnames(data)) {
-      # in this case the cumulative counts are there but no daily counts
-      data <- data %>%
-        dplyr::group_by_at(dplyr::vars(dplyr::starts_with("region_level"))) %>%
-        dplyr::arrange(date, .by_group = TRUE) %>%
-        tidyr::fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
-        dplyr::mutate(!!count_today_name := (!!as.name(cumulative_count_name)) - dplyr::lag(!!as.name(cumulative_count_name), default = 0))
-    }
-  }
-
-  return(tibble::tibble(data))
-}
-
-
 #' Custom CSV reading function
-#' @description Checks for use of memoise and then uses whichever read_csv function is needed by user
+#'
+#' @description Checks for use of memoise and then uses vroom::vroom.
 #' @param file A URL or filepath to a CSV
 #' @param ... extra parameters to be passed to vroom::vroom
 #' @return A data table
@@ -135,92 +8,71 @@ calculate_columns_from_existing_data <- function(data) {
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
 csv_reader <- function(file, ...) {
-  read_csv_fun <- vroom::vroom
+  read_csv_fun <- vroom
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
-      ch <- memoise::cache_filesystem(".cache")
-      read_csv_fun <- memoise::memoise(vroom::vroom, cache = ch)
+      ch <- cache_filesystem(".cache")
+      read_csv_fun <- memoise(vroom, cache = ch)
     }
   }
-
   data <- read_csv_fun(file, ..., guess_max = 500)
-  return(tibble::tibble(data))
+  return(tibble(data))
 }
 
-
 #' Custom CSV reading function
-#' @description Checks for use of memoise and then uses readr::read_csv, which appears
-#' more robust in loading some streams
-#' @param file A URL or filepath to a CSV
+#' 
+#' @description Checks for use of memoise and then uses readr::read_csv,
+#' which appears more robust in loading some streams
+#' @importFrom csv_reader
 #' @param ... extra parameters to be passed to readr::read_csv
-#' @return A data table
+#' @return A data frame
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom tibble tibble
 #' @importFrom readr read_csv
 csv_readr <- function(file, ...) {
-  read_csv_fun <- readr::read_csv
+  read_csv_fun <- read_csv
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
-      ch <- memoise::cache_filesystem(".cache")
-      read_csv_fun <- memoise::memoise(readr::read_csv, cache = ch)
+      ch <- cache_filesystem(".cache")
+      read_csv_fun <- memoise(read_csv, cache = ch)
     }
   }
 
   data <- read_csv_fun(file, ...)
-  return(tibble::tibble(data))
+  return(tibble(data))
 }
 
-#' Get totals data given the time series data.
+#' Add useMemoise to options
 #'
-#' @description Get totals data given the time series data.
-#' @param data a data table
-#' @param include_level_2_regions Boolean. Are level 2 regions
-#' included in the data
-#' @return A data table, totalled up
-#' @importFrom dplyr left_join group_by %>%  summarise select arrange
-#' @importFrom tibble tibble
+#' @description Adds useMemoise to options meaning memoise is
+#' used when reading data in.
+#' @export
+start_using_memoise <- function() {
+  options("useMemoise" = TRUE)
+}
+
+#' Stop using useMemoise
 #'
-totalise_data <- function(data, include_level_2_regions) {
-  # Group the data ------------------------------------------------------
-  if (include_level_2_regions) {
-    data <- data %>%
-      dplyr::group_by(region_level_1, level_1_region_code, region_level_2, level_2_region_code)
-  } else {
-    data <- data %>%
-      dplyr::group_by(region_level_1, level_1_region_code)
+#' @description Sets useMemoise in options to NULL, meaning memoise isn't used
+#' when reading data in
+#' @export
+stop_using_memoise <- function() {
+  if (!is.null(options("useMemoise"))) {
+    options("useMemoise" = NULL)
   }
+}
 
-  # Total the data ------------------------------------------------------
-  data <- data %>%
-    dplyr::summarise(
-      cases_total = sum(cases_new, na.rm = TRUE),
-      deaths_total = sum(deaths_new, na.rm = TRUE),
-      recovered_total = sum(recovered_new, na.rm = TRUE),
-      hosp_total = sum(hosp_new, na.rm = TRUE),
-      tested_total = sum(tested_new, na.rm = TRUE)
-    ) %>%
-    dplyr::ungroup()
-
-  # Select correct data -------------------------------------------------
-  if (include_level_2_regions) {
-    data <- data %>%
-      dplyr::select(
-        region_level_2, level_2_region_code,
-        region_level_1, level_1_region_code, cases_total, deaths_total,
-        recovered_total, hosp_total, tested_total
-      )
-  } else {
-    data <- data %>%
-      dplyr::select(
-        region_level_1, level_1_region_code, cases_total, deaths_total,
-        recovered_total, hosp_total, tested_total
-      )
-  }
-
-
-  return(tibble::tibble(data))
+#' Reset Cache and Update all Local Data
+#'
+#' @return Null
+#' @export
+#' @importFrom memoise cache_filesystem
+reset_cache <- function() {
+  unlink(".cache", recursive = TRUE)
+  cache <- cache_filesystem(".cache")
+  return(invisible(NULL))
 }

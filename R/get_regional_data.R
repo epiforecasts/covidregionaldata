@@ -3,10 +3,7 @@
 #' @description Downloads, cleans and processes regional data
 #' for Covid-19.
 #' @inheritParams new_covidregionaldata
-#' @param totals Boolean. If TRUE, returns totalled data per region up to
-#' today's date. If FALSE, returns the full dataset stratified by date and
-#' region.
-#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @inheritParams process_regional
 #' @param steps Logical, defaults to FALSE. Should all processesing and cleaning
 #' steps be kept and output in a list.
 #' @param ... pass additional arguments to `download_regional`
@@ -43,3 +40,4 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     return(region$processed)
   }
 }
+
