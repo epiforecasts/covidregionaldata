@@ -24,7 +24,7 @@ cleans and sanitises further. Adds rows and columns of NA values so that data is
 \examples{
 
 \dontrun{
- get_national_data(country = "canada", totals = TRUE, source = "WHO")
+get_national_data(country = "canada", totals = TRUE, source = "WHO")
 }
 
 }

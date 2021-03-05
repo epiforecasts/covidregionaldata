@@ -14,11 +14,13 @@ get_colombia_regional_cases <- function() {
   url <- "https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv"
   colombia <- csv_reader(url) %>%
     dplyr::select(date = fecha, region_level_1 = departamento, cases_total = casos) %>%
-    dplyr::mutate(date = lubridate::ymd(date),
-                  region_level_1 = iconv(region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
-                  region_level_1 = stringr::str_replace_all(region_level_1, " D.C.", ""),
-                  region_level_1 = stringr::str_replace_all(region_level_1, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
-                  region_level_1 = stringr::str_to_sentence(region_level_1))
+    dplyr::mutate(
+      date = lubridate::ymd(date),
+      region_level_1 = iconv(region_level_1, from = "UTF-8", to = "ASCII//TRANSLIT"),
+      region_level_1 = stringr::str_replace_all(region_level_1, " D.C.", ""),
+      region_level_1 = stringr::str_replace_all(region_level_1, "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA", "San Andres, Providencia y Santa Catalina"),
+      region_level_1 = stringr::str_to_sentence(region_level_1)
+    )
 
   return(colombia)
 }

@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
-Version: 0.8.3.1
+Version: 0.8.3.2
 Authors@R: c(person(given = "Sam Abbott",
            role = c("aut"),
            email = "sam.abbott@lshtm.ac.uk",
@@ -88,6 +88,7 @@ Imports:
     readr,
     jsonlite,
     countrycode,
+    tidyselect,
     rlang
 Suggests:
     data.table,

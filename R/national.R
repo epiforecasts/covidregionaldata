@@ -9,34 +9,38 @@
 #' @importFrom readxl read_excel
 #' @importFrom dplyr mutate rename select arrange filter
 #' @importFrom countrycode countryname
-get_ecdc_cases <- function(){
+get_ecdc_cases <- function() {
   # Try csv from ECDC
   url <- "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
   raw <- try(csv_reader(file = url))
-  
+
   # Clean data
   data <- raw %>%
     dplyr::mutate(date = as.Date(dateRep, format = "%d/%m/%Y")) %>%
-    dplyr::rename(iso_code = geoId, country = countriesAndTerritories,
-                  cases_new = cases, deaths_new = deaths,
-                  population_2019 = popData2019) %>%
+    dplyr::rename(
+      iso_code = geoId, country = countriesAndTerritories,
+      cases_new = cases, deaths_new = deaths,
+      population_2019 = popData2019
+    ) %>%
     dplyr::select(date, country, iso_code, population_2019, cases_new, deaths_new) %>%
     dplyr::arrange(date) %>%
     dplyr::filter(country != "Cases_on_an_international_conveyance_Japan") %>%
-    dplyr::mutate(cases_new = ifelse(cases_new < 0, 0, cases_new),
-                  country = stringr::str_replace_all(country, "_", " "),
-                  country = countrycode::countryname(country, destination = "country.name.en", warn = FALSE),
-                  # Correct for Namibia
-                  iso_code = ifelse(country == "Namibia", "NA", iso_code),
-                  un_region = countrycode::countrycode(iso_code, origin = "iso2c", destination = "un.region.name", warn = FALSE),
-                  # Correct for Kosovo
-                  un_region = ifelse(iso_code == "XK", "Europe", un_region),
-                  # Correct for UK
-                  un_region = ifelse(iso_code == "UK", "Europe", un_region),
-                  # Correct for Greece
-                  un_region = ifelse(iso_code == "EL", "Europe", un_region),
-                  # Correct for Taiwan
-                  un_region = ifelse(iso_code == "TW", "Asia", un_region))
+    dplyr::mutate(
+      cases_new = ifelse(cases_new < 0, 0, cases_new),
+      country = stringr::str_replace_all(country, "_", " "),
+      country = countrycode::countryname(country, destination = "country.name.en", warn = FALSE),
+      # Correct for Namibia
+      iso_code = ifelse(country == "Namibia", "NA", iso_code),
+      un_region = countrycode::countrycode(iso_code, origin = "iso2c", destination = "un.region.name", warn = FALSE),
+      # Correct for Kosovo
+      un_region = ifelse(iso_code == "XK", "Europe", un_region),
+      # Correct for UK
+      un_region = ifelse(iso_code == "UK", "Europe", un_region),
+      # Correct for Greece
+      un_region = ifelse(iso_code == "EL", "Europe", un_region),
+      # Correct for Taiwan
+      un_region = ifelse(iso_code == "TW", "Asia", un_region)
+    )
   return(data)
 }
 
@@ -56,12 +60,16 @@ get_who_cases <- function() {
 
   # Add standard country names
   who <- raw %>%
-    dplyr::mutate(country = countrycode::countrycode(iso_code, 
-                                                     origin = "iso2c", destination = "country.name.en", warn = FALSE),
-                  un_region = countrycode::countrycode(iso_code, 
-                                                       origin = "iso2c", destination = "un.region.name", warn = FALSE),
-                  # Correct for Kosovo
-                  un_region = ifelse(iso_code == "XK", "Europe", un_region),
-                  country = ifelse(iso_code == "XK", "Kosovo", country))
+    dplyr::mutate(
+      country = countrycode::countrycode(iso_code,
+        origin = "iso2c", destination = "country.name.en", warn = FALSE
+      ),
+      un_region = countrycode::countrycode(iso_code,
+        origin = "iso2c", destination = "un.region.name", warn = FALSE
+      ),
+      # Correct for Kosovo
+      un_region = ifelse(iso_code == "XK", "Europe", un_region),
+      country = ifelse(iso_code == "XK", "Kosovo", country)
+    )
   return(who)
 }

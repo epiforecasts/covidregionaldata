@@ -7,7 +7,7 @@
 #' @param data a data frame with a region_level_1 column and optionally a region_level_2 column
 #' @param country a string with the country of interest
 #' @return a tibble with the column renamed to a sensible name
-#' @importFrom dplyr %>% rename
+#' @importFrom dplyr rename
 #' @importFrom tibble tibble
 #'
 # Renaming the region name column
@@ -22,12 +22,12 @@ rename_region_column <- function(data, country) {
     "france" = "region",
     "india" = "state",
     "italy" = "region",
+    "lithuania" = "county",
     "mexico" = "estado",
     "uk" = "region",
     "usa" = "state",
     "cuba" = "provincia",
-    "south africa" = "province",
-    "region"
+    "south africa" = "province"
   )
 
   data <- data %>% dplyr::rename(!!level_1_region_name := region_level_1)
@@ -38,6 +38,7 @@ rename_region_column <- function(data, country) {
       "brazil" = "city",
       "france" = "departement",
       "germany" = "landkreis",
+      "lithuania" = "municipality",
       "mexico" = "municipio",
       "uk" = "authority",
       "usa" = "county"
@@ -57,7 +58,7 @@ rename_region_column <- function(data, country) {
 #' @param data a data frame with a region_level_1_code column and optionally a region_level_2_code column
 #' @param country a string with the country of interest
 #' @return a tibble with the column(s) renamed to a sensible name
-#' @importFrom dplyr %>% rename
+#' @importFrom dplyr rename
 #' @importFrom tibble tibble
 #'
 rename_region_code_column <- function(data, country) {
@@ -71,13 +72,14 @@ rename_region_code_column <- function(data, country) {
     "france" = "iso_3166_2",
     "india" = "iso_3166_2",
     "italy" = "iso_3166_2",
+    "lithuania" = "iso_3166_2",
     "mexico" = "iso_3166_2",
     "uk" = "ons_region_code",
     "usa" = "iso_3166_2",
     "cuba" = "iso_3166_2",
-    "south africa" = "iso_3166_2",
-    "iso_3166_2"
+    "south africa" = "iso_3166_2"
   )
+
   data <- data %>% dplyr::rename(!!level_1_region_code_name := level_1_region_code)
 
   if ("level_2_region_code" %in% colnames(data)) {
@@ -86,6 +88,7 @@ rename_region_code_column <- function(data, country) {
       "brazil" = "level_2_region_code",
       "germany" = "level_2_region_code",
       "france" = "iso_3166_departement",
+      "lithuania" = "iso_3166_municipality",
       "mexico" = "inegi_code",
       "uk" = "ltla_code",
       "usa" = "fips"
@@ -114,18 +117,16 @@ get_region_codes <- function(country) {
     "germany" = get_germany_region_codes,
     "india" = get_india_region_codes,
     "italy" = get_italy_region_codes,
+    "lithuania" = get_lithuania_region_codes,
     "mexico" = get_mexico_region_codes,
     "uk" = get_uk_region_codes,
     "usa" = get_us_region_codes,
     "cuba" = get_cuba_region_codes,
-    "south africa" = get_southafrica_region_codes,
-    NULL
+    "south africa" = get_southafrica_region_codes
   )
-  if (is.null(region_code_fun)) {
-    region_codes_table <- NULL
-  } else {
-    region_codes_table <- do.call(region_code_fun, list())
-  }
+
+  region_codes_table <- do.call(region_code_fun, list())
+
   return(region_codes_table)
 }
 
@@ -139,6 +140,7 @@ get_level_2_region_codes <- function(country) {
     "brazil" = get_brazil_level_2_codes,
     "france" = get_france_level_2_codes,
     "germany" = get_germany_level_2_codes,
+    "lithuania" = get_lithuania_level_2_codes,
     "mexico" = get_mexico_level_2_codes,
     "uk" = get_uk_level_2_codes,
     "usa" = get_us_level_2_codes
@@ -282,6 +284,38 @@ get_italy_region_codes <- function() {
   return(region_codes)
 }
 
+#' Lithuanian region codes
+#' @importFrom tibble tribble
+#'
+get_lithuania_region_codes <- function() {
+
+  # The following code, adjusted from a version for France, was initially used
+  # to create lookup tables of Lithuanian municipality and country codes. These
+  # were then adjusted to match the format used by the Official Statistics
+  # Portal in their open data and are left as hard-coded tibbles. These codes
+  # have not changed in ten years.
+
+  # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
+  # level_2_codes_table <- level_2_codes_url %>%
+  #   xml2::read_html() %>%
+  #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
+  #   rvest::html_table(fill = TRUE)
+  region_codes <- tibble::tribble(
+    ~level_1_region_code,            ~region,                   ~region_en,
+    "LT-AL",             "Alytaus apskritis",              "Alytus County",
+    "LT-KU",               "Kauno apskritis",              "Kaunas County",
+    "LT-KL",      "Klaip\u0117dos apskritis",       "Klaip\u0117da County",
+    "LT-MR",   "Marijampol\u0117s apskritis",    "Marijampol\u0117 County",
+    "LT-PN", "Panev\u0117\u017eio apskritis", "Panev\u0117\u017eys County",
+    "LT-SA",   "\u0160iauli\u0173 apskritis",       "\u0160iauliai County",
+    "LT-TA",       "Taurag\u0117s apskritis",        "Taurag\u0117 County",
+    "LT-TE",    "Tel\u0161i\u0173 apskritis",        "Tel\u0161iai County",
+    "LT-UT",              "Utenos apskritis",               "Utena County",
+    "LT-VL",            "Vilniaus apskritis",             "Vilnius County",
+         NA,                   "nenustatyta",                   "unstated"
+  )
+  return(region_codes)
+}
 
 #' US region codes
 #' @importFrom tibble tibble
@@ -415,6 +449,88 @@ get_germany_level_2_codes <- function() {
 #' France level 2 codes (included in original function)
 get_france_level_2_codes <- function() {
   return(NULL)
+}
+
+#' Lithuania level 2 codes
+#' @importFrom tibble tribble
+get_lithuania_level_2_codes <- function() {
+  # The following code, adjusted from a version for France, was initially used to
+  # create lookup tables of Lithuanian municipality and country codes.
+  # These were then adjusted to match the format used by the
+  # Official Statistics Portal in their open data and are left as
+  # hard-coded tibbles. These codes have not changed in ten years.
+
+  # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
+  # level_2_codes_table <- level_2_codes_url %>%
+  #   xml2::read_html() %>%
+  #   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table') %>%
+  #   rvest::html_table(fill = TRUE)
+
+  region_codes <- tibble::tribble(
+    ~level_2_region_code,               ~region,       ~region_nomin,            ~region_type,
+    "LT-01",     "Akmen\u0117s r. sav.",            "Akmen\u0117", "district municipality",
+    "LT-02",     "Alytaus m. sav.",   "Alytaus miestas",     "city municipality",
+    "LT-03",     "Alytaus r. sav.",            "Alytus", "district municipality",
+    "LT-04",    "Anyk\u0161\u010di\u0173 r. sav.",         "Anyk\u0161\u010diai", "district municipality",
+    "LT-05",       "Bir\u0161tono sav.",          "Bir\u0161tono",          "municipality",
+    "LT-06",       "Bir\u017e\u0173 r. sav.",            "Bir\u017eai", "district municipality",
+    "LT-07",    "Druskinink\u0173 sav.",      "Druskininkai",          "municipality",
+    "LT-08",      "Elektr\u0117n\u0173 sav.",        "Elektr\u0117nai",          "municipality",
+    "LT-09",   "Ignalinos r. sav.",          "Ignalina", "district municipality",
+    "LT-10",     "Jonavos r. sav.",            "Jonava", "district municipality",
+    "LT-11",    "Joni\u0161kio r. sav.",          "Joni\u0161kis", "district municipality",
+    "LT-12",    "Jurbarko r. sav.",         "Jurbarkas", "district municipality",
+    "LT-13", "Kai\u0161iadori\u0173 r. sav.",       "Kai\u0161iadorys", "district municipality",
+    "LT-14",     "Kalvarijos sav.",        "Kalvarijos",          "municipality",
+    "LT-16",       "Kauno r. sav.",            "Kaunas", "district municipality",
+    "LT-15",       "Kauno m. sav.",     "Kauno miestas",     "city municipality",
+    "LT-17",    "Kazl\u0173 R\u016bdos sav.",       "Kazl\u0173 R\u016bdos",          "municipality",
+    "LT-18",    "K\u0117daini\u0173 r. sav.",         "K\u0117dainiai", "district municipality",
+    "LT-19",      "Kelm\u0117s r. sav.",             "Kelm\u0117", "district municipality",
+    "LT-21",   "Klaip\u0117dos r. sav.",          "Klaip\u0117da", "district municipality",
+    "LT-20",   "Klaip\u0117dos m. sav.", "Klaip\u0117dos miestas",     "city municipality",
+    "LT-22",   "Kretingos r. sav.",          "Kretinga", "district municipality",
+    "LT-23",    "Kupi\u0161kio r. sav.",          "Kupi\u0161kis", "district municipality",
+    "LT-24",     "Lazdij\u0173 r. sav.",          "Lazdijai", "district municipality",
+    "LT-25",   "Marijampol\u0117s sav.",       "Marijampol\u0117", "district municipality",
+    "LT-26",    "Ma\u017eeiki\u0173 r. sav.",         "Ma\u017eeikiai", "district municipality",
+    "LT-27",      "Mol\u0117t\u0173 r. sav.",           "Mol\u0117tai", "district municipality",
+    "LT-28",       "Neringos sav.",           "Neringa",          "municipality",
+    "LT-29",        "Pag\u0117gi\u0173 sav.",          "Pag\u0117giai",          "municipality",
+    "LT-30",    "Pakruojo r. sav.",         "Pakruojis", "district municipality",
+    "LT-31",    "Palangos m. sav.",  "Palangos miestas",     "city municipality",
+    "LT-32",   "Panev\u0117\u017eio m. sav.", "Panev\u0117\u017eio miestas",     "city municipality",
+    "LT-33",   "Panev\u0117\u017eio r. sav.",         "Panev\u0117\u017eys", "district municipality",
+    "LT-34",    "Pasvalio r. sav.",          "Pasvalys", "district municipality",
+    "LT-35",     "Plung\u0117s r. sav.",            "Plung\u0117", "district municipality",
+    "LT-36",      "Prien\u0173 r. sav.",           "Prienai", "district municipality",
+    "LT-37", "Radvili\u0161kio r. sav.",       "Radvili\u0161kis", "district municipality",
+    "LT-38",    "Raseini\u0173 r. sav.",         "Raseiniai", "district municipality",
+    "LT-39",        "Rietavo sav.",           "Rietavo",          "municipality",
+    "LT-40",    "Roki\u0161kio r. sav.",          "Roki\u0161kis", "district municipality",
+    "LT-41",       "\u0160aki\u0173 r. sav.",            "\u0160akiai", "district municipality",
+    "LT-42",  "\u0160al\u010dinink\u0173 r. sav.",       "\u0160al\u010dininkai", "district municipality",
+    "LT-44",     "\u0160iauli\u0173 r. sav.",          "\u0160iauliai", "district municipality",
+    "LT-43",     "\u0160iauli\u0173 m. sav.",   "\u0160iauli\u0173 miestas",     "city municipality",
+    "LT-45",     "\u0160ilal\u0117s r. sav.",            "\u0160ilal\u0117", "district municipality",
+    "LT-46",     "\u0160ilut\u0117s r. sav.",            "\u0160ilut\u0117", "district municipality",
+    "LT-47",    "\u0160irvint\u0173 r. sav.",         "\u0160irvintos", "district municipality",
+    "LT-48",      "Skuodo r. sav.",           "Skuodas", "district municipality",
+    "LT-49",  "\u0160ven\u010dioni\u0173 r. sav.",        "\u0160ven\u010dionys", "district municipality",
+    "LT-50",    "Taurag\u0117s r. sav.",           "Taurag\u0117", "district municipality",
+    "LT-51",      "Tel\u0161i\u0173 r. sav.",           "Tel\u0161iai", "district municipality",
+    "LT-52",       "Trak\u0173 r. sav.",            "Trakai", "district municipality",
+    "LT-53",    "Ukmerg\u0117s r. sav.",           "Ukmerg\u0117", "district municipality",
+    "LT-54",      "Utenos r. sav.",             "Utena", "district municipality",
+    "LT-55",     "Var\u0117nos r. sav.",            "Var\u0117na", "district municipality",
+    "LT-56", "Vilkavi\u0161kio r. sav.",       "Vilkavi\u0161kis", "district municipality",
+    "LT-57",    "Vilniaus m. sav.",  "Vilniaus miestas",     "city municipality",
+    "LT-58",    "Vilniaus r. sav.",           "Vilnius", "district municipality",
+    "LT-59",       "Visagino sav.",         "Visaginas",          "municipality",
+    "LT-60",      "Zaras\u0173 r. sav.",           "Zarasai", "district municipality",
+    NA,         "nenustatyta",          "unstated",                      NA
+  )
+  return (region_codes)
 }
 
 #' US level 2 codes (FIPS) (Included in original function)

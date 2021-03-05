@@ -165,7 +165,7 @@ jobs:
         
 
   test-coverage:
-    if: github.ref == 'refs/heads/master' && github.repository == 'epiforecasts/covidregionaldata'
+    if: github.repository == 'epiforecasts/covidregionaldata'
     runs-on: macOS-latest
 
     needs: [R-CMD-check]

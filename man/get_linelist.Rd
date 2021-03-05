@@ -24,7 +24,6 @@ get_linelist()
 
 # Return the report delay only
 get_linelist(report_delay_only = TRUE)
-
 }
 }
 \author{
