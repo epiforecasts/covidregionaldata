@@ -1,3 +1,88 @@
+#' Download Mexico data across levels
+#'
+#' @description Data download function for Mexico data
+#' @param level A character string indicating the target administrative level
+#' to download. Supports "estados" and "municipio".
+#' @inheritParams download_regional
+#' @author Sam Abbott
+#' @importFrom httr POST content
+#' @importFrom xml2 xml_find_first xml_text
+#' @importFrom dplyr select full_join
+#' @importFrom rlang .data
+#' @importFrom tidyr pivot_longer
+mexico_api <- function(level = "estados", verbose = TRUE) {
+  # Fetch the latest data using a PHP script from the website
+  level <- match.arg(level, choices = c("municipio", "estados"))
+  if (level %in% "municipio") {
+    path <- "Downloads/filesDD.php?csvmun"
+  }else {
+    path <- "Downloads/filesDD.php?csvaxd"
+  }
+  domain <- "https://datos.covid-19.conacyt.mx/"
+  script_url <- file.path(domain, path)
+
+  confirmed_url <- script_url %>%
+    POST(body = "Confirmados", encode = "form", verbose = TRUE) %>%
+    content() %>%
+    xml_find_first("//script") %>%
+    xml_text() %>%
+    strsplit("\\n\\t*") %>%
+    unlist() %>%
+    {
+      grep("^a\\.href", ., value = TRUE)
+    } %>%
+    {
+      gsub('^a\\.href\\s+=\\s+"(.*)";', "\\1", .)
+    }
+
+ deceased_url <- gsub("Confirmados", "Defunciones", confirmed_url, fixed = TRUE)
+
+  read_data <- function(target, new_name) {
+    if (verbose) {
+      message("Downloading ", new_name)
+    }
+    csv_reader(file.path(domain, target)) %>%
+    select(- .data$poblacion) %>%
+    pivot_longer(-c("cve_ent", "nombre"),
+                 names_to = "date", values_to = new_name)
+  }
+
+  confirmed <- read_data(confirmed_url, "cases_new")
+  deceased <- read_data(deceased_url, "deaths_new")
+  df <- full_join(confirmed, deceased,
+                   by = c("cve_ent", "nombre", "date"))
+  return(df)
+}
+
+#' Download Mexican Regional Daily COVID-19 Count Data - Estado
+#'
+#' @description Extracts daily COVID-19 data for Mexico, stratified by Estados.
+#' Data available at <https://datos.covid-19.conacyt.mx/#DownZCSV>.
+#' @export
+#' @inheritParams download_regional
+#' @method download_regional crd_mexico_1
+#' @author Sam Abbott
+download_regional.crd_mexico_1 <- function(region, verbose = TRUE, ...) {
+  df <- mexico_api(level = "estados", verbose = verbose)
+  region$raw <- df
+  return(region)
+}
+
+#' Download Mexican Regional Daily COVID-19 Count Data - Municipio
+#'
+#' @description Extracts daily COVID-19 data for Mexico, stratified by
+#' Municipio.
+#' Data available at <https://datos.covid-19.conacyt.mx/#DownZCSV>.
+#' @export
+#' @inheritParams download_regional
+#' @method download_regional crd_mexico_2
+#' @author Sam Abbott
+download_regional.crd_mexico_2 <- function(region, verbose = TRUE, ...) {
+  df <- mexico_api(level = "municipio", verbose = verbose)
+  region$raw <- df
+  return(region)
+}
+
 #' Mexican Regional Daily COVID-19 Count Data - Estado
 #'
 #' @description Extracts daily COVID-19 data for Mexico, stratified by Estados.
