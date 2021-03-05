@@ -21,8 +21,6 @@ add_extra_na_cols <- function(data) {
   return(tibble::tibble(data))
 }
 
-
-
 #' Set negative data to 0
 #' @description Set data values to 0 if they are negative in a dataset. Data in the datasets should always be > 0.
 #' @param data a data table
@@ -199,7 +197,8 @@ left_join_region_codes <- function(data, region_codes_table, by = NULL, ...) {
 #'
 #' @description Get totals data given the time series data.
 #' @param data a data table
-#' @param include_level_2_regions Boolean. Are level 2 regions included in the data
+#' @param include_level_2_regions Boolean. Are level 2 regions
+#' included in the data
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by %>%  summarise select arrange
 #' @importFrom tibble tibble
