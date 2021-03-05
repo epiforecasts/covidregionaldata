@@ -14,7 +14,7 @@ check_data_sources <- function(countries = "all",
 
   # get country names
   if (countries == "all") {
-    countries <- available_datasets %>%
+    countries <- covidregionaldata::available_datasets %>%
       dplyr::filter(get_data_function == "get_regional_data") %>%
       dplyr::pull(country)
   }
