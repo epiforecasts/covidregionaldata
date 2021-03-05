@@ -3,7 +3,7 @@
 #  - test-get-country-regional-data
 
 # Get countries to test
-countries <- get_info_covidregionaldata() %>%
+countries <- covidregionaldata::available_datasets %>%
   dplyr::filter(
     get_data_function == "get_regional_data" & !is.na(source_data_cols)
   )

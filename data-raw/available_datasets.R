@@ -1,10 +1,6 @@
-#' Get meta information about the covidregionaldata datasets.
-#' Use this also as a guide for setting up new country datasets
-#' @description Find out function names, data returned, subregion level and raw data sources, alongside package info
-#' @return A tibble of metadata about covidregionaldata
-#' @export
-get_info_covidregionaldata <- function() {
-  tibble::tribble(
+# Get meta information about the covidregionaldata datasets.
+available_datasets <-   
+tibble::tribble(
     ~get_data_function, # get_regional_data for country data
     ~country, # country name
     ~level_1_region, # local region name: see utils.R > rename_region_column
@@ -175,4 +171,9 @@ get_info_covidregionaldata <- function() {
     "https://github.com/beoutbreakprepared/nCoV2019",
     "id, country, death, date_onset, date_confirm, date_admission_hospital, date_death_or_discharge"
   )
-}
+
+available_datasets <- available_datasets %>%
+    dplyr::select(country, level_1_region, level_2_region, get_data_function,
+                  function_options, data_url, source_data_cols)
+
+usethis::use_data(available_datasets, overwrite = TRUE)
