@@ -184,7 +184,8 @@ process_regional.crd_level_1 <- function(region, totals = FALSE,
                                          localise = FALSE, verbose = TRUE) {
   region_vars <- c("region_level_1", "level_1_region_code")
   region <- process_regional_internal(
-    region, group_vars = region_vars, totals = totals,
+    region,
+    group_vars = region_vars, totals = totals,
     localise = localise, verbose = verbose
   )
   return(region)
@@ -207,11 +208,14 @@ process_regional.crd_level_1 <- function(region, totals = FALSE,
 #' }
 process_regional.crd_level_2 <- function(region, totals = FALSE,
                                          localise = FALSE, verbose = TRUE) {
-  region_vars <- c("region_level_2", "level_2_region_code", 
-                   "region_level_1", "level_1_region_code")
+  region_vars <- c(
+    "region_level_2", "level_2_region_code",
+    "region_level_1", "level_1_region_code"
+  )
 
   region <- process_regional_internal(
-    region, group_vars = region_vars, totals = totals,
+    region,
+    group_vars = region_vars, totals = totals,
     localise = localise, verbose = verbose
   )
   return(region)

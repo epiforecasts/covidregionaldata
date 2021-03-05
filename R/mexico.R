@@ -38,7 +38,8 @@ mexico_api <- function(level = "estados", verbose = TRUE) {
     }
 
   deceased_url <- gsub("Confirmados", "Defunciones", confirmed_url,
-                       fixed = TRUE)
+    fixed = TRUE
+  )
 
   read_data <- function(target, new_name) {
     if (verbose) {

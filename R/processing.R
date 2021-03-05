@@ -10,7 +10,7 @@ add_extra_na_cols <- function(data) {
   expected_col_names <- c(
     "cases_new", "cases_total", "deaths_new", "deaths_total",
     "recovered_new", "recovered_total", "tested_new", "tested_total",
-    "hosp_new",  "hosp_total"
+    "hosp_new", "hosp_total"
   )
 
   for (colname in expected_col_names) {
@@ -60,16 +60,16 @@ fill_empty_dates_with_na <- function(data) {
       complete(
         date = full_seq(data$date, period = 1),
         nesting(
-            region_level_2, level_2_region_code,
-            region_level_1, level_1_region_code
-            )
+          region_level_2, level_2_region_code,
+          region_level_1, level_1_region_code
         )
+      )
   } else {
     data <- data %>%
       complete(
         date = full_seq(data$date, period = 1),
         nesting(region_level_1, level_1_region_code)
-    )
+      )
   }
   return(data)
 }
@@ -86,11 +86,13 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
 complete_cumulative_columns <- function(data) {
-  cumulative_col_names <- c("deaths_total", "cases_total", "recovered_total",
-                            "hosp_total", "tested_total")
+  cumulative_col_names <- c(
+    "deaths_total", "cases_total", "recovered_total",
+    "hosp_total", "tested_total"
+  )
   for (cumulative_col_name in cumulative_col_names) {
     if (cumulative_col_name %in% colnames(data)) {
-        data <- fill(data, all_of(cumulative_col_name))
+      data <- fill(data, all_of(cumulative_col_name))
     }
   }
   return(data)
@@ -116,26 +118,27 @@ calculate_columns_from_existing_data <- function(data) {
     cumulative_count_name <- paste0(count, "_total")
 
     if (count_today_name %in% colnames(data) &
-          !(cumulative_count_name %in% colnames(data))) {
+      !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
       data <- data %>%
         group_by_at(vars(starts_with("region_level"))) %>%
         arrange(date, .by_group = TRUE) %>%
         mutate(
-            !!cumulative_count_name :=
-                cumsum(replace_na(!!as.name(count_today_name), 0))
-              )
-    }else if (!(count_today_name %in% colnames(data)) &
-                 cumulative_count_name %in% colnames(data)) {
+          !!cumulative_count_name :=
+            cumsum(replace_na(!!as.name(count_today_name), 0))
+        )
+    } else if (!(count_today_name %in% colnames(data)) &
+      cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
       data <- data %>%
         group_by_at(vars(starts_with("region_level"))) %>%
         arrange(date, .by_group = TRUE) %>%
         fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         mutate(
-            !!count_today_name :=
-                 (!!as.name(cumulative_count_name)) -
-                     lag(!!as.name(cumulative_count_name), default = 0))
+          !!count_today_name :=
+            (!!as.name(cumulative_count_name)) -
+            lag(!!as.name(cumulative_count_name), default = 0)
+        )
     }
   }
   return(data)
@@ -177,8 +180,8 @@ totalise_data <- function(data) {
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !! :=
 process_regional_internal <- function(region, group_vars,
-                                     totals = FALSE, localise = FALSE,
-                                     verbose = TRUE) {
+                                      totals = FALSE, localise = FALSE,
+                                      verbose = TRUE) {
   dat <- group_by_at(region$clean, .vars = group_vars)
 
   . <- NULL
@@ -191,19 +194,24 @@ process_regional_internal <- function(region, group_vars,
     dat <- totalise_data(dat)
     dat <- dat %>%
       select(all_of(
-        c(group_vars, "cases_total", "deaths_total", "recovered_total",
-          "hosp_total", "tested_total")
-      )
-    )
-  }else {
+        c(
+          group_vars, "cases_total", "deaths_total", "recovered_total",
+          "hosp_total", "tested_total"
+        )
+      ))
+  } else {
     dat <- dat %>%
       drop_na(.data$date) %>%
       fill_empty_dates_with_na() %>%
       complete_cumulative_columns() %>%
-      select(all_of(c("date", group_vars, "cases_new", "cases_total",
-       "deaths_new", "deaths_total", "recovered_new", "recovered_total",
-       "hosp_new", "hosp_total", "tested_new", "tested_total")),
-        everything()) %>%
+      select(
+        all_of(c(
+          "date", group_vars, "cases_new", "cases_total",
+          "deaths_new", "deaths_total", "recovered_new", "recovered_total",
+          "hosp_new", "hosp_total", "tested_new", "tested_total"
+        )),
+        everything()
+      ) %>%
       arrange(.data$date, all_of(group_vars[1]))
   }
 

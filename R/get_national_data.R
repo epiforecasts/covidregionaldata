@@ -75,7 +75,7 @@ get_national_data <- function(country = NULL, totals = FALSE, source = "who") {
   if (totals) {
     data <- data %>%
       dplyr::rename("region_level_1" = "country", "level_1_region_code" = "iso_code") %>%
-      totalise_data(include_level_2_regions = FALSE) %>%
+      totalise_data() %>%
       dplyr::select(-recovered_total, -hosp_total, -tested_total) %>%
       dplyr::arrange(-cases_total) %>%
       dplyr::rename("country" = "region_level_1", "iso_code" = "level_1_region_code")

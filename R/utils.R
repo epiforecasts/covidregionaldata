@@ -39,7 +39,7 @@ csv_reader <- function(file, ...) {
 }
 
 #' Custom CSV reading function
-#' 
+#'
 #' @description Checks for use of memoise and then uses readr::read_csv,
 #' which appears more robust in loading some streams
 #' @inheritParams csv_reader
