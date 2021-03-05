@@ -4,7 +4,15 @@
 \alias{clean_regional.default}
 \title{Default region specific data cleaning}
 \usage{
-\method{clean_regional}{default}(region, verbose, ...)
+\method{clean_regional}{default}(region, verbose = TRUE, ...)
+}
+\arguments{
+\item{region}{A list as produced by \code{new_covidregionaldata}.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
+
+\item{...}{Additional arguments to pass to dataset specific methods}
 }
 \description{
 Default regional cleaning method. Highlights that no custom
@@ -12,4 +20,8 @@ cleaning is happening.
 }
 \author{
 Sam Abbott
+region <- new_covidregionaldata("uk", "1")
+class(region) <- "list"
+region <- download_regional(region, verbose = FALSE)
+clean_regional(region, verbose = FALSE)
 }

@@ -32,30 +32,6 @@ test_that("add_extra_na_cols is working", {
   expect_true(all(is.na(new_dataset$cases_new)))
 })
 
-test_that("rename_region_column does so correctly", {
-  df <- data.frame(matrix(rnorm(100), ncol = 10))
-  colnames(df)[1] <- "region_level_1"
-
-  expect_error(rename_region_column(df, "test"))
-  expect_equal(colnames(rename_region_column(df, "canada"))[1], "province")
-
-  colnames(df)[1] <- "region_level_1"
-  colnames(df)[2] <- "region_level_2"
-  expect_equal(colnames(rename_region_column(df, "belgium"))[1:2], c("region", "province"))
-})
-
-test_that("rename_region_code_column does so correctly", {
-  df <- data.frame(matrix(rnorm(100), ncol = 10))
-  colnames(df)[1] <- "level_1_region_code"
-
-  expect_error(rename_region_code_column(df, "test"))
-  expect_equal(colnames(rename_region_code_column(df, "canada"))[1], "iso_3166_2")
-
-  colnames(df)[1] <- "level_1_region_code"
-  colnames(df)[2] <- "level_2_region_code"
-  expect_equal(colnames(rename_region_code_column(df, "usa"))[1:2], c("iso_3166_2", "fips"))
-})
-
 test_that("set_negative_values_to_zero works", {
   dates <- c(rep(Sys.Date(), 100))
   values <- 49:-50

@@ -20,8 +20,11 @@
 #' @author Sam Abbott
 #' @export
 #' @examples
+#' # initialise data downloading in the UK
 #' new_covidregionaldata("uk", "1")
-new_covidregionaldata <- function(country = character(), level = character(),
+#' # initialise data downloading for mexico
+#' new_covidregionaldata("mexico", "1")
+new_covidregionaldata <- function(country = character(), level = "1",
                                   verbose = TRUE) {
   stopifnot(is.character(country))
   stopifnot(is.character(level))
@@ -45,6 +48,10 @@ new_covidregionaldata <- function(country = character(), level = character(),
                See available_datasets for supported options")
   }
 
+  codes <- region_codes %>%
+    filter(country %in% tar_country,
+           level %in% tar_level)
+
   if (verbose) {
     message(
       "Getting data for the ", tar_country,
@@ -52,10 +59,13 @@ new_covidregionaldata <- function(country = character(), level = character(),
     )
   }
 
-  x <- list(
-    country = tar_country, level = target[[tar_level]],
-    location_codes = NULL
-  )
+  x <- list(country = tar_country, level = target[[tar_level]])
+
+  if (nrow(codes) == 1) {
+    x$code <- codes$name[[1]]
+    x$codes_lookup <- codes$codes[[1]]
+  }
+
   x <- structure(
     x,
     class = c(

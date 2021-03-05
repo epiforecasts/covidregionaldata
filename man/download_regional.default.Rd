@@ -4,10 +4,23 @@
 \alias{download_regional.default}
 \title{Default regional data downloading}
 \usage{
-\method{download_regional}{default}(region, verbose, ...)
+\method{download_regional}{default}(region, verbose = TRUE, ...)
+}
+\arguments{
+\item{region}{A list as produced by \code{new_covidregionaldata}.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
+
+\item{...}{Additional arguments to pass to dataset specific methods}
 }
 \description{
 Default download method. Causes an error if called.
+}
+\examples{
+region <- new_covidregionaldata("uk", "1")
+class(region) <- "list"
+download_regional(region, verbose = FALSE)
 }
 \author{
 Sam Abbott

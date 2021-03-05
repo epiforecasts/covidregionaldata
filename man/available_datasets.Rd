@@ -11,11 +11,12 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 available_datasets
 }
 \value{
-A tibble of metadata about covidregionaldata
+A tibble of metadata about covidregionaldata.
 }
 \description{
-Find out function names, data returned, subregion level
-and raw data sources, alongside package information. It can also be used
-to help guide adding data sources to the package.
+Lists available datasets including: function names,
+data returned, subregion level and raw data sources, alongside
+package information. It can also be used to help guide adding
+data sources to the package.
 }
 \keyword{datasets}

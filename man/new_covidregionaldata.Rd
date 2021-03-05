@@ -4,11 +4,7 @@
 \alias{new_covidregionaldata}
 \title{Construct a covidregionaldata class object}
 \usage{
-new_covidregionaldata(
-  country = character(),
-  level = character(),
-  verbose = TRUE
-)
+new_covidregionaldata(country = character(), level = "1", verbose = TRUE)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
@@ -35,7 +31,10 @@ target dataset of interest (see return). Returns an error if the requested
 dataset is not supported.
 }
 \examples{
+# initialise data downloading in the UK
 new_covidregionaldata("uk", "1")
+# initialise data downloading for mexico
+new_covidregionaldata("mexico", "1")
 }
 \author{
 Sam Abbott
