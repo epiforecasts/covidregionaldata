@@ -32,7 +32,8 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region <- clean_regional(region, verbose = verbose)
 
   # non-specific cleaning and checks
-  # region <- process_regional(region, verbose = verbose)
+  region <- process_regional(region, totals = totals,
+                             localise = localise, verbose = verbose)
 
   if (steps) {
     return(region)

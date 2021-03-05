@@ -24,9 +24,9 @@ of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). See \code{available_datasets} for supported
 options by dataset.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per region up to
-today's date. If FALSE, returns the full dataset stratified by date and
-region.}
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
 
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 

@@ -106,7 +106,7 @@ download_regional <- function(region, verbose = TRUE, ...) {
 download_regional.default <- function(region, verbose = TRUE, ...) {
   if (verbose) {
     warning(
-      "A download function has not been implemented for this datasource"
+      "A download function has not been implemented for this data source"
     )
   }
   region$raw <- NA
@@ -148,7 +148,6 @@ clean_regional.default <- function(region, verbose = TRUE, ...) {
   return(region)
 }
 
-
 #' Shared regional dataset processing
 #'
 #' @description Shared regional data cleaning designed to be called
@@ -171,12 +170,10 @@ process_regional <- function(region, totals = FALSE, localise = FALSE,
 #' @description Shared regional data cleaning designed to be called
 #' after `clean_regional` for level 1 regions.
 #' @export
-#' @inheritParams prepare_regional
+#' @inheritParams process_regional
 #' @method process_regional crd_level_1
 #' @author Sam Abbott
-#' @importFrom dplyr do group_by ungroup select everything arrange dplyr
-#' @importFrom tidyr drop_na
-#' @examples 
+#' @examples
 #' \dontrun{
 #' mexico <- new_covidregionaldata("mexico")
 #' mexico <- download_regional(mexico)
@@ -185,88 +182,37 @@ process_regional <- function(region, totals = FALSE, localise = FALSE,
 #' }
 process_regional.crd_level_1 <- function(region, totals = FALSE,
                                          localise = FALSE, verbose = TRUE) {
- . <- NULL
-
-  dat <- group_by(region$clean, .data$region_level_1, .data$level_1_region_code)
-
-  dat <- dat %>%
-    do(, calculate_columns_from_existing_data(.)) %>%
-    add_extra_na_cols() %>%
-    set_negative_values_to_zero()
-
-  if (totals) {
-    dat <- totalise_data(dat)
-    dat <- dat %>%
-      select(.data$region_level_1, .data$level_1_region_code, 
-             .data$cases_total, .data$deaths_total, 
-             .data$recovered_total, .data$hosp_total, .data$tested_total
-      )
-  }else {
-    dat <- dat %>%
-      drop_na(.data$date) %>%
-      fill_empty_dates_with_na() %>%
-      complete_cumulative_columns() %>%
-      select(
-          .data$date, .data$region_level_1, .data$level_1_region_code, 
-          .data$cases_new, .data$cases_total, .data$deaths_new, 
-          .data$deaths_total, .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total, .data$tested_new,
-          .data$tested_total, everything()
-        ) %>%
-      arrange(.data$date, .data$region_level_1)
-  }
-
-  dat <- ungroup(dat)
-
-  if (localise) {
-    dat <- rename(dat, !!region$level := region_level_1)
-  }
-  dat <- rename(dat, !!region$code := level_1_region_code)
-
-  region$processed <- dat
+  region_vars <- c("region_level_1", "level_1_region_code")
+  region <- process_regional_internal(
+    region, group_vars = region_vars, totals = totals,
+    localise = localise, verbose = verbose
+  )
   return(region)
 }
 
+#' Shared Regional Dataset Processing for Level 2 Data
+#'
+#' @description Shared regional data cleaning designed to be called
+#' after `clean_regional` for level 2 regions.
+#' @export
+#' @inheritParams process_regional
+#' @method process_regional crd_level_2
+#' @author Sam Abbott
+#' @examples
+#' \dontrun{
+#' mexico <- new_covidregionaldata("mexico", level = "2")
+#' mexico <- download_regional(mexico)
+#' mexico <- clean_regional(mexico)
+#' process_regional(mexico)$processed
+#' }
 process_regional.crd_level_2 <- function(region, totals = FALSE,
                                          localise = FALSE, verbose = TRUE) {
- . <- NULL
+  region_vars <- c("region_level_2", "level_2_region_code", 
+                   "region_level_1", "level_1_region_code")
 
-  dat <- group_by(region$clean, .data$region_level_1, .data$level_1_region_code)
-
-  dat <- dat %>%
-    do(, calculate_columns_from_existing_data(.)) %>%
-    add_extra_na_cols() %>%
-    set_negative_values_to_zero()
-
-  if (totals) {
-    dat <- totalise_data(dat)
-    dat <- dat %>%
-      select(.data$region_level_1, .data$level_1_region_code, 
-             .data$cases_total, .data$deaths_total, 
-             .data$recovered_total, .data$hosp_total, .data$tested_total
-      )
-  }else {
-    dat <- dat %>%
-      drop_na(.data$date) %>%
-      fill_empty_dates_with_na() %>%
-      complete_cumulative_columns() %>%
-      select(
-          .data$date, .data$region_level_1, .data$level_1_region_code, 
-          .data$cases_new, .data$cases_total, .data$deaths_new, 
-          .data$deaths_total, .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total, .data$tested_new,
-          .data$tested_total, everything()
-        ) %>%
-      arrange(.data$date, .data$region_level_1)
-  }
-
-  dat <- ungroup(dat)
-
-  if (localise) {
-    dat <- rename(dat, !!region$level := region_level_1)
-  }
-  dat <- rename(dat, !!region$code := level_1_region_code)
-
-  region$processed <- dat
+  region <- process_regional_internal(
+    region, group_vars = region_vars, totals = totals,
+    localise = localise, verbose = verbose
+  )
   return(region)
 }

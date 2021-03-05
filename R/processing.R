@@ -129,7 +129,7 @@ calculate_columns_from_existing_data <- function(data) {
                  cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
       data <- data %>%
-        group_by_at((starts_with("region_level"))) %>%
+        group_by_at(vars(starts_with("region_level"))) %>%
         arrange(date, .by_group = TRUE) %>%
         fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         mutate(
@@ -153,12 +153,67 @@ totalise_data <- function(data) {
   data <- data %>%
     summarise(
       cases_total = sum(.data$cases_new, na.rm = TRUE),
-      .deaths_total = sum(.data$deaths_new, na.rm = TRUE),
+      deaths_total = sum(.data$deaths_new, na.rm = TRUE),
       recovered_total = sum(.data$recovered_new, na.rm = TRUE),
       hosp_total = sum(.data$hosp_new, na.rm = TRUE),
-      tested_total = sum(.data$tested_new, na.rm = TRUE)
+      tested_total = sum(.data$tested_new, na.rm = TRUE),
+      .groups = "drop"
     ) %>%
-    ungroup() %>%
     arrange(-cases_total)
   return(data)
+}
+
+#' Internal Shared Regional Dataset Processing
+#'
+#' @description Internal shared regional data cleaning designed to be called
+#' by `process_regional`.
+#' @param group_vars A character vector of grouping variables. It is assumed
+#' that the first entry indicates the main region variable and the second
+#' indicates the code for this variable.
+#' @inheritParams process_regional
+#' @author Sam Abbott
+#' @importFrom dplyr do group_by_at ungroup select everything arrange rename
+#' @importFrom tidyr drop_na
+#' @importFrom tidyselect all_of
+#' @importFrom rlang !! :=
+process_regional_internal <- function(region, group_vars,
+                                     totals = FALSE, localise = FALSE,
+                                     verbose = TRUE) {
+  dat <- group_by_at(region$clean, .vars = group_vars)
+
+  . <- NULL
+  dat <- dat %>%
+    do(calculate_columns_from_existing_data(.)) %>%
+    add_extra_na_cols() %>%
+    set_negative_values_to_zero()
+
+  if (totals) {
+    dat <- totalise_data(dat)
+    dat <- dat %>%
+      select(all_of(
+        c(group_vars, "cases_total", "deaths_total", "recovered_total",
+          "hosp_total", "tested_total")
+      )
+    )
+  }else {
+    dat <- dat %>%
+      drop_na(.data$date) %>%
+      fill_empty_dates_with_na() %>%
+      complete_cumulative_columns() %>%
+      select(all_of(c("date", group_vars, "cases_new", "cases_total",
+       "deaths_new", "deaths_total", "recovered_new", "recovered_total",
+       "hosp_new", "hosp_total", "tested_new", "tested_total")),
+        everything()) %>%
+      arrange(.data$date, all_of(group_vars[1]))
+  }
+
+  dat <- ungroup(dat)
+
+  if (localise) {
+    dat <- rename(dat, !!region$level := !!group_vars[1])
+  }
+  dat <- rename(dat, !!region$code := !!group_vars[2])
+
+  region$processed <- dat
+  return(region)
 }

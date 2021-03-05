@@ -25,7 +25,7 @@ csv_reader <- function(file, ...) {
 #' 
 #' @description Checks for use of memoise and then uses readr::read_csv,
 #' which appears more robust in loading some streams
-#' @importFrom csv_reader
+#' @inheritParams csv_reader
 #' @param ... extra parameters to be passed to readr::read_csv
 #' @return A data frame
 #' @importFrom memoise memoise cache_filesystem
