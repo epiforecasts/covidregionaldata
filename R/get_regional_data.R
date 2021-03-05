@@ -16,7 +16,7 @@
 #' start_using_memoise()
 #'
 #' # download the data (and keep all processing steps)
-#' get_regional_data(country = "mexico", steps = TRUE)
+#' get_regional_data(country = "Mexico", steps = TRUE)
 #' }
 #'
 get_regional_data <- function(country, level = "1", totals = FALSE,

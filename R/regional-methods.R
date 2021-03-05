@@ -33,7 +33,7 @@ new_covidregionaldata <- function(country = character(), level = "1",
     filter(.data$get_data_function %in% "get_regional_data")
 
   tar_country <- match.arg(
-    country,
+    tolower(country),
     choices = countries$country, several.ok = FALSE
   )
 

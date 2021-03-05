@@ -182,6 +182,9 @@ totalise_data <- function(data) {
 process_regional_internal <- function(region, group_vars,
                                       totals = FALSE, localise = FALSE,
                                       verbose = TRUE) {
+  if (is.null(region$clean) || is.na(region$clean)) {
+      stop("No regional data found to process")
+  }
   dat <- group_by_at(region$clean, .vars = group_vars)
 
   . <- NULL
