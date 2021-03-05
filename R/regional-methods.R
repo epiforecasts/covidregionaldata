@@ -157,7 +157,7 @@ clean_regional.default <- function(region, verbose = TRUE, ...) {
 #'  stratified by date and region.
 #' @param localise Logical, defaults to TRUE. Should region names be localised.
 #' @export
-#' @inheritParams new_covidregionaldata
+#' @inheritParams clean_regional
 #' @rdname process_regional
 #' @author Sam Abbott
 process_regional <- function(region, totals = FALSE, localise = FALSE,

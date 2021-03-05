@@ -7,6 +7,8 @@
 \method{process_regional}{crd_level_2}(region, totals = FALSE, localise = FALSE, verbose = TRUE)
 }
 \arguments{
+\item{region}{A list as produced by \code{new_covidregionaldata}.}
+
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}

@@ -13,6 +13,8 @@ process_regional_internal(
 )
 }
 \arguments{
+\item{region}{A list as produced by \code{new_covidregionaldata}.}
+
 \item{group_vars}{A character vector of grouping variables. It is assumed
 that the first entry indicates the main region variable and the second
 indicates the code for this variable.}

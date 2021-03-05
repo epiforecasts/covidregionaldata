@@ -24,8 +24,8 @@ check_data_sources <- function(countries = "all",
     countries,
     ~ covidregionaldata::get_regional_data(
       country = .x,
-      localise_regions = FALSE,
-      include_level_2_regions = TRUE
+      localise = FALSE,
+      level = "2"
     )
   )
   names(country_data) <- countries

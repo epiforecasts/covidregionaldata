@@ -43,7 +43,7 @@ covidregionaldata::get_national_data()
 To get time-series data for subnational regions of a specific country, for example by local authority in the UK, use `get_regional_data()`:
 
 ```r
-covidregionaldata::get_regional_data(country = "UK", include_level_2_regions = TRUE)
+covidregionaldata::get_regional_data(country = "UK", level = "2)
 ```
 Subnational regions are only available in some countries. See below section 4, "Coverage".
 
