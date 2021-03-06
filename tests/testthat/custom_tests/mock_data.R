@@ -241,3 +241,14 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
 
   return(tibble::tibble(full_data_with_cum_cases_filled))
 }
+
+
+  returned_data <- with_mock(
+    "covidregionaldata:::get_canada_region_codes" = function(country) {
+      return(region_codes)
+    },
+    "covidregionaldata:::get_canada_regional_cases" = function() {
+      return(input_data)
+    },
+    get_regional_data("canada", include_level_2_regions = FALSE)
+  )
