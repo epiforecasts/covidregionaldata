@@ -19,7 +19,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' get_national_data(country = "canada", source = "WHO", totals = TRUE)
+#' # set up a data cache
+#' start_using_memoise()
+#'
+#' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 #'
 get_national_data <- function(country, source = "who", totals = FALSE,
@@ -31,6 +34,9 @@ get_national_data <- function(country, source = "who", totals = FALSE,
   # download and cache raw data
   source <- download_regional(source, verbose = verbose)
 
+  # dataset specifc cleaning
+  source <- clean_regional(source, verbose = verbose)
+
   # filter for country of interest
   if (!missing(country)) {
     tar_country <- country
@@ -39,18 +45,14 @@ get_national_data <- function(country, source = "who", totals = FALSE,
       stop("Country name not recognised. Please enter a character string, with
             no abbreviation.")
     }
-    source$raw <- filter(source$raw,
-                         .data$region_level_1 %in% tar_country)
+    source$clean <- filter(source$clean,
+                           .data$region_level_1 %in% tar_country)
   }
-
-  # dataset specifc cleaning
-  source <- clean_regional(source, verbose = verbose)
 
   # non-specific cleaning and checks
   source <- process_regional(source, totals = totals,
                              localise = TRUE, verbose = verbose)
 
   source <- return_regional(source, steps = steps)
-  return(region)
+  return(source)
   }
-  

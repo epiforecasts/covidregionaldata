@@ -4,18 +4,30 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country = NULL, totals = FALSE, source = "who")
+get_national_data(
+  country,
+  source = "who",
+  totals = FALSE,
+  steps = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{country}{Character A string specifying the country to get data from.
+\item{country}{A character string specifying the country to get data from.
 Not case or language dependent. Defaults to all countries.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per country up to
-today's date. If FALSE, returns the full dataset stratified by date and
-country.}
-
-\item{source}{Character A string specifying the data source: "WHO", or
+\item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
+
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
+
+\item{steps}{Logical, defaults to FALSE. Should all processesing and cleaning
+steps be kept and output in a list.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,
@@ -29,9 +41,11 @@ and sanitises further. Adds rows and columns of NA values so that data is
 in a standard format.
 }
 \examples{
-
 \dontrun{
-get_national_data(country = "canada", totals = TRUE, source = "WHO")
+# set up a data cache
+start_using_memoise()
+
+get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 }
 
 }
