@@ -10,12 +10,13 @@ get_interventions_data()
 a dataframe of government interventions compiled by ACAPS
 }
 \description{
-Data available here: https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset#
+Data available here:
+https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset#
 }
 \examples{
-
-## Code
-get_interventions_data
+\dontrun{
+get_interventions_data()
+}
 }
 \author{
 Paul Campbell @paulcampbell91

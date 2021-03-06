@@ -7,15 +7,19 @@
 get_linelist(clean = TRUE, report_delay_only = FALSE)
 }
 \arguments{
-\item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
+\item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be
+cleaned for use.}
 
-\item{report_delay_only}{Logical, defaults to \code{FALSE}. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned}
+\item{report_delay_only}{Logical, defaults to \code{FALSE}. Should only certain
+variables (id, country, onset date, days' delay), and observations
+(patients with a report delay) be returned}
 }
 \value{
 A linelist of case data
 }
 \description{
-This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
+This function downloads the latest linelist. As this linelist
+is experiencing a high user demand it may not always be available.
 }
 \examples{
 \dontrun{
@@ -25,7 +29,4 @@ get_linelist()
 # Return the report delay only
 get_linelist(report_delay_only = TRUE)
 }
-}
-\author{
-Sam Abbott \href{mailto:sam.abbott@lshtm.ac.uk}{sam.abbott@lshtm.ac.uk}
 }

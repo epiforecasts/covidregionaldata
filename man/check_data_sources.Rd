@@ -9,10 +9,12 @@ check_data_sources(countries = "all", worldwide = TRUE)
 \arguments{
 \item{countries}{names of countries as in the "country.R" file name to check}
 
-\item{worldwide}{report on worldwide datasets - ECDC and WHO, interventions, linelist}
+\item{worldwide}{report on worldwide datasets - ECDC and WHO, interventions,
+linelist}
 }
 \value{
-A tibble of latest dates for all sources and data checks for sub-national data
+A tibble of latest dates for all sources and data checks for
+sub-national data
 }
 \description{
 Check that data are up to date and returning correctly
