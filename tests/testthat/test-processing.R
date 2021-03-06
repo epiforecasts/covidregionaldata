@@ -66,3 +66,21 @@ test_that("complete_cumulative_columns works", {
   expect_equal(colnames(actual_data), colnames(expected_data))
   expect_true(!any(is.na(actual_data$cases_total)))
 })
+
+test_process_regional <- function(level = "1") {
+  test_that(paste0("process_regional.crd_level_", level, " works"), {
+  mexico <- readRDS(paste0("custom_data/mexico_level_", level, ".rds"))
+  expect <- mexico$processed
+  reproc <- process_regional(mexico)$processed
+  expect_equal(expect, reproc)
+  reproc_local <- process_regional(mexico, localise = FALSE)
+  reproc_local <- reproc_local$processed
+  expect_true(any(colnames(reproc_local) %in% paste0("region_level_", level)))
+  reproc_total <- process_regional(mexico, totals = TRUE)
+  reproc_total <- reproc_total$processed
+  expect_snapshot(reproc_total)
+  })
+}
+
+test_process_regional(level = "1")
+test_process_regional(level = "2")

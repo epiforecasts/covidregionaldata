@@ -180,7 +180,7 @@ totalise_data <- function(data) {
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !! :=
 process_regional_internal <- function(region, group_vars,
-                                      totals = FALSE, localise = FALSE,
+                                      totals = FALSE, localise = TRUE,
                                       verbose = TRUE) {
   if (is.null(region$clean) || is.na(region$clean)) {
       stop("No regional data found to process")

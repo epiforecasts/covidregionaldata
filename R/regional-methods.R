@@ -160,7 +160,7 @@ clean_regional.default <- function(region, verbose = TRUE, ...) {
 #' @inheritParams clean_regional
 #' @rdname process_regional
 #' @author Sam Abbott
-process_regional <- function(region, totals = FALSE, localise = FALSE,
+process_regional <- function(region, totals = FALSE, localise = TRUE,
                              verbose = TRUE) {
   UseMethod("process_regional")
 }
@@ -181,7 +181,7 @@ process_regional <- function(region, totals = FALSE, localise = FALSE,
 #' process_regional(mexico)$processed
 #' }
 process_regional.crd_level_1 <- function(region, totals = FALSE,
-                                         localise = FALSE, verbose = TRUE) {
+                                         localise = TRUE, verbose = TRUE) {
   region_vars <- c("region_level_1", "level_1_region_code")
   region <- process_regional_internal(
     region,
@@ -207,7 +207,7 @@ process_regional.crd_level_1 <- function(region, totals = FALSE,
 #' process_regional(mexico)$processed
 #' }
 process_regional.crd_level_2 <- function(region, totals = FALSE,
-                                         localise = FALSE, verbose = TRUE) {
+                                         localise = TRUE, verbose = TRUE) {
   region_vars <- c(
     "region_level_2", "level_2_region_code",
     "region_level_1", "level_1_region_code"
