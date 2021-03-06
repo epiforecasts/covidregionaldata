@@ -94,6 +94,7 @@ Suggests:
     data.table,
     pkgdown,
     testthat (>= 3.0.0),
+    mockery,
     spelling,
     knitr,
     rmarkdown,

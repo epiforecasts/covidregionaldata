@@ -4,7 +4,7 @@
 \alias{return_regional.crd_ecdc_1}
 \title{WHO Return Changes}
 \usage{
-\method{return_regional}{crd_who_1}(region, steps = FALSE)
+\method{return_regional}{crd_ecdc_1}(region, steps = FALSE)
 }
 \arguments{
 \item{region}{A list as produced by \code{new_covidregionaldata}.}

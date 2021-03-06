@@ -75,7 +75,7 @@ clean_regional.crd_ecdc_1 <- function(region, verbose = TRUE, ...) {
 #'
 #' @description Specifc return settings for the WHO dataset.
 #' @export
-#' @method return_regional crd_who_1
+#' @method return_regional crd_ecdc_1
 #' @inheritParams return_regional
 #' @author Sam Abbott
 #' @importFrom dplyr group_by ungroup select arrange
