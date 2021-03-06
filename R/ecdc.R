@@ -73,7 +73,7 @@ clean_regional.crd_ecdc_1 <- function(region, verbose = TRUE, ...) {
 
 #' WHO Return Changes
 #'
-#' @description Specifc return settings for the WHO dataset.
+#' @description Specific return settings for the WHO dataset.
 #' @export
 #' @method return_regional crd_ecdc_1
 #' @inheritParams return_regional
@@ -90,7 +90,7 @@ clean_regional.crd_ecdc_1 <- function(region, verbose = TRUE, ...) {
 #' }
 return_regional.crd_ecdc_1 <- function(region, steps = FALSE) {
   region$return <- region$processed %>%
-    group_by(country) %>%
+    group_by(.data$country) %>%
     fill(.data$population_2019, .data$un_region, .direction = "updown") %>%
     ungroup()
 

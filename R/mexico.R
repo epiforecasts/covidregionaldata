@@ -121,14 +121,14 @@ clean_regional.crd_mexico_1 <- function(region, verbose = TRUE, ...) {
   region$clean <- region$raw %>%
     mutate(
       region_level_1 = str_to_title(.data$nombre),
-      region_level_1 = ifelse(region_level_1 == "Distrito Federal",
+      region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
         "Ciudad de Mexico",
-        region_level_1
+        .data$region_level_1
       ),
       date = dmy(.data$date)
     ) %>%
     full_join(region$codes_lookup, by = "region_level_1") %>%
-    filter(region_level_1 != "Nacional") %>%
+    filter(.data$region_level_1 != "Nacional") %>%
     rename(level_1_region_code = .data$iso_code) %>%
     select(-c(.data$nombre, .data$cve_ent))
   return(region)
@@ -153,11 +153,11 @@ clean_regional.crd_mexico_1 <- function(region, verbose = TRUE, ...) {
 clean_regional.crd_mexico_2 <- function(region, verbose = TRUE, ...) {
   region$clean <- region$raw %>%
     mutate(
-      region_level_2 = nombre,
-      inegi_state = substr(cve_ent, 1, 2),
-      date = dmy(date)
+      region_level_2 = .data$nombre,
+      inegi_state = substr(.data$cve_ent, 1, 2),
+      date = dmy(.data$date)
     ) %>%
-    select(-nombre) %>%
+    select(-.data$nombre) %>%
     full_join(region$codes_lookup, by = "inegi_state") %>%
     mutate(
       level_1_region_code = .data$iso_code,

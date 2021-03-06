@@ -15,8 +15,8 @@ check_data_sources <- function(countries = "all", worldwide = TRUE) {
   # get country names
   if (countries == "all") {
     countries <- covidregionaldata::available_datasets %>%
-      filter(get_data_function == "get_regional_data") %>%
-      pull(country)
+      filter(.data$get_data_function == "get_regional_data") %>%
+      pull(.data$country)
   }
 
   # Run each country - level 1

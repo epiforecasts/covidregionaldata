@@ -10,6 +10,7 @@
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom lubridate dmy
 #' @importFrom tibble as_tibble
+#' @importFrom utils untar
 #' @return A linelist of case data
 #' @export
 #' @examples
@@ -45,23 +46,25 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
   if (clean) {
     linelist <- linelist %>%
       mutate(
-        date_confirm = suppressWarnings(dmy(date_confirmation)),
-        date_onset = suppressWarnings(dmy(date_onset_symptoms)),
+        date_confirm = suppressWarnings(dmy(.data$date_confirmation)),
+        date_onset = suppressWarnings(dmy(.data$date_onset_symptoms)),
         date_admission_hospital = suppressWarnings(
-          dmy(date_admission_hospital)),
+          dmy(.data$date_admission_hospital)),
         date_death_or_discharge = suppressWarnings(
-          dmy(date_death_or_discharge)),
-        death = ifelse(outcome %in% c("dead", "death", "died",
-                                      "deceases", "Dead", "Death",
-                                      "Died", "Deceased"),
-                                      TRUE, FALSE),
-        delay_onset_report = as.integer(as.Date(date_confirm) -
-                              as.Date(date_onset)),
-        delay_onset_admission = as.integer(as.Date(date_admission_hospital) -
-                                  as.Date(date_onset)),
-        delay_onset_death = ifelse(death == TRUE,
-          as.integer(as.Date(date_death_or_discharge) - as.Date(date_onset)),
-          NA
+          dmy(.data$date_death_or_discharge)),
+        death = ifelse(.data$outcome %in% c("dead", "death", "died",
+                                            "deceases", "Dead", "Death",
+                                            "Died", "Deceased"),
+                                            TRUE, FALSE),
+        delay_onset_report = as.integer(as.Date(.data$date_confirm) -
+                              as.Date(.data$date_onset)),
+        delay_onset_admission =
+          as.integer(as.Date(.data$date_admission_hospital) -
+                                  as.Date(.data$date_onset)),
+        delay_onset_death = ifelse(.data$death == TRUE,
+            as.integer(as.Date(.data$date_death_or_discharge) -
+             as.Date(.data$date_onset)),
+              NA
         )
       ) %>%
       select(

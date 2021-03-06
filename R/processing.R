@@ -12,7 +12,6 @@ add_extra_na_cols <- function(data) {
     "recovered_new", "recovered_total", "tested_new", "tested_total",
     "hosp_new", "hosp_total"
   )
-
   for (colname in expected_col_names) {
     if (!(colname %in% colnames(data))) {
       original_col_names <- colnames(data)
@@ -35,7 +34,6 @@ set_negative_values_to_zero <- function(data) {
     "tested_total", "cases_new", "deaths_new", "recovered_new", "hosp_new",
     "tested_new"
   )
-
   for (numeric_col_name in numeric_col_names) {
     if (numeric_col_name %in% colnames(data)) {
       data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
@@ -55,6 +53,8 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
 fill_empty_dates_with_na <- function(data) {
+  region_level_1 <- NULL; region_level_2 <- NULL;
+  level_2_region_code <- NULL; level_1_region_code <- NULL;
   if ("region_level_2" %in% colnames(data)) {
     data <- data %>%
       complete(
@@ -151,7 +151,6 @@ calculate_columns_from_existing_data <- function(data) {
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by summarise select arrange
 #' @importFrom tibble tibble
-#'
 totalise_data <- function(data) {
   data <- data %>%
     summarise(
@@ -162,7 +161,7 @@ totalise_data <- function(data) {
       tested_total = sum(.data$tested_new, na.rm = TRUE),
       .groups = "drop"
     ) %>%
-    arrange(-cases_total)
+    arrange(-.data$cases_total)
   return(data)
 }
 
@@ -182,7 +181,7 @@ totalise_data <- function(data) {
 process_regional_internal <- function(region, group_vars,
                                       totals = FALSE, localise = TRUE,
                                       verbose = TRUE) {
-  if (is.null(region$clean) || is.na(region$clean)) {
+  if (!any(class(region$clean) %in% "data.frame")) {
       stop("No regional data found to process")
   }
   dat <- group_by_at(region$clean, .vars = group_vars)
@@ -217,7 +216,6 @@ process_regional_internal <- function(region, group_vars,
       ) %>%
       arrange(.data$date, all_of(group_vars[1]))
   }
-
   dat <- ungroup(dat)
 
   if (localise) {

@@ -229,7 +229,7 @@ process_regional.crd_level_2 <- function(region, totals = FALSE,
 #' @description Region specific return settings. Designed to be called
 #' after `process_regional`. For most datasets a custom method should not be
 #' needed.
-#' @param steps Logical, defaults to FALSE. Should all processesing and cleaning
+#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
 #' @export
 #' @inheritParams clean_regional

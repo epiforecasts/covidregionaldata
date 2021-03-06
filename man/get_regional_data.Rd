@@ -33,7 +33,7 @@ stratified by date and region.}
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
-\item{steps}{Logical, defaults to FALSE. Should all processesing and cleaning
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
 \item{...}{pass additional arguments to \code{download_regional}}

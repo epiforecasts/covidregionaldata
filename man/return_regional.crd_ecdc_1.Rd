@@ -9,11 +9,11 @@
 \arguments{
 \item{region}{A list as produced by \code{new_covidregionaldata}.}
 
-\item{steps}{Logical, defaults to FALSE. Should all processesing and cleaning
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 }
 \description{
-Specifc return settings for the WHO dataset.
+Specific return settings for the WHO dataset.
 }
 \examples{
 \dontrun{

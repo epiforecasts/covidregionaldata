@@ -23,7 +23,7 @@ Not case or language dependent. Defaults to all countries.}
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
-\item{steps}{Logical, defaults to FALSE. Should all processesing and cleaning
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing

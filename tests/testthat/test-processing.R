@@ -76,9 +76,6 @@ test_process_regional <- function(level = "1") {
   reproc_local <- process_regional(mexico, localise = FALSE)
   reproc_local <- reproc_local$processed
   expect_true(any(colnames(reproc_local) %in% paste0("region_level_", level)))
-  reproc_total <- process_regional(mexico, totals = TRUE)
-  reproc_total <- reproc_total$processed
-  expect_snapshot(reproc_total)
   })
 }
 

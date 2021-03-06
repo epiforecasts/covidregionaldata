@@ -57,7 +57,7 @@ clean_regional.crd_who_1 <- function(region, verbose = TRUE, ...) {
 
 #' WHO Return Changes
 #'
-#' @description Specifc return settings for the WHO dataset.
+#' @description Specific return settings for the WHO dataset.
 #' @export
 #' @method return_regional crd_who_1
 #' @inheritParams return_regional
