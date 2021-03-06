@@ -6,10 +6,14 @@ test_get_regional_data <- function(level) {
     raw$processed <- NULL
     raw$return <- NULL
     mockery::stub(get_regional_data, "download_regional", raw)
-    d <- get_regional_data("mexico", level = level)
+    d <- get_regional_data("mexico", level = level, verbose = FALSE)
     expect_s3_class(d, "data.frame")
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
-    expect_equal(true, get_regional_data("mexico", level = level, steps = TRUE))
+    expect_equal(
+        true,
+        get_regional_data("mexico", level = level,
+                          steps = TRUE, verbose = FALSE)
+        )
   })
 }
 
