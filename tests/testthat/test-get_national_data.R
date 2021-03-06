@@ -1,4 +1,3 @@
-
 test_get_national_data <- function(source) {
   test_that(paste0("get_national_data returns", source, " data"), {
     true <- readRDS(paste0("custom_data/", source, ".rds"))
