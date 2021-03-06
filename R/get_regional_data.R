@@ -4,8 +4,7 @@
 #' for Covid-19.
 #' @inheritParams new_covidregionaldata
 #' @inheritParams process_regional
-#' @param steps Logical, defaults to FALSE. Should all processesing and cleaning
-#' steps be kept and output in a list.
+#' @inheritParams return_regional
 #' @param ... pass additional arguments to `download_regional`
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
@@ -35,9 +34,6 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region <- process_regional(region, totals = totals, 
                              localise = localise, verbose = verbose)
 
-  if (steps) {
-    return(region)
-  } else {
-    return(region$processed)
-  }
+  region <- return_regional(region, steps = steps)
+  return(region)
 }

@@ -223,3 +223,36 @@ process_regional.crd_level_2 <- function(region, totals = FALSE,
   )
   return(region)
 }
+
+#' Region Specific Return Settings
+#'
+#' @description Region specific return settings. Designed to be called
+#' after `process_regional`. For most datasets a custom method should not be
+#' needed.
+#' @param steps Logical, defaults to FALSE. Should all processesing and cleaning
+#' steps be kept and output in a list.
+#' @export
+#' @inheritParams clean_regional
+#' @rdname return_regional
+#' @author Sam Abbott
+return_regional <- function(region, steps = FALSE) {
+  UseMethod("return_regional")
+}
+
+#' Default Region Specific Return Changes
+#'
+#' @description Optional region specific return changes. Designed to be called
+#' after `process_regional`. For most datasets a custom method should not be
+#' needed.
+#' @export
+#' @method return_regional default
+#' @inheritParams return_regional
+#' @author Sam Abbott
+return_regional.default <- function(region, steps = FALSE) {
+  region$return <- NA
+  if (steps) {
+    return(region)
+  } else {
+    return(region$processed)
+  }
+}

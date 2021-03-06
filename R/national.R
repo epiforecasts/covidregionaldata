@@ -127,3 +127,63 @@ clean_regional.crd_who_1 <- function(region, verbose = TRUE, ...) {
            level_1_region_code = .data$iso_code)
   return(region)
 }
+
+#' WHO Return Changes
+#'
+#' @description Specifc return settings for the WHO dataset.
+#' @export
+#' @method return_regional crd_who_1
+#' @inheritParams return_regional
+#' @author Sam Abbott
+#' @importFrom dplyr group_by ungroup select arrange
+#' @importFrom tidyr fill
+#' @examples
+#' \dontrun{
+#' who <- new_covidregionaldata("who")
+#' who <- download_regional(who)
+#' who <- clean_regional(who)
+#' return_regional(who)$return
+#' }
+return_regional.crd_who_1 <- function(region, steps = FALSE) {
+  region$return <- region$processed %>%
+    group_by(country) %>%
+    fill(.data$who_region, .data$un_region, .direction = "updown") %>%
+    ungroup()
+
+    region$return <- region$return %>%
+      select(
+        .data$date, .data$un_region, .data$who_region, .data$country,
+        .data$iso_code, .data$cases_new, .data$cases_total,
+        .data$deaths_new, .data$deaths_total, .data$recovered_new,
+        .data$recovered_total, .data$hosp_new, .data$hosp_total,
+        .data$tested_new, .data$tested_total
+      ) %>%
+      arrange(.data$date, .data$country)
+
+  if (steps) {
+    return(region)
+  } else {
+    return(region$return)
+  }
+}
+
+
+
+  if (source == "ecdc") {
+    data <- data %>%
+      dplyr::group_by(country) %>%
+      tidyr::fill(population_2019, un_region, .direction = "updown") %>%
+      dplyr::ungroup()
+
+    data <- data %>%
+      dplyr::select(
+        date, un_region, country, iso_code, population_2019,
+        cases_new, cases_total,
+        deaths_new, deaths_total,
+        recovered_new, recovered_total,
+        hosp_new, hosp_total,
+        tested_new, tested_total
+      ) %>%
+      dplyr::arrange(date, country)
+    return(data)
+  }
