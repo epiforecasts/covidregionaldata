@@ -1,19 +1,19 @@
 test_that("new_covidregionaldata can correctly construct classes", {
     uk <- new_covidregionaldata("uk", "1", verbose = FALSE)
     expect_s3_class(
-        suppressMessages(new_covidregionaldata("uk", "1", verbose = FALSE)),
+        suppressMessages(new_covidregionaldata("uk", "1", verbose = TRUE)),
         "crd_level_1"
     )
     expect_s3_class(
-        suppressMessages(new_covidregionaldata("uk", "2", verbose = FALSE)),
+        suppressMessages(new_covidregionaldata("uk", "2", verbose = TRUE)),
         "crd_level_2"
     )
     expect_s3_class(
-        suppressMessages(new_covidregionaldata("uk", "1", verbose = FALSE)),
+        suppressMessages(new_covidregionaldata("uk", "1", verbose = TRUE)),
         "crd_uk_1"
     )
     expect_s3_class(
-        suppressMessages(new_covidregionaldata("ecdc", "1", verbose = FALSE)),
+        suppressMessages(new_covidregionaldata("ecdc", "1", verbose = TRUE)),
         "crd_ecdc_1"
     )
 })
@@ -33,7 +33,7 @@ test_that("method defaults correctly handle unsupported data", {
     expect_true(is.na(region$raw))
     region <- clean_regional(region, verbose = FALSE)
     expect_true(is.na(region$clean))
-    expect_error(process_regional(region))
+    expect_error(process_regional(region, verbose = FALSE))
 })
 
 test_that("regional_return.default functions as expected", {

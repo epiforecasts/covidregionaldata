@@ -4,13 +4,7 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(
-  country,
-  source = "who",
-  totals = FALSE,
-  steps = FALSE,
-  verbose = TRUE
-)
+get_national_data(country, source = "who", steps = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
@@ -18,10 +12,6 @@ Not case or language dependent. Defaults to all countries.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
-
-\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
-data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}

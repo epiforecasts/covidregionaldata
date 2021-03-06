@@ -11,6 +11,8 @@ test_get_national_data <- function(source) {
     expect_s3_class(d, "data.frame")
     expect_true(all(d$country == "Afghanistan"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
+    expect_error(get_national_data(country = "rwfwf", source = source,
+                                   verbose = FALSE))
     expect_equal(
       true,
       get_national_data(source = source, steps = TRUE, verbose = FALSE)

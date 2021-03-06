@@ -25,8 +25,8 @@
 #' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 #'
-get_national_data <- function(country, source = "who", totals = FALSE,
-                              steps = FALSE, verbose = TRUE) {
+get_national_data <- function(country, source = "who", steps = FALSE,
+                              verbose = TRUE) {
 
   # check data availability and define list
   source <- new_covidregionaldata(source, level = "1", verbose = verbose)
@@ -50,7 +50,7 @@ get_national_data <- function(country, source = "who", totals = FALSE,
   }
 
   # non-specific cleaning and checks
-  source <- process_regional(source, totals = totals,
+  source <- process_regional(source, totals = FALSE,
                              localise = TRUE, verbose = verbose)
 
   source <- return_regional(source, steps = steps)

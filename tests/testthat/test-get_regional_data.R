@@ -14,6 +14,13 @@ test_get_regional_data <- function(level) {
         get_regional_data("mexico", level = level,
                           steps = TRUE, verbose = FALSE)
         )
+    d <- get_regional_data("mexico", level = level, verbose = FALSE,
+                           localise = FALSE)
+    expect_true(any(colnames(d) %in% paste0("region_level_", level)))
+    d <- get_regional_data("mexico", level = level, verbose = FALSE,
+                           totals = TRUE)
+    expect_true(any(grepl("total", colnames(d))))
+    expect_true(!any(colnames(d) == "date"))
   })
 }
 
