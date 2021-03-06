@@ -1,22 +1,43 @@
-#' # initialise data downloading in the UK
-#' new_covidregionaldata("uk", "1")
-#' # initialise data downloading for mexico
-#' new_covidregionaldata("mexico", "1")
-#' # initialise data download from the ECDC source
-#' new_covidregionaldata("ecdc")
-#' 
-#' #' region <- new_covidregionaldata("uk", "1")
-#' class(region) <- "list"
-#' download_regional(region, verbose = FALSE)
-#' #' region <- new_covidregionaldata("uk", "1")
-#' class(region) <- "list"
-#' region <- download_regional(region, verbose = FALSE)
-#' clean_regional(region, verbose = FALSE)
-#' return_regional.default <- function(region, steps = FALSE) {
- # region$return <- NA
- # if (steps) {
- #   return(region)
- # } else {
- #   return(region$processed)
- # }
-#}
+test_that("new_covidregionaldata can correctly construct classes", {
+    uk <- new_covidregionaldata("uk", "1", verbose = FALSE)
+    expect_s3_class(
+        suppressMessages(new_covidregionaldata("uk", "1", verbose = FALSE)),
+        "crd_level_1"
+    )
+    expect_s3_class(
+        suppressMessages(new_covidregionaldata("uk", "2", verbose = FALSE)),
+        "crd_level_2"
+    )
+    expect_s3_class(
+        suppressMessages(new_covidregionaldata("uk", "1", verbose = FALSE)),
+        "crd_uk_1"
+    )
+    expect_s3_class(
+        suppressMessages(new_covidregionaldata("ecdc", "1", verbose = FALSE)),
+        "crd_ecdc_1"
+    )
+})
+
+test_that("new_covidregionaldata can correctly construct lists", {
+    mexico <- new_covidregionaldata("mexico", "1", verbose = FALSE)
+    expect_type(mexico, "list")
+    expect_equal(names(mexico), c("country", "level", "code", "codes_lookup"))
+    expect_error(new_covidregionaldata("tmp", "1", verbose = FALSE))
+    expect_error(new_covidregionaldata("tmp", "1", verbose = FALSE))
+})
+
+test_that("method defaults correctly handle unsupported data", {
+    region <- new_covidregionaldata("uk", "1", verbose = FALSE)
+    class(region) <- "list"
+    region <- download_regional(region, verbose = FALSE)
+    expect_true(is.na(region$raw))
+    region <- clean_regional(region, verbose = FALSE)
+    expect_true(is.na(region$clean))
+    expect_error(process_regional(region))
+})
+
+test_that("regional_return.default functions as expected", {
+    tmp <- list(processed = "hello")
+    expect_type(return_regional(tmp, steps = TRUE), "list")
+    expect_type(return_regional(tmp, steps = FALSE), "character")
+})
