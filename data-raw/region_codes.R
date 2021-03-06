@@ -1,7 +1,15 @@
 
+# global region codes
+global_codes <- tibble::tibble(
+  country = c("who", "ecdc"),
+  level = c("level_1_region"),
+  name = c("iso_code"),
+  codes = NULL
+)
+
 # mexico region codes
 mexico_codes <- readr::read_csv("data-raw/mexico_codes.csv")
-region_codes <- tibble::tibble(
+mexico_codes <- tibble::tibble(
   country = "mexico",
   level = c("level_1_region", "level_2_region"),
   name = c("iso_3166_2", "inegi_code"),
@@ -13,6 +21,7 @@ region_codes <- tibble::tibble(
 )
 
 # add additional regions in the same format and bind together
+region_codes <- dplyr::bind_rows(global_codes, mexico_codes)
 
 # update package region_codes
 usethis::use_data(region_codes, overwrite = TRUE)

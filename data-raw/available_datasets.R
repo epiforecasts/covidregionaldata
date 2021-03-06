@@ -140,7 +140,7 @@ available_datasets <-
     # Global data
     "get_national_data",
     "who",
-    NA,
+    "country",
     NA,
     NA,
     "https://covid19.who.int",
@@ -148,7 +148,7 @@ available_datasets <-
 
     "get_national_data",
     "ecdc",
-    NA,
+    "country",
     NA,
     NA,
     "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",

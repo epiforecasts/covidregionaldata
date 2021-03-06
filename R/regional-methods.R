@@ -24,13 +24,16 @@
 #' new_covidregionaldata("uk", "1")
 #' # initialise data downloading for mexico
 #' new_covidregionaldata("mexico", "1")
+#' # initialise data download from the ECDC source
+#' new_covidregionaldata("ecdc")
 new_covidregionaldata <- function(country = character(), level = "1",
                                   verbose = TRUE) {
   stopifnot(is.character(country))
   stopifnot(is.character(level))
 
   countries <- covidregionaldata::available_datasets %>%
-    filter(.data$get_data_function %in% "get_regional_data")
+    filter(.data$get_data_function %in%
+             c("get_regional_data", "get_national_data"))
 
   tar_country <- match.arg(
     tolower(country),
