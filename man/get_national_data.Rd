@@ -7,19 +7,26 @@
 get_national_data(country = NULL, totals = FALSE, source = "who")
 }
 \arguments{
-\item{country}{Character A string specifying the country to get data from. Not case or language dependent. Defaults to all countries.}
+\item{country}{Character A string specifying the country to get data from.
+Not case or language dependent. Defaults to all countries.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.}
+\item{totals}{Boolean. If TRUE, returns totalled data per country up to
+today's date. If FALSE, returns the full dataset stratified by date and
+country.}
 
-\item{source}{Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to WHO.}
+\item{source}{Character A string specifying the data source: "WHO", or
+"ECDC". Not case dependent. Defaults to WHO.}
 }
 \value{
-A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.
+A tibble with data related to cases, deaths, hospitalisations,
+recoveries and testing.
 }
 \description{
-Gets raw data using the source-specific function. Includes ISO country codes.
-Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
-cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format.
+Gets raw data using the source-specific function. Includes ISO
+country codes. Then adds columns which were missing from the raw data
+(calculating cumulative counts from new dailies and vice versa), cleans
+and sanitises further. Adds rows and columns of NA values so that data is
+in a standard format.
 }
 \examples{
 

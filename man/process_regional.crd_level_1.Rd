@@ -4,7 +4,7 @@
 \alias{process_regional.crd_level_1}
 \title{Shared Regional Dataset Processing for Level 1 Data}
 \usage{
-\method{process_regional}{crd_level_1}(region, totals = FALSE, localise = FALSE, verbose = TRUE)
+\method{process_regional}{crd_level_1}(region, totals = FALSE, localise = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{region}{A list as produced by \code{new_covidregionaldata}.}

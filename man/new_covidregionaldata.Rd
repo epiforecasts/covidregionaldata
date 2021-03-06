@@ -35,6 +35,8 @@ dataset is not supported.
 new_covidregionaldata("uk", "1")
 # initialise data downloading for mexico
 new_covidregionaldata("mexico", "1")
+# initialise data download from the ECDC source
+new_covidregionaldata("ecdc")
 }
 \author{
 Sam Abbott

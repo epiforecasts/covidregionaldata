@@ -8,7 +8,7 @@ process_regional_internal(
   region,
   group_vars,
   totals = FALSE,
-  localise = FALSE,
+  localise = TRUE,
   verbose = TRUE
 )
 }

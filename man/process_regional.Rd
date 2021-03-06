@@ -4,7 +4,7 @@
 \alias{process_regional}
 \title{Shared regional dataset processing}
 \usage{
-process_regional(region, totals = FALSE, localise = FALSE, verbose = TRUE)
+process_regional(region, totals = FALSE, localise = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{region}{A list as produced by \code{new_covidregionaldata}.}
