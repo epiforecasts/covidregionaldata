@@ -42,8 +42,6 @@ clean_regional.crd_italy_1 <- function(region, verbose = TRUE, ...) {
       deaths_total = .data$deceduti,
       tested_total = .data$tamponi
     ) %>%
-    select(.data$date, .data$region_level_1, .data$cases_total,
-           .data$deaths_total, .data$tested_total) %>%
     arrange(.data$date) %>%
     mutate(region_level_1 = recode(.data$region_level_1,
       "P.A. Trento" = "Trentino-Alto Adige",
@@ -51,6 +49,9 @@ clean_regional.crd_italy_1 <- function(region, verbose = TRUE, ...) {
     )) %>%
     group_by(.data$date, .data$region_level_1) %>%
     mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
-    ungroup()
+    ungroup() %>%
+    full_join(region$codes_lookup, by = c("region_level_1" = "region")) %>%
+    select(.data$date, .data$region_level_1, level_1_region_code = .data$code,
+           .data$cases_total, .data$deaths_total, .data$tested_total)
   return(region)
 }
