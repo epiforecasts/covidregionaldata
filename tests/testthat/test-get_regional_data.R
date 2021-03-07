@@ -1,6 +1,6 @@
 test_get_regional_data <- function(level) {
   test_that(paste0("get_regional_data returns level ", level, " data"), {
-    true <- readRDS(paste0("custom_data/mexico_level_", level, ".rds"))
+    true <- readRDS(paste0("custom_data/mexico_level_", level, "_snap.rds"))
     raw <- true
     raw$clean <- NULL
     raw$processed <- NULL

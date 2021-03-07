@@ -69,7 +69,7 @@ test_that("complete_cumulative_columns works", {
 
 test_process_regional <- function(level = "1") {
   test_that(paste0("process_regional.crd_level_", level, " works"), {
-  mexico <- readRDS(paste0("custom_data/mexico_level_", level, ".rds"))
+  mexico <- readRDS(paste0("custom_data/mexico_level_", level, "_snap.rds"))
   expect <- mexico$processed
   reproc <- process_regional(mexico)$processed
   expect_equal(expect, reproc)
