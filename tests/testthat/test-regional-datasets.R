@@ -4,19 +4,19 @@
 source("custom_tests/test-regional-dataset.R")
 
 # sources implemented currently (temporary)
-implemented_sources <- c("ecdc", "who", "mexico")
+implemented_sources <- c("ecdc", "who", "mexico", "italy")
 
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.
 # Can also be set using environment variables
-source_of_interest <- NULL
+source_of_interest <- "italy"
 if (!is.null(getOption("testSource"))) {
     source_of_interest <- getOption("testSource")
 }
 # should downloads be tested (defaults to FALSE)
 # set this to true when implementing a new data set
 # can also be controlled using an environment variable
-download <- FALSE
+download <- TRUE
 if (!is.null(getOption("testDownload"))) {
     download <- getOption("testDownload")
 }
