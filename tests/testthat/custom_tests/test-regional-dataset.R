@@ -80,7 +80,10 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     })
 
     custom_test <- paste0("test_", source, "_level_", level)
-    if (exists(custom_test)) {
-        do.call(custom_test, list())
+    if (!exists(custom_test)) {
+        custom_test <- function(region) {
+
+        }
     }
+    do.call(custom_test, list(region = region))
 }

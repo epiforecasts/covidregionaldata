@@ -1,5 +1,4 @@
-
-test_ecdc_level_1 <- function() {
+test_ecdc_level_1 <- function(region) {
     test_that("ecdc data has expected format", {
         necessary_cols <- c("geoId", "countriesAndTerritories",
                             "cases", "deaths", "popData2019")
@@ -12,7 +11,7 @@ test_ecdc_level_1 <- function() {
     })
 }
 
-test_ecdc_level_1 <- function() {
+test_who_level_1 <- function(region) {
     test_that("who data has expected format", {
         all_countries <- region$return %>%
             dplyr::filter(is.na(un_region)) %>%
@@ -23,4 +22,4 @@ test_ecdc_level_1 <- function() {
 }
 
 # Add data set specific custom tests here in the format of above using
-# global variables from test_regional_dataset()
+# variables from test_regional_dataset() environment
