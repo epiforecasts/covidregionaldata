@@ -72,11 +72,10 @@ test_regional_dataset <- function(source, level, download = FALSE) {
 
     region <- return_regional(region, steps = TRUE)
     test_that(paste0(data_name, " can be returned as expected"), {
-        if (!any(class(region$return) %in% "data.frame")) {
+        if (any(class(region$return) %in% "data.frame")) {
             expect_s3_class(region$return, "data.frame")
             expect_true(nrow(region$return) > 0)
             expect_true(ncol(region$return) >= 2)
-            expect_processed_cols(region$return, level = level)
         }
     })
 
