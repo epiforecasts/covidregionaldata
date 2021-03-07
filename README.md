@@ -49,6 +49,11 @@ Subnational regions are only available in some countries. See below section 4, "
 
 ## Dataset status
 
+**Dataset** | **Status**|**CRAN status**|
+:-----:| :-----:|:-----:|:-----:
+WHO | [![WHO](https://github.com/epiforecasts/covidregionaldata/workflows/WHO/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/who.yaml) | *Working*
+ECDC | ![ECDC](https://github.com/epiforecasts/covidregionaldata/workflows/ECDC/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/ecdc.yaml) | *Working*
+Mexico | ![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)| *Working*
 
 
 

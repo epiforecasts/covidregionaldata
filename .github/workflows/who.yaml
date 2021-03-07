@@ -2,7 +2,7 @@ on:
   schedule:
     - cron: '2 0 * * *'
 
-name: ECDC
+name: WHO
 
 jobs:
   ECDC:
