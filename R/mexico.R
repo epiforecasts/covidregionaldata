@@ -71,7 +71,7 @@ mexico_api <- function(level = "estados", verbose = TRUE) {
 #' @examples
 #' \dontrun{
 #' mexico <- new_covidregionaldata("mexico")
-#' mexico <- download_data(mexico)
+#' mexico <- download_regional(mexico)
 #' mexico$raw
 #' }
 download_regional.crd_mexico_1 <- function(region, verbose = TRUE, ...) {

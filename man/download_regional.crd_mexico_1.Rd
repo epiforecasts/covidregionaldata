@@ -21,7 +21,7 @@ Data available at \url{https://datos.covid-19.conacyt.mx/#DownZCSV}.
 \examples{
 \dontrun{
 mexico <- new_covidregionaldata("mexico")
-mexico <- download_data(mexico)
+mexico <- download_regional(mexico)
 mexico$raw
 }
 }
