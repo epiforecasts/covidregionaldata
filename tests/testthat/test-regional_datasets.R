@@ -6,8 +6,24 @@
 
 # loop over available levels
 
+source <- "mexico"
+level <- "1"
+data_name <- paste0(source, "at ", level)
 # setup data class and test it can be found
+test_that(paste0(data_name, " can be defined as a class"), {
+    expect_error(
+        new_covidregionaldata(source, level = level, verbose = FALSE),
+        NA
+    )
+})
+region <- new_covidregionaldata(source, level = level, verbose = FALSE)
 
+if (download) {
+    test_that(paste0(date_name, " downloads sucessfully"), {
+        
+    })
+
+}
 # test data download (does it download)
 
 # load stored data if present
