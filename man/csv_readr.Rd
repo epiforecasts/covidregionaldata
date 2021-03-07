@@ -12,9 +12,9 @@ csv_readr(file, ...)
 \item{...}{extra parameters to be passed to readr::read_csv}
 }
 \value{
-A data table
+A data frame
 }
 \description{
-Checks for use of memoise and then uses readr::read_csv, which appears
-more robust in loading some streams
+Checks for use of memoise and then uses readr::read_csv,
+which appears more robust in loading some streams
 }

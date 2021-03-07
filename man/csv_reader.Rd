@@ -15,5 +15,5 @@ csv_reader(file, ...)
 A data table
 }
 \description{
-Checks for use of memoise and then uses whichever read_csv function is needed by user
+Checks for use of memoise and then uses vroom::vroom.
 }

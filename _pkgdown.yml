@@ -44,14 +44,16 @@ reference:
   - title: Datasets
     desc: Package datasets
       - available_datasets
+  - title: Lower Level Methods
+    desc: Lower level methods used by other functions.
+    contents:
+      - contains("download_regional")
+      - contains("clean_regional")
+      - contains("process_regioanl")
+      - contains("return_regional")
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
-      - -get_info_covidregionaldata
-      - -get_national_data
-      - -get_linelist
-      - -get_interventions_data
-      - contains("get")
       - contains("fill")
       - contains("csv")
       - contains("cumulative")
