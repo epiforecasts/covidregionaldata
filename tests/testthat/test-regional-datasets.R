@@ -1,10 +1,10 @@
-# load testing function and tools. 
+# load testing function and tools.
 # set up custom tests using:
 # custom_tests/regional-dataset-specific.R
 source("custom_tests/test-regional-dataset.R")
 
 # sources implemented currently (temporary)
-implemented_sources <- c("ecdc", "who", "mexico")
+implemented_sources <- c("ecdc", "who", "mexico", "italy")
 
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.

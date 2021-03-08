@@ -54,6 +54,7 @@ Subnational regions are only available in some countries. See below section 4, "
 | WHO   |  [![WHO](https://github.com/epiforecasts/covidregionaldata/workflows/WHO/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/who.yaml)    | *working* |
 | ECDC  |  [![ECDC](https://github.com/epiforecasts/covidregionaldata/workflows/ECDC/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/ecdc.yaml)    | *working* |
 | Mexico  |  [![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)    | *working* |
+| Italy  |  [![Italy](https://github.com/epiforecasts/covidregionaldata/workflows/Italy/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/italy.yaml)    | *working* |
 
 ## Development
 We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/inst/smg/SMG.md).
