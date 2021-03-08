@@ -52,7 +52,9 @@ To get time-series data for subnational regions of a specific country, for examp
 ```r
 get_regional_data(country = "UK", include_level_2_regions = TRUE)
 ```
+
 Subnational regions are only available in some countries. See the package documentation for further details.
+
 ## Development
 
 We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more detail, please read the [System Maintenance Guide](https://github.com/epiforecasts/covidregionaldata/blob/master/inst/smg/SMG.md).
