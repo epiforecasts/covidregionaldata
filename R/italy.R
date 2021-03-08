@@ -1,7 +1,8 @@
 #' Download Italian Regional Daily COVID-19 Count Data
 #'
-#' @description Extracts daily COVID-19 data for Italy, stratified by .
-#' Data available at .
+#' @description Extracts daily COVID-19 data for Italy, stratified by region.
+#' Data available at:
+#' <https://github.com/pcm-dpc/COVID-19>
 #' @inheritParams download_regional
 #' @method download_regional crd_italy_1
 #' @author Sam Abbott

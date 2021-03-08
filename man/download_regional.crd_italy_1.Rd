@@ -15,8 +15,9 @@ messages and warnings be returned.}
 \item{...}{Additional arguments to pass to dataset specific methods}
 }
 \description{
-Extracts daily COVID-19 data for Italy, stratified by .
-Data available at .
+Extracts daily COVID-19 data for Italy, stratified by region.
+Data available at:
+\url{https://github.com/pcm-dpc/COVID-19}
 }
 \examples{
 \dontrun{
