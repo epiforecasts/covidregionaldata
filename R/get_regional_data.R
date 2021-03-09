@@ -9,31 +9,26 @@
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @export
-#' @examples
-#' \dontrun{
-#' # set up a data cache
-#' start_using_memoise()
-#'
-#' # download the data (and keep all processing steps)
-#' get_regional_data(country = "Mexico", steps = TRUE)
-#' }
 #'
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, verbose = TRUE,
                               steps = FALSE, ...) {
-  # check data availability and define list
-  region <- new_covidregionaldata(country, level = level, verbose = verbose)
+  # check data availability and initiate country class if avaliable
+  region_class <- check_country_avaliable(
+    country = country, level = level,
+    totals = totals, localise = localise,
+    verbose = verbose, steps = steps, ...
+  )
 
   # download and cache raw data
-  region <- download_regional(region, verbose = verbose, ...)
+  region_class$download_data()
 
   # dataset specifc cleaning
-  region <- clean_regional(region, verbose = verbose)
+  region_class$clean_regional()
 
   # non-specific cleaning and checks
-  region <- process_regional(region, totals = totals, 
-                             localise = localise, verbose = verbose)
+  region_class$process_regional()
 
-  region <- return_regional(region, steps = steps)
+  region <- region_class$return_regional()
   return(region)
 }

@@ -46,13 +46,3 @@ recoveries and testing stratified by regions within the given country.
 Downloads, cleans and processes regional data
 for Covid-19.
 }
-\examples{
-\dontrun{
-# set up a data cache
-start_using_memoise()
-
-# download the data (and keep all processing steps)
-get_regional_data(country = "Mexico", steps = TRUE)
-}
-
-}
