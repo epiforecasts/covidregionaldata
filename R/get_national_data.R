@@ -17,25 +17,22 @@
 #' @importFrom tidyr drop_na fill
 #' @importFrom countrycode countryname
 #' @export
-#' @examples
-#' \dontrun{
-#' # set up a data cache
-#' start_using_memoise()
-#'
-#' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
-#' }
-#'
+#' 
 get_national_data <- function(country, source = "who", steps = FALSE,
-                              verbose = TRUE) {
+                              verbose = TRUE, ...) {
 
-  # check data availability and define list
-  source <- new_covidregionaldata(source, level = "1", verbose = verbose)
+  # check data availability and initiate country class if avaliable
+  nation_class <- check_country_avaliable(
+    country = source, level = "1",
+    totals = FALSE, localise = TRUE,
+    verbose = verbose, steps = steps, ...
+  )
 
   # download and cache raw data
-  source <- download_regional(source, verbose = verbose)
-
+  nation_class$download_data()
+  
   # dataset specifc cleaning
-  source <- clean_regional(source, verbose = verbose)
+  nation_class$clean_regional()
 
   # filter for country of interest
   if (!missing(country)) {
@@ -45,14 +42,15 @@ get_national_data <- function(country, source = "who", steps = FALSE,
       stop("Country name not recognised. Please enter a character string, with
             no abbreviation.")
     }
-    source$clean <- filter(source$clean,
-                           .data$region_level_1 %in% tar_country)
+    nation_class$region$clean <- filter(
+      nation_class$region$clean,
+      .data$region_level_1 %in% tar_country
+    )
   }
 
   # non-specific cleaning and checks
-  source <- process_regional(source, totals = FALSE,
-                             localise = TRUE, verbose = verbose)
+  nation_class$process_regional()
 
-  source <- return_regional(source, steps = steps)
-  return(source)
-  }
+  nation <- nation_class$return_regional()
+  return(nation)
+}

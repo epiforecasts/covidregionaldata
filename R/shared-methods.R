@@ -80,6 +80,7 @@ dataClass <- R6::R6Class("Generic methods",
     #' @importFrom rlang .data
     get_region_codes = function() {
       tar_level <- paste0("level_", self$level, "_region")
+      tar_level_name <- self[[tar_level]]
       codes <- covidregionaldata::region_codes %>%
         filter(
           .data$country %in% self$country,
@@ -89,11 +90,11 @@ dataClass <- R6::R6Class("Generic methods",
       if (self$verbose) {
         message(
           "Getting data for ", self$country,
-          " at ", tar_level, " administrative region"
+          " at ", tar_level_name, " administrative region"
         )
       }
 
-      self$region <- list(country = self$country, level = tar_level)
+      self$region <- list(country = self$country, level = tar_level_name)
 
       if (nrow(codes) == 1) {
         self$region$code <- codes$name[[1]]
@@ -114,6 +115,7 @@ dataClass <- R6::R6Class("Generic methods",
     download_data = function(...) {
       self$region$raw <- suppressWarnings(csv_reader(self$data_url))
     },
+  
     #' Shared regional dataset processing
     #'
     #' @description General function to processes regional data.
