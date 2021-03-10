@@ -124,30 +124,42 @@ Ecdc <- R6::R6Class("ecdc",
           cases_new = .data$cases, deaths_new = .data$deaths,
           population_2019 = .data$popData2019
         ) %>%
-        select(.data$date, .data$country, .data$iso_code,
-               .data$population_2019, .data$cases_new, .data$deaths_new) %>%
+        select(
+          .data$date, .data$country, .data$iso_code,
+          .data$population_2019, .data$cases_new, .data$deaths_new
+        ) %>%
         arrange(.data$date) %>%
         filter(.data$country != "Cases_on_an_international_conveyance_Japan") %>%
         mutate(
           cases_new = ifelse(.data$cases_new < 0, 0, .data$cases_new),
           country = str_replace_all(.data$country, "_", " "),
           country = countryname(.data$country,
-                                destination = "country.name.en",
-                                warn = FALSE),
+            destination = "country.name.en",
+            warn = FALSE
+          ),
           iso_code = ifelse(.data$country == "Namibia", "NA", .data$iso_code),
-          un_region = countrycode(.data$iso_code, origin = "iso2c",
-                                  destination = "un.region.name",
-                                  warn = FALSE),
+          un_region = countrycode(.data$iso_code,
+            origin = "iso2c",
+            destination = "un.region.name",
+            warn = FALSE
+          ),
           un_region = ifelse(.data$iso_code == "XK", "Europe",
-                             .data$un_region),
+            .data$un_region
+          ),
           un_region = ifelse(.data$iso_code == "UK", "Europe",
-                             .data$un_region),
+            .data$un_region
+          ),
           un_region = ifelse(.data$iso_code == "EL", "Europe",
-                             .data$un_region),
+            .data$un_region
+          ),
           un_region = ifelse(.data$iso_code == "TW", "Asia",
-                             .data$un_region)) %>%
-        rename(region_level_1 = .data$country,
-               level_1_region_code = .data$iso_code)
+            .data$un_region
+          )
+        ) %>%
+        rename(
+          region_level_1 = .data$country,
+          level_1_region_code = .data$iso_code
+        )
     },
 
     #' @description Specific return settings for the ECDC dataset.
@@ -160,7 +172,7 @@ Ecdc <- R6::R6Class("ecdc",
         group_by(.data$country) %>%
         fill(.data$population_2019, .data$un_region, .direction = "updown") %>%
         ungroup()
-      
+
       self$region$return <- self$region$return %>%
         select(
           .data$date, .data$un_region, .data$country,
@@ -171,7 +183,7 @@ Ecdc <- R6::R6Class("ecdc",
           .data$tested_new, .data$tested_total
         ) %>%
         arrange(.data$date, .data$country)
-      
+
       if (self$steps) {
         return(self$region)
       } else {

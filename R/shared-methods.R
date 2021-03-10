@@ -59,7 +59,7 @@ check_country_avaliable <- function(country = character(), level = level,
 dataClass <- R6::R6Class("Generic methods",
   public = list(
     #' @field country name of country to fetch data for
-    country = NULL,
+    country = "",
     #' @field region data frame for requested region
     region = NULL,
     #' @field data_url link to raw data
@@ -115,7 +115,7 @@ dataClass <- R6::R6Class("Generic methods",
     download_data = function(...) {
       self$region$raw <- suppressWarnings(csv_reader(self$data_url))
     },
-  
+
     #' Shared regional dataset processing
     #'
     #' @description General function to processes regional data.
