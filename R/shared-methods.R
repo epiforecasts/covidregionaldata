@@ -19,19 +19,18 @@ check_country_avaliable <- function(country = character(), level = level,
   stopifnot(is.character(country))
   stopifnot(is.character(level))
 
-  # format country to find the correct class
+  # check we have data for desired country
   country <- paste0(
     toupper(substr(country, 1, 1)),
     tolower(substr(country, 2, nchar(country)))
   )
-  tryCatch(
-    regionClass <- get(country),
-    error = function(e) {
-      stop(
-        paste("No data avaliable for country'", country, "'.")
-      )
-    }
-  )
+  avaliable_sources = covidregionaldata::region_codes$country
+  if (!(tolower(country) %in% avaliable_sources)){
+    stop(
+      paste("No data avaliable for country'", country, "'.")
+    )
+  }
+  regionClass <- get(country)
   region_class <- regionClass$new(
     level = level, totals = totals,
     localise = localise, verbose = verbose,
