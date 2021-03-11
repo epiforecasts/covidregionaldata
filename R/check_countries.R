@@ -4,13 +4,13 @@
 #' The function uses the region_codes file to find countries.
 #' @return A tibble of avaliable countries and the region level
 #' data is avaliable for
-#' @importFrom dplyr filter %>% %in% mutate
+#' @importFrom dplyr filter %>% mutate
 #' @importFrom tidyr pivot_wider
 #' @export
 #'
 show_countries <- function() {
   exclude <- c("who", "ecdc")
-  countries <- region_codes %>%
+  countries <- covidregionaldata::region_codes %>%
     filter(!.data$country %in% exclude) %>%
     select(c("country", "level"))
   countries <- countries %>%

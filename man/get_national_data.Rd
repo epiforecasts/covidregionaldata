@@ -4,7 +4,7 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country, source = "who", steps = FALSE, verbose = TRUE)
+get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
@@ -18,6 +18,8 @@ steps be kept and output in a list.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{...}{pass additional arguments to \code{download_regional}}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,
@@ -29,13 +31,4 @@ country codes. Then adds columns which were missing from the raw data
 (calculating cumulative counts from new dailies and vice versa), cleans
 and sanitises further. Adds rows and columns of NA values so that data is
 in a standard format.
-}
-\examples{
-\dontrun{
-# set up a data cache
-start_using_memoise()
-
-get_national_data(country = "canada", source = "ecdc", steps = TRUE)
-}
-
 }
