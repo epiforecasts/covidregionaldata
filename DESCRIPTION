@@ -87,7 +87,7 @@ Imports:
     rvest,
     readr,
     jsonlite,
-    countrycode,
+    countrycode (>= 1.2.0),
     tidyselect,
     rlang
 Suggests:
