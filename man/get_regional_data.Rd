@@ -36,7 +36,7 @@ messages and warnings be returned.}
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
-\item{...}{pass additional arguments to \code{download_regional}}
+\item{...}{additional arguments to pass to Country classes.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,

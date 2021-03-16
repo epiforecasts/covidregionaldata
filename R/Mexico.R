@@ -1,7 +1,7 @@
 #' R6 Class containing country specific attributes and methods
 #'
 #' @description Country specific information for downloading, cleaning
-#'  and procesing covid-19 region data for Mexico.
+#'  and processing covid-19 region data for Mexico.
 #'
 #' @details Inherits from `dataClass`
 #'

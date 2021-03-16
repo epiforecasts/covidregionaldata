@@ -8,7 +8,8 @@ get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
-Not case or language dependent. Defaults to all countries.}
+Not case dependent. Name should be the English name. For a list of
+options see \code{available_datasets}.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
@@ -19,7 +20,7 @@ steps be kept and output in a list.}
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
-\item{...}{pass additional arguments to \code{download_regional}}
+\item{...}{additional arguments to pass to Country classes.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,

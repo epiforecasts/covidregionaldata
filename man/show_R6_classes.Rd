@@ -2,16 +2,16 @@
 % Please edit documentation in R/check_countries.R
 \name{show_R6_classes}
 \alias{show_R6_classes}
-\title{Get the countries data is avaliable for}
+\title{Get the countries data is available for}
 \usage{
 show_R6_classes()
 }
 \value{
-A list of avaliable countries and the region level
-data is avaliable for
+A list of available countries and the region level
+data is available for
 }
 \description{
-Show what countries have what level data avaliable.
+Show what countries have what level data available.
 The function searches the environment for R6 class objects and
 extracts the country name and what level it has from the object.
 }
