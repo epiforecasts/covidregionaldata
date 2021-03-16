@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>", 
+  eval = FALSE
 )
 ```
 
@@ -101,7 +102,7 @@ usa_states %>% filter(state %in% c('New York', 'Texas', 'Florida')) %>%
 ```
 The `totals` argument can also be used in `get_regional_data` to return the cumulative number of cases or deaths over time.
 
-```{r}
+```{r,}
 usa_states_totals <- get_regional_data(country = "USA", totals = TRUE)
 ```
 
