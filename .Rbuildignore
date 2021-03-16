@@ -22,3 +22,4 @@ SMG.md
 ^vignettes$
 ^tests/testthat/\.cache$
 \.lintr$
+^\.pre-commit-config\.yaml$
