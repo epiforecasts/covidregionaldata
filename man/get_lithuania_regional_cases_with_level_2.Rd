@@ -42,7 +42,8 @@ OSP for the \code{deaths_new}; this can be changed with the
 \description{
 Extracts daily COVID-19 data for Lithuania, by municipality.
 
-Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
+Data available at
+\url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 It is loaded and then sanitised.
 }
 \section{OSP Data fields}{
