@@ -2,16 +2,8 @@
 #'
 #' @description Check data for the requested country and region
 #' is avaliable and return an initialised region class for that country.
-#' @param country A character string specifying the country to get data from.
-#' Not case dependent. Name should be the English name. For a list of
-#' options see `available_datasets`.
-#' @param level A character string indicating the target administrative level
-#' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). See `available_datasets` for supported
-#' options by dataset.
-#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-#' messages and warnings be returned.
-#' @return The target countries specific object if avaliable, e.g. `Italy`
+#' @inheritParams get_regional_data
+#' @return The target countries specific object if avaliable, e.g. [Italy()]
 #' @rdname download_data
 check_country_avaliable <- function(country = character(), level = level,
                                     totals = totals, localise = localise,
@@ -55,7 +47,8 @@ check_country_avaliable <- function(country = character(), level = level,
 #'
 #' @details All countries have shared methods for extracting region codes,
 #' downloading, processing, and returning data.
-dataClass <- R6::R6Class("Generic methods",
+dataClass <- R6::R6Class(
+  "dataClass",
   public = list(
     #' @field country name of country to fetch data for
     country = "",

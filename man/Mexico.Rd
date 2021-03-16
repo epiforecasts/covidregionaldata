@@ -14,7 +14,7 @@ Inherits from \code{dataClass}
 Sam Abbott
 }
 \section{Super class}{
-\code{\link[covidregionaldata:Generic methods]{covidregionaldata::Generic methods}} -> \code{mexico}
+\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{mexico}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -43,9 +43,9 @@ Sam Abbott
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="Generic methods" data-id="get_region_codes">}\href{../../covidregionaldata/html/Generic methods.html#method-get_region_codes}{\code{covidregionaldata::Generic methods$get_region_codes()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="Generic methods" data-id="process_regional">}\href{../../covidregionaldata/html/Generic methods.html#method-process_regional}{\code{covidregionaldata::Generic methods$process_regional()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="Generic methods" data-id="return_regional">}\href{../../covidregionaldata/html/Generic methods.html#method-return_regional}{\code{covidregionaldata::Generic methods$return_regional()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/dataClass.html#method-get_region_codes}{\code{covidregionaldata::dataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process_regional">}\href{../../covidregionaldata/html/dataClass.html#method-process_regional}{\code{covidregionaldata::dataClass$process_regional()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return_regional">}\href{../../covidregionaldata/html/dataClass.html#method-return_regional}{\code{covidregionaldata::dataClass$return_regional()}}\out{</span>}
 }
 \out{</details>}
 }
