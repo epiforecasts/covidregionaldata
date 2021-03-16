@@ -87,7 +87,7 @@ Imports:
     rvest,
     readr,
     jsonlite,
-    countrycode,
+    countrycode (>= 1.2.0),
     tidyselect,
     rlang
 Suggests:
@@ -104,4 +104,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
 Config/testthat/edition: 3

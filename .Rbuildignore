@@ -19,7 +19,6 @@ SMG.md
 ^docs$
 ^doc$
 ^Meta$
-^vignettes$
 ^tests/testthat/\.cache$
 \.lintr$
 ^\.pre-commit-config\.yaml$

@@ -22,6 +22,8 @@ navbar:
       href: index.html
     - text: "Getting Started"
       href: articles/quickstart.html
+    - text: "Package overview"
+      href: articles/slowstart.html
     - text: "Data Status"
       href: articles/data_checks.html  
     - text: News
