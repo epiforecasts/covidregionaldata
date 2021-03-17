@@ -6,6 +6,9 @@
 \usage{
 get_lithuania_region_codes()
 }
+\value{
+(NULL) These are already presented by the \code{get_data} function
+}
 \description{
 Lithuanian region codes
 }

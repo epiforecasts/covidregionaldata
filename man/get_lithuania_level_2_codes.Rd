@@ -2,10 +2,10 @@
 % Please edit documentation in R/get_region_codes.R
 \name{get_lithuania_level_2_codes}
 \alias{get_lithuania_level_2_codes}
-\title{Lithuania level 2 codes}
+\title{Lithuania level 2 codes (Included in original function)}
 \usage{
 get_lithuania_level_2_codes()
 }
 \description{
-Lithuania level 2 codes
+Lithuania level 2 codes (Included in original function)
 }
