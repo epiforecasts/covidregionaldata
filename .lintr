@@ -1,0 +1,6 @@
+linters: with_defaults(
+    line_length_linter = line_length_linter(80),
+    camel_case_linter = NULL,
+    snake_case_linter = NULL,
+    object_length_linter = object_length_linter(50))
+exclusions: list.files(path = "tests/", recursive = T, full.names = T)
