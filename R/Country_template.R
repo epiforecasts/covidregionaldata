@@ -13,7 +13,7 @@ NameOfCountry <- R6::R6Class("country_name",
     #' @field level_1_region the level 1 region name.
     level_1_region = "name_of_level_1_regions",
     #' @field level_2_region the level 2 region name.
-    level_2_region = "name_of_level_2_regions", # If no level 2 regions, set as NA
+    level_2_region = "name_of_level_2_regions", # If none set as NA
     #' @field data_url link to raw data
     data_url = "link_to_some_raw_data",
     #' @field source_data_cols existing columns within the raw data
@@ -29,9 +29,11 @@ NameOfCountry <- R6::R6Class("country_name",
       # No return statement is required
     },
 
-    #' @description Set up the country class with attributes set to input parameters
+    #' @description Set up the country class with attributes set to input
+    #' parameters
     #' @param level The region level for the data
-    #' @param totals Boolean. If TRUE, returns totalled data per region up to today's date.
+    #' @param totals Boolean. If TRUE, returns totalled data per region up
+    #' to today's date.
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
