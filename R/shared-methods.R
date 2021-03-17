@@ -1,4 +1,4 @@
-#' Check country and regions are avaliable and set up
+#' Check country and regions are avaliable and set up country class
 #'
 #' @description Check data for the requested country and region
 #' is avaliable and return an initialised region class for that country.
@@ -16,8 +16,8 @@ check_country_avaliable <- function(country = character(), level = level,
     toupper(substr(country, 1, 1)),
     tolower(substr(country, 2, nchar(country)))
   )
-  avaliable_sources = covidregionaldata::region_codes$country
-  if (!(tolower(country) %in% avaliable_sources)){
+  avaliable_sources <- covidregionaldata::region_codes$country
+  if (!(tolower(country) %in% avaliable_sources)) {
     stop(
       paste("No data avaliable for country'", country, "'.")
     )
@@ -58,7 +58,8 @@ dataClass <- R6::R6Class(
     data_url = "",
     #' @field level target region level
     level = NULL,
-    #' @field totals Boolean. If TRUE, returns totalled data per region up to today's date.
+    #' @field totals Boolean. If TRUE, returns totalled data per region
+    #' up to today's date.
     totals = NULL,
     #' @field localise Boolean. Should region names be localised.
     localise = NULL,
@@ -128,9 +129,9 @@ dataClass <- R6::R6Class(
       )
     },
 
-    #' @description Optional region specific return changes. Designed to be called
-    #' after `process_regional`. For most datasets a custom method should not be
-    #' needed.
+    #' @description Optional region specific return changes.
+    #' Designed to be called after `process_regional`. For most datasets a
+    #' custom method should not be needed.
     #' @author Sam Abbott
     return_regional = function() {
       self$region$return <- NA

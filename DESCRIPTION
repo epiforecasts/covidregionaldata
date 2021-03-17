@@ -1,69 +1,86 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
 Version: 0.9.0.0
-Authors@R: c(person(given = "Sam Abbott",
-           role = c("aut"),
-           email = "sam.abbott@lshtm.ac.uk",
-           comment = c(ORCID = "0000-0001-8057-8037")),
-    person("Katharine", "Sherratt",
-           email = "katharine.sherratt@lshtm.ac.uk",
-           role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-4413-453X")),
-    person("Jonnie", "Bevan",
-            email = "jonnie.bevan@tessella.com",
-            role = c("aut")),
-    person("Hamish", "Gibbs",
-           email = "Hamish.Gibbs@lshtm.ac.uk",
-           role = c("aut"),
-           comment = c(ORCID = "0000-0003-4413-453X")),
-    person("Sophie", "Meakin",
-           email = "sophie.meaking@lshtm.ac.uk",
-           role = c("ctb")),
-    person("Joel", "Hellewell",
-           email = "joel.hellewell@lshtm.ac.uk",
-           role = c("ctb"),
-           comment = c(ORCID = "0000-0003-2683-0849")),
-    person("Patrick", "Barks",
-       email = "patrick.barks@epicentre.msf.org",
-       role = c("ctb")),
-    person("Paul", "Campbell",
-       email = " paul.campbell@epicentre.msf.org",
-       role = c("aut")),
-    person("Flavio", "Finger",
-       email = "flavio.finger@epicentre.msf.org",
-       role = c("ctb"),
-       comment = c(ORCID = "0000-0002-8613-5170")),
-    person("Richard", "Boyes",
-            comment = c(URL = "https://github.com/rboyes"),
-            role = c("ctb")),
-    person("Sebastian", "Funk",
-            email = "sebastian.funk@lshtm.ac.uk",
-            role = c("aut")),
-    person("Joe", "Palmer",
-           role=c("ctb")),
-    person("Hugo", "Gruson",
-           role = c("ctb"),
-           comment = c(ORCID = "0000-0002-4094-1476")))
+Authors@R: 
+    c(person(given = "Sam Abbott",
+             role = "aut",
+             email = "sam.abbott@lshtm.ac.uk",
+             comment = c(ORCID = "0000-0001-8057-8037")),
+      person(given = "Katharine",
+             family = "Sherratt",
+             role = c("aut", "cre"),
+             email = "katharine.sherratt@lshtm.ac.uk",
+             comment = c(ORCID = "0000-0003-4413-453X")),
+      person(given = "Jonnie",
+             family = "Bevan",
+             role = "aut",
+             email = "jonnie.bevan@tessella.com"),
+      person(given = "Hamish",
+             family = "Gibbs",
+             role = "aut",
+             email = "Hamish.Gibbs@lshtm.ac.uk",
+             comment = c(ORCID = "0000-0003-4413-453X")),
+      person(given = "Sophie",
+             family = "Meakin",
+             role = "ctb",
+             email = "sophie.meaking@lshtm.ac.uk"),
+      person(given = "Joel",
+             family = "Hellewell",
+             role = "ctb",
+             email = "joel.hellewell@lshtm.ac.uk",
+             comment = c(ORCID = "0000-0003-2683-0849")),
+      person(given = "Patrick",
+             family = "Barks",
+             role = "ctb",
+             email = "patrick.barks@epicentre.msf.org"),
+      person(given = "Paul",
+             family = "Campbell",
+             role = "aut",
+             email = " paul.campbell@epicentre.msf.org"),
+      person(given = "Flavio",
+             family = "Finger",
+             role = "ctb",
+             email = "flavio.finger@epicentre.msf.org",
+             comment = c(ORCID = "0000-0002-8613-5170")),
+      person(given = "Richard",
+             family = "Boyes",
+             role = "ctb",
+             comment = c(URL = "https://github.com/rboyes")),
+      person(given = "Sebastian",
+             family = "Funk",
+             role = "aut",
+             email = "sebastian.funk@lshtm.ac.uk"),
+      person(given = "Joe",
+             family = "Palmer",
+             role = "ctb"),
+      person(given = "Hugo",
+             family = "Gruson",
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-4094-1476")))
 Description: An interface to subnational and national level Covid-19 data.
-    For all countries supported, this includes a daily time-series of cases.
-    Wherever available we also provide  data on deaths, hospitalisations, and tests.
-    National level data is also supported using a range of data sources as well as
-    linelist data and links to intervention data sets. Data sources included:
-    WHO <https://covid19.who.int>;
-    ACAPS interventions <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
+    For all countries supported, this includes a daily time-series of
+    cases.  Wherever available we also provide data on deaths,
+    hospitalisations, and tests.  National level data is also supported
+    using a range of data sources as well as linelist data and links to
+    intervention data sets. Data sources included: WHO
+    <https://covid19.who.int>; ACAPS interventions
+    <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
     patient linelist: <https://github.com/beoutbreakprepared/nCoV2019>),
-    regional data (Afghanistan: <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
-    Belgium: <https://epistat.wiv-isp.be/covid/>; Brazil: <https://github.com/wcota/covid19br>;
-    Canada: <https://health-infobase.canada.ca/>; Colombia: <https://github.com/danielcs88/colombia_covid-19>;
-    Germany: <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
+    regional data (Afghanistan:
+    <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
+    Belgium: <https://epistat.wiv-isp.be/covid/>; Brazil:
+    <https://github.com/wcota/covid19br>; Canada:
+    <https://health-infobase.canada.ca/>; Colombia:
+    <https://github.com/danielcs88/colombia_covid-19>; Germany:
+    <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
     France: <https://www.data.gouv.fr/fr/pages/donnees-coronavirus>;
-    India: <https://api.covid19india.org/>; Italy: <https://github.com/pcm-dpc/COVID-19>;
-     UK: <https://coronavirus.data.gov.uk>,
+    India: <https://api.covid19india.org/>; Italy:
+    <https://github.com/pcm-dpc/COVID-19>; UK:
+    <https://coronavirus.data.gov.uk>,
     <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
-    USA: <https://github.com/nytimes/covid-19-data>),
-    Cuba: <https://covid19cubadata.github.io>,
-    and geocoding data (Colombia: <https://en.wikipedia.org/wiki/ISO_3166-2:CO>).
-Language: en-gb
+    USA: <https://github.com/nytimes/covid-19-data>), Cuba:
+    <https://covid19cubadata.github.io>, and geocoding data (Colombia:
+    <https://en.wikipedia.org/wiki/ISO_3166-2:CO>).
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata,
     https://github.com/epiforecasts/covidregionaldata
@@ -71,38 +88,41 @@ BugReports: https://github.com/epiforecasts/covidregionaldata/issues
 Depends:
     R (>= 3.5.0)
 Imports:
-    vroom,
+    countrycode (>= 1.2.0),
     dplyr,
-    tibble,
-    purrr,
-    stringr,
+    httr,
+    jsonlite,
+    lubridate,
     magrittr,
     memoise,
-    lubridate,
-    tidyr (>= 1.0.0),
-    httr,
-    yaml,
-    readxl,
-    xml2,
-    rvest,
+    purrr,
+    R6,
     readr,
-    jsonlite,
-    countrycode (>= 1.2.0),
+    readxl,
+    rlang,
+    rvest,
+    stringr,
+    tibble,
+    tidyr (>= 1.0.0),
     tidyselect,
-    rlang
+    vroom,
+    xml2,
+    yaml
 Suggests:
     data.table,
-    pkgdown,
-    testthat (>= 3.0.0),
-    mockery,
-    spelling,
+    ggplot2,
     knitr,
+    mockery,
+    pkgdown,
     rmarkdown,
     rworldmap,
-    ggplot2
+    spelling,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-gb
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-VignetteBuilder: knitr
-Config/testthat/edition: 3

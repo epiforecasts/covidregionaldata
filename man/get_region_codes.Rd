@@ -25,7 +25,8 @@ Sam Abbott
 
 \item{\code{level}}{target region level}
 
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to today's date.}
+\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
+up to today's date.}
 
 \item{\code{localise}}{Boolean. Should region names be localised.}
 
@@ -95,9 +96,9 @@ Dynamically works for level 1 and level 2 regions.
 \if{html}{\out{<a id="method-return_regional"></a>}}
 \if{latex}{\out{\hypertarget{method-return_regional}{}}}
 \subsection{Method \code{return_regional()}}{
-Optional region specific return changes. Designed to be called
-after \code{process_regional}. For most datasets a custom method should not be
-needed.
+Optional region specific return changes.
+Designed to be called after \code{process_regional}. For most datasets a
+custom method should not be needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dataClass$return_regional()}\if{html}{\out{</div>}}
 }

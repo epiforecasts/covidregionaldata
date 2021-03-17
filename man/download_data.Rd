@@ -2,7 +2,7 @@
 % Please edit documentation in R/shared-methods.R
 \name{check_country_avaliable}
 \alias{check_country_avaliable}
-\title{Check country and regions are avaliable and set up}
+\title{Check country and regions are avaliable and set up country class}
 \usage{
 check_country_avaliable(
   country = character(),
