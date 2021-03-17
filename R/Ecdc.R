@@ -21,6 +21,9 @@ Ecdc <- R6::R6Class("ecdc",
 
     #' @description ECDC specific state level data cleaning
     #' @param ... pass additional arguments
+    #' @importFrom dplyr mutate rename select arrange filter
+    #' @importFrom stringr str_replace_all
+    #' @importFrom countrycode countryname countrycode
     #'
     clean_regional = function(...) {
       long_string <- "Cases_on_an_international_conveyance_Japan"
