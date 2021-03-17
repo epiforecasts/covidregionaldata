@@ -21,8 +21,6 @@ Ecdc <- R6::R6Class("ecdc",
     # Core Attributes
     #' @field level_1_region the level 1 region name.
     level_1_region = "country",
-    #' @field level_2_region the level 2 region name.
-    level_2_region = NA, # If no level 2 regions just remove
     #' @field data_url link to raw data
     data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
     #' @field source_data_cols existing columns within the raw data

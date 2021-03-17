@@ -31,8 +31,6 @@ Ecdc$new(
 \describe{
 \item{\code{level_1_region}}{the level 1 region name.}
 
-\item{\code{level_2_region}}{the level 2 region name.}
-
 \item{\code{data_url}}{link to raw data}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
