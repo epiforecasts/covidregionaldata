@@ -6,7 +6,7 @@ test_that(
         country = 1, level = "1",
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
-        ),
+      ),
       "is.character(country) is not TRUE",
       fixed = TRUE
     )
@@ -63,8 +63,7 @@ test_that(
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE
     )
-    to_check = class(region_class)
+    to_check <- class(region_class)
     expect_equal(to_check[length(to_check)], "R6")
-  
   }
 )

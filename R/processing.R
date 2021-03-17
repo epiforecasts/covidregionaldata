@@ -53,8 +53,10 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
 fill_empty_dates_with_na <- function(data) {
-  region_level_1 <- NULL; region_level_2 <- NULL;
-  level_2_region_code <- NULL; level_1_region_code <- NULL;
+  region_level_1 <- NULL
+  region_level_2 <- NULL
+  level_2_region_code <- NULL
+  level_1_region_code <- NULL
   if ("region_level_2" %in% colnames(data)) {
     data <- data %>%
       complete(
@@ -188,7 +190,7 @@ process_regional_internal <- function(region, group_vars,
                                       totals = FALSE, localise = TRUE,
                                       verbose = TRUE) {
   if (!any(class(region$clean) %in% "data.frame")) {
-      stop("No regional data found to process")
+    stop("No regional data found to process")
   }
   dat <- group_by_at(region$clean, .vars = group_vars)
 
