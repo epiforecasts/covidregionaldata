@@ -78,9 +78,8 @@ Mexico <- R6::R6Class("mexico",
     #' request.
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms
-    #' @param ... pass additional arguments
     #'
-    clean = function(...) {
+    clean = function() {
       if (self$level == "1") {
         self$clean_regional_level_1()
       } else if (self$level == "2") {
@@ -93,9 +92,8 @@ Mexico <- R6::R6Class("mexico",
     #' @importFrom stringr str_to_title
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
-    #' @param ... pass additional arguments
     #'
-    clean_regional_level_1 = function(...) {
+    clean_regional_level_1 = function() {
       self$region$clean <- self$region$raw %>%
         mutate(
           region_level_1 = str_to_title(.data$nombre),
@@ -116,9 +114,8 @@ Mexico <- R6::R6Class("mexico",
     #' @importFrom stringr str_to_title
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
-    #' @param ... pass additional arguments
     #'
-    clean_regional_level_2 = function(...) {
+    clean_regional_level_2 = function() {
       self$region$clean <- self$region$raw %>%
         mutate(
           region_level_2 = .data$nombre,

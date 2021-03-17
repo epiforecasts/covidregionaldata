@@ -20,12 +20,11 @@ Ecdc <- R6::R6Class("ecdc",
     source_data_cols = c("cases_new", "deaths_new"),
 
     #' @description ECDC specific state level data cleaning
-    #' @param ... pass additional arguments
     #' @importFrom dplyr mutate rename select arrange filter
     #' @importFrom stringr str_replace_all
     #' @importFrom countrycode countryname countrycode
     #'
-    clean = function(...) {
+    clean = function() {
       long_string <- "Cases_on_an_international_conveyance_Japan"
       self$region$clean <- self$region$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
@@ -73,10 +72,9 @@ Ecdc <- R6::R6Class("ecdc",
     },
 
     #' @description Specific return settings for the ECDC dataset.
-    #' @param ... pass additional arguments
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
-    return = function(...) {
+    return = function() {
       self$region$return <- self$region$processed %>%
         group_by(.data$country) %>%
         fill(.data$population_2019, .data$un_region, .direction = "updown") %>%

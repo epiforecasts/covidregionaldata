@@ -20,7 +20,7 @@ NameOfCountry <- R6::R6Class("Country_template",
     #' @field level_1_region the level 1 region name.
     level_1_region = "name_of_level_1_regions",
     #' @field level_2_region the level 2 region name.
-    level_2_region = "name_of_level_2_regions", # If none set as NA
+    level_2_region = "name_of_level_2_regions", # If none simply remove
     #' @field data_url link to raw data
     data_url = "link_to_some_raw_data",
     #' @field source_data_cols existing columns within the raw data
@@ -30,7 +30,7 @@ NameOfCountry <- R6::R6Class("Country_template",
     #' @param ... pass additional arguments
     #'
     clean = function(...) {
-      # function to clean the data (MUST BE CALLED clean_regional)
+      # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
       # e.g. self$region$clean <- something
       # No return statement is required

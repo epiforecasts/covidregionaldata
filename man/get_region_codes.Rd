@@ -58,18 +58,11 @@ General function for getting region codes for given region.
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 General function for downloading raw data.
+Shared regional dataset processing
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dataClass$download(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dataClass$download()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments
-Shared regional dataset processing}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process"></a>}}
@@ -78,23 +71,16 @@ Shared regional dataset processing}
 General function to processes regional data.
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dataClass$process(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dataClass$process()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-return"></a>}}
 \if{latex}{\out{\hypertarget{method-return}{}}}
 \subsection{Method \code{return()}}{
 Optional region specific return changes.
-Designed to be called after \code{process_regional}. For most datasets a
+Designed to be called after \code{process}. For most datasets a
 custom method should not be needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dataClass$return()}\if{html}{\out{</div>}}

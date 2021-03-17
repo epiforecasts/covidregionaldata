@@ -23,9 +23,8 @@ Italy <- R6::R6Class("italy",
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms
     #' @importFrom rlang .data
-    #' @param ... pass additional arguments
     #'
-    clean = function(...) {
+    clean = function() {
       self$region$clean <- self$region$raw %>%
         mutate(
           date = as_date(ymd_hms(.data$data)),

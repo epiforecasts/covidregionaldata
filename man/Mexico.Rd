@@ -65,16 +65,9 @@ use a PHP script from the website.
 directs to either level 1 or level 2 processing based on
 request.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_regional_level_1"></a>}}
@@ -82,16 +75,9 @@ request.
 \subsection{Method \code{clean_regional_level_1()}}{
 Mexico Specific Estados Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_1(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_1()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_regional_level_2"></a>}}
@@ -99,16 +85,9 @@ Mexico Specific Estados Level Data Cleaning
 \subsection{Method \code{clean_regional_level_2()}}{
 Mexico Specific Municipality Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_2(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_2()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}

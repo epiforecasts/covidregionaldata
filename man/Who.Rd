@@ -50,16 +50,9 @@ Inherits from \code{dataClass}
 \subsection{Method \code{clean()}}{
 WHO specific country level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Who$clean(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Who$clean()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-return"></a>}}
@@ -67,16 +60,9 @@ WHO specific country level data cleaning
 \subsection{Method \code{return()}}{
 Specific return settings for the WHO dataset.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Who$return(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Who$return()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}

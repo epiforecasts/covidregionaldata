@@ -50,16 +50,9 @@ Inherits from \code{dataClass}
 \subsection{Method \code{clean()}}{
 Italy specific state level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Italy$clean(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Italy$clean()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
