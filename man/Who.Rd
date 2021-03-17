@@ -3,6 +3,9 @@
 \name{Who}
 \alias{Who}
 \title{R6 Class containing specific attributes and methods for WHO data}
+\source{
+https://covid19.who.int/WHO-COVID-19-global-data.csv
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for WHO

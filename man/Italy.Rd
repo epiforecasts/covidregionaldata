@@ -3,6 +3,9 @@
 \name{Italy}
 \alias{Italy}
 \title{R6 Class containing country specific attributes and methods}
+\source{
+https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for Italy.

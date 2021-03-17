@@ -4,6 +4,7 @@
 #'  and processing covid-19 region data for WHO
 #'
 #' @details Inherits from `dataClass`
+#' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
 #'
 Who <- R6::R6Class("who",
   inherit = dataClass,

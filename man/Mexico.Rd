@@ -3,6 +3,9 @@
 \name{Mexico}
 \alias{Mexico}
 \title{R6 Class containing country specific attributes and methods}
+\source{
+https://datos.covid-19.conacyt.mx/#DownZCSV
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for Mexico.

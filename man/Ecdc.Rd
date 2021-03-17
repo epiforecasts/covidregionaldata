@@ -3,6 +3,9 @@
 \name{Ecdc}
 \alias{Ecdc}
 \title{R6 Class containing specific attributes and methods for ECDC dataset}
+\source{
+https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for ECDC

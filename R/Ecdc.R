@@ -4,6 +4,7 @@
 #'  and processing covid-19 region data for ECDC
 #'
 #' @details Inherits from `dataClass`
+#' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 #'
 Ecdc <- R6::R6Class("ecdc",
   inherit = dataClass,

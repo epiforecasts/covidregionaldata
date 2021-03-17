@@ -4,6 +4,7 @@
 #'  and processing covid-19 region data for Mexico.
 #'
 #' @details Inherits from `dataClass`
+#' @source https://datos.covid-19.conacyt.mx/#DownZCSV
 #'
 Mexico <- R6::R6Class("mexico",
   inherit = dataClass,
