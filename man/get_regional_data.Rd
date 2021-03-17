@@ -46,3 +46,8 @@ recoveries and testing stratified by regions within the given country.
 Downloads, cleans and processes regional data
 for Covid-19.
 }
+\examples{
+\dontrun{
+get_regional_data("Italy", level = "1")
+}
+}

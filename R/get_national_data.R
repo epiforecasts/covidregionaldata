@@ -22,7 +22,10 @@
 #' @importFrom tidyr drop_na fill
 #' @importFrom countrycode countryname
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' get_national_data("Italy", source = "who")
+#' }
 get_national_data <- function(country, source = "who", steps = FALSE,
                               verbose = TRUE, ...) {
 

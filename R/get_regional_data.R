@@ -21,7 +21,10 @@
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' get_regional_data("Italy", level = "1")
+#' }
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, verbose = TRUE,
                               steps = FALSE, ...) {

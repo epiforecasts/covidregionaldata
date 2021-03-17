@@ -5,7 +5,14 @@
 #'
 #' @details Inherits from `dataClass`
 #' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
-#'
+#' @examples
+#' \dontrun{
+#' Who$new(
+#'   level = "1", totals = FALSE,
+#'   localise = FALSE, verbose = FALSE,
+#'   steps = FALSE
+#' )
+#' }
 Who <- R6::R6Class("who",
   inherit = dataClass,
   public = list(

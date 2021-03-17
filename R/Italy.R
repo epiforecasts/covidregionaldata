@@ -5,7 +5,14 @@
 #'
 #' @details Inherits from `dataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
-#'
+#' @examples
+#' \dontrun{
+#' Italy$new(
+#'   level = "1", totals = FALSE,
+#'   localise = FALSE, verbose = FALSE,
+#'   steps = FALSE
+#' )
+#' }
 Italy <- R6::R6Class("italy",
   inherit = dataClass,
   public = list(

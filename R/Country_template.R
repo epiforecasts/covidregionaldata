@@ -6,7 +6,7 @@
 #' @details Inherits from `dataClass`
 #' @examples
 #' \dontrun{
-#' Italy(
+#' Italy$new(
 #'   level = "1", totals = FALSE,
 #'   localise = FALSE, verbose = FALSE,
 #'   steps = FALSE

@@ -33,3 +33,8 @@ country codes. Then adds columns which were missing from the raw data
 and sanitises further. Adds rows and columns of NA values so that data is
 in a standard format.
 }
+\examples{
+\dontrun{
+get_national_data("Italy", source = "who")
+}
+}

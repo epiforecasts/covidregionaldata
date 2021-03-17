@@ -13,6 +13,16 @@ and processing covid-19 region data for ECDC
 \details{
 Inherits from \code{dataClass}
 }
+\examples{
+\dontrun{
+Ecdc$new(
+  level = "1", totals = FALSE,
+  localise = FALSE, verbose = FALSE,
+  steps = FALSE
+)
+}
+
+}
 \section{Super class}{
 \code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{ecdc}
 }

@@ -5,7 +5,14 @@
 #'
 #' @details Inherits from `dataClass`
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
-#'
+#' @examples
+#' \dontrun{
+#' Mexico$new(
+#'   level = "1", totals = FALSE,
+#'   localise = FALSE, verbose = FALSE,
+#'   steps = FALSE
+#' )
+#' }
 Mexico <- R6::R6Class("mexico",
   inherit = dataClass,
   public = list(
