@@ -5,9 +5,13 @@
 #' @inheritParams get_regional_data
 #' @return The target countries specific object if avaliable, e.g. [Italy()]
 #' @rdname download_data
-check_country_avaliable <- function(country = character(), level = level,
-                                    totals = totals, localise = localise,
-                                    verbose = verbose, steps = steps, ...) {
+#' @examples
+#' \dontrun{
+#' check_country_avaliable(country = "Italy")
+#' }
+check_country_avaliable <- function(country = character(), level = "1",
+                                    totals = FALSE, localise = TRUE,
+                                    verbose = TRUE, steps = FALSE, ...) {
   stopifnot(is.character(country))
   stopifnot(is.character(level))
 

@@ -6,11 +6,11 @@
 \usage{
 check_country_avaliable(
   country = character(),
-  level = level,
-  totals = totals,
-  localise = localise,
-  verbose = verbose,
-  steps = steps,
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = TRUE,
+  steps = FALSE,
   ...
 )
 }
@@ -44,4 +44,9 @@ The target countries specific object if avaliable, e.g. \code{\link[=Italy]{Ital
 \description{
 Check data for the requested country and region
 is avaliable and return an initialised region class for that country.
+}
+\examples{
+\dontrun{
+check_country_avaliable(country = "Italy")
+}
 }
