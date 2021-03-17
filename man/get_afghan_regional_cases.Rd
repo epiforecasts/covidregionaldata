@@ -7,8 +7,8 @@
 get_afghan_regional_cases()
 }
 \value{
-A data frame of daily Afghan provincial cases and deaths, stratified by state,
-to be further processed by \code{get_regional_data()}.
+A data frame of daily Afghan provincial cases and deaths, stratified
+by state, to be further processed by \code{get_regional_data()}.
 }
 \description{
 Fetches daily COVID-19 data for Afghanistan by province.
