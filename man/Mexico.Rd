@@ -53,8 +53,8 @@ Sam Abbott
 \if{html}{\out{<a id="method-download_data"></a>}}
 \if{latex}{\out{\hypertarget{method-download_data}{}}}
 \subsection{Method \code{download_data()}}{
-Data download function for Mexico data. This replaces the generic
-download_data function in \code{dataClass}. To get the latest data
+Data download function for Mexico data. This replaces the
+generic download_data function in \code{dataClass}. To get the latest data
 use a PHP script from the website.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$download_data()}\if{html}{\out{</div>}}
@@ -65,7 +65,8 @@ use a PHP script from the website.
 \if{html}{\out{<a id="method-clean_regional"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_regional}{}}}
 \subsection{Method \code{clean_regional()}}{
-directs to either level 1 or level 2 processing based on request.
+directs to either level 1 or level 2 processing based on
+request.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional(...)}\if{html}{\out{</div>}}
 }
@@ -116,7 +117,8 @@ Mexico Specific Municipality Level Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Set up the country class with attributes set to input parameters
+Set up the country class with attributes set to input
+parameters
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
 }
@@ -126,7 +128,8 @@ Set up the country class with attributes set to input parameters
 \describe{
 \item{\code{level}}{The region level for the data}
 
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to today's date.}
+\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to
+today's date.}
 
 \item{\code{localise}}{Boolean. Should region names be localised.}
 
