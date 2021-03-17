@@ -11,9 +11,6 @@ allowing them to access general methods.
 All countries have shared methods for extracting region codes,
 downloading, processing, and returning data.
 }
-\author{
-Sam Abbott
-}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

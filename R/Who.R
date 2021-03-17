@@ -54,7 +54,6 @@ Who <- R6::R6Class("who",
 
     #' @description Specific return settings for the WHO dataset.
     #' @param ... pass additional arguments
-    #' @author Sam Abbott
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function(...) {

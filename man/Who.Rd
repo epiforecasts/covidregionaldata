@@ -10,9 +10,6 @@ and processing covid-19 region data for WHO
 \details{
 Inherits from \code{dataClass}
 }
-\author{
-Sam Abbott
-}
 \section{Super class}{
 \code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{who}
 }

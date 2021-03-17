@@ -74,7 +74,6 @@ Ecdc <- R6::R6Class("ecdc",
 
     #' @description Specific return settings for the ECDC dataset.
     #' @param ... pass additional arguments
-    #' @author Sam Abbott
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function(...) {

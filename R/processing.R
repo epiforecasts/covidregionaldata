@@ -181,7 +181,6 @@ totalise_data <- function(data) {
 #' @param localise Logical, defaults to TRUE. Should region names be localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-#' @author Sam Abbott
 #' @importFrom dplyr do group_by_at ungroup select everything arrange rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of

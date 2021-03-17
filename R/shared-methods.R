@@ -132,7 +132,6 @@ dataClass <- R6::R6Class(
     #' @description Optional region specific return changes.
     #' Designed to be called after `process_regional`. For most datasets a
     #' custom method should not be needed.
-    #' @author Sam Abbott
     return = function() {
       self$region$return <- NA
       if (self$steps) {
