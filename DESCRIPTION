@@ -91,26 +91,20 @@ Imports:
     countrycode (>= 1.2.0),
     dplyr,
     httr,
-    jsonlite,
     lubridate,
     magrittr,
     memoise,
     purrr,
     R6,
     readr,
-    readxl,
     rlang,
-    rvest,
     stringr,
     tibble,
     tidyr (>= 1.0.0),
     tidyselect,
-    usethis,
     vroom,
-    xml2,
-    yaml
+    xml2
 Suggests:
-    data.table,
     ggplot2,
     knitr,
     mockery,
@@ -118,7 +112,8 @@ Suggests:
     rmarkdown,
     rworldmap,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    usethis
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

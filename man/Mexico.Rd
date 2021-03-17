@@ -59,9 +59,15 @@ Mexico$new(
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
+<<<<<<< HEAD
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
+=======
+\if{html}{\out{<a id="method-download_data"></a>}}
+\if{latex}{\out{\hypertarget{method-download_data}{}}}
+\subsection{Method \code{download_data()}}{
+>>>>>>> 9515533183bf6312797c7e5de947e20981cbc2cb
 Data download function for Mexico data. This replaces the
 generic download_data function in \code{dataClass}. To get the latest data
 use a PHP script from the website.
@@ -71,9 +77,15 @@ use a PHP script from the website.
 
 }
 \if{html}{\out{<hr>}}
+<<<<<<< HEAD
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
+=======
+\if{html}{\out{<a id="method-clean_regional"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_regional}{}}}
+\subsection{Method \code{clean_regional()}}{
+>>>>>>> 9515533183bf6312797c7e5de947e20981cbc2cb
 directs to either level 1 or level 2 processing based on
 request.
 \subsection{Usage}{
