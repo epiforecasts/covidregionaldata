@@ -46,7 +46,7 @@ Authors@R: c(person(given = "Sam Abbott",
            comment = c(ORCID = "0000-0002-4094-1476")),
     person("Richard", "Martin-Nielsen",
            comment = c(URL = "https://github.com/RichardMN"),
-           role=c("ctb"))))
+           role=c("ctb")))
 Description: An interface to subnational and national level Covid-19 data.
     For all countries supported, this includes a daily time-series of cases.
     Wherever available we also provide  data on deaths, hospitalisations, and tests.
