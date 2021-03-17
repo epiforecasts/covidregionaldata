@@ -19,8 +19,8 @@ Mexico <- R6::R6Class("mexico",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
-    #' @description Data download function for Mexico data. This replaces the generic
-    #' download_data function in `dataClass`. To get the latest data
+    #' @description Data download function for Mexico data. This replaces the
+    #' generic download_data function in `dataClass`. To get the latest data
     #' use a PHP script from the website.
     #' @author Sam Abbott
     #' @importFrom httr POST content
@@ -75,7 +75,8 @@ Mexico <- R6::R6Class("mexico",
       )
     },
 
-    #' @description directs to either level 1 or level 2 processing based on request.
+    #' @description directs to either level 1 or level 2 processing based on
+    #' request.
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms
     #' @param ... pass additional arguments
@@ -137,9 +138,11 @@ Mexico <- R6::R6Class("mexico",
         )
     },
 
-    #' @description Set up the country class with attributes set to input parameters
+    #' @description Set up the country class with attributes set to input
+    #' parameters
     #' @param level The region level for the data
-    #' @param totals Boolean. If TRUE, returns totalled data per region up to today's date.
+    #' @param totals Boolean. If TRUE, returns totalled data per region up to
+    #' today's date.
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
