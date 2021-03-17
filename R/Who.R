@@ -17,11 +17,17 @@ Who <- R6::R6Class("who",
     #' @field data_url link to raw data
     data_url = "https://covid19.who.int/WHO-COVID-19-global-data.csv",
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_new", "cases_total", "deaths_new", "deaths_total"),
+    source_data_cols = c(
+      "cases_new",
+      "cases_total",
+      "deaths_new",
+      "deaths_total"
+    ),
 
     #' @description WHO specific country level data cleaning
     #' @param ... pass additional arguments
-    #'
+    #' @importFrom dplyr mutate rename
+    #' @importFrom countrycode countrycode
     clean_regional = function(...) {
       self$region$clean <- self$region$raw
       colnames(self$region$clean) <- c(
@@ -74,9 +80,11 @@ Who <- R6::R6Class("who",
       }
     },
 
-    #' @description Set up the country class with attributes set to input parameters
+    #' @description Set up the country class with attributes set to input
+    #' parameters
     #' @param level The region level for the data
-    #' @param totals Boolean. If TRUE, returns totalled data per region up to today's date.
+    #' @param totals Boolean. If TRUE, returns totalled data per region up to
+    #' today's date.
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
