@@ -170,15 +170,16 @@ totalise_data <- function(data) {
 #' Internal Shared Regional Dataset Processing
 #'
 #' @description Internal shared regional data cleaning designed to be called
-#' by `process_regional`.
-#' @param region A given Country class object to process
+#' by `process`.
+#' @param region A given Country class object to process, e.g. `Italy()`
 #' @param group_vars A character vector of grouping variables. It is assumed
 #' that the first entry indicates the main region variable and the second
 #' indicates the code for this variable.
-#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+#' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @param localise Logical, defaults to `TRUE`. Should region names be
+#' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
 #' @importFrom dplyr do group_by_at ungroup select everything arrange rename
