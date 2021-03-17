@@ -23,6 +23,7 @@ Ecdc <- R6::R6Class("ecdc",
     #' @param ... pass additional arguments
     #'
     clean_regional = function(...) {
+      long_string <- "Cases_on_an_international_conveyance_Japan"
       self$region$clean <- self$region$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
         rename(
@@ -35,7 +36,7 @@ Ecdc <- R6::R6Class("ecdc",
           .data$population_2019, .data$cases_new, .data$deaths_new
         ) %>%
         arrange(.data$date) %>%
-        filter(.data$country != "Cases_on_an_international_conveyance_Japan") %>%
+        filter(.data$country != long_string) %>%
         mutate(
           cases_new = ifelse(.data$cases_new < 0, 0, .data$cases_new),
           country = str_replace_all(.data$country, "_", " "),
@@ -97,9 +98,11 @@ Ecdc <- R6::R6Class("ecdc",
       }
     },
 
-    #' @description Set up the country class with attributes set to input parameters
+    #' @description Set up the country class with attributes set to input
+    #' parameters
     #' @param level The region level for the data
-    #' @param totals Boolean. If TRUE, returns totalled data per region up to today's date.
+    #' @param totals Boolean. If TRUE, returns totalled data per region up to
+    #' today's date.
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.

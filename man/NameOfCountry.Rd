@@ -65,7 +65,8 @@ Inherits from \code{dataClass}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Set up the country class with attributes set to input parameters
+Set up the country class with attributes set to input
+parameters
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{NameOfCountry$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
 }
@@ -75,7 +76,8 @@ Set up the country class with attributes set to input parameters
 \describe{
 \item{\code{level}}{The region level for the data}
 
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to today's date.}
+\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up
+to today's date.}
 
 \item{\code{localise}}{Boolean. Should region names be localised.}
 
