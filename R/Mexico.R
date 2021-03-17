@@ -29,7 +29,7 @@ Mexico <- R6::R6Class("mexico",
     #' @importFrom rlang .data
     #' @importFrom tidyr pivot_longer
     #'
-    download_data = function() {
+    download = function() {
       . <- NULL
       if (self$level == "2") {
         path <- "Downloads/filesDD.php?csvmun"
@@ -81,7 +81,7 @@ Mexico <- R6::R6Class("mexico",
     #' @importFrom lubridate as_date ymd_hms
     #' @param ... pass additional arguments
     #'
-    clean_regional = function(...) {
+    clean = function(...) {
       if (self$level == "1") {
         self$clean_regional_level_1()
       } else if (self$level == "2") {

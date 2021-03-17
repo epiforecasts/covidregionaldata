@@ -40,9 +40,9 @@ up to today's date.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-get_region_codes}{\code{dataClass$get_region_codes()}}
-\item \href{#method-download_data}{\code{dataClass$download_data()}}
-\item \href{#method-process_regional}{\code{dataClass$process_regional()}}
-\item \href{#method-return_regional}{\code{dataClass$return_regional()}}
+\item \href{#method-download}{\code{dataClass$download()}}
+\item \href{#method-process}{\code{dataClass$process()}}
+\item \href{#method-return}{\code{dataClass$return()}}
 \item \href{#method-clone}{\code{dataClass$clone()}}
 }
 }
@@ -57,12 +57,12 @@ General function for getting region codes for given region.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download_data"></a>}}
-\if{latex}{\out{\hypertarget{method-download_data}{}}}
-\subsection{Method \code{download_data()}}{
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
 General function for downloading raw data.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dataClass$download_data(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dataClass$download(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -75,13 +75,13 @@ Shared regional dataset processing}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-process_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-process_regional}{}}}
-\subsection{Method \code{process_regional()}}{
+\if{html}{\out{<a id="method-process"></a>}}
+\if{latex}{\out{\hypertarget{method-process}{}}}
+\subsection{Method \code{process()}}{
 General function to processes regional data.
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dataClass$process_regional(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dataClass$process(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -93,14 +93,14 @@ Dynamically works for level 1 and level 2 regions.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-return_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-return_regional}{}}}
-\subsection{Method \code{return_regional()}}{
+\if{html}{\out{<a id="method-return"></a>}}
+\if{latex}{\out{\hypertarget{method-return}{}}}
+\subsection{Method \code{return()}}{
 Optional region specific return changes.
 Designed to be called after \code{process_regional}. For most datasets a
 custom method should not be needed.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dataClass$return_regional()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dataClass$return()}\if{html}{\out{</div>}}
 }
 
 }

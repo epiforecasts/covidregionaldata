@@ -22,7 +22,7 @@ NameOfCountry <- R6::R6Class("country_name",
     #' @description *Country-name* specific state level data cleaning
     #' @param ... pass additional arguments
     #'
-    clean_regional = function(...) {
+    clean = function(...) {
       # function to clean the data (MUST BE CALLED clean_regional)
       # modify the data variable 'region' in place and add using 'self'
       # e.g. self$region$clean <- something

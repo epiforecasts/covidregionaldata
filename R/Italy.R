@@ -25,7 +25,7 @@ Italy <- R6::R6Class("italy",
     #' @importFrom rlang .data
     #' @param ... pass additional arguments
     #'
-    clean_regional = function(...) {
+    clean = function(...) {
       self$region$clean <- self$region$raw %>%
         mutate(
           date = as_date(ymd_hms(.data$data)),

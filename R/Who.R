@@ -28,7 +28,7 @@ Who <- R6::R6Class("who",
     #' @param ... pass additional arguments
     #' @importFrom dplyr mutate rename
     #' @importFrom countrycode countrycode
-    clean_regional = function(...) {
+    clean = function(...) {
       self$region$clean <- self$region$raw
       colnames(self$region$clean) <- c(
         "date", "iso_code", "country", "who_region",
@@ -57,7 +57,7 @@ Who <- R6::R6Class("who",
     #' @author Sam Abbott
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
-    return_regional = function(...) {
+    return = function(...) {
       self$region$return <- self$region$processed %>%
         group_by(.data$country) %>%
         fill(.data$who_region, .data$un_region, .direction = "updown") %>%

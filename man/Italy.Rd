@@ -29,7 +29,7 @@ Inherits from \code{dataClass}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-clean_regional}{\code{Italy$clean_regional()}}
+\item \href{#method-clean}{\code{Italy$clean()}}
 \item \href{#method-new}{\code{Italy$new()}}
 \item \href{#method-clone}{\code{Italy$clone()}}
 }
@@ -37,20 +37,20 @@ Inherits from \code{dataClass}
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="download_data">}\href{../../covidregionaldata/html/dataClass.html#method-download_data}{\code{covidregionaldata::dataClass$download_data()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="download">}\href{../../covidregionaldata/html/dataClass.html#method-download}{\code{covidregionaldata::dataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/dataClass.html#method-get_region_codes}{\code{covidregionaldata::dataClass$get_region_codes()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process_regional">}\href{../../covidregionaldata/html/dataClass.html#method-process_regional}{\code{covidregionaldata::dataClass$process_regional()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return_regional">}\href{../../covidregionaldata/html/dataClass.html#method-return_regional}{\code{covidregionaldata::dataClass$return_regional()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process">}\href{../../covidregionaldata/html/dataClass.html#method-process}{\code{covidregionaldata::dataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return">}\href{../../covidregionaldata/html/dataClass.html#method-return}{\code{covidregionaldata::dataClass$return()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_regional}{}}}
-\subsection{Method \code{clean_regional()}}{
+\if{html}{\out{<a id="method-clean"></a>}}
+\if{latex}{\out{\hypertarget{method-clean}{}}}
+\subsection{Method \code{clean()}}{
 Italy specific state level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Italy$clean_regional(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Italy$clean(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -65,7 +65,8 @@ Italy specific state level data cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Set up the country class with attributes set to input parameters
+Set up the country class with attributes set to input
+parameters
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Italy$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
 }
@@ -75,7 +76,8 @@ Set up the country class with attributes set to input parameters
 \describe{
 \item{\code{level}}{The region level for the data}
 
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to today's date.}
+\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to
+today's date.}
 
 \item{\code{localise}}{Boolean. Should region names be localised.}
 

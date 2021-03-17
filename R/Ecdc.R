@@ -25,7 +25,7 @@ Ecdc <- R6::R6Class("ecdc",
     #' @importFrom stringr str_replace_all
     #' @importFrom countrycode countryname countrycode
     #'
-    clean_regional = function(...) {
+    clean = function(...) {
       long_string <- "Cases_on_an_international_conveyance_Japan"
       self$region$clean <- self$region$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
@@ -77,7 +77,7 @@ Ecdc <- R6::R6Class("ecdc",
     #' @author Sam Abbott
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
-    return_regional = function(...) {
+    return = function(...) {
       self$region$return <- self$region$processed %>%
         group_by(.data$country) %>%
         fill(.data$population_2019, .data$un_region, .direction = "updown") %>%

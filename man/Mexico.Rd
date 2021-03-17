@@ -32,8 +32,8 @@ Sam Abbott
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-download_data}{\code{Mexico$download_data()}}
-\item \href{#method-clean_regional}{\code{Mexico$clean_regional()}}
+\item \href{#method-download}{\code{Mexico$download()}}
+\item \href{#method-clean}{\code{Mexico$clean()}}
 \item \href{#method-clean_regional_level_1}{\code{Mexico$clean_regional_level_1()}}
 \item \href{#method-clean_regional_level_2}{\code{Mexico$clean_regional_level_2()}}
 \item \href{#method-new}{\code{Mexico$new()}}
@@ -44,30 +44,31 @@ Sam Abbott
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/dataClass.html#method-get_region_codes}{\code{covidregionaldata::dataClass$get_region_codes()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process_regional">}\href{../../covidregionaldata/html/dataClass.html#method-process_regional}{\code{covidregionaldata::dataClass$process_regional()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return_regional">}\href{../../covidregionaldata/html/dataClass.html#method-return_regional}{\code{covidregionaldata::dataClass$return_regional()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process">}\href{../../covidregionaldata/html/dataClass.html#method-process}{\code{covidregionaldata::dataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return">}\href{../../covidregionaldata/html/dataClass.html#method-return}{\code{covidregionaldata::dataClass$return()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download_data"></a>}}
-\if{latex}{\out{\hypertarget{method-download_data}{}}}
-\subsection{Method \code{download_data()}}{
-Data download function for Mexico data. This replaces the generic
-download_data function in \code{dataClass}. To get the latest data
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Data download function for Mexico data. This replaces the
+generic download_data function in \code{dataClass}. To get the latest data
 use a PHP script from the website.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$download_data()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$download()}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_regional}{}}}
-\subsection{Method \code{clean_regional()}}{
-directs to either level 1 or level 2 processing based on request.
+\if{html}{\out{<a id="method-clean"></a>}}
+\if{latex}{\out{\hypertarget{method-clean}{}}}
+\subsection{Method \code{clean()}}{
+directs to either level 1 or level 2 processing based on
+request.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -116,7 +117,8 @@ Mexico Specific Municipality Level Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Set up the country class with attributes set to input parameters
+Set up the country class with attributes set to input
+parameters
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
 }
@@ -126,7 +128,8 @@ Set up the country class with attributes set to input parameters
 \describe{
 \item{\code{level}}{The region level for the data}
 
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to today's date.}
+\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to
+today's date.}
 
 \item{\code{localise}}{Boolean. Should region names be localised.}
 

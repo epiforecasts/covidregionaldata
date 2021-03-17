@@ -34,10 +34,10 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   )
 
   # download and cache raw data
-  nation_class$download_data()
+  nation_class$download()
 
   # dataset specifc cleaning
-  nation_class$clean_regional()
+  nation_class$clean()
 
   # filter for country of interest
   if (!missing(country)) {
@@ -54,8 +54,8 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   }
 
   # non-specific cleaning and checks
-  nation_class$process_regional()
+  nation_class$process()
 
-  nation <- nation_class$return_regional()
+  nation <- nation_class$return()
   return(nation)
 }

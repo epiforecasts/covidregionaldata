@@ -32,8 +32,8 @@ Sam Abbott
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-clean_regional}{\code{Ecdc$clean_regional()}}
-\item \href{#method-return_regional}{\code{Ecdc$return_regional()}}
+\item \href{#method-clean}{\code{Ecdc$clean()}}
+\item \href{#method-return}{\code{Ecdc$return()}}
 \item \href{#method-new}{\code{Ecdc$new()}}
 \item \href{#method-clone}{\code{Ecdc$clone()}}
 }
@@ -41,19 +41,19 @@ Sam Abbott
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="download_data">}\href{../../covidregionaldata/html/dataClass.html#method-download_data}{\code{covidregionaldata::dataClass$download_data()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="download">}\href{../../covidregionaldata/html/dataClass.html#method-download}{\code{covidregionaldata::dataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/dataClass.html#method-get_region_codes}{\code{covidregionaldata::dataClass$get_region_codes()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process_regional">}\href{../../covidregionaldata/html/dataClass.html#method-process_regional}{\code{covidregionaldata::dataClass$process_regional()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process">}\href{../../covidregionaldata/html/dataClass.html#method-process}{\code{covidregionaldata::dataClass$process()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_regional}{}}}
-\subsection{Method \code{clean_regional()}}{
+\if{html}{\out{<a id="method-clean"></a>}}
+\if{latex}{\out{\hypertarget{method-clean}{}}}
+\subsection{Method \code{clean()}}{
 ECDC specific state level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Ecdc$clean_regional(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Ecdc$clean(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -65,12 +65,12 @@ ECDC specific state level data cleaning
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-return_regional"></a>}}
-\if{latex}{\out{\hypertarget{method-return_regional}{}}}
-\subsection{Method \code{return_regional()}}{
+\if{html}{\out{<a id="method-return"></a>}}
+\if{latex}{\out{\hypertarget{method-return}{}}}
+\subsection{Method \code{return()}}{
 Specific return settings for the ECDC dataset.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Ecdc$return_regional(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Ecdc$return(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

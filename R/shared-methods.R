@@ -105,7 +105,7 @@ dataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     #' @param ... pass additional arguments
-    download_data = function(...) {
+    download = function(...) {
       self$region$raw <- suppressWarnings(csv_reader(self$data_url))
     },
 
@@ -114,7 +114,7 @@ dataClass <- R6::R6Class(
     #' @description General function to processes regional data.
     #' Dynamically works for level 1 and level 2 regions.
     #' @param ... pass additional arguments
-    process_regional = function(...) {
+    process = function(...) {
       region_vars <- switch(self$level,
         "1" = c("region_level_1", "level_1_region_code"),
         "2" = c(
@@ -133,7 +133,7 @@ dataClass <- R6::R6Class(
     #' Designed to be called after `process_regional`. For most datasets a
     #' custom method should not be needed.
     #' @author Sam Abbott
-    return_regional = function() {
+    return = function() {
       self$region$return <- NA
       if (self$steps) {
         return(self$region)
