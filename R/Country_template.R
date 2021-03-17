@@ -4,8 +4,15 @@
 #'  and processing covid-19 region data for *Country-name*
 #'
 #' @details Inherits from `dataClass`
-#'
-NameOfCountry <- R6::R6Class("country_name",
+#' @examples
+#' \dontrun{
+#' Italy(
+#'   level = "1", totals = FALSE,
+#'   localise = FALSE, verbose = FALSE,
+#'   steps = FALSE
+#' )
+#' }
+NameOfCountry <- R6::R6Class("Country_template",
   inherit = dataClass,
   public = list(
 

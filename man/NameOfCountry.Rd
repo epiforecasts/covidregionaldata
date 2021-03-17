@@ -10,8 +10,17 @@ and processing covid-19 region data for \emph{Country-name}
 \details{
 Inherits from \code{dataClass}
 }
+\examples{
+\dontrun{
+Italy(
+  level = "1", totals = FALSE,
+  localise = FALSE, verbose = FALSE,
+  steps = FALSE
+)
+}
+}
 \section{Super class}{
-\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{country_name}
+\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{Country_template}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
