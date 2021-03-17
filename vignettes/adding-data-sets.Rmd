@@ -38,50 +38,70 @@ list of expected column names below to see what correspondences exist.
 
 ### Expected column names
 
+Below is a list of the columns which your `get_regional_data_*` function
+is expected to return. You will not likely have data for all these columns
+and you do _not_ need to generate empty or `NA` columns.
+
+At a minimum, your `get_regional_data_*` function should provide `date`,
+one of `level_1_region` or `level_2_region` (as appropriate),
+one of `level_1_region_code` or `level_2_region_code` (as appropriate),
+and one of `cases_new`, `cases_total`, `deaths_new`, `deaths_total`,
+`recovered_new`, `recovered_total`, `tested_new`, `tested_total`.
+
 `date`
- : Date of data
+:  the date that the counts were reported (YYYY-MM-DD).
 
-`region_level_2`
- : Name of level 2 region
+`level 1 region`
+:  the level 1 region name. This column will be named differently
+for different countries (e.g. state, province),
+but this renaming is done by the function which calls 
+your `get_regional_data_*` function, based on what is present in 
+`get_info_covidregionaldata` (see below)
 
-`level_2_region_code`
- : Code for level 2 region
+`level 1 region code`
+:  a standard code for the level 1 region. The column name reflects the specific administrative code used. Typically data returns the [ISO 3166-2 standard](https://en.wikipedia.org/wiki/ISO_3166-2),
+although where not available the column will be named differently to reflect its source.
 
-`region_level_1`
- : Name of level 1 region
+`level 2 region`
+:  the level 2 region name. This column will be named differently
+for different countries (e.g. city, county),
+but this renaming is done by the function which calls 
+your `get_regional_data_*` function, based on what is present in 
+`get_info_covidregionaldata` (see below)
 
-`level_1_region_code`
- : Code for level 2 region
+`level 2 region code`
+:  a standard code for the level 2 region. The column will be named differently for different countries (e.g. `fips` in the USA).
 
 `cases_new`
- : Number of new cases
+:  new reported cases for that day
 
 `cases_total`
- : Total number of cases
+:  total reported cases up to and including that day
 
 `deaths_new`
- : New deaths
+:  new reported deaths for that day
 
 `deaths_total`
- : Total deaths due to COVID
+:  total reported deaths up to and including that day
 
 `recovered_new`
- : Newly-recovered cases
+:  new reported recoveries for that day
 
 `recovered_total`
- : Total recovered cases
- 
+:  total reported recoveries up to and including that day
+
 `hosp_new`
- : Newly-hospitalised cases
+:  new reported hospitalisations for that day
 
 `hosp_total`
- : Total hospitalised cases
+:  total reported hospitalisations up to and including that day (note this is cumulative total of new reported, _not_ total currently in hospital)
 
 `tested_new`
- : Number of new tests
- 
+:  tests for that day
+
 `tested_total`
- : Total number of tests
+:  total tests completed up to and including that day
+
 
 ## Create a new file with the name of your country
 
@@ -170,7 +190,7 @@ The table in this function expects
  : `get_regional_data` for country data
  
 `country`
- :   The country name as a character string, all lower-case letters.
+ :   The country name in English as a character string, all lower-case letters.
  
 `level_1_region`
  :   The local name for a level 1 region, a character string; can be `NA`
@@ -215,10 +235,6 @@ Among other things, this will show you how `vroom` is parsing your
 source data.
 
 
-## Run R-CMD Check
-
-Check the package.
-
 ### Run `lintr`
 
 `lintr` will pedantically check your code for style. Note that the default
@@ -246,6 +262,19 @@ You may need to edit the `DESCRIPTION` file to add new package dependencies.
 
 You will probably have added at least one or two new words which need to be
 added to the WORDLIST used by the spellchecker.
+
+## Run R-CMD Check
+
+Check the package. Checking the package will probably highlight additional
+changes you need to make to the WORDLIST, DESCRIPTION, to your documentation
+or other items.
+
+### CRAN accepts only ASCII source
+
+Your data source or your region names may use non-ASCII characters. The
+[prefixer::](https://github.com/dreamRs/prefixer) add-in has [a handy tool
+for converting non-ASCII characters to
+escaped versions](https://github.com/dreamRs/prefixer#not-ascii).
 
 ## Extra credit: merging data sources
 
