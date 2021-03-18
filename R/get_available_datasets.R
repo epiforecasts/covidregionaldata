@@ -7,12 +7,10 @@
 #' data is available for
 #' @importFrom rlang .data
 #' @importFrom dplyr select bind_rows
+#' @importFrom tibble as_tibble
 #' @export
 #' @examples
-#' \dontrun{
-#' get_avaliable_datasets()
-#' }
-#'
+#' get_available_datasets()
 get_available_datasets <- function() {
   envi <- ls("package:covidregionaldata")
   # regional data
@@ -29,7 +27,7 @@ get_available_datasets <- function() {
           unlist(public_fields$source_data_cols),
           collapse = " "
         )
-        dat <- as.data.frame(public_fields)
+        dat <- as_tibble(public_fields)
         dat["country"] <- x
         if (x %in% c("WHO", "ECDC")) {
           dat["get_data_function"] <- "get_national_data"
