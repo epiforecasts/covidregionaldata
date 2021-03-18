@@ -42,7 +42,7 @@ check_country_avaliable <- function(country = character(), level = "1",
 
 #' initialize function used by all `Country` class objects.
 #' @description Set up the country class with attributes set to input
-#' parameters
+#' parameters. Should only be called by a `Country` class object.
 #' @param self The specific class object to attach values
 #' @param level The region level for the data
 #' @param totals Boolean. If TRUE, returns totalled data per region up to
@@ -50,7 +50,9 @@ check_country_avaliable <- function(country = character(), level = "1",
 #' @param localise Boolean. Should region names be localised.
 #' @param verbose Boolean. Display information at various stages.
 #' @param steps Boolean. Keep data from each processing step.
-general_init <- function(self, level, totals, localise, verbose, steps) {
+general_init <- function(self, level = "1",
+                         totals = FALSE, localise = TRUE,
+                         verbose = TRUE, steps = FALSE) {
   self$level <- level
   self$totals <- totals
   self$localise <- localise

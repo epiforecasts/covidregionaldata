@@ -4,7 +4,14 @@
 \alias{general_init}
 \title{initialize function used by all \code{Country} class objects.}
 \usage{
-general_init(self, level, totals, localise, verbose, steps)
+general_init(
+  self,
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = TRUE,
+  steps = FALSE
+)
 }
 \arguments{
 \item{self}{The specific class object to attach values}
@@ -22,5 +29,5 @@ today's date.}
 }
 \description{
 Set up the country class with attributes set to input
-parameters
+parameters. Should only be called by a \code{Country} class object.
 }
