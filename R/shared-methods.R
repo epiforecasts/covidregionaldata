@@ -95,11 +95,7 @@ DataClass <- R6::R6Class(
       }
 
       self$region <- structure(
-        self$region,
-        class = c(
-          paste0("crd_", self$country, "_", self$level),
-          paste0("crd_level_", self$level)
-        )
+        self$region
       )
     },
 
