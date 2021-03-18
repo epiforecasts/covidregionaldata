@@ -15,11 +15,11 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-Italy$new(
-  level = "1", totals = FALSE,
-  localise = FALSE, verbose = FALSE,
-  steps = FALSE
-)
+region <- Italy$new(verbose = TRUE, steps = TRUE)
+region$download()
+region$clean()
+region$process()
+region$return()
 }
 }
 \section{Super class}{
@@ -71,7 +71,13 @@ Italy specific state level data cleaning
 Set up the country class with attributes set to input
 parameters
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Italy$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Italy$new(
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = FALSE,
+  steps = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

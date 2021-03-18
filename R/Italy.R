@@ -7,11 +7,11 @@
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
 #' @examples
 #' \dontrun{
-#' Italy$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' region <- Italy$new(verbose = TRUE, steps = TRUE)
+#' region$download()
+#' region$clean()
+#' region$process()
+#' region$return()
 #' }
 Italy <- R6::R6Class("Italy",
   inherit = DataClass,
@@ -64,7 +64,8 @@ Italy <- R6::R6Class("Italy",
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
-    initialize = function(level, totals, localise, verbose, steps) {
+    initialize = function(level = "1", totals = FALSE, localise = TRUE,
+                          verbose = FALSE, steps = FALSE) {
       self$level <- level
       self$totals <- totals
       self$localise <- localise
