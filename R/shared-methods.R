@@ -34,7 +34,7 @@ check_country_avaliable <- function(country = character(), level = "1",
 
   if (is.null(region_class[[tar_level]])) {
     stop("Target spatial level not supported in the selected country.
-               See available_datasets for supported options")
+               use get_available_datasets() to see supported options")
   }
 
   return(region_class)

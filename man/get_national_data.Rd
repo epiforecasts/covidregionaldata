@@ -9,7 +9,7 @@ get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
 \arguments{
 \item{country}{A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
-options see \code{available_datasets}.}
+options use \code{get_available_datasets}.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}

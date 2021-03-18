@@ -12,12 +12,9 @@ test_that(
     }
 
     check_all_country_fields <- function() {
-      avaliable_sources <- covidregionaldata::region_codes$country
+      avalibale_country_data <- get_available_datasets()
+      avaliable_sources <- avalibale_country_data$country
       for (country in avaliable_sources) {
-        country <- paste0(
-          toupper(substr(country, 1, 1)),
-          tolower(substr(country, 2, nchar(country)))
-        )
         regionClass <- get(country)
         check_country_fields(regionClass)
       }
@@ -41,12 +38,9 @@ test_that(
     }
 
     check_all_country_methods <- function() {
-      avaliable_sources <- covidregionaldata::region_codes$country
+      avalibale_country_data <- get_available_datasets()
+      avaliable_sources <- avalibale_country_data$country
       for (country in avaliable_sources) {
-        country <- paste0(
-          toupper(substr(country, 1, 1)),
-          tolower(substr(country, 2, nchar(country)))
-        )
         regionClass <- get(country)
         check_country_methods(regionClass)
       }

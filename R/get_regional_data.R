@@ -4,10 +4,10 @@
 #' for Covid-19.
 #' @param country A character string specifying the country to get data from.
 #' Not case dependent. Name should be the English name. For a list of
-#' options see `available_datasets`.
+#' options use `get_available_datasets`.
 #' @param level A character string indicating the target administrative level
 #' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). See `available_datasets` for supported
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
 #' options by dataset.
 #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset

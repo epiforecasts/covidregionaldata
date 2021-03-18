@@ -5,38 +5,51 @@
 #' extracts the country name and what level it has from the object.
 #' @return A list of available countries and the region level
 #' data is available for
+#' @importFrom rlang .data
+#' @importFrom dplyr select bind_rows
 #' @export
+#' @examples
+#' \dontrun{
+#' get_avaliable_datasets()
+#' }
 #'
-show_R6_classes <- function() {
+get_available_datasets <- function() {
   envi <- ls("package:covidregionaldata")
-  starts_with_capitals_idx <- grep("^[A-Z][a-z]", envi)
+  # regional data
+  starts_with_capitals_idx <- grep("^[A-Z]", envi)
   starts_with_capitals <- envi[starts_with_capitals_idx]
-  exclude <- c("Who", "Ecdc", "NameOfCountry")
-  check <- lapply(
+  exclude <- c("DataClass", "CountryTemplate")
+  valid_country_objects <- lapply(
     starts_with_capitals,
     function(x) {
-      class(get(x)) == "R6ClassGenerator" & !(x %in% c(exclude))
+      country_obj <- get(x)
+      if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
+        public_fields <- get(x)$public_fields
+        public_fields$source_data_cols <- paste(
+          unlist(public_fields$source_data_cols),
+          collapse = " "
+        )
+        dat <- as.data.frame(public_fields)
+        dat["country"] <- x
+        if (x %in% c("WHO", "ECDC")) {
+          dat["get_data_function"] <- "get_national_data"
+        } else {
+          dat["get_data_function"] <- "get_regional_data"
+        }
+        return(dat)
+      }
     }
   )
-  valid_country_classes <- starts_with_capitals[unlist(check)]
-  public_field_names <- lapply(
-    valid_country_classes,
-    function(x) {
-      !(is.na(get(x)$public_fields["level_2_region"]))
-    }
-  )
-  level_2_available <- valid_country_classes[unlist(public_field_names)]
-
-  # Format the level 1 and level 2 into a dataframe like show countries.
-  level_1 <- data.frame(valid_country_classes, "Y", stringsAsFactors = FALSE)
-  colnames(level_1) <- c("county", "level_1")
-  level_2 <- data.frame(level_2_available, "Y", stringsAsFactors = FALSE)
-  colnames(level_2) <- c("county", "level_2")
-  countries_level_available <- merge(level_1,
-    level_2,
-    by = "county",
-    all = TRUE
-  )
-  countries_level_available[is.na(countries_level_available)] <- "N"
-  return(countries_level_available)
+  valid_country_objects <- Filter(Negate(is.null), valid_country_objects)
+  avaliable_country_data <- valid_country_objects %>%
+    bind_rows() %>%
+    select(
+      .data$country,
+      .data$level_1_region,
+      .data$level_2_region,
+      .data$get_data_function,
+      .data$data_url,
+      .data$source_data_cols
+    )
+  return(avaliable_country_data)
 }

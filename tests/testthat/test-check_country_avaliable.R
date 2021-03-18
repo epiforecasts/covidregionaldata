@@ -50,7 +50,7 @@ test_that(
         verbose = FALSE, steps = FALSE
       ),
       "Target spatial level not supported in the selected country.
-               See available_datasets for supported options",
+               use get_available_datasets() to see supported options",
       fixed = TRUE
     )
   }

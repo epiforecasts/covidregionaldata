@@ -17,11 +17,11 @@ check_country_avaliable(
 \arguments{
 \item{country}{A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
-options see \code{available_datasets}.}
+options use \code{get_available_datasets}.}
 
 \item{level}{A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
-level 1 ("1) and level 2 ("2"). See \code{available_datasets} for supported
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
 options by dataset.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled

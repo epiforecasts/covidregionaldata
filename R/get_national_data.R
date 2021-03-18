@@ -8,7 +8,7 @@
 #'
 #' @param country A character string specifying the country to get data from.
 #' Not case dependent. Name should be the English name. For a list of
-#' options see `available_datasets`.
+#' options use `get_available_datasets`.
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
