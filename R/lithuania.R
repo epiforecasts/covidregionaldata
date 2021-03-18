@@ -1,15 +1,18 @@
 #' Lithuania Regional Daily COVID-19 Count Data - County
 #' @inherit get_lithuania_regional_cases_with_level_2
 #'
-#' @description Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis)
-#' and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
-#' Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
+#' @description Extracts daily COVID-19 data for Lithuania,
+#' stratified by county (apskritis) and municipality (savivaldybe).
+#' Some Lithuanian municipalities share names, there being both a
+#' Vilnius city municipality (m. sav.) and a Vilnius regional
+#' municipality (r. sav.)
 #'
 #' Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 #'
 #' It is loaded and then sanitised.
 #'
-#' @return A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.
+#' @return A data frame of COVID cases by county in Lithuania,
+#' ready to be used by \code{get_regional_data()}.
 #'
 #' @seealso [get_lithuania_regional_cases_with_level_2()]
 #' @md
@@ -22,26 +25,18 @@ get_lithuania_regional_cases_only_level_1 <-
            death_definition = "of",
            recovered_definition = "official") {
     # Lithuania only publishes data at the municipality level. To provide
-    # data for the level 1 regions (Counties, Apskritis) we get the municipality
-    # level data and aggregate it according to municipality
-    # level_1_lookup <- tibble::tibble(level_1_region_code = c("LT-AL", "LT-KU", "LT-KL", "LT-MR", "LT-PN",
-    #                                        "LT-SA", "LT-TA", "LT-TE", "LT-UT", "LT-VL", NA_character_),
-    #                region_level_1 = c("Alytaus apskritis",
-    #                                   "Kauno apskritis", "Klaip\u0117dos apskritis", "Marijampol\u0117s apskritis",
-    #                                   "Panev\u0117\u017eio apskritis", "\u0160iauli\u0173 apskritis", "Taurag\u0117s apskritis",
-    #                                   "Tel\u0161i\u0173 apskritis", "Utenos apskritis", "Vilniaus apskritis", "nenustatyta"),
-    #                region_level_1_en = c("Alytus County", "Kaunas County",
-    #                                      "Klaip\u0117da County", "Marijampol\u0117 County", "Panev\u0117\u017eys County",
-    #                                      "\u0160iauliai County", "Taurag\u0117 County", "Tel\u0161iai County", "Utena County",
-    #                                      "Vilnius County", "unstated"))
-    #
+    # data for the level 1 regions (Counties, Apskritis) we get the
+    # municipality level data and aggregate it according to municipality
+
     county_data <- get_lithuania_regional_cases_with_level_2(
       national_data,
       all_osp_fields,
       death_definition
     ) %>%
       dplyr::group_by(date, region_level_1, level_1_region_code) %>%
-      dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum)) %>%
+      dplyr::summarise(
+        dplyr::across(tidyselect::vars_select_helpers$where(is.numeric),
+                      sum)) %>%
       dplyr::mutate(region_level_1 = if_else(is.na(.data$region_level_1),
         "Lietuva", .data$region_level_1
       )) %>%
@@ -219,34 +214,20 @@ get_lithuania_regional_cases_only_level_1 <-
 #'
 #'
 #' @seealso [get_lithuania_regional_cases_only_level_1()]
-#' 
+#'
 #' @md
-#' 
+#'
 #' @importFrom dplyr %>% filter select mutate full_join left_join rename bind_rows
 #' @importFrom lubridate as_date ymd
-#' @importFrom xml2 read_html
-#' @importFrom rvest html_nodes html_table
-#' @importFrom tibble tibble
+#' @importFrom tibble tribble
 #' @importFrom rlang .data
 #' @importFrom tidyselect last_col
-#' 
+#'
 get_lithuania_regional_cases_with_level_2 <-
   function(national_data = FALSE,
            all_osp_fields = FALSE,
            death_definition = "of",
            recovered_definition = "official") {
-    # The following code, adjusted from a version for France, was initially
-    # used to create lookup tables of Lithuanian municipality and country
-    # codes.
-    # These were then adjusted to match the format used by the
-    # Official Statistics Portal in their open data and are left as
-    # hard-coded tibbles. These codes have not changed in ten years.
-    # level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
-    # level_2_codes_table <- level_2_codes_url %>%
-    #   xml2::read_html() %>%
-    #   rvest::html_nodes(xpath = '//*[@id=\"mw-content-text\"]/div/table') %>%
-    #   rvest::html_table(fill = TRUE)
-
     region_lookup_table <- tibble::tribble(
       ~region_level_2, ~level_2_region_code, ~region_level_1, ~level_1_region_code, ~region_level_1_en, ~region_level_2_type,
       "Alytaus m. sav.", "LT-02", "Alytaus apskritis", "LT-AL", "Alytus County", "city municipality",
@@ -315,7 +296,7 @@ get_lithuania_regional_cases_with_level_2 <-
     # Advertise the fine documentation.
     message("Use ?get_lithuania_regional_cases_with_level_2() for more information on this dataset")
 
-    # Read data --------------------------------------------------------------------
+    # Read data
     cases_url <- "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
     osp_data <- csv_reader(file = cases_url)
 
@@ -373,10 +354,13 @@ get_lithuania_regional_cases_with_level_2 <-
 
     # Take the difference between national and sum of counties' data
     unassigned <- osp_data %>%
-      dplyr::mutate(national = ifelse(.data$municipality_name == "Lietuva", "national", "municipality")) %>%
+      dplyr::mutate(national = ifelse(.data$municipality_name == "Lietuva",
+                                      "national", "municipality")) %>%
       dplyr::group_by(date, .data$national) %>%
-      dplyr::summarise(across(tidyselect::all_of(sum_cols), ~ sum(.x, na.rm = TRUE))) %>%
-      dplyr::mutate(across(tidyselect::all_of(sum_cols), ~ dplyr::lead(.x, 1) - .x),
+      dplyr::summarise(across(tidyselect::all_of(sum_cols),
+                              ~ sum(.x, na.rm = TRUE))) %>%
+      dplyr::mutate(across(tidyselect::all_of(sum_cols),
+                           ~ dplyr::lead(.x, 1) - .x),
         municipality_name = "Unknown",
         ab_prc_day =
           dplyr::if_else(
@@ -405,7 +389,8 @@ get_lithuania_regional_cases_with_level_2 <-
 
     # Join unknown locations to main dataset
     osp_data_w_unassigned <- dplyr::bind_rows(
-      osp_data %>% select(-.data$object_id, -.data$municipality_code), unassigned
+      osp_data %>% select(-.data$object_id, -.data$municipality_code),
+      unassigned
     )
 
     # Exclude national data based on user param (default = FALSE)
@@ -432,7 +417,7 @@ get_lithuania_regional_cases_with_level_2 <-
       dplyr::left_join(region_lookup_table, by = c("region_level_2")) %>%
       dplyr::select(
         date, region_level_1, region_level_2,
-        level_1_region_code, level_2_region_code, 
+        level_1_region_code, level_2_region_code,
         cases_new, cases_total, deaths_new,
         tested_new, recovered_total,
         dplyr::everything()
@@ -445,13 +430,16 @@ get_lithuania_regional_cases_with_level_2 <-
         dplyr::select(
           date, region_level_1, region_level_2,
           level_1_region_code, level_2_region_code,
-          cases_new, cases_total, deaths_new, tested_new, recovered_total
+          cases_new, cases_total, deaths_new,
+          tested_new, recovered_total
         )
     }
-    ## This is the list of fields which we're trying to generate, copied from get_regional_data.R
-    # date, region_level_2, level_2_region_code, region_level_1, level_1_region_code,
+    ## This is the list of fields which we're trying to generate, copied
+    # from get_regional_data.R:
+    # date, region_level_2, level_2_region_code,
+    # region_level_1, level_1_region_code,
     # cases_new, cases_total, deaths_new, deaths_total,
     # recovered_new, recovered_total, hosp_new, hosp_total,
-    # tested_new, tested_total, dplyr::everything())
+    # tested_new, tested_total, dplyr::everything()
     return(cases_data)
   }
