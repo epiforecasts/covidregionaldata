@@ -4,11 +4,11 @@
 #' is avaliable and return an initialised region class for that country.
 #' @inheritParams get_regional_data
 #' @return The target countries specific object if avaliable, e.g. [Italy()]
-#' @rdname check_country_avaliable
+#' @rdname check_country_available
 #' @export
 #' @examples
-#' check_country_avaliable(country = "Italy")
-check_country_avaliable <- function(country = character(), level = "1",
+#' check_country_available(country = "Italy")
+check_country_available <- function(country = character(), level = "1",
                                     totals = FALSE, localise = TRUE,
                                     verbose = TRUE, steps = FALSE, ...) {
   stopifnot(is.character(country))

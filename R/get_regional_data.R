@@ -36,7 +36,7 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   )
 
   # check data availability and initiate country class if avaliable
-  region_class <- check_country_avaliable(
+  region_class <- check_country_available(
     country = country, level = level,
     totals = totals, localise = localise,
     verbose = verbose, steps = steps, ...

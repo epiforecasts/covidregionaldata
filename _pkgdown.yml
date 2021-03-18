@@ -47,6 +47,8 @@ reference:
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
+      - get_available_datasets
+      - check_country_available
       - contains("fill")
       - contains("csv")
       - contains("cumulative")

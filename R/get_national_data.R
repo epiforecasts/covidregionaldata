@@ -34,7 +34,7 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   source <- toupper(source)
 
   # check data availability and initiate country class if avaliable
-  nation_class <- check_country_avaliable(
+  nation_class <- check_country_available(
     country = source, level = "1",
     totals = FALSE, localise = TRUE,
     verbose = verbose, steps = steps, ...
