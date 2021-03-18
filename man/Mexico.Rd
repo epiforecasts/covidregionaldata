@@ -105,25 +105,15 @@ Mexico Specific Municipality Level Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Set up the country class with attributes set to input
-parameters
+Initialize the country
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{level}}{The region level for the data}
-
-\item{\code{totals}}{Boolean. If TRUE, returns totalled data per region up to
-today's date.}
-
-\item{\code{localise}}{Boolean. Should region names be localised.}
-
-\item{\code{verbose}}{Boolean. Display information at various stages.}
-
-\item{\code{steps}}{Boolean. Keep data from each processing step.}
+\item{\code{...}}{The args passed by \link{general_init}}
 }
 \if{html}{\out{</div>}}
 }
