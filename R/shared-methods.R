@@ -47,8 +47,8 @@ check_country_avaliable <- function(country = character(), level = "1",
 #'
 #' @details All countries have shared methods for extracting region codes,
 #' downloading, processing, and returning data.
-dataClass <- R6::R6Class(
-  "dataClass",
+DataClass <- R6::R6Class(
+  "DataClass",
   public = list(
     #' @field country name of country to fetch data for
     country = "",

@@ -8,7 +8,7 @@ Country specific information for downloading, cleaning
 and processing covid-19 region data for \emph{Country-name}
 }
 \details{
-Inherits from \code{dataClass}
+Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
@@ -20,7 +20,7 @@ Italy$new(
 }
 }
 \section{Super class}{
-\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{CountryTemplate}
+\code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{CountryTemplate}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -44,10 +44,10 @@ Italy$new(
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="download">}\href{../../covidregionaldata/html/dataClass.html#method-download}{\code{covidregionaldata::dataClass$download()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/dataClass.html#method-get_region_codes}{\code{covidregionaldata::dataClass$get_region_codes()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="process">}\href{../../covidregionaldata/html/dataClass.html#method-process}{\code{covidregionaldata::dataClass$process()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="dataClass" data-id="return">}\href{../../covidregionaldata/html/dataClass.html#method-return}{\code{covidregionaldata::dataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
 \out{</details>}
 }

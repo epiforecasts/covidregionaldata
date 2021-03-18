@@ -3,7 +3,7 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for Italy.
 #'
-#' @details Inherits from `dataClass`
+#' @details Inherits from `DataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
 #' @examples
 #' \dontrun{
@@ -14,7 +14,7 @@
 #' )
 #' }
 Italy <- R6::R6Class("Italy",
-  inherit = dataClass,
+  inherit = DataClass,
   public = list(
 
     # Core Attributes

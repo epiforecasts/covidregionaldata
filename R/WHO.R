@@ -3,7 +3,7 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data from the World Health Organisation
 #'
-#' @details Inherits from `dataClass`
+#' @details Inherits from `DataClass`
 #' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
 #' @examples
 #' \dontrun{
@@ -14,7 +14,7 @@
 #' )
 #' }
 WHO <- R6::R6Class("WHO",
-  inherit = dataClass,
+  inherit = DataClass,
   public = list(
 
     # Core Attributes

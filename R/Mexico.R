@@ -3,7 +3,7 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for Mexico.
 #'
-#' @details Inherits from `dataClass`
+#' @details Inherits from `DataClass`
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
 #' @examples
 #' \dontrun{
@@ -14,7 +14,7 @@
 #' )
 #' }
 Mexico <- R6::R6Class("Mexico",
-  inherit = dataClass,
+  inherit = DataClass,
   public = list(
 
     # Core Attributes
@@ -28,7 +28,7 @@ Mexico <- R6::R6Class("Mexico",
     source_data_cols = c("cases_new", "deaths_new"),
 
     #' @description Data download function for Mexico data. This replaces the
-    #' generic download_data function in `dataClass`. To get the latest data
+    #' generic download_data function in `DataClass`. To get the latest data
     #' use a PHP script from the website.
     #' @importFrom httr POST content
     #' @importFrom xml2 xml_find_first xml_text

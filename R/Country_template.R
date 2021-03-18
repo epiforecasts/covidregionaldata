@@ -3,7 +3,7 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for *Country-name*
 #'
-#' @details Inherits from `dataClass`
+#' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
 #' Italy$new(
@@ -13,7 +13,7 @@
 #' )
 #' }
 CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
-  inherit = dataClass,
+  inherit = DataClass,
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)

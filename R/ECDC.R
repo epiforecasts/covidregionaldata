@@ -4,7 +4,7 @@
 #'  and processing covid-19 region data from the European Centre for
 #'  Disease Prevention and Control.
 #'
-#' @details Inherits from `dataClass`
+#' @details Inherits from `DataClass`
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 #' @examples
 #' \dontrun{
@@ -16,7 +16,7 @@
 #' }
 #'
 ECDC <- R6::R6Class("ECDC",
-  inherit = dataClass,
+  inherit = DataClass,
   public = list(
 
     # Core Attributes
