@@ -20,7 +20,7 @@ steps be kept and output in a list.}
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
-\item{...}{additional arguments to pass to Country classes.}
+\item{...}{additional arguments to pass to individual sources.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,

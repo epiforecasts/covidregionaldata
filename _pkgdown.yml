@@ -41,18 +41,9 @@ reference:
     contents:
       - get_national_data
       - get_regional_data
-      - get_linelist
-      - get_interventions_data
   - title: Datasets
     desc: Package datasets
-      - available_datasets
-  - title: Lower Level Methods
-    desc: Lower level methods used by other functions.
-    contents:
-      - contains("download_regional")
-      - contains("clean_regional")
-      - contains("process_regioanl")
-      - contains("return_regional")
+      - region_codes
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:

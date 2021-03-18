@@ -11,13 +11,10 @@
 #' options use `get_available_datasets`.
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
-#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
-#' steps be kept and output in a list.
-#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-#' messages and warnings be returned.
-#' @param ... additional arguments to pass to Country classes.
+#' @param ... additional arguments to pass to individual sources.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
+#' @inheritParams get_regional_data
 #' @importFrom dplyr group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
 #' @importFrom countrycode countryname

@@ -1,16 +1,16 @@
 #' R6 Class containing country specific attributes and methods
 #'
 #' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for *Country-name*
+#'  and processing covid-19 region data for an example Country.
 #'
 #' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
-#' Italy$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' region <- Italy$new(verbose = TRUE, steps = TRUE)
+#' region$download()
+#' region$clean()
+#' region$process()
+#' region$return()
 #' }
 CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   inherit = DataClass,
@@ -42,7 +42,8 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
-    initialize = function(level, totals, localise, verbose, steps) {
+    initialize = function(level = "1", totals = FALSE, localise = TRUE,
+                          verbose = FALSE, steps = FALSE) {
       self$level <- level
       self$totals <- totals
       self$localise <- localise

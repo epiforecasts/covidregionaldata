@@ -9,15 +9,12 @@
 #' of the data with the default being "1". Currently supported options are
 #' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
 #' options by dataset.
-#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
-#'  data per region up to today's date. If FALSE, returns the full dataset
-#'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
-#' @param ... additional arguments to pass to Country classes.
+#' @inheritParams process_internal
+#' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @export

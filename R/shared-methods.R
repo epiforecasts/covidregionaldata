@@ -4,11 +4,10 @@
 #' is avaliable and return an initialised region class for that country.
 #' @inheritParams get_regional_data
 #' @return The target countries specific object if avaliable, e.g. [Italy()]
-#' @rdname download_data
+#' @rdname check_country_avaliable
+#' @export
 #' @examples
-#' \dontrun{
 #' check_country_avaliable(country = "Italy")
-#' }
 check_country_avaliable <- function(country = character(), level = "1",
                                     totals = FALSE, localise = TRUE,
                                     verbose = TRUE, steps = FALSE, ...) {
@@ -116,7 +115,7 @@ DataClass <- R6::R6Class(
           "region_level_1", "level_1_region_code"
         )
       )
-      self$region <- process_regional_internal(
+      self$region <- process_internal(
         self$region,
         group_vars = region_vars, totals = self$totals,
         localise = self$localise, verbose = self$verbose

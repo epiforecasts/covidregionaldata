@@ -5,18 +5,18 @@
 \title{R6 Class containing country specific attributes and methods}
 \description{
 Country specific information for downloading, cleaning
-and processing covid-19 region data for \emph{Country-name}
+and processing covid-19 region data for an example Country.
 }
 \details{
 Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-Italy$new(
-  level = "1", totals = FALSE,
-  localise = FALSE, verbose = FALSE,
-  steps = FALSE
-)
+region <- Italy$new(verbose = TRUE, steps = TRUE)
+region$download()
+region$clean()
+region$process()
+region$return()
 }
 }
 \section{Super class}{
@@ -75,7 +75,13 @@ Italy$new(
 Set up the country class with attributes set to input
 parameters
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryTemplate$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CountryTemplate$new(
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = FALSE,
+  steps = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

@@ -12,7 +12,7 @@
 #' @examples
 #' get_available_datasets()
 get_available_datasets <- function() {
-  envi <- ls("package:covidregionaldata")
+  envi <- ls(getNamespace("covidregionaldata"), all.names = TRUE)
   # regional data
   starts_with_capitals_idx <- grep("^[A-Z]", envi)
   starts_with_capitals <- envi[starts_with_capitals_idx]
@@ -38,7 +38,6 @@ get_available_datasets <- function() {
       }
     }
   )
-  valid_country_objects <- Filter(Negate(is.null), valid_country_objects)
   avaliable_country_data <- valid_country_objects %>%
     bind_rows() %>%
     select(
