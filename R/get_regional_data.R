@@ -23,7 +23,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' get_regional_data("Italy", level = "1")
+#' # set up a data cache
+#' start_using_memoise()
+#'
+#' # download data for Italy keeping all processing steps
+#' get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
 #' }
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, verbose = TRUE,

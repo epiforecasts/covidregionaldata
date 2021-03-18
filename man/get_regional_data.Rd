@@ -48,6 +48,10 @@ for Covid-19.
 }
 \examples{
 \dontrun{
-get_regional_data("Italy", level = "1")
+# set up a data cache
+start_using_memoise()
+
+# download data for Italy keeping all processing steps
+get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
 }
 }

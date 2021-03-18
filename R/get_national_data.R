@@ -24,7 +24,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' get_national_data("Italy", source = "who")
+#' # set up a data cache
+#' start_using_memoise()
+#'
+#' # download data for Canada keeping all processing steps
+#' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 get_national_data <- function(country, source = "who", steps = FALSE,
                               verbose = TRUE, ...) {
