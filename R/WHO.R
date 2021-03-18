@@ -7,11 +7,11 @@
 #' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
 #' @examples
 #' \dontrun{
-#' Who$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' national <- WHO$new(verbose = TRUE, steps = TRUE)
+#' national$download()
+#' national$clean()
+#' national$process()
+#' national$return()
 #' }
 WHO <- R6::R6Class("WHO",
   inherit = DataClass,
@@ -91,7 +91,8 @@ WHO <- R6::R6Class("WHO",
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
-    initialize = function(level, totals, localise, verbose, steps) {
+    initialize = function(level = "1", totals = FALSE, localise = TRUE,
+                          verbose = FALSE, steps = FALSE) {
       self$level <- level
       self$totals <- totals
       self$localise <- localise

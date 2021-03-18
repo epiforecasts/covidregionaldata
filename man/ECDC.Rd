@@ -16,11 +16,11 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-Ecdc$new(
-  level = "1", totals = FALSE,
-  localise = FALSE, verbose = FALSE,
-  steps = FALSE
-)
+national <- ECDC$new(verbose = TRUE, steps = TRUE)
+national$download()
+national$clean()
+national$process()
+national$return()
 }
 
 }
@@ -83,7 +83,13 @@ Specific return settings for the ECDC dataset.
 Set up the country class with attributes set to input
 parameters
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDC$new(level, totals, localise, verbose, steps)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ECDC$new(
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = FALSE,
+  steps = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

@@ -8,11 +8,11 @@
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 #' @examples
 #' \dontrun{
-#' Ecdc$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' national <- ECDC$new(verbose = TRUE, steps = TRUE)
+#' national$download()
+#' national$clean()
+#' national$process()
+#' national$return()
 #' }
 #'
 ECDC <- R6::R6Class("ECDC",
@@ -114,7 +114,8 @@ ECDC <- R6::R6Class("ECDC",
     #' @param localise Boolean. Should region names be localised.
     #' @param verbose Boolean. Display information at various stages.
     #' @param steps Boolean. Keep data from each processing step.
-    initialize = function(level, totals, localise, verbose, steps) {
+    initialize = function(level = "1", totals = FALSE, localise = TRUE,
+                          verbose = FALSE, steps = FALSE) {
       self$level <- level
       self$totals <- totals
       self$localise <- localise
