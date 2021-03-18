@@ -35,7 +35,7 @@ test_that(
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
       ),
-      "No data avaliable for country' Amadeupcountry '.",
+      "No data avaliable for country' amadeupcountry '.",
       fixed = TRUE
     )
   }
@@ -45,7 +45,7 @@ test_that(
   {
     expect_error(
       check_country_avaliable(
-        country = "italy", level = "2",
+        country = "Italy", level = "2",
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
       ),
@@ -59,7 +59,7 @@ test_that(
   "Test returns an R6 object",
   {
     region_class <- check_country_avaliable(
-      country = "who", level = "1",
+      country = "WHO", level = "1",
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE
     )

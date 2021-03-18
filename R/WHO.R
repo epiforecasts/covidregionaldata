@@ -1,7 +1,7 @@
 #' R6 Class containing specific attributes and methods for WHO data
 #'
 #' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for WHO
+#'  and processing covid-19 region data from the World Health Organisation
 #'
 #' @details Inherits from `dataClass`
 #' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
@@ -13,7 +13,7 @@
 #'   steps = FALSE
 #' )
 #' }
-Who <- R6::R6Class("who",
+WHO <- R6::R6Class("WHO",
   inherit = dataClass,
   public = list(
 
@@ -97,7 +97,7 @@ Who <- R6::R6Class("who",
       self$localise <- localise
       self$verbose <- verbose
       self$steps <- steps
-      self$country <- class(self)[1]
+      self$country <- tolower(class(self)[1])
       self$get_region_codes()
     }
   )

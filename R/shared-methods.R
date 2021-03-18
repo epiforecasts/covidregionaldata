@@ -16,10 +16,6 @@ check_country_avaliable <- function(country = character(), level = "1",
   stopifnot(is.character(level))
 
   # check we have data for desired country
-  country <- paste0(
-    toupper(substr(country, 1, 1)),
-    tolower(substr(country, 2, nchar(country)))
-  )
   avaliable_sources <- covidregionaldata::region_codes$country
   if (!(tolower(country) %in% avaliable_sources)) {
     stop(

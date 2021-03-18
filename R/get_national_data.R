@@ -29,6 +29,9 @@
 get_national_data <- function(country, source = "who", steps = FALSE,
                               verbose = TRUE, ...) {
 
+  # format source name
+  source <- toupper(source)
+
   # check data availability and initiate country class if avaliable
   nation_class <- check_country_avaliable(
     country = source, level = "1",

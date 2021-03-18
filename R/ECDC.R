@@ -1,7 +1,8 @@
 #' R6 Class containing specific attributes and methods for ECDC dataset
 #'
 #' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for ECDC
+#'  and processing covid-19 region data from the European Centre for
+#'  Disease Prevention and Control.
 #'
 #' @details Inherits from `dataClass`
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
@@ -14,7 +15,7 @@
 #' )
 #' }
 #'
-Ecdc <- R6::R6Class("ecdc",
+ECDC <- R6::R6Class("ECDC",
   inherit = dataClass,
   public = list(
 
@@ -119,7 +120,7 @@ Ecdc <- R6::R6Class("ecdc",
       self$localise <- localise
       self$verbose <- verbose
       self$steps <- steps
-      self$country <- class(self)[1]
+      self$country <- tolower(class(self)[1])
       self$get_region_codes()
     }
   )

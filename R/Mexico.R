@@ -13,7 +13,7 @@
 #'   steps = FALSE
 #' )
 #' }
-Mexico <- R6::R6Class("mexico",
+Mexico <- R6::R6Class("Mexico",
   inherit = dataClass,
   public = list(
 
@@ -156,7 +156,7 @@ Mexico <- R6::R6Class("mexico",
       self$localise <- localise
       self$verbose <- verbose
       self$steps <- steps
-      self$country <- class(self)[1]
+      self$country <- tolower(class(self)[1])
       self$get_region_codes()
     }
   )

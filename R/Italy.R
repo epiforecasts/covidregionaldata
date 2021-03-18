@@ -13,7 +13,7 @@
 #'   steps = FALSE
 #' )
 #' }
-Italy <- R6::R6Class("italy",
+Italy <- R6::R6Class("Italy",
   inherit = dataClass,
   public = list(
 
@@ -70,7 +70,7 @@ Italy <- R6::R6Class("italy",
       self$localise <- localise
       self$verbose <- verbose
       self$steps <- steps
-      self$country <- class(self)[1]
+      self$country <- tolower(class(self)[1])
       self$get_region_codes()
     }
   )

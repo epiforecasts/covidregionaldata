@@ -23,7 +23,7 @@ Italy$new(
 }
 }
 \section{Super class}{
-\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{italy}
+\code{\link[covidregionaldata:dataClass]{covidregionaldata::dataClass}} -> \code{Italy}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
