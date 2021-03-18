@@ -44,12 +44,18 @@ check_country_avaliable <- function(country = character(), level = "1",
 #' @description Set up the country class with attributes set to input
 #' parameters. Should only be called by a `Country` class object.
 #' @param self The specific class object to attach values
-#' @param level The region level for the data
-#' @param totals Boolean. If TRUE, returns totalled data per region up to
-#' today's date.
-#' @param localise Boolean. Should region names be localised.
-#' @param verbose Boolean. Display information at various stages.
-#' @param steps Boolean. Keep data from each processing step.
+#' @param level A character string indicating the target administrative level
+#' of the data with the default being "1". Currently supported options are
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
+#' options by dataset.
+#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+#'  data per region up to today's date. If FALSE, returns the full dataset
+#'  stratified by date and region.
+#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+#' messages and warnings be returned.
+#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
+#' steps be kept and output in a list.
 general_init <- function(self, level = "1",
                          totals = FALSE, localise = TRUE,
                          verbose = TRUE, steps = FALSE) {

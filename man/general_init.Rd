@@ -16,16 +16,22 @@ general_init(
 \arguments{
 \item{self}{The specific class object to attach values}
 
-\item{level}{The region level for the data}
+\item{level}{A character string indicating the target administrative level
+of the data with the default being "1". Currently supported options are
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
+options by dataset.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per region up to
-today's date.}
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
 
-\item{localise}{Boolean. Should region names be localised.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
-\item{verbose}{Boolean. Display information at various stages.}
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
 
-\item{steps}{Boolean. Keep data from each processing step.}
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
+steps be kept and output in a list.}
 }
 \description{
 Set up the country class with attributes set to input

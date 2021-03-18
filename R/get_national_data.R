@@ -6,15 +6,10 @@
 #'  and sanitises further. Adds rows and columns of NA values so that data is
 #'  in a standard format.
 #'
-#' @param country A character string specifying the country to get data from.
-#' Not case dependent. Name should be the English name. For a list of
-#' options use `get_available_datasets`.
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
-#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
-#' steps be kept and output in a list.
-#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-#' messages and warnings be returned.
+#' @inheritParams get_regional_data
+#' @inheritParams general_init
 #' @param ... additional arguments to pass to Country classes.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
