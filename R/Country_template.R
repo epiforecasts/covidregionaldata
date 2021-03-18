@@ -12,7 +12,7 @@
 #'   steps = FALSE
 #' )
 #' }
-NameOfCountry <- R6::R6Class("Country_template",
+CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   inherit = dataClass,
   public = list(
 

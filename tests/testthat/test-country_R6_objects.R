@@ -2,7 +2,7 @@ test_that(
   "Test all county R6 objects contain required fields",
   {
     check_country_fields <- function(regionClass) {
-      expected_public_fields <- names(NameOfCountry$public_fields)
+      expected_public_fields <- names(CountryTemplate$public_fields)
       region_public_fields <- names(regionClass$public_fields)
       for (field in expected_public_fields) {
         if (!(field %in% region_public_fields)) {
@@ -31,7 +31,7 @@ test_that(
   "Test all county R6 objects contain required fields",
   {
     check_country_methods <- function(regionClass) {
-      expected_public_methods <- names(NameOfCountry$public_methods)
+      expected_public_methods <- names(CountryTemplate$public_methods)
       region_public_methods <- names(regionClass$public_methods)
       for (method in expected_public_methods) {
         if (!(method %in% region_public_methods)) {
