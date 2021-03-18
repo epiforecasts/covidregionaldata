@@ -285,7 +285,8 @@ get_italy_region_codes <- function() {
 }
 
 #' Lithuanian region codes
-#' @return (NULL) These are already presented by the `get_data` function
+#' @return (NULL) These are already presented by the
+#' `get_lithuania_regional_cases_with_level_2` function
 #' 
 get_lithuania_region_codes <- function() {
   return (NULL)

@@ -40,7 +40,7 @@ get_lithuania_regional_cases_only_level_1 <-
       all_osp_fields,
       death_definition
     ) %>%
-      dplyr::group_by(date, region_level_1) %>%
+      dplyr::group_by(date, region_level_1, level_1_region_code) %>%
       dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum)) %>%
       dplyr::mutate(region_level_1 = if_else(is.na(.data$region_level_1),
         "Lietuva", .data$region_level_1
