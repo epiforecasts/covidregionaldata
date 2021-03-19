@@ -2,10 +2,19 @@
 #'
 #' @description Downloads, cleans and processes regional data
 #' for Covid-19.
-#' @inheritParams new_covidregionaldata
-#' @inheritParams process_regional
-#' @inheritParams return_regional
-#' @param ... pass additional arguments to `download_regional`
+#' @param country A character string specifying the country to get data from.
+#' Not case dependent. Name should be the English name. For a list of
+#' options use `get_available_datasets`.
+#' @param level A character string indicating the target administrative level
+#' of the data with the default being "1". Currently supported options are
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
+#' options by dataset.
+#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+#' messages and warnings be returned.
+#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
+#' steps be kept and output in a list.
+#' @inheritParams process_internal
+#' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @export
@@ -14,26 +23,34 @@
 #' # set up a data cache
 #' start_using_memoise()
 #'
-#' # download the data (and keep all processing steps)
-#' get_regional_data(country = "Mexico", steps = TRUE)
+#' # download data for Italy keeping all processing steps
+#' get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
 #' }
-#'
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, verbose = TRUE,
                               steps = FALSE, ...) {
-  # check data availability and define list
-  region <- new_covidregionaldata(country, level = level, verbose = verbose)
+  # format country string
+  country <- paste0(
+    toupper(substr(country, 1, 1)),
+    tolower(substr(country, 2, nchar(country)))
+  )
+
+  # check data availability and initiate country class if avaliable
+  region_class <- check_country_available(
+    country = country, level = level,
+    totals = totals, localise = localise,
+    verbose = verbose, steps = steps, ...
+  )
 
   # download and cache raw data
-  region <- download_regional(region, verbose = verbose, ...)
+  region_class$download()
 
   # dataset specifc cleaning
-  region <- clean_regional(region, verbose = verbose)
+  region_class$clean()
 
   # non-specific cleaning and checks
-  region <- process_regional(region, totals = totals, 
-                             localise = localise, verbose = verbose)
+  region_class$process()
 
-  region <- return_regional(region, steps = steps)
+  region <- region_class$return()
   return(region)
 }

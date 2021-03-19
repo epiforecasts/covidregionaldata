@@ -4,11 +4,12 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country, source = "who", steps = FALSE, verbose = TRUE)
+get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
-Not case or language dependent. Defaults to all countries.}
+Not case dependent. Name should be the English name. For a list of
+options use \code{get_available_datasets}.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
@@ -18,6 +19,8 @@ steps be kept and output in a list.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{...}{additional arguments to pass to individual sources.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,
@@ -35,7 +38,7 @@ in a standard format.
 # set up a data cache
 start_using_memoise()
 
+# download data for Canada keeping all processing steps
 get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 }
-
 }

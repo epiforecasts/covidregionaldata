@@ -7,9 +7,11 @@
 #'  in a standard format.
 #'
 #' @param country A character string specifying the country to get data from.
-#'  Not case or language dependent. Defaults to all countries.
+#' Not case dependent. Name should be the English name. For a list of
+#' options use `get_available_datasets`.
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
+#' @param ... additional arguments to pass to individual sources.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
 #' @inheritParams get_regional_data
@@ -22,20 +24,27 @@
 #' # set up a data cache
 #' start_using_memoise()
 #'
+#' # download data for Canada keeping all processing steps
 #' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
-#'
 get_national_data <- function(country, source = "who", steps = FALSE,
-                              verbose = TRUE) {
+                              verbose = TRUE, ...) {
 
-  # check data availability and define list
-  source <- new_covidregionaldata(source, level = "1", verbose = verbose)
+  # format source name
+  source <- toupper(source)
+
+  # check data availability and initiate country class if avaliable
+  nation_class <- check_country_available(
+    country = source, level = "1",
+    totals = FALSE, localise = TRUE,
+    verbose = verbose, steps = steps, ...
+  )
 
   # download and cache raw data
-  source <- download_regional(source, verbose = verbose)
+  nation_class$download()
 
   # dataset specifc cleaning
-  source <- clean_regional(source, verbose = verbose)
+  nation_class$clean()
 
   # filter for country of interest
   if (!missing(country)) {
@@ -45,14 +54,15 @@ get_national_data <- function(country, source = "who", steps = FALSE,
       stop("Country name not recognised. Please enter a character string, with
             no abbreviation.")
     }
-    source$clean <- filter(source$clean,
-                           .data$region_level_1 %in% tar_country)
+    nation_class$region$clean <- filter(
+      nation_class$region$clean,
+      .data$region_level_1 %in% tar_country
+    )
   }
 
   # non-specific cleaning and checks
-  source <- process_regional(source, totals = FALSE,
-                             localise = TRUE, verbose = verbose)
+  nation_class$process()
 
-  source <- return_regional(source, steps = steps)
-  return(source)
-  }
+  nation <- nation_class$return()
+  return(nation)
+}

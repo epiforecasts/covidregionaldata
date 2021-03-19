@@ -31,9 +31,13 @@ italy_codes <- tibble::tibble(
 )
 
 # add additional regions in the same format and bind together
-region_codes <- purrr::reduce(list(global_codes, mexico_codes,
-                                   italy_codes),
-                                   dplyr::bind_rows)
+region_codes <- purrr::reduce(
+  list(
+    global_codes, mexico_codes,
+    italy_codes
+  ),
+  dplyr::bind_rows
+)
 
 # update package region_codes
 usethis::use_data(region_codes, overwrite = TRUE)

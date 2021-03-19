@@ -21,3 +21,4 @@ SMG.md
 ^Meta$
 ^tests/testthat/\.cache$
 \.lintr$
+^\.pre-commit-config\.yaml$

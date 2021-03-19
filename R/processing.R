@@ -53,8 +53,10 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
 fill_empty_dates_with_na <- function(data) {
-  region_level_1 <- NULL; region_level_2 <- NULL;
-  level_2_region_code <- NULL; level_1_region_code <- NULL;
+  region_level_1 <- NULL
+  region_level_2 <- NULL
+  level_2_region_code <- NULL
+  level_1_region_code <- NULL
   if ("region_level_2" %in% colnames(data)) {
     data <- data %>%
       complete(
@@ -168,21 +170,26 @@ totalise_data <- function(data) {
 #' Internal Shared Regional Dataset Processing
 #'
 #' @description Internal shared regional data cleaning designed to be called
-#' by `process_regional`.
+#' by `process`.
+#' @param region A given Country class object to process, e.g. `Italy()`
 #' @param group_vars A character vector of grouping variables. It is assumed
 #' that the first entry indicates the main region variable and the second
 #' indicates the code for this variable.
-#' @inheritParams process_regional
-#' @author Sam Abbott
+#' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
+#'  data per region up to today's date. If FALSE, returns the full dataset
+#'  stratified by date and region.
+#' @param localise Logical, defaults to `TRUE`. Should region names be
+#' localised.
+#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+#' messages and warnings be returned.
 #' @importFrom dplyr do group_by_at ungroup select everything arrange rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !! :=
-process_regional_internal <- function(region, group_vars,
-                                      totals = FALSE, localise = TRUE,
-                                      verbose = TRUE) {
+process_internal <- function(region, group_vars, totals = FALSE,
+                             localise = TRUE, verbose = TRUE) {
   if (!any(class(region$clean) %in% "data.frame")) {
-      stop("No regional data found to process")
+    stop("No regional data found to process")
   }
   dat <- group_by_at(region$clean, .vars = group_vars)
 
