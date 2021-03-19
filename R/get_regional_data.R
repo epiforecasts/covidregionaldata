@@ -56,7 +56,8 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
 
   if (return_class) {
     return(region_class)
+  } else {
+    region <- region_class$return()
+    return(region)
   }
-  region <- region_class$return()
-  return(region)
 }

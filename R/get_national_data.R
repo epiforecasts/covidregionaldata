@@ -66,7 +66,8 @@ get_national_data <- function(country, source = "who", steps = FALSE,
 
   if (return_class) {
     return(nation_class)
+  } else {
+    nation <- nation_class$return()
+    return(nation)
   }
-  nation <- nation_class$return()
-  return(nation)
 }
