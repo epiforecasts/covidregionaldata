@@ -13,13 +13,18 @@
 #' @param ... additional arguments to pass to Country classes.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
+#' @inheritParams get_regional_data
 #' @importFrom dplyr group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
 #' @importFrom countrycode countryname
 #' @export
 #' @examples
 #' \dontrun{
-#' get_national_data("Italy", source = "who")
+#' # set up a data cache
+#' start_using_memoise()
+#'
+#' # download data for Canada keeping all processing steps
+#' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 get_national_data <- function(country, source = "who", steps = FALSE,
                               verbose = TRUE, ...) {
@@ -28,7 +33,7 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   source <- toupper(source)
 
   # check data availability and initiate country class if avaliable
-  nation_class <- check_country_avaliable(
+  nation_class <- check_country_available(
     country = source, level = "1",
     totals = FALSE, localise = TRUE,
     verbose = verbose, steps = steps, ...

@@ -2,7 +2,7 @@ test_that(
   "Test error is thrown for numeric country",
   {
     expect_error(
-      check_country_avaliable(
+      check_country_available(
         country = 1, level = "1",
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
@@ -16,7 +16,7 @@ test_that(
   "Test error is thrown for numeric level",
   {
     expect_error(
-      check_country_avaliable(
+      check_country_available(
         country = "1", level = 1,
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
@@ -30,7 +30,7 @@ test_that(
   "Test error is thrown for unknown country/source",
   {
     expect_error(
-      check_country_avaliable(
+      check_country_available(
         country = "amadeupcountry", level = "1",
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
@@ -44,7 +44,7 @@ test_that(
   "Test error is thrown when level not avaliable for data",
   {
     expect_error(
-      check_country_avaliable(
+      check_country_available(
         country = "Italy", level = "2",
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
@@ -58,7 +58,7 @@ test_that(
 test_that(
   "Test returns an R6 object",
   {
-    region_class <- check_country_avaliable(
+    region_class <- check_country_available(
       country = "WHO", level = "1",
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE

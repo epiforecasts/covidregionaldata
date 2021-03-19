@@ -1,6 +1,9 @@
 abbott
+aboutus
 acaps
 ACAPS
+acf
+af
 afghanistan
 Antwerpen
 api
@@ -8,9 +11,11 @@ arcgis
 args
 aut
 avaliable
+bd
 beoutbreakprepared
 bevan
 Bevan
+bootswatch
 Boyes
 br
 BRU
@@ -45,8 +50,10 @@ datos
 DD
 de
 Département
+desc
 develVersion
 dmuijen
+docsearch
 donnees
 DownZCSV
 dpc
@@ -77,6 +84,7 @@ Hamish
 hellewell
 Hellewell
 hospitalisations
+href
 https
 httr
 humdata
@@ -116,6 +124,7 @@ Muijen
 municipio
 Municipio
 mx
+navbar
 nCoV
 nhs
 nhsregions
@@ -126,6 +135,7 @@ opendata
 ORCID
 org
 Organisation
+params
 patrick
 paul
 paulcampbell
@@ -146,12 +156,14 @@ RoxygenNote
 rvest
 rworldmap
 sam
+samabbott
 sanitises
 seabbs
 sebastian
 shapefiles
 sherratt
 Sherratt
+slowstart
 sophie
 st
 standardised

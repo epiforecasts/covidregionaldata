@@ -7,14 +7,12 @@
 #' data is available for
 #' @importFrom rlang .data
 #' @importFrom dplyr select bind_rows
+#' @importFrom tibble as_tibble
 #' @export
 #' @examples
-#' \dontrun{
-#' get_avaliable_datasets()
-#' }
-#'
+#' get_available_datasets()
 get_available_datasets <- function() {
-  envi <- ls("package:covidregionaldata")
+  envi <- ls(getNamespace("covidregionaldata"), all.names = TRUE)
   # regional data
   starts_with_capitals_idx <- grep("^[A-Z]", envi)
   starts_with_capitals <- envi[starts_with_capitals_idx]
@@ -29,7 +27,7 @@ get_available_datasets <- function() {
           unlist(public_fields$source_data_cols),
           collapse = " "
         )
-        dat <- as.data.frame(public_fields)
+        dat <- as_tibble(public_fields)
         dat["country"] <- x
         if (x %in% c("WHO", "ECDC")) {
           dat["get_data_function"] <- "get_national_data"
@@ -40,7 +38,6 @@ get_available_datasets <- function() {
       }
     }
   )
-  valid_country_objects <- Filter(Negate(is.null), valid_country_objects)
   avaliable_country_data <- valid_country_objects %>%
     bind_rows() %>%
     select(

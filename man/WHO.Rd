@@ -15,11 +15,11 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-Who$new(
-  level = "1", totals = FALSE,
-  localise = FALSE, verbose = FALSE,
-  steps = FALSE
-)
+national <- WHO$new(verbose = TRUE, steps = TRUE)
+national$download()
+national$clean()
+national$process()
+national$return()
 }
 }
 \section{Super class}{

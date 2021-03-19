@@ -6,7 +6,11 @@ test_that(
       region_public_fields <- names(regionClass$public_fields)
       for (field in expected_public_fields) {
         if (!(field %in% region_public_fields)) {
-          stop(paste0(field, " required but missing in '", regionClass$classname, "'"))
+          stop(
+            paste0(
+              field, " required but missing in '", regionClass$classname, "'"
+            )
+          )
         }
       }
     }
@@ -20,7 +24,6 @@ test_that(
       }
       return(0)
     }
-    # expect_equal(check_all_country_fields(), 0)
   }
 )
 
@@ -46,6 +49,5 @@ test_that(
       }
       return(0)
     }
-    # expect_equal(check_all_country_methods(), 0)
   }
 )

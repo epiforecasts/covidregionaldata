@@ -8,11 +8,11 @@
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 #' @examples
 #' \dontrun{
-#' Ecdc$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' national <- ECDC$new(verbose = TRUE, steps = TRUE)
+#' national$download()
+#' national$clean()
+#' national$process()
+#' national$return()
 #' }
 #'
 ECDC <- R6::R6Class("ECDC",

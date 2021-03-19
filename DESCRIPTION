@@ -11,6 +11,9 @@ Authors@R:
              role = c("aut", "cre"),
              email = "katharine.sherratt@lshtm.ac.uk",
              comment = c(ORCID = "0000-0003-4413-453X")),
+      person(given = "Joe",
+             family = "Palmer",
+             role = "aut"),
       person(given = "Jonnie",
              family = "Bevan",
              role = "aut",
@@ -46,17 +49,14 @@ Authors@R:
              family = "Boyes",
              role = "ctb",
              comment = c(URL = "https://github.com/rboyes")),
-      person(given = "Sebastian",
-             family = "Funk",
-             role = "aut",
-             email = "sebastian.funk@lshtm.ac.uk"),
-      person(given = "Joe",
-             family = "Palmer",
-             role = "ctb"),
       person(given = "Hugo",
              family = "Gruson",
              role = "ctb",
-             comment = c(ORCID = "0000-0002-4094-1476")))
+             comment = c(ORCID = "0000-0002-4094-1476")),
+      person(given = "Sebastian",
+             family = "Funk",
+             role = "aut",
+             email = "sebastian.funk@lshtm.ac.uk"))
 Description: An interface to subnational and national level Covid-19 data.
     For all countries supported, this includes a daily time-series of
     cases.  Wherever available we also provide data on deaths,

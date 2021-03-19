@@ -7,11 +7,11 @@
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
 #' @examples
 #' \dontrun{
-#' Mexico$new(
-#'   level = "1", totals = FALSE,
-#'   localise = FALSE, verbose = FALSE,
-#'   steps = FALSE
-#' )
+#' region <- Mexico$new(verbose = TRUE, steps = TRUE)
+#' region$download()
+#' region$clean()
+#' region$process()
+#' region$return()
 #' }
 Mexico <- R6::R6Class("Mexico",
   inherit = DataClass,
@@ -28,7 +28,7 @@ Mexico <- R6::R6Class("Mexico",
     source_data_cols = c("cases_new", "deaths_new"),
 
     #' @description Data download function for Mexico data. This replaces the
-    #' generic download_data function in `DataClass`. To get the latest data
+    #' generic download function in `DataClass`. To get the latest data
     #' use a PHP script from the website.
     #' @importFrom httr POST content
     #' @importFrom xml2 xml_find_first xml_text
@@ -89,9 +89,9 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean = function() {
       if (self$level == "1") {
-        self$clean_regional_level_1()
+        self$clean_level_1()
       } else if (self$level == "2") {
-        self$clean_regional_level_2()
+        self$clean_level_2()
       }
     },
 
@@ -101,7 +101,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
     #'
-    clean_regional_level_1 = function() {
+    clean_level_1 = function() {
       self$region$clean <- self$region$raw %>%
         mutate(
           region_level_1 = str_to_title(.data$nombre),
@@ -123,7 +123,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
     #'
-    clean_regional_level_2 = function() {
+    clean_level_2 = function() {
       self$region$clean <- self$region$raw %>%
         mutate(
           region_level_2 = .data$nombre,

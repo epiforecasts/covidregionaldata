@@ -15,11 +15,11 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-Mexico$new(
-  level = "1", totals = FALSE,
-  localise = FALSE, verbose = FALSE,
-  steps = FALSE
-)
+region <- Mexico$new(verbose = TRUE, steps = TRUE)
+region$download()
+region$clean()
+region$process()
+region$return()
 }
 }
 \section{Super class}{
@@ -43,8 +43,8 @@ Mexico$new(
 \itemize{
 \item \href{#method-download}{\code{Mexico$download()}}
 \item \href{#method-clean}{\code{Mexico$clean()}}
-\item \href{#method-clean_regional_level_1}{\code{Mexico$clean_regional_level_1()}}
-\item \href{#method-clean_regional_level_2}{\code{Mexico$clean_regional_level_2()}}
+\item \href{#method-clean_level_1}{\code{Mexico$clean_level_1()}}
+\item \href{#method-clean_level_2}{\code{Mexico$clean_level_2()}}
 \item \href{#method-new}{\code{Mexico$new()}}
 \item \href{#method-clone}{\code{Mexico$clone()}}
 }
@@ -63,7 +63,7 @@ Mexico$new(
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 Data download function for Mexico data. This replaces the
-generic download_data function in \code{DataClass}. To get the latest data
+generic download function in \code{DataClass}. To get the latest data
 use a PHP script from the website.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$download()}\if{html}{\out{</div>}}
@@ -82,22 +82,22 @@ request.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_regional_level_1"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_regional_level_1}{}}}
-\subsection{Method \code{clean_regional_level_1()}}{
+\if{html}{\out{<a id="method-clean_level_1"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
+\subsection{Method \code{clean_level_1()}}{
 Mexico Specific Estados Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_1()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_1()}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_regional_level_2"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_regional_level_2}{}}}
-\subsection{Method \code{clean_regional_level_2()}}{
+\if{html}{\out{<a id="method-clean_level_2"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
+\subsection{Method \code{clean_level_2()}}{
 Mexico Specific Municipality Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_regional_level_2()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_2()}\if{html}{\out{</div>}}
 }
 
 }
