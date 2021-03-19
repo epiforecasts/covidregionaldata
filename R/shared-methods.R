@@ -100,7 +100,17 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
-      self$region$raw <- suppressWarnings(csv_reader(self$data_url))
+      if (self$verbose) {
+        self$region$raw <- suppressWarnings(
+          csv_reader(self$data_url)
+        )
+      } else {
+        self$region$raw <- suppressMessages(
+          suppressWarnings(
+            csv_reader(self$data_url)
+          )
+        )
+      }
     },
 
     #' Shared regional dataset processing
