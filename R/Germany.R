@@ -1,5 +1,4 @@
-#' R6 Class for downloading, cleaning and processing notification data
-#' from Germany
+#' Germany Class for downloading, cleaning and processing notification data
 #'
 #' @description Country specific information for downloading, cleaning
 #'  and processing COVID-19 region level 1 and 2 data for Germany.
