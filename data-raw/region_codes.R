@@ -49,10 +49,10 @@ germany_codes <- tibble::tibble(
   level = c("level_1_region", "level_2_region"),
   name = c("iso_3166_2", "code"),
   codes = list(
-    ,
-    tibble::tibble(
+    level_1_germany,
+    dplyr::mutate(
+      level_1_germany,
       level_2_region_code = NA,
-      region_level_2 = NA
     )
   )
 )
