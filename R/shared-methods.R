@@ -100,7 +100,18 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
-      self$region$raw <- suppressWarnings(csv_reader(self$data_url))
+      if (self$verbose) {
+        message("Downloading data")
+        self$region$raw <- suppressWarnings(
+          csv_reader(self$data_url)
+        )
+      } else {
+        self$region$raw <- suppressMessages(
+          suppressWarnings(
+            csv_reader(self$data_url)
+          )
+        )
+      }
     },
 
     #' Shared regional dataset processing
@@ -108,6 +119,9 @@ DataClass <- R6::R6Class(
     #' @description General function to processes regional data.
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
+      if (self$verbose) {
+        message("Procesing data")
+      }
       region_vars <- switch(self$level,
         "1" = c("region_level_1", "level_1_region_code"),
         "2" = c(

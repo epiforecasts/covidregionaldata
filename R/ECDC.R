@@ -33,6 +33,9 @@ ECDC <- R6::R6Class("ECDC",
     #' @importFrom countrycode countryname countrycode
     #'
     clean = function() {
+      if (self$verbose) {
+        message("Cleaning data")
+      }
       long_string <- "Cases_on_an_international_conveyance_Japan"
       self$region$clean <- self$region$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
