@@ -2,11 +2,11 @@
 % Please edit documentation in R/shared-methods.R
 \name{check_country_available}
 \alias{check_country_available}
-\title{Check country and regions are avaliable and set up country class}
+\title{Check country and regions are available and set up country class}
 \usage{
 check_country_available(
   country = character(),
-  level = "1",
+  level = 1,
   totals = FALSE,
   localise = TRUE,
   verbose = TRUE,
@@ -40,11 +40,11 @@ steps be kept and output in a list.}
 \item{...}{additional arguments to pass to country specific functionality.}
 }
 \value{
-The target countries specific object if avaliable, e.g. \code{\link[=Italy]{Italy()}}
+The target countries specific object if available, e.g. \code{\link[=Italy]{Italy()}}
 }
 \description{
 Check data for the requested country and region
-is avaliable and return an initialised region class for that country.
+is available and return an initialised region class for that country.
 }
 \examples{
 check_country_available(country = "Italy")

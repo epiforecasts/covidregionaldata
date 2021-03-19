@@ -13,20 +13,6 @@ test_that(
   }
 )
 test_that(
-  "Test error is thrown for numeric level",
-  {
-    expect_error(
-      check_country_available(
-        country = "1", level = 1,
-        totals = FALSE, localise = TRUE,
-        verbose = FALSE, steps = FALSE
-      ),
-      "is.character(level) is not TRUE",
-      fixed = TRUE
-    )
-  }
-)
-test_that(
   "Test error is thrown for unknown country/source",
   {
     expect_error(
@@ -35,13 +21,13 @@ test_that(
         totals = FALSE, localise = TRUE,
         verbose = FALSE, steps = FALSE
       ),
-      "No data avaliable for country' amadeupcountry '.",
+      "No data available for country 'amadeupcountry'.",
       fixed = TRUE
     )
   }
 )
 test_that(
-  "Test error is thrown when level not avaliable for data",
+  "Test error is thrown when level not available for data",
   {
     expect_error(
       check_country_available(

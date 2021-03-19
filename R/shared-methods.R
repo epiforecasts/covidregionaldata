@@ -1,24 +1,24 @@
-#' Check country and regions are avaliable and set up country class
+#' Check country and regions are available and set up country class
 #'
 #' @description Check data for the requested country and region
-#' is avaliable and return an initialised region class for that country.
+#' is available and return an initialised region class for that country.
 #' @inheritParams get_regional_data
-#' @return The target countries specific object if avaliable, e.g. [Italy()]
+#' @return The target countries specific object if available, e.g. [Italy()]
 #' @rdname check_country_available
 #' @export
 #' @examples
 #' check_country_available(country = "Italy")
-check_country_available <- function(country = character(), level = "1",
+check_country_available <- function(country = character(), level = 1,
                                     totals = FALSE, localise = TRUE,
                                     verbose = TRUE, steps = FALSE, ...) {
   stopifnot(is.character(country))
-  stopifnot(is.character(level))
+  level <- as.character(level)
 
   # check we have data for desired country
-  avaliable_sources <- covidregionaldata::region_codes$country
-  if (!(tolower(country) %in% avaliable_sources)) {
+  available_sources <- covidregionaldata::region_codes$country
+  if (!(tolower(country) %in% available_sources)) {
     stop(
-      paste("No data avaliable for country'", country, "'.")
+      paste0("No data available for country '", country, "'.")
     )
   }
   regionClass <- get(country)
@@ -81,8 +81,8 @@ DataClass <- R6::R6Class(
 
       if (self$verbose) {
         message(
-          "- Getting data for ", self$country,
-          " at ", tar_level_name, " administrative region"
+          "Processing data for ", self$country,
+          " by ", tar_level_name
         )
       }
 

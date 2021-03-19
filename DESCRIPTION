@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for the Covid-19 Outbreak
-Version: 0.9.0.0
+Version: 0.9.0.1
 Authors@R: 
     c(person(given = "Sam Abbott",
              role = "aut",
@@ -53,6 +53,10 @@ Authors@R:
              family = "Gruson",
              role = "ctb",
              comment = c(ORCID = "0000-0002-4094-1476")),
+      person(given = "Richard",
+             family = "Martin-Nielsen",
+             role = "ctb",
+             comment = c(URL = "https://github.com/RichardMN")),
       person(given = "Sebastian",
              family = "Funk",
              role = "aut",
