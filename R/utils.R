@@ -90,6 +90,23 @@ stop_using_memoise <- function() {
 #' @importFrom memoise cache_filesystem
 reset_cache <- function() {
   unlink(".cache", recursive = TRUE)
-  cache <- cache_filesystem(".cache")
+  cache_filesystem(".cache")
   return(invisible(NULL))
+}
+
+#' Control data return
+#'
+#' @description Controls data return for `get_reigonal_data` and
+#' `get_national_data`
+#' @param obj A Class based on a `DataClass`
+#' @param class Logical, defaults to FALSE. If TRUE returns the
+#' `Country` class object rather than a tibble or a list of tibbles.
+#' Overides `steps`.
+return_data <- function(obj, class = FALSE) {
+  if (class) {
+    return(obj)
+  } else {
+    obj <- obj$return()
+    return(obj)
+  }
 }

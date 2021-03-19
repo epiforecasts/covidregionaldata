@@ -13,8 +13,7 @@
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
-#' @param return_class Logical, defaults to FALSE. If TRUE returns the
-#' `Country` class object.
+#' @inheritParams return_data
 #' @inheritParams process_internal
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
@@ -29,8 +28,8 @@
 #' get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
 #' }
 get_regional_data <- function(country, level = "1", totals = FALSE,
-                              localise = TRUE, verbose = TRUE,
-                              steps = FALSE, return_class = FALSE,
+                              localise = TRUE, steps = FALSE,
+                              class = FALSE, verbose = TRUE,
                               ...) {
   # format country string
   country <- paste0(
@@ -54,10 +53,7 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   # non-specific cleaning and checks
   region_class$process()
 
-  if (return_class) {
-    return(region_class)
-  } else {
-    region <- region_class$return()
-    return(region)
-  }
+  return(return_data(region_class,
+    class = class
+  ))
 }

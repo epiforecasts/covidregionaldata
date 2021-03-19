@@ -9,9 +9,9 @@ get_regional_data(
   level = "1",
   totals = FALSE,
   localise = TRUE,
-  verbose = TRUE,
   steps = FALSE,
-  return_class = FALSE,
+  class = FALSE,
+  verbose = TRUE,
   ...
 )
 }
@@ -32,14 +32,15 @@ stratified by date and region.}
 \item{localise}{Logical, defaults to \code{TRUE}. Should region names be
 localised.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
-messages and warnings be returned.}
-
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
-\item{return_class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object.}
+\item{class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object rather than a tibble or a list of tibbles.
+Overides \code{steps}.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
 
 \item{...}{additional arguments to pass to country specific functionality.}
 }

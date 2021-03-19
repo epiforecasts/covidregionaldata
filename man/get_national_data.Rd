@@ -8,8 +8,8 @@ get_national_data(
   country,
   source = "who",
   steps = FALSE,
+  class = FALSE,
   verbose = TRUE,
-  return_class = FALSE,
   ...
 )
 }
@@ -24,11 +24,12 @@ options use \code{get_available_datasets}.}
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
+\item{class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object rather than a tibble or a list of tibbles.
+Overides \code{steps}.}
+
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
-
-\item{return_class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object.}
 
 \item{...}{additional arguments to pass to individual sources.}
 }

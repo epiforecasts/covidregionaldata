@@ -14,6 +14,7 @@
 #' @param ... additional arguments to pass to individual sources.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
+#' @inheritParams return_data
 #' @inheritParams get_regional_data
 #' @importFrom dplyr group_by arrange select ungroup do everything
 #' @importFrom tidyr drop_na fill
@@ -28,7 +29,7 @@
 #' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 get_national_data <- function(country, source = "who", steps = FALSE,
-                              verbose = TRUE, return_class = FALSE,
+                              class = FALSE, verbose = TRUE,
                               ...) {
 
   # format source name
@@ -64,10 +65,7 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   # non-specific cleaning and checks
   nation_class$process()
 
-  if (return_class) {
-    return(nation_class)
-  } else {
-    nation <- nation_class$return()
-    return(nation)
-  }
+  return(return_data(nation_class,
+    class = class
+  ))
 }
