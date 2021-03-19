@@ -88,6 +88,9 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom lubridate as_date ymd_hms
     #'
     clean = function() {
+      if (self$verbose) {
+        message("Cleaning data")
+      }
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {

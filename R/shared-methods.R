@@ -101,12 +101,7 @@ DataClass <- R6::R6Class(
     #' @description General function for downloading raw data.
     download = function() {
       if (self$verbose) {
-        message(paste(
-          "- Downloading level",
-          self$level,
-          "data for",
-          self$country
-        ))
+        message("Downloading data")
         self$region$raw <- suppressWarnings(
           csv_reader(self$data_url)
         )
@@ -125,12 +120,7 @@ DataClass <- R6::R6Class(
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       if (self$verbose) {
-        message(paste(
-          "- Processing level",
-          self$level,
-          "data for",
-          self$country
-        ))
+        message("Procesing data")
       }
       region_vars <- switch(self$level,
         "1" = c("region_level_1", "level_1_region_code"),

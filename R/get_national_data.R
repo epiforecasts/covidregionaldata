@@ -44,14 +44,11 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   nation_class$download()
 
   # dataset specifc cleaning
-  if (verbose) {
-    message(paste("- Cleaning", source, "data"))
-  }
   nation_class$clean()
 
   # filter for country of interest
   if (verbose) {
-    message(paste("- Filtering", source, "data for", country))
+    message(paste("Filtering", source, "data for", country))
   }
   if (!missing(country)) {
     tar_country <- country

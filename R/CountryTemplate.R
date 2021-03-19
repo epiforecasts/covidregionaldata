@@ -32,6 +32,10 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
       # modify the data variable 'region' in place and add using 'self'
       # e.g. self$region$clean <- something
       # No return statement is required
+      # have a statment like this to indicate information to user if requested
+      if (self$verbose) {
+        message("Cleaning data")
+      }
     },
 
     #' @description Set up the country class with attributes set to input

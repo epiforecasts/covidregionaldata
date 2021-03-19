@@ -46,9 +46,6 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region_class$download()
 
   # dataset specifc cleaning
-  if (verbose) {
-    message(paste("- Cleaning level", level, "data for", country))
-  }
   region_class$clean()
 
   # non-specific cleaning and checks
