@@ -11,6 +11,7 @@ arcgis
 aut
 avaliable
 bd
+behaviour
 beoutbreakprepared
 bevan
 Bevan
@@ -112,6 +113,7 @@ Linelist
 linelists
 linter
 linters
+localisation
 localised
 lshtm
 lubridate
@@ -132,6 +134,7 @@ nhsregions
 nolint
 npgeo
 nytimes
+ONS
 opendata
 ORCID
 org
@@ -145,6 +148,7 @@ pkgdown
 purrr
 quickstart
 rboyes
+readmissions
 readr
 readxl
 Région
@@ -174,6 +178,7 @@ stringr
 subnational
 Subnational
 subregion
+summarise
 tessella
 testthat
 tibble
