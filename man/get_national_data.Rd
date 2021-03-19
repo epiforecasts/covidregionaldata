@@ -4,7 +4,14 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
+get_national_data(
+  country,
+  source = "who",
+  steps = FALSE,
+  class = FALSE,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
@@ -16,6 +23,10 @@ options use \code{get_available_datasets}.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
+
+\item{class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object rather than a tibble or a list of tibbles.
+Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
