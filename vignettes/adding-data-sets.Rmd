@@ -18,20 +18,35 @@ knitr::opts_chunk$set(
 library(covidregionaldata)
 ```
 
+## Introduction
+
+The `covidregionaldata` package provides cleaned and standardised
+approaches to several national-level data sources (from the WHO,
+ECDC) as well as a consistent interface for accessing sub-national
+level data which may be available from governmental or
+non-governmental organisations for different countries.
+
+This sub-national data is given at one or two hierarchical 
+sub-national levels, depending on what is available, and is provided
+by dedicated code for each country. Below we set out the steps
+(a "recipe") for adding sub-national data for a country.
+
 ## Recipe for adding a new data set for `covidregionaldata`
 
 ### Ingredients
 
 You need an open and accessible data source, preferably in the form of 
 a CSV file updated on a regular basis and accessible for download with a
-fixed (or programmably-predictable) URL.
+fixed (or predictable) URL. (See the code for Mexico for an example of
+a complex mechanism for downloading data.)
 
 `covidregionaldata` provides an internal function, `csv_reader` which 
 does nearly all the hard work of downloading, caching and parsing such a
 CSV. 
 
 If you can, you may wish to download a local copy of your data source's
-CSV to work with. `covidregionaldata` internally uses [`vroom`](https://vroom.r-lib.org/index.html) to parse most CSV files.
+CSV to work with. `covidregionaldata` internally
+uses [`vroom`](https://vroom.r-lib.org/index.html) to parse most CSV files.
 
 Run `vroom` on your local file, see what you get. Compare it with the 
 list of expected column names below to see what correspondences exist.
@@ -59,8 +74,12 @@ your `get_regional_data_*` function, based on what is present in
 `get_info_covidregionaldata` (see below)
 
 `level 1 region code`
-:  a standard code for the level 1 region. The column name reflects the specific administrative code used. Typically data returns the [ISO 3166-2 standard](https://en.wikipedia.org/wiki/ISO_3166-2),
-although where not available the column will be named differently to reflect its source.
+:  a standard code for the level 1 region. The column name 
+reflects the specific administrative code used. Typically
+data returns the
+[ISO 3166-2 standard](https://en.wikipedia.org/wiki/ISO_3166-2),
+although where not available the column will be named differently 
+to reflect its source.
 
 `level 2 region`
 :  the level 2 region name. This column will be named differently
@@ -70,7 +89,8 @@ your `get_regional_data_*` function, based on what is present in
 `get_info_covidregionaldata` (see below)
 
 `level 2 region code`
-:  a standard code for the level 2 region. The column will be named differently for different countries (e.g. `fips` in the USA).
+:  a standard code for the level 2 region. The column will be named
+differently for different countries (e.g. `fips` in the USA).
 
 `cases_new`
 :  new reported cases for that day
@@ -94,14 +114,15 @@ your `get_regional_data_*` function, based on what is present in
 :  new reported hospitalisations for that day
 
 `hosp_total`
-:  total reported hospitalisations up to and including that day (note this is cumulative total of new reported, _not_ total currently in hospital)
+:  total reported hospitalisations up to and including that day
+(note this is cumulative total of new reported, _not_ total 
+currently in hospital)
 
 `tested_new`
 :  tests for that day
 
 `tested_total`
 :  total tests completed up to and including that day
-
 
 ## Create a new file with the name of your country
 
@@ -121,18 +142,20 @@ Load your data using the `csv_reader` function provided.
   original_data <- csv_reader(file = cases_url)
 ```
 
-Clean your data. You should probably use `lubridate::as_date` (or another function) to
-generate the `date` field.
+Clean your data. You should probably use `lubridate::as_date`
+(or another function) to generate the `date` field.
 
 You may need to convert local region names, or adjust them. 
 
-You may want to remove fields which have no use to the end user (e.g., codes used
-for regions which do not correspond to ISO:3166 standards or the codes you will
+You may want to remove fields which have no use to the end user (e.g., 
+codes used for regions which do not correspond to ISO:3166 standards or
+the codes you will
 return).
 
-General practice is to only return the data fields which `covidregionaldata`
-processes and provides, as listed above. If you don't have all these fields,
-they will be calculated where possible or replaced with `NA` where appropriate.
+General practice is to only return the data fields which
+`covidregionaldata` processes and provides, as listed above. If you don't
+have all these fields, they will be calculated where possible or replaced
+with `NA` where appropriate.
 
 ```{r eval=FALSE, echo=TRUE}
 cases_data <- original_data %>%
@@ -141,18 +164,30 @@ cases_data <- original_data %>%
         cases_new, cases_total, deaths_new, tested_new, recovered_total
       )
 ```
+### Finding ISO3166-2 codes
 
-### Add in `get_country_regional_cases_only_level_1` functions
+Ideally we use ISO3166-2 codes for sub-national regions at levels 1 and 2.
+Wikipedia provides a
+[list of countries with the ISO 3166-2 codes
+available](https://en.wikipedia.org/wiki/ISO_3166-2). 
+The ISO provides
+an [online browsing platform of country codes](https://www.iso.org/obp/ui/#home)
+giving authoritative data, but the results mix levels 1 and 2
+making it less straightforward for conversion and use.
 
-For any country where regional data is provided, level 1 data must be provided.
+The following code, adjusted from a version for France, was initially
+used to create lookup tables of Lithuanian municipality and county
+codes.
 
-Some countries only provide data at for level 2 regions. In this case, the
-data must be aggregated. You may then have the level 1 function call the
-level 2 function and aggregate the data. Somewhere you will need to provide
-the logic to determine the correspondence between level 2 regions and level
-1 regions.
+```{r example code to scrape ISO3166 codes, eval=TRUE, echo=TRUE}
+level_2_codes_url <- "https://en.wikipedia.org/wiki/ISO_3166-2:LT"
+level_2_codes_table <- level_2_codes_url %>%
+ xml2::read_html() %>%
+ rvest::html_nodes(xpath = '//*[@id=\"mw-content-text\"]/div/table') %>%
+ rvest::html_table(fill = TRUE)
 
-### Add in `get_country_regional_cases_with_level_2` functions
+level_2_codes_table
+```
 
 ## Add your new `get_` functions to get_regional_data
 
@@ -168,11 +203,23 @@ to the `countries_with_level_2_regions` list in `get_regional_data`; and
 2. add the pair of the name of your country and the name of your `get_country_regional_cases_with_level_2` function to the `switch` statement
 which chooses the `get_data_function` for level 2 data return.
 
+### Add in `get_country_regional_cases_only_level_1` functions
+
+For any country where regional data is provided, level 1 data must be provided.
+
+Some countries only provide data at for level 2 regions. In this case, the
+data must be aggregated. You may then have the level 1 function call the
+level 2 function and aggregate the data. Somewhere you will need to provide
+the logic to determine the correspondence between level 2 regions and level
+1 regions.
+
+### Add in `get_country_regional_cases_with_level_2` functions
+
+
 ## Document your code
 
 To make the package work you will need to use `@importFrom` tags to 
 make external functions usable within your code.
-
 Provide additional information about the `@usage`, `@params` and `@value`
 
 If you have two `get_country_regional_data` functions (one for each level)
