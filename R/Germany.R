@@ -80,7 +80,7 @@ Germany <- R6::R6Class("Germany",
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
         ungroup() %>%
-        full_join(self$region$codes_lookup, by = "region_level_2")
+        full_join(self$region$codes_lookup, by = "region_level_1")
     },
 
     #' @description Set up the country class with attributes set to input
