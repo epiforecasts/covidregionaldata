@@ -30,11 +30,38 @@ italy_codes <- tibble::tibble(
   )
 )
 
+# germany codes
+germany_codes <- tibble::tibble(
+  country = "germany",
+  level = c("level_1_region", "level_2_region"),
+  name = c("iso_3166_2", "code"),
+  codes = list(
+    tibble::tibble(
+      level_1_region_code = c(
+        "DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH", "DE-MV",
+        "DE-NI", "DE-NW", "DE-RP", "DE-SH", "DE-SL", "DE-SN", "DE-ST", "DE-TH"
+      ),
+      region_level_1 = c(
+        "Brandenburg", "Berlin", "Baden-W\u00FCrttemberg", "Bayern", "Bremen",
+        "Hessen", "Hamburg", "Mecklenburg-Vorpommern", "Niedersachsen",
+        "Nordrhein-Westfalen",
+        "Rheinland-Pfalz", "Schleswig-Holstein", "Saarland", "Sachsen",
+        "Sachsen-Anhalt", "Th\u00FCringen"
+      )
+    ),
+    tibble::tibble(
+      level_2_region_code = NA,
+      region_level_2 = NA
+    )
+  )
+)
+
+
 # add additional regions in the same format and bind together
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
-    italy_codes
+    italy_codes, germany_codes
   ),
   dplyr::bind_rows
 )

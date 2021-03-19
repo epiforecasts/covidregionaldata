@@ -51,7 +51,7 @@ Germany <- R6::R6Class("Germany",
     },
 
     #' @description Germany Specific Bundesland Level Data Cleaning
-    #' @importFrom dplyr group_by summarise ungroup
+    #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
       self$region$clean <- self$region$clean %>%
         group_by(.data$region_level_1, .data$date) %>%
@@ -59,11 +59,12 @@ Germany <- R6::R6Class("Germany",
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup()
+        ungroup() %>%
+        full_join(self$region$codes_lookup, by = "region_level_1")
     },
 
     #' @description Germany Specific Landkreis Level Data Cleaning
-    #' @importFrom dplyr mutate group_by summarise ungroup
+    #' @importFrom dplyr mutate group_by summarise ungroup full_join
     #'
     clean_level_2 = function() {
       self$region$clean <- self$region$clean %>%
@@ -78,7 +79,8 @@ Germany <- R6::R6Class("Germany",
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup()
+        ungroup() %>%
+        full_join(self$region$codes_lookup, by = "region_level_2")
     },
 
     #' @description Set up the country class with attributes set to input
