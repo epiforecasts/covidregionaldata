@@ -2,7 +2,7 @@
 % Please edit documentation in R/Italy.R
 \name{Italy}
 \alias{Italy}
-\title{R6 Class containing country specific attributes and methods}
+\title{Italy Class for downloading, cleaning and processing notification data}
 \source{
 https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
 }
