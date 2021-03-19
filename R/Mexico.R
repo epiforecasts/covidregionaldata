@@ -1,4 +1,4 @@
-#' R6 Class containing country specific attributes and methods
+#' Meixco Class for downloading, cleaning and processing notification data
 #'
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for Mexico.

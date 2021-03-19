@@ -2,7 +2,7 @@
 % Please edit documentation in R/Mexico.R
 \name{Mexico}
 \alias{Mexico}
-\title{R6 Class containing country specific attributes and methods}
+\title{Meixco Class for downloading, cleaning and processing notification data}
 \source{
 https://datos.covid-19.conacyt.mx/#DownZCSV
 }

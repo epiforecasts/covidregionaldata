@@ -5,8 +5,8 @@ This update contains a substantial package refactor and as such introduces some 
 
 ## Changes
 
-* Available datasets not listed in `available_datasets`.
-* Refactored `get_regional_data` and `get_national_data` to use S3 method dispatch. This is mostly an internal change and so should have minimal user impact. 
+* Available datasets not listed in `get_available_datasets`.
+* Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. 
 * Added a list return method so that data processing changes can be tracked.
 * Surfaced the underlying methods which may be of use for users.
 * Separated unit testing of package functionality from testing of data downloads.
