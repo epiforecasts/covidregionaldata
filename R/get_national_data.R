@@ -28,7 +28,8 @@
 #' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
 #' }
 get_national_data <- function(country, source = "who", steps = FALSE,
-                              verbose = TRUE, ...) {
+                              verbose = TRUE, return_class = FALSE,
+                              ...) {
 
   # format source name
   source <- toupper(source)
@@ -63,6 +64,9 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   # non-specific cleaning and checks
   nation_class$process()
 
+  if (return_class) {
+    return(nation_class)
+  }
   nation <- nation_class$return()
   return(nation)
 }

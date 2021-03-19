@@ -11,6 +11,7 @@ get_regional_data(
   localise = TRUE,
   verbose = TRUE,
   steps = FALSE,
+  return_class = FALSE,
   ...
 )
 }
@@ -36,6 +37,9 @@ messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
+
+\item{return_class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object.}
 
 \item{...}{additional arguments to pass to country specific functionality.}
 }

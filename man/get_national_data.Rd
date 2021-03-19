@@ -4,7 +4,14 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country, source = "who", steps = FALSE, verbose = TRUE, ...)
+get_national_data(
+  country,
+  source = "who",
+  steps = FALSE,
+  verbose = TRUE,
+  return_class = FALSE,
+  ...
+)
 }
 \arguments{
 \item{country}{A character string specifying the country to get data from.
@@ -19,6 +26,9 @@ steps be kept and output in a list.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{return_class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object.}
 
 \item{...}{additional arguments to pass to individual sources.}
 }
