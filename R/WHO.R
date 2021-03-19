@@ -34,6 +34,9 @@ WHO <- R6::R6Class("WHO",
     #' @importFrom dplyr mutate rename
     #' @importFrom countrycode countrycode
     clean = function() {
+      if (self$verbose) {
+        message("Cleaning data")
+      }
       self$region$clean <- self$region$raw
       colnames(self$region$clean) <- c(
         "date", "iso_code", "country", "who_region",

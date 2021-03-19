@@ -46,6 +46,9 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   nation_class$clean()
 
   # filter for country of interest
+  if (verbose) {
+    message(paste("Filtering", source, "data for", country))
+  }
   if (!missing(country)) {
     tar_country <- country
     tar_country <- countryname(tar_country, destination = "country.name.en")
