@@ -55,6 +55,8 @@ check_country_available <- function(country = character(), level = 1,
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
+#' #' @export
+#'
 general_init <- function(self, level = "1",
                          totals = FALSE, localise = TRUE,
                          verbose = TRUE, steps = FALSE) {

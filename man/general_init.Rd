@@ -31,7 +31,8 @@ stratified by date and region.}
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
-steps be kept and output in a list.}
+steps be kept and output in a list.
+#' @export}
 }
 \description{
 Set up the country class with attributes set to input
