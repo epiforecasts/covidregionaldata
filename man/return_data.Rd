@@ -11,7 +11,7 @@ return_data(obj, class = FALSE)
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
 \code{Country} class object rather than a tibble or a list of tibbles.
-Overides \code{steps}.}
+Overrides \code{steps}.}
 }
 \description{
 Controls data return for \code{get_reigonal_data} and

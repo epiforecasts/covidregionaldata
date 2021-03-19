@@ -101,7 +101,7 @@ reset_cache <- function() {
 #' @param obj A Class based on a `DataClass`
 #' @param class Logical, defaults to FALSE. If TRUE returns the
 #' `Country` class object rather than a tibble or a list of tibbles.
-#' Overides `steps`.
+#' Overrides `steps`.
 return_data <- function(obj, class = FALSE) {
   if (class) {
     return(obj)

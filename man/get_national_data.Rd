@@ -26,7 +26,7 @@ steps be kept and output in a list.}
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
 \code{Country} class object rather than a tibble or a list of tibbles.
-Overides \code{steps}.}
+Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
