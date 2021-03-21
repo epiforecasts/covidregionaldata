@@ -53,6 +53,8 @@ To get time-series data for subnational regions of a specific country, for examp
 covidregionaldata::get_regional_data(country = "UK", level = "2)
 ```
 
+Subnational regions are only available in some countries. See the package documentation for further details.
+
 ## Dataset status
 
 | **Dataset** | **GitHub status** | *CRAN status* |
@@ -62,10 +64,6 @@ covidregionaldata::get_regional_data(country = "UK", level = "2)
 | Mexico  |  [![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)    | *working* |
 | Italy  |  [![Italy](https://github.com/epiforecasts/covidregionaldata/workflows/Italy/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/italy.yaml)    | *working* |
 =======
-get_regional_data(country = "UK", include_level_2_regions = TRUE)
-```
-
-Subnational regions are only available in some countries. See the package documentation for further details.
 
 ## Development
 
