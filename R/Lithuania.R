@@ -172,7 +172,7 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Get relevant column names for differences (i.e. not percentages
       # or qualitative)
-      sum_cols <- names(select(osp_data, "population":tidyselect::last_col()))
+      sum_cols <- names(select(self$region$raw, "population":tidyselect::last_col()))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
       # Take the difference between national and sum of counties' data
@@ -217,7 +217,7 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Join unknown locations to main dataset
       osp_data_w_unassigned <- dplyr::bind_rows(
-        osp_data %>% select(-.data$object_id, -.data$municipality_code),
+        self$region$raw %>% select(-.data$object_id, -.data$municipality_code),
         unassigned
       )
 
@@ -270,10 +270,18 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @description Lithuania Specific County Level Data Cleaning
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
+      ## TODO: put in params
+      # - currently with the defaults and the logic transferred across
+      
+      death_definition <- "of"
+      recovered_definition <- "official"
+      all_osp_fields <- FALSE
+      national_data <- FALSE
+      
       self$region$clean <- self$region$clean %>%
-        dplyr::group_by(.data$date, .data$region_level_1) %>%
+        dplyr::group_by(.data$date, .data$region_level_1, .data$level_1_region_code) %>%
         dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum)) %>%
-        dplyr::mutate(region_level_1 = if_else(is.na(.data$region_level_1),
+        dplyr::mutate(region_level_1 = dplyr::if_else(is.na(.data$region_level_1),
           "Lietuva", .data$region_level_1
         )) %>%
         dplyr::ungroup()

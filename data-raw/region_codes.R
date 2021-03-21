@@ -57,12 +57,24 @@ germany_codes <- tibble::tibble(
   )
 )
 
+# lithuania codes
+lithuania_codes <- readr::read_csv("data-raw/lithuania_codes.csv")
+lithuania_codes <- tibble::tibble(
+  country = "lithuania",
+  level = c("level_1_region", "level_2_region"),
+  name = c("iso_3166_2", "iso_3166_2"),
+  codes = list(
+    lithuania_codes,
+    lithuania_codes
+  )
+)
 
 # add additional regions in the same format and bind together
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
-    italy_codes, germany_codes
+    italy_codes, germany_codes,
+    lithuania_codes
   ),
   dplyr::bind_rows
 )
