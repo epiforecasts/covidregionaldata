@@ -221,7 +221,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
     #' messages and warnings be returned.
     #' @param steps Logical, defaults to FALSE. Should all processing and
     #' cleaning steps be kept and output in a list.
-    #' #' @export
+    #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.
     #' @param release_date Date data was released. Default is to extract
