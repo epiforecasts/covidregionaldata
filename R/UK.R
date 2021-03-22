@@ -55,16 +55,22 @@ Uk <- R6::R6Class("Uk", # rename to country name
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
       self$region <- list(country = self$country, level = tar_level_name)
+      self$region$code <- "ons_region_code"
+      self$region$codes_lookup <- NULL
     },
 
     download = function() {
       # set up filters
       private$set_filters()
+      self$region$raw <- purrr::map(private$query_filters, self$download_uk)
+    },
+
+    download_uk = function(filter) {
       # build a list of download links as limited to 4 variables per request
       csv_links <- purrr::map(
         1:(ceiling(length(self$source_data_cols) / 4)),
         ~ paste0(
-          self$data_url, "?", unlist(private$query_filters), "&",
+          self$data_url, "?", unlist(filter), "&",
           paste(paste0(
             "metric=",
             self$source_data_cols[(1 + 4 * (. - 1)):min(
@@ -77,7 +83,6 @@ Uk <- R6::R6Class("Uk", # rename to country name
         )
       )
       # add in release data if defined
-      print(self$release_date)
       if (!is.null(self$release_date)) {
         csv_links <- purrr::map(csv_links, ~ paste0(
           .,
@@ -89,7 +94,6 @@ Uk <- R6::R6Class("Uk", # rename to country name
       safe_reader <- purrr::safely(csv_readr)
       csv <- purrr::map(csv_links, ~ safe_reader(.)[[1]])
       csv <- purrr::compact(csv)
-      print(csv)
       csv <- purrr::reduce(csv, dplyr::full_join,
         by = c("date", "areaType", "areaCode", "areaName")
       )
@@ -103,7 +107,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
           release_date = as.Date(self$release_date)
         )
       }
-      self$region$raw <- csv
+      return(csv)
     },
 
     #' @description UK specific cleaning, directs to level 1 or level 2
