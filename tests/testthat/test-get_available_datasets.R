@@ -27,7 +27,7 @@ test_that(
   }
 )
 test_that(
-  "Test at least 5 countries are avaliable",
+  "Test at least 5 countries are available",
   {
     number_of_rows <- nrow(data)
     number_of_countries <- length(unique(data$country))
