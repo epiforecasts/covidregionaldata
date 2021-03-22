@@ -4,7 +4,7 @@
 #'  and processing covid-19 region level 1 and 2 data for Lithuania.
 #'
 #' @details Inherits from `DataClass`
-#' 
+#'
 #' @section OSP Data fields:
 #'
 #' The[Official Statistics Portal](https://osp.stat.gov.lt) provides
@@ -370,10 +370,10 @@ Lithuania <- R6::R6Class("Lithuania",
     },
 
     #' @description Lithuania Specific County Level Data Cleaning
-    #' 
+    #'
     #' Aggregates data to the level 1 (county) regional level. Data is
     #' provided by the source at the level 2 (municipality) regional level.
-    #' 
+    #'
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
 
@@ -415,10 +415,10 @@ Lithuania <- R6::R6Class("Lithuania",
     },
 
     #' @description Lithuania Specific Municipality Level Data Cleaning
-    #' 
+    #'
     #' No data cleaning is necessary specific to the municipality level
     #' since the data is already provided at the municipality level.
-    #'  
+    #'
     #' @importFrom dplyr mutate group_by summarise ungroup full_join
     #'
     clean_level_2 = function() {
@@ -440,10 +440,10 @@ Lithuania <- R6::R6Class("Lithuania",
     #'   data fields from the OSP source be returned? (Defaults `FALSE`)
     #'
     #' @param ... The args passed by [general_init]
-    initialize = function( death_definition = "of",
-                           recovered_definition = "official",
-                           all_osp_fields = FALSE,
-                           national_data = FALSE, ...) {
+    initialize = function(death_definition = "of",
+                          recovered_definition = "official",
+                          all_osp_fields = FALSE,
+                          national_data = FALSE, ...) {
       general_init(self, ...)
       # Add custom fields here
       private$death_definition <- death_definition
@@ -459,11 +459,11 @@ Lithuania <- R6::R6Class("Lithuania",
     # recovered_definition whether to use the official counts of
     # recovered cases or the statistical estimates provided by OSP
     recovered_definition = "official",
-    # all_osp_fields whether to return all the data vectors provided 
+    # all_osp_fields whether to return all the data vectors provided
     # by OSP
     all_osp_fields = FALSE,
     # national_data whether to return data rows for national results
     national_data = FALSE
   )
-  
+
 )
