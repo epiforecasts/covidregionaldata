@@ -101,6 +101,7 @@ Imports:
     purrr,
     R6,
     readr,
+    readxl,
     rlang,
     stringr,
     tibble,
