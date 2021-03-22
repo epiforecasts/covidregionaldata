@@ -49,6 +49,7 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
 
   # dataset specifc cleaning
   region_class$clean()
+  print(region_class$region$clean)
 
   # non-specific cleaning and checks
   region_class$process()

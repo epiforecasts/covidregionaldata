@@ -224,6 +224,16 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    process = function() {
+      super$process()
+      # rename the region codes columuns
+      self$region$processed <- self$region$processed %>%
+        dplyr::rename(
+          ltla_code = ons_region_code,
+          ons_region_code = level_1_region_code
+        )
+    },
+
 
     #' @description Initialize the country
     #' @param ... The args passed by [general_init]
