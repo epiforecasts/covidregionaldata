@@ -64,6 +64,7 @@ develVersion
 dir
 dmuijen
 docsearch
+DOI
 donnees
 DONTTEST
 DownZCSV
@@ -91,6 +92,7 @@ fribidi
 gb
 gcc
 geocoding
+germany
 getRversion
 ggplot
 github
@@ -225,6 +227,8 @@ subregion
 sudo
 summarise
 tessella
+testDownload
+testSource
 testthat
 tibble
 tidyr
