@@ -43,15 +43,6 @@ region$return()
 \item{\code{data_url}}{link to raw data}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
-
-\item{\code{query_filters}}{Set what filters to use to query the data}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{query_filters}}{Set what filters to use to query the data}
 }
 \if{html}{\out{</div>}}
 }
@@ -62,6 +53,8 @@ region$return()
 \item \href{#method-download}{\code{Uk$download()}}
 \item \href{#method-clean}{\code{Uk$clean()}}
 \item \href{#method-clean_level_1}{\code{Uk$clean_level_1()}}
+\item \href{#method-clean_level_2}{\code{Uk$clean_level_2()}}
+\item \href{#method-process}{\code{Uk$process()}}
 \item \href{#method-new}{\code{Uk$new()}}
 \item \href{#method-clone}{\code{Uk$clone()}}
 }
@@ -69,7 +62,6 @@ region$return()
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
 \out{</details>}
@@ -88,6 +80,7 @@ Specific function for getting region codes for UK .
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
+UK specific download function
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Uk$download()}\if{html}{\out{</div>}}
 }
@@ -99,23 +92,39 @@ Specific function for getting region codes for UK .
 \subsection{Method \code{clean()}}{
 UK specific cleaning, directs to level 1 or level 2
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Uk$clean(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Uk$clean()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
+UK Specific Region Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Uk$clean_level_1(nhsregions = FALSE, release_date = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Uk$clean_level_1()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean_level_2"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
+\subsection{Method \code{clean_level_2()}}{
+UK Specific Level 2 Data Cleaning
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Uk$clean_level_2()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-process"></a>}}
+\if{latex}{\out{\hypertarget{method-process}{}}}
+\subsection{Method \code{process()}}{
+UK specific function to processes regional data.
+Calls the parent process function but for level two regions does some
+column renaming.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Uk$process()}\if{html}{\out{</div>}}
 }
 
 }
@@ -123,15 +132,53 @@ UK specific cleaning, directs to level 1 or level 2
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initialize the country
+Specific initalize function for UK providing extra
+arguments specific to the UK
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Uk$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Uk$new(
+  level = "1",
+  totals = FALSE,
+  localise = TRUE,
+  verbose = TRUE,
+  steps = FALSE,
+  nhsregions = FALSE,
+  release_date = NULL,
+  resolution = "utla"
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{The args passed by \link{general_init}}
+\item{\code{level}}{A character string indicating the target administrative
+level of the data with the default being "1". Currently supported
+options are level 1 ("1) and level 2 ("2").
+Use \code{get_available_datasets} for supported options by dataset.}
+
+\item{\code{totals}}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
+
+\item{\code{localise}}{Logical, defaults to TRUE. Should region names be
+localised.}
+
+\item{\code{verbose}}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
+
+\item{\code{steps}}{Logical, defaults to FALSE. Should all processing and
+cleaning steps be kept and output in a list.
+#' @export}
+
+\item{\code{nhsregions}}{Return subnational English regions using NHS region
+boundaries instead of PHE boundaries.}
+
+\item{\code{release_date}}{Date data was released. Default is to extract
+latest release. Dates should be in the format "yyyy-mm-dd".}
+
+\item{\code{resolution}}{"utla" (default) or "ltla", depending on which
+geographical resolution is preferred}
+
+\item{\code{self}}{The specific class object to attach values}
 }
 \if{html}{\out{</div>}}
 }

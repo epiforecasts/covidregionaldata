@@ -50,7 +50,6 @@ Uk <- R6::R6Class("Uk", # rename to country name
 
     #' @description Specific function for getting region codes for UK .
     #' @rdname get_region_codes
-    #' @importFrom rlang .data
     get_region_codes = function() {
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
@@ -59,64 +58,19 @@ Uk <- R6::R6Class("Uk", # rename to country name
       self$region$codes_lookup <- NULL
     },
 
+    #' @description UK specific download function
+    #' @importFrom purrr map
     download = function() {
       # set up filters
       private$set_filters()
-      self$region$raw <- purrr::map(private$query_filters, self$download_uk)
-    },
-
-    download_uk = function(filter) {
-      # build a list of download links as limited to 4 variables per request
-      csv_links <- purrr::map(
-        1:(ceiling(length(self$source_data_cols) / 4)),
-        ~ paste0(
-          self$data_url, "?", unlist(filter), "&",
-          paste(paste0(
-            "metric=",
-            self$source_data_cols[(1 + 4 * (. - 1)):min(
-              (4 * .), length(self$source_data_cols)
-            )]
-          ),
-          collapse = "&"
-          ),
-          "&format=csv"
-        )
-      )
-      # add in release data if defined
-      if (!is.null(private$release_date)) {
-        csv_links <- purrr::map(csv_links, ~ paste0(
-          .,
-          "&release=",
-          private$release_date
-        ))
-      }
-      # download and link all data into a single data frame
-      safe_reader <- purrr::safely(csv_readr)
-      csv <- purrr::map(csv_links, ~ safe_reader(.)[[1]])
-      csv <- purrr::compact(csv)
-      csv <- purrr::reduce(csv, dplyr::full_join,
-        by = c("date", "areaType", "areaCode", "areaName")
-      )
-      if (is.null(csv)) {
-        stop("Data retrieval failed")
-      }
-      # add release date as variable if missing
-      if (!is.null(private$release_date)) {
-        csv <- dplyr::mutate(
-          csv,
-          release_date = as.Date(private$release_date)
-        )
-      }
-      return(csv)
+      message("Downloading UK data.")
+      self$region$raw <- map(private$query_filters, private$download_uk)
     },
 
     #' @description UK specific cleaning, directs to level 1 or level 2
-    #' @param ... pass additional arguments
     #'
-    clean = function(...) {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+    clean = function() {
+      message("Cleaning data")
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
@@ -124,33 +78,37 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    #' @description UK Specific Region Level Data Cleaning
+    #' @importFrom dplyr bind_rows mutate rename %>%
+    #' @importFrom lubridate ymd
+    #' @importFrom rlang .data
     clean_level_1 = function() {
-      self$region$clean <- dplyr::bind_rows(
+      self$region$clean <- bind_rows(
         self$region$raw$nation, self$region$raw$region
       ) %>%
-        dplyr::mutate(
-          date = lubridate::ymd(date),
+        mutate(
+          date = ymd(.data$date),
           # Cases and deaths by specimen date and date of death
           #   for all nations + regions
-          cases_new = newCasesBySpecimenDate,
-          cases_total = cumCasesBySpecimenDate,
-          deaths_new = newDeaths28DaysByDeathDate,
-          deaths_total = cumDeaths28DaysByDeathDate
+          cases_new = .data$newCasesBySpecimenDate,
+          cases_total = .data$cumCasesBySpecimenDate,
+          deaths_new = .data$newDeaths28DaysByDeathDate,
+          deaths_total = .data$cumDeaths28DaysByDeathDate
         ) %>%
         # Hospitalisations and tested variables are only available for nations
         # (not regions)
         #   sub-national English regions are available in the NHS data below
         # (with arg nhsregions = TRUE)
-        dplyr::rename(
-          hosp_new = newAdmissions,
-          hosp_total = cumAdmissions,
-          tested_new = newTestsByPublishDate,
-          tested_total = cumTestsByPublishDate,
-          region_level_1 = areaName,
-          level_1_region_code = areaCode
+        rename(
+          hosp_new = .data$newAdmissions,
+          hosp_total = .data$cumAdmissions,
+          tested_new = .data$newTestsByPublishDate,
+          tested_total = .data$cumTestsByPublishDate,
+          region_level_1 = .data$areaName,
+          level_1_region_code = .data$areaCode
         )
       if (!is.null(private$release_date)) {
-        self$region$clean <- dplyr::mutate(
+        self$region$clean <- mutate(
           self$region$clean,
           release_date = private$release_date
         )
@@ -162,55 +120,61 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    #' @description UK Specific Level 2 Data Cleaning
+    #' @importFrom dplyr mutate rename left_join select %>%
+    #' @importFrom lubridate ymd
+    #' @importFrom stringr str_detect
+    #' @importFrom rlang .data
     clean_level_2 = function() {
       private$get_authority_lookup_table()
       self$region$clean <- self$region$raw[[1]] %>%
-        dplyr::mutate(
-          date = lubridate::ymd(date),
+        mutate(
+          date = ymd(.data$date),
           # Cases and deaths are by publish date for Scotland, Wales;
           #   but by specimen date and date of death for England and NI
-          cases_new = ifelse(stringr::str_detect(areaCode, "^[EN]"),
-            newCasesBySpecimenDate,
-            newCasesByPublishDate
+          cases_new = ifelse(str_detect(.data$areaCode, "^[EN]"),
+            .data$newCasesBySpecimenDate,
+            .data$newCasesByPublishDate
           ),
-          cases_total = ifelse(stringr::str_detect(areaCode, "^[EN]"),
-            cumCasesBySpecimenDate,
-            cumCasesByPublishDate
+          cases_total = ifelse(str_detect(.data$areaCode, "^[EN]"),
+            .data$cumCasesBySpecimenDate,
+            .data$cumCasesByPublishDate
           ),
-          deaths_new = ifelse(stringr::str_detect(areaCode, "^[EN]"),
-            newDeaths28DaysByDeathDate,
-            newDeaths28DaysByPublishDate
+          deaths_new = ifelse(str_detect(.data$areaCode, "^[EN]"),
+            .data$newDeaths28DaysByDeathDate,
+            .data$newDeaths28DaysByPublishDate
           ),
-          deaths_total = ifelse(stringr::str_detect(areaCode, "^[EN]"),
-            cumDeaths28DaysByDeathDate,
-            cumDeaths28DaysByPublishDate
+          deaths_total = ifelse(str_detect(.data$areaCode, "^[EN]"),
+            .data$cumDeaths28DaysByDeathDate,
+            .data$cumDeaths28DaysByPublishDate
           )
         ) %>%
         # Hospitalisations and tested variables are consistent across nations
-        dplyr::rename(
-          region_level_2 = areaName,
-          level_2_region_code = areaCode
+        rename(
+          region_level_2 = .data$areaName,
+          level_2_region_code = .data$areaCode
         ) %>%
         # Join local authority codes to level 1 regions
-        dplyr::left_join(private$authority_lookup_table,
+        left_join(private$authority_lookup_table,
           by = "region_level_2"
         ) %>%
-        dplyr::rename(level_2_region_code = level_2_region_code.x) %>%
-        dplyr::select(-level_2_region_code.y) %>%
-        dplyr::mutate(
-          region_level_1 = ifelse(grepl("^W", level_2_region_code), "Wales",
-            ifelse(grepl("^S", level_2_region_code),
+        rename(level_2_region_code = .data$level_2_region_code.x) %>%
+        select(-.data$level_2_region_code.y) %>%
+        mutate(
+          region_level_1 = ifelse(grepl("^W", .data$level_2_region_code),
+            "Wales",
+            ifelse(grepl("^S", .data$level_2_region_code),
               "Scotland",
-              ifelse(grepl("^N", level_2_region_code),
-                "Northern Ireland", region_level_1
+              ifelse(grepl("^N", .data$level_2_region_code),
+                "Northern Ireland", .data$region_level_1
               )
             )
           ),
           level_1_region_code = ifelse(
-            region_level_1 == "Scotland", "S92000003",
-            ifelse(region_level_1 == "Wales", "W92000004",
-              ifelse(region_level_1 == "Northern Ireland",
-                "N92000002", level_1_region_code
+            .data$region_level_1 == "Scotland", "S92000003",
+            ifelse(.data$region_level_1 == "Wales", "W92000004",
+              ifelse(.data$region_level_1 == "Northern Ireland",
+                "N92000002", .data$level_1_region_code
               )
             )
           )
@@ -223,13 +187,17 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    #' @description UK specific function to processes regional data.
+    #' Calls the parent process function but for level two regions does some
+    #' column renaming.
+    #' @importFrom dplyr rename %>%
     process = function() {
       # run through parent process
       super$process()
       # rename the region codes columuns for level 2
       if (self$level == "2") {
         self$region$processed <- self$region$processed %>%
-          dplyr::rename(
+          rename(
             ltla_code = ons_region_code,
             ons_region_code = level_1_region_code,
             region = region_level_1
@@ -237,6 +205,29 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    #' @description Specific initalize function for UK providing extra
+    #' arguments specific to the UK
+    #' @param self The specific class object to attach values
+    #' @param level A character string indicating the target administrative
+    #' level of the data with the default being "1". Currently supported
+    #' options are level 1 ("1) and level 2 ("2").
+    #' Use `get_available_datasets` for supported options by dataset.
+    #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+    #'  data per region up to today's date. If FALSE, returns the full dataset
+    #'  stratified by date and region.
+    #' @param localise Logical, defaults to TRUE. Should region names be
+    #' localised.
+    #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+    #' messages and warnings be returned.
+    #' @param steps Logical, defaults to FALSE. Should all processing and
+    #' cleaning steps be kept and output in a list.
+    #' #' @export
+    #' @param nhsregions Return subnational English regions using NHS region
+    #' boundaries instead of PHE boundaries.
+    #' @param release_date Date data was released. Default is to extract
+    #' latest release. Dates should be in the format "yyyy-mm-dd".
+    #' @param resolution "utla" (default) or "ltla", depending on which
+    #' geographical resolution is preferred
     initialize = function(level = "1",
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE,
@@ -255,19 +246,66 @@ Uk <- R6::R6Class("Uk", # rename to country name
     }
   ),
   private = list(
-    #' @field query_filters Set what filters to use to query the data
+    # query_filters Set what filters to use to query the data
     query_filters = NULL,
-    #' @field authority_lookup_table Get table of authority structures
+    # authority_lookup_table Get table of authority structures
     authority_lookup_table = NULL,
-    #' @field nhsregions Whether to include NHS regions in the data
+    # nhsregions Whether to include NHS regions in the data
     nhsregions = FALSE,
-    #' @field release_date The resealse date for the data
+    # release_date The resealse date for the data
     release_date = NULL,
-    #' @field resolution The resolution of the data to return
+    # resolution The resolution of the data to return
     resolution = "utla",
 
-    #' @description Set filters for UK data api query.
-    #'
+    # Helper function for downloading UK data
+    #' @importFrom purrr map safely compact reduce
+    #' @importFrom dplyr full_join mutate
+    download_uk = function(filter) {
+      # build a list of download links as limited to 4 variables per request
+      csv_links <- map(
+        1:(ceiling(length(self$source_data_cols) / 4)),
+        ~ paste0(
+          self$data_url, "?", unlist(filter), "&",
+          paste(paste0(
+            "metric=",
+            self$source_data_cols[(1 + 4 * (. - 1)):min(
+              (4 * .), length(self$source_data_cols)
+            )]
+          ),
+          collapse = "&"
+          ),
+          "&format=csv"
+        )
+      )
+      # add in release data if defined
+      if (!is.null(private$release_date)) {
+        csv_links <- map(csv_links, ~ paste0(
+          .,
+          "&release=",
+          private$release_date
+        ))
+      }
+      # download and link all data into a single data frame
+      safe_reader <- safely(csv_readr)
+      csv <- map(csv_links, ~ safe_reader(.)[[1]])
+      csv <- compact(csv)
+      csv <- reduce(csv, full_join,
+        by = c("date", "areaType", "areaCode", "areaName")
+      )
+      if (is.null(csv)) {
+        stop("Data retrieval failed")
+      }
+      # add release date as variable if missing
+      if (!is.null(private$release_date)) {
+        csv <- mutate(
+          csv,
+          release_date = as.Date(private$release_date)
+        )
+      }
+      return(csv)
+    },
+
+    # Set filters for UK data api query.
     set_filters = function() {
       if (self$level == 1) {
         private$query_filters <- list(
@@ -287,12 +325,17 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
-    #' @description Add NHS data for level 1 regions
-    #' Separate NHS data is available for "first" admissions, excluding
-    #' readmissions. This is available for England + English regions only.
+    # Add NHS data for level 1 regions
+    # Separate NHS data is available for "first" admissions, excluding
+    # readmissions. This is available for England + English regions only.
     #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
     #     Section 2, "2. Estimated new hospital cases"
-    #'
+
+    #' @importFrom lubridate year month
+    #' @importFrom readxl read_excel cell_limits
+    #' @importFrom tibble as_tibble
+    #' @importFrom dplyr mutate select %>% group_by summarise left_join
+    #' @importFrom tidyr pivot_longer
     add_nhs_regions = function() {
       if (is.null(private$release_date)) {
         private$release_date <- Sys.Date() - 1
@@ -308,10 +351,10 @@ Uk <- R6::R6Class("Uk", # rename to country name
       # Download NHS xlsx
       nhs_url <- paste0(
         "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
-        lubridate::year(private$release_date), "/",
+        year(private$release_date), "/",
         ifelse(lubridate::month(private$release_date) < 10,
           paste0(0, lubridate::month(private$release_date)),
-          lubridate::month(private$release_date)
+          month(private$release_date)
         ),
         "/COVID-19-daily-admissions-and-beds-",
         gsub("-", "", as.character(private$release_date)),
@@ -323,26 +366,26 @@ Uk <- R6::R6Class("Uk", # rename to country name
 
       # Clean NHS data
       adm_new <- suppressMessages(
-        readxl::read_excel(tmp,
+        read_excel(tmp,
           sheet = 1,
-          range = readxl::cell_limits(c(28, 2), c(36, NA))
+          range = cell_limits(c(28, 2), c(36, NA))
         ) %>%
           t()
       )
       colnames(adm_new) <- adm_new[1, ]
       adm_new <- adm_new[2:nrow(adm_new), ]
       adm_new <- adm_new %>%
-        tibble::as_tibble() %>%
-        dplyr::mutate(date = seq.Date(
+        as_tibble() %>%
+        mutate(date = .data$seq.Date(
           from = as.Date("2020-08-01"),
           by = 1,
           length.out = nrow(.)
         )) %>%
-        tidyr::pivot_longer(-date,
+        pivot_longer(-date,
           names_to = "region_level_1",
           values_to = "hosp_new_first_admissions"
         ) %>%
-        dplyr::mutate(
+        mutate(
           region_level_1 = ifelse(region_level_1 == "ENGLAND",
             "England", region_level_1
           ),
@@ -352,41 +395,45 @@ Uk <- R6::R6Class("Uk", # rename to country name
 
       # Merge PHE data into NHS regions ---------------------------------------
       self$region$clean <- self$region$clean %>%
-        dplyr::select(-level_1_region_code) %>%
-        dplyr::mutate(
+        select(-.data$level_1_region_code) %>%
+        mutate(
           region_level_1 = ifelse(
-            region_level_1 == "East Midlands" | region_level_1 == "West Midlands", # nolint
+            .data$region_level_1 == "East Midlands" | .data$region_level_1 == "West Midlands", # nolint
             "Midlands",
-            region_level_1
+            .data$region_level_1
           ),
           region_level_1 = ifelse(
-            region_level_1 == "Yorkshire and The Humber" | region_level_1 == "North East", # nolint
-            "North East and Yorkshire", region_level_1
+            .data$region_level_1 == "Yorkshire and The Humber" | .data$region_level_1 == "North East", # nolint
+            "North East and Yorkshire", .data$region_level_1
           )
         ) %>%
-        dplyr::group_by(date, region_level_1) %>%
-        dplyr::summarise(
-          cases_new = sum(cases_new, na.rm = TRUE),
-          cases_total = sum(cases_total, na.rm = TRUE),
-          deaths_new = sum(deaths_new, na.rm = TRUE),
-          deaths_total = sum(deaths_total, na.rm = TRUE),
-          hosp_new = sum(hosp_new, na.rm = TRUE),
-          hosp_total = sum(hosp_total, na.rm = TRUE),
+        group_by(date, .data$region_level_1) %>%
+        summarise(
+          cases_new = sum(.data$cases_new, na.rm = TRUE),
+          cases_total = sum(.data$cases_total, na.rm = TRUE),
+          deaths_new = sum(.data$deaths_new, na.rm = TRUE),
+          deaths_total = sum(.data$deaths_total, na.rm = TRUE),
+          hosp_new = sum(.data$hosp_new, na.rm = TRUE),
+          hosp_total = sum(.data$hosp_total, na.rm = TRUE),
           .groups = "drop"
         )
 
       # Merge PHE and NHS data
-      self$region$clean <- dplyr::left_join(
+      self$region$clean <- left_join(
         self$region$clean, adm_new,
         by = c("region_level_1", "date")
       ) %>%
         # Create a blended variable that uses "all" hospital admissions
         # (includes readmissions) for devolved nations and "first" hospital
         # admissions for England + English regions
-        dplyr::mutate(
+        mutate(
           hosp_new_blend = ifelse(
-            region_level_1 %in% c("Wales", "Scotland", "Northern Ireland"),
-            hosp_new, hosp_new_first_admissions
+            .data$region_level_1 %in% c(
+              "Wales",
+              "Scotland",
+              "Northern Ireland"
+            ),
+            .data$hosp_new, .data$hosp_new_first_admissions
           ),
           level_1_region_code = NA,
           release_date = private$release_date
@@ -394,6 +441,9 @@ Uk <- R6::R6Class("Uk", # rename to country name
     },
 
     #' @importFrom vroom vroom col_character
+    #' @importFrom dplyr select distinct filter bind_rows arrange
+    #' @importFrom tidyr drop_na
+    #' @importFrom tibble tibble
     get_authority_lookup_table = function() {
       authority_data <- vroom::vroom(
         "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
@@ -405,35 +455,41 @@ Uk <- R6::R6Class("Uk", # rename to country name
       )
 
       unitary_auth <- authority_data %>%
-        dplyr::select(
-          level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM",
-          level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM"
+        select(
+          level_2_region_code = "CTY17CD",
+          region_level_2 = "CTY17NM",
+          level_1_region_code = "GOR10CD",
+          region_level_1 = "GOR10NM"
         ) %>%
-        dplyr::distinct() %>%
-        tidyr::drop_na(region_level_2)
+        distinct() %>%
+        drop_na(.data$region_level_2)
 
       upper_tier_auth <- authority_data %>%
-        dplyr::select(
-          level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM",
-          level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM"
+        select(
+          level_2_region_code = "LAD17CD",
+          region_level_2 = "LAD17NM",
+          level_1_region_code = "GOR10CD",
+          region_level_1 = "GOR10NM"
         ) %>%
-        dplyr::distinct() %>%
-        tidyr::drop_na(region_level_2)
+        distinct() %>%
+        drop_na(.data$region_level_2)
 
       country_auth <- authority_data %>%
-        dplyr::select(
-          level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM",
-          level_1_region_code = "CTRY17CD", region_level_1 = "CTRY17NM"
+        select(
+          level_2_region_code = "LAD17CD",
+          region_level_2 = "LAD17NM",
+          level_1_region_code = "CTRY17CD",
+          region_level_1 = "CTRY17NM"
         ) %>%
-        dplyr::filter(region_level_1 %in% c(
+        filter(.data$region_level_1 %in% c(
           "Northern Ireland",
           "Scotland",
           "Wales"
         )) %>%
-        dplyr::distinct() %>%
-        tidyr::drop_na(region_level_2)
+        distinct() %>%
+        drop_na(.data$region_level_2)
 
-      other_auths <- tibble::tibble(
+      other_auths <- tibble(
         level_2_region_code = c("E06000058", "E06000052", "E09000012"),
         region_level_2 = c(
           "Bournemouth, Christchurch and Poole",
@@ -445,7 +501,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
       )
 
       # Join tables ---------------------------------------------------
-      private$authority_lookup_table <- dplyr::bind_rows(
+      private$authority_lookup_table <- bind_rows(
         unitary_auth,
         upper_tier_auth,
         country_auth,
@@ -453,8 +509,11 @@ Uk <- R6::R6Class("Uk", # rename to country name
       )
 
       private$authority_lookup_table <- private$authority_lookup_table %>%
-        dplyr::arrange(level_1_region_code) %>%
-        dplyr::distinct(level_2_region_code, region_level_2, .keep_all = TRUE)
+        arrange(.data$level_1_region_code) %>%
+        distinct(.data$level_2_region_code,
+          .data$region_level_2,
+          .keep_all = TRUE
+        )
     }
   )
 )

@@ -8,6 +8,9 @@ afghanistan
 Antwerpen
 api
 arcgis
+areaCode
+areaName
+areaType
 args
 aut
 avaliable
@@ -51,9 +54,16 @@ cron
 csv
 ctb
 cubadata
+cumAdmissions
+cumCasesByPublishDate
+cumCasesBySpecimenDate
+cumDeaths
+cumTestsByPublishDate
 danielcs
 dati
 datos
+DaysByDeathDate
+DaysByPublishDate
 DD
 de
 Département
@@ -110,6 +120,7 @@ httr
 humdata
 india
 infobase
+initalize
 initialised
 io
 iso
@@ -141,6 +152,7 @@ linux
 localisation
 localised
 lshtm
+ltla
 lubridate
 macOS
 magrittr
@@ -156,6 +168,15 @@ Municipio
 mx
 navbar
 nCoV
+newAdmissions
+newCasesByPublishDate
+newCasesBySpecimenDate
+newDeaths
+newPillarFourTestsByPublishDate
+newPillarOneTestsByPublishDate
+newPillarThreeTestsByPublishDate
+newPillarTwoTestsByPublishDate
+newTestsByPublishDate
 nhs
 nhsregions
 nolint
@@ -176,6 +197,7 @@ patrick
 paul
 paulcampbell
 pcm
+PHE
 pkgbuild
 pkgdown
 pkgs
@@ -235,6 +257,7 @@ udunits
 uk
 useMemoise
 usethis
+utla
 VignetteBuilder
 VLG
 VLI
@@ -247,4 +270,5 @@ wiv
 writeLines
 www
 yaml
+yyyy
 YYYY
