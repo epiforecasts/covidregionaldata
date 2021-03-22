@@ -224,7 +224,7 @@ process_internal <- function(region, group_vars, totals = FALSE,
       arrange(.data$date, all_of(group_vars[1]))
   }
   dat <- ungroup(dat)
-  print(group_vars)
+
   if (localise) {
     dat <- rename(dat, !!region$level := !!group_vars[1])
   }

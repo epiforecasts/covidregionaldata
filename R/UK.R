@@ -62,7 +62,6 @@ Uk <- R6::R6Class("Uk", # rename to country name
     download = function() {
       # set up filters
       private$set_filters()
-      print(private$query_filters)
       self$region$raw <- purrr::map(private$query_filters, self$download_uk)
     },
 
@@ -84,11 +83,11 @@ Uk <- R6::R6Class("Uk", # rename to country name
         )
       )
       # add in release data if defined
-      if (!is.null(self$release_date)) {
+      if (!is.null(private$release_date)) {
         csv_links <- purrr::map(csv_links, ~ paste0(
           .,
           "&release=",
-          self$release_date
+          private$release_date
         ))
       }
       # download and link all data into a single data frame
@@ -102,10 +101,10 @@ Uk <- R6::R6Class("Uk", # rename to country name
         stop("Data retrieval failed")
       }
       # add release date as variable if missing
-      if (!is.null(self$release_date)) {
+      if (!is.null(private$release_date)) {
         csv <- dplyr::mutate(
           csv,
-          release_date = as.Date(self$release_date)
+          release_date = as.Date(private$release_date)
         )
       }
       return(csv)
@@ -125,7 +124,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
-    clean_level_1 = function(nhsregions = FALSE, release_date = NULL) {
+    clean_level_1 = function() {
       self$region$clean <- dplyr::bind_rows(
         self$region$raw$nation, self$region$raw$region
       ) %>%
@@ -150,20 +149,20 @@ Uk <- R6::R6Class("Uk", # rename to country name
           region_level_1 = areaName,
           level_1_region_code = areaCode
         )
-      if (!is.null(release_date)) {
+      if (!is.null(private$release_date)) {
         self$region$clean <- dplyr::mutate(
           self$region$clean,
-          release_date = release_date
+          release_date = private$release_date
         )
       }
 
       # get NHS data if requested
-      if (nhsregions) {
+      if (private$nhsregions) {
         private$add_nhs_regions()
       }
     },
 
-    clean_level_2 = function(release_date = NULL) {
+    clean_level_2 = function() {
       private$get_authority_lookup_table()
       self$region$clean <- self$region$raw[[1]] %>%
         dplyr::mutate(
@@ -217,29 +216,42 @@ Uk <- R6::R6Class("Uk", # rename to country name
           )
         )
 
-      if (!is.null(release_date)) {
+      if (!is.null(private$release_date)) {
         self$region$clean <- dplyr::mutate(self$region$clean,
-          release_date = release_date
+          release_date = private$release_date
         )
       }
     },
 
     process = function() {
+      # run through parent process
       super$process()
-      # rename the region codes columuns
-      self$region$processed <- self$region$processed %>%
-        dplyr::rename(
-          ltla_code = ons_region_code,
-          ons_region_code = level_1_region_code,
-          region = region_level_1
-        )
+      # rename the region codes columuns for level 2
+      if (self$level == "2") {
+        self$region$processed <- self$region$processed %>%
+          dplyr::rename(
+            ltla_code = ons_region_code,
+            ons_region_code = level_1_region_code,
+            region = region_level_1
+          )
+      }
     },
 
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
+    initialize = function(level = "1",
+                          totals = FALSE, localise = TRUE,
+                          verbose = TRUE, steps = FALSE,
+                          nhsregions = FALSE, release_date = NULL,
+                          resolution = "utla") {
+      self$level <- level
+      self$totals <- totals
+      self$localise <- localise
+      self$verbose <- verbose
+      self$steps <- steps
+      self$country <- tolower(class(self)[1])
+      private$nhsregions <- nhsregions
+      private$release_date <- release_date
+      private$resolution <- resolution
+      self$get_region_codes()
     }
   ),
   private = list(
@@ -247,21 +259,29 @@ Uk <- R6::R6Class("Uk", # rename to country name
     query_filters = NULL,
     #' @field authority_lookup_table Get table of authority structures
     authority_lookup_table = NULL,
+    #' @field nhsregions Whether to include NHS regions in the data
+    nhsregions = FALSE,
+    #' @field release_date The resealse date for the data
+    release_date = NULL,
+    #' @field resolution The resolution of the data to return
+    resolution = "utla",
 
     #' @description Set filters for UK data api query.
     #'
-    set_filters = function(resolution = "utla") {
+    set_filters = function() {
       if (self$level == 1) {
         private$query_filters <- list(
           nation = "areaType=nation",
           region = "areaType=region"
         )
       } else if (self$level == 2) {
-        resolution <- match.arg(resolution, choices = c("utla", "ltla"))
-        private$query_filters <- list(
-          paste("areaType", resolution, sep = "=")
+        private$resolution <- match.arg(private$resolution,
+          choices = c("utla", "ltla")
         )
-        names(private$query_filters) <- resolution
+        private$query_filters <- list(
+          paste("areaType", private$resolution, sep = "=")
+        )
+        names(private$query_filters) <- private$resolution
       } else {
         stop(paste("Uk data not supported for level", self$level))
       }
@@ -273,11 +293,11 @@ Uk <- R6::R6Class("Uk", # rename to country name
     #   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
     #     Section 2, "2. Estimated new hospital cases"
     #'
-    add_nhs_regions = function(release_date) {
-      if (is.null(release_date)) {
-        release_date <- Sys.Date() - 1
+    add_nhs_regions = function() {
+      if (is.null(private$release_date)) {
+        private$release_date <- Sys.Date() - 1
       }
-      if (release_date < (Sys.Date() - 7)) {
+      if (private$release_date < (Sys.Date() - 7)) {
         stop("Data by NHS regions is only available in archived form for the
              last 7 days")
       }
@@ -288,13 +308,13 @@ Uk <- R6::R6Class("Uk", # rename to country name
       # Download NHS xlsx
       nhs_url <- paste0(
         "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
-        lubridate::year(release_date), "/",
-        ifelse(lubridate::month(release_date) < 10,
-          paste0(0, lubridate::month(release_date)),
-          lubridate::month(release_date)
+        lubridate::year(private$release_date), "/",
+        ifelse(lubridate::month(private$release_date) < 10,
+          paste0(0, lubridate::month(private$release_date)),
+          lubridate::month(private$release_date)
         ),
         "/COVID-19-daily-admissions-and-beds-",
-        gsub("-", "", as.character(release_date)),
+        gsub("-", "", as.character(private$release_date)),
         ".xlsx"
       )
 
@@ -369,7 +389,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
             hosp_new, hosp_new_first_admissions
           ),
           level_1_region_code = NA,
-          release_date = release_date
+          release_date = private$release_date
         )
     },
 
