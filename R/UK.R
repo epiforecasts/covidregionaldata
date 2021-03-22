@@ -230,7 +230,8 @@ Uk <- R6::R6Class("Uk", # rename to country name
       self$region$processed <- self$region$processed %>%
         dplyr::rename(
           ltla_code = ons_region_code,
-          ons_region_code = level_1_region_code
+          ons_region_code = level_1_region_code,
+          region = region_level_1
         )
     },
 
