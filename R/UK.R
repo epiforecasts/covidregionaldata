@@ -62,6 +62,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
     download = function() {
       # set up filters
       private$set_filters()
+      print(private$query_filters)
       self$region$raw <- purrr::map(private$query_filters, self$download_uk)
     },
 
@@ -162,6 +163,67 @@ Uk <- R6::R6Class("Uk", # rename to country name
       }
     },
 
+    clean_level_2 = function(release_date = NULL) {
+      private$get_authority_lookup_table()
+      self$region$clean <- self$region$raw[[1]] %>%
+        dplyr::mutate(
+          date = lubridate::ymd(date),
+          # Cases and deaths are by publish date for Scotland, Wales;
+          #   but by specimen date and date of death for England and NI
+          cases_new = ifelse(stringr::str_detect(areaCode, "^[EN]"),
+            newCasesBySpecimenDate,
+            newCasesByPublishDate
+          ),
+          cases_total = ifelse(stringr::str_detect(areaCode, "^[EN]"),
+            cumCasesBySpecimenDate,
+            cumCasesByPublishDate
+          ),
+          deaths_new = ifelse(stringr::str_detect(areaCode, "^[EN]"),
+            newDeaths28DaysByDeathDate,
+            newDeaths28DaysByPublishDate
+          ),
+          deaths_total = ifelse(stringr::str_detect(areaCode, "^[EN]"),
+            cumDeaths28DaysByDeathDate,
+            cumDeaths28DaysByPublishDate
+          )
+        ) %>%
+        # Hospitalisations and tested variables are consistent across nations
+        dplyr::rename(
+          region_level_2 = areaName,
+          level_2_region_code = areaCode
+        ) %>%
+        # Join local authority codes to level 1 regions
+        dplyr::left_join(private$authority_lookup_table,
+          by = "region_level_2"
+        ) %>%
+        dplyr::rename(level_2_region_code = level_2_region_code.x) %>%
+        dplyr::select(-level_2_region_code.y) %>%
+        dplyr::mutate(
+          region_level_1 = ifelse(grepl("^W", level_2_region_code), "Wales",
+            ifelse(grepl("^S", level_2_region_code),
+              "Scotland",
+              ifelse(grepl("^N", level_2_region_code),
+                "Northern Ireland", region_level_1
+              )
+            )
+          ),
+          level_1_region_code = ifelse(
+            region_level_1 == "Scotland", "S92000003",
+            ifelse(region_level_1 == "Wales", "W92000004",
+              ifelse(region_level_1 == "Northern Ireland",
+                "N92000002", level_1_region_code
+              )
+            )
+          )
+        )
+
+      if (!is.null(release_date)) {
+        self$region$clean <- dplyr::mutate(self$region$clean,
+          release_date = release_date
+        )
+      }
+    },
+
 
     #' @description Initialize the country
     #' @param ... The args passed by [general_init]
@@ -172,10 +234,12 @@ Uk <- R6::R6Class("Uk", # rename to country name
   private = list(
     #' @field query_filters Set what filters to use to query the data
     query_filters = NULL,
+    #' @field authority_lookup_table Get table of authority structures
+    authority_lookup_table = NULL,
 
     #' @description Set filters for UK data api query.
     #'
-    set_filters = function(resolution = "ultra") {
+    set_filters = function(resolution = "utla") {
       if (self$level == 1) {
         private$query_filters <- list(
           nation = "areaType=nation",
@@ -296,6 +360,70 @@ Uk <- R6::R6Class("Uk", # rename to country name
           level_1_region_code = NA,
           release_date = release_date
         )
+    },
+
+    #' @importFrom vroom vroom col_character
+    get_authority_lookup_table = function() {
+      authority_data <- vroom::vroom(
+        "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
+        col_types = c(
+          WD17NMW = vroom::col_character(),
+          CTY17CD = vroom::col_character(),
+          CTY17NM = vroom::col_character()
+        )
+      )
+
+      unitary_auth <- authority_data %>%
+        dplyr::select(
+          level_2_region_code = "CTY17CD", region_level_2 = "CTY17NM",
+          level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM"
+        ) %>%
+        dplyr::distinct() %>%
+        tidyr::drop_na(region_level_2)
+
+      upper_tier_auth <- authority_data %>%
+        dplyr::select(
+          level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM",
+          level_1_region_code = "GOR10CD", region_level_1 = "GOR10NM"
+        ) %>%
+        dplyr::distinct() %>%
+        tidyr::drop_na(region_level_2)
+
+      country_auth <- authority_data %>%
+        dplyr::select(
+          level_2_region_code = "LAD17CD", region_level_2 = "LAD17NM",
+          level_1_region_code = "CTRY17CD", region_level_1 = "CTRY17NM"
+        ) %>%
+        dplyr::filter(region_level_1 %in% c(
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        )) %>%
+        dplyr::distinct() %>%
+        tidyr::drop_na(region_level_2)
+
+      other_auths <- tibble::tibble(
+        level_2_region_code = c("E06000058", "E06000052", "E09000012"),
+        region_level_2 = c(
+          "Bournemouth, Christchurch and Poole",
+          "Cornwall and Isles of Scilly",
+          "Hackney and City of London"
+        ),
+        level_1_region_code = c(rep("E92000001", 3)),
+        region_level_1 = c("South West", "South West", "London")
+      )
+
+      # Join tables ---------------------------------------------------
+      private$authority_lookup_table <- dplyr::bind_rows(
+        unitary_auth,
+        upper_tier_auth,
+        country_auth,
+        other_auths
+      )
+
+      private$authority_lookup_table <- private$authority_lookup_table %>%
+        dplyr::arrange(level_1_region_code) %>%
+        dplyr::distinct(level_2_region_code, region_level_2, .keep_all = TRUE)
     }
   )
 )
