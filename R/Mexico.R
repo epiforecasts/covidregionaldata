@@ -67,8 +67,13 @@ Mexico <- R6::R6Class("Mexico",
       read_data <- function(target, new_name) {
         if (self$verbose) {
           message("Downloading ", new_name)
+          dat <- csv_reader(file.path(domain, target))
+        } else {
+          dat <- suppressMessages(
+            csv_reader(file.path(domain, target))
+          )
         }
-        csv_reader(file.path(domain, target)) %>%
+        dat <- dat %>%
           select(-.data$poblacion) %>%
           pivot_longer(-c("cve_ent", "nombre"),
             names_to = "date", values_to = new_name
