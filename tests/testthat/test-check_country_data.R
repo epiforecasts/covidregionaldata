@@ -29,6 +29,11 @@ check_all_country_cols <- function(level) {
       country
     )
   )
+  if (level == 2) {
+    avaliable_sources <- dplyr::filter(
+      avaliable_sources, !(is.na(level_2_region))
+    )
+  }
   countries <- avaliable_sources$country
   for (country in countries) {
     data <- get_regional_data(country, level = level, class = T, verbose = F)
@@ -37,5 +42,6 @@ check_all_country_cols <- function(level) {
   }
 }
 
+testthat::skip("Skipping data checks as very slow")
 check_all_country_cols(level = 1)
 check_all_country_cols(level = 2)
