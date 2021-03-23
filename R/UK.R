@@ -1,20 +1,23 @@
 #' United Kingdom Class for downloading, cleaning and processing notification
 #' data.
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for an example Country.
+#' @description Extracts daily COVID-19 data for the UK, stratified by region
+#' and nation. Contains additional options to other country class objects,
+#' including options to return subnational English regions using NHS region
+#' boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
+#' download from (release_date) and a geographical resolution (resolution).
 #'
 #' @details Inherits from `DataClass`
 #' @source https://coronavirus.data.gov.uk/details/download #nolint
 #' @examples
 #' \dontrun{
-#' region <- Italy$new(verbose = TRUE, steps = TRUE)
+#' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
 #' region$download()
 #' region$clean()
 #' region$process()
 #' region$return()
 #' }
-Uk <- R6::R6Class("Uk", # rename to country name
+UK <- R6::R6Class("UK", # rename to country name
   inherit = DataClass,
   public = list(
     # Core Attributes (amend each paramater for country specific infomation)
@@ -228,6 +231,15 @@ Uk <- R6::R6Class("Uk", # rename to country name
     #' latest release. Dates should be in the format "yyyy-mm-dd".
     #' @param resolution "utla" (default) or "ltla", depending on which
     #' geographical resolution is preferred
+    #' @examples
+    #' \dontrun{
+    #' Uk$new(
+    #'  level = 1, localise = TRUE,
+    #'  verbose = True, steps = FALSE,
+    #'  nhsregions = FALSE, release_date = NULL,
+    #'  resolution = utla
+    #' )
+    #' }
     initialize = function(level = "1",
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE,
