@@ -14,6 +14,11 @@ check_country_available <- function(country = character(), level = 1,
   stopifnot(is.character(country))
   level <- as.character(level)
 
+  # if country is UK whole name must be upper case
+  if (country == "Uk") {
+    country <- toupper(country)
+  }
+
   # check we have data for desired country
   available_sources <- covidregionaldata::get_available_datasets()
   available_sources <- tolower(available_sources$country)
