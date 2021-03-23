@@ -30,12 +30,15 @@ the statistical estimate provided by OSP. Should be \code{"official"}
 or \code{"statistical"}. (Defaults to \code{"official"}.)}
 }
 \value{
-A data frame of COVID cases by county in Lithuania, ready to be used by \code{get_regional_data()}.
+A data frame of COVID cases by county in Lithuania,
+ready to be used by \code{get_regional_data()}.
 }
 \description{
-Extracts daily COVID-19 data for Lithuania, stratified by county (apskritis)
-and municipality (savivaldybe). Some Lithuanian municipalities share names, there being both a
-Vilnius city municipality (m. sav.) and a Vilnius regional municipality (r. sav.)
+Extracts daily COVID-19 data for Lithuania,
+stratified by county (apskritis) and municipality (savivaldybe).
+Some Lithuanian municipalities share names, there being both a
+Vilnius city municipality (m. sav.) and a Vilnius regional
+municipality (r. sav.)
 
 Data available at \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}.
 
