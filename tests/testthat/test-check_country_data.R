@@ -36,7 +36,10 @@ check_all_country_cols <- function(level) {
   }
   countries <- avaliable_sources$country
   for (country in countries) {
-    data <- get_regional_data(country, level = level, class = T, verbose = F)
+    data <- get_regional_data(country,
+      level = level, class = TRUE,
+      verbose = FALSE
+    )
     check_clean_cols(level, country, data$region$clean)
     check_processed_cols(level, country, data$region$processed)
   }
