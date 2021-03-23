@@ -38,7 +38,7 @@ get_available_datasets <- function() {
       }
     }
   )
-  avaliable_country_data <- valid_country_objects %>%
+  available_country_data <- valid_country_objects %>%
     bind_rows() %>%
     select(
       .data$country,
@@ -48,5 +48,5 @@ get_available_datasets <- function() {
       .data$data_url,
       .data$source_data_cols
     )
-  return(avaliable_country_data)
+  return(available_country_data)
 }

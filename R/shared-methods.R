@@ -150,7 +150,7 @@ DataClass <- R6::R6Class(
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       if (self$verbose) {
-        message("Procesing data")
+        message("Processing data")
       }
       region_vars <- switch(self$level,
         "1" = c("region_level_1", "level_1_region_code"),
