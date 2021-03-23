@@ -376,7 +376,7 @@ Uk <- R6::R6Class("Uk", # rename to country name
       adm_new <- adm_new[2:nrow(adm_new), ]
       adm_new <- adm_new %>%
         as_tibble() %>%
-        mutate(date = .data$seq.Date(
+        mutate(date = seq.Date(
           from = as.Date("2020-08-01"),
           by = 1,
           length.out = nrow(.)
