@@ -1,0 +1,174 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# Subnational data for the Covid-19 outbreak
+
+[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
+[![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
+[![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.9.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/)
+[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
+[![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
+
+
+An interface to subnational and national level Covid-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as linelist data and links to intervention data sets.
+
+## Installation
+
+Install from CRAN:
+
+```{r, eval = FALSE}
+install.packages("covidregionaldata")
+```
+Install the stable development version of the package with:
+
+```{r, eval = FALSE}
+install.packages("drat")
+drat:::add("epiforecasts")
+install.packages("covidregionaldata")
+```
+
+Install the unstable development version of the package with:
+
+```{r, eval = FALSE}
+remotes::install_github("epiforecasts/covidregionaldata")
+```
+
+## Quick start
+
+[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata/)
+
+Load `covidregionaldata`, `dplyr`, `scales`, and `ggplot2` (all used in this quick start),
+
+```{r, message = FALSE}
+library(covidregionaldata)
+library(dplyr)
+library(ggplot2)
+library(scales)
+```
+
+### Setup Data caching
+
+This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will use a `.cache` in the current directory),
+
+```{r}
+start_using_memoise()
+```
+
+To stop using `memoise` use, 
+
+```{r, eval = FALSE}
+stop_using_memoise()
+```
+
+and to reset the cache (required to download new data),
+
+```{r, eval = FALSE}
+reset_cache()
+```
+
+### National data  
+
+To get worldwide time-series data by country (sourced from the WHO), use:
+
+```{r}
+nots <- get_national_data()
+nots
+```
+
+This can also be filtered for a country of interest,
+
+```{r}
+get_national_data(country = "France", verbose = FALSE)
+```
+
+Using this data we can compare case information between countries, for example here is the number of deaths over time for each country in the G7:
+
+```{r g7_plot, warning = FALSE, message = FALSE}
+g7 <- c(
+  "United States", "United Kingdom", "France", "Germany",
+  "Italy", "Canada", "Japan"
+)
+nots %>%
+  filter(country %in% g7) %>%
+  ggplot() +
+  aes(x = date, y = deaths_new, col = country) +
+  geom_line(alpha = 0.4) +
+  labs(x = "Date", y = "Reported Covid-19 deaths") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  guides(col = guide_legend(title = "Country"))
+```
+
+### Subnational data
+
+To get time-series data for subnational regions of a specific country, for example by level 1 region in the UK, use:
+
+```{r}
+uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
+uk_nots
+```
+
+Now we have the data we can create plots, for example the time-series of the number of cases for each region:
+
+```{r uk_plot, warning = FALSE, message = FALSE}
+uk_nots %>%
+  filter(!(region %in% "England")) %>%
+  ggplot() +
+  aes(x = date, y = cases_new, col = region) +
+  geom_line(alpha = 0.4) +
+  labs(x = "Date", y = "Reported Covid-19 cases") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  guides(col = guide_legend(title = "Region"))
+```
+
+We can also explore data for level 2 regions (here Upper-tier local authorities),
+
+```{r}
+uk_nots_2 <- get_regional_data(country = "UK", level = "2", verbose = FALSE)
+uk_nots_2
+```
+
+now as an example we can plot cases in the East Midlands,
+
+```{r utla_plot, warning = FALSE, message = FALSE}
+uk_nots_2 %>%
+  filter(region %in% c("East Midlands")) %>%
+  ggplot() +
+  aes(x = date, y = cases_new, col = authority) +
+  geom_line(alpha = 0.4) +
+  labs(x = "Date", y = "Reported Covid-19 cases") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  guides(col = guide_legend(title = "Authority"))
+ ```
+
+Level 2 data is only available for some countries, see `get_available_datasets` for supported nations. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd)
+
+## Dataset status
+
+| **Dataset** | **GitHub status** | *CRAN status* |
+| :--- | :---: | :---: |
+| WHO   |  [![WHO](https://github.com/epiforecasts/covidregionaldata/workflows/WHO/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/who.yaml)    | *working* |
+| ECDC  |  [![ECDC](https://github.com/epiforecasts/covidregionaldata/workflows/ECDC/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/ecdc.yaml)    | *working* |
+| Mexico  |  [![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)    | *working* |
+| Italy  |  [![Italy](https://github.com/epiforecasts/covidregionaldata/workflows/Italy/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/italy.yaml)    | *working* |
+| Germany  |  [![Germany](https://github.com/epiforecasts/covidregionaldata/workflows/Germany/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/germany.yaml)    | *working* |
+
+## Development
+
+We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more details, start with the [contributing guide](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/contributing.md).

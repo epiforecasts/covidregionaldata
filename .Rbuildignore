@@ -22,3 +22,4 @@ SMG.md
 ^tests/testthat/\.cache$
 \.lintr$
 ^\.pre-commit-config\.yaml$
+^README\.Rmd$
