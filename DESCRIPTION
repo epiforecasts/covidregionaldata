@@ -95,6 +95,7 @@ Imports:
     countrycode (>= 1.2.0),
     dplyr,
     httr,
+    lifecycle,
     lubridate,
     magrittr,
     memoise,
