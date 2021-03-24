@@ -23,3 +23,4 @@ SMG.md
 \.lintr$
 ^\.pre-commit-config\.yaml$
 ^README\.Rmd$
+^.*.pdf$
