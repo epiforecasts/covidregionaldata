@@ -21,8 +21,8 @@ check_country_available <- function(country = character(), level = 1,
 
   # check we have data for desired country
   available_sources <- covidregionaldata::get_available_datasets()
-  available_sources <- tolower(available_sources$country)
-  if (!(tolower(country) %in% available_sources)) {
+  available_sources <- available_sources$country
+  if (!(country %in% available_sources)) {
     stop(
       paste0("No data available for country '", country, "'.")
     )
