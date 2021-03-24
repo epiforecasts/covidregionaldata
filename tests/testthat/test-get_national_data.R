@@ -1,11 +1,15 @@
 test_get_national_data <- function(source) {
   test_that(paste0("get_national_data returns", source, " data"), {
     true <- readRDS(paste0("custom_data/", source, ".rds"))
-    raw <- true
-    raw$clean <- NULL
-    raw$processed <- NULL
-    raw$return <- NULL
-    mockery::stub(get_national_data, "download", raw)
+    # initiate class
+    test_class <- get(toupper(source))$new()
+    # set raw to mock data
+    test_class$region$raw <- true$raw
+    # stub the download function for a return of the mock data
+    mockery::stub(test_class$download, "download", "stub has been called!")
+    expect_equal(test_class$download, "stub has been called!")
+    mockery::stub(test_class$download, "download", true$raw)
+    # check
     d <- get_national_data(
       country = "Afghanistan", source = source,
       verbose = FALSE
@@ -17,10 +21,6 @@ test_get_national_data <- function(source) {
       country = "rwfwf", source = source,
       verbose = FALSE
     ))
-    print(true)
-    print(
-      get_national_data(source = source, steps = TRUE, verbose = FALSE)
-    )
     expect_equal(
       true,
       get_national_data(source = source, steps = TRUE, verbose = FALSE)
@@ -28,6 +28,6 @@ test_get_national_data <- function(source) {
   })
 }
 
-testthat::skip("Test in development")
+# testthat::skip("Test in development")
 test_get_national_data("who")
-test_get_national_data("ecdc")
+# test_get_national_data("ecdc")

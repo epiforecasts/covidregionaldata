@@ -130,6 +130,7 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
+      print("CAN YOU SEE MEEEEEEEE!!!!!!!")
       if (self$verbose) {
         message("Downloading data")
         self$region$raw <- suppressWarnings(
