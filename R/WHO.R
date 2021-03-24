@@ -37,13 +37,13 @@ WHO <- R6::R6Class("WHO",
       if (self$verbose) {
         message("Cleaning data")
       }
-      self$region$clean <- self$region$raw
-      colnames(self$region$clean) <- c(
+      self$data$clean <- self$data$raw
+      colnames(self$data$clean) <- c(
         "date", "iso_code", "country", "who_region",
         "cases_new", "cases_total", "deaths_new",
         "deaths_total"
       )
-      self$region$clean <- self$region$clean %>%
+      self$data$clean <- self$data$clean %>%
         mutate(
           country = countrycode(.data$iso_code,
             origin = "iso2c", destination = "country.name.en", warn = FALSE
@@ -64,12 +64,12 @@ WHO <- R6::R6Class("WHO",
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function() {
-      self$region$return <- self$region$processed %>%
+      self$data$return <- self$data$processed %>%
         group_by(.data$country) %>%
         fill(.data$who_region, .data$un_region, .direction = "updown") %>%
         ungroup()
 
-      self$region$return <- self$region$return %>%
+      self$data$return <- self$data$return %>%
         select(
           .data$date, .data$un_region, .data$who_region, .data$country,
           .data$iso_code, .data$cases_new, .data$cases_total,
@@ -80,9 +80,9 @@ WHO <- R6::R6Class("WHO",
         arrange(.data$date, .data$country)
 
       if (self$steps) {
-        return(self$region)
+        return(self$data)
       } else {
-        return(self$region$return)
+        return(self$data$return)
       }
     },
 

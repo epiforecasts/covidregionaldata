@@ -37,7 +37,7 @@ ECDC <- R6::R6Class("ECDC",
         message("Cleaning data")
       }
       long_string <- "Cases_on_an_international_conveyance_Japan"
-      self$region$clean <- self$region$raw %>%
+      self$data$clean <- self$data$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
         rename(
           iso_code = .data$geoId, country = .data$countriesAndTerritories,
@@ -86,12 +86,12 @@ ECDC <- R6::R6Class("ECDC",
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function() {
-      self$region$return <- self$region$processed %>%
+      self$data$return <- self$data$processed %>%
         group_by(.data$country) %>%
         fill(.data$population_2019, .data$un_region, .direction = "updown") %>%
         ungroup()
 
-      self$region$return <- self$region$return %>%
+      self$data$return <- self$data$return %>%
         select(
           .data$date, .data$un_region, .data$country,
           .data$iso_code, .data$population_2019,
@@ -103,9 +103,9 @@ ECDC <- R6::R6Class("ECDC",
         arrange(.data$date, .data$country)
 
       if (self$steps) {
-        return(self$region)
+        return(self$data)
       } else {
-        return(self$region$return)
+        return(self$data$return)
       }
     },
 

@@ -55,9 +55,9 @@ UK <- R6::R6Class("UK", # rename to country name
     get_region_codes = function() {
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
-      self$region <- list(country = self$country, level = tar_level_name)
-      self$region$code <- "ons_region_code"
-      self$region$codes_lookup <- NULL
+      self$data <- list(country = self$country, level = tar_level_name)
+      self$data$code <- "ons_region_code"
+      self$data$codes_lookup <- NULL
     },
 
     #' @description UK specific download function
@@ -67,9 +67,9 @@ UK <- R6::R6Class("UK", # rename to country name
       self$set_filters()
       if (self$verbose) {
         message("Downloading UK data.")
-        self$region$raw <- map(self$query_filters, self$download_uk)
+        self$data$raw <- map(self$query_filters, self$download_uk)
       }
-      self$region$raw <- suppressMessages(
+      self$data$raw <- suppressMessages(
         map(self$query_filters, self$download_uk)
       )
     },
@@ -92,8 +92,8 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
     clean_level_1 = function() {
-      self$region$clean <- bind_rows(
-        self$region$raw$nation, self$region$raw$region
+      self$data$clean <- bind_rows(
+        self$data$raw$nation, self$data$raw$region
       ) %>%
         mutate(
           date = ymd(.data$date),
@@ -117,8 +117,8 @@ UK <- R6::R6Class("UK", # rename to country name
           level_1_region_code = .data$areaCode
         )
       if (!is.null(self$release_date)) {
-        self$region$clean <- mutate(
-          self$region$clean,
+        self$data$clean <- mutate(
+          self$data$clean,
           release_date = self$release_date
         )
       }
@@ -136,7 +136,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$get_authority_lookup_table()
-      self$region$clean <- self$region$raw[[1]] %>%
+      self$data$clean <- self$data$raw[[1]] %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths are by publish date for Scotland, Wales;
@@ -190,7 +190,7 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       if (!is.null(self$release_date)) {
-        self$region$clean <- dplyr::mutate(self$region$clean,
+        self$data$clean <- dplyr::mutate(self$data$clean,
           release_date = self$release_date
         )
       }
@@ -205,7 +205,7 @@ UK <- R6::R6Class("UK", # rename to country name
       super$process()
       # rename the region codes columuns for level 2
       if (self$level == "2") {
-        self$region$processed <- self$region$processed %>%
+        self$data$processed <- self$data$processed %>%
           rename(
             ltla_code = ons_region_code,
             ons_region_code = level_1_region_code,
@@ -410,7 +410,7 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE data into NHS regions ---------------------------------------
-      self$region$clean <- self$region$clean %>%
+      self$data$clean <- self$data$clean %>%
         select(-.data$level_1_region_code) %>%
         mutate(
           region_level_1 = ifelse(
@@ -435,8 +435,8 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE and NHS data
-      self$region$clean <- left_join(
-        self$region$clean, adm_new,
+      self$data$clean <- left_join(
+        self$data$clean, adm_new,
         by = c("region_level_1", "date")
       ) %>%
         # Create a blended variable that uses "all" hospital admissions
