@@ -52,7 +52,6 @@ UK <- R6::R6Class("UK", # rename to country name
     ),
 
     #' @description Specific function for getting region codes for UK .
-    #' @rdname get_region_codes
     get_region_codes = function() {
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
