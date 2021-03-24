@@ -42,7 +42,7 @@ Uk$new(
  level = 1, localise = TRUE,
  verbose = True, steps = FALSE,
  nhsregions = FALSE, release_date = NULL,
- resolution = utla
+ resolution = "utla"
 )
 }
 }
@@ -59,6 +59,16 @@ Uk$new(
 \item{\code{data_url}}{link to raw data}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+
+\item{\code{query_filters}}{Set what filters to use to query the data}
+
+\item{\code{authority_lookup_table}}{Get table of authority structures}
+
+\item{\code{nhsregions}}{Whether to include NHS regions in the data}
+
+\item{\code{release_date}}{The release date for the data}
+
+\item{\code{resolution}}{The resolution of the data to return}
 }
 \if{html}{\out{</div>}}
 }
@@ -72,6 +82,10 @@ Uk$new(
 \item \href{#method-clean_level_2}{\code{UK$clean_level_2()}}
 \item \href{#method-process}{\code{UK$process()}}
 \item \href{#method-new}{\code{UK$new()}}
+\item \href{#method-download_uk}{\code{UK$download_uk()}}
+\item \href{#method-set_filters}{\code{UK$set_filters()}}
+\item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
+\item \href{#method-get_authority_lookup_table}{\code{UK$get_authority_lookup_table()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
 }
@@ -204,12 +218,63 @@ Uk$new(
  level = 1, localise = TRUE,
  verbose = True, steps = FALSE,
  nhsregions = FALSE, release_date = NULL,
- resolution = utla
+ resolution = "utla"
 )
 }
 }
 \if{html}{\out{</div>}}
 
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download_uk"></a>}}
+\if{latex}{\out{\hypertarget{method-download_uk}{}}}
+\subsection{Method \code{download_uk()}}{
+Helper function for downloading Uk data API
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$download_uk(filter)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filter}}{region filters}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_filters"></a>}}
+\if{latex}{\out{\hypertarget{method-set_filters}{}}}
+\subsection{Method \code{set_filters()}}{
+Set filters for UK data api query.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$set_filters()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_nhs_regions"></a>}}
+\if{latex}{\out{\hypertarget{method-add_nhs_regions}{}}}
+\subsection{Method \code{add_nhs_regions()}}{
+Add NHS data for level 1 regions
+Separate NHS data is available for "first" admissions, excluding
+readmissions. This is available for England + English regions only.
+See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+Section 2, "2. Estimated new hospital cases"
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$add_nhs_regions()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_authority_lookup_table"></a>}}
+\if{latex}{\out{\hypertarget{method-get_authority_lookup_table}{}}}
+\subsection{Method \code{get_authority_lookup_table()}}{
+Get lookup table for UK authorities
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$get_authority_lookup_table()}\if{html}{\out{</div>}}
 }
 
 }
