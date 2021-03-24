@@ -33,7 +33,7 @@ Italy <- R6::R6Class("Italy",
       if (self$verbose) {
         message("Cleaning data")
       }
-      self$region$clean <- self$region$raw %>%
+      self$data$clean <- self$data$raw %>%
         mutate(
           date = as_date(ymd_hms(.data$data)),
           region_level_1 = as.character(.data$denominazione_regione),
@@ -49,7 +49,7 @@ Italy <- R6::R6Class("Italy",
         group_by(.data$date, .data$region_level_1) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
-        full_join(self$region$codes_lookup,
+        full_join(self$data$codes_lookup,
           by = c("region_level_1" = "region")
         ) %>%
         select(.data$date, .data$region_level_1,

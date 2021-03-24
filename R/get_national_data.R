@@ -34,7 +34,7 @@ get_national_data <- function(country, source = "who", steps = FALSE,
   # format source name
   source <- toupper(source)
 
-  # check data availability and initiate country class if avaliable
+  # check data availability and initiate country class if available
   nation_class <- check_country_available(
     country = source, level = "1",
     totals = FALSE, localise = TRUE,
@@ -58,8 +58,8 @@ get_national_data <- function(country, source = "who", steps = FALSE,
       stop("Country name not recognised. Please enter a character string, with
             no abbreviation.")
     }
-    nation_class$region$clean <- filter(
-      nation_class$region$clean,
+    nation_class$data$clean <- filter(
+      nation_class$data$clean,
       .data$region_level_1 %in% tar_country
     )
   }

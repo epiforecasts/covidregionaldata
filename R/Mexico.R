@@ -67,8 +67,13 @@ Mexico <- R6::R6Class("Mexico",
       read_data <- function(target, new_name) {
         if (self$verbose) {
           message("Downloading ", new_name)
+          dat <- csv_reader(file.path(domain, target))
+        } else {
+          dat <- suppressMessages(
+            csv_reader(file.path(domain, target))
+          )
         }
-        csv_reader(file.path(domain, target)) %>%
+        dat <- dat %>%
           select(-.data$poblacion) %>%
           pivot_longer(-c("cve_ent", "nombre"),
             names_to = "date", values_to = new_name
@@ -77,7 +82,7 @@ Mexico <- R6::R6Class("Mexico",
 
       confirmed <- read_data(confirmed_url, "cases_new")
       deceased <- read_data(deceased_url, "deaths_new")
-      self$region$raw <- full_join(confirmed, deceased,
+      self$data$raw <- full_join(confirmed, deceased,
         by = c("cve_ent", "nombre", "date")
       )
     },
@@ -105,7 +110,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_1 = function() {
-      self$region$clean <- self$region$raw %>%
+      self$data$clean <- self$data$raw %>%
         mutate(
           region_level_1 = str_to_title(.data$nombre),
           region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
@@ -114,7 +119,7 @@ Mexico <- R6::R6Class("Mexico",
           ),
           date = dmy(.data$date)
         ) %>%
-        full_join(self$region$codes_lookup, by = "region_level_1") %>%
+        full_join(self$data$codes_lookup, by = "region_level_1") %>%
         filter(.data$region_level_1 != "Nacional") %>%
         rename(level_1_region_code = .data$iso_code) %>%
         select(-c(.data$nombre, .data$cve_ent))
@@ -127,14 +132,14 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_2 = function() {
-      self$region$clean <- self$region$raw %>%
+      self$data$clean <- self$data$raw %>%
         mutate(
           region_level_2 = .data$nombre,
           inegi_state = substr(.data$cve_ent, 1, 2),
           date = dmy(.data$date)
         ) %>%
         select(-.data$nombre) %>%
-        full_join(self$region$codes_lookup, by = "inegi_state") %>%
+        full_join(self$data$codes_lookup, by = "inegi_state") %>%
         mutate(
           level_1_region_code = .data$iso_code,
           level_2_region_code = .data$cve_ent
