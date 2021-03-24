@@ -66,14 +66,21 @@ UK <- R6::R6Class("UK", # rename to country name
     download = function() {
       # set up filters
       self$set_filters()
-      message("Downloading UK data.")
-      self$region$raw <- map(self$query_filters, self$download_uk)
+      if (self$verbose) {
+        message("Downloading UK data.")
+        self$region$raw <- map(self$query_filters, self$download_uk)
+      }
+      self$region$raw <- suppressMessages(
+        map(self$query_filters, self$download_uk)
+      )
     },
 
     #' @description UK specific cleaning, directs to level 1 or level 2
     #'
     clean = function() {
-      message("Cleaning data")
+      if (self$verbose) {
+        message("Cleaning data")
+      }
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
