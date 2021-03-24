@@ -5,6 +5,7 @@ This update contains a substantial package refactor and as such introduces some 
 
 ## Changes
 
+* (24/03/2021) Added R6 class for downloading and processing UK covid-19 data.
 * Available datasets not listed in `get_available_datasets`.
 * Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. 
 * Added a list return method so that data processing changes can be tracked.
