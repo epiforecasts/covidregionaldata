@@ -370,8 +370,8 @@ UK <- R6::R6Class("UK", # rename to country name
       nhs_url <- paste0(
         "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
         year(self$release_date), "/",
-        ifelse(lubridate::month(self$release_date) < 10,
-          paste0(0, lubridate::month(self$release_date)),
+        ifelse(month(self$release_date) < 10,
+          paste0(0, month(self$release_date)),
           month(self$release_date)
         ),
         "/COVID-19-daily-admissions-and-beds-",
@@ -463,12 +463,12 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom tidyr drop_na
     #' @importFrom tibble tibble
     get_authority_lookup_table = function() {
-      authority_data <- vroom::vroom(
+      authority_data <- vroom(
         "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
         col_types = c(
-          WD17NMW = vroom::col_character(),
-          CTY17CD = vroom::col_character(),
-          CTY17NM = vroom::col_character()
+          WD17NMW = col_character(),
+          CTY17CD = col_character(),
+          CTY17NM = col_character()
         )
       )
 
