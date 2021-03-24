@@ -16,7 +16,7 @@ downloading, processing, and returning data.
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{region}}{data frame for requested region}
+\item{\code{data}}{data frame for requested region}
 
 \item{\code{data_url}}{link to raw data}
 
@@ -30,13 +30,6 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{region}}{data frame for requested region}
 }
 \if{html}{\out{</div>}}
 }

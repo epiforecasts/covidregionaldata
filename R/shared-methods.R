@@ -81,7 +81,7 @@ DataClass <- R6::R6Class(
   public = list(
     #' @field country name of country to fetch data for
     country = "",
-    #' @field region data frame for requested region
+    #' @field data data frame for requested region
     data = NULL,
     #' @field data_url link to raw data
     data_url = "",
