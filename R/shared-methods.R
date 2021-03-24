@@ -82,7 +82,7 @@ DataClass <- R6::R6Class(
     #' @field country name of country to fetch data for
     country = "",
     #' @field region data frame for requested region
-    region = NULL,
+    data = NULL,
     #' @field data_url link to raw data
     data_url = "",
     #' @field level target region level
@@ -116,15 +116,15 @@ DataClass <- R6::R6Class(
         )
       }
 
-      self$region <- list(country = self$country, level = tar_level_name)
+      self$data <- list(country = self$country, level = tar_level_name)
 
       if (nrow(codes) == 1) {
-        self$region$code <- codes$name[[1]]
-        self$region$codes_lookup <- codes$codes[[1]]
+        self$data$code <- codes$name[[1]]
+        self$data$codes_lookup <- codes$codes[[1]]
       }
 
-      self$region <- structure(
-        self$region
+      self$data <- structure(
+        self$data
       )
     },
 
@@ -132,11 +132,11 @@ DataClass <- R6::R6Class(
     download = function() {
       if (self$verbose) {
         message("Downloading data")
-        self$region$raw <- suppressWarnings(
+        self$data$raw <- suppressWarnings(
           csv_reader(self$data_url)
         )
       } else {
-        self$region$raw <- suppressMessages(
+        self$data$raw <- suppressMessages(
           suppressWarnings(
             csv_reader(self$data_url)
           )
@@ -159,8 +159,8 @@ DataClass <- R6::R6Class(
           "region_level_1", "level_1_region_code"
         )
       )
-      self$region <- process_internal(
-        self$region,
+      self$data <- process_internal(
+        self$data,
         group_vars = region_vars, totals = self$totals,
         localise = self$localise, verbose = self$verbose
       )
@@ -170,11 +170,11 @@ DataClass <- R6::R6Class(
     #' Designed to be called after `process`. For most datasets a
     #' custom method should not be needed.
     return = function() {
-      self$region$return <- NA
+      self$data$return <- NA
       if (self$steps) {
-        return(self$region)
+        return(self$data)
       } else {
-        return(self$region$processed)
+        return(self$data$processed)
       }
     }
   )
