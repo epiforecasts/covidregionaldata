@@ -36,6 +36,7 @@ CMD
 codecov
 Codecov
 colombia
+com
 conacyt
 config
 Config
@@ -65,6 +66,7 @@ datos
 DaysByDeathDate
 DaysByPublishDate
 DD
+dd
 de
 Département
 deps
@@ -108,6 +110,7 @@ ggplot
 github
 githubusercontent
 gouv
+gov
 Gruson
 Hamish
 harfbuzz
@@ -124,6 +127,7 @@ india
 infobase
 initalize
 initialised
+int
 io
 iso
 isp
@@ -253,6 +257,7 @@ testDownload
 testSource
 testthat
 tibble
+tibbles
 tidyr
 tidyselect
 totalled
