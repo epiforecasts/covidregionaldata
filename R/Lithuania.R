@@ -7,7 +7,7 @@
 #'
 #' @section OSP Data fields:
 #'
-#' The[Official Statistics Portal](https://osp.stat.gov.lt) provides
+#' The [Official Statistics Portal](https://osp.stat.gov.lt) (OSP) provides
 #' many data series in their table.
 #'
 #' The full range of these vectors can be returned by setting
@@ -146,7 +146,7 @@ Lithuania <- R6::R6Class("Lithuania",
     clean = function(...) {
       # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$region$clean <- something
+      # e.g. self$data$clean <- something
       # No return statement is required
       # have a statement like this to indicate information to user if requested
       if (self$verbose) {
@@ -274,11 +274,11 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Get relevant column names for differences (i.e. not percentages
       # or qualitative)
-      sum_cols <- names(select(self$region$raw, "population":tidyselect::last_col()))
+      sum_cols <- names(select(self$data$raw, "population":tidyselect::last_col()))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
       # Take the difference between national and sum of counties' data
-      unassigned <- self$region$raw %>%
+      unassigned <- self$data$raw %>%
         dplyr::mutate(national = ifelse(.data$municipality_name == "Lietuva",
           "national", "municipality"
         )) %>%
@@ -319,7 +319,7 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Join unknown locations to main dataset
       osp_data_w_unassigned <- dplyr::bind_rows(
-        self$region$raw %>% select(-.data$object_id, -.data$municipality_code),
+        self$data$raw %>% select(-.data$object_id, -.data$municipality_code),
         unassigned
       )
 
@@ -332,7 +332,7 @@ Lithuania <- R6::R6Class("Lithuania",
           )
       }
 
-      self$region$clean <- osp_data_w_unassigned %>%
+      self$data$clean <- osp_data_w_unassigned %>%
         dplyr::mutate(
           date = lubridate::as_date(date),
           tested_new = .data$ab_tot_day + .data$ag_tot_day + .data$pcr_tot_day,
@@ -355,7 +355,7 @@ Lithuania <- R6::R6Class("Lithuania",
       # just select the core data sought by get_regional_data
       # (default = FALSE)
       if (!private$all_osp_fields) {
-        self$region$clean <- self$region$clean %>%
+        self$data$clean <- self$data$clean %>%
           dplyr::select(
             date, region_level_1, region_level_2,
             level_1_region_code, level_2_region_code,
@@ -377,7 +377,7 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
 
-      self$region$clean <- self$region$clean %>%
+      self$data$clean <- self$data$clean %>%
         dplyr::group_by(.data$date, .data$region_level_1, .data$level_1_region_code) %>%
         dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum)) %>%
         dplyr::mutate(region_level_1 = dplyr::if_else(is.na(.data$region_level_1),
@@ -388,7 +388,7 @@ Lithuania <- R6::R6Class("Lithuania",
       if (private$all_osp_fields) {
         # For each of the test percentage fields, recalculate the percentages,
         # first checking that the total number of checks is not zero.
-        self$region$clean <- self$region$clean %>%
+        self$data$clean <- self$data$clean %>%
           dplyr::mutate(
             ab_prc_day =
               dplyr::if_else(

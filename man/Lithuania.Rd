@@ -16,7 +16,7 @@ Inherits from \code{DataClass}
 \section{OSP Data fields}{
 
 
-The\href{https://osp.stat.gov.lt}{Official Statistics Portal} provides
+The \href{https://osp.stat.gov.lt}{Official Statistics Portal} (OSP) provides
 many data series in their table.
 
 The full range of these vectors can be returned by setting
