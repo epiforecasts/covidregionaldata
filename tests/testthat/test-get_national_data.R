@@ -3,7 +3,7 @@ test_get_national_data <- function(source) {
     true <- readRDS(paste0("custom_data/", source, ".rds"))
     stub_download <- function() {
       pf <- parent.frame()
-      pf$nation_class$region$raw <- true$raw
+      pf$nation_class$data$raw <- true$raw
     }
     mockery::stub(
       get_national_data,
