@@ -3,6 +3,9 @@
 \name{Canada}
 \alias{Canada}
 \title{Canada Class containing country specific attributes and methods}
+\source{
+https://health-infobase.canada.ca
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for Canada.
