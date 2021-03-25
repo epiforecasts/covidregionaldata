@@ -9,6 +9,8 @@ message_verbose(verbose = TRUE, ...)
 \arguments{
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{...}{Additional arguments passed to \code{message}.}
 }
 \description{
 A wrapper for \code{message} that only prints output when

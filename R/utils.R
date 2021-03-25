@@ -54,6 +54,7 @@ csv_reader <- function(file, verbose = FALSE, ...) {
 #' `verbose = TRUE`.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
+#' @param ... Additional arguments passed to `message`.
 message_verbose <- function(verbose = TRUE, ...) {
   if (verbose) {
     message(...)
