@@ -35,7 +35,7 @@ Germany <- R6::R6Class("Germany",
       if (self$verbose) {
         message("Cleaning data")
       }
-      self$region$clean <- self$region$raw %>%
+      self$data$clean <- self$data$raw %>%
         select(
           date = .data$Meldedatum,
           region_level_1 = .data$Bundesland,
@@ -55,21 +55,21 @@ Germany <- R6::R6Class("Germany",
     #' @description Germany Specific Bundesland Level Data Cleaning
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
-      self$region$clean <- self$region$clean %>%
+      self$data$clean <- self$data$clean %>%
         group_by(.data$region_level_1, .data$date) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
         ungroup() %>%
-        full_join(self$region$codes_lookup, by = "region_level_1")
+        full_join(self$data$codes_lookup, by = "region_level_1")
     },
 
     #' @description Germany Specific Landkreis Level Data Cleaning
     #' @importFrom dplyr mutate group_by summarise ungroup full_join
     #'
     clean_level_2 = function() {
-      self$region$clean <- self$region$clean %>%
+      self$data$clean <- self$data$clean %>%
         mutate(
           region_level_2 = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)",
             .data$region_level_2,
@@ -82,7 +82,7 @@ Germany <- R6::R6Class("Germany",
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
         ungroup() %>%
-        full_join(self$region$codes_lookup, by = "region_level_1")
+        full_join(self$data$codes_lookup, by = "region_level_1")
     },
 
     #' @description Initialize the country

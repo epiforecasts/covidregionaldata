@@ -16,7 +16,7 @@ downloading, processing, and returning data.
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{region}}{data frame for requested region}
+\item{\code{data}}{data frame for requested region}
 
 \item{\code{data_url}}{link to raw data}
 

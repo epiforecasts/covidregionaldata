@@ -7,4 +7,4 @@ docs
 doc
 Meta
 inst/doc
-.pdf
+*.pdf
