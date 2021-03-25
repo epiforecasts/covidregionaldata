@@ -6,9 +6,11 @@
 #' Data is sourced from \url{https://health-infobase.France.ca}.
 #' @details Inherits from `DataClass`
 #' 
-#' @source https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675 # nolint
-#' @source https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c # nolint
-#' @source https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01 # nolint
+# nolint start
+#' @source https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675 
+#' @source https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c
+#' @source https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01
+# nolint end
 #' @export
 #' @examples
 #' \dontrun{

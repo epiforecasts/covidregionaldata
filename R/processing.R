@@ -15,7 +15,7 @@ add_extra_na_cols <- function(data) {
   for (colname in expected_col_names) {
     if (!(colname %in% colnames(data))) {
       original_col_names <- colnames(data)
-      data$new_col <- rep(NA_integer_, dim(data)[1])
+      data$new_col <- rep(NA_real_, dim(data)[1])
       colnames(data) <- c(original_col_names, colname)
     }
   }
