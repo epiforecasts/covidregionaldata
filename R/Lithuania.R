@@ -15,7 +15,7 @@
 #'
 #' The following describes the data provided by the OSP.
 #'
-#'
+# nolint start
 #' | field | description |
 #' | :------ | :------------ |
 #' | `date` | the reporting day during which the events occurred or at the end of which the accounting was performed |
@@ -52,6 +52,7 @@
 #' | `recovered_sttstcl` | Statistical number of recovered live persons |
 #' | `map_colors` `$` | The map colour-coding for the municipality, based on averages of test positivity and incidence per capita |
 #'
+# nolint end
 #' `*` The `municipality_code` is discarded since it does not correspond
 #' to ISO-3166:2 codes used elsewhere in the package.
 #'
@@ -114,7 +115,9 @@
 #' and `active_sttstcl` and `recovered_sttstcl` (an estimate of how
 #' many of these are still ill).
 #'
+# nolint start
 #' @source https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0
+# nolint end
 #' @examples
 #' \dontrun{
 #' region <- Lithuania$new(verbose = TRUE, steps = TRUE)
@@ -136,9 +139,20 @@ Lithuania <- R6::R6Class("Lithuania",
     data_url = "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv", # nolint
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
-      "cases_new", "tested_new", "recovered_total",
-      "deaths_new"
+      "cases_new", "tested_new", "recovered_total", "deaths_new"
     ),
+    # Additional attributes specific to the Lithuania functionality
+    #' @field death_definition which criteria of deaths attributed to
+    #' COVID to use
+    death_definition = "of",
+    #' @field recovered_definition whether to use the official counts of
+    #' recovered cases or the statistical estimates provided by OSP
+    recovered_definition = "official",
+    #' @field all_osp_fields whether to return all the data vectors provided
+    #' by OSP
+    all_osp_fields = FALSE,
+    #' @field national_data whether to return data rows for national results
+    national_data = FALSE,
 
     #' @description *Lithuania* specific state level data cleaning
     #' @param ... pass additional arguments
@@ -153,83 +167,11 @@ Lithuania <- R6::R6Class("Lithuania",
         message("Cleaning data")
       }
 
-      # region_lookup_table is used to provide ISO 3166-2 codes for
-      # municipalities and counties, but also to provide the hierarchical link
-      # between municipalities and counties, telling the code which
-      # municipalities are contained within which counties.
-      # region_level_2 is written to match the data from the raw data source
-      # nolint start
-      region_lookup_table <- tibble::tribble(
-        ~region_level_2, ~level_2_region_code, ~region_level_1, ~level_1_region_code, ~region_level_1_en, ~region_level_2_type,
-        "Alytaus m. sav.", "LT-02", "Alytaus apskritis", "LT-AL", "Alytus County", "city municipality",
-        "Alytaus r. sav.", "LT-03", "Alytaus apskritis", "LT-AL", "Alytus County", "district municipality",
-        "Druskinink\u0173 sav.", "LT-07", "Alytaus apskritis", "LT-AL", "Alytus County", "municipality",
-        "Lazdij\u0173 r. sav.", "LT-24", "Alytaus apskritis", "LT-AL", "Alytus County", "district municipality",
-        "Var\u0117nos r. sav.", "LT-55", "Alytaus apskritis", "LT-AL", "Alytus County", "district municipality",
-        "Bir\u0161tono sav.", "LT-05", "Kauno apskritis", "LT-KU", "Kaunas County", "municipality",
-        "Jonavos r. sav.", "LT-10", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Kai\u0161iadori\u0173 r. sav.", "LT-13", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Kauno r. sav.", "LT-16", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Kauno m. sav.", "LT-15", "Kauno apskritis", "LT-KU", "Kaunas County", "city municipality",
-        "K\u0117daini\u0173 r. sav.", "LT-18", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Prien\u0173 r. sav.", "LT-36", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Raseini\u0173 r. sav.", "LT-38", "Kauno apskritis", "LT-KU", "Kaunas County", "district municipality",
-        "Klaip\u0117dos r. sav.", "LT-21", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "district municipality",
-        "Klaip\u0117dos m. sav.", "LT-20", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "city municipality",
-        "Kretingos r. sav.", "LT-22", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "district municipality",
-        "Neringos sav.", "LT-28", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "municipality",
-        "Palangos m. sav.", "LT-31", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "city municipality",
-        "\u0160ilut\u0117s r. sav.", "LT-46", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "district municipality",
-        "Skuodo r. sav.", "LT-48", "Klaip\u0117dos apskritis", "LT-KL", "Klaip\u0117da County", "district municipality",
-        "Kalvarijos sav.", "LT-14", "Marijampol\u0117s apskritis", "LT-MR", "Marijampol\u0117 County", "municipality",
-        "Kazl\u0173 R\u016bdos sav.", "LT-17", "Marijampol\u0117s apskritis", "LT-MR", "Marijampol\u0117 County", "municipality",
-        "Marijampol\u0117s sav.", "LT-25", "Marijampol\u0117s apskritis", "LT-MR", "Marijampol\u0117 County", "district municipality",
-        "\u0160aki\u0173 r. sav.", "LT-41", "Marijampol\u0117s apskritis", "LT-MR", "Marijampol\u0117 County", "district municipality",
-        "Vilkavi\u0161kio r. sav.", "LT-56", "Marijampol\u0117s apskritis", "LT-MR", "Marijampol\u0117 County", "district municipality",
-        "Bir\u017e\u0173 r. sav.", "LT-06", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "district municipality",
-        "Kupi\u0161kio r. sav.", "LT-23", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "district municipality",
-        "Panev\u0117\u017eio m. sav.", "LT-32", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "city municipality",
-        "Panev\u0117\u017eio r. sav.", "LT-33", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "district municipality",
-        "Pasvalio r. sav.", "LT-34", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "district municipality",
-        "Roki\u0161kio r. sav.", "LT-40", "Panev\u0117\u017eio apskritis", "LT-PN", "Panev\u0117\u017eys County", "district municipality",
-        "Akmen\u0117s r. sav.", "LT-01", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "Joni\u0161kio r. sav.", "LT-11", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "Kelm\u0117s r. sav.", "LT-19", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "Pakruojo r. sav.", "LT-30", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "Radvili\u0161kio r. sav.", "LT-37", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "\u0160iauli\u0173 r. sav.", "LT-44", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "district municipality",
-        "\u0160iauli\u0173 m. sav.", "LT-43", "\u0160iauli\u0173 apskritis", "LT-SA", "\u0160iauliai County", "city municipality",
-        "Jurbarko r. sav.", "LT-12", "Taurag\u0117s apskritis", "LT-TA", "Taurag\u0117 County", "district municipality",
-        "Pag\u0117gi\u0173 sav.", "LT-29", "Taurag\u0117s apskritis", "LT-TA", "Taurag\u0117 County", "municipality",
-        "\u0160ilal\u0117s r. sav.", "LT-45", "Taurag\u0117s apskritis", "LT-TA", "Taurag\u0117 County", "district municipality",
-        "Taurag\u0117s r. sav.", "LT-50", "Taurag\u0117s apskritis", "LT-TA", "Taurag\u0117 County", "district municipality",
-        "Ma\u017eeiki\u0173 r. sav.", "LT-26", "Tel\u0161i\u0173 apskritis", "LT-TE", "Tel\u0161iai County", "district municipality",
-        "Plung\u0117s r. sav.", "LT-35", "Tel\u0161i\u0173 apskritis", "LT-TE", "Tel\u0161iai County", "district municipality",
-        "Rietavo sav.", "LT-39", "Tel\u0161i\u0173 apskritis", "LT-TE", "Tel\u0161iai County", "municipality",
-        "Tel\u0161i\u0173 r. sav.", "LT-51", "Tel\u0161i\u0173 apskritis", "LT-TE", "Tel\u0161iai County", "district municipality",
-        "Anyk\u0161\u010di\u0173 r. sav.", "LT-04", "Utenos apskritis", "LT-UT", "Utena County", "district municipality",
-        "Ignalinos r. sav.", "LT-09", "Utenos apskritis", "LT-UT", "Utena County", "district municipality",
-        "Mol\u0117t\u0173 r. sav.", "LT-27", "Utenos apskritis", "LT-UT", "Utena County", "district municipality",
-        "Utenos r. sav.", "LT-54", "Utenos apskritis", "LT-UT", "Utena County", "district municipality",
-        "Visagino sav.", "LT-59", "Utenos apskritis", "LT-UT", "Utena County", "municipality",
-        "Zaras\u0173 r. sav.", "LT-60", "Utenos apskritis", "LT-UT", "Utena County", "district municipality",
-        "Elektr\u0117n\u0173 sav.", "LT-08", "Vilniaus apskritis", "LT-VL", "Vilnius County", "municipality",
-        "\u0160al\u010dinink\u0173 r. sav.", "LT-42", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "\u0160irvint\u0173 r. sav.", "LT-47", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "\u0160ven\u010dioni\u0173 r. sav.", "LT-49", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "Trak\u0173 r. sav.", "LT-52", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "Ukmerg\u0117s r. sav.", "LT-53", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "Vilniaus m. sav.", "LT-57", "Vilniaus apskritis", "LT-VL", "Vilnius County", "city municipality",
-        "Vilniaus r. sav.", "LT-58", "Vilniaus apskritis", "LT-VL", "Vilnius County", "district municipality",
-        "Unknown", NA, "Unknown", NA, NA, NA
-      )
-      # nolint end
-
       # Process two params which let us switch what OSP fields are returned
       # for the number of deaths and the number of recovered cases.
       #
       # death_definition : default is "of"
-      death_field <- switch(private$death_definition,
+      death_field <- switch(self$death_definition,
         of = "daily_deaths_def1",
         daily_deaths_def1 = "daily_deaths_def1",
         with = "daily_deaths_def2",
@@ -243,14 +185,14 @@ Lithuania <- R6::R6Class("Lithuania",
       #
       if (is.null(death_field)) {
         message(paste0(
-          "death_definition of \"", private$death_definition,
+          "death_definition of \"", self$death_definition,
           "\" not recognised, defaulting to \"of\""
         ))
         death_field <- "daily_deaths_def1"
       }
 
       # recovered_definition : default is "official"
-      recovered_field <- switch(private$recovered_definition,
+      recovered_field <- switch(self$recovered_definition,
         official = "recovered_de_jure",
         recovered_de_jure = "recovered_de_jure",
         de_jure = "recovered_de_jure",
@@ -263,7 +205,7 @@ Lithuania <- R6::R6Class("Lithuania",
       #
       if (is.null(death_field)) {
         message(paste0(
-          "recovered_definition of \"", private$recovered_definition,
+          "recovered_definition of \"", self$recovered_definition,
           "\" not recognised, defaulting to \"official\""
         ))
         recovered_field <- "recovered_de_jure"
@@ -274,7 +216,8 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Get relevant column names for differences (i.e. not percentages
       # or qualitative)
-      sum_cols <- names(select(self$data$raw, "population":tidyselect::last_col()))
+      sum_cols <- names(select(self$data$raw,
+                               "population":tidyselect::last_col()))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
       # Take the difference between national and sum of counties' data
@@ -324,7 +267,7 @@ Lithuania <- R6::R6Class("Lithuania",
       )
 
       # Exclude national data based on user param (default = FALSE)
-      if (!private$national_data) {
+      if (!self$national_data) {
         osp_data_w_unassigned <-
           dplyr::filter(
             osp_data_w_unassigned,
@@ -344,7 +287,7 @@ Lithuania <- R6::R6Class("Lithuania",
           cases_total = .data$cumulative_totals,
           region_level_2 = .data$municipality_name
         ) %>%
-        dplyr::left_join(region_lookup_table, by = c("region_level_2")) %>%
+        dplyr::left_join(self$data$codes_lookup, by = c("region_level_2")) %>%
         dplyr::select(
           date, region_level_1, region_level_2,
           cases_new, cases_total, deaths_new,
@@ -353,8 +296,8 @@ Lithuania <- R6::R6Class("Lithuania",
         )
       # If we have not been asked to return all the OSP-provided data,
       # just select the core data sought by get_regional_data
-      # (default = FALSE)
-      if (!private$all_osp_fields) {
+      # (default is FALSE)
+      if (!self$all_osp_fields) {
         self$data$clean <- self$data$clean %>%
           dplyr::select(
             date, region_level_1, region_level_2,
@@ -378,14 +321,18 @@ Lithuania <- R6::R6Class("Lithuania",
     clean_level_1 = function() {
 
       self$data$clean <- self$data$clean %>%
-        dplyr::group_by(.data$date, .data$region_level_1, .data$level_1_region_code) %>%
-        dplyr::summarise(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), sum)) %>%
-        dplyr::mutate(region_level_1 = dplyr::if_else(is.na(.data$region_level_1),
-          "Lietuva", .data$region_level_1
-        )) %>%
+        dplyr::group_by(.data$date,
+                        .data$region_level_1, .data$level_1_region_code) %>%
+        dplyr::summarise(
+          dplyr::across(tidyselect::vars_select_helpers$where(is.numeric),
+                        sum)) %>%
+        dplyr::mutate(region_level_1
+                      = dplyr::if_else(is.na(.data$region_level_1),
+                                       "Lietuva", .data$region_level_1
+                      )) %>%
         dplyr::ungroup()
       # Fix percentages, where necessary
-      if (private$all_osp_fields) {
+      if (self$all_osp_fields) {
         # For each of the test percentage fields, recalculate the percentages,
         # first checking that the total number of checks is not zero.
         self$data$clean <- self$data$clean %>%
@@ -446,24 +393,12 @@ Lithuania <- R6::R6Class("Lithuania",
                           national_data = FALSE, ...) {
       general_init(self, ...)
       # Add custom fields here
-      private$death_definition <- death_definition
-      private$recovered_definition <- recovered_definition
-      private$all_osp_fields <- all_osp_fields
-      private$national_data <- national_data
+      self$death_definition <- death_definition
+      self$recovered_definition <- recovered_definition
+      self$all_osp_fields <- all_osp_fields
+      self$national_data <- national_data
     }
-  ),
-  private = list(
-    # death_definition which criteria of deaths attributed to
-    # COVID to use
-    death_definition = "of",
-    # recovered_definition whether to use the official counts of
-    # recovered cases or the statistical estimates provided by OSP
-    recovered_definition = "official",
-    # all_osp_fields whether to return all the data vectors provided
-    # by OSP
-    all_osp_fields = FALSE,
-    # national_data whether to return data rows for national results
-    national_data = FALSE
   )
+
 
 )

@@ -73,8 +73,8 @@ lithuania_codes <- tibble::tibble(
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
-    italy_codes, germany_codes,
-    lithuania_codes
+    lithuania_codes,
+    italy_codes, germany_codes
   ),
   dplyr::bind_rows
 )

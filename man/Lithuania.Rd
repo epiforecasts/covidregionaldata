@@ -150,6 +150,17 @@ region$return()
 \item{\code{data_url}}{link to raw data}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+
+\item{\code{death_definition}}{which criteria of deaths attributed to
+COVID to use}
+
+\item{\code{recovered_definition}}{whether to use the official counts of
+recovered cases or the statistical estimates provided by OSP}
+
+\item{\code{all_osp_fields}}{whether to return all the data vectors provided
+by OSP}
+
+\item{\code{national_data}}{whether to return data rows for national results}
 }
 \if{html}{\out{</div>}}
 }
