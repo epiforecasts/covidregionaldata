@@ -65,9 +65,6 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     tolower(substr(country, 2, nchar(country)))
   )
 
-  if (include_level_2_regions) {
-    level <- "2"
-  }
   # check data availability and initiate country class if available
   region_class <- check_country_available(
     country = country, level = level,

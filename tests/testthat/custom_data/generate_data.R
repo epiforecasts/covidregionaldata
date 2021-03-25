@@ -1,8 +1,13 @@
+# helper functions
+source("tests/testthat/functions/replacePublicR6Method.R")
 # save level 1 mexico data for testing
 mexico <- covidregionaldata::Mexico$new(verbose = FALSE)
 mexico$download()
 mexico$clean()
 mexico$process()
+replacePublicR6Method(mexico, "download", function() {
+  return(invisible(NULL))
+})
 saveRDS(mexico, "tests/testthat/custom_data/mexico_level_1_snap.rds")
 
 # save level 2 mexico data for testing
@@ -12,6 +17,9 @@ mexico$download()
 mexico$data$raw <- dplyr::slice(mexico$data$raw, 1:1000)
 mexico$clean()
 mexico$process()
+replacePublicR6Method(mexico, "download", function() {
+  return(invisible(NULL))
+})
 saveRDS(mexico, "tests/testthat/custom_data/mexico_level_2_snap.rds")
 
 # save a snapshot of the ECDC data
