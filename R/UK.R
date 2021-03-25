@@ -9,6 +9,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://coronavirus.data.gov.uk/details/download #nolint
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
@@ -62,6 +63,7 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description UK specific download function
     #' @importFrom purrr map
+    #' @importFrom dplyr bind_rows
     download = function() {
       # set up filters
       self$set_filters()
@@ -72,6 +74,13 @@ UK <- R6::R6Class("UK", # rename to country name
       self$data$raw <- suppressMessages(
         map(self$query_filters, self$download_uk)
       )
+      if (self$level == "1") {
+        self$data$raw <- bind_rows(
+          self$data$raw$nation, self$data$raw$region
+        )
+      } else if (self$level == "2") {
+        self$data$raw <- self$data$raw[[1]]
+      }
     },
 
     #' @description UK specific cleaning, directs to level 1 or level 2
@@ -92,9 +101,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
     clean_level_1 = function() {
-      self$data$clean <- bind_rows(
-        self$data$raw$nation, self$data$raw$region
-      ) %>%
+      self$data$clean <- self$data$raw %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths by specimen date and date of death
@@ -136,7 +143,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$get_authority_lookup_table()
-      self$data$clean <- self$data$raw[[1]] %>%
+      self$data$clean <- self$data$raw %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths are by publish date for Scotland, Wales;

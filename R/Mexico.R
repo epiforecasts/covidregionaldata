@@ -5,6 +5,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- Mexico$new(verbose = TRUE, steps = TRUE)
