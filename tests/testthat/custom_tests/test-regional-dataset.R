@@ -32,6 +32,11 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     )
   ))
 
+  raw_path <- paste0("custom_data/", source, "_level_", level, ".rds")
+  if (!file.exists(raw_path)) {
+    download <- TRUE
+  }
+
   if (download) {
     region$download()
     test_that(paste0(data_name, " downloads sucessfully"), {
@@ -40,14 +45,9 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       expect_true(ncol(region$data$raw) >= 2)
     })
     region$data$raw <- dplyr::slice_tail(region$data$raw, n = 1000)
-    saveRDS(
-      region$data$raw,
-      paste0("custom_data/", source, "_level_", level, ".rds")
-    )
+    saveRDS(region$data$raw, raw_path)
   } else {
-    region$data$raw <- readRDS(
-      paste0("custom_data/", source, "_level_", level, ".rds")
-    )
+    region$data$raw <- readRDS(raw_path)
   }
 
   region$clean()
