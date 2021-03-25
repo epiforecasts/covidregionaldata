@@ -1,19 +1,21 @@
 test_get_national_data <- function(source) {
   test_that(paste0("get_national_data returns", source, " data"), {
     true <- readRDS(paste0("custom_data/", source, ".rds"))
-    # initiate class
-    test_class <- get(toupper(source))$new()
-    # set raw to mock data
-    test_class$region$raw <- true$raw
-    # stub the download function for a return of the mock data
-    mockery::stub(test_class$download, "download", "stub has been called!")
-    expect_equal(test_class$download, "stub has been called!")
-    mockery::stub(test_class$download, "download", true$raw)
-    # check
+    stub_download <- function() {
+      pf <- parent.frame()
+      pf$nation_class$region$raw <- true$raw
+    }
+    mockery::stub(
+      get_national_data,
+      "nation_class$download",
+      stub_download
+    )
     d <- get_national_data(
       country = "Afghanistan", source = source,
       verbose = FALSE
     )
+    print(d)
+
     expect_s3_class(d, "data.frame")
     expect_true(all(d$country == "Afghanistan"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
