@@ -4,10 +4,13 @@
 \alias{csv_reader}
 \title{Custom CSV reading function}
 \usage{
-csv_reader(file, ...)
+csv_reader(file, verbose = FALSE, ...)
 }
 \arguments{
 \item{file}{A URL or filepath to a CSV}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
 
 \item{...}{extra parameters to be passed to vroom::vroom}
 }

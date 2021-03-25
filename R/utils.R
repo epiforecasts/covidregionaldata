@@ -20,11 +20,12 @@ rlang::`.data`
 #' @description Checks for use of memoise and then uses vroom::vroom.
 #' @param file A URL or filepath to a CSV
 #' @param ... extra parameters to be passed to vroom::vroom
+#' @inheritParams message_verbose
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
-csv_reader <- function(file, ...) {
+csv_reader <- function(file, verbose = FALSE, ...) {
   read_csv_fun <- vroom
 
   if (!is.null(getOption("useMemoise"))) {
@@ -34,35 +35,31 @@ csv_reader <- function(file, ...) {
       read_csv_fun <- memoise(vroom, cache = ch)
     }
   }
-  data <- read_csv_fun(file, ..., guess_max = 500)
-  return(tibble(data))
-}
-
-#' Custom CSV reading function
-#'
-#' @description Checks for use of memoise and then uses readr::read_csv,
-#' which appears more robust in loading some streams
-#' @inheritParams csv_reader
-#' @param ... extra parameters to be passed to readr::read_csv
-#' @return A data frame
-#' @importFrom memoise memoise cache_filesystem
-#' @importFrom tibble tibble
-#' @importFrom readr read_csv
-csv_readr <- function(file, ...) {
-  read_csv_fun <- read_csv
-
-  if (!is.null(getOption("useMemoise"))) {
-    if (getOption("useMemoise")) {
-      # Set up cache
-      ch <- cache_filesystem(".cache")
-      read_csv_fun <- memoise(read_csv, cache = ch)
-    }
+  if (verbose) {
+    message("Downloading data from", file)
+    data <- read_csv_fun(file, ..., guess_max = 500)
+  } else {
+    data <- suppressWarnings(
+      suppressMessages(
+        read_csv_fun(file, ..., guess_max = 500)
+      )
+    )
   }
-
-  data <- read_csv_fun(file, ...)
   return(tibble(data))
 }
 
+#' Wrapper for message
+#'
+#' @description A wrapper for `message` that only prints output when
+#' `verbose = TRUE`.
+#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+#' messages and warnings be returned.
+message_verbose <- function(verbose = TRUE, ...) {
+  if (verbose) {
+    message(...)
+  }
+  return(invisible(NULL))
+}
 #' Add useMemoise to options
 #'
 #' @description Adds useMemoise to options meaning memoise is

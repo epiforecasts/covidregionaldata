@@ -31,9 +31,7 @@ Italy <- R6::R6Class("Italy",
     #' @importFrom rlang .data
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw %>%
         mutate(
           date = as_date(ymd_hms(.data$data)),

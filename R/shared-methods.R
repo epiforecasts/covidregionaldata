@@ -114,13 +114,10 @@ DataClass <- R6::R6Class(
           .data$country %in% self$country,
           .data$level %in% tar_level
         )
-
-      if (self$verbose) {
-        message(
-          "Processing data for ", self$country,
-          " by ", tar_level_name
-        )
-      }
+      message_verbose(
+        self$verbose, "Processing data for ",
+        self$country, " by ", tar_level_name
+      )
 
       self$data <- list(country = self$country, level = tar_level_name)
 
@@ -128,26 +125,11 @@ DataClass <- R6::R6Class(
         self$data$code <- codes$name[[1]]
         self$data$codes_lookup <- codes$codes[[1]]
       }
-
-      self$data <- structure(
-        self$data
-      )
     },
 
     #' @description General function for downloading raw data.
     download = function() {
-      if (self$verbose) {
-        message("Downloading data")
-        self$data$raw <- suppressWarnings(
-          csv_reader(self$data_url)
-        )
-      } else {
-        self$data$raw <- suppressMessages(
-          suppressWarnings(
-            csv_reader(self$data_url)
-          )
-        )
-      }
+      self$data$raw <- csv_reader(self$data_url, self$verbose)
     },
 
     #' Shared regional dataset processing
@@ -155,9 +137,7 @@ DataClass <- R6::R6Class(
     #' @description General function to processes regional data.
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
-      if (self$verbose) {
-        message("Processing data")
-      }
+      message_verbose(self$verbose, "Processing data")
       region_vars <- switch(self$level,
         "1" = c("region_level_1", "level_1_region_code"),
         "2" = c(
