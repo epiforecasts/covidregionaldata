@@ -38,8 +38,8 @@ test_regional_dataset <- function(source, level, download = FALSE) {
   }
 
   if (download) {
-    region$download()
     test_that(paste0(data_name, " downloads sucessfully"), {
+      region$download()
       expect_s3_class(region$data$raw, "data.frame")
       expect_true(nrow(region$data$raw) > 0)
       expect_true(ncol(region$data$raw) >= 2)
@@ -50,16 +50,16 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     region$data$raw <- readRDS(raw_path)
   }
 
-  region$clean()
   test_that(paste0(data_name, " can be cleaned as expected"), {
+    region$clean()
     expect_s3_class(region$data$clean, "data.frame")
     expect_true(nrow(region$data$clean) > 0)
     expect_true(ncol(region$data$clean) >= 2)
     expect_clean_cols(region$data$clean, level = level)
   })
 
-  region$process()
   test_that(paste0(data_name, " can be processed as expected"), {
+    region$process()
     expect_s3_class(region$data$processed, "data.frame")
     expect_true(nrow(region$data$processed) > 0)
     expect_true(ncol(region$data$processed) >= 2)
@@ -75,8 +75,8 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     }
   })
 
-  returned <- region$return()
   test_that(paste0(data_name, " can be returned as expected"), {
+    returned <- region$return()
     if (any(class(returned) %in% "data.frame")) {
       expect_s3_class(returned, "data.frame")
       expect_true(nrow(returned) > 0)
