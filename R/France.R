@@ -19,35 +19,44 @@ France <- R6::R6Class("France",
 
     # Core Attributes (amend each paramater for country specific infomation)
     #' @field level_1_region the level 1 region name.
-    level_1_region = "level_1_region", # for brevity - refers to
-    # provinces and territories
+    level_1_region = "region",
+    #' @field level_2_region the level 1 region name.
+    level_2_region = "departement",
     #' @field data_url link to raw data for cases
-    data_url = "https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675", #nolint
+    data_url = "https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675", # nolint
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_new", "cases_total", "deaths_new", "recovered_total", "tested_new"),
+    source_data_cols = c("cases_new", "deaths_new",
+                         "hosp_new", "tested_new"),
     #' @field hosp_url link to raw data for hospitalisations
-    hosp_url = "https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c",
+    hosp_url = "https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c", # nolint
 
 
     #' @description France-specific function for downloading raw data.
     download = function() {
+      if (self$level == 1) {
+        self$data_url <- "https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01" # nolint
+      }
       if (self$verbose) {
         message("Downloading data")
         self$data$raw <- suppressWarnings(
           csv_reader(self$data_url)
         )
-        self$data$raw_hosp <- suppressWarnings(
-          csv_reader(self$hosp_url)
-        )
+        if (self$level == 2) {
+          self$data$raw_hosp <- suppressWarnings(
+            csv_reader(self$hosp_url)
+          )
+        }
       } else {
         self$data$raw <- suppressMessages(
           suppressWarnings(
             csv_reader(self$data_url)
           )
         )
-        self$data$raw_hosp <- suppressMessages(
-          csv_reader(self$hosp_url)
-        )
+        if (self$level == 2) {
+          self$data$raw_hosp <- suppressMessages(
+            csv_reader(self$hosp_url)
+          )
+        }
       }
     },
 
@@ -68,59 +77,61 @@ France <- R6::R6Class("France",
         message("Cleaning data")
       }
 
-      level_1_lookup <- self$get_region_codes_by_level(1)
-      level_2_lookup <- self$get_region_codes_by_level(2)
-      
-      cases_data <- self$data$raw %>%
+      if (self$level == "1") {
+        self$clean_level_1()
+      } else if (self$level == "2") {
+        self$clean_level_2()
+      }
+    },
+
+    #' @description France Specific Region Level Data Cleaning
+    #'
+    #' @importFrom dplyr filter mutate left_join rename select
+   clean_level_1 = function() {
+      self$data$clean <- self$data$raw %>%
         dplyr::filter(cl_age90 == 0) %>%
         dplyr::select(
           date = jour,
-          insee_code = dep,
+          insee_code = reg,
           cases_new = P,
           tested_new = `T`
         ) %>%
         dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))  %>%
-        dplyr::left_join(level_1_lookup, by = "insee_code") %>%
+        dplyr::left_join(self$data$codes_lookup, by = "insee_code") %>%
         dplyr::rename("level_1_region_code" = "iso_code")
+      },
 
-      hosp_data <- self$data$raw_hosp %>%
-        dplyr::select(
-          date = jour,
-          level_2_region_code = dep,
-          hosp_new = incid_hosp,
-          deaths_new = incid_dc
-        ) %>%
-        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+      #' @description France Specific Department Level Data Cleaning
+      #'
+      #' @importFrom dplyr filter mutate left_join rename select full_join
+      clean_level_2 = function() {
+        cases_data <- self$data$raw %>%
+          dplyr::filter(cl_age90 == 0) %>%
+          dplyr::select(
+            date = jour,
+            level_2_region_code = dep,
+            cases_new = P,
+            tested_new = `T`
+          ) %>%
+          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+
+        hosp_data <- self$data$raw_hosp %>%
+          dplyr::select(
+            date = jour,
+            level_2_region_code = dep,
+            hosp_new = incid_hosp,
+            deaths_new = incid_dc
+          ) %>%
+          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
 
       self$data$clean <- dplyr::full_join(cases_data, hosp_data,
         by = c("date", "level_2_region_code")) %>%
-        dplyr::mutate(level_2_region_code = paste0("FR-", level_2_region_code)) %>%
-        dplyr::left_join(level_2_lookup, by = "level_2_region_code")
-
+        dplyr::mutate(level_2_region_code =
+                        paste0("FR-", level_2_region_code)) %>%
+        dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
     },
 
-    #' @description Return the region codes for a specific level
-    #' 
-    #' Intended for use in the France class where we need both sets
-    #' at once.
-    #' 
-    #' @param level The level to provide region codes for
-    get_region_codes_by_level = function(level = 1) {
-      tar_level <- paste0("level_", level, "_region")
-      tar_level_name <- self[[tar_level]]
-      codes <- covidregionaldata::region_codes %>%
-        filter(
-          .data$country %in% self$country,
-          .data$level %in% tar_level
-        )
-      
-      if (nrow(codes) == 1) {
-        codes_lookup <- codes$codes[[1]]
-      }
-      
-      codes_lookup
-    },
-    
+
     #' @description Initialize the country
     #' @param ... The args passed by [general_init]
     initialize = function(...) {

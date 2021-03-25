@@ -29,6 +29,8 @@ region$return()
 \describe{
 \item{\code{level_1_region}}{the level 1 region name.}
 
+\item{\code{level_2_region}}{the level 1 region name.}
+
 \item{\code{data_url}}{link to raw data for cases}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
@@ -42,7 +44,8 @@ region$return()
 \itemize{
 \item \href{#method-download}{\code{France$download()}}
 \item \href{#method-clean}{\code{France$clean()}}
-\item \href{#method-get_region_codes_by_level}{\code{France$get_region_codes_by_level()}}
+\item \href{#method-clean_level_1}{\code{France$clean_level_1()}}
+\item \href{#method-clean_level_2}{\code{France$clean_level_2()}}
 \item \href{#method-new}{\code{France$new()}}
 \item \href{#method-clone}{\code{France$clone()}}
 }
@@ -85,24 +88,24 @@ cleaning
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_region_codes_by_level"></a>}}
-\if{latex}{\out{\hypertarget{method-get_region_codes_by_level}{}}}
-\subsection{Method \code{get_region_codes_by_level()}}{
-Return the region codes for a specific level
-
-Intended for use in the France class where we need both sets
-at once.
+\if{html}{\out{<a id="method-clean_level_1"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
+\subsection{Method \code{clean_level_1()}}{
+France Specific Region Level Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{France$get_region_codes_by_level(level = 1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{France$clean_level_1()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{level}}{The level to provide region codes for}
 }
-\if{html}{\out{</div>}}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean_level_2"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
+\subsection{Method \code{clean_level_2()}}{
+France Specific Department Level Data Cleaning
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{France$clean_level_2()}\if{html}{\out{</div>}}
 }
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
