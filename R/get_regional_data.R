@@ -45,9 +45,9 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
       "covidregionaldata::get_regional_data(include_level_2_regions = )", "covidregionaldata::get_regional_data(level = )"
     )
     if (include_level_2_regions) {
-      level <- "1"
-    } else {
       level <- "2"
+    } else {
+      level <- "1"
     }
   }
 
@@ -65,9 +65,6 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     tolower(substr(country, 2, nchar(country)))
   )
 
-  if (include_level_2_regions) {
-    level <- "2"
-  }
   # check data availability and initiate country class if available
   region_class <- check_country_available(
     country = country, level = level,
