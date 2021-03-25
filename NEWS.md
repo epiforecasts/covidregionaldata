@@ -2,13 +2,10 @@
 
 This update contains a substantial package refactor and as such introduces some breaking changes. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
 
-
 ## Changes
 
-* (24/03/2021) Changed field "region" to "data" in all country classes.
-* (24/03/2021) Added R6 class for downloading and processing UK covid-19 data.
 * Available datasets not listed in `get_available_datasets`.
-* Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. 
+* Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. However, all datasets are now available to be used as R6 methods (see `get_available_datasets)
 * Added a list return method so that data processing changes can be tracked.
 * Surfaced the underlying methods which may be of use for users.
 * Separated unit testing of package functionality from testing of data downloads.

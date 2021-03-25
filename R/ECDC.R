@@ -6,6 +6,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+#' @export
 #' @examples
 #' \dontrun{
 #' national <- ECDC$new(verbose = TRUE, steps = TRUE)
