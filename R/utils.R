@@ -36,7 +36,7 @@ csv_reader <- function(file, verbose = FALSE, ...) {
     }
   }
   if (verbose) {
-    message("Downloading data from", file)
+    message("Downloading data from ", file)
     data <- read_csv_fun(file, ..., guess_max = 500)
   } else {
     data <- suppressWarnings(
