@@ -13,11 +13,17 @@
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
+#' @param include_level_2_regions `r lifecycle::badge("deprecated")` Boolean. If TRUE, returns data stratified by
+#'  level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
+#'  data is not always available. In these cases the user will get a warning
+#'  and the Level 1 data will be returned.
+#' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
 #' @inheritParams return_data
 #' @inheritParams process_internal
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
+#' @importFrom lifecycle deprecated is_present deprecate_warn
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,7 +36,29 @@
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, steps = FALSE,
                               class = FALSE, verbose = TRUE,
+                              include_level_2_regions = deprecated(),
+                              localise_regions = deprecated(),
                               ...) {
+  if (is_present(include_level_2_regions)) {
+    deprecate_warn(
+      "0.9.0",
+      "covidregionaldata::get_regional_data(include_level_2_regions = )", "covidregionaldata::get_regional_data(level = )"
+    )
+    if (include_level_2_regions) {
+      level <- "1"
+    } else {
+      level <- "2"
+    }
+  }
+
+  if (is_present(localise_regions)) {
+    deprecate_warn(
+      "0.9.0",
+      "covidregionaldata::get_regional_data(localise_regions = )", "covidregionaldata::get_regional_data(localise = )"
+    )
+    localise <- localise_regions
+  }
+
   # format country string
   country <- paste0(
     toupper(substr(country, 1, 1)),
