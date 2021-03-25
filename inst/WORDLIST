@@ -13,6 +13,7 @@ areaName
 areaType
 args
 aut
+bbb
 bd
 behaviour
 beoutbreakprepared
@@ -30,6 +31,7 @@ casedistribution
 cb
 cbc
 Centre
+clipPath
 cloneable
 cmd
 CMD
@@ -66,6 +68,7 @@ DaysByDeathDate
 DaysByPublishDate
 DD
 de
+DejaVu
 Département
 deps
 desc
@@ -81,6 +84,7 @@ DownZCSV
 dpc
 dplyr
 eb
+ec
 ecdc
 ECDC
 england
@@ -94,6 +98,8 @@ Estados
 eu
 europa
 eval
+fe
+fff
 ffinger
 filepath
 flavio
@@ -117,6 +123,7 @@ hellewell
 Hellewell
 hospitalisations
 href
+http
 https
 httr
 humdata
@@ -143,7 +150,9 @@ libgdal
 libqpdf
 LIBS
 libudunits
+lifecycle
 Limburg
+linearGradient
 linelist
 Linelist
 linelists
@@ -211,6 +220,7 @@ Rds
 readmissions
 readr
 readxl
+rect
 Région
 regioni
 reparameterise
@@ -226,6 +236,7 @@ rspm
 RSPM
 rvest
 rworldmap
+rx
 sam
 samabbott
 sanitised
@@ -248,10 +259,12 @@ Subnational
 subregion
 sudo
 summarise
+svg
 tessella
 testDownload
 testSource
 testthat
+textLength
 tibble
 tidyr
 tidyselect
@@ -262,6 +275,7 @@ uk
 useMemoise
 usethis
 utla
+Verdana
 VignetteBuilder
 VLG
 VLI
@@ -273,6 +287,8 @@ wikipedia
 wiv
 writeLines
 www
+xlink
+xmlns
 yaml
 yyyy
 YYYY
