@@ -112,6 +112,7 @@ baNV
 bĈ
 bcc
 BCCuB
+bbb
 bd
 bD
 bdȘ
@@ -179,6 +180,7 @@ cIݍ
 CJB
 cL
 CLB
+clipPath
 cloneable
 cmd
 cMd
@@ -239,6 +241,7 @@ dCN
 dD
 DD
 de
+DejaVu
 Département
 deps
 desc
@@ -369,6 +372,8 @@ FB
 fƂ
 FDD
 fF
+fe
+fff
 ffinger
 Fg
 FG
@@ -490,6 +495,7 @@ Hɹ
 HSB
 hsUM
 Hta
+httpv
 https
 httr
 hU
@@ -702,7 +708,9 @@ libgdal
 libqpdf
 LIBS
 libudunits
+lifecycle
 Limburg
+linearGradient
 linelist
 Linelist
 linelists
@@ -992,6 +1000,7 @@ RĘ
 readmissions
 readr
 readxl
+rect
 Région
 regioni
 rEGRa
@@ -1048,6 +1057,7 @@ S۫
 ֭S
 ș
 Ș
+rx
 sam
 samabbott
 sanitised
@@ -1116,6 +1126,7 @@ tB
 tbH
 TBL
 Tcu
+svg
 tessella
 testDownload
 testSource
@@ -1126,6 +1137,7 @@ tƑe
 tG
 tGW
 tH
+textLength
 tibble
 tidyr
 tidyselect
@@ -1216,6 +1228,7 @@ vee
 Vf
 vg
 Vh
+Verdana
 VignetteBuilder
 vIx
 vk
@@ -1340,6 +1353,8 @@ XӴWO
 ȳ
 Yִ
 yA
+xlink
+xmlns
 yaml
 yarE
 yB
@@ -1574,7 +1589,7 @@ Zև
 הf
 וJ
 י
-ףּ
+ףּ
 ץ
 צTy
 ק
@@ -1684,5 +1699,5 @@ Zև
 팪
 ᇣ
 ꌻN
-梨
-褐
+梨
+褐
