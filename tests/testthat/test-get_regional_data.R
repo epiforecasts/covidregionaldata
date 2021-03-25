@@ -45,6 +45,19 @@ test_get_regional_data <- function(level) {
     )
     expect_true(any(grepl("total", colnames(d))))
     expect_true(!any(colnames(d) == "date"))
+    # test depreciated args
+    if (level == "2") {
+      expect_warning(get_regional_data("mexico",
+        level = level,
+        include_level_2_regions = TRUE, verbose = FALSE
+      ))
+      expect_warning(
+        get_regional_data("mexico",
+          localise_regions = TRUE,
+          verbose = FALSE
+        )
+      )
+    }
   })
 }
 
