@@ -1,4 +1,4 @@
-## Load mock data functions
+# Load mock data functions
 source("custom_tests/mock_data.R")
 
 test_that("calculate_columns_from_existing_data returns correct results", {
@@ -68,3 +68,19 @@ test_that("complete_cumulative_columns works", {
   expect_equal(colnames(actual_data), colnames(expected_data))
   expect_true(!any(is.na(actual_data$cases_total)))
 })
+
+test_process_regional <- function(level = "1") {
+  test_that(paste0("process_regional.crd_level_", level, " works"), {
+    mexico <- readRDS(paste0("custom_data/mexico_level_", level, "_snap.rds"))
+    expect <- mexico$data$processed
+    mexico$process()
+    expect_equal(expect, mexico$data$processed)
+    mexico$localise <- FALSE
+    mexico$process()
+    reproc_local <- mexico$data$processed
+    expect_true(any(colnames(reproc_local) %in% paste0("region_level_", level)))
+  })
+}
+
+test_process_regional(level = "1")
+test_process_regional(level = "2")

@@ -1,13 +1,17 @@
 # save level 1 mexico data for testing
-mexico <- get_regional_data("mexico", steps = TRUE, level = "1")
+mexico <- covidregionaldata::Mexico$new(verbose = FALSE)
+mexico$download()
+mexico$clean()
+mexico$process()
 saveRDS(mexico, "tests/testthat/custom_data/mexico_level_1_snap.rds")
 
 # save level 2 mexico data for testing
 # (downsample for storage and speed)
-mexico <- get_regional_data("mexico", steps = TRUE, level = "2")
-mexico$raw <- dplyr::slice(mexico$raw, 1:1000)
-mexico <- clean_regional(mexico)
-mexico <- process_regional(mexico)
+mexico <- covidregionaldata::Mexico$new(level = "2", verbose = FALSE)
+mexico$download()
+mexico$data$raw <- dplyr::slice(mexico$data$raw, 1:1000)
+mexico$clean()
+mexico$process()
 saveRDS(mexico, "tests/testthat/custom_data/mexico_level_2_snap.rds")
 
 # save a snapshot of the ECDC data
