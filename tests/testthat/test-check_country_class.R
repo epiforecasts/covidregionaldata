@@ -13,8 +13,8 @@ check_country_fields <- function(regionClass) {
 }
 
 check_all_country_fields <- function() {
-  avalibale_country_data <- get_available_datasets()
-  available_sources <- avalibale_country_data$country
+  available_country_data <- get_available_datasets()
+  available_sources <- available_country_data$country
   for (country in available_sources) {
     regionClass <- get(country)
     check_country_fields(regionClass)
@@ -37,8 +37,8 @@ check_country_methods <- function(regionClass) {
 }
 
 check_all_country_methods <- function() {
-  avalibale_country_data <- get_available_datasets()
-  available_sources <- avalibale_country_data$country
+  available_country_data <- get_available_datasets()
+  available_sources <- available_country_data$country
   for (country in available_sources) {
     regionClass <- get(country)
     check_country_methods(regionClass)
