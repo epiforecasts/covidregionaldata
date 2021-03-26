@@ -4,27 +4,52 @@
 \alias{get_national_data}
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
-get_national_data(country = NULL, totals = FALSE, source = "who")
+get_national_data(
+  country,
+  source = "who",
+  steps = FALSE,
+  class = FALSE,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
-\item{country}{Character A string specifying the country to get data from. Not case or language dependent. Defaults to all countries.}
+\item{country}{A character string specifying the country to get data from.
+Not case dependent. Name should be the English name. For a list of
+options use \code{get_available_datasets}.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per country up to today's date. If FALSE, returns the full dataset stratified by date and country.}
+\item{source}{A character string specifying the data source: "WHO", or
+"ECDC". Not case dependent. Defaults to WHO.}
 
-\item{source}{Character A string specifying the data source: "WHO", or "ECDC". Not case dependent. Defaults to WHO.}
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
+steps be kept and output in a list.}
+
+\item{class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object rather than a tibble or a list of tibbles.
+Overrides \code{steps}.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
+
+\item{...}{additional arguments to pass to Country classes.}
 }
 \value{
-A tibble with data related to cases, deaths, hospitalisations, recoveries and testing.
+A tibble with data related to cases, deaths, hospitalisations,
+recoveries and testing.
 }
 \description{
-Gets raw data using the source-specific function. Includes ISO country codes.
-Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
-cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format.
+Gets raw data using the source-specific function. Includes ISO
+country codes. Then adds columns which were missing from the raw data
+(calculating cumulative counts from new dailies and vice versa), cleans
+and sanitises further. Adds rows and columns of NA values so that data is
+in a standard format.
 }
 \examples{
-
 \dontrun{
-get_national_data(country = "canada", totals = TRUE, source = "WHO")
-}
+# set up a data cache
+start_using_memoise()
 
+# download data for Canada keeping all processing steps
+get_national_data(country = "canada", source = "ecdc", steps = TRUE)
+}
 }

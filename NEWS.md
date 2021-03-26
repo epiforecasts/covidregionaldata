@@ -1,3 +1,15 @@
+# covidregionaldata 0.9.0
+
+This update contains a substantial package refactor and as such introduces some breaking changes. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
+
+## Changes
+
+* Available datasets not listed in `get_available_datasets`.
+* Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. However, all datasets are now available to be used as R6 methods (see `get_available_datasets)
+* Added a list return method so that data processing changes can be tracked.
+* Surfaced the underlying methods which may be of use for users.
+* Separated unit testing of package functionality from testing of data downloads.
+
 # covidregionaldata 0.8.3
 
 ## New data sets

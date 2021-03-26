@@ -19,6 +19,9 @@ SMG.md
 ^docs$
 ^doc$
 ^Meta$
-^vignettes$
-^tests/testthat/\.cache$
 ^CODE_OF_CONDUCT\.md$
+^tests/testthat/\.cache$
+\.lintr$
+^\.pre-commit-config\.yaml$
+^README\.Rmd$
+^.*.pdf$
