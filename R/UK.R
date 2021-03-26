@@ -130,7 +130,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
       # get NHS data if requested
       if (self$nhsregions) {
-        self$add_nhs_regions()
+        self$data$clean <- self$add_nhs_regions(self$data$clean, self$nhs_raw)
       }
     },
 
@@ -411,10 +411,12 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom tibble as_tibble
     #' @importFrom dplyr mutate select %>% group_by summarise left_join
     #' @importFrom tidyr pivot_longer
-    add_nhs_regions = function() {
-      colnames(self$nhs_raw) <- self$nhs_raw[1, ]
-      self$nhs_raw <- self$nhs_raw[2:nrow(self$nhs_raw), ]
-      self$nhs_raw <- self$nhs_raw %>%
+    #' @param clean_data Cleaned UK covid-19 data
+    #' @param nhs_data NHS region data
+    add_nhs_regions = function(clean_data, nhs_data) {
+      colnames(nhs_data) <- nhs_data[1, ]
+      nhs_data <- nhs_data[2:nrow(nhs_data), ]
+      nhs_data <- nhs_data %>%
         as_tibble() %>%
         mutate(date = seq.Date(
           from = as.Date("2020-08-01"),
@@ -433,7 +435,7 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE data into NHS regions ---------------------------------------
-      self$data$clean <- self$data$clean %>%
+      clean_data <- clean_data %>%
         select(-.data$level_1_region_code) %>%
         mutate(
           region_level_1 = ifelse(
@@ -458,8 +460,8 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE and NHS data
-      self$data$clean <- left_join(
-        self$data$clean, self$nhs_raw,
+      clean_data <- left_join(
+        clean_data, nhs_data,
         by = c("region_level_1", "date")
       ) %>%
         # Create a blended variable that uses "all" hospital admissions
@@ -477,6 +479,7 @@ UK <- R6::R6Class("UK", # rename to country name
           level_1_region_code = NA,
           release_date = self$release_date
         )
+      return(clean_data)
     },
 
     #' @description Download lookup table for UK authorities
