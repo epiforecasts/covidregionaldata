@@ -1,0 +1,105 @@
+level_2_region_code,region_level_2,level_1_region_code,region_level_1,insee_code
+FR-01,Ain,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-02,Aisne,FR-HDF,Hauts-de-France,32
+FR-03,Allier,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-04,Alpes-de-Haute-Provence,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-06,Alpes-Maritimes,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-07,Ardèche,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-08,Ardennes,FR-GES,Grand-Est,44
+FR-09,Ariège,FR-OCC,Occitanie,76
+FR-10,Aube,FR-GES,Grand-Est,44
+FR-11,Aude,FR-OCC,Occitanie,76
+FR-12,Aveyron,FR-OCC,Occitanie,76
+FR-67,Bas-Rhin,FR-GES,Grand-Est,44
+FR-13,Bouches-du-Rhône,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-14,Calvados,FR-NOR,Normandie,28
+FR-15,Cantal,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-16,Charente,FR-NAQ,Nouvelle-Aquitaine,75
+FR-17,Charente-Maritime,FR-NAQ,Nouvelle-Aquitaine,75
+FR-18,Cher,FR-CVL,Centre-Val de Loire,24
+FR-19,Corrèze,FR-NAQ,Nouvelle-Aquitaine,75
+FR-2A,Corse-du-Sud,FR-20R,Corse,94
+FR-21,Côte-d'Or,FR-BFC,Bourgogne-Franche-Comté,27
+FR-22,Côtes-d'Armor,FR-BRE,Bretagne,53
+FR-23,Creuse,FR-NAQ,Nouvelle-Aquitaine,75
+FR-79,Deux-Sèvres,FR-NAQ,Nouvelle-Aquitaine,75
+FR-24,Dordogne,FR-NAQ,Nouvelle-Aquitaine,75
+FR-25,Doubs,FR-BFC,Bourgogne-Franche-Comté,27
+FR-26,Drôme,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-91,Essonne,FR-IDF,Île-de-France,11
+FR-27,Eure,FR-NOR,Normandie,28
+FR-28,Eure-et-Loir,FR-CVL,Centre-Val de Loire,24
+FR-29,Finistère,FR-BRE,Bretagne,53
+FR-973,Guyane (française),FR-GF,Guyane (française),03
+FR-30,Gard,FR-OCC,Occitanie,76
+FR-32,Gers,FR-OCC,Occitanie,76
+FR-33,Gironde,FR-NAQ,Nouvelle-Aquitaine,75
+FR-971,Guadeloupe,FR-GP,Guadeloupe,01
+FR-2B,Haute-Corse,FR-20R,Corse,94
+FR-31,Haute-Garonne,FR-OCC,Occitanie,76
+FR-43,Haute-Loire,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-52,Haute-Marne,FR-GES,Grand-Est,44
+FR-05,Hautes-Alpes,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-70,Haute-Saône,FR-BFC,Bourgogne-Franche-Comté,27
+FR-74,Haute-Savoie,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-65,Hautes-Pyrénées,FR-OCC,Occitanie,76
+FR-87,Haute-Vienne,FR-NAQ,Nouvelle-Aquitaine,75
+FR-68,Haut-Rhin,FR-GES,Grand-Est,44
+FR-92,Hauts-de-Seine,FR-IDF,Île-de-France,11
+FR-34,Hérault,FR-OCC,Occitanie,76
+FR-35,Ille-et-Vilaine,FR-BRE,Bretagne,53
+FR-36,Indre,FR-CVL,Centre-Val de Loire,24
+FR-37,Indre-et-Loire,FR-CVL,Centre-Val de Loire,24
+FR-38,Isère,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-39,Jura,FR-BFC,Bourgogne-Franche-Comté,27
+FR-40,Landes,FR-NAQ,Nouvelle-Aquitaine,75
+FR-42,Loire,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-44,Loire-Atlantique,FR-PDL,Pays-de-la-Loire,52
+FR-45,Loiret,FR-CVL,Centre-Val de Loire,24
+FR-41,Loir-et-Cher,FR-CVL,Centre-Val de Loire,24
+FR-46,Lot,FR-OCC,Occitanie,76
+FR-47,Lot-et-Garonne,FR-NAQ,Nouvelle-Aquitaine,75
+FR-48,Lozère,FR-OCC,Occitanie,76
+FR-49,Maine-et-Loire,FR-PDL,Pays-de-la-Loire,52
+FR-50,Manche,FR-NOR,Normandie,28
+FR-51,Marne,FR-GES,Grand-Est,44
+FR-972,Martinique,FR-MQ,Martinique,02
+FR-53,Mayenne,FR-PDL,Pays-de-la-Loire,52
+FR-976,Mayotte,FR-YT,Mayotte,06
+FR-54,Meurthe-et-Moselle,FR-GES,Grand-Est,44
+FR-55,Meuse,FR-GES,Grand-Est,44
+FR-56,Morbihan,FR-BRE,Bretagne,53
+FR-57,Moselle,FR-GES,Grand-Est,44
+FR-58,Nièvre,FR-BFC,Bourgogne-Franche-Comté,27
+FR-59,Nord,FR-HDF,Hauts-de-France,32
+FR-60,Oise,FR-HDF,Hauts-de-France,32
+FR-61,Orne,FR-NOR,Normandie,28
+FR-75,Paris,FR-IDF,Île-de-France,11
+FR-62,Pas-de-Calais,FR-HDF,Hauts-de-France,32
+FR-63,Puy-de-Dôme,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-64,Pyrénées-Atlantiques,FR-NAQ,Nouvelle-Aquitaine,75
+FR-66,Pyrénées-Orientales,FR-OCC,Occitanie,76
+FR-974,La Réunion,FR-RE,La Réunion,04
+FR-69,Rhône[1],FR-ARA,Auvergne-Rhône-Alpes,84
+FR-71,Saône-et-Loire,FR-BFC,Bourgogne-Franche-Comté,27
+FR-72,Sarthe,FR-PDL,Pays-de-la-Loire,52
+FR-73,Savoie,FR-ARA,Auvergne-Rhône-Alpes,84
+FR-77,Seine-et-Marne,FR-IDF,Île-de-France,11
+FR-76,Seine-Maritime,FR-NOR,Normandie,28
+FR-93,Seine-Saint-Denis,FR-IDF,Île-de-France,11
+FR-80,Somme,FR-HDF,Hauts-de-France,32
+FR-81,Tarn,FR-OCC,Occitanie,76
+FR-82,Tarn-et-Garonne,FR-OCC,Occitanie,76
+FR-90,Territoire de Belfort,FR-BFC,Bourgogne-Franche-Comté,27
+FR-94,Val-de-Marne,FR-IDF,Île-de-France,11
+FR-95,Val-d'Oise,FR-IDF,Île-de-France,11
+FR-83,Var,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-84,Vaucluse,FR-PAC,Provence-Alpes-Côte-d’Azur,93
+FR-85,Vendée,FR-PDL,Pays-de-la-Loire,52
+FR-86,Vienne,FR-NAQ,Nouvelle-Aquitaine,75
+FR-88,Vosges,FR-GES,Grand-Est,44
+FR-89,Yonne,FR-BFC,Bourgogne-Franche-Comté,27
+FR-78,Yvelines,FR-IDF,Île-de-France,11
+FR-977,Saint-Barthelemy,FR-PM,Saint-Barthelemy,05
+FR-978,Saint-Martin,FR-BL,Saint-Martin,07
+FR-975,Saint-Pierre et Miquelon,FR-MF,Saint-Pierre et Miquelon,08
