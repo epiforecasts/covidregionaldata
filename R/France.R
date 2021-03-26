@@ -92,7 +92,7 @@ France <- R6::R6Class("France",
     #' @description France Specific Region Level Data Cleaning
     #'
     #' @importFrom dplyr filter mutate left_join rename select
-   clean_level_1 = function() {
+    clean_level_1 = function() {
       self$data$clean <- self$data$raw %>%
         dplyr::filter(cl_age90 == 0) %>%
         dplyr::select(
@@ -102,40 +102,38 @@ France <- R6::R6Class("France",
           tested_new = `T`
         ) %>%
         dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))  %>%
-        dplyr::left_join(self$data$codes_lookup, by = "insee_code") %>%
-        dplyr::rename("level_1_region_code" = "iso_code")
+        dplyr::left_join(self$data$codes_lookup, by = "insee_code") 
       },
 
-      #' @description France Specific Department Level Data Cleaning
-      #'
-      #' @importFrom dplyr filter mutate left_join rename select full_join
-      clean_level_2 = function() {
-        cases_data <- self$data$raw %>%
-          dplyr::filter(cl_age90 == 0) %>%
-          dplyr::select(
-            date = jour,
-            level_2_region_code = dep,
-            cases_new = P,
-            tested_new = `T`
-          ) %>%
-          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+    #' @description France Specific Department Level Data Cleaning
+    #'
+    #' @importFrom dplyr filter mutate left_join rename select full_join
+    clean_level_2 = function() {
+      cases_data <- self$data$raw %>%
+        dplyr::filter(cl_age90 == 0) %>%
+        dplyr::select(
+          date = jour,
+          level_2_region_code = dep,
+          cases_new = P,
+          tested_new = `T`
+        ) %>%
+        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
 
-        hosp_data <- self$data$raw_hosp %>%
-          dplyr::select(
-            date = jour,
-            level_2_region_code = dep,
-            hosp_new = incid_hosp,
-            deaths_new = incid_dc
-          ) %>%
-          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+      hosp_data <- self$data$raw_hosp %>%
+        dplyr::select(
+          date = jour,
+          level_2_region_code = dep,
+          hosp_new = incid_hosp,
+          deaths_new = incid_dc
+        ) %>%
+        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
 
-      self$data$clean <- dplyr::full_join(cases_data, hosp_data,
-        by = c("date", "level_2_region_code")) %>%
-        dplyr::mutate(level_2_region_code =
-                        paste0("FR-", level_2_region_code)) %>%
-        dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
+    self$data$clean <- dplyr::full_join(cases_data, hosp_data,
+      by = c("date", "level_2_region_code")) %>%
+      dplyr::mutate(level_2_region_code =
+                      paste0("FR-", level_2_region_code)) %>%
+      dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
     },
-
 
     #' @description Initialize the country
     #' @param ... The args passed by [general_init]

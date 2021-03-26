@@ -13,8 +13,6 @@ https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for France.
-
-Data is sourced from \url{https://health-infobase.France.ca}.
 }
 \details{
 Inherits from \code{DataClass}
