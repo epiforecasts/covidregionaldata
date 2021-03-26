@@ -67,28 +67,27 @@ UK <- R6::R6Class("UK", # rename to country name
     download = function() {
       # set up filters
       self$set_filters()
-      if (self$verbose) {
-        message("Downloading UK data.")
-        self$data$raw <- map(self$query_filters, self$download_uk)
-      }
-      self$data$raw <- suppressMessages(
-        map(self$query_filters, self$download_uk)
-      )
+      message_verbose(self$verbose, "Downloading UK data.")
+      self$data$raw <- map(self$query_filters, self$download_uk)
+
       if (self$level == "1") {
         self$data$raw <- bind_rows(
           self$data$raw$nation, self$data$raw$region
         )
+        # get NHS data if requested
+        if (self$nhsregions) {
+          self$download_nhs_regions()
+        }
       } else if (self$level == "2") {
         self$data$raw <- self$data$raw[[1]]
+        self$download_authority_data()
       }
     },
 
     #' @description UK specific cleaning, directs to level 1 or level 2
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
@@ -126,13 +125,12 @@ UK <- R6::R6Class("UK", # rename to country name
       if (!is.null(self$release_date)) {
         self$data$clean <- mutate(
           self$data$clean,
-          release_date = self$release_date
+          release_date <- self$release_date
         )
       }
-
       # get NHS data if requested
       if (self$nhsregions) {
-        self$add_nhs_regions()
+        self$data$clean <- self$add_nhs_regions(self$data$clean, self$nhs_raw)
       }
     },
 
@@ -280,6 +278,12 @@ UK <- R6::R6Class("UK", # rename to country name
     release_date = NA,
     #' @field resolution The resolution of the data to return
     resolution = "utla",
+    #' @field nhs_raw Raw NHS region data
+    nhs_raw = NA,
+    #' @field authority_data The raw data for creating authority lookup tables
+    authority_data = NA,
+    #' @field nhs_base_url Base url for nhs region data
+    nhs_base_url = "https://www.england.nhs.uk/statistics", # nolint
 
     #' @description Helper function for downloading Uk data API
     #' @importFrom purrr map safely compact reduce
@@ -311,8 +315,8 @@ UK <- R6::R6Class("UK", # rename to country name
         ))
       }
       # download and link all data into a single data frame
-      safe_reader <- safely(csv_readr)
-      csv <- map(csv_links, ~ safe_reader(.)[[1]])
+      safe_reader <- safely(csv_reader)
+      csv <- map(csv_links, ~ safe_reader(.)[[1]], verbose = self$verbose)
       csv <- compact(csv)
       csv <- reduce(csv, full_join,
         by = c("date", "areaType", "areaCode", "areaName")
@@ -346,8 +350,59 @@ UK <- R6::R6Class("UK", # rename to country name
         )
         names(self$query_filters) <- self$resolution
       } else {
-        stop(paste("Uk data not supported for level", self$level))
+        stop(paste("UK data not supported for level", self$level))
       }
+    },
+
+    #' @description Download NHS data for level 1 regions
+    #' Separate NHS data is available for "first" admissions, excluding
+    #' readmissions. This is available for England + English regions only.
+    #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+    #'     Section 2, "2. Estimated new hospital cases"
+    #' @source https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
+    #' @importFrom lubridate year month
+    #' @importFrom readxl read_excel cell_limits
+    #' @importFrom dplyr %>%
+    download_nhs_regions = function() {
+      if (is.null(self$release_date)) {
+        self$release_date <- Sys.Date() - 1
+      }
+      if (self$release_date < (Sys.Date() - 7)) {
+        stop("Data by NHS regions is only available in archived form for the
+             last 7 days")
+      }
+      message_verbose(
+        self$verbose,
+        "Arranging data by NHS region. Also adding new variable:
+        hosp_new_first_admissions. This is NHS data for first hospital
+        admissions, which excludes readmissions. This is available for
+        England and English regions only."
+      )
+      nhs_url <- paste0(
+        self$nhs_base_url,
+        "/wp-content/uploads/sites/2/",
+        year(self$release_date), "/",
+        ifelse(month(self$release_date) < 10,
+          paste0(0, month(self$release_date)),
+          month(self$release_date)
+        ),
+        "/COVID-19-daily-admissions-and-beds-",
+        gsub("-", "", as.character(self$release_date)),
+        ".xlsx"
+      )
+      tmp <- file.path(tempdir(), "nhs.xlsx")
+      download.file(nhs_url,
+        destfile = tmp,
+        mode = "wb", quiet = !(self$verbose)
+      )
+      self$nhs_raw <- suppressMessages(
+        read_excel(tmp,
+          sheet = 1,
+          range = cell_limits(c(28, 2), c(36, NA))
+        ) %>%
+          t()
+      )
+      self$nhs_raw <- as.data.frame(self$nhs_raw)
     },
 
     #' @description Add NHS data for level 1 regions
@@ -360,45 +415,12 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom tibble as_tibble
     #' @importFrom dplyr mutate select %>% group_by summarise left_join
     #' @importFrom tidyr pivot_longer
-    add_nhs_regions = function() {
-      if (is.null(self$release_date)) {
-        self$release_date <- Sys.Date() - 1
-      }
-      if (self$release_date < (Sys.Date() - 7)) {
-        stop("Data by NHS regions is only available in archived form for the
-             last 7 days")
-      }
-      message("Arranging data by NHS region. Also adding new variable:
-              hosp_new_first_admissions. This is NHS data for first hospital
-              admissions, which excludes readmissions. This is available for
-              England and English regions only.")
-      # Download NHS xlsx
-      nhs_url <- paste0(
-        "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
-        year(self$release_date), "/",
-        ifelse(month(self$release_date) < 10,
-          paste0(0, month(self$release_date)),
-          month(self$release_date)
-        ),
-        "/COVID-19-daily-admissions-and-beds-",
-        gsub("-", "", as.character(self$release_date)),
-        ".xlsx"
-      )
-
-      tmp <- file.path(tempdir(), "nhs.xlsx")
-      download.file(nhs_url, destfile = tmp, mode = "wb")
-
-      # Clean NHS data
-      adm_new <- suppressMessages(
-        read_excel(tmp,
-          sheet = 1,
-          range = cell_limits(c(28, 2), c(36, NA))
-        ) %>%
-          t()
-      )
-      colnames(adm_new) <- adm_new[1, ]
-      adm_new <- adm_new[2:nrow(adm_new), ]
-      adm_new <- adm_new %>%
+    #' @param clean_data Cleaned UK covid-19 data
+    #' @param nhs_data NHS region data
+    add_nhs_regions = function(clean_data, nhs_data) {
+      colnames(nhs_data) <- nhs_data[1, ]
+      nhs_data <- nhs_data[2:nrow(nhs_data), ]
+      nhs_data <- nhs_data %>%
         as_tibble() %>%
         mutate(date = seq.Date(
           from = as.Date("2020-08-01"),
@@ -417,7 +439,7 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE data into NHS regions ---------------------------------------
-      self$data$clean <- self$data$clean %>%
+      clean_data <- clean_data %>%
         select(-.data$level_1_region_code) %>%
         mutate(
           region_level_1 = ifelse(
@@ -442,8 +464,8 @@ UK <- R6::R6Class("UK", # rename to country name
         )
 
       # Merge PHE and NHS data
-      self$data$clean <- left_join(
-        self$data$clean, adm_new,
+      clean_data <- left_join(
+        clean_data, nhs_data,
         by = c("region_level_1", "date")
       ) %>%
         # Create a blended variable that uses "all" hospital admissions
@@ -461,6 +483,20 @@ UK <- R6::R6Class("UK", # rename to country name
           level_1_region_code = NA,
           release_date = self$release_date
         )
+      return(clean_data)
+    },
+
+    #' @description Download lookup table for UK authorities
+    #' @importFrom vroom vroom col_character
+    download_authority_data = function() {
+      self$authority_data <- vroom(
+        "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
+        col_types = c(
+          WD17NMW = col_character(),
+          CTY17CD = col_character(),
+          CTY17NM = col_character()
+        )
+      )
     },
 
     #' @description Get lookup table for UK authorities
@@ -469,16 +505,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom tidyr drop_na
     #' @importFrom tibble tibble
     get_authority_lookup_table = function() {
-      authority_data <- vroom(
-        "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
-        col_types = c(
-          WD17NMW = col_character(),
-          CTY17CD = col_character(),
-          CTY17NM = col_character()
-        )
-      )
-
-      unitary_auth <- authority_data %>%
+      unitary_auth <- self$authority_data %>%
         select(
           level_2_region_code = "CTY17CD",
           region_level_2 = "CTY17NM",
@@ -488,7 +515,7 @@ UK <- R6::R6Class("UK", # rename to country name
         distinct() %>%
         drop_na(.data$region_level_2)
 
-      upper_tier_auth <- authority_data %>%
+      upper_tier_auth <- self$authority_data %>%
         select(
           level_2_region_code = "LAD17CD",
           region_level_2 = "LAD17NM",
@@ -498,7 +525,7 @@ UK <- R6::R6Class("UK", # rename to country name
         distinct() %>%
         drop_na(.data$region_level_2)
 
-      country_auth <- authority_data %>%
+      country_auth <- self$authority_data %>%
         select(
           level_2_region_code = "LAD17CD",
           region_level_2 = "LAD17NM",
