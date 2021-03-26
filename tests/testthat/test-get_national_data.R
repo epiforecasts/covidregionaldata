@@ -1,21 +1,24 @@
 test_get_national_data <- function(source) {
   test_that(paste0("get_national_data returns", source, " data"), {
-    true <- readRDS(paste0("custom_data/", source, ".rds"))
-    stub_download <- function() {
-      pf <- parent.frame()
-      pf$nation_class$data$raw <- true$raw
-    }
+    national <- readRDS(paste0("custom_data/", source, ".rds"))
+    true <- national$return()
+    true_R6 <- national$clone()
+    true_R6$steps <- TRUE
+    true_steps <- true_R6$return()
     mockery::stub(
-      get_national_data,
-      "nation_class$download",
-      stub_download
+      get_national_data, "check_country_available",
+      function(country, level, totals, localise,
+               verbose, steps) {
+        class <- national$clone()
+        class$verbose <- verbose
+        class$steps <- steps
+        return(class)
+      }
     )
     d <- get_national_data(
       country = "Afghanistan", source = source,
       verbose = FALSE
     )
-    print(d)
-
     expect_s3_class(d, "data.frame")
     expect_true(all(d$country == "Afghanistan"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
@@ -24,12 +27,18 @@ test_get_national_data <- function(source) {
       verbose = FALSE
     ))
     expect_equal(
-      true,
+      true_steps,
       get_national_data(source = source, steps = TRUE, verbose = FALSE)
+    )
+    expect_equal(
+      true_R6,
+      get_national_data(
+        source = source, steps = TRUE, class = TRUE,
+        verbose = FALSE
+      )
     )
   })
 }
 
-# testthat::skip("Test in development")
+test_get_national_data("ecdc")
 test_get_national_data("who")
-# test_get_national_data("ecdc")
