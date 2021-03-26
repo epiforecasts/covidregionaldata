@@ -38,6 +38,7 @@ up to today's date.}
 \itemize{
 \item \href{#method-get_region_codes}{\code{DataClass$get_region_codes()}}
 \item \href{#method-download}{\code{DataClass$download()}}
+\item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
@@ -58,9 +59,19 @@ General function for getting region codes for given region.
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 General function for downloading raw data.
-Shared regional dataset processing
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean"></a>}}
+\if{latex}{\out{\hypertarget{method-clean}{}}}
+\subsection{Method \code{clean()}}{
+General cleaning function
+Shared regional dataset processing
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
 
 }

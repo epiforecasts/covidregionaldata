@@ -150,6 +150,12 @@ DataClass <- R6::R6Class(
       }
     },
 
+    #' @description General cleaning function
+    clean = function() {
+      warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
+      self$data$clean <- self$data$raw
+    },
+
     #' Shared regional dataset processing
     #'
     #' @description General function to processes regional data.
