@@ -9,8 +9,6 @@
 #' of the data with the default being "1". Currently supported options are
 #' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
 #' options by dataset.
-#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-#' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
 #' @param include_level_2_regions `r lifecycle::badge("deprecated")` Boolean. If TRUE, returns data stratified by
@@ -20,6 +18,7 @@
 #' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
 #' @inheritParams return_data
 #' @inheritParams process_internal
+#' @inheritParams message_verbose
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
