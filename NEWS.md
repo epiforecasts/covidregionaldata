@@ -4,6 +4,7 @@ This update contains a substantial package refactor and as such introduces some 
 
 ## Changes
 
+* Placed nhs data handling in correct areas of UK class, so that downloading occurs at the download step, cleaning happens at the cleaning step, etc. Also added tests.
 * Available datasets not listed in `get_available_datasets`.
 * Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. However, all datasets are now available to be used as R6 methods (see `get_available_datasets)
 * Added a list return method so that data processing changes can be tracked.
