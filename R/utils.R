@@ -19,13 +19,15 @@ rlang::`.data`
 #'
 #' @description Checks for use of memoise and then uses vroom::vroom.
 #' @param file A URL or filepath to a CSV
+#' @param guess_max Maximum number of records to use for guessing column types.
+#' Defaults to a 1000.
 #' @param ... extra parameters to be passed to vroom::vroom
 #' @inheritParams message_verbose
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
-csv_reader <- function(file, verbose = FALSE, ...) {
+csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   read_csv_fun <- vroom
 
   if (!is.null(getOption("useMemoise"))) {
@@ -37,11 +39,11 @@ csv_reader <- function(file, verbose = FALSE, ...) {
   }
   if (verbose) {
     message("Downloading data from ", file)
-    data <- read_csv_fun(file, ..., guess_max = 500)
+    data <- read_csv_fun(file, ..., guess_max = guess_max)
   } else {
     data <- suppressWarnings(
       suppressMessages(
-        read_csv_fun(file, ..., guess_max = 500)
+        read_csv_fun(file, ..., guess_max = guess_max)
       )
     )
   }
