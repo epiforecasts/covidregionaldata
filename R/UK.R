@@ -125,7 +125,7 @@ UK <- R6::R6Class("UK", # rename to country name
       if (!is.null(self$release_date)) {
         self$data$clean <- mutate(
           self$data$clean,
-          release_date = self$release_date
+          release_date <- self$release_date
         )
       }
       # get NHS data if requested
