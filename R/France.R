@@ -41,27 +41,11 @@ France <- R6::R6Class("France",
       if (self$level == 1) {
         self$data_url <- "https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01" # nolint
       }
-      if (self$verbose) {
-        message("Downloading data")
-        self$data$raw <- suppressWarnings(
-          csv_reader(self$data_url)
-        )
-        if (self$level == 2) {
-          self$data$raw_hosp <- suppressWarnings(
-            csv_reader(self$hosp_url)
-          )
-        }
-      } else {
-        self$data$raw <- suppressMessages(
-          suppressWarnings(
-            csv_reader(self$data_url)
-          )
-        )
-        if (self$level == 2) {
-          self$data$raw_hosp <- suppressMessages(
-            csv_reader(self$hosp_url)
-          )
-        }
+      message_verbose(self$verbose, "Downloading data")
+      self$data$raw <- csv_reader(self$data_url, self$verbose)
+
+      if (self$level == 2) {
+        self$data$raw_hosp <- csv_reader(self$hosp_url, self$verbose)
       }
     },
 
@@ -69,18 +53,13 @@ France <- R6::R6Class("France",
     #' cleaning
     #' @param ... pass additional arguments
     #'
-    #' @importFrom dplyr filter select mutate rename
-    #' @importFrom tidyr replace_na
-    #' @importFrom lubridate dmy
     clean = function(...) {
       # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
       # e.g. self$data$clean <- something
       # No return statement is required
       # have a statement like this to indicate information to user if requested
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
 
       if (self$level == "1") {
         self$clean_level_1()
@@ -91,54 +70,56 @@ France <- R6::R6Class("France",
 
     #' @description France Specific Region Level Data Cleaning
     #'
-    #' @importFrom dplyr filter mutate left_join rename select
+    #' @importFrom dplyr filter mutate left_join select
+    #' @importFrom lubridate as_date ymd
     clean_level_1 = function() {
       self$data$clean <- self$data$raw %>%
-        dplyr::filter(cl_age90 == 0) %>%
-        dplyr::select(
+        filter(cl_age90 == 0) %>%
+        select(
           date = jour,
           insee_code = reg,
           cases_new = P,
           tested_new = `T`
         ) %>%
-        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))  %>%
-        dplyr::left_join(self$data$codes_lookup, by = "insee_code")
+        mutate(date = as_date(ymd(date)))  %>%
+        left_join(self$data$codes_lookup, by = "insee_code")
       },
 
     #' @description France Specific Department Level Data Cleaning
     #'
     #' @importFrom dplyr filter mutate left_join rename select full_join
+    #' @importFrom lubridate as_date ymd
     clean_level_2 = function() {
       cases_data <- self$data$raw %>%
-        dplyr::filter(cl_age90 == 0) %>%
-        dplyr::select(
+        filter(cl_age90 == 0) %>%
+        select(
           date = jour,
           level_2_region_code = dep,
           cases_new = P,
           tested_new = `T`
         ) %>%
-        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+        mutate(date = as_date(ymd(date)))
 
       if (!is.null(self$data$raw_hosp)) {
         hosp_data <- self$data$raw_hosp %>%
-          dplyr::select(
+          select(
             date = jour,
             level_2_region_code = dep,
             hosp_new = incid_hosp,
             deaths_new = incid_dc
           ) %>%
-          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+          mutate(date = as_date(ymd(date)))
 
-        combined_data <- dplyr::full_join(cases_data, hosp_data,
+        combined_data <- full_join(cases_data, hosp_data,
           by = c("date", "level_2_region_code"))
       } else {
         combined_data <- cases_data
       }
 
       self$data$clean <- combined_data %>%
-        dplyr::mutate(level_2_region_code =
-                        paste0("FR-", level_2_region_code)) %>%
-        dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
+        mutate(level_2_region_code =
+                paste0("FR-", level_2_region_code)) %>%
+        left_join(self$data$codes_lookup, by = "level_2_region_code")
     },
 
     #' @description Initialize the country
