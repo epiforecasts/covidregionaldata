@@ -21,3 +21,4 @@ SMG.md
 ^Meta$
 ^vignettes$
 ^tests/testthat/\.cache$
+^CODE_OF_CONDUCT\.md$
