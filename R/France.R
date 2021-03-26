@@ -102,7 +102,7 @@ France <- R6::R6Class("France",
           tested_new = `T`
         ) %>%
         dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))  %>%
-        dplyr::left_join(self$data$codes_lookup, by = "insee_code") 
+        dplyr::left_join(self$data$codes_lookup, by = "insee_code")
       },
 
     #' @description France Specific Department Level Data Cleaning
@@ -119,20 +119,26 @@ France <- R6::R6Class("France",
         ) %>%
         dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
 
-      hosp_data <- self$data$raw_hosp %>%
-        dplyr::select(
-          date = jour,
-          level_2_region_code = dep,
-          hosp_new = incid_hosp,
-          deaths_new = incid_dc
-        ) %>%
-        dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
+      if (!is.null(self$data$raw_hosp)) {
+        hosp_data <- self$data$raw_hosp %>%
+          dplyr::select(
+            date = jour,
+            level_2_region_code = dep,
+            hosp_new = incid_hosp,
+            deaths_new = incid_dc
+          ) %>%
+          dplyr::mutate(date = lubridate::as_date(lubridate::ymd(date)))
 
-    self$data$clean <- dplyr::full_join(cases_data, hosp_data,
-      by = c("date", "level_2_region_code")) %>%
-      dplyr::mutate(level_2_region_code =
-                      paste0("FR-", level_2_region_code)) %>%
-      dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
+        combined_data <- dplyr::full_join(cases_data, hosp_data,
+          by = c("date", "level_2_region_code"))
+      } else {
+        combined_data <- cases_data
+      }
+
+      self$data$clean <- combined_data %>%
+        dplyr::mutate(level_2_region_code =
+                        paste0("FR-", level_2_region_code)) %>%
+        dplyr::left_join(self$data$codes_lookup, by = "level_2_region_code")
     },
 
     #' @description Initialize the country
