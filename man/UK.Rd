@@ -6,6 +6,8 @@
 data.}
 \source{
 https://coronavirus.data.gov.uk/details/download #nolint
+
+https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
 }
 \description{
 Extracts daily COVID-19 data for the UK, stratified by region
@@ -62,6 +64,12 @@ Uk$new(
 \item{\code{release_date}}{The release date for the data}
 
 \item{\code{resolution}}{The resolution of the data to return}
+
+\item{\code{nhs_raw}}{Raw NHS region data}
+
+\item{\code{authority_data}}{The raw data for creating authority lookup tables}
+
+\item{\code{nhs_base_url}}{Base url for nhs region data}
 }
 \if{html}{\out{</div>}}
 }
@@ -77,7 +85,9 @@ Uk$new(
 \item \href{#method-new}{\code{UK$new()}}
 \item \href{#method-download_uk}{\code{UK$download_uk()}}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
+\item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
+\item \href{#method-download_authority_data}{\code{UK$download_authority_data()}}
 \item \href{#method-get_authority_lookup_table}{\code{UK$get_authority_lookup_table()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
@@ -248,6 +258,20 @@ Set filters for UK data api query.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download_nhs_regions"></a>}}
+\if{latex}{\out{\hypertarget{method-download_nhs_regions}{}}}
+\subsection{Method \code{download_nhs_regions()}}{
+Download NHS data for level 1 regions
+Separate NHS data is available for "first" admissions, excluding
+readmissions. This is available for England + English regions only.
+See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+Section 2, "2. Estimated new hospital cases"
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$download_nhs_regions()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-add_nhs_regions"></a>}}
 \if{latex}{\out{\hypertarget{method-add_nhs_regions}{}}}
 \subsection{Method \code{add_nhs_regions()}}{
@@ -257,7 +281,26 @@ readmissions. This is available for England + English regions only.
 See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$add_nhs_regions()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$add_nhs_regions(clean_data, nhs_data)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{clean_data}}{Cleaned UK covid-19 data}
+
+\item{\code{nhs_data}}{NHS region data}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download_authority_data"></a>}}
+\if{latex}{\out{\hypertarget{method-download_authority_data}{}}}
+\subsection{Method \code{download_authority_data()}}{
+Download lookup table for UK authorities
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$download_authority_data()}\if{html}{\out{</div>}}
 }
 
 }

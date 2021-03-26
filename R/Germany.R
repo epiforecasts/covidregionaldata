@@ -5,6 +5,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2")
@@ -32,9 +33,7 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw %>%
         select(
           date = .data$Meldedatum,

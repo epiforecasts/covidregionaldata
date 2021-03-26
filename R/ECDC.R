@@ -6,6 +6,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+#' @export
 #' @examples
 #' \dontrun{
 #' national <- ECDC$new(verbose = TRUE, steps = TRUE)
@@ -33,9 +34,7 @@ ECDC <- R6::R6Class("ECDC",
     #' @importFrom countrycode countryname countrycode
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       long_string <- "Cases_on_an_international_conveyance_Japan"
       self$data$clean <- self$data$raw %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%

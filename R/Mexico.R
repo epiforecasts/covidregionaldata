@@ -5,6 +5,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- Mexico$new(verbose = TRUE, steps = TRUE)
@@ -65,14 +66,9 @@ Mexico <- R6::R6Class("Mexico",
       )
 
       read_data <- function(target, new_name) {
-        if (self$verbose) {
-          message("Downloading ", new_name)
-          dat <- csv_reader(file.path(domain, target))
-        } else {
-          dat <- suppressMessages(
-            csv_reader(file.path(domain, target))
-          )
-        }
+        message_verbose(self$verbose, "Downloading ", new_name)
+        dat <- csv_reader(file.path(domain, target), self$verbose)
+
         dat <- dat %>%
           select(-.data$poblacion) %>%
           pivot_longer(-c("cve_ent", "nombre"),
@@ -93,9 +89,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom lubridate as_date ymd_hms
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {

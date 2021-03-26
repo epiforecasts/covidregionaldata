@@ -4,6 +4,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- Italy$new(verbose = TRUE, steps = TRUE)
@@ -30,12 +31,10 @@ Italy <- R6::R6Class("Italy",
     #' @importFrom rlang .data
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw %>%
         mutate(
-          date = as_date(ymd_hms(.data$data)),
+          date = suppressWarnings(as_date(ymd_hms(.data$data))),
           region_level_1 = as.character(.data$denominazione_regione),
           cases_total = .data$totale_casi,
           deaths_total = .data$deceduti,
