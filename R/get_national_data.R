@@ -49,9 +49,9 @@ get_national_data <- function(country, source = "who", steps = FALSE,
 
   # filter for country of interest
   if (!missing(country)) {
-    if (verbose) {
-      message(paste("Filtering", source, "data for", country))
-    }
+    message_verbose(
+      verbose, paste("Filtering", source, "data for", country)
+    )
     tar_country <- country
     tar_country <- countryname(tar_country, destination = "country.name.en")
     if (is.na(tar_country)) {

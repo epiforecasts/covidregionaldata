@@ -101,7 +101,6 @@ Imports:
     memoise,
     purrr,
     R6,
-    readr,
     readxl,
     rlang,
     stringr,

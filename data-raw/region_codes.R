@@ -7,7 +7,7 @@ global_codes <- tibble::tibble(
 )
 
 # mexico region codes
-mexico_codes <- readr::read_csv("data-raw/mexico_codes.csv")
+mexico_codes <- vroom::vroom("data-raw/mexico_codes.csv")
 mexico_codes <- tibble::tibble(
   country = "mexico",
   level = c("level_1_region", "level_2_region"),
@@ -20,7 +20,7 @@ mexico_codes <- tibble::tibble(
 )
 
 # italy codes
-italy_codes <- readr::read_csv("data-raw/italy_codes.csv")
+italy_codes <- vroom::vroom("data-raw/italy_codes.csv")
 italy_codes <- tibble::tibble(
   country = "italy",
   level = c("level_1_region"),
