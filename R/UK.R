@@ -67,13 +67,9 @@ UK <- R6::R6Class("UK", # rename to country name
     download = function() {
       # set up filters
       self$set_filters()
-      if (self$verbose) {
-        message("Downloading UK data.")
-        self$data$raw <- map(self$query_filters, self$download_uk)
-      }
-      self$data$raw <- suppressMessages(
-        map(self$query_filters, self$download_uk)
-      )
+      message_verbose(self$verbose, "Downloading UK data.")
+      self$data$raw <- map(self$query_filters, self$download_uk)
+
       if (self$level == "1") {
         self$data$raw <- bind_rows(
           self$data$raw$nation, self$data$raw$region
@@ -86,9 +82,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @description UK specific cleaning, directs to level 1 or level 2
     #'
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
@@ -129,7 +123,6 @@ UK <- R6::R6Class("UK", # rename to country name
           release_date = self$release_date
         )
       }
-
       # get NHS data if requested
       if (self$nhsregions) {
         self$add_nhs_regions()
@@ -311,8 +304,8 @@ UK <- R6::R6Class("UK", # rename to country name
         ))
       }
       # download and link all data into a single data frame
-      safe_reader <- safely(csv_readr)
-      csv <- map(csv_links, ~ safe_reader(.)[[1]])
+      safe_reader <- safely(csv_reader)
+      csv <- map(csv_links, ~ safe_reader(.)[[1]], verbose = self$verbose)
       csv <- compact(csv)
       csv <- reduce(csv, full_join,
         by = c("date", "areaType", "areaCode", "areaName")
@@ -346,7 +339,7 @@ UK <- R6::R6Class("UK", # rename to country name
         )
         names(self$query_filters) <- self$resolution
       } else {
-        stop(paste("Uk data not supported for level", self$level))
+        stop(paste("UK data not supported for level", self$level))
       }
     },
 
@@ -368,10 +361,13 @@ UK <- R6::R6Class("UK", # rename to country name
         stop("Data by NHS regions is only available in archived form for the
              last 7 days")
       }
-      message("Arranging data by NHS region. Also adding new variable:
+      message_verbose(
+        self$verbose,
+        "Arranging data by NHS region. Also adding new variable:
               hosp_new_first_admissions. This is NHS data for first hospital
               admissions, which excludes readmissions. This is available for
-              England and English regions only.")
+              England and English regions only."
+      )
       # Download NHS xlsx
       nhs_url <- paste0(
         "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",

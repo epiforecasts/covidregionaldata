@@ -33,9 +33,7 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
       # e.g. self$data$clean <- something
       # No return statement is required
       # have a statment like this to indicate information to user if requested
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
     },
 
     #' @description Initialize the country

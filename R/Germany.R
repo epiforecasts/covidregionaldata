@@ -33,9 +33,7 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+      message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw %>%
         select(
           date = .data$Meldedatum,
