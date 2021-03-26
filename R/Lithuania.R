@@ -126,6 +126,7 @@
 #' region$process()
 #' region$return()
 #' }
+#' @export
 Lithuania <- R6::R6Class("Lithuania",
   inherit = DataClass,
   public = list(
@@ -157,6 +158,11 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @description *Lithuania* specific state level data cleaning
     #' @param ... pass additional arguments
     #'
+    # nolint start
+    #' @importFrom dplyr mutate group_by summarise if_else filter select bind_rows rename left_join everything across lead
+    #' @importFrom tidyselect all_of
+    #' @importFrom lubridate as_date
+    # nolint end
     clean = function(...) {
       # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
@@ -222,46 +228,46 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Take the difference between national and sum of counties' data
       unassigned <- self$data$raw %>%
-        dplyr::mutate(national = ifelse(.data$municipality_name == "Lietuva",
+        mutate(national = ifelse(.data$municipality_name == "Lietuva",
           "national", "municipality"
         )) %>%
-        dplyr::group_by(date, .data$national) %>%
-        dplyr::summarise(across(
-          tidyselect::all_of(sum_cols),
+        group_by(date, .data$national) %>%
+        summarise(across(
+          all_of(sum_cols),
           ~ sum(.x, na.rm = TRUE)
         )) %>%
-        dplyr::mutate(across(
-          tidyselect::all_of(sum_cols),
-          ~ dplyr::lead(.x, 1) - .x
+        mutate(across(
+          all_of(sum_cols),
+          ~ lead(.x, 1) - .x
         ),
         municipality_name = "Unknown",
         ab_prc_day =
-          dplyr::if_else(
+          if_else(
             .data$ab_tot_day == 0, 0,
             .data$ab_pos_day / .data$ab_tot_day
           ),
         ag_prc_day =
-          dplyr::if_else(
+          if_else(
             .data$ag_tot_day == 0, 0,
             .data$ag_pos_day / .data$ag_tot_day
           ),
         pcr_prc_day =
-          dplyr::if_else(
+          if_else(
             .data$pcr_tot_day == 0, 0,
             .data$pcr_pos_day / .data$pcr_tot_day
           ),
         dgn_prc_day =
-          dplyr::if_else(
+          if_else(
             .data$dgn_tot_day == 0, 0,
             .data$dgn_pos_day / .data$dgn_tot_day
           ),
         map_colors = NA_character_
         ) %>%
-        dplyr::filter(.data$national == "municipality") %>%
-        dplyr::select(-.data$national)
+        filter(.data$national == "municipality") %>%
+        select(-.data$national)
 
       # Join unknown locations to main dataset
-      osp_data_w_unassigned <- dplyr::bind_rows(
+      osp_data_w_unassigned <- bind_rows(
         self$data$raw %>% select(-.data$object_id, -.data$municipality_code),
         unassigned
       )
@@ -269,37 +275,37 @@ Lithuania <- R6::R6Class("Lithuania",
       # Exclude national data based on user param (default = FALSE)
       if (!self$national_data) {
         osp_data_w_unassigned <-
-          dplyr::filter(
+          filter(
             osp_data_w_unassigned,
             !.data$municipality_name == "Lietuva"
           )
       }
 
       self$data$clean <- osp_data_w_unassigned %>%
-        dplyr::mutate(
-          date = lubridate::as_date(date),
+        mutate(
+          date = as_date(date),
           tested_new = .data$ab_tot_day + .data$ag_tot_day + .data$pcr_tot_day,
           deaths_new = .data[[death_field]],
           recovered_total = .data[[recovered_field]]
         ) %>%
-        dplyr::rename(
+        rename(
           cases_new = .data$incidence,
           cases_total = .data$cumulative_totals,
           region_level_2 = .data$municipality_name
         ) %>%
-        dplyr::left_join(self$data$codes_lookup, by = c("region_level_2")) %>%
-        dplyr::select(
+        left_join(self$data$codes_lookup, by = c("region_level_2")) %>%
+        select(
           date, region_level_1, region_level_2,
           cases_new, cases_total, deaths_new,
           tested_new, recovered_total,
-          dplyr::everything()
+          everything()
         )
       # If we have not been asked to return all the OSP-provided data,
       # just select the core data sought by get_regional_data
       # (default is FALSE)
       if (!self$all_osp_fields) {
         self$data$clean <- self$data$clean %>%
-          dplyr::select(
+          select(
             date, region_level_1, region_level_2,
             level_1_region_code, level_2_region_code,
             cases_new, cases_total, deaths_new, tested_new, recovered_total
@@ -317,43 +323,44 @@ Lithuania <- R6::R6Class("Lithuania",
     #' Aggregates data to the level 1 (county) regional level. Data is
     #' provided by the source at the level 2 (municipality) regional level.
     #'
-    #' @importFrom dplyr group_by summarise ungroup full_join
+    #' @importFrom dplyr group_by summarise ungroup full_join across if_else
+    #' @importFrom tidyselect vars_select_helpers
     clean_level_1 = function() {
 
       self$data$clean <- self$data$clean %>%
-        dplyr::group_by(.data$date,
+        group_by(.data$date,
                         .data$region_level_1, .data$level_1_region_code) %>%
-        dplyr::summarise(
-          dplyr::across(tidyselect::vars_select_helpers$where(is.numeric),
+        summarise(
+          across(tidyselect::vars_select_helpers$where(is.numeric),
                         sum)) %>%
-        dplyr::mutate(region_level_1
-                      = dplyr::if_else(is.na(.data$region_level_1),
+        mutate(region_level_1
+                      = if_else(is.na(.data$region_level_1),
                                        "Lietuva", .data$region_level_1
                       )) %>%
-        dplyr::ungroup()
+        ungroup()
       # Fix percentages, where necessary
       if (self$all_osp_fields) {
         # For each of the test percentage fields, recalculate the percentages,
         # first checking that the total number of checks is not zero.
         self$data$clean <- self$data$clean %>%
-          dplyr::mutate(
+          mutate(
             ab_prc_day =
-              dplyr::if_else(
+              if_else(
                 .data$ab_tot_day == 0, 0,
                 .data$ab_pos_day / .data$ab_tot_day
               ),
             ag_prc_day =
-              dplyr::if_else(
+              if_else(
                 .data$ag_tot_day == 0, 0,
                 .data$ag_pos_day / .data$ag_tot_day
               ),
             pcr_prc_day =
-              dplyr::if_else(
+              if_else(
                 .data$pcr_tot_day == 0, 0,
                 .data$pcr_pos_day / .data$pcr_tot_day
               ),
             dgn_prc_day =
-              dplyr::if_else(
+              if_else(
                 .data$dgn_tot_day == 0, 0,
                 .data$dgn_pos_day / .data$dgn_tot_day
               )
@@ -365,8 +372,6 @@ Lithuania <- R6::R6Class("Lithuania",
     #'
     #' No data cleaning is necessary specific to the municipality level
     #' since the data is already provided at the municipality level.
-    #'
-    #' @importFrom dplyr mutate group_by summarise ungroup full_join
     #'
     clean_level_2 = function() {
     },

@@ -193,11 +193,13 @@ codecov
 Codecov
 coK
 colombia
+com
 conacyt
 config
 Config
 coronavirus
 countrycode
+CoV
 covid
 Covid
 COVID
@@ -240,6 +242,7 @@ DaysByDeathDate
 DaysByPublishDate
 ȸ
 dCN
+dd
 dD
 DD
 de
@@ -448,6 +451,7 @@ gmgo
 GN
 gO
 gouv
+gov
 gp
 gQ
 grM
@@ -534,6 +538,7 @@ iAO
 ic
 iC
 Ic
+ICD
 ie
 iE
 ie'vk
@@ -560,9 +565,11 @@ india
 infobase
 initalize
 initialised
+int
 io
 iOv
 iP
+IPC
 iR
 iso
 isp
@@ -631,6 +638,7 @@ JS
 jsonlite
 Jt
 ju
+jure
 jUO
 jv
 jw
@@ -896,6 +904,7 @@ ORCID
 org
 Organisation
 os
+OSP
 Ot
 ǾT
 ou
@@ -1066,6 +1075,7 @@ sam
 samabbott
 sanitised
 sanitises
+SARS
 saveRDS
 Sbb
 sD
@@ -1143,6 +1153,7 @@ tG
 tGW
 tH
 tibble
+tibbles
 tidyr
 tidyselect
 tK
