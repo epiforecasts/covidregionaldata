@@ -4,6 +4,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+#' @export
 #' @examples
 #' \dontrun{
 #' region <- Italy$new(verbose = TRUE, steps = TRUE)

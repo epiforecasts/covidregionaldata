@@ -4,8 +4,8 @@ test_ecdc_level_1 <- function(region) {
       "geoId", "countriesAndTerritories",
       "cases", "deaths", "popData2019"
     )
-    expect_true(all(necessary_cols %in% colnames(region$raw)))
-    all_countries <- region$return %>%
+    expect_true(all(necessary_cols %in% colnames(region$data$raw)))
+    all_countries <- region$data$return %>%
       dplyr::filter(is.na(un_region)) %>%
       dplyr::group_by(country) %>%
       dplyr::tally()
@@ -15,7 +15,7 @@ test_ecdc_level_1 <- function(region) {
 
 test_who_level_1 <- function(region) {
   test_that("who data has expected format", {
-    all_countries <- region$return %>%
+    all_countries <- region$data$return %>%
       dplyr::filter(is.na(un_region)) %>%
       dplyr::group_by(country) %>%
       dplyr::tally()
