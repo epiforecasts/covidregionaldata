@@ -7,7 +7,7 @@ test_that("message_verbose returns a message when asked", {
 
 test_that("message_verbose does not return a message when asked", {
   l <- suppressMessages(
-    capture.output(message_verbose(FALSE, "hi there"), type = "message"),
+    capture.output(message_verbose(FALSE, "hi there"), type = "message")
   )
   expect_equal(l, character(0))
 })
