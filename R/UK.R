@@ -282,6 +282,8 @@ UK <- R6::R6Class("UK", # rename to country name
     nhs_raw = NA,
     #' @field authority_data The raw data for creating authority lookup tables
     authority_data = NA,
+    #' @field nhs_base_url Base url for nhs region data
+    nhs_base_url = "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/", # nolint
 
     #' @description Helper function for downloading Uk data API
     #' @importFrom purrr map safely compact reduce
@@ -377,7 +379,7 @@ UK <- R6::R6Class("UK", # rename to country name
         England and English regions only."
       )
       nhs_url <- paste0(
-        "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/",
+        self$nhs_base_url,
         year(self$release_date), "/",
         ifelse(month(self$release_date) < 10,
           paste0(0, month(self$release_date)),

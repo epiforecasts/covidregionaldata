@@ -68,6 +68,8 @@ Uk$new(
 \item{\code{nhs_raw}}{Raw NHS region data}
 
 \item{\code{authority_data}}{The raw data for creating authority lookup tables}
+
+\item{\code{nhs_base_url}}{Base url for nhs region data}
 }
 \if{html}{\out{</div>}}
 }
