@@ -401,6 +401,7 @@ UK <- R6::R6Class("UK", # rename to country name
         ) %>%
           t()
       )
+      self$nhs_raw <- as.data.frame(self$nhs_raw)
     },
 
     #' @description Add NHS data for level 1 regions
