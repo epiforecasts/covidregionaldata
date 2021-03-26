@@ -389,9 +389,11 @@ UK <- R6::R6Class("UK", # rename to country name
         gsub("-", "", as.character(self$release_date)),
         ".xlsx"
       )
-
       tmp <- file.path(tempdir(), "nhs.xlsx")
-      download.file(nhs_url, destfile = tmp, mode = "wb")
+      download.file(nhs_url,
+        destfile = tmp,
+        mode = "wb", quiet = !(self$verbose)
+      )
       self$nhs_raw <- suppressMessages(
         read_excel(tmp,
           sheet = 1,
