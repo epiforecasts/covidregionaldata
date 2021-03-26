@@ -34,7 +34,7 @@ Italy <- R6::R6Class("Italy",
       message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw %>%
         mutate(
-          date = as_date(ymd_hms(.data$data)),
+          date = suppressWarnings(as_date(ymd_hms(.data$data))),
           region_level_1 = as.character(.data$denominazione_regione),
           cases_total = .data$totale_casi,
           deaths_total = .data$deceduti,
