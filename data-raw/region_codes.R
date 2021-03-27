@@ -57,32 +57,37 @@ germany_codes <- tibble::tibble(
   )
 )
 
-# india codes
+# usa codes
 
-india_state_names <- tibble::tibble(
-  code = c(
-    "AN", "AP", "AR", "AS", "BR", "CH", "CT", "DN", "DD",
-    "DL", "GA", "GJ", "HR", "HP", "JK", "JH", "KA", "KL",
-    "LA", "LD", "MP", "MH", "MN", "ML", "MZ", "NL", "OR",
-    "PY", "PB", "RJ", "SK", "TN", "TG", "TR", "UN", "UP", "UT", "WB"
+usa_codes <- tibble::tibble(
+  level_1_region_code = c(
+    "US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT", "US-DE", "US-FL", "US-GA",
+    "US-HI", "US-ID", "US-IL", "US-IN", "US-IA", "US-KS", "US-KY", "US-LA", "US-ME", "US-MD",
+    "US-MA", "US-MI", "US-MN", "US-MS", "US-MO", "US-MT", "US-NE", "US-NV", "US-NH", "US-NJ",
+    "US-NM", "US-NY", "US-NC", "US-ND", "US-OH", "US-OK", "US-OR", "US-PA", "US-RI", "US-SC",
+    "US-SD", "US-TN", "US-TX", "US-UT", "US-VE", "US-VA", "US-WA", "US-WV", "US-WI", "US-WY",
+    "US-DC", "US-AS", "US-GU", "US-MP", "US-PR", "US-UM", "US-VI"
   ),
-  region_level_1 = c(
-    "Andaman and Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
-    "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu",
-    "NCT of Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
-    "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh",
-    "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
-    "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
-    "Tripura", "Unknown", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+  region = c(
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+    "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+    "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+    "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+    "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+    "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
+    "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia",
+    "American Samoa", "Guam", "Northern Mariana Islands", "Puerto Rico", "Minor Outlying Islands",
+    "Virgin Islands"
   )
 )
 
-india_codes <- tibble::tibble(
-  country = "india",
-  level = c("level_1_region"),
-  name = c("iso_3166_2"),
+usa_codes <- tibble::tibble(
+  country = "usa",
+  level = c("level_1_region", "level_2_region"),
+  name = c("iso_3166_2", "fips"),
   codes = list(
-    india_state_names
+    usa_codes,
+    usa_codes
   )
 )
 
@@ -90,7 +95,7 @@ india_codes <- tibble::tibble(
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
-    india_codes,
+    usa_codes,
     italy_codes, germany_codes
   ),
   dplyr::bind_rows

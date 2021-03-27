@@ -5,7 +5,7 @@
 \alias{region_codes}
 \title{Region Codes for Each Dataset.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 8 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 9 rows and 4 columns.
 }
 \usage{
 region_codes
