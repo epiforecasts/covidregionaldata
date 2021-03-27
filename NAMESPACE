@@ -3,6 +3,7 @@
 export("%>%")
 export(ECDC)
 export(Germany)
+export(India)
 export(Italy)
 export(Mexico)
 export(UK)
