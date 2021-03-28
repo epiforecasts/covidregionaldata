@@ -57,32 +57,28 @@ germany_codes <- tibble::tibble(
   )
 )
 
-# india codes
+# south africa codes
 
-india_state_names <- tibble::tibble(
-  code = c(
-    "AN", "AP", "AR", "AS", "BR", "CH", "CT", "DN", "DD",
-    "DL", "GA", "GJ", "HR", "HP", "JK", "JH", "KA", "KL",
-    "LA", "LD", "MP", "MH", "MN", "ML", "MZ", "NL", "OR",
-    "PY", "PB", "RJ", "SK", "TN", "TG", "TR", "UN", "UP", "UT", "WB"
-  ),
-  region_level_1 = c(
-    "Andaman and Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
-    "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu",
-    "NCT of Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
-    "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh",
-    "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
-    "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
-    "Tripura", "Unknown", "Uttar Pradesh", "Uttarakhand", "West Bengal"
-  )
+# Set region names
+southafrica_names <- tibble::tribble(
+  ~level_1_region_code, ~region_level_1,
+  "ZA-EC", "Eastern Cape",
+  "ZA-FS", "Free State",
+  "ZA-GP", "Gauteng",
+  "ZA-KZN", "Kwazulu-Natal",
+  "ZA-LP", "Limpopo",
+  "ZA-MP", "Mpumalanga",
+  "ZA-NC", "Northern Cape",
+  "ZA-NW", "North-West",
+  "ZA-WC", "Western Cape"
 )
 
-india_codes <- tibble::tibble(
-  country = "india",
+southafrica_codes <- tibble::tibble(
+  country = "southafrica",
   level = c("level_1_region"),
   name = c("iso_3166_2"),
   codes = list(
-    india_state_names
+    southafrica_names
   )
 )
 
@@ -90,7 +86,7 @@ india_codes <- tibble::tibble(
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
-    india_codes,
+    southafrica_codes,
     italy_codes, germany_codes
   ),
   dplyr::bind_rows

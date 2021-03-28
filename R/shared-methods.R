@@ -17,6 +17,8 @@ check_country_available <- function(country = character(), level = 1,
   # if country is UK whole name must be upper case
   if (country == "Uk") {
     country <- toupper(country)
+  } else if (country == "Southafrica") {
+    country <- "SouthAfrica"
   }
 
   # check we have data for desired country
