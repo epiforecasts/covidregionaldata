@@ -71,7 +71,7 @@ USA <- R6::R6Class("USA",
         ) %>%
         select(date, region_level_1, cases_total, deaths_total) %>%
         left_join(self$data$codes_lookup,
-                  by = c("region_level_1"="region"))
+                  by = c("region_level_1" = "region"))
     },
 
     #' @description USA Specific County Level Data Cleaning
@@ -90,7 +90,7 @@ USA <- R6::R6Class("USA",
           deaths_total = replace(deaths_total, deaths_total < 0, 0)
         ) %>%
         left_join(self$data$codes_lookup,
-                  by = c("region_level_1"="region"))
+                  by = c("region_level_1" = "region"))
     },
 
     #' @description Initialize the country
