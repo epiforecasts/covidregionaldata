@@ -105,6 +105,7 @@ DataClass <- R6::R6Class(
     #' @field region_codes string or tible Region codes for the target country
     region_codes = NULL,
 
+    #' @description Set up a table of region codes for clean data
     set_region_codes = function() {
     },
 

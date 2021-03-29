@@ -51,6 +51,7 @@ up to today's date.}
 \if{html}{\out{<a id="method-set_region_codes"></a>}}
 \if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
 \subsection{Method \code{set_region_codes()}}{
+Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$set_region_codes()}\if{html}{\out{</div>}}
 }

@@ -1,0 +1,209 @@
+#' Belgium Class for downloading, cleaning and processing notification data
+#'
+#' @description Country specific information for downloading, cleaning
+#'  and processing COVID-19 region level 1 and 2 data for Belgium.
+#'
+#' @details Inherits from `DataClass`
+#' @source https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+#' @export
+#' @examples
+#' \dontrun{
+#' region <- Belgium$new(verbose = TRUE, steps = TRUE, level = "2")
+#' region$download()
+#' region$clean()
+#' region$process()
+#' region$return()
+#' }
+Belgium <- R6::R6Class("Belgium",
+  inherit = DataClass,
+  public = list(
+
+    # Core Attributes
+    #' @field level_1_region the level 1 region name.
+    level_1_region = "region",
+    #' @field level_2_region the level 2 region name.
+    level_2_region = "province",
+    # nolint start
+    #' @field data_url link to raw cases data
+    data_url = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
+    #' @field hosp_url link to raw hospitalisation data
+    hosp_url = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv",
+    #' @field deaths_url link to raw deaths data (mortality)
+    deaths_url = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv",
+    # nolint end
+    #' @field source_data_cols existing columns within the raw data
+    source_data_cols = c("cases_new", "deaths_new"),
+
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble tribble
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      level_1_belgium <- tibble::tibble(
+        level_1_region_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
+        region_level_1 = c("Brussels", "Flanders", "Wallonia")
+      )
+      level_2_belgium <- tibble::tribble(
+        ~level_2_region_code,    ~region_level_2, ~level_1_region_code,
+                    "BE-VAN",        "Antwerpen",      "BE-VLG",
+                    "BE-WBR",    "BrabantWallon",      "BE-WAL",
+                    "BE-WHT",          "Hainaut",      "BE-WAL",
+                    "BE-WLG",            "Liège",      "BE-WAL",
+                    "BE-VLI",          "Limburg",      "BE-VLG",
+                    "BE-WLX",       "Luxembourg",      "BE-WAL",
+                    "BE-WNA",            "Namur",      "BE-WAL",
+                    "BE-VOV",   "OostVlaanderen",      "BE-VLG",
+                    "BE-VBR",    "VlaamsBrabant",      "BE-VLG",
+                    "BE-VWV",   "WestVlaanderen",      "BE-VLG",
+                    "BE-BRU",         "Brussels",      "BE-BRU"
+        )
+
+      belgium_codes <- tibble(
+        country = "belgium",
+        level = c("level_1_region", "level_2_region"),
+        name = c("iso_3166_2", "code"),
+        codes = list(
+          level_1_belgium,
+          level_2_belgium
+        )
+      )
+      self$region_codes <- belgium_codes
+    },
+    
+    #' @description Belgium-specific function for downloading raw data.
+    download = function() {
+      message_verbose(self$verbose, "Downloading data")
+      self$data$raw <- csv_reader(self$data_url, self$verbose)
+      self$data$raw_hosp <- csv_reader(self$hosp_url, self$verbose)
+      if (self$level == 1) {
+        # deaths data is not available by province (level 2)
+        self$data$raw_deaths <- csv_reader(self$deaths_url, self$verbose)
+      }
+    },
+
+    #' @description directs to either level 1 or level 2 processing based on
+    #' request.
+    #' @importFrom dplyr select mutate
+    #' @importFrom lubridate as_date ymd_hms
+    clean = function() {
+      message_verbose(self$verbose, "Cleaning data")
+      if (self$level == "1") {
+        self$clean_level_1()
+      } else if (self$level == "2") {
+        self$clean_level_2()
+      }
+    },
+
+    #' @description Belgium Specific Region Level Data Cleaning
+    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
+    #' @importFrom tidyr replace_na
+    #' @importFrom lubridate ymd
+    clean_level_1 = function() {
+      cases_data <- self$data$raw %>%
+        select(DATE, REGION, CASES) %>%
+        mutate(
+          DATE = ymd(DATE),
+          CASES = as.numeric(CASES)
+        ) %>%
+        replace_na(list(REGION = "Unknown")) %>%
+        group_by(DATE, REGION) %>%
+        tally(CASES) %>%
+        ungroup()
+      
+      hosp_data <- self$data$raw_hosp %>%
+        select(DATE, REGION, NEW_IN) %>%
+        mutate(
+          DATE = ymd(DATE),
+          NEW_IN = as.numeric(NEW_IN)
+        ) %>%
+        replace_na(list(REGION = "Unknown")) %>%
+        group_by(DATE, REGION) %>%
+        tally(wt = NEW_IN) %>%
+        ungroup()
+      
+      deaths_data <- self$data$raw_deaths %>%
+        select(DATE, REGION, DEATHS) %>%
+        mutate(
+          DATE = ymd(DATE),
+          DEATHS = as.numeric(DEATHS)
+        ) %>%
+        replace_na(list(REGION = "Unknown")) %>%
+        group_by(DATE, REGION) %>%
+        tally(wt = DEATHS) %>%
+        ungroup()
+      
+      # Join the three datasets and rename columns
+      cases_and_hosp_data <- full_join(cases_data,
+                                       hosp_data,
+                                       by = c("DATE" = "DATE",
+                                              "REGION" = "REGION"))
+      
+      self$data$clean <- full_join(cases_and_hosp_data,
+                                   deaths_data,
+                                   by = c("DATE" = "DATE",
+                                          "REGION" = "REGION")) %>%
+        rename(date = DATE, region_level_1 = REGION,
+               cases_new = n.x, hosp_new = n.y, deaths_new = n) %>%
+        left_join(self$data$codes_lookup, by = c("region_level_1"))
+    },
+
+    #' @description Belgium Specific Province Level Data Cleaning
+    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
+    #' @importFrom tidyr replace_na
+    #' @importFrom lubridate ymd
+    #'
+    clean_level_2 = function() {
+      cases_data <- self$data$raw %>%
+        select(DATE, REGION, PROVINCE, CASES) %>%
+        mutate(
+          DATE = lubridate::ymd(DATE),
+          CASES = as.numeric(CASES)
+        ) %>%
+        replace_na(list(
+          REGION = "Unknown",
+          PROVINCE = "Unknown"
+        )) %>%
+        group_by(DATE, PROVINCE, REGION) %>%
+        tally(CASES) %>%
+        ungroup()
+      
+      hosp_data <- self$data$raw_hosp %>%
+        select(DATE, REGION, PROVINCE, NEW_IN) %>%
+        mutate(
+          DATE = lubridate::ymd(DATE),
+          NEW_IN = as.numeric(NEW_IN)
+        ) %>%
+        replace_na(list(
+          REGION = "Unknown",
+          PROVINCE = "Unknown"
+        )) %>%
+        group_by(DATE, PROVINCE, REGION) %>%
+        tally(wt = NEW_IN) %>%
+        ungroup()
+      
+      # Join the two datasets and rename columns
+      self$data$clean <- full_join(cases_data, hosp_data,
+                                   by = c("DATE" = "DATE",
+                                          "PROVINCE" = "PROVINCE",
+                                          "REGION" = "REGION")) %>%
+        rename(date = DATE,
+               region_level_1 = REGION,
+               region_level_2 = PROVINCE,
+               cases_new = n.x,
+               hosp_new = n.y) %>%
+        left_join(self$data$codes_lookup,
+                  by = c("region_level_2"))
+    },
+
+    #' @description Initialize the country
+    #' @param ... The args passed by [general_init]
+    initialize = function(...) {
+      general_init(self, ...)
+    }
+  )
+)
