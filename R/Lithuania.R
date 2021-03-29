@@ -313,9 +313,7 @@ Lithuania <- R6::R6Class("Lithuania",
       }
       if (self$level == "1") {
         self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
+      } 
     },
 
     #' @description Lithuania Specific County Level Data Cleaning
@@ -366,14 +364,6 @@ Lithuania <- R6::R6Class("Lithuania",
               )
           )
       }
-    },
-
-    #' @description Lithuania Specific Municipality Level Data Cleaning
-    #'
-    #' No data cleaning is necessary specific to the municipality level
-    #' since the data is already provided at the municipality level.
-    #'
-    clean_level_2 = function() {
     },
 
     #' @description Initialize the country

@@ -169,7 +169,6 @@ by OSP}
 \itemize{
 \item \href{#method-clean}{\code{Lithuania$clean()}}
 \item \href{#method-clean_level_1}{\code{Lithuania$clean_level_1()}}
-\item \href{#method-clean_level_2}{\code{Lithuania$clean_level_2()}}
 \item \href{#method-new}{\code{Lithuania$new()}}
 \item \href{#method-clone}{\code{Lithuania$clone()}}
 }
@@ -211,19 +210,6 @@ Aggregates data to the level 1 (county) regional level. Data is
 provided by the source at the level 2 (municipality) regional level.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Lithuania$clean_level_1()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_level_2"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
-\subsection{Method \code{clean_level_2()}}{
-Lithuania Specific Municipality Level Data Cleaning
-
-No data cleaning is necessary specific to the municipality level
-since the data is already provided at the municipality level.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Lithuania$clean_level_2()}\if{html}{\out{</div>}}
 }
 
 }
