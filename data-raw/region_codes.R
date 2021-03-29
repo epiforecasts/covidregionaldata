@@ -57,11 +57,30 @@ germany_codes <- tibble::tibble(
   )
 )
 
+# canada codes
+
+level_1_canada <- tibble::tibble(
+  level_1_region_code = c("CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL", "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE", "CA-QC", "CA-SK", "CA-YT"),
+  region_level_1 = c(
+    "Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador",
+    "Nova Scotia", "Northwest Territories", "Nunavut", "Ontario", "Prince Edward Island",
+    "Quebec", "Saskatchewan", "Yukon"
+    )
+  )
+canada_codes <- tibble::tibble(
+  country = "canada",
+  level = c("level_1_region"),
+  name = c("iso_3166_2"),
+  codes = list(
+    level_1_canada
+  )
+)
 
 # add additional regions in the same format and bind together
 region_codes <- purrr::reduce(
   list(
     global_codes, mexico_codes,
+    canada_codes,
     italy_codes, germany_codes
   ),
   dplyr::bind_rows
