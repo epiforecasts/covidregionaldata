@@ -20,8 +20,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom utils download.file
 #' @importFrom lifecycle deprecate_warn
-#' 
-
+#'
 get_interventions_data <- function() {
   deprecate_warn(
     when = "0.9.0",
@@ -40,9 +39,9 @@ get_interventions_data <- function() {
   data <- suppressWarnings(read_excel(file.path(temp, filename), 
                                       sheet = "Dataset", 
                                       col_types = "text")) %>%
-    mutate(ENTRY_DATE = as.Date((as.numeric(ENTRY_DATE) - 2), 
+    mutate(ENTRY_DATE = as.Date((as.numeric(.data$ENTRY_DATE) - 2), 
                                 origin = as.Date("1900-01-01")),
-           DATE_IMPLEMENTED = as.Date((as.numeric(DATE_IMPLEMENTED) - 2), 
+           DATE_IMPLEMENTED = as.Date((as.numeric(.data$DATE_IMPLEMENTED) - 2), 
                                       origin = as.Date("1900-01-01")))
   names(data) <- tolower(names(data))
   
