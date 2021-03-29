@@ -105,5 +105,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
                     .data$date_onset, .data$delay_onset_report)
   }
   
+  message("Note: This linelist covers January to June 2020. We will update when a new data source becomes available.")
+  
   return(linelist)
 }
