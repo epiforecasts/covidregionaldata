@@ -9,6 +9,7 @@ This update contains a substantial package refactor and as such introduces some 
 * Added a list return method so that data processing changes can be tracked.
 * Surfaced the underlying methods which may be of use for users.
 * Separated unit testing of package functionality from testing of data downloads.
+* `get_linelist` is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with `covidregionaldata`.
 
 # covidregionaldata 0.8.3
 
