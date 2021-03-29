@@ -9,6 +9,7 @@ This update contains a substantial package refactor and as such introduces some 
 * Added a list return method so that data processing changes can be tracked.
 * Surfaced the underlying methods which may be of use for users.
 * Separated unit testing of package functionality from testing of data downloads.
+* `get_interventions_data()` is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/
 
 # covidregionaldata 0.8.3
 
