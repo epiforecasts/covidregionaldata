@@ -28,24 +28,25 @@ France <- R6::R6Class("France",
     level_1_region = "region",
     #' @field level_2_region the level 1 region name.
     level_2_region = "departement",
-    #' @field data_url link to raw data for cases
-    data_url = "https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675", # nolint
+    # nolint start
+    #' @field data_url link to raw data for cases for level 1
+    data_url = "https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01", 
+    #' @field level_2_data_url link to raw data for cases for level 2
+    level_2_data_url = "https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675",
+    #' @field level_2_hosp_url link to raw data for hospitalisations for level 2
+    level_2_hosp_url = "https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c",
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "tested_new"),
-    #' @field hosp_url link to raw data for hospitalisations
-    hosp_url = "https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c", # nolint
-
 
     #' @description France-specific function for downloading raw data.
     download = function() {
-      if (self$level == 1) {
-        self$data_url <- "https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01" # nolint
-      }
       message_verbose(self$verbose, "Downloading data")
-      self$data$raw <- csv_reader(self$data_url, self$verbose)
-
-      if (self$level == 2) {
-        self$data$raw_hosp <- csv_reader(self$hosp_url, self$verbose)
+      if (self$level == 1) {
+        self$data$raw <- csv_reader(self$data_url, self$verbose)
+      } else { # self$level is 2
+        self$data$raw <- csv_reader(self$level_2_data_url, self$verbose)
+        self$data$raw_hosp <- csv_reader(self$level_2_hosp_url, self$verbose)
       }
     },
 

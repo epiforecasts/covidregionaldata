@@ -36,11 +36,13 @@ region$return()
 
 \item{\code{level_2_region}}{the level 1 region name.}
 
-\item{\code{data_url}}{link to raw data for cases}
+\item{\code{data_url}}{link to raw data for cases for level 1}
+
+\item{\code{level_2_data_url}}{link to raw data for cases for level 2}
+
+\item{\code{level_2_hosp_url}}{link to raw data for hospitalisations for level 2}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
-
-\item{\code{hosp_url}}{link to raw data for hospitalisations}
 }
 \if{html}{\out{</div>}}
 }
