@@ -19,6 +19,7 @@ SMG.md
 ^docs$
 ^doc$
 ^Meta$
+^CODE_OF_CONDUCT\.md$
 ^tests/testthat/\.cache$
 \.lintr$
 ^\.pre-commit-config\.yaml$
