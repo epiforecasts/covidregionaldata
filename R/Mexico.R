@@ -28,6 +28,31 @@ Mexico <- R6::R6Class("Mexico",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    #' @import from dplyr select
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      mexico_codes <- csv_reader("data-raw/mexico_codes.csv", self$verbose)
+      mexico_codes <- tibble(
+        country = "mexico",
+        level = c("level_1_region", "level_2_region"),
+        name = c("iso_3166_2", "inegi_code"),
+        codes = list(
+          select(mexico_codes, region_level_1, iso_code) %>%
+            unique(),
+          mexico_codes
+        )
+      )
+      self$region_codes <- mexico_codes
+    },
+
     #' @description Data download function for Mexico data. This replaces the
     #' generic download function in `DataClass`. To get the latest data
     #' use a PHP script from the website.

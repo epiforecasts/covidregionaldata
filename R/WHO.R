@@ -31,6 +31,25 @@ WHO <- R6::R6Class("WHO",
       "deaths_total"
     ),
 
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      who_codes <- tibble(
+        country = c("who"),
+        level = c("level_1_region"),
+        name = c("iso_code"),
+        codes = NULL
+      )
+      self$region_codes <- who_codes
+    },
+
     #' @description WHO specific country level data cleaning
     #' @importFrom dplyr mutate rename
     #' @importFrom countrycode countrycode

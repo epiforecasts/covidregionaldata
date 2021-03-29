@@ -25,6 +25,28 @@ Italy <- R6::R6Class("Italy",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total", "tested_total"),
 
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      italy_codes <- csv_reader("data-raw/italy_codes.csv", self$verbose)
+      italy_codes <- tibble(
+        country = "italy",
+        level = c("level_1_region"),
+        name = c("iso_3166_2"),
+        codes = list(
+          italy_codes
+        )
+      )
+      self$region_codes <- italy_codes
+    },
+
     #' @description Italy specific state level data cleaning
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms

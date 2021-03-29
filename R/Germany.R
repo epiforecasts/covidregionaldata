@@ -28,6 +28,46 @@ Germany <- R6::R6Class("Germany",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    #' @import from dplyr mutate
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      level_1_germany <- tibble(
+        level_1_region_code = c(
+          "DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH",
+          "DE-MV", "DE-NI", "DE-NW", "DE-RP", "DE-SH", "DE-SL", "DE-SN",
+          "DE-ST", "DE-TH"
+        ),
+        region_level_1 = c(
+          "Brandenburg", "Berlin", "Baden-W\u00FCrttemberg", "Bayern",
+          "Bremen", "Hessen", "Hamburg", "Mecklenburg-Vorpommern",
+          "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz",
+          "Schleswig-Holstein", "Saarland", "Sachsen", "Sachsen-Anhalt",
+          "Th\u00FCringen"
+        )
+      )
+      germany_codes <- tibble(
+        country = "germany",
+        level = c("level_1_region", "level_2_region"),
+        name = c("iso_3166_2", "code"),
+        codes = list(
+          level_1_germany,
+          mutate(
+            level_1_germany,
+            level_2_region_code = NA,
+          )
+        )
+      )
+      self$region_codes <- germany_codes
+    },
+
     #' @description directs to either level 1 or level 2 processing based on
     #' request.
     #' @importFrom dplyr select mutate
