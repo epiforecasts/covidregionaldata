@@ -1,7 +1,6 @@
 # mexico region codes
 mexico_codes <- vroom::vroom("data-raw/mexico_codes.csv")
 mexico_codes <- tibble::tibble(
-  country = "mexico",
   level = c("level_1_region", "level_2_region"),
   name = c("iso_3166_2", "inegi_code"),
   codes = list(

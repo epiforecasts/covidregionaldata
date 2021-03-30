@@ -35,7 +35,9 @@ Italy <- R6::R6Class("Italy",
           self$country
         )
       )
-      self$region_codes <- covidregionaldata::italy_codes
+      region_data <- covidregionaldata::italy_codes
+      self$region_codes <- by(region_data, region_data$level, function(x) x)
+      self$code_name <- unique(region_data$name)
     },
 
     #' @description Italy specific state level data cleaning
@@ -61,7 +63,7 @@ Italy <- R6::R6Class("Italy",
         group_by(.data$date, .data$region_level_1) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
-        full_join(self$data$codes_lookup,
+        full_join(self$region_codes[["level_1_region"]],
           by = c("region_level_1" = "region")
         ) %>%
         select(.data$date, .data$region_level_1,

@@ -72,7 +72,7 @@ general_init <- function(self, level = "1",
   self$verbose <- verbose
   self$steps <- steps
   self$country <- tolower(class(self)[1])
-  self$get_region_codes()
+  self$set_region_codes()
 }
 
 #' R6 Class containing non-country specific methods
@@ -103,38 +103,13 @@ DataClass <- R6::R6Class(
     #' @field steps Boolean. Keep data from each processing step.
     steps = NULL,
     #' @field region_codes string or tibble Region codes for the target country
-    region_codes = NULL,
+    region_codes = list(),
+    #' @field code_name
+    code_name = NULL,
 
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
-    },
-
-    #' @description General function for getting region codes for given region.
-    #' @rdname get_region_codes
-    #' @importFrom rlang .data
-    get_region_codes = function() {
-      tar_level <- paste0("level_", self$level, "_region")
-      tar_level_name <- self[[tar_level]]
-      self$data <- list(country = self$country, level = tar_level_name)
-      message_verbose(
-        self$verbose, "Processing data for ",
-        self$country, " by ", tar_level_name
-      )
-      code_name <- self$set_region_codes()
-      if (is.null(self$region_codes)) {
-        self$data$code <- code_name
-      } else {
-        codes <- self$region_codes %>%
-          filter(
-            .data$country %in% self$country,
-            .data$level %in% tar_level
-          )
-        if (nrow(codes) == 1) {
-          self$data$code <- codes$name[[1]]
-          self$data$codes_lookup <- codes$codes[[1]]
-        }
-      }
     },
 
     #' @description General function for downloading raw data.
@@ -161,8 +136,9 @@ DataClass <- R6::R6Class(
           "region_level_1", "level_1_region_code"
         )
       )
-      self$data <- process_internal(
-        self$data,
+      tar_level <- paste0("level_", self$level, "_region")
+      self$data$processed <- process_internal(
+        self$data$clean, tar_level, self$code_name,
         group_vars = region_vars, totals = self$totals,
         localise = self$localise, verbose = self$verbose
       )

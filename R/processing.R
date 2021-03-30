@@ -186,12 +186,13 @@ totalise_data <- function(data) {
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !! :=
-process_internal <- function(region, group_vars, totals = FALSE,
-                             localise = TRUE, verbose = TRUE) {
-  if (!any(class(region$clean) %in% "data.frame")) {
+process_internal <- function(clean_data, level, code, group_vars,
+                             totals = FALSE, localise = TRUE,
+                             verbose = TRUE) {
+  if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
-  dat <- group_by_at(region$clean, .vars = group_vars)
+  dat <- group_by_at(clean_data, .vars = group_vars)
 
   . <- NULL
   dat <- dat %>%
@@ -226,10 +227,9 @@ process_internal <- function(region, group_vars, totals = FALSE,
   dat <- ungroup(dat)
 
   if (localise) {
-    dat <- rename(dat, !!region$level := !!group_vars[1])
+    dat <- rename(dat, !!level := !!group_vars[1])
   }
-  dat <- rename(dat, !!region$code := !!group_vars[2])
+  dat <- rename(dat, !!code := !!group_vars[2])
 
-  region$processed <- dat
-  return(region)
+  return(dat)
 }
