@@ -114,20 +114,24 @@ DataClass <- R6::R6Class(
     get_region_codes = function() {
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
+      self$data <- list(country = self$country, level = tar_level_name)
       message_verbose(
         self$verbose, "Processing data for ",
         self$country, " by ", tar_level_name
       )
-      codes <- self$region_codes %>%
-        filter(
-          .data$country %in% self$country,
-          .data$level %in% tar_level
-        )
-      self$data <- list(country = self$country, level = tar_level_name)
-
-      if (nrow(codes) == 1) {
-        self$data$code <- codes$name[[1]]
-        self$data$codes_lookup <- codes$codes[[1]]
+      self$set_region_codes()
+      if (is.null(self$region_codes)) {
+        self$data$code <- "iso_code"
+      } else {
+        codes <- self$region_codes %>%
+          filter(
+            .data$country %in% self$country,
+            .data$level %in% tar_level
+          )
+        if (nrow(codes) == 1) {
+          self$data$code <- codes$name[[1]]
+          self$data$codes_lookup <- codes$codes[[1]]
+        }
       }
     },
 
