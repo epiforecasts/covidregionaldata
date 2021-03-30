@@ -71,15 +71,11 @@ UK <- R6::R6Class("UK", # rename to country name
       self$data$raw <- map(self$query_filters, self$download_uk)
 
       if (self$level == "1") {
-        self$data$raw <- bind_rows(
-          self$data$raw$nation, self$data$raw$region
-        )
         # get NHS data if requested
         if (self$nhsregions) {
           self$download_nhs_regions()
         }
       } else if (self$level == "2") {
-        self$data$raw <- self$data$raw[[1]]
         self$download_authority_data()
       }
     },
@@ -100,7 +96,10 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
     clean_level_1 = function() {
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- bind_rows(
+        self$data$raw$nation, self$data$raw$region
+      )
+      self$data$clean <- self$data$clean %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths by specimen date and date of death
@@ -141,7 +140,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$get_authority_lookup_table()
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[[1]] %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths are by publish date for Scotland, Wales;
