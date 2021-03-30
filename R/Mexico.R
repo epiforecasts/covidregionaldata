@@ -30,7 +30,7 @@ Mexico <- R6::R6Class("Mexico",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
-    #' @import from dplyr select
+    #' @importFrom dplyr select
     set_region_codes = function() {
       message_verbose(
         self$verbose,

@@ -41,6 +41,7 @@ region$return()
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-set_region_codes}{\code{Mexico$set_region_codes()}}
 \item \href{#method-download}{\code{Mexico$download()}}
 \item \href{#method-clean}{\code{Mexico$clean()}}
 \item \href{#method-clean_level_1}{\code{Mexico$clean_level_1()}}
@@ -57,6 +58,16 @@ region$return()
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Set up a table of region codes for clean data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$set_region_codes()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-download"></a>}}

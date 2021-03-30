@@ -30,12 +30,15 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
+
+\item{\code{region_codes}}{string or tibble Region codes for the target country}
 }
 \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
 \item \href{#method-get_region_codes}{\code{DataClass$get_region_codes()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
@@ -43,6 +46,17 @@ up to today's date.}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Place holder for custom country specific function to load
+region codes.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$set_region_codes()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_region_codes"></a>}}

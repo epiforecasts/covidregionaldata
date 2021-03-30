@@ -57,8 +57,6 @@ Uk$new(
 
 \item{\code{query_filters}}{Set what filters to use to query the data}
 
-\item{\code{authority_lookup_table}}{Get table of authority structures}
-
 \item{\code{nhsregions}}{Whether to include NHS regions in the data}
 
 \item{\code{release_date}}{The release date for the data}
@@ -76,7 +74,7 @@ Uk$new(
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-get_region_codes}{\code{UK$get_region_codes()}}
+\item \href{#method-set_region_codes}{\code{UK$set_region_codes()}}
 \item \href{#method-download}{\code{UK$download()}}
 \item \href{#method-clean}{\code{UK$clean()}}
 \item \href{#method-clean_level_1}{\code{UK$clean_level_1()}}
@@ -87,25 +85,24 @@ Uk$new(
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
 \item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
-\item \href{#method-download_authority_data}{\code{UK$download_authority_data()}}
-\item \href{#method-get_authority_lookup_table}{\code{UK$get_authority_lookup_table()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_region_codes"></a>}}
-\if{latex}{\out{\hypertarget{method-get_region_codes}{}}}
-\subsection{Method \code{get_region_codes()}}{
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
 Specific function for getting region codes for UK .
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$get_region_codes()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$set_region_codes()}\if{html}{\out{</div>}}
 }
 
 }
@@ -293,26 +290,6 @@ Section 2, "2. Estimated new hospital cases"
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download_authority_data"></a>}}
-\if{latex}{\out{\hypertarget{method-download_authority_data}{}}}
-\subsection{Method \code{download_authority_data()}}{
-Download lookup table for UK authorities
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$download_authority_data()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_authority_lookup_table"></a>}}
-\if{latex}{\out{\hypertarget{method-get_authority_lookup_table}{}}}
-\subsection{Method \code{get_authority_lookup_table()}}{
-Get lookup table for UK authorities
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$get_authority_lookup_table()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

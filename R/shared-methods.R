@@ -102,9 +102,11 @@ DataClass <- R6::R6Class(
     verbose = NULL,
     #' @field steps Boolean. Keep data from each processing step.
     steps = NULL,
-    #' @field region_codes string or tible Region codes for the target country
+    #' @field region_codes string or tibble Region codes for the target country
     region_codes = NULL,
 
+    #' @description Place holder for custom country specific function to load
+    #' region codes.
     set_region_codes = function() {
     },
 

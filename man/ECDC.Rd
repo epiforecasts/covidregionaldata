@@ -41,6 +41,7 @@ national$return()
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-set_region_codes}{\code{ECDC$set_region_codes()}}
 \item \href{#method-clean}{\code{ECDC$clean()}}
 \item \href{#method-return}{\code{ECDC$return()}}
 \item \href{#method-new}{\code{ECDC$new()}}
@@ -55,6 +56,16 @@ national$return()
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Specific function for getting country codes for ECDC .
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ECDC$set_region_codes()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean"></a>}}
