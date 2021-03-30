@@ -28,6 +28,11 @@ ECDC <- R6::R6Class("ECDC",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
+    #' @description Specific function for getting country codes for ECDC .
+    set_region_codes = function() {
+      return("iso_code")
+    },
+
     #' @description ECDC specific state level data cleaning
     #' @importFrom dplyr mutate rename select arrange filter
     #' @importFrom stringr str_replace_all

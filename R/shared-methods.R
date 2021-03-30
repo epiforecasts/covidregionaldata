@@ -119,9 +119,9 @@ DataClass <- R6::R6Class(
         self$verbose, "Processing data for ",
         self$country, " by ", tar_level_name
       )
-      self$set_region_codes()
+      code_name <- self$set_region_codes()
       if (is.null(self$region_codes)) {
-        self$data$code <- "iso_code"
+        self$data$code <- code_name
       } else {
         codes <- self$region_codes %>%
           filter(

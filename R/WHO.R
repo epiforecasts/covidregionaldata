@@ -31,6 +31,11 @@ WHO <- R6::R6Class("WHO",
       "deaths_total"
     ),
 
+    #' @description Specific function for getting country codes for WHO .
+    set_region_codes = function() {
+      return("iso_code")
+    },
+
     #' @description WHO specific country level data cleaning
     #' @importFrom dplyr mutate rename
     #' @importFrom countrycode countrycode
