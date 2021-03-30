@@ -112,22 +112,20 @@ DataClass <- R6::R6Class(
     #' @rdname get_region_codes
     #' @importFrom rlang .data
     get_region_codes = function() {
-      self$set_region_codes()
       tar_level <- paste0("level_", self$level, "_region")
       tar_level_name <- self[[tar_level]]
       message_verbose(
         self$verbose, "Processing data for ",
         self$country, " by ", tar_level_name
       )
+      codes <- self$region_codes %>%
+        filter(
+          .data$country %in% self$country,
+          .data$level %in% tar_level
+        )
       self$data <- list(country = self$country, level = tar_level_name)
-      if (is.null(self$region_codes)) {
-        stop("Region codes have not been set for this data")
-      } else {
-        codes <- self$region_codes %>%
-          filter(
-            .data$country %in% self$country,
-            .data$level %in% tar_level
-          )
+
+      if (nrow(codes) == 1) {
         self$data$code <- codes$name[[1]]
         self$data$codes_lookup <- codes$codes[[1]]
       }

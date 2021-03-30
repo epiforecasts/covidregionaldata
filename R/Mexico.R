@@ -39,18 +39,7 @@ Mexico <- R6::R6Class("Mexico",
           self$country
         )
       )
-      mexico_codes <- csv_reader("data-raw/mexico_codes.csv", self$verbose)
-      mexico_codes <- tibble(
-        country = "mexico",
-        level = c("level_1_region", "level_2_region"),
-        name = c("iso_3166_2", "inegi_code"),
-        codes = list(
-          select(mexico_codes, region_level_1, iso_code) %>%
-            unique(),
-          mexico_codes
-        )
-      )
-      self$region_codes <- mexico_codes
+      self$region_codes <- covidregionaldata::mexico_codes
     },
 
     #' @description Data download function for Mexico data. This replaces the

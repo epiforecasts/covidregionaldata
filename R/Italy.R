@@ -35,16 +35,7 @@ Italy <- R6::R6Class("Italy",
           self$country
         )
       )
-      italy_codes <- csv_reader("data-raw/italy_codes.csv", self$verbose)
-      italy_codes <- tibble(
-        country = "italy",
-        level = c("level_1_region"),
-        name = c("iso_3166_2"),
-        codes = list(
-          italy_codes
-        )
-      )
-      self$region_codes <- italy_codes
+      self$region_codes <- covidregionaldata::italy_codes
     },
 
     #' @description Italy specific state level data cleaning
