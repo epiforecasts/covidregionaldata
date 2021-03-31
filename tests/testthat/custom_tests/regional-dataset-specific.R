@@ -41,14 +41,14 @@ test_UK_level_1 <- function(region) {
   if (download) {
     test_that(paste(data_name, " downloads sucessfully"), { # nolint
       region$download()
-      expect_s3_class(region$data$nhs_raw, "data.frame")
-      expect_true(nrow(region$data$nhs_raw) > 0)
-      expect_true(ncol(region$data$nhs_raw) >= 2)
+      expect_s3_class(region$data$raw$nhs, "data.frame")
+      expect_true(nrow(region$data$raw$nhs) > 0)
+      expect_true(ncol(region$data$raw$nhs) >= 2)
     })
-    region$nhs_raw <- dplyr::slice_tail(region$data$nhs_raw, n = 1000)
-    saveRDS(region$data$nhs_raw, nhs_included_path)
+    region$nhs_raw <- dplyr::slice_tail(region$data$raw$nhs, n = 1000)
+    saveRDS(region$data$raw$nhs, nhs_included_path)
   } else {
-    region$data$nhs_raw <- readRDS(nhs_included_path)
+    region$data$raw$nhs <- readRDS(nhs_included_path)
   }
   test_that(paste(data_name, "can be cleaned as expected"), {
     region$clean()

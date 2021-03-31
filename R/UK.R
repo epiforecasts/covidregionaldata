@@ -73,7 +73,7 @@ UK <- R6::R6Class("UK", # rename to country name
       if (self$level == "1") {
         # get NHS data if requested
         if (self$nhsregions) {
-          self$data$nhs_raw <- self$download_nhs_regions()
+          self$data$raw$nhs <- self$download_nhs_regions()
         }
       } else if (self$level == "2") {
         self$download_authority_data()
@@ -131,7 +131,7 @@ UK <- R6::R6Class("UK", # rename to country name
       if (self$nhsregions) {
         self$data$clean <- self$add_nhs_regions(
           self$data$clean,
-          self$data$nhs_raw
+          self$data$raw$nhs
         )
       }
     },
@@ -359,7 +359,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' readmissions. This is available for England + English regions only.
     #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
     #'     Section 2, "2. Estimated new hospital cases"
-    #' @return nhs_raw data.frame of nhs regions
+    #' @return nhs data.frame of nhs regions
     #' @source https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
     #' @importFrom lubridate year month
     #' @importFrom readxl read_excel cell_limits
@@ -396,14 +396,14 @@ UK <- R6::R6Class("UK", # rename to country name
         destfile = tmp,
         mode = "wb", quiet = !(self$verbose)
       )
-      nhs_raw <- suppressMessages(
+      nhs <- suppressMessages(
         read_excel(tmp,
           sheet = 1,
           range = cell_limits(c(28, 2), c(36, NA))
         ) %>%
           t()
       )
-      return(as.data.frame(nhs_raw))
+      return(as.data.frame(nhs))
     },
 
     #' @description Add NHS data for level 1 regions
