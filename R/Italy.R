@@ -32,7 +32,7 @@ Italy <- R6::R6Class("Italy",
     #'
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw[[1]] %>%
+      self$data$clean <- self$data$raw[["raw"]] %>%
         mutate(
           date = suppressWarnings(as_date(ymd_hms(.data$data))),
           region_level_1 = as.character(.data$denominazione_regione),

@@ -129,7 +129,7 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
-      self$data$raw <- list(csv_reader(self$data_url, self$verbose))
+      self$data$raw <- list("raw" = csv_reader(self$data_url, self$verbose))
     },
 
     #' @description General cleaning function

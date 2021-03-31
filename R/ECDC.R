@@ -36,7 +36,7 @@ ECDC <- R6::R6Class("ECDC",
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
       long_string <- "Cases_on_an_international_conveyance_Japan"
-      self$data$clean <- self$data$raw[[1]] %>%
+      self$data$clean <- self$data$raw[["raw"]] %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
         rename(
           iso_code = .data$geoId, country = .data$countriesAndTerritories,
