@@ -5,7 +5,9 @@
 \title{Internal Shared Regional Dataset Processing}
 \usage{
 process_internal(
-  region,
+  clean_data,
+  level,
+  code,
   group_vars,
   totals = FALSE,
   localise = TRUE,
@@ -13,7 +15,9 @@ process_internal(
 )
 }
 \arguments{
-\item{region}{A given Country class object to process, e.g. \code{Italy()}}
+\item{clean_data}{The clean data for a country, e.g. \code{Italy$data$clean}}
+
+\item{level}{The level of the data, e.g. 'level_1_region'}
 
 \item{group_vars}{A character vector of grouping variables. It is assumed
 that the first entry indicates the main region variable and the second

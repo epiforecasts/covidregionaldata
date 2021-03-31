@@ -104,7 +104,7 @@ DataClass <- R6::R6Class(
     steps = NULL,
     #' @field region_codes string or tibble Region codes for the target country
     region_codes = list(),
-    #' @field code_name
+    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
     code_name = NULL,
 
     #' @description Place holder for custom country specific function to load
