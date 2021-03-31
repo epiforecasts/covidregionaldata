@@ -20,7 +20,8 @@ Italy <- R6::R6Class("Italy",
     # Core Attributes
     #' @field level_1_region the level 1 region name.
     level_1_region = "regioni",
-    #' @field data_url link to raw data
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
     data_url = list(
       "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv" # nolint
     ),

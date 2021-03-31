@@ -23,7 +23,8 @@ Mexico <- R6::R6Class("Mexico",
     level_1_region = "estados",
     #' @field level_2_region the level 2 region name.
     level_2_region = "municipios",
-    #' @field data_url link to raw data
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
     data_url = list(
       "main" = "https://datos.covid-19.conacyt.mx/",
       "1" = "Downloads/filesDD.php?csvmun",

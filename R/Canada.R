@@ -23,7 +23,8 @@ Canada <- R6::R6Class("Canada",
     #' @field level_1_region the level 1 region name.
     level_1_region = "level_1_region", # for brevity - refers to
     # provinces and territories
-    #' @field data_url link to raw data
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
     data_url = list(
       "main" = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv" # nolint
     ),

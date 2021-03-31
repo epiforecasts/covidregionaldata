@@ -26,7 +26,8 @@ UK <- R6::R6Class("UK", # rename to country name
     level_1_region = "region", # add more levels as needed
     #' @field level_2_region the level 2 region name
     level_2_region = "authority",
-    #' @field data_url link to raw data
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
     data_url = list(
       "main" = "https://api.coronavirus.data.gov.uk/v2/data",
       "nhs_base_url" = "https://www.england.nhs.uk/statistics"

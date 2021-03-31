@@ -89,7 +89,8 @@ DataClass <- R6::R6Class(
     country = "",
     #' @field data data frame for requested region
     data = NULL,
-    #' @field data_url link to raw data
+    #' @field data_url List of named links to raw data. The first, and
+    #' sometimes only entry, should be named main
     data_url = list(),
     #' @field level target region level
     level = NULL,
@@ -128,9 +129,10 @@ DataClass <- R6::R6Class(
     },
 
     #' @description General function for downloading raw data.
+    #' @importFrom purrr map
     download = function() {
-      self$data$raw <- list(
-        "main" = csv_reader(self$data_url[["main"]], self$verbose)
+      self$data$raw <- map(self$data_url, csv_reader,
+        verbose = self$verbose
       )
     },
 

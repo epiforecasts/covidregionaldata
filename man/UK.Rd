@@ -51,7 +51,8 @@ Uk$new(
 
 \item{\code{level_2_region}}{the level 2 region name}
 
-\item{\code{data_url}}{link to raw data}
+\item{\code{data_url}}{List of named links to raw data. The first, and
+only entry, is be named main.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
@@ -267,7 +268,7 @@ Section 2, "2. Estimated new hospital cases"
 }
 
 \subsection{Returns}{
-nhs_raw data.frame of nhs regions
+nhs data.frame of nhs regions
 }
 }
 \if{html}{\out{<hr>}}
