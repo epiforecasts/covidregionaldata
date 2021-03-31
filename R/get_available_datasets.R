@@ -23,6 +23,10 @@ get_available_datasets <- function() {
       country_obj <- get(x)
       if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
         public_fields <- get(x)$public_fields
+        public_fields$data_url <- paste(
+          unlist(public_fields$data_url),
+          collapse = " "
+        )
         public_fields$source_data_cols <- paste(
           unlist(public_fields$source_data_cols),
           collapse = " "

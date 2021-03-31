@@ -90,7 +90,7 @@ DataClass <- R6::R6Class(
     #' @field data data frame for requested region
     data = NULL,
     #' @field data_url link to raw data
-    data_url = "",
+    data_url = list(),
     #' @field level target region level
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
@@ -129,7 +129,7 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
-      self$data$raw <- csv_reader(self$data_url, self$verbose)
+      self$data$raw <- csv_reader(self$data_url[["main"]], self$verbose)
     },
 
     #' @description General cleaning function

@@ -21,7 +21,9 @@ Italy <- R6::R6Class("Italy",
     #' @field level_1_region the level 1 region name.
     level_1_region = "regioni",
     #' @field data_url link to raw data
-    data_url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv", # nolint
+    data_url = list(
+      "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total", "tested_total"),
 

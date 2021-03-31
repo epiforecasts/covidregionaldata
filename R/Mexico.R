@@ -24,7 +24,11 @@ Mexico <- R6::R6Class("Mexico",
     #' @field level_2_region the level 2 region name.
     level_2_region = "municipios",
     #' @field data_url link to raw data
-    data_url = "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    data_url = list(
+      "main" = "https://datos.covid-19.conacyt.mx/",
+      "1" = "Downloads/filesDD.php?csvmun",
+      "2" = "Downloads/filesDD.php?csvaxd"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -39,13 +43,10 @@ Mexico <- R6::R6Class("Mexico",
     #'
     download = function() {
       . <- NULL
-      if (self$level == "2") {
-        path <- "Downloads/filesDD.php?csvmun"
-      } else {
-        path <- "Downloads/filesDD.php?csvaxd"
-      }
-      domain <- "https://datos.covid-19.conacyt.mx/"
-      script_url <- file.path(domain, path)
+      script_url <- file.path(
+        self$data_url[["main"]],
+        self$data_url[[self$level]]
+      )
 
       confirmed_url <- script_url %>%
         POST(body = "Confirmados", encode = "form", verbose = TRUE) %>%
@@ -67,7 +68,10 @@ Mexico <- R6::R6Class("Mexico",
 
       read_data <- function(target, new_name) {
         message_verbose(self$verbose, "Downloading ", new_name)
-        dat <- csv_reader(file.path(domain, target), self$verbose)
+        dat <- csv_reader(
+          file.path(self$data_url[["main"]], target),
+          self$verbose
+        )
 
         dat <- dat %>%
           select(-.data$poblacion) %>%
