@@ -78,7 +78,8 @@ Mexico <- R6::R6Class("Mexico",
 
       confirmed <- read_data(confirmed_url, "cases_new")
       deceased <- read_data(deceased_url, "deaths_new")
-      self$data$raw <- full_join(confirmed, deceased,
+      self$data$raw <- list("confirmed" = confirmed, "deceased" = deceased)
+      self$data$raw$confirmed_diseased <- full_join(confirmed, deceased,
         by = c("cve_ent", "nombre", "date")
       )
     },
@@ -104,7 +105,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_1 = function() {
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw$confirmed_diseased %>%
         mutate(
           region_level_1 = str_to_title(.data$nombre),
           region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
@@ -126,7 +127,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_2 = function() {
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw$confirmed_diseased %>%
         mutate(
           region_level_2 = .data$nombre,
           inegi_state = substr(.data$cve_ent, 1, 2),
