@@ -39,7 +39,6 @@ up to today's date.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
-\item \href{#method-get_region_codes}{\code{DataClass$get_region_codes()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
@@ -55,16 +54,6 @@ Place holder for custom country specific function to load
 region codes.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$set_region_codes()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_region_codes"></a>}}
-\if{latex}{\out{\hypertarget{method-get_region_codes}{}}}
-\subsection{Method \code{get_region_codes()}}{
-General function for getting region codes for given region.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$get_region_codes()}\if{html}{\out{</div>}}
 }
 
 }

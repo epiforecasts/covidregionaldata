@@ -5,7 +5,7 @@
 \alias{italy_codes}
 \title{Region Codes for Italy Dataset.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 20 rows and 4 columns.
 }
 \usage{
 italy_codes

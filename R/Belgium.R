@@ -73,8 +73,9 @@ Belgium <- R6::R6Class("Belgium",
         )
       )
       self$region_codes <- belgium_codes
+      self$code_name <- "iso_3166_2"
     },
-    
+
     #' @description Belgium-specific function for downloading raw data.
     download = function() {
       message_verbose(self$verbose, "Downloading data")
@@ -100,9 +101,11 @@ Belgium <- R6::R6Class("Belgium",
     },
 
     #' @description Belgium Specific Region Level Data Cleaning
-    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
+    # nolint start
+    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename 
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate ymd
+    # nolint end
     clean_level_1 = function() {
       cases_data <- self$data$raw %>%
         select(DATE, REGION, CASES) %>%
@@ -114,7 +117,7 @@ Belgium <- R6::R6Class("Belgium",
         group_by(DATE, REGION) %>%
         tally(CASES) %>%
         ungroup()
-      
+
       hosp_data <- self$data$raw_hosp %>%
         select(DATE, REGION, NEW_IN) %>%
         mutate(
@@ -125,7 +128,7 @@ Belgium <- R6::R6Class("Belgium",
         group_by(DATE, REGION) %>%
         tally(wt = NEW_IN) %>%
         ungroup()
-      
+
       deaths_data <- self$data$raw_deaths %>%
         select(DATE, REGION, DEATHS) %>%
         mutate(
@@ -136,26 +139,29 @@ Belgium <- R6::R6Class("Belgium",
         group_by(DATE, REGION) %>%
         tally(wt = DEATHS) %>%
         ungroup()
-      
+
       # Join the three datasets and rename columns
       cases_and_hosp_data <- full_join(cases_data,
                                        hosp_data,
-                                       by = c("DATE" = "DATE",
-                                              "REGION" = "REGION"))
-      
-      self$data$clean <- full_join(cases_and_hosp_data,
+                                       by = c("DATE", "REGION"))
+
+      all_data <- full_join(cases_and_hosp_data,
                                    deaths_data,
-                                   by = c("DATE" = "DATE",
-                                          "REGION" = "REGION")) %>%
+                                   by = c("DATE", "REGION")) %>%
         rename(date = DATE, region_level_1 = REGION,
-               cases_new = n.x, hosp_new = n.y, deaths_new = n) %>%
-        left_join(self$data$codes_lookup, by = c("region_level_1"))
+               cases_new = n.x, hosp_new = n.y, deaths_new = n)
+      self$data$clean <-
+        left_join(all_data, self$region_codes$codes[1],
+                  by = c("region_level_1"),
+                  copy = TRUE)
     },
 
     #' @description Belgium Specific Province Level Data Cleaning
+    # nolint start
     #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate ymd
+    # nolint end
     #'
     clean_level_2 = function() {
       cases_data <- self$data$raw %>%
@@ -171,7 +177,7 @@ Belgium <- R6::R6Class("Belgium",
         group_by(DATE, PROVINCE, REGION) %>%
         tally(CASES) %>%
         ungroup()
-      
+
       hosp_data <- self$data$raw_hosp %>%
         select(DATE, REGION, PROVINCE, NEW_IN) %>%
         mutate(
@@ -185,19 +191,19 @@ Belgium <- R6::R6Class("Belgium",
         group_by(DATE, PROVINCE, REGION) %>%
         tally(wt = NEW_IN) %>%
         ungroup()
-      
+
       # Join the two datasets and rename columns
       self$data$clean <- full_join(cases_data, hosp_data,
-                                   by = c("DATE" = "DATE",
-                                          "PROVINCE" = "PROVINCE",
-                                          "REGION" = "REGION")) %>%
+                                   by = c("DATE",
+                                          "PROVINCE",
+                                          "REGION")) %>%
         rename(date = DATE,
                region_level_1 = REGION,
                region_level_2 = PROVINCE,
                cases_new = n.x,
                hosp_new = n.y) %>%
-        left_join(self$data$codes_lookup,
-                  by = c("region_level_2"))
+        left_join(self$region_codes$codes[2],
+                  by = c("region_level_2"), copy = TRUE)
     },
 
     #' @description Initialize the country

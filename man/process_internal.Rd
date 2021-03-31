@@ -5,7 +5,9 @@
 \title{Internal Shared Regional Dataset Processing}
 \usage{
 process_internal(
-  region,
+  clean_data,
+  level,
+  code,
   group_vars,
   totals = FALSE,
   localise = TRUE,
@@ -13,8 +15,6 @@ process_internal(
 )
 }
 \arguments{
-\item{region}{A given Country class object to process, e.g. \code{Italy()}}
-
 \item{group_vars}{A character vector of grouping variables. It is assumed
 that the first entry indicates the main region variable and the second
 indicates the code for this variable.}
@@ -28,6 +28,8 @@ localised.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{region}{A given Country class object to process, e.g. \code{Italy()}}
 }
 \description{
 Internal shared regional data cleaning designed to be called
