@@ -65,8 +65,6 @@ Uk$new(
 
 \item{\code{resolution}}{The resolution of the data to return}
 
-\item{\code{nhs_raw}}{Raw NHS region data}
-
 \item{\code{authority_data}}{The raw data for creating authority lookup tables}
 
 \item{\code{nhs_base_url}}{Base url for nhs region data}
@@ -270,6 +268,9 @@ Section 2, "2. Estimated new hospital cases"
 \if{html}{\out{<div class="r">}}\preformatted{UK$download_nhs_regions()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+nhs_raw data.frame of nhs regions
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-add_nhs_regions"></a>}}

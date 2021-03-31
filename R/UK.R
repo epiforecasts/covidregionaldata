@@ -73,7 +73,7 @@ UK <- R6::R6Class("UK", # rename to country name
       if (self$level == "1") {
         # get NHS data if requested
         if (self$nhsregions) {
-          self$download_nhs_regions()
+          self$data$nhs_raw <- self$download_nhs_regions()
         }
       } else if (self$level == "2") {
         self$download_authority_data()
@@ -129,7 +129,10 @@ UK <- R6::R6Class("UK", # rename to country name
       }
       # get NHS data if requested
       if (self$nhsregions) {
-        self$data$clean <- self$add_nhs_regions(self$data$clean, self$nhs_raw)
+        self$data$clean <- self$add_nhs_regions(
+          self$data$clean,
+          self$data$nhs_raw
+        )
       }
     },
 
@@ -277,8 +280,6 @@ UK <- R6::R6Class("UK", # rename to country name
     release_date = NA,
     #' @field resolution The resolution of the data to return
     resolution = "utla",
-    #' @field nhs_raw Raw NHS region data
-    nhs_raw = NA,
     #' @field authority_data The raw data for creating authority lookup tables
     authority_data = NA,
     #' @field nhs_base_url Base url for nhs region data
@@ -358,6 +359,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' readmissions. This is available for England + English regions only.
     #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
     #'     Section 2, "2. Estimated new hospital cases"
+    #' @return nhs_raw data.frame of nhs regions
     #' @source https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
     #' @importFrom lubridate year month
     #' @importFrom readxl read_excel cell_limits
@@ -394,14 +396,14 @@ UK <- R6::R6Class("UK", # rename to country name
         destfile = tmp,
         mode = "wb", quiet = !(self$verbose)
       )
-      self$nhs_raw <- suppressMessages(
+      nhs_raw <- suppressMessages(
         read_excel(tmp,
           sheet = 1,
           range = cell_limits(c(28, 2), c(36, NA))
         ) %>%
           t()
       )
-      self$nhs_raw <- as.data.frame(self$nhs_raw)
+      return(as.data.frame(nhs_raw))
     },
 
     #' @description Add NHS data for level 1 regions
