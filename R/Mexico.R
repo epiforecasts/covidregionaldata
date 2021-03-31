@@ -129,10 +129,13 @@ Mexico <- R6::R6Class("Mexico",
           ),
           date = dmy(.data$date)
         ) %>%
-        full_join(self$data$codes_lookup, by = "region_level_1") %>%
+        left_join(self$region_codes[["level_1_region"]],
+                  by = c("cve_ent" = "inegi_state",
+                         "region_level_1")) %>%
         filter(.data$region_level_1 != "Nacional") %>%
         rename(level_1_region_code = .data$iso_code) %>%
-        select(-c(.data$nombre, .data$cve_ent))
+        select(date, region_level_1, level_1_region_code,
+               cases_new, deaths_new)
     },
 
     #' @description Mexico Specific Municipality Level Data Cleaning
