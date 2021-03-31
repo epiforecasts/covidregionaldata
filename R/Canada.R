@@ -41,28 +41,22 @@ Canada <- R6::R6Class("Canada",
           self$country
         )
       )
-      level_1_canada <- tibble::tibble(
-        level_1_region_code = c(
+      canada_codes <- tibble(
+        code = c(
           "CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL",
           "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE",
           "CA-QC", "CA-SK", "CA-YT"
         ),
-        region_level_1 = c(
+        region = c(
           "Alberta", "British Columbia", "Manitoba", "New Brunswick",
           "Newfoundland and Labrador", "Nova Scotia", "Northwest Territories",
           "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
           "Saskatchewan", "Yukon"
         )
       )
-      canada_codes <- tibble::tibble(
-        country = "canada",
-        level = c("level_1_region"),
-        name = c("iso_3166_2"),
-        codes = list(
-          level_1_canada
-        )
-      )
-      self$region_codes <- canada_codes
+      canada_codes$level <- "1"
+      self$code_name <- "iso_3166_2"
+      self$region_codes <- list("1" = canada_codes)
     },
 
     #' @description *Canada* specific provincial/territorial level data
@@ -108,9 +102,13 @@ Canada <- R6::R6Class("Canada",
           recovered_total = numrecover,
           tested_total = numtested
         ) %>%
-        full_join(self$data$codes_lookup,
-          by = c("region_level_1")
+        full_join(self$region_codes[[self$level]],
+          by = c("region_level_1" = "region")
         ) %>%
+        rename(
+          level_1_region_code = code
+        ) %>%
+        select(-level) %>%
         replace_na(list(
           deaths_total = 0, cases_total = 0,
           recovered_total = 0, tested_total = 0
