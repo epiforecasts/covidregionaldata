@@ -46,8 +46,13 @@ Italy <- R6::R6Class("Italy",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
         group_by(.data$date, .data$region_level_1) %>%
-        mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
-        ungroup() %>%
+        summarise(cases_total = sum(.data$cases_total, na.rm = TRUE),
+                  deaths_total = sum(.data$deaths_total, na.rm = TRUE),
+                  tested_total = sum(.data$tested_total, na.rm = TRUE),
+                  .groups = "drop") %>%
+        full_join(self$region_codes[["level_1_region"]],
+                  by = c("region_level_1" = "region")
+        ) %>%
         full_join(self$data$codes_lookup,
           by = c("region_level_1" = "region")
         ) %>%
