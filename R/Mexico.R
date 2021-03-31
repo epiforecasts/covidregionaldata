@@ -39,7 +39,9 @@ Mexico <- R6::R6Class("Mexico",
           self$country
         )
       )
-      self$region_codes <- covidregionaldata::mexico_codes
+      region_data <- mexico_codes
+      self$region_codes <- by(region_data, region_data$level, function(x) x)
+      self$code_name <- unique(region_data$name)
     },
 
     #' @description Data download function for Mexico data. This replaces the
@@ -147,14 +149,16 @@ Mexico <- R6::R6Class("Mexico",
           date = dmy(.data$date)
         ) %>%
         select(-.data$nombre) %>%
-        full_join(self$data$codes_lookup, by = "inegi_state") %>%
+        full_join(self$region_codes[["level_1_region"]],
+                  by = c("inegi_state")) %>%
         mutate(
           level_1_region_code = .data$iso_code,
           level_2_region_code = .data$cve_ent
         ) %>%
         select(
-          -.data$inegi_state, -.data$cve_ent,
-          -.data$inegi_state, -.data$iso_code
+          date, level_1_region_code, region_level_1,
+          level_2_region_code, region_level_2,
+          cases_new, deaths_new
         )
     },
 
