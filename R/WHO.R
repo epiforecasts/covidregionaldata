@@ -36,7 +36,7 @@ WHO <- R6::R6Class("WHO",
     #' @importFrom countrycode countrycode
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw
+      self$data$clean <- self$data$raw[["main"]]
       colnames(self$data$clean) <- c(
         "date", "iso_code", "country", "who_region",
         "cases_new", "cases_total", "deaths_new",
