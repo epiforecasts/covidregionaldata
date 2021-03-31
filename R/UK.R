@@ -143,7 +143,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$get_authority_lookup_table()
-      self$data$clean <- self$data$raw[[1]] %>%
+      self$data$clean <- self$data$raw[["utla"]] %>%
         mutate(
           date = ymd(.data$date),
           # Cases and deaths are by publish date for Scotland, Wales;
