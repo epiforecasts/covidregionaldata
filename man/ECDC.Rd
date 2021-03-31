@@ -61,7 +61,7 @@ national$return()
 \if{html}{\out{<a id="method-set_region_codes"></a>}}
 \if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
 \subsection{Method \code{set_region_codes()}}{
-Set up a table of region codes for clean data
+Specific function for getting country codes for ECDC .
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ECDC$set_region_codes()}\if{html}{\out{</div>}}
 }

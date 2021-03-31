@@ -24,10 +24,46 @@ Canada <- R6::R6Class("Canada",
     level_1_region = "level_1_region", # for brevity - refers to
     # provinces and territories
     #' @field data_url link to raw data
-    data_url = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv", #nolint
+    data_url = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv", # nolint
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_new", "cases_total", "deaths_new",
-      "recovered_total", "tested_new"),
+    source_data_cols = c(
+      "cases_new", "cases_total", "deaths_new",
+      "recovered_total", "tested_new"
+    ),
+
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    set_region_codes = function() {
+      message_verbose(
+        self$verbose,
+        paste(
+          "Getting region codes for",
+          self$country
+        )
+      )
+      level_1_canada <- tibble::tibble(
+        level_1_region_code = c(
+          "CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL",
+          "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE",
+          "CA-QC", "CA-SK", "CA-YT"
+        ),
+        region_level_1 = c(
+          "Alberta", "British Columbia", "Manitoba", "New Brunswick",
+          "Newfoundland and Labrador", "Nova Scotia", "Northwest Territories",
+          "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
+          "Saskatchewan", "Yukon"
+        )
+      )
+      canada_codes <- tibble::tibble(
+        country = "canada",
+        level = c("level_1_region"),
+        name = c("iso_3166_2"),
+        codes = list(
+          level_1_canada
+        )
+      )
+      self$region_codes <- canada_codes
+    },
 
     #' @description *Canada* specific provincial/territorial level data
     #' cleaning
@@ -45,13 +81,17 @@ Canada <- R6::R6Class("Canada",
       message_verbose(self$verbose, "Cleaning data")
 
       self$data$clean <- self$data$raw %>%
-        select(pruid, prname, date,
-          numtoday, numtotal, numdeaths, numrecover, numtested) %>%
+        select(
+          pruid, prname, date,
+          numtoday, numtotal, numdeaths, numrecover, numtested
+        ) %>%
         filter(pruid != 1) %>%
         select(-pruid) %>%
         mutate(
-          prname = gsub("Repatriated travellers",
-            "Repatriated Travellers", prname),
+          prname = gsub(
+            "Repatriated travellers",
+            "Repatriated Travellers", prname
+          ),
           date = dmy(date),
           numrecover = as.numeric(numrecover),
           numdeaths = as.numeric(numdeaths),
@@ -69,9 +109,12 @@ Canada <- R6::R6Class("Canada",
           tested_total = numtested
         ) %>%
         full_join(self$data$codes_lookup,
-          by = c("region_level_1")) %>%
-            replace_na(list(deaths_total = 0, cases_total = 0,
-              recovered_total = 0, tested_total = 0))
+          by = c("region_level_1")
+        ) %>%
+        replace_na(list(
+          deaths_total = 0, cases_total = 0,
+          recovered_total = 0, tested_total = 0
+        ))
     },
 
     #' @description Initialize the country

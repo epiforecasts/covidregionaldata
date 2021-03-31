@@ -53,12 +53,8 @@ UK <- R6::R6Class("UK", # rename to country name
     ),
 
     #' @description Specific function for getting region codes for UK .
-    get_region_codes = function() {
-      tar_level <- paste0("level_", self$level, "_region")
-      tar_level_name <- self[[tar_level]]
-      self$data <- list(country = self$country, level = tar_level_name)
-      self$data$code <- "ons_region_code"
-      self$data$codes_lookup <- NULL
+    set_region_codes = function() {
+      return("ons_region_code")
     },
 
     #' @description UK specific download function
@@ -140,7 +136,6 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom stringr str_detect
     #' @importFrom rlang .data
     clean_level_2 = function() {
-      self$get_authority_lookup_table()
       self$data$clean <- self$data$raw %>%
         mutate(
           date = ymd(.data$date),
@@ -169,7 +164,7 @@ UK <- R6::R6Class("UK", # rename to country name
           level_2_region_code = .data$areaCode
         ) %>%
         # Join local authority codes to level 1 regions
-        left_join(self$authority_lookup_table,
+        left_join(covidregionaldata::uk_authority_lookup_table,
           by = "region_level_2"
         ) %>%
         rename(level_2_region_code = .data$level_2_region_code.x) %>%
@@ -270,8 +265,6 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @field query_filters Set what filters to use to query the data
     query_filters = NA,
-    #' @field authority_lookup_table Get table of authority structures
-    authority_lookup_table = NA,
     #' @field nhsregions Whether to include NHS regions in the data
     nhsregions = FALSE,
     #' @field release_date The release date for the data
@@ -484,87 +477,6 @@ UK <- R6::R6Class("UK", # rename to country name
           release_date = self$release_date
         )
       return(clean_data)
-    },
-
-    #' @description Download lookup table for UK authorities
-    #' @importFrom vroom vroom col_character
-    download_authority_data = function() {
-      self$authority_data <- vroom(
-        "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
-        col_types = c(
-          WD17NMW = col_character(),
-          CTY17CD = col_character(),
-          CTY17NM = col_character()
-        )
-      )
-    },
-
-    #' @description Get lookup table for UK authorities
-    #' @importFrom vroom vroom col_character
-    #' @importFrom dplyr select distinct filter bind_rows arrange
-    #' @importFrom tidyr drop_na
-    #' @importFrom tibble tibble
-    get_authority_lookup_table = function() {
-      unitary_auth <- self$authority_data %>%
-        select(
-          level_2_region_code = "CTY17CD",
-          region_level_2 = "CTY17NM",
-          level_1_region_code = "GOR10CD",
-          region_level_1 = "GOR10NM"
-        ) %>%
-        distinct() %>%
-        drop_na(.data$region_level_2)
-
-      upper_tier_auth <- self$authority_data %>%
-        select(
-          level_2_region_code = "LAD17CD",
-          region_level_2 = "LAD17NM",
-          level_1_region_code = "GOR10CD",
-          region_level_1 = "GOR10NM"
-        ) %>%
-        distinct() %>%
-        drop_na(.data$region_level_2)
-
-      country_auth <- self$authority_data %>%
-        select(
-          level_2_region_code = "LAD17CD",
-          region_level_2 = "LAD17NM",
-          level_1_region_code = "CTRY17CD",
-          region_level_1 = "CTRY17NM"
-        ) %>%
-        filter(.data$region_level_1 %in% c(
-          "Northern Ireland",
-          "Scotland",
-          "Wales"
-        )) %>%
-        distinct() %>%
-        drop_na(.data$region_level_2)
-
-      other_auths <- tibble(
-        level_2_region_code = c("E06000058", "E06000052", "E09000012"),
-        region_level_2 = c(
-          "Bournemouth, Christchurch and Poole",
-          "Cornwall and Isles of Scilly",
-          "Hackney and City of London"
-        ),
-        level_1_region_code = c(rep("E92000001", 3)),
-        region_level_1 = c("South West", "South West", "London")
-      )
-
-      # Join tables ---------------------------------------------------
-      self$authority_lookup_table <- bind_rows(
-        unitary_auth,
-        upper_tier_auth,
-        country_auth,
-        other_auths
-      )
-
-      self$authority_lookup_table <- self$authority_lookup_table %>%
-        arrange(.data$level_1_region_code) %>%
-        distinct(.data$level_2_region_code,
-          .data$region_level_2,
-          .keep_all = TRUE
-        )
     }
   )
 )

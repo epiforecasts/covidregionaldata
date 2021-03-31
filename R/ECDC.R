@@ -28,23 +28,9 @@ ECDC <- R6::R6Class("ECDC",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
-    #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
+    #' @description Specific function for getting country codes for ECDC .
     set_region_codes = function() {
-      message_verbose(
-        self$verbose,
-        paste(
-          "Getting region codes for",
-          self$country
-        )
-      )
-      who_codes <- tibble(
-        country = c("ecdc"),
-        level = c("level_1_region"),
-        name = c("iso_code"),
-        codes = NULL
-      )
-      self$region_codes <- who_codes
+      return("iso_code")
     },
 
     #' @description ECDC specific state level data cleaning

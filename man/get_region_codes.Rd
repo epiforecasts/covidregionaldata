@@ -31,7 +31,7 @@ up to today's date.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
 
-\item{\code{region_codes}}{string or tible Region codes for the target country}
+\item{\code{region_codes}}{string or tibble Region codes for the target country}
 }
 \if{html}{\out{</div>}}
 }
@@ -51,7 +51,8 @@ up to today's date.}
 \if{html}{\out{<a id="method-set_region_codes"></a>}}
 \if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
 \subsection{Method \code{set_region_codes()}}{
-Set up a table of region codes for clean data
+Place holder for custom country specific function to load
+region codes.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$set_region_codes()}\if{html}{\out{</div>}}
 }
