@@ -2,15 +2,18 @@
 
 This update contains a substantial package refactor and as such introduces some breaking changes. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
 
-## Changes
-
-* Available datasets not listed in `get_available_datasets`.
-* Refactored `get_regional_data` and `get_national_data` to use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. However, all datasets are now available to be used as R6 methods (see `get_available_datasets)
-* Added a list return method so that data processing changes can be tracked.
-* Surfaced the underlying methods which may be of use for users.
-* Separated unit testing of package functionality from testing of data downloads.
+## Deprecated functions
+* `get_available_datasets()` replaces `get_info_covidregionaldata()` to view available data. `get_info_covidregionaldata()` is deprecated.
 * `get_interventions_data()` is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/
 * `get_linelist` is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with `covidregionaldata`.
+
+## New features
+* Track data processing from raw to clean using the `step = TRUE` argument in `get_regional_data()`.
+* Access the underlying methods for data cleaning which may be of use for users.
+
+## Technical improvements
+* Under the hood, `get_regional_data()` and `get_national_data()` now use R6 method dispatch. This is mostly an internal change and so should have minimal user impact. However, all datasets are now available to be used as R6 methods (see `get_available_datasets`).
+* We have separated unit testing of package functionality from testing of data downloads.
 
 # covidregionaldata 0.8.3
 
