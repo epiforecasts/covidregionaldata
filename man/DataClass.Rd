@@ -32,6 +32,8 @@ up to today's date.}
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
 
 \item{\code{region_codes}}{string or tibble Region codes for the target country}
+
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
 }
 \if{html}{\out{</div>}}
 }
