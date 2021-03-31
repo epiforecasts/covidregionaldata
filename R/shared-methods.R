@@ -129,13 +129,15 @@ DataClass <- R6::R6Class(
 
     #' @description General function for downloading raw data.
     download = function() {
-      self$data$raw <- csv_reader(self$data_url[["main"]], self$verbose)
+      self$data$raw <- list(
+        "main" = csv_reader(self$data_url[["main"]], self$verbose)
+      )
     },
 
     #' @description General cleaning function
     clean = function() {
       warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
-      self$data$clean <- self$data$raw
+      self$data$clean <- self$data$raw[["main"]]
     },
 
     #' Shared regional dataset processing

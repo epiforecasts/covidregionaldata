@@ -47,8 +47,7 @@ Canada <- R6::R6Class("Canada",
       # No return statement is required
       # have a statement like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")
-
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         select(
           pruid, prname, date,
           numtoday, numtotal, numdeaths, numrecover, numtested

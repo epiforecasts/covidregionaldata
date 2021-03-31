@@ -36,7 +36,7 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$Meldedatum,
           region_level_1 = .data$Bundesland,
