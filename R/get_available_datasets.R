@@ -25,11 +25,11 @@ get_available_datasets <- function() {
         public_fields <- get(x)$public_fields
         public_fields$data_url <- paste(
           unlist(public_fields$data_url),
-          collapse = " "
+          collapse = ", "
         )
         public_fields$source_data_cols <- paste(
           unlist(public_fields$source_data_cols),
-          collapse = " "
+          collapse = ", "
         )
         dat <- as_tibble(public_fields)
         dat["country"] <- x
