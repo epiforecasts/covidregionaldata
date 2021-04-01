@@ -23,9 +23,9 @@ ECDC <- R6::R6Class("ECDC",
     # Core Attributes
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "country"),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
@@ -83,7 +83,7 @@ ECDC <- R6::R6Class("ECDC",
           )
         ) %>%
         rename(
-          region_level_1 = .data$country,
+          level_1_region = .data$country,
           level_1_region_code = .data$iso_code
         )
     },
@@ -113,12 +113,6 @@ ECDC <- R6::R6Class("ECDC",
       } else {
         return(self$data$return)
       }
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )

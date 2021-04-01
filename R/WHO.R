@@ -61,7 +61,7 @@ WHO <- R6::R6Class("WHO",
           country = ifelse(.data$iso_code == "XK", "Kosovo", .data$country)
         ) %>%
         rename(
-          region_level_1 = .data$country,
+          level_1_region = .data$country,
           level_1_region_code = .data$iso_code
         )
     },
@@ -90,12 +90,6 @@ WHO <- R6::R6Class("WHO",
       } else {
         return(self$data$return)
       }
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )

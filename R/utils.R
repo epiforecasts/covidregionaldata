@@ -89,7 +89,7 @@ stop_using_memoise <- function() {
 #' @export
 #' @importFrom memoise cache_filesystem
 reset_cache <- function() {
-  unlink(options("cache_path") , recursive = TRUE)
+  unlink(options("cache_path"), recursive = TRUE)
   cache_filesystem(options("cache_path"))
   return(invisible(NULL))
 }

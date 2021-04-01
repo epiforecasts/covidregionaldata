@@ -50,6 +50,7 @@ up to today's date.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
+\item \href{#method-new}{\code{DataClass$new()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
@@ -69,10 +70,28 @@ region codes.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+Initialize the country
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{The args passed by \link{initialise_dataclass}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-General function for downloading raw data.
+Download raw data using the list
+of supplied data_urls.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
 }
@@ -82,8 +101,7 @@ General function for downloading raw data.
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-General cleaning function
-Shared regional dataset processing
+Clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
@@ -93,7 +111,7 @@ Shared regional dataset processing
 \if{html}{\out{<a id="method-process"></a>}}
 \if{latex}{\out{\hypertarget{method-process}{}}}
 \subsection{Method \code{process()}}{
-General function to processes regional data.
+Processes data.
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}

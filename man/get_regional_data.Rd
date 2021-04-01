@@ -27,12 +27,11 @@ of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
 options by dataset.}
 
-\item{totals}{Logical, defaults to \code{FALSE}. If `TRUE``, returns totalled
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
-\item{localise}{Logical, defaults to \code{TRUE}. Should region names be
-localised.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}

@@ -239,7 +239,7 @@ UK <- R6::R6Class("UK", # rename to country name
                           verbose = TRUE, steps = FALSE,
                           nhsregions = FALSE, release_date = NULL,
                           resolution = "utla") {
-      general_init(self,
+      initialise_dataclass(self,
         level = level, totals = totals,
         localise = localise, verbose = verbose,
         steps = steps
@@ -428,7 +428,7 @@ UK <- R6::R6Class("UK", # rename to country name
             "North East and Yorkshire", .data$level_1_region
           )
         ) %>%
-        group_by(date, .data$level_1_region)%>%
+        group_by(date, .data$level_1_region) %>%
         summarise(
           cases_new = sum(.data$cases_new, na.rm = TRUE),
           cases_total = sum(.data$cases_total, na.rm = TRUE),

@@ -61,7 +61,7 @@ fill_empty_dates_with_na <- function(data) {
     complete(
       date = full_seq(data$date, period = 1),
       nesting(!!!syms(regions))
-      )
+    )
   return(data)
 }
 
@@ -163,9 +163,9 @@ totalise_data <- function(data) {
 #' by `process`.
 #' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
 #' @param level The level of the data, e.g. 'level_1_region'
-#' @param group_vars Grouping variables, used to 
-#' for grouping and to localise names. It is assumed that the first entry 
-#' indicates the main region variable and the second indicates the geocode for 
+#' @param group_vars Grouping variables, used to
+#' for grouping and to localise names. It is assumed that the first entry
+#' indicates the main region variable and the second indicates the geocode for
 #' this variable.
 #' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
@@ -174,10 +174,10 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange rename
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange rename # nolint
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
-#' @importFrom rlang !!! 
+#' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE) {
@@ -185,7 +185,7 @@ process_internal <- function(clean_data, level, group_vars,
     stop("No regional data found to process")
   }
   group_vars_standard <- names(group_vars)
-  
+
   dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
   . <- NULL

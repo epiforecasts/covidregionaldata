@@ -55,9 +55,9 @@ check_country_available <- function(country = character(), level = 1,
 #' steps be kept and output in a list.
 #' @export
 #'
-general_init <- function(self, level = "1",
-                         totals = FALSE, localise = TRUE,
-                         verbose = TRUE, steps = FALSE) {
+initialise_dataclass <- function(self, level = "1",
+                                 totals = FALSE, localise = TRUE,
+                                 verbose = TRUE, steps = FALSE) {
   if (any(self$supported_levels %in% level)) {
     self$level <- level
   } else {
@@ -119,9 +119,9 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
+    #' @param ... The args passed by [initialise_dataclass]
     initialize = function(...) {
-      general_init(self, ...)
+      initialise_dataclass(self, ...)
     },
 
     #' @description Download raw data using the list
