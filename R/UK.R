@@ -22,6 +22,8 @@ UK <- R6::R6Class("UK", # rename to country name
   inherit = DataClass,
   public = list(
     # Core Attributes (amend each paramater for country specific infomation)
+    #' @field country name of country to fetch data for
+    country = "United Kingdom (UK)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

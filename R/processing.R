@@ -174,7 +174,8 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange rename # nolint
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !!!

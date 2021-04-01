@@ -67,7 +67,6 @@ initialise_dataclass <- function(self, level = "1",
   self$localise <- localise
   self$verbose <- verbose
   self$steps <- steps
-  self$country <- tolower(class(self)[1])
   self$region_name <- self$supported_region_names[[self$level]]
   self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
@@ -102,6 +101,8 @@ DataClass <- R6::R6Class(
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(),
+    #' @field source_data_cols existing columns within the raw data
+    source_data_cols = c(),
     #' @field level target region level
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
@@ -176,6 +177,26 @@ DataClass <- R6::R6Class(
       } else {
         return(self$data$processed)
       }
+    },
+
+    #' @description Class summary information
+    #' @importFrom tibble tibble
+    #' @return Returns a single row summary tibble
+    summary = function() {
+      sum_df <- tibble(
+        country = self$country,
+        class = class(self)[1],
+        level_1_region = self$supported_region_names[["1"]],
+        level_2_region = ifelse(is.null(self$supported_region_names[["2"]]),
+          NA, self$supported_region_names[["2"]]
+        ),
+        get_data_function = ifelse(any(c("WHO", "ECDC") %in% class(self)[1]),
+          "get_national_data", "get_regional_data"
+        ),
+        data_url = paste(unlist(self$data_url), collapse = ", "),
+        source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
+      )
+      return(sum_df)
     }
   )
 )

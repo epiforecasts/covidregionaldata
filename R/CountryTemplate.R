@@ -17,6 +17,8 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
+    #' @field country name of country to fetch data for
+    country = "",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
     #' @field supported_region_names A list of region names in order of level.
@@ -35,7 +37,7 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     clean = function(...) {
       # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- something
+      # e.g. self$data$clean <- self$data$raw[["main"]]
       # No return statement is required
       # have a statment like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")

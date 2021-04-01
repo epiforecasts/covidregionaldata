@@ -33,6 +33,8 @@ downloading, processing, and returning data.
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
 
+\item{\code{source_data_cols}}{existing columns within the raw data}
+
 \item{\code{level}}{target region level}
 
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
@@ -55,6 +57,7 @@ up to today's date.}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-return}{\code{DataClass$return()}}
+\item \href{#method-summary}{\code{DataClass$summary()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
 }
@@ -129,6 +132,19 @@ custom method should not be needed.
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$return()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-summary"></a>}}
+\if{latex}{\out{\hypertarget{method-summary}{}}}
+\subsection{Method \code{summary()}}{
+Class summary information
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns a single row summary tibble
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
