@@ -21,8 +21,12 @@ Mexico <- R6::R6Class("Mexico",
     # Core Attributes
     #' @field level_1_region the level 1 region name
     level_1_region = "estados",
-    #' @field level_2_region the level 2 region name.
+    #' @field level_2_region the level 2 region name
     level_2_region = "municipios",
+    #' @field level_1_region_code the level 1 geocode name 
+    level_1_region_code = "iso_3166_2",
+    #' @field level_2_region_code the level 2 geocode name
+    level_2_region_code = "inegi",
     #' @field data_url link to raw data
     data_url = "https://datos.covid-19.conacyt.mx/#DownZCSV",
     #' @field source_data_cols existing columns within the raw data
@@ -39,9 +43,7 @@ Mexico <- R6::R6Class("Mexico",
           self$country
         )
       )
-      region_data <- mexico_codes
-      self$region_codes <- by(region_data, region_data$level, function(x) x)
-      self$code_name <- unique(region_data$name)
+      self$region_codes <- mexico_codes
     },
 
     #' @description Data download function for Mexico data. This replaces the
@@ -129,11 +131,10 @@ Mexico <- R6::R6Class("Mexico",
           ),
           date = dmy(.data$date)
         ) %>%
-        left_join(self$region_codes[["level_1_region"]],
-                  by = c("cve_ent" = "inegi_state",
-                         "region_level_1")) %>%
+        left_join(self$region_codes %>%
+                    filter(is.na(region_level_2)),
+                  by = c("region_level_1")) %>%
         filter(.data$region_level_1 != "Nacional") %>%
-        rename(level_1_region_code = .data$iso_code) %>%
         select(date, region_level_1, level_1_region_code,
                cases_new, deaths_new)
     },
@@ -146,18 +147,11 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean_level_2 = function() {
       self$data$clean <- self$data$raw %>%
-        mutate(
-          region_level_2 = .data$nombre,
-          inegi_state = substr(.data$cve_ent, 1, 2),
-          date = dmy(.data$date)
-        ) %>%
-        select(-.data$nombre) %>%
-        full_join(self$region_codes[["level_1_region"]],
-                  by = c("inegi_state")) %>%
-        mutate(
-          level_1_region_code = .data$iso_code,
-          level_2_region_code = .data$cve_ent
-        ) %>%
+        rename(region_level_2 = .data$nombre) %>%
+        mutate(date = dmy(.data$date)) %>%
+        left_join(self$region_codes %>%
+                    filter(!is.na(region_level_2)),
+                  by = "region_level_2") %>%
         select(
           date, level_1_region_code, region_level_1,
           level_2_region_code, region_level_2,
