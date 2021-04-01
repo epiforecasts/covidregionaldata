@@ -6,7 +6,7 @@ source("custom_tests/test-regional-dataset.R")
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.
 # Can also be set using environment variables
-source_of_interest <- "Mexico"
+source_of_interest <- NULL
 if (!is.null(getOption("testSource"))) {
   source_of_interest <- getOption("testSource")
 }
