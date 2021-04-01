@@ -28,7 +28,6 @@ test_who_level_1 <- function(region) {
 test_UK_level_1 <- function(region) {
   data_name <- "UK level 1 with 'nhsregions=TRUE'"
   region$nhsregions <- TRUE
-  region$nhsregions <- TRUE
   source <- class(region)[1]
   nhs_included_path <- paste0(
     "custom_data/", source,
@@ -42,14 +41,14 @@ test_UK_level_1 <- function(region) {
   if (download) {
     test_that(paste(data_name, " downloads sucessfully"), { # nolint
       region$download()
-      expect_s3_class(region$nhs_raw, "data.frame")
-      expect_true(nrow(region$nhs_raw) > 0)
-      expect_true(ncol(region$nhs_raw) >= 2)
+      expect_s3_class(region$data$raw$nhs, "data.frame")
+      expect_true(nrow(region$data$raw$nhs) > 0)
+      expect_true(ncol(region$data$raw$nhs) >= 2)
     })
-    region$nhs_raw <- dplyr::slice_tail(region$nhs_raw, n = 1000)
-    saveRDS(region$nhs_raw, nhs_included_path)
+    region$nhs_raw <- dplyr::slice_tail(region$data$raw$nhs, n = 1000)
+    saveRDS(region$data$raw$nhs, nhs_included_path)
   } else {
-    region$nhs_raw <- readRDS(nhs_included_path)
+    region$data$raw$nhs <- readRDS(nhs_included_path)
   }
   test_that(paste(data_name, "can be cleaned as expected"), {
     region$clean()

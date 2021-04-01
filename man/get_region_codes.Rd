@@ -18,7 +18,8 @@ downloading, processing, and returning data.
 
 \item{\code{data}}{data frame for requested region}
 
-\item{\code{data_url}}{link to raw data}
+\item{\code{data_url}}{List of named links to raw data. The first, and
+sometimes only entry, should be named main}
 
 \item{\code{level}}{target region level}
 

@@ -23,11 +23,16 @@ Canada <- R6::R6Class("Canada",
     #' @field level_1_region the level 1 region name.
     level_1_region = "level_1_region", # for brevity - refers to
     # provinces and territories
-    #' @field data_url link to raw data
-    data_url = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv", #nolint
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_new", "cases_total", "deaths_new",
-      "recovered_total", "tested_new"),
+    source_data_cols = c(
+      "cases_new", "cases_total", "deaths_new",
+      "recovered_total", "tested_new"
+    ),
 
     #' @description *Canada* specific provincial/territorial level data
     #' cleaning
@@ -43,15 +48,18 @@ Canada <- R6::R6Class("Canada",
       # No return statement is required
       # have a statement like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")
-
-      self$data$clean <- self$data$raw %>%
-        select(pruid, prname, date,
-          numtoday, numtotal, numdeaths, numrecover, numtested) %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
+        select(
+          pruid, prname, date,
+          numtoday, numtotal, numdeaths, numrecover, numtested
+        ) %>%
         filter(pruid != 1) %>%
         select(-pruid) %>%
         mutate(
-          prname = gsub("Repatriated travellers",
-            "Repatriated Travellers", prname),
+          prname = gsub(
+            "Repatriated travellers",
+            "Repatriated Travellers", prname
+          ),
           date = dmy(date),
           numrecover = as.numeric(numrecover),
           numdeaths = as.numeric(numdeaths),
@@ -69,9 +77,12 @@ Canada <- R6::R6Class("Canada",
           tested_total = numtested
         ) %>%
         full_join(self$data$codes_lookup,
-          by = c("region_level_1")) %>%
-            replace_na(list(deaths_total = 0, cases_total = 0,
-              recovered_total = 0, tested_total = 0))
+          by = c("region_level_1")
+        ) %>%
+        replace_na(list(
+          deaths_total = 0, cases_total = 0,
+          recovered_total = 0, tested_total = 0
+        ))
     },
 
     #' @description Initialize the country

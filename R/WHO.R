@@ -21,8 +21,11 @@ WHO <- R6::R6Class("WHO",
     # Core Attributes
     #' @field level_1_region the level 1 region name.
     level_1_region = "country",
-    #' @field data_url link to raw data
-    data_url = "https://covid19.who.int/WHO-COVID-19-global-data.csv",
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "cases_new",
@@ -36,7 +39,7 @@ WHO <- R6::R6Class("WHO",
     #' @importFrom countrycode countrycode
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw
+      self$data$clean <- self$data$raw[["main"]]
       colnames(self$data$clean) <- c(
         "date", "iso_code", "country", "who_region",
         "cases_new", "cases_total", "deaths_new",
