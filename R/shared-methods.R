@@ -89,8 +89,9 @@ DataClass <- R6::R6Class(
     country = "",
     #' @field data data frame for requested region
     data = NULL,
-    #' @field data_url link to raw data
-    data_url = "",
+    #' @field data_url List of named links to raw data. The first, and
+    #' sometimes only entry, should be named main
+    data_url = list(),
     #' @field level target region level
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
@@ -113,14 +114,17 @@ DataClass <- R6::R6Class(
     },
 
     #' @description General function for downloading raw data.
+    #' @importFrom purrr map
     download = function() {
-      self$data$raw <- csv_reader(self$data_url, self$verbose)
+      self$data$raw <- map(self$data_url, csv_reader,
+        verbose = self$verbose
+      )
     },
 
     #' @description General cleaning function
     clean = function() {
       warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
-      self$data$clean <- self$data$raw
+      self$data$clean <- self$data$raw[["main"]]
     },
 
     #' Shared regional dataset processing

@@ -21,14 +21,15 @@ Mexico <- R6::R6Class("Mexico",
     # Core Attributes
     #' @field level_1_region the level 1 region name
     level_1_region = "estados",
-    #' @field level_2_region the level 2 region name
+    #' @field level_2_region the level 2 region name.
     level_2_region = "municipios",
-    #' @field level_1_region_code the level 1 geocode name 
-    level_1_region_code = "iso_3166_2",
-    #' @field level_2_region_code the level 2 geocode name
-    level_2_region_code = "inegi",
-    #' @field data_url link to raw data
-    data_url = "https://datos.covid-19.conacyt.mx/#DownZCSV",
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://datos.covid-19.conacyt.mx/",
+      "1" = "Downloads/filesDD.php?csvmun",
+      "2" = "Downloads/filesDD.php?csvaxd"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -43,7 +44,7 @@ Mexico <- R6::R6Class("Mexico",
           self$country
         )
       )
-      self$region_codes <- mexico_codes
+      self$region_codes <- covidregionaldata::mexico_codes
     },
 
     #' @description Data download function for Mexico data. This replaces the
@@ -57,13 +58,10 @@ Mexico <- R6::R6Class("Mexico",
     #'
     download = function() {
       . <- NULL
-      if (self$level == "2") {
-        path <- "Downloads/filesDD.php?csvmun"
-      } else {
-        path <- "Downloads/filesDD.php?csvaxd"
-      }
-      domain <- "https://datos.covid-19.conacyt.mx/"
-      script_url <- file.path(domain, path)
+      script_url <- file.path(
+        self$data_url[["main"]],
+        self$data_url[[self$level]]
+      )
 
       confirmed_url <- script_url %>%
         POST(body = "Confirmados", encode = "form", verbose = TRUE) %>%
@@ -85,7 +83,10 @@ Mexico <- R6::R6Class("Mexico",
 
       read_data <- function(target, new_name) {
         message_verbose(self$verbose, "Downloading ", new_name)
-        dat <- csv_reader(file.path(domain, target), self$verbose)
+        dat <- csv_reader(
+          file.path(self$data_url[["main"]], target),
+          self$verbose
+        )
 
         dat <- dat %>%
           select(-.data$poblacion) %>%
@@ -96,7 +97,8 @@ Mexico <- R6::R6Class("Mexico",
 
       confirmed <- read_data(confirmed_url, "cases_new")
       deceased <- read_data(deceased_url, "deaths_new")
-      self$data$raw <- full_join(confirmed, deceased,
+      self$data$raw <- list("confirmed" = confirmed, "deceased" = deceased)
+      self$data$raw$confirmed_diseased <- full_join(confirmed, deceased,
         by = c("cve_ent", "nombre", "date")
       )
     },
@@ -122,21 +124,19 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_1 = function() {
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw$confirmed_diseased %>%
         mutate(
-          level_1_region = str_to_title(.data$nombre),
-          level_1_region = ifelse(.data$level_1_region == "Distrito Federal",
+          region_level_1 = str_to_title(.data$nombre),
+          region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
             "Ciudad de Mexico",
-            .data$level_1_region
+            .data$region_level_1
           ),
           date = dmy(.data$date)
         ) %>%
-        left_join(self$region_codes %>%
-                    filter(is.na(level_2_region)),
-                  by = c("level_1_region")) %>%
-        filter(.data$level_1_region != "Nacional") %>%
-        select(date, level_1_region, level_1_region_code,
-               cases_new, deaths_new)
+        full_join(self$data$codes_lookup, by = "region_level_1") %>%
+        filter(.data$region_level_1 != "Nacional") %>%
+        rename(level_1_region_code = .data$iso_code) %>%
+        select(-c(.data$nombre, .data$cve_ent))
     },
 
     #' @description Mexico Specific Municipality Level Data Cleaning
@@ -146,16 +146,21 @@ Mexico <- R6::R6Class("Mexico",
     #' @importFrom rlang .data
     #'
     clean_level_2 = function() {
-      self$data$clean <- self$data$raw %>%
-        rename(level_2_region = .data$nombre) %>%
-        mutate(date = dmy(.data$date)) %>%
-        left_join(self$region_codes %>%
-                    filter(!is.na(level_2_region)),
-                  by = "level_2_region") %>%
+      self$data$clean <- self$data$raw$confirmed_diseased %>%
+        mutate(
+          region_level_2 = .data$nombre,
+          inegi_state = substr(.data$cve_ent, 1, 2),
+          date = dmy(.data$date)
+        ) %>%
+        select(-.data$nombre) %>%
+        full_join(self$data$codes_lookup, by = "inegi_state") %>%
+        mutate(
+          level_1_region_code = .data$iso_code,
+          level_2_region_code = .data$cve_ent
+        ) %>%
         select(
-          date, level_1_region_code, level_1_region,
-          level_2_region_code, level_2_region,
-          cases_new, deaths_new
+          -.data$inegi_state, -.data$cve_ent,
+          -.data$inegi_state, -.data$iso_code
         )
     },
 
