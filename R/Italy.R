@@ -74,7 +74,7 @@ Italy <- R6::R6Class("Italy",
         group_by(.data$date, .data$level_1_region) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
-        full_join(self$region_codes[["1"]],
+        full_join(self$codes_lookup[["1"]],
           by = c("level_1_region" = "region")
         ) %>%
         select(.data$date, .data$level_1_region,
