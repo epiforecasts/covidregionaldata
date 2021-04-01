@@ -21,6 +21,12 @@ downloading, processing, and returning data.
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
 
+\item{\code{data_url_level_1}}{List of named links to raw data to be
+downloaded only for level 1.}
+
+\item{\code{data_url_level_2}}{List of named links to raw data to be
+downloaded only for level 2.}
+
 \item{\code{level}}{target region level}
 
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
