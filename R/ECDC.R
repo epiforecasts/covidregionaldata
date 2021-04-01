@@ -23,8 +23,11 @@ ECDC <- R6::R6Class("ECDC",
     # Core Attributes
     #' @field level_1_region the level 1 region name.
     level_1_region = "country",
-    #' @field data_url link to raw data
-    data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -41,7 +44,7 @@ ECDC <- R6::R6Class("ECDC",
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
       long_string <- "Cases_on_an_international_conveyance_Japan"
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
         rename(
           iso_code = .data$geoId, country = .data$countriesAndTerritories,
