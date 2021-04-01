@@ -123,7 +123,7 @@ Mexico <- R6::R6Class("Mexico",
     },
 
     #' @description Mexico Specific Estados Level Data Cleaning
-    #' @importFrom dplyr mutate full_join filter rename select
+    #' @importFrom dplyr mutate full_join filter rename select distinct
     #' @importFrom stringr str_to_title
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
