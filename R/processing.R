@@ -52,7 +52,7 @@ set_negative_values_to_zero <- function(data) {
 #' @return A tibble with rows of NAs added.
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
-#' @importFrom starts_with
+#' @importFrom tidyselect starts_with
 #' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%

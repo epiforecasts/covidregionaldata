@@ -28,9 +28,7 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
-
-\item{\code{level_1_region_code}}{the level 1 region geocode name}
+\item{\code{localise_regions}}{the localised names for level 1 and 2 regions}
 
 \item{\code{data_url}}{link to raw data}
 

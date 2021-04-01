@@ -18,7 +18,7 @@ Italy <- R6::R6Class("Italy",
   public = list(
 
     # Core Attributes
-    #' @field the localised names for level 1 and 2 regions and geocodes
+    #' @field localise_regions the localised names for level 1 and 2 regions
     localise_regions = list(level_1_region = "regioni",
                             level_1_region_code = "iso_3166_2"),
     #' @field data_url link to raw data
