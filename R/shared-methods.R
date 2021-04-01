@@ -130,12 +130,12 @@ DataClass <- R6::R6Class(
     process = function() {
       message_verbose(self$verbose, "Processing data")
       region_vars <- switch(self$level,
-        "1" = c("level_1_region" = self$level_1_region, 
-                "level_1_region_code" = self$level_1_region_code),
-        "2" = c("level_2_region" = self$level_2_region, 
-                "level_2_region_code" = self$level_2_region_code,
-                "level_1_region" = self$level_1_region, 
-                "level_1_region_code" = self$level_1_region_code)
+        "1" = c("level_1_region" = self$localise_regions$level_1_region, 
+                "level_1_region_code" = self$localise_regions$level_1_region_code), # nolint
+        "2" = c("level_2_region" = self$localise_regions$level_2_region, 
+                "level_2_region_code" = self$localise_regions$level_2_region_code,
+                "level_1_region" = self$localise_regions$level_1_region, 
+                "level_1_region_code" = self$localise_regions$level_1_region_code)
       )
       tar_level <- paste0("level_", self$level, "_region")
       self$data$processed <- process_internal(

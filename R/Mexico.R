@@ -19,14 +19,11 @@ Mexico <- R6::R6Class("Mexico",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name
-    level_1_region = "estados",
-    #' @field level_2_region the level 2 region name
-    level_2_region = "municipios",
-    #' @field level_1_region_code the level 1 geocode name 
-    level_1_region_code = "iso_3166_2",
-    #' @field level_2_region_code the level 2 geocode name
-    level_2_region_code = "inegi",
+    #' @field the localised names for level 1 and 2 regions and geocodes
+    localise_regions = list(level_1_region = "estados",
+                            level_1_region_code = "iso_3166_2", 
+                            level_2_region = "municipios", 
+                            level_2_region_code = "inegi"),
     #' @field data_url link to raw data
     data_url = "https://datos.covid-19.conacyt.mx/#DownZCSV",
     #' @field source_data_cols existing columns within the raw data

@@ -18,10 +18,9 @@ Italy <- R6::R6Class("Italy",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "regioni",
-    #' @field level_1_region_code the level 1 region geocode name
-    level_1_region_code = "iso_3166_2",
+    #' @field the localised names for level 1 and 2 regions and geocodes
+    localise_regions = list(level_1_region = "regioni",
+                            level_1_region_code = "iso_3166_2"),
     #' @field data_url link to raw data
     data_url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv", # nolint
     #' @field source_data_cols existing columns within the raw data
