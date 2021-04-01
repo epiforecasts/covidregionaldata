@@ -52,6 +52,8 @@ set_negative_values_to_zero <- function(data) {
 #' @return A tibble with rows of NAs added.
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
+#' @importFrom starts_with
+#' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
     names()
@@ -97,6 +99,7 @@ complete_cumulative_columns <- function(data) {
 #' @return A data frame with extra columns if required
 #' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
 #' @importFrom tidyr replace_na
+#' @importFrom tidyselect ends_with
 #' @importFrom tibble tibble
 #' @importFrom rlang !! :=
 calculate_columns_from_existing_data <- function(data) {
@@ -110,7 +113,7 @@ calculate_columns_from_existing_data <- function(data) {
       !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
       data <- data %>%
-        group_by_at(vars(ends_with("region"))) %>%
+        group_by_at(vars(ends_with("_region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         mutate(
           !!cumulative_count_name :=
@@ -120,7 +123,7 @@ calculate_columns_from_existing_data <- function(data) {
       cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
       data <- data %>%
-        group_by_at(vars(ends_with("region"))) %>%
+        group_by_at(vars(ends_with("_region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         mutate(
@@ -174,7 +177,7 @@ totalise_data <- function(data) {
 #' @importFrom dplyr do group_by_at ungroup select everything arrange rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
-#' @importFrom rlang !! :=
+#' @importFrom rlang !!! 
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE) {
