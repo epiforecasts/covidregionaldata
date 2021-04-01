@@ -13,7 +13,7 @@ if (!is.null(getOption("testSource"))) {
 # should downloads be tested (defaults to FALSE)
 # set this to true when implementing a new data set
 # can also be controlled using an environment variable
-download <- FALSE
+download <- TRUE
 if (!is.null(getOption("testDownload"))) {
   download <- getOption("testDownload")
 }
