@@ -30,7 +30,11 @@ region$return()
 \describe{
 \item{\code{level_1_region}}{the level 1 region name}
 
-\item{\code{level_2_region}}{the level 2 region name.}
+\item{\code{level_2_region}}{the level 2 region name}
+
+\item{\code{level_1_region_code}}{the level 1 geocode name}
+
+\item{\code{level_2_region_code}}{the level 2 geocode name}
 
 \item{\code{data_url}}{link to raw data}
 
