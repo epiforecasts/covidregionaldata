@@ -30,3 +30,7 @@ test_that("csv_reader verbosity is controlled as expected", {
     0
   )
 })
+
+test_that("csv_reader fails as expected when given a file that doesn't exist", {
+  expect_error(csv_reader("nonsense.csv", verbose = FALSE))
+})
