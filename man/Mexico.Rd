@@ -9,6 +9,16 @@ https://datos.covid-19.conacyt.mx/#DownZCSV
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for Mexico.
+
+Notes on region codes:
+
+Level 1 codes = ISO-3166-2,
+source: https://en.wikipedia.org/wiki/ISO_3166-2:MX
+
+Level 2 codes = INEGI Mexican official statistics geocoding,
+source: raw data
+
+Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 }
 \details{
 Inherits from \code{DataClass}
@@ -28,13 +38,7 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name}
-
-\item{\code{level_2_region}}{the level 2 region name}
-
-\item{\code{level_1_region_code}}{the level 1 geocode name}
-
-\item{\code{level_2_region_code}}{the level 2 geocode name}
+\item{\code{localise_regions}}{the localised names for level 1 and 2 regions}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}

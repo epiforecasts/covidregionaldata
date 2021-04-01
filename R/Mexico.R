@@ -3,6 +3,16 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for Mexico.
 #'
+#'  Notes on region codes:
+#'
+#'  Level 1 codes = ISO-3166-2,
+#'  source: https://en.wikipedia.org/wiki/ISO_3166-2:MX
+#'
+#'  Level 2 codes = INEGI Mexican official statistics geocoding,
+#'   source: raw data
+#'
+#'  Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
+#'
 #' @details Inherits from `DataClass`
 #' @source https://datos.covid-19.conacyt.mx/#DownZCSV
 #' @export
@@ -19,10 +29,11 @@ Mexico <- R6::R6Class("Mexico",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name
-    level_1_region = "estados",
-    #' @field level_2_region the level 2 region name.
-    level_2_region = "municipios",
+    #' @field localise_regions the localised names for level 1 and 2 regions
+    localise_regions = list(level_1_region = "estados",
+                            level_1_region_code = "iso_3166_2",
+                            level_2_region = "municipios",
+                            level_2_region_code = "inegi"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
