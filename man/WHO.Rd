@@ -28,7 +28,7 @@ national$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{localise_regions}}{names for spatial units}
 
 \item{\code{data_url}}{link to raw data}
 

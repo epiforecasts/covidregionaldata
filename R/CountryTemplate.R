@@ -17,8 +17,11 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "name_of_level_1_regions", # add more levels as needed
+    #' @field localise_regions the localised names for level 1 and 2 regions
+    localise_regions = list(level_1_region = "region_1_name",
+                            level_1_region_code = "region_1_geocode_name", 
+                            level_2_region = "region_2_name", 
+                            level_2_region_code = "region_2_geocode_name"),
     #' @field data_url link to raw data
     data_url = "link_to_some_raw_data",
     #' @field source_data_cols existing columns within the raw data

@@ -19,8 +19,8 @@ WHO <- R6::R6Class("WHO",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "country",
+    #' @field localise_regions names for spatial units
+    localise_regions = list(level_1_region = "country"),
     #' @field data_url link to raw data
     data_url = "https://covid19.who.int/WHO-COVID-19-global-data.csv",
     #' @field source_data_cols existing columns within the raw data

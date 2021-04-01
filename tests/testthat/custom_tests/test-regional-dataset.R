@@ -2,9 +2,9 @@ source("custom_tests/regional-dataset-specific.R")
 
 expect_clean_cols <- function(data, level) {
   expect_s3_class(data[["date"]], "Date")
-  expect_type(data[["region_level_1"]], "character")
+  expect_type(data[["level_1_region"]], "character")
   if (level == "2") {
-    expect_type(data[["region_level_2"]], "character")
+    expect_type(data[["level_2_region"]], "character")
   }
 }
 
@@ -15,9 +15,9 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   expect_type(data[["deaths_new"]], "double")
   expect_type(data[["deaths_total"]], "double")
   if (!localised) {
-    expect_type(data[["region_level_1"]], "character")
+    expect_type(data[["level_1_region"]], "character")
     if (level == "2") {
-      expect_type(data[["region_level_2"]], "character")
+      expect_type(data[["level_2_region"]], "character")
     }
   }
 }
