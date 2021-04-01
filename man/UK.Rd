@@ -47,9 +47,11 @@ Uk$new(
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{level_2_region}}{the level 2 region name}
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -68,6 +70,15 @@ only entry, is be named main.}
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -76,7 +87,6 @@ only entry, is be named main.}
 \item \href{#method-clean}{\code{UK$clean()}}
 \item \href{#method-clean_level_1}{\code{UK$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{UK$clean_level_2()}}
-\item \href{#method-process}{\code{UK$process()}}
 \item \href{#method-new}{\code{UK$new()}}
 \item \href{#method-download_uk}{\code{UK$download_uk()}}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
@@ -88,6 +98,7 @@ only entry, is be named main.}
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
 \out{</details>}
@@ -139,18 +150,6 @@ UK Specific Region Level Data Cleaning
 UK Specific Level 2 Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$clean_level_2()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-process"></a>}}
-\if{latex}{\out{\hypertarget{method-process}{}}}
-\subsection{Method \code{process()}}{
-UK specific function to processes regional data.
-Calls the parent process function but for level two regions does some
-column renaming.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$process()}\if{html}{\out{</div>}}
 }
 
 }

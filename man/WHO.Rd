@@ -28,7 +28,11 @@ national$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{localise_regions}}{names for spatial units}
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -37,10 +41,18 @@ only entry, is be named main.}
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-set_region_codes}{\code{WHO$set_region_codes()}}
 \item \href{#method-clean}{\code{WHO$clean()}}
 \item \href{#method-return}{\code{WHO$return()}}
 \item \href{#method-new}{\code{WHO$new()}}
@@ -52,18 +64,9 @@ only entry, is be named main.}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 }
 \out{</details>}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_region_codes"></a>}}
-\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
-\subsection{Method \code{set_region_codes()}}{
-Specific function for getting country codes for WHO .
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{WHO$set_region_codes()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean"></a>}}

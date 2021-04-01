@@ -28,14 +28,25 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{level_2_region}}{the level 2 region name.}
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
 }
 \if{html}{\out{</div>}}
 }

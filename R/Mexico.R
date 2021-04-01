@@ -164,7 +164,7 @@ Mexico <- R6::R6Class("Mexico",
       self$data$clean <- self$data$raw$clean %>%
         rename(level_2_region = .data$nombre) %>%
         mutate(date = dmy(.data$date)) %>%
-        left_join(self$codes_lookup[["2"]]),
+        left_join(self$codes_lookup[["2"]],
                   by = "level_2_region") %>%
         select(
           date, level_1_region_code, level_1_region,

@@ -12,7 +12,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- Italy$new(verbose = TRUE, steps = TRUE)
+region <- CountryTemplate$new(verbose = TRUE, steps = TRUE)
 region$download()
 region$clean()
 region$process()
@@ -25,12 +25,29 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{localise_regions}}{the localised names for level 1 and 2 regions}
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
+
+\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_code}}{A list of region codes in order of level.}
 }
 \if{html}{\out{</div>}}
 }
