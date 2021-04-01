@@ -34,14 +34,6 @@ check_country_available <- function(country = character(), level = 1,
     steps = steps, ...
   )
 
-  level <- match.arg(level, choices = c("1", "2"), several.ok = FALSE)
-  tar_level <- paste0("level_", level, "_region")
-
-  if (is.null(region_class[["localise_regions"]][[tar_level]])) {
-    stop("Target spatial level not supported in the selected country.
-               use get_available_datasets() to see supported options")
-  }
-
   return(region_class)
 }
 
@@ -68,7 +60,7 @@ general_init <- function(self, level = "1",
                          verbose = TRUE, steps = FALSE) {
   if (!is.null(self$supported_levels[[level]])) {
     self$level <- level
-  }else{
+  } else {
     stop(level, " is not a supported level check supported_levels for options")
   }
   self$totals <- totals
@@ -124,7 +116,7 @@ DataClass <- R6::R6Class(
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
-      self$code_name 
+      self$code_name
     },
 
     #' @description General function for downloading raw data.
@@ -148,20 +140,24 @@ DataClass <- R6::R6Class(
     process = function() {
       message_verbose(self$verbose, "Processing data")
       region_vars <- switch(self$level,
-        "1" = c("level_1_region" = self$localise_regions$level_1_region, 
-                "level_1_region_code" = self$localise_regions$level_1_region_code), # nolint
-        "2" = c("level_2_region" = self$localise_regions$level_2_region, 
-                "level_2_region_code" = self$localise_regions$level_2_region_code,
-                "level_1_region" = self$localise_regions$level_1_region, 
-                "level_1_region_code" = self$localise_regions$level_1_region_code)
+        "1" = c(
+          "level_1_region" = self$localise_regions$level_1_region,
+          "level_1_region_code" = self$localise_regions$level_1_region_code
+        ), # nolint
+        "2" = c(
+          "level_2_region" = self$localise_regions$level_2_region,
+          "level_2_region_code" = self$localise_regions$level_2_region_code,
+          "level_1_region" = self$localise_regions$level_1_region,
+          "level_1_region_code" = self$localise_regions$level_1_region_code
+        )
       )
       tar_level <- paste0("level_", self$level, "_region")
       self$data$processed <- process_internal(
-        clean_data = self$data$clean, 
+        clean_data = self$data$clean,
         level = tar_level,
-        group_vars = region_vars, 
+        group_vars = region_vars,
         totals = self$totals,
-        localise = self$localise, 
+        localise = self$localise,
         verbose = self$verbose
       )
     },
