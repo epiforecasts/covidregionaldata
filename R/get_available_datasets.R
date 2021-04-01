@@ -24,7 +24,7 @@ get_available_datasets <- function() {
       if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
         public_fields <- get(x)$public_fields
         out <- out["country", "get_data_function"]
-        out <- public_fields$localise_regions
+        out <- c(out, public_fields$supported_region_names)
         out$data_url <- paste(
           unlist(public_fields$data_url),
           collapse = ", "
