@@ -24,9 +24,9 @@ UK <- R6::R6Class("UK", # rename to country name
     # Core Attributes (amend each paramater for country specific infomation)
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "region", "2" = "authority"),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
@@ -60,6 +60,7 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description Specific function for getting region codes for UK .
     set_region_codes = function() {
+      self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
     #' @description UK specific download function

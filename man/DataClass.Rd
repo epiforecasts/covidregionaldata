@@ -20,9 +20,9 @@ downloading, processing, and returning data.
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{region_name}}{A list of region names in order of level.}
+\item{\code{supported_region_names}}{A list of region names in order of level.}
 
-\item{\code{region_code}}{A list of region codes in order of level.}
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
 
@@ -43,13 +43,6 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{region_code}}{A list of region codes in order of level.}
 }
 \if{html}{\out{</div>}}
 }

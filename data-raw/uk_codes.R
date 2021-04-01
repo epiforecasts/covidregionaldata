@@ -1,3 +1,7 @@
+library(vroom)
+library(dplyr)
+library(tidyr)
+
 # make uk authority table
 authority_data <- vroom::vroom(
   "https://opendata.arcgis.com/datasets/72e57d3ab1054e169c55afff3c9c1aa4_0.csv", # nolint
@@ -62,7 +66,7 @@ authority_lookup_table <- dplyr::bind_rows(
   other_auths
 )
 
-uk_authority_lookup_table <- authority_lookup_table %>%
+uk_codes <- authority_lookup_table %>%
   dplyr::arrange(.data$level_1_region_code) %>%
   dplyr::distinct(.data$level_2_region_code,
     .data$level_2_region,
@@ -70,4 +74,4 @@ uk_authority_lookup_table <- authority_lookup_table %>%
   )
 
 # update package region_codes
-usethis::use_data(uk_authority_lookup_table, overwrite = TRUE)
+usethis::use_data(uk_codes, overwrite = TRUE)

@@ -53,12 +53,12 @@ check_country_available <- function(country = character(), level = 1,
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
-#' #' @export
+#' @export
 #'
 general_init <- function(self, level = "1",
                          totals = FALSE, localise = TRUE,
                          verbose = TRUE, steps = FALSE) {
-  if (!is.null(self$supported_levels[[level]])) {
+  if (any(self$supported_levels %in% level)) {
     self$level <- level
   } else {
     stop(level, " is not a supported level check supported_levels for options")
@@ -89,9 +89,9 @@ DataClass <- R6::R6Class(
     data = NULL,
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = NA),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
     #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
     region_name = NULL,
@@ -116,10 +116,16 @@ DataClass <- R6::R6Class(
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
-      self$code_name
     },
 
-    #' @description General function for downloading raw data.
+    #' @description Initialize the country
+    #' @param ... The args passed by [general_init]
+    initialize = function(...) {
+      general_init(self, ...)
+    },
+
+    #' @description Download raw data using the list
+    #' of supplied data_urls.
     #' @importFrom purrr map
     download = function() {
       self$data$raw <- map(self$data_url, csv_reader,
@@ -127,15 +133,13 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description General cleaning function
+    #' @description Clean data
     clean = function() {
       warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
       self$data$clean <- self$data$raw[["main"]]
     },
 
-    #' Shared regional dataset processing
-    #'
-    #' @description General function to processes regional data.
+    #' @description Processes data.
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       message_verbose(self$verbose, "Processing data")

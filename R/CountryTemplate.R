@@ -19,16 +19,10 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     # Core Attributes (amend each paramater for country specific infomation)
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = NA),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
-    #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
-    region_name = NULL,
-    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
-    code_name = NULL,
-    #' @field codes_lookup string or tibble Region codes for the target country
-    codes_lookup = list(),
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(main = "url"),
@@ -45,13 +39,6 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
       # No return statement is required
       # have a statment like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
-      # Add custom fields here
     }
   )
 )
