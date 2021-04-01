@@ -21,8 +21,12 @@ Mexico <- R6::R6Class("Mexico",
     # Core Attributes
     #' @field level_1_region the level 1 region name
     level_1_region = "estados",
-    #' @field level_2_region the level 2 region name.
+    #' @field level_2_region the level 2 region name
     level_2_region = "municipios",
+    #' @field level_1_region_code the level 1 geocode name 
+    level_1_region_code = "iso_3166_2",
+    #' @field level_2_region_code the level 2 geocode name
+    level_2_region_code = "inegi",
     #' @field data_url link to raw data
     data_url = "https://datos.covid-19.conacyt.mx/#DownZCSV",
     #' @field source_data_cols existing columns within the raw data
@@ -39,7 +43,7 @@ Mexico <- R6::R6Class("Mexico",
           self$country
         )
       )
-      self$region_codes <- covidregionaldata::mexico_codes
+      self$region_codes <- mexico_codes
     },
 
     #' @description Data download function for Mexico data. This replaces the
@@ -120,17 +124,19 @@ Mexico <- R6::R6Class("Mexico",
     clean_level_1 = function() {
       self$data$clean <- self$data$raw %>%
         mutate(
-          region_level_1 = str_to_title(.data$nombre),
-          region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
+          level_1_region = str_to_title(.data$nombre),
+          level_1_region = ifelse(.data$level_1_region == "Distrito Federal",
             "Ciudad de Mexico",
-            .data$region_level_1
+            .data$level_1_region
           ),
           date = dmy(.data$date)
         ) %>%
-        full_join(self$data$codes_lookup, by = "region_level_1") %>%
-        filter(.data$region_level_1 != "Nacional") %>%
-        rename(level_1_region_code = .data$iso_code) %>%
-        select(-c(.data$nombre, .data$cve_ent))
+        left_join(self$region_codes %>%
+                    filter(is.na(level_2_region)),
+                  by = c("level_1_region")) %>%
+        filter(.data$level_1_region != "Nacional") %>%
+        select(date, level_1_region, level_1_region_code,
+               cases_new, deaths_new)
     },
 
     #' @description Mexico Specific Municipality Level Data Cleaning
@@ -141,20 +147,15 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean_level_2 = function() {
       self$data$clean <- self$data$raw %>%
-        mutate(
-          region_level_2 = .data$nombre,
-          inegi_state = substr(.data$cve_ent, 1, 2),
-          date = dmy(.data$date)
-        ) %>%
-        select(-.data$nombre) %>%
-        full_join(self$data$codes_lookup, by = "inegi_state") %>%
-        mutate(
-          level_1_region_code = .data$iso_code,
-          level_2_region_code = .data$cve_ent
-        ) %>%
+        rename(level_2_region = .data$nombre) %>%
+        mutate(date = dmy(.data$date)) %>%
+        left_join(self$region_codes %>%
+                    filter(!is.na(level_2_region)),
+                  by = "level_2_region") %>%
         select(
-          -.data$inegi_state, -.data$cve_ent,
-          -.data$inegi_state, -.data$iso_code
+          date, level_1_region_code, level_1_region,
+          level_2_region_code, level_2_region,
+          cases_new, deaths_new
         )
     },
 

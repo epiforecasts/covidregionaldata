@@ -130,17 +130,21 @@ DataClass <- R6::R6Class(
     process = function() {
       message_verbose(self$verbose, "Processing data")
       region_vars <- switch(self$level,
-        "1" = c("region_level_1", "level_1_region_code"),
-        "2" = c(
-          "region_level_2", "level_2_region_code",
-          "region_level_1", "level_1_region_code"
-        )
+        "1" = c("level_1_region" = self$level_1_region, 
+                "level_1_region_code" = self$level_1_region_code),
+        "2" = c("level_2_region" = self$level_2_region, 
+                "level_2_region_code" = self$level_2_region_code,
+                "level_1_region" = self$level_1_region, 
+                "level_1_region_code" = self$level_1_region_code)
       )
       tar_level <- paste0("level_", self$level, "_region")
       self$data$processed <- process_internal(
-        self$data$clean, tar_level, self$code_name,
-        group_vars = region_vars, totals = self$totals,
-        localise = self$localise, verbose = self$verbose
+        clean_data = self$data$clean, 
+        level = tar_level,
+        group_vars = region_vars, 
+        totals = self$totals,
+        localise = self$localise, 
+        verbose = self$verbose
       )
     },
 
