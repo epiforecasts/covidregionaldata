@@ -296,7 +296,7 @@ UK <- R6::R6Class("UK", # rename to country name
       csv_links <- map(
         1:(ceiling(length(self$source_data_cols) / 4)),
         ~ paste0(
-          self$data_url, "?", unlist(filter), "&",
+          self$data_url[["main"]], "?", unlist(filter), "&",
           paste(paste0(
             "metric=",
             self$source_data_cols[(1 + 4 * (. - 1)):min(
