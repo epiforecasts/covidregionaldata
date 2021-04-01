@@ -1,13 +1,19 @@
-- name: 'Pull request checklist'
-  uses: actions/github-script@0.3.0
-  if: github.event_name == 'pull_request'
-  with:
-    github-token: ${{ secrets.GITHUB_TOKEN }}
-    script: |
-      const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
-      github.issues.createComment({ issue_number, owner, repo, 
-        body: 'Thanks for opening this pull request. Can you please run through the following checklist before requesting review (ticking as complete or if not relevant).
-        
+name: Pull request checklist
+
+on: [pull_request]
+
+jobs:
+  pr-checklist:
+    runs-on: ubuntu-latest
+    steps: 
+     - uses: actions/github-script@0.3.0
+       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+          github.issues.createComment({ issue_number, owner, repo, 
+          body: 'Thanks for opening this pull request. Can you please run through the following checklist before requesting review (ticking as complete or if not relevant).
+          
                    - [ ] Read our [contribution guidelines](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/CONTRIBUTING.md) if you have not already done so.
                    - [ ] If you have altered an existing class please run the tests locally using `options(testDownload=TRUE, testSource=class-name)` and report your findings.
                    - [ ] If you have added an existing class please run the tests locally for that class (i.e using `devtools::test()`).
@@ -15,5 +21,4 @@
                    - [ ] Comment with details if unable to get our CI checks to pass or unable to remove all warnings.
                    
                    Thank you again for the contribution. If making large scale changes consider using our `pre-commit` hooks (see the contributing guide) to more easily comply with our guidelines. 
-                  '
-      });
+                  ' });
