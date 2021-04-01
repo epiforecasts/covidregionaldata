@@ -22,10 +22,14 @@ UK <- R6::R6Class("UK", # rename to country name
   inherit = DataClass,
   public = list(
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "region", # add more levels as needed
-    #' @field level_2_region the level 2 region name
-    level_2_region = "authority",
+    #' @field country name of country to fetch data for
+    country = "United Kingdom (UK)",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1", "2"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "region", "2" = "authority"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
@@ -58,7 +62,7 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description Specific function for getting region codes for UK .
     set_region_codes = function() {
-      return("ons_region_code")
+      self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
     #' @description UK specific download function
@@ -75,8 +79,6 @@ UK <- R6::R6Class("UK", # rename to country name
         if (self$nhsregions) {
           self$data$raw$nhs <- self$download_nhs_regions()
         }
-      } else if (self$level == "2") {
-        self$download_authority_data()
       }
     },
 
@@ -118,7 +120,7 @@ UK <- R6::R6Class("UK", # rename to country name
           hosp_total = .data$cumAdmissions,
           tested_new = .data$newTestsByPublishDate,
           tested_total = .data$cumTestsByPublishDate,
-          region_level_1 = .data$areaName,
+          level_1_region = .data$areaName,
           level_1_region_code = .data$areaCode
         )
       if (!is.null(self$release_date)) {
@@ -166,29 +168,29 @@ UK <- R6::R6Class("UK", # rename to country name
         ) %>%
         # Hospitalisations and tested variables are consistent across nations
         rename(
-          region_level_2 = .data$areaName,
+          level_2_region = .data$areaName,
           level_2_region_code = .data$areaCode
         ) %>%
         # Join local authority codes to level 1 regions
-        left_join(covidregionaldata::uk_authority_lookup_table,
-          by = "region_level_2"
+        left_join(self$code_lookup[["2"]],
+          by = "level_2_region"
         ) %>%
         rename(level_2_region_code = .data$level_2_region_code.x) %>%
         select(-.data$level_2_region_code.y) %>%
         mutate(
-          region_level_1 = ifelse(grepl("^W", .data$level_2_region_code),
+          level_1_region = ifelse(grepl("^W", .data$level_2_region_code),
             "Wales",
             ifelse(grepl("^S", .data$level_2_region_code),
               "Scotland",
               ifelse(grepl("^N", .data$level_2_region_code),
-                "Northern Ireland", .data$region_level_1
+                "Northern Ireland", .data$level_1_region
               )
             )
           ),
           level_1_region_code = ifelse(
-            .data$region_level_1 == "Scotland", "S92000003",
-            ifelse(.data$region_level_1 == "Wales", "W92000004",
-              ifelse(.data$region_level_1 == "Northern Ireland",
+            .data$level_1_region == "Scotland", "S92000003",
+            ifelse(.data$level_1_region == "Wales", "W92000004",
+              ifelse(.data$level_1_region == "Northern Ireland",
                 "N92000002", .data$level_1_region_code
               )
             )
@@ -199,24 +201,6 @@ UK <- R6::R6Class("UK", # rename to country name
         self$data$clean <- dplyr::mutate(self$data$clean,
           release_date = self$release_date
         )
-      }
-    },
-
-    #' @description UK specific function to processes regional data.
-    #' Calls the parent process function but for level two regions does some
-    #' column renaming.
-    #' @importFrom dplyr rename %>%
-    process = function() {
-      # run through parent process
-      super$process()
-      # rename the region codes columuns for level 2
-      if (self$level == "2") {
-        self$data$processed <- self$data$processed %>%
-          rename(
-            ltla_code = ons_region_code,
-            ons_region_code = level_1_region_code,
-            region = region_level_1
-          )
       }
     },
 
@@ -257,16 +241,14 @@ UK <- R6::R6Class("UK", # rename to country name
                           verbose = TRUE, steps = FALSE,
                           nhsregions = FALSE, release_date = NULL,
                           resolution = "utla") {
-      self$level <- level
-      self$totals <- totals
-      self$localise <- localise
-      self$verbose <- verbose
-      self$steps <- steps
-      self$country <- tolower(class(self)[1])
+      initialise_dataclass(self,
+        level = level, totals = totals,
+        localise = localise, verbose = verbose,
+        steps = steps
+      )
       self$nhsregions <- nhsregions
       self$release_date <- release_date
       self$resolution <- resolution
-      self$get_region_codes()
     },
 
     #' @field query_filters Set what filters to use to query the data
@@ -331,12 +313,12 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description Set filters for UK data api query.
     set_filters = function() {
-      if (self$level == 1) {
+      if (self$level == "1") {
         self$query_filters <- list(
           nation = "areaType=nation",
           region = "areaType=region"
         )
-      } else if (self$level == 2) {
+      } else if (self$level == "2") {
         self$resolution <- match.arg(self$resolution,
           choices = c("utla", "ltla")
         )
@@ -424,12 +406,12 @@ UK <- R6::R6Class("UK", # rename to country name
           length.out = nrow(.)
         )) %>%
         pivot_longer(-date,
-          names_to = "region_level_1",
+          names_to = "level_1_region",
           values_to = "hosp_new_first_admissions"
         ) %>%
         mutate(
-          region_level_1 = ifelse(region_level_1 == "ENGLAND",
-            "England", region_level_1
+          level_1_region = ifelse(level_1_region == "ENGLAND",
+            "England", level_1_region
           ),
           hosp_new_first_admissions = as.numeric(hosp_new_first_admissions)
         )
@@ -438,17 +420,17 @@ UK <- R6::R6Class("UK", # rename to country name
       clean_data <- clean_data %>%
         select(-.data$level_1_region_code) %>%
         mutate(
-          region_level_1 = ifelse(
-            .data$region_level_1 == "East Midlands" | .data$region_level_1 == "West Midlands", # nolint
+          level_1_region = ifelse(
+            .data$level_1_region == "East Midlands" | .data$level_1_region == "West Midlands", # nolint
             "Midlands",
-            .data$region_level_1
+            .data$level_1_region
           ),
-          region_level_1 = ifelse(
-            .data$region_level_1 == "Yorkshire and The Humber" | .data$region_level_1 == "North East", # nolint
-            "North East and Yorkshire", .data$region_level_1
+          level_1_region = ifelse(
+            .data$level_1_region == "Yorkshire and The Humber" | .data$level_1_region == "North East", # nolint
+            "North East and Yorkshire", .data$level_1_region
           )
         ) %>%
-        group_by(date, .data$region_level_1) %>%
+        group_by(date, .data$level_1_region) %>%
         summarise(
           cases_new = sum(.data$cases_new, na.rm = TRUE),
           cases_total = sum(.data$cases_total, na.rm = TRUE),
@@ -462,14 +444,14 @@ UK <- R6::R6Class("UK", # rename to country name
       # Merge PHE and NHS data
       clean_data <- left_join(
         clean_data, nhs_data,
-        by = c("region_level_1", "date")
+        by = c("level_1_region", "date")
       ) %>%
         # Create a blended variable that uses "all" hospital admissions
         # (includes readmissions) for devolved nations and "first" hospital
         # admissions for England + English regions
         mutate(
           hosp_new_blend = ifelse(
-            .data$region_level_1 %in% c(
+            .data$level_1_region %in% c(
               "Wales",
               "Scotland",
               "Northern Ireland"

@@ -33,7 +33,7 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       # Set up cache
-      ch <- cache_filesystem(".cache")
+      ch <- cache_filesystem(options("cache_path"))
       read_csv_fun <- memoise(vroom, cache = ch)
     }
   }
@@ -69,7 +69,7 @@ message_verbose <- function(verbose = TRUE, ...) {
 #' used when reading data in.
 #' @export
 start_using_memoise <- function() {
-  options("useMemoise" = TRUE)
+  options("useMemoise" = TRUE, cache_path = ".cache")
 }
 
 #' Stop using useMemoise
@@ -89,8 +89,8 @@ stop_using_memoise <- function() {
 #' @export
 #' @importFrom memoise cache_filesystem
 reset_cache <- function() {
-  unlink(".cache", recursive = TRUE)
-  cache_filesystem(".cache")
+  unlink(options("cache_path"), recursive = TRUE)
+  cache_filesystem(options("cache_path"))
   return(invisible(NULL))
 }
 

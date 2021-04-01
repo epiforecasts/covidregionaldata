@@ -18,8 +18,22 @@ downloading, processing, and returning data.
 
 \item{\code{data}}{data frame for requested region}
 
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
+
+\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
+
+\item{\code{source_data_cols}}{existing columns within the raw data}
 
 \item{\code{level}}{target region level}
 
@@ -31,10 +45,6 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
-
-\item{\code{region_codes}}{string or tibble Region codes for the target country}
-
-\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
 }
 \if{html}{\out{</div>}}
 }
@@ -42,10 +52,12 @@ up to today's date.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
+\item \href{#method-new}{\code{DataClass$new()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-return}{\code{DataClass$return()}}
+\item \href{#method-summary}{\code{DataClass$summary()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
 }
@@ -61,10 +73,28 @@ region codes.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+Initialize the country
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{The args passed by \link{initialise_dataclass}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-General function for downloading raw data.
+Download raw data using the list
+of supplied data_urls.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
 }
@@ -74,8 +104,7 @@ General function for downloading raw data.
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-General cleaning function
-Shared regional dataset processing
+Clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
@@ -85,7 +114,7 @@ Shared regional dataset processing
 \if{html}{\out{<a id="method-process"></a>}}
 \if{latex}{\out{\hypertarget{method-process}{}}}
 \subsection{Method \code{process()}}{
-General function to processes regional data.
+Processes data.
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
@@ -103,6 +132,19 @@ custom method should not be needed.
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$return()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-summary"></a>}}
+\if{latex}{\out{\hypertarget{method-summary}{}}}
+\subsection{Method \code{summary()}}{
+Class summary information
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns a single row summary tibble
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

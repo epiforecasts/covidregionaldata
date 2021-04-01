@@ -39,8 +39,6 @@ get_linelist()
 # Return the report delay only
 get_linelist(report_delay_only = TRUE)
 }
-}
-\author{
-Sam Abbott \href{mailto:sam.abbott@lshtm.ac.uk}{sam.abbott@lshtm.ac.uk}
+
 }
 \keyword{internal}

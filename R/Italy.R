@@ -18,8 +18,14 @@ Italy <- R6::R6Class("Italy",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "regioni",
+    #' @field country name of country to fetch data for
+    country = "Italy",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "regioni"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
@@ -31,16 +37,20 @@ Italy <- R6::R6Class("Italy",
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
     set_region_codes = function() {
-      message_verbose(
-        self$verbose,
-        paste(
-          "Getting region codes for",
-          self$country
+      self$codes_lookup$`1` <- tibble(
+        code = c(
+          "IT-21", "IT-23", "IT-25", "IT-32", "IT-34", "IT-36", "IT-42",
+          "IT-45", "IT-52", "IT-55", "IT-57", "IT-62", "IT-65", "IT-67",
+          "IT-72", "IT-75", "IT-77", "IT-78", "IT-82", "IT-88"
+        ),
+        region = c(
+          "Piemonte", "Valle d'Aosta", "Lombardia", "Trentino-Alto Adige",
+          "Veneto", "Friuli Venezia Giulia", "Liguria", "Emilia-Romagna",
+          "Toscana", "Umbria", "Marche", "Lazio", "Abruzzo",
+          "Molise", "Campania", "Puglia", "Basilicata",
+          "Calabria", "Sicilia", "Sardegna"
         )
       )
-      region_data <- covidregionaldata::italy_codes
-      self$region_codes <- by(region_data, region_data$level, function(x) x)
-      self$code_name <- unique(region_data$name)
     },
 
     #' @description Italy specific state level data cleaning
@@ -53,32 +63,26 @@ Italy <- R6::R6Class("Italy",
       self$data$clean <- self$data$raw[["main"]] %>%
         mutate(
           date = suppressWarnings(as_date(ymd_hms(.data$data))),
-          region_level_1 = as.character(.data$denominazione_regione),
+          level_1_region = as.character(.data$denominazione_regione),
           cases_total = .data$totale_casi,
           deaths_total = .data$deceduti,
           tested_total = .data$tamponi
         ) %>%
         arrange(.data$date) %>%
-        mutate(region_level_1 = recode(.data$region_level_1,
+        mutate(level_1_region = recode(.data$level_1_region,
           "P.A. Trento" = "Trentino-Alto Adige",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
-        group_by(.data$date, .data$region_level_1) %>%
+        group_by(.data$date, .data$level_1_region) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
-        full_join(self$region_codes[["level_1_region"]],
-          by = c("region_level_1" = "region")
+        full_join(self$codes_lookup[["1"]],
+          by = c("level_1_region" = "region")
         ) %>%
-        select(.data$date, .data$region_level_1,
+        select(.data$date, .data$level_1_region,
           level_1_region_code = .data$code,
           .data$cases_total, .data$deaths_total, .data$tested_total
         )
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )

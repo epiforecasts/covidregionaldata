@@ -21,8 +21,14 @@ ECDC <- R6::R6Class("ECDC",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "country",
+    #' @field country name of country to fetch data for
+    country = "European Centre for Disease Control (ECDC)",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "country"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
@@ -30,11 +36,6 @@ ECDC <- R6::R6Class("ECDC",
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
-
-    #' @description Specific function for getting country codes for ECDC .
-    set_region_codes = function() {
-      return("iso_code")
-    },
 
     #' @description ECDC specific state level data cleaning
     #' @importFrom dplyr mutate rename select arrange filter
@@ -84,7 +85,7 @@ ECDC <- R6::R6Class("ECDC",
           )
         ) %>%
         rename(
-          region_level_1 = .data$country,
+          level_1_region = .data$country,
           level_1_region_code = .data$iso_code
         )
     },
@@ -114,12 +115,6 @@ ECDC <- R6::R6Class("ECDC",
       } else {
         return(self$data$return)
       }
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )

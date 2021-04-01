@@ -13,7 +13,7 @@ if (!is.null(getOption("testSource"))) {
 # should downloads be tested (defaults to FALSE)
 # set this to true when implementing a new data set
 # can also be controlled using an environment variable
-download <- FALSE
+download <- TRUE
 if (!is.null(getOption("testDownload"))) {
   download <- getOption("testDownload")
 }
@@ -39,10 +39,6 @@ if (!is.null(source_of_interest)) {
   sources <- sources %>%
     dplyr::filter(source %in% source_of_interest)
 }
-
-# filter out UK level 2 as broken
-sources <- sources %>%
-  dplyr::filter(!(source %in% "UK" & level == "2"))
 
 # apply tests to each data source in turn
 sources %>%

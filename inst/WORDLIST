@@ -72,6 +72,7 @@ af
 ͣF
 Âf
 afghanistan
+AGU
 aH
 aI
 aIb
@@ -108,11 +109,15 @@ Aنy
 ɒ
 b֒
 BÂ
+Baja
+BAJA
 baNV
 bbb
 bĈ
 bcc
 BCCuB
+BCN
+BCS
 bd
 bD
 bdȘ
@@ -157,6 +162,8 @@ bٲd
 c͊
 cÆ
 campbell
+Campeche
+CAMPECHE
 canada
 carb
 casedistribution
@@ -176,7 +183,12 @@ Centre
 cff
 cG
 ĉg
+CHH
 CHi
+Chiapas
+CHIAPAS
+CHP
+Ciudad
 cIݍ
 CJB
 cL
@@ -187,11 +199,17 @@ cmd
 cMd
 CMD
 cmh
+CMX
 cn
 Cn
+COA
+Coahuila
+COAHUILA
 codecov
 Codecov
 coK
+Colima
+COLIMA
 colombia
 com
 conacyt
@@ -258,6 +276,7 @@ DId
 Dijb
 dir
 disp
+DISTRITO
 dL
 DL
 dM
@@ -286,6 +305,9 @@ Ds
 dt
 DT
 DunE
+DUR
+Durango
+DURANGO
 dUX
 DV
 dw
@@ -454,9 +476,13 @@ gov
 gp
 gQ
 grM
+GRO
 Gruson
 gȘ
 Gse
+GUA
+Guanajuato
+GUANAJUATO
 gV
 GV
 GVUp
@@ -484,6 +510,8 @@ Hellewell
 hFǊ
 hgg
 HH
+Hidalgo
+HIDALGO
 hj
 Hj
 HJ
@@ -560,6 +588,7 @@ ILD
 iM
 imTL
 india
+INEGI
 infobase
 initalize
 initialised
@@ -595,6 +624,9 @@ IӴ
 j̲
 jA
 JAI
+JAL
+Jalisco
+JALISCO
 jB
 JB
 JBEJ
@@ -778,6 +810,8 @@ MF
 mFV
 mh
 mH
+Michoacan
+MICHOACAN
 Mj
 MJ
 MM͙g
@@ -785,6 +819,9 @@ MMMrz
 MmX
 mnڌ
 mOB
+MOR
+Morelos
+MORELOS
 mPg
 mq
 mS
@@ -804,8 +841,11 @@ mީ
 Ň
 ņ͘
 nܸ
+Nacional
 Nak
 navbar
+Nayarit
+NAYARIT
 ncb
 nCoV
 nD
@@ -829,6 +869,7 @@ nhsregions
 NK
 Nl
 NL
+NLE
 NlS
 NLz
 nM
@@ -850,6 +891,8 @@ Nsے
 nT
 Nty
 nU
+Nuevo
+NUEVO
 Nw
 nwU
 Nx
@@ -871,6 +914,7 @@ Oٜ
 o'q
 oa
 ÔAa
+OAX
 Oc
 ȱcǾ
 od
@@ -940,9 +984,12 @@ pkgdown
 pkgs
 PmjY
 PN
+Potosi
+POTOSI
 pq
 PSX
 pU
+PUE
 purrr
 PV
 pw
@@ -987,7 +1034,11 @@ qsec
 qT
 qu
 qU
+Queretaro
+QUERETARO
 quickstart
+Quintana
+QUINTANA
 qv
 QVs
 qW
@@ -1033,6 +1084,8 @@ RmZ
 rn
 Rnt
 Ro
+Roo
+ROO
 Roxygen
 RoxygenNote
 rp
@@ -1082,6 +1135,8 @@ SG
 shapefiles
 sherratt
 Sherratt
+Sinaloa
+SINALOA
 sIR
 sj
 sJ
@@ -1089,6 +1144,7 @@ sk
 SKa
 ſl
 slowstart
+SLP
 sM
 SMh
 Șn
@@ -1110,6 +1166,8 @@ Subnational
 subregion
 sudo
 summarise
+Sur
+SUR
 svg
 sw
 sWG
@@ -1130,6 +1188,8 @@ t̵
 tܶ
 ֲT
 tA
+Tamaulipas
+TAMAULIPAS
 tAR
 tB
 tbH
@@ -1152,6 +1212,9 @@ tidyr
 tidyselect
 tK
 tl
+TLA
+Tlaxcala
+TLAXCALA
 tO
 tooL
 totalled
@@ -1234,6 +1297,7 @@ vc
 vd
 vD
 vee
+VER
 Verdana
 Vf
 vg
@@ -1393,6 +1457,7 @@ ysv
 yTN
 YtZ
 YUa
+YUC
 yv
 yV
 YV
@@ -1418,6 +1483,9 @@ za
 Za
 ZA
 ZȂ
+ZAC
+Zacatecas
+ZACATECAS
 zB
 Zb
 zbm

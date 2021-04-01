@@ -5,7 +5,7 @@
 \alias{mexico_codes}
 \title{Region Codes for Mexico Dataset.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 75 rows and 4 columns.
 }
 \usage{
 mexico_codes
