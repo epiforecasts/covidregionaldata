@@ -133,7 +133,8 @@ Mexico <- R6::R6Class("Mexico",
                   by = c("level_1_region")) %>%
         filter(.data$level_1_region != "Nacional") %>%
         select(date, level_1_region, level_1_region_code,
-               cases_new, deaths_new)
+               cases_new, deaths_new) %>%
+        distinct(.keep_all = TRUE)
     },
 
     #' @description Mexico Specific Municipality Level Data Cleaning
