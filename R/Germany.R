@@ -23,8 +23,11 @@ Germany <- R6::R6Class("Germany",
     level_1_region = "bundesland",
     #' @field level_2_region the level 2 region name.
     level_2_region = "landkreis",
-    #' @field data_url link to raw data
-    data_url = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv", # nolint
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 

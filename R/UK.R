@@ -26,8 +26,12 @@ UK <- R6::R6Class("UK", # rename to country name
     level_1_region = "region", # add more levels as needed
     #' @field level_2_region the level 2 region name
     level_2_region = "authority",
-    #' @field data_url link to raw data
-    data_url = "https://api.coronavirus.data.gov.uk/v2/data",
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://api.coronavirus.data.gov.uk/v2/data",
+      "nhs_base_url" = "https://www.england.nhs.uk/statistics"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = list(
       # Cases by date of specimen
@@ -282,8 +286,6 @@ UK <- R6::R6Class("UK", # rename to country name
     resolution = "utla",
     #' @field authority_data The raw data for creating authority lookup tables
     authority_data = NA,
-    #' @field nhs_base_url Base url for nhs region data
-    nhs_base_url = "https://www.england.nhs.uk/statistics", # nolint
 
     #' @description Helper function for downloading Uk data API
     #' @importFrom purrr map safely compact reduce
@@ -380,7 +382,7 @@ UK <- R6::R6Class("UK", # rename to country name
         England and English regions only."
       )
       nhs_url <- paste0(
-        self$nhs_base_url,
+        self$data_url[["nhs_base_url"]],
         "/wp-content/uploads/sites/2/",
         year(self$release_date), "/",
         ifelse(month(self$release_date) < 10,
