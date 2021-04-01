@@ -53,26 +53,13 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
 fill_empty_dates_with_na <- function(data) {
-  region_level_1 <- NULL
-  region_level_2 <- NULL
-  level_2_region_code <- NULL
-  level_1_region_code <- NULL
-  if ("region_level_2" %in% colnames(data)) {
-    data <- data %>%
-      complete(
-        date = full_seq(data$date, period = 1),
-        nesting(
-          region_level_2, level_2_region_code,
-          region_level_1, level_1_region_code
-        )
+  regions <- select(data, starts_with("level_")) %>%
+    names()
+  data <- data %>%
+    complete(
+      date = full_seq(data$date, period = 1),
+      nesting(!!!syms(regions))
       )
-  } else {
-    data <- data %>%
-      complete(
-        date = full_seq(data$date, period = 1),
-        nesting(region_level_1, level_1_region_code)
-      )
-  }
   return(data)
 }
 
@@ -123,7 +110,7 @@ calculate_columns_from_existing_data <- function(data) {
       !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
       data <- data %>%
-        group_by_at(vars(starts_with("region_level"))) %>%
+        group_by_at(vars(ends_with("region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         mutate(
           !!cumulative_count_name :=
@@ -133,7 +120,7 @@ calculate_columns_from_existing_data <- function(data) {
       cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
       data <- data %>%
-        group_by_at(vars(starts_with("region_level"))) %>%
+        group_by_at(vars(ends_with("region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         mutate(
@@ -173,9 +160,10 @@ totalise_data <- function(data) {
 #' by `process`.
 #' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
 #' @param level The level of the data, e.g. 'level_1_region'
-#' @param group_vars A character vector of grouping variables. It is assumed
-#' that the first entry indicates the main region variable and the second
-#' indicates the code for this variable.
+#' @param group_vars Grouping variables, used to 
+#' for grouping and to localise names. It is assumed that the first entry 
+#' indicates the main region variable and the second indicates the geocode for 
+#' this variable.
 #' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
@@ -187,13 +175,15 @@ totalise_data <- function(data) {
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !! :=
-process_internal <- function(clean_data, level, code, group_vars,
+process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE) {
   if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
-  dat <- group_by_at(clean_data, .vars = group_vars)
+  group_vars_standard <- names(group_vars)
+  
+  dat <- group_by(clean_data, across(.cols = group_vars_standard))
 
   . <- NULL
   dat <- dat %>%
@@ -206,7 +196,7 @@ process_internal <- function(clean_data, level, code, group_vars,
     dat <- dat %>%
       select(all_of(
         c(
-          group_vars, "cases_total", "deaths_total", "recovered_total",
+          group_vars_standard, "cases_total", "deaths_total", "recovered_total",
           "hosp_total", "tested_total"
         )
       ))
@@ -217,20 +207,21 @@ process_internal <- function(clean_data, level, code, group_vars,
       complete_cumulative_columns() %>%
       select(
         all_of(c(
-          "date", group_vars, "cases_new", "cases_total",
+          "date", group_vars_standard, "cases_new", "cases_total",
           "deaths_new", "deaths_total", "recovered_new", "recovered_total",
           "hosp_new", "hosp_total", "tested_new", "tested_total"
         )),
         everything()
       ) %>%
-      arrange(.data$date, all_of(group_vars[1]))
+      arrange(.data$date, all_of(group_vars_standard[1]))
   }
   dat <- ungroup(dat)
 
   if (localise) {
-    dat <- rename(dat, !!level := !!group_vars[1])
+    old <- names(group_vars)
+    names(old) <- group_vars
+    dat <- rename(dat, !!!old)
   }
-  dat <- rename(dat, !!code := !!group_vars[2])
 
   return(dat)
 }

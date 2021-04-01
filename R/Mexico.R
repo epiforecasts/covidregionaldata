@@ -124,18 +124,18 @@ Mexico <- R6::R6Class("Mexico",
     clean_level_1 = function() {
       self$data$clean <- self$data$raw %>%
         mutate(
-          region_level_1 = str_to_title(.data$nombre),
-          region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
+          level_1_region = str_to_title(.data$nombre),
+          level_1_region = ifelse(.data$level_1_region == "Distrito Federal",
             "Ciudad de Mexico",
-            .data$region_level_1
+            .data$level_1_region
           ),
           date = dmy(.data$date)
         ) %>%
         left_join(self$region_codes %>%
-                    filter(is.na(region_level_2)),
-                  by = c("region_level_1")) %>%
-        filter(.data$region_level_1 != "Nacional") %>%
-        select(date, region_level_1, level_1_region_code,
+                    filter(is.na(level_2_region)),
+                  by = c("level_1_region")) %>%
+        filter(.data$level_1_region != "Nacional") %>%
+        select(date, level_1_region, level_1_region_code,
                cases_new, deaths_new)
     },
 
@@ -147,14 +147,14 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean_level_2 = function() {
       self$data$clean <- self$data$raw %>%
-        rename(region_level_2 = .data$nombre) %>%
+        rename(level_2_region = .data$nombre) %>%
         mutate(date = dmy(.data$date)) %>%
         left_join(self$region_codes %>%
-                    filter(!is.na(region_level_2)),
-                  by = "region_level_2") %>%
+                    filter(!is.na(level_2_region)),
+                  by = "level_2_region") %>%
         select(
-          date, level_1_region_code, region_level_1,
-          level_2_region_code, region_level_2,
+          date, level_1_region_code, level_1_region,
+          level_2_region_code, level_2_region,
           cases_new, deaths_new
         )
     },

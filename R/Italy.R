@@ -20,6 +20,8 @@ Italy <- R6::R6Class("Italy",
     # Core Attributes
     #' @field level_1_region the level 1 region name.
     level_1_region = "regioni",
+    #' @field level_1_region_code the level 1 region geocode name
+    level_1_region_code = "iso_3166_2",
     #' @field data_url link to raw data
     data_url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv", # nolint
     #' @field source_data_cols existing columns within the raw data
@@ -50,23 +52,23 @@ Italy <- R6::R6Class("Italy",
       self$data$clean <- self$data$raw %>%
         mutate(
           date = suppressWarnings(as_date(ymd_hms(.data$data))),
-          region_level_1 = as.character(.data$denominazione_regione),
+          level_1_region = as.character(.data$denominazione_regione),
           cases_total = .data$totale_casi,
           deaths_total = .data$deceduti,
           tested_total = .data$tamponi
         ) %>%
         arrange(.data$date) %>%
-        mutate(region_level_1 = recode(.data$region_level_1,
+        mutate(level_1_region = recode(.data$level_1_region,
           "P.A. Trento" = "Trentino-Alto Adige",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
-        group_by(.data$date, .data$region_level_1) %>%
+        group_by(.data$date, .data$level_1_region) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
         full_join(self$region_codes[["level_1_region"]],
-          by = c("region_level_1" = "region")
+          by = c("level_1_region" = "region")
         ) %>%
-        select(.data$date, .data$region_level_1,
+        select(.data$date, .data$level_1_region,
           level_1_region_code = .data$code,
           .data$cases_total, .data$deaths_total, .data$tested_total
         )
