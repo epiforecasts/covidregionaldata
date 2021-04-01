@@ -37,14 +37,13 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom tibble tibble
     #' @importFrom dplyr mutate
     set_region_codes = function() {
-      self$codes_lookup$
-      level_1_germany <- tibble(
-        level_1_region_code = c(
+      self$codes_lookup$`1` <- tibble(
+        code = c(
           "DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH",
           "DE-MV", "DE-NI", "DE-NW", "DE-RP", "DE-SH", "DE-SL", "DE-SN",
           "DE-ST", "DE-TH"
         ),
-        region_level_1 = c(
+        region = c(
           "Brandenburg", "Berlin", "Baden-W\u00FCrttemberg", "Bayern",
           "Bremen", "Hessen", "Hamburg", "Mecklenburg-Vorpommern",
           "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz",
@@ -52,19 +51,6 @@ Germany <- R6::R6Class("Germany",
           "Th\u00FCringen"
         )
       )
-      germany_codes <- tibble(
-        country = "germany",
-        level = c("level_1_region", "level_2_region"),
-        name = c("iso_3166_2", "code"),
-        codes = list(
-          level_1_germany,
-          mutate(
-            level_1_germany,
-            level_2_region_code = NA,
-          )
-        )
-      )
-      self$region_codes <- germany_codes
     },
 
     #' @description directs to either level 1 or level 2 processing based on
@@ -81,7 +67,14 @@ Germany <- R6::R6Class("Germany",
           cases_new = .data$AnzahlFall,
           deaths_new = .data$AnzahlTodesfall
         ) %>%
-        mutate(date = as_date(ymd_hms(.data$date)))
+        mutate(date = as_date(ymd_hms(.data$date))) %>%
+        left_join(
+          self$codes_lookup$`1`,
+          by = c("region_level_1" = "region")
+        ) %>%
+        mutate(
+          level_1_region_code = .data$code,
+        )
 
       if (self$level == "1") {
         self$clean_level_1()
@@ -99,8 +92,7 @@ Germany <- R6::R6Class("Germany",
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup() %>%
-        full_join(self$data$codes_lookup, by = "region_level_1")
+        ungroup()
     },
 
     #' @description Germany Specific Landkreis Level Data Cleaning
@@ -119,8 +111,7 @@ Germany <- R6::R6Class("Germany",
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup() %>%
-        full_join(self$data$codes_lookup, by = "region_level_1")
+        ungroup()
     },
 
     #' @description Initialize the country
