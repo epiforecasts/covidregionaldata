@@ -66,12 +66,18 @@ check_country_available <- function(country = character(), level = 1,
 general_init <- function(self, level = "1",
                          totals = FALSE, localise = TRUE,
                          verbose = TRUE, steps = FALSE) {
-  self$level <- level
+  if (!is.null(self$supported_levels[[level]])) {
+    self$level <- level
+  }else{
+    stop(level, " is not a supported level check supported_levels for options")
+  }
   self$totals <- totals
   self$localise <- localise
   self$verbose <- verbose
   self$steps <- steps
   self$country <- tolower(class(self)[1])
+  self$region_name <- self$supported_region_names[[self$level]]
+  self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
 }
 
@@ -89,8 +95,21 @@ DataClass <- R6::R6Class(
     country = "",
     #' @field data data frame for requested region
     data = NULL,
-    #' @field data_url link to raw data
-    data_url = "",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = NA),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = NA),
+    #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
+    region_name = NULL,
+    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
+    code_name = NULL,
+    #' @field codes_lookup string or tibble Region codes for the target country
+    codes_lookup = list(),
+    #' @field data_url List of named links to raw data. The first, and
+    #' sometimes only entry, should be named main
+    data_url = list(),
     #' @field level target region level
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
@@ -102,25 +121,24 @@ DataClass <- R6::R6Class(
     verbose = NULL,
     #' @field steps Boolean. Keep data from each processing step.
     steps = NULL,
-    #' @field region_codes string or tibble Region codes for the target country
-    region_codes = list(),
-    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
-    code_name = NULL,
-
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
+      self$code_name 
     },
 
     #' @description General function for downloading raw data.
+    #' @importFrom purrr map
     download = function() {
-      self$data$raw <- csv_reader(self$data_url, self$verbose)
+      self$data$raw <- map(self$data_url, csv_reader,
+        verbose = self$verbose
+      )
     },
 
     #' @description General cleaning function
     clean = function() {
       warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
-      self$data$clean <- self$data$raw
+      self$data$clean <- self$data$raw[["main"]]
     },
 
     #' Shared regional dataset processing

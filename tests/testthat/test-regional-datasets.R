@@ -40,10 +40,6 @@ if (!is.null(source_of_interest)) {
     dplyr::filter(source %in% source_of_interest)
 }
 
-# filter out UK level 2 as broken
-sources <- sources %>%
-  dplyr::filter(!(source %in% "UK" & level == "2"))
-
 # apply tests to each data source in turn
 sources %>%
   dplyr::rowwise() %>%

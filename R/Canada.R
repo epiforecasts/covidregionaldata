@@ -23,8 +23,11 @@ Canada <- R6::R6Class("Canada",
     #' @field level_1_region the level 1 region name.
     level_1_region = "level_1_region", # for brevity - refers to
     # provinces and territories
-    #' @field data_url link to raw data
-    data_url = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv", # nolint
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "cases_new", "cases_total", "deaths_new",
@@ -73,8 +76,7 @@ Canada <- R6::R6Class("Canada",
       # No return statement is required
       # have a statement like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")
-
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         select(
           pruid, prname, date,
           numtoday, numtotal, numdeaths, numrecover, numtested

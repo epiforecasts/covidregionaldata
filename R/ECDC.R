@@ -21,17 +21,19 @@ ECDC <- R6::R6Class("ECDC",
   public = list(
 
     # Core Attributes
-    #' @field localise_regions names for spatial units
-    localise_regions = list(level_1_region = "country"),
-    #' @field data_url link to raw data
-    data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = "country"),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_code"),
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
-
-    #' @description Specific function for getting country codes for ECDC .
-    set_region_codes = function() {
-      return("iso_code")
-    },
 
     #' @description ECDC specific state level data cleaning
     #' @importFrom dplyr mutate rename select arrange filter
@@ -41,7 +43,7 @@ ECDC <- R6::R6Class("ECDC",
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
       long_string <- "Cases_on_an_international_conveyance_Japan"
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         mutate(date = as.Date(.data$dateRep, format = "%d/%m/%Y")) %>%
         rename(
           iso_code = .data$geoId, country = .data$countriesAndTerritories,

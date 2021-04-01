@@ -27,7 +27,8 @@ region$return()
 \describe{
 \item{\code{localise_regions}}{the localised names for level 1 and 2 regions}
 
-\item{\code{data_url}}{link to raw data}
+\item{\code{data_url}}{List of named links to raw data. The first, and
+sometimes only entry, should be named main}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }

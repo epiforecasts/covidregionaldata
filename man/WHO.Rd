@@ -30,7 +30,8 @@ national$return()
 \describe{
 \item{\code{localise_regions}}{names for spatial units}
 
-\item{\code{data_url}}{link to raw data}
+\item{\code{data_url}}{List of named links to raw data. The first, and
+only entry, is be named main.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }

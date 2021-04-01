@@ -19,12 +19,17 @@ Germany <- R6::R6Class("Germany",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "bundesland",
-    #' @field level_2_region the level 2 region name.
-    level_2_region = "landkreis",
-    #' @field data_url link to raw data
-    data_url = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv", # nolint
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1", "2"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = "bundesland", "2" = "landkreis"),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -32,13 +37,7 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom tibble tibble
     #' @importFrom dplyr mutate
     set_region_codes = function() {
-      message_verbose(
-        self$verbose,
-        paste(
-          "Getting region codes for",
-          self$country
-        )
-      )
+      self$codes_lookup$
       level_1_germany <- tibble(
         level_1_region_code = c(
           "DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH",
@@ -74,7 +73,7 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$Meldedatum,
           region_level_1 = .data$Bundesland,

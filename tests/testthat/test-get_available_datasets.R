@@ -1,3 +1,7 @@
+test_that("get_available_datasets works without error", {
+  expect_s3_class(get_available_datasets(), "data.frame")
+})
+
 data <- get_available_datasets()
 test_that(
   "Test column names are as expected",

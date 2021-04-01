@@ -6,7 +6,7 @@
 #' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
-#' region <- Italy$new(verbose = TRUE, steps = TRUE)
+#' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE)
 #' region$download()
 #' region$clean()
 #' region$process()
@@ -17,13 +17,21 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field localise_regions the localised names for level 1 and 2 regions
-    localise_regions = list(level_1_region = "region_1_name",
-                            level_1_region_code = "region_1_geocode_name", 
-                            level_2_region = "region_2_name", 
-                            level_2_region_code = "region_2_geocode_name"),
-    #' @field data_url link to raw data
-    data_url = "link_to_some_raw_data",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = NA),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = NA),
+    #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
+    region_name = NULL,
+    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
+    code_name = NULL,
+    #' @field codes_lookup string or tibble Region codes for the target country
+    codes_lookup = list(),
+    #' @field data_url List of named links to raw data. The first, and
+    #' sometimes only entry, should be named main
+    data_url = list(main = "url"),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("col_1", "col_2", "col_3", "etc."),
 
