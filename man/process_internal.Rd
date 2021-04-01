@@ -32,8 +32,6 @@ localised.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
-
-\item{region}{A given Country class object to process, e.g. \code{Italy()}}
 }
 \description{
 Internal shared regional data cleaning designed to be called

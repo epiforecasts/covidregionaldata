@@ -32,11 +32,7 @@ region$return()
 
 \item{\code{level_2_region}}{the level 2 region name.}
 
-\item{\code{data_url}}{link to raw cases data}
-
-\item{\code{hosp_url}}{link to raw hospitalisation data}
-
-\item{\code{deaths_url}}{link to raw deaths data (mortality)}
+\item{\code{data_url}}{List of named links to raw data.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
@@ -46,7 +42,6 @@ region$return()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Belgium$set_region_codes()}}
-\item \href{#method-download}{\code{Belgium$download()}}
 \item \href{#method-clean}{\code{Belgium$clean()}}
 \item \href{#method-clean_level_1}{\code{Belgium$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Belgium$clean_level_2()}}
@@ -57,6 +52,7 @@ region$return()
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 }
@@ -69,16 +65,6 @@ region$return()
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Belgium$set_region_codes()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download"></a>}}
-\if{latex}{\out{\hypertarget{method-download}{}}}
-\subsection{Method \code{download()}}{
-Belgium-specific function for downloading raw data.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Belgium$download()}\if{html}{\out{</div>}}
 }
 
 }

@@ -23,14 +23,12 @@ Belgium <- R6::R6Class("Belgium",
     level_1_region = "region",
     #' @field level_2_region the level 2 region name.
     level_2_region = "province",
-    # nolint start
-    #' @field data_url link to raw cases data
-    data_url = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
-    #' @field hosp_url link to raw hospitalisation data
-    hosp_url = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv",
-    #' @field deaths_url link to raw deaths data (mortality)
-    deaths_url = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv",
-    # nolint end
+    #' @field data_url List of named links to raw data.
+    data_url = list(
+      "main" ="https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
+      "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv",
+      "deaths" = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -46,10 +44,10 @@ Belgium <- R6::R6Class("Belgium",
       )
       level_1_belgium <- tibble::tibble(
         level_1_region_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
-        region_level_1 = c("Brussels", "Flanders", "Wallonia")
+        level_1_region = c("Brussels", "Flanders", "Wallonia")
       )
       level_2_belgium <- tibble::tribble(
-        ~level_2_region_code,    ~region_level_2, ~level_1_region_code,
+        ~level_2_region_code,    ~level_2_region, ~level_1_region_code,
                     "BE-VAN",        "Antwerpen",      "BE-VLG",
                     "BE-WBR",    "BrabantWallon",      "BE-WAL",
                     "BE-WHT",          "Hainaut",      "BE-WAL",
@@ -76,17 +74,6 @@ Belgium <- R6::R6Class("Belgium",
       self$code_name <- "iso_3166_2"
     },
 
-    #' @description Belgium-specific function for downloading raw data.
-    download = function() {
-      message_verbose(self$verbose, "Downloading data")
-      self$data$raw <- csv_reader(self$data_url, self$verbose)
-      self$data$raw_hosp <- csv_reader(self$hosp_url, self$verbose)
-      if (self$level == 1) {
-        # deaths data is not available by province (level 2)
-        self$data$raw_deaths <- csv_reader(self$deaths_url, self$verbose)
-      }
-    },
-
     #' @description directs to either level 1 or level 2 processing based on
     #' request.
     #' @importFrom dplyr select mutate
@@ -107,7 +94,7 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom lubridate ymd
     # nolint end
     clean_level_1 = function() {
-      cases_data <- self$data$raw %>%
+      cases_data <- self$data$raw$main %>%
         select(DATE, REGION, CASES) %>%
         mutate(
           DATE = ymd(DATE),
@@ -118,7 +105,7 @@ Belgium <- R6::R6Class("Belgium",
         tally(CASES) %>%
         ungroup()
 
-      hosp_data <- self$data$raw_hosp %>%
+      hosp_data <- self$data$raw$hosp %>%
         select(DATE, REGION, NEW_IN) %>%
         mutate(
           DATE = ymd(DATE),
@@ -129,7 +116,7 @@ Belgium <- R6::R6Class("Belgium",
         tally(wt = NEW_IN) %>%
         ungroup()
 
-      deaths_data <- self$data$raw_deaths %>%
+      deaths_data <- self$data$raw$deaths %>%
         select(DATE, REGION, DEATHS) %>%
         mutate(
           DATE = ymd(DATE),
@@ -148,11 +135,11 @@ Belgium <- R6::R6Class("Belgium",
       all_data <- full_join(cases_and_hosp_data,
                                    deaths_data,
                                    by = c("DATE", "REGION")) %>%
-        rename(date = DATE, region_level_1 = REGION,
+        rename(date = DATE, level_1_region = REGION,
                cases_new = n.x, hosp_new = n.y, deaths_new = n)
       self$data$clean <-
         left_join(all_data, self$region_codes$codes[1],
-                  by = c("region_level_1"),
+                  by = c("level_1_region"),
                   copy = TRUE)
     },
 
@@ -164,7 +151,7 @@ Belgium <- R6::R6Class("Belgium",
     # nolint end
     #'
     clean_level_2 = function() {
-      cases_data <- self$data$raw %>%
+      cases_data <- self$data$raw$main %>%
         select(DATE, REGION, PROVINCE, CASES) %>%
         mutate(
           DATE = lubridate::ymd(DATE),
@@ -178,7 +165,7 @@ Belgium <- R6::R6Class("Belgium",
         tally(CASES) %>%
         ungroup()
 
-      hosp_data <- self$data$raw_hosp %>%
+      hosp_data <- self$data$raw$hosp %>%
         select(DATE, REGION, PROVINCE, NEW_IN) %>%
         mutate(
           DATE = lubridate::ymd(DATE),
@@ -198,12 +185,12 @@ Belgium <- R6::R6Class("Belgium",
                                           "PROVINCE",
                                           "REGION")) %>%
         rename(date = DATE,
-               region_level_1 = REGION,
-               region_level_2 = PROVINCE,
+               level_1_region = REGION,
+               level_2_region = PROVINCE,
                cases_new = n.x,
                hosp_new = n.y) %>%
         left_join(self$region_codes$codes[2],
-                  by = c("region_level_2"), copy = TRUE)
+                  by = c("level_2_region"), copy = TRUE)
     },
 
     #' @description Initialize the country
