@@ -8,6 +8,8 @@
 # Note: Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 library(rvest)
 library(stringi)
+library(dplyr)
+library(tibble)
 
 # Level 1 -----------------------------------------------------------------
 # Get ISO codes
@@ -71,7 +73,8 @@ level_2_full <- level_2 %>%
 
 # Long join and save --------------------------------------------------
 mexico_codes <- bind_rows(level_1_full, level_2_full) %>%
-  select(-inegi_level1)
+  select(-inegi_level1) %>%
+  as_tibble()
 
 vroom::vroom_write(mexico_codes, "data-raw/mexico_codes.csv")
  

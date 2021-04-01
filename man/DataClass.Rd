@@ -18,6 +18,18 @@ downloading, processing, and returning data.
 
 \item{\code{data}}{data frame for requested region}
 
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
+
+\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
 
@@ -31,10 +43,13 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
-
-\item{\code{region_codes}}{string or tibble Region codes for the target country}
-
-\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_code}}{A list of region codes in order of level.}
 }
 \if{html}{\out{</div>}}
 }

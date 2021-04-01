@@ -52,6 +52,7 @@ set_negative_values_to_zero <- function(data) {
 #' @return A tibble with rows of NAs added.
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
+#' @importFrom tidyselect starts_with
 #' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
@@ -162,9 +163,9 @@ totalise_data <- function(data) {
 #' by `process`.
 #' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
 #' @param level The level of the data, e.g. 'level_1_region'
-#' @param group_vars Grouping variables, used to 
-#' for grouping and to localise names. It is assumed that the first entry 
-#' indicates the main region variable and the second indicates the geocode for 
+#' @param group_vars Grouping variables, used to
+#' for grouping and to localise names. It is assumed that the first entry
+#' indicates the main region variable and the second indicates the geocode for
 #' this variable.
 #' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
@@ -186,8 +187,8 @@ process_internal <- function(clean_data, level, group_vars,
     stop("No regional data found to process")
   }
   group_vars_standard <- names(group_vars)
-  
-  dat <- group_by(clean_data, across(.cols = group_vars_standard))
+
+  dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
   . <- NULL
   dat <- dat %>%

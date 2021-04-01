@@ -11,47 +11,47 @@ authority_data <- vroom::vroom(
 unitary_auth <- authority_data %>%
   dplyr::select(
     level_2_region_code = "CTY17CD",
-    region_level_2 = "CTY17NM",
+    level_2_region = "CTY17NM",
     level_1_region_code = "GOR10CD",
-    region_level_1 = "GOR10NM"
+    level_1_region = "GOR10NM"
   ) %>%
   dplyr::distinct() %>%
-  tidyr::drop_na(.data$region_level_2)
+  tidyr::drop_na(.data$level_2_region)
 
 upper_tier_auth <- authority_data %>%
   dplyr::select(
     level_2_region_code = "LAD17CD",
-    region_level_2 = "LAD17NM",
+    level_2_region = "LAD17NM",
     level_1_region_code = "GOR10CD",
-    region_level_1 = "GOR10NM"
+    level_1_region = "GOR10NM"
   ) %>%
   dplyr::distinct() %>%
-  tidyr::drop_na(.data$region_level_2)
+  tidyr::drop_na(.data$level_2_region)
 
 country_auth <- authority_data %>%
   dplyr::select(
     level_2_region_code = "LAD17CD",
-    region_level_2 = "LAD17NM",
+    level_2_region = "LAD17NM",
     level_1_region_code = "CTRY17CD",
-    region_level_1 = "CTRY17NM"
+    level_1_region = "CTRY17NM"
   ) %>%
-  dplyr::filter(.data$region_level_1 %in% c(
+  dplyr::filter(.data$level_1_region %in% c(
     "Northern Ireland",
     "Scotland",
     "Wales"
   )) %>%
   dplyr::distinct() %>%
-  tidyr::drop_na(.data$region_level_2)
+  tidyr::drop_na(.data$level_2_region)
 
 other_auths <- tibble::tibble(
   level_2_region_code = c("E06000058", "E06000052", "E09000012"),
-  region_level_2 = c(
+  level_2_region = c(
     "Bournemouth, Christchurch and Poole",
     "Cornwall and Isles of Scilly",
     "Hackney and City of London"
   ),
   level_1_region_code = c(rep("E92000001", 3)),
-  region_level_1 = c("South West", "South West", "London")
+  level_1_region = c("South West", "South West", "London")
 )
 
 # Join tables ---------------------------------------------------
@@ -65,7 +65,7 @@ authority_lookup_table <- dplyr::bind_rows(
 uk_authority_lookup_table <- authority_lookup_table %>%
   dplyr::arrange(.data$level_1_region_code) %>%
   dplyr::distinct(.data$level_2_region_code,
-    .data$region_level_2,
+    .data$level_2_region,
     .keep_all = TRUE
   )
 

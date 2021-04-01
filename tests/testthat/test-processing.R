@@ -4,7 +4,7 @@ source("custom_tests/mock_data.R")
 test_that("calculate_columns_from_existing_data returns correct results", {
   input_data <- tibble::tibble(
     "date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
-    "region_level_1" = c(rep("A", 4), rep("B", 3)),
+    "level_1_region" = c(rep("A", 4), rep("B", 3)),
     "cases_new" = c(0, 1, NA_integer_, 1, 1, 1, 1),
     "deaths_total" = c(0, 1, 2, 3, 1, NA_integer_, 2)
   )
@@ -50,12 +50,12 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
   expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
   expected_data <- dplyr::mutate(
     expected_data,
-    region_level_2 = region_level_1,
+    level_2_region = level_1_region,
     level_2_region_code = level_1_region_code
   ) %>%
     select(
-      date, region_level_2, level_2_region_code,
-      region_level_1, level_1_region_code, cases
+      date, level_2_region, level_2_region_code,
+      level_1_region, level_1_region_code, cases
     )
   partial_data <- expected_data[-c(6:9), ]
   expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
@@ -78,7 +78,7 @@ test_process_regional <- function(level = "1") {
     mexico$localise <- FALSE
     mexico$process()
     reproc_local <- mexico$data$processed
-    expect_true(any(colnames(reproc_local) %in% paste0("region_level_", level)))
+    expect_true(any(colnames(reproc_local) %in% paste0("level_", level, "_region")))
   })
 }
 

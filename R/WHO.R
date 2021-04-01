@@ -19,8 +19,12 @@ WHO <- R6::R6Class("WHO",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "country",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "country"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
@@ -33,11 +37,6 @@ WHO <- R6::R6Class("WHO",
       "deaths_new",
       "deaths_total"
     ),
-
-    #' @description Specific function for getting country codes for WHO .
-    set_region_codes = function() {
-      return("iso_code")
-    },
 
     #' @description WHO specific country level data cleaning
     #' @importFrom dplyr mutate rename

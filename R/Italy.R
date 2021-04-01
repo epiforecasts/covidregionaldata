@@ -18,28 +18,37 @@ Italy <- R6::R6Class("Italy",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "regioni",
-    #' @field level_1_region_code the level 1 region geocode name
-    level_1_region_code = "iso_3166_2",
-    #' @field data_url link to raw data
-    data_url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv", # nolint
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = "regioni"),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total", "tested_total"),
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
     set_region_codes = function() {
-      message_verbose(
-        self$verbose,
-        paste(
-          "Getting region codes for",
-          self$country
+      self$codes_lookup$`1` <- tibble(
+        code = c(
+          "IT-21", "IT-23", "IT-25", "IT-32", "IT-34", "IT-36", "IT-42",
+           "IT-45", "IT-52", "IT-55", "IT-57", "IT-62", "IT-65", "IT-67",
+           "IT-72", "IT-75", "IT-77", "IT-78", "IT-82", "IT-88"
+        ),
+        region = c(
+          "Piemonte", "Valle d'Aosta", "Lombardia", "Trentino-Alto Adige",
+           "Veneto", "Friuli Venezia Giulia", "Liguria", "Emilia-Romagna",
+           "Toscana", "Umbria", "Marche", "Lazio", "Abruzzo",
+           "Molise", "Campania", "Puglia", "Basilicata",
+           "Calabria", "Sicilia", "Sardegna"
         )
       )
-      region_data <- covidregionaldata::italy_codes
-      self$region_codes <- by(region_data, region_data$level, function(x) x)
-      self$code_name <- unique(region_data$name)
     },
 
     #' @description Italy specific state level data cleaning
@@ -65,7 +74,7 @@ Italy <- R6::R6Class("Italy",
         group_by(.data$date, .data$level_1_region) %>%
         mutate(cases_total = sum(.data$cases_total, na.rm = TRUE)) %>%
         ungroup() %>%
-        full_join(self$region_codes[["level_1_region"]],
+        full_join(self$codes_lookup[["1"]],
           by = c("level_1_region" = "region")
         ) %>%
         select(.data$date, .data$level_1_region,
