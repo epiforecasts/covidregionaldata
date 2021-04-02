@@ -34,14 +34,6 @@ check_country_available <- function(country = character(), level = 1,
     steps = steps, ...
   )
 
-  level <- match.arg(level, choices = c("1", "2"), several.ok = FALSE)
-  tar_level <- paste0("level_", level, "_region")
-
-  if (is.null(region_class[[tar_level]])) {
-    stop("Target spatial level not supported in the selected country.
-               use get_available_datasets() to see supported options")
-  }
-
   return(region_class)
 }
 
@@ -66,13 +58,19 @@ check_country_available <- function(country = character(), level = 1,
 general_init <- function(self, level = "1",
                          totals = FALSE, localise = TRUE,
                          verbose = TRUE, steps = FALSE) {
-  self$level <- level
+  if (!is.null(self$supported_levels[[level]])) {
+    self$level <- level
+  } else {
+    stop(level, " is not a supported level check supported_levels for options")
+  }
   self$totals <- totals
   self$localise <- localise
   self$verbose <- verbose
   self$steps <- steps
   self$country <- tolower(class(self)[1])
-  self$get_region_codes()
+  self$region_name <- self$supported_region_names[[self$level]]
+  self$code_name <- self$supported_region_codes[[self$level]]
+  self$set_region_codes()
 }
 
 #' R6 Class containing non-country specific methods
@@ -89,6 +87,18 @@ DataClass <- R6::R6Class(
     country = "",
     #' @field data data frame for requested region
     data = NULL,
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field region_name A list of region names in order of level.
+    supported_region_names = list("1" = NA),
+    #' @field region_code A list of region codes in order of level.
+    supported_region_codes = list("1" = NA),
+    #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
+    region_name = NULL,
+    #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
+    code_name = NULL,
+    #' @field codes_lookup string or tibble Region codes for the target country
+    codes_lookup = list(),
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(),
@@ -109,29 +119,10 @@ DataClass <- R6::R6Class(
     verbose = NULL,
     #' @field steps Boolean. Keep data from each processing step.
     steps = NULL,
-
-    #' @description General function for getting region codes for given region.
-    #' @rdname get_region_codes
-    #' @importFrom rlang .data
-    get_region_codes = function() {
-      tar_level <- paste0("level_", self$level, "_region")
-      tar_level_name <- self[[tar_level]]
-      codes <- covidregionaldata::region_codes %>%
-        filter(
-          .data$country %in% self$country,
-          .data$level %in% tar_level
-        )
-      message_verbose(
-        self$verbose, "Processing data for ",
-        self$country, " by ", tar_level_name
-      )
-
-      self$data <- list(country = self$country, level = tar_level_name)
-
-      if (nrow(codes) == 1) {
-        self$data$code <- codes$name[[1]]
-        self$data$codes_lookup <- codes$codes[[1]]
-      }
+    #' @description Place holder for custom country specific function to load
+    #' region codes.
+    set_region_codes = function() {
+      self$code_name
     },
 
     #' @description General function for downloading raw data.
@@ -161,16 +152,25 @@ DataClass <- R6::R6Class(
     process = function() {
       message_verbose(self$verbose, "Processing data")
       region_vars <- switch(self$level,
-        "1" = c("region_level_1", "level_1_region_code"),
+        "1" = c(
+          "level_1_region" = self$localise_regions$level_1_region,
+          "level_1_region_code" = self$localise_regions$level_1_region_code
+        ), # nolint
         "2" = c(
-          "region_level_2", "level_2_region_code",
-          "region_level_1", "level_1_region_code"
+          "level_2_region" = self$localise_regions$level_2_region,
+          "level_2_region_code" = self$localise_regions$level_2_region_code,
+          "level_1_region" = self$localise_regions$level_1_region,
+          "level_1_region_code" = self$localise_regions$level_1_region_code
         )
       )
-      self$data <- process_internal(
-        self$data,
-        group_vars = region_vars, totals = self$totals,
-        localise = self$localise, verbose = self$verbose
+      tar_level <- paste0("level_", self$level, "_region")
+      self$data$processed <- process_internal(
+        clean_data = self$data$clean,
+        level = tar_level,
+        group_vars = region_vars,
+        totals = self$totals,
+        localise = self$localise,
+        verbose = self$verbose
       )
     },
 

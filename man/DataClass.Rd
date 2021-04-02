@@ -18,6 +18,18 @@ downloading, processing, and returning data.
 
 \item{\code{data}}{data frame for requested region}
 
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{region_name}}{A list of region names in order of level.}
+
+\item{\code{region_code}}{A list of region codes in order of level.}
+
+\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
 
@@ -40,10 +52,17 @@ up to today's date.}
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{region_code}}{A list of region codes in order of level.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-get_region_codes}{\code{DataClass$get_region_codes()}}
+\item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
@@ -52,12 +71,13 @@ up to today's date.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_region_codes"></a>}}
-\if{latex}{\out{\hypertarget{method-get_region_codes}{}}}
-\subsection{Method \code{get_region_codes()}}{
-General function for getting region codes for given region.
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Place holder for custom country specific function to load
+region codes.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$get_region_codes()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$set_region_codes()}\if{html}{\out{</div>}}
 }
 
 }

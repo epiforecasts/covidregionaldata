@@ -23,15 +23,17 @@ get_available_datasets <- function() {
       country_obj <- get(x)
       if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
         public_fields <- get(x)$public_fields
-        public_fields$data_url <- paste(
+        out <- out["country", "get_data_function"]
+        out <- c(out, public_fields$supported_region_names)
+        out$data_url <- paste(
           unlist(public_fields$data_url),
           collapse = ", "
         )
-        public_fields$source_data_cols <- paste(
+        out$source_data_cols <- paste(
           unlist(public_fields$source_data_cols),
           collapse = ", "
         )
-        dat <- as_tibble(public_fields)
+        dat <- as_tibble(out)
         dat["country"] <- x
         if (x %in% c("WHO", "ECDC")) {
           dat["get_data_function"] <- "get_national_data"

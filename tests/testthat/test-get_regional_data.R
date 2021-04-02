@@ -38,7 +38,7 @@ test_get_regional_data <- function(level) {
       level = level, verbose = FALSE,
       localise = FALSE
     )
-    expect_true(any(colnames(d) %in% paste0("region_level_", level)))
+    expect_true(any(colnames(d) %in% paste0("level_", level, "_region")))
     d <- get_regional_data("mexico",
       level = level, verbose = FALSE,
       totals = TRUE
