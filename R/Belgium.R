@@ -19,18 +19,22 @@ Belgium <- R6::R6Class("Belgium",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "region",
-    #' @field level_2_region the level 2 region name.
-    level_2_region = "province",
+    #' @field country name of country to fetch data for
+    country = "Belgium",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1", "2"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "region", "2" = "province"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2", "2" = "iso_3166_2"),
     #' @field data_url List of named links to raw data.
     data_url = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
       "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
     ),
-    #' @field data_url_level_2 List of named links to raw data for level 2;
-    #' not used or accessed when generating level 1 results.
-    data_url_level_2 = list(
+    #' @field data_url_level_1 List of named links to raw data for level 1;
+    #' not used or accessed when generating level 2 results.
+    data_url_level_1 = list(
       "deaths" = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
     ),
     #' @field source_data_cols existing columns within the raw data
@@ -39,18 +43,11 @@ Belgium <- R6::R6Class("Belgium",
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble tribble
     set_region_codes = function() {
-      message_verbose(
-        self$verbose,
-        paste(
-          "Getting region codes for",
-          self$country
-        )
-      )
-      level_1_belgium <- tibble::tibble(
+      self$codes_lookup$`1` <- tibble::tibble(
         level_1_region_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
         level_1_region = c("Brussels", "Flanders", "Wallonia")
       )
-      level_2_belgium <- tibble::tribble(
+      self$codes_lookup$`2` <- tibble::tribble(
         ~level_2_region_code,    ~level_2_region, ~level_1_region_code,
                     "BE-VAN",        "Antwerpen",      "BE-VLG",
                     "BE-WBR",    "BrabantWallon",      "BE-WAL",
@@ -64,18 +61,6 @@ Belgium <- R6::R6Class("Belgium",
                     "BE-VWV",   "WestVlaanderen",      "BE-VLG",
                     "BE-BRU",         "Brussels",      "BE-BRU"
         )
-
-      belgium_codes <- tibble(
-        country = "belgium",
-        level = c("level_1_region", "level_2_region"),
-        name = c("iso_3166_2", "code"),
-        codes = list(
-          level_1_belgium,
-          level_2_belgium
-        )
-      )
-      self$region_codes <- belgium_codes
-      self$code_name <- "iso_3166_2"
     },
 
     #' @description directs to either level 1 or level 2 processing based on
@@ -93,7 +78,7 @@ Belgium <- R6::R6Class("Belgium",
 
     #' @description Belgium Specific Region Level Data Cleaning
     # nolint start
-    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename 
+    #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate ymd
     # nolint end
@@ -142,7 +127,7 @@ Belgium <- R6::R6Class("Belgium",
         rename(date = DATE, level_1_region = REGION,
                cases_new = n.x, hosp_new = n.y, deaths_new = n)
       self$data$clean <-
-        left_join(all_data, self$region_codes$codes[1],
+        left_join(all_data, self$codes_lookup[[1]],
                   by = c("level_1_region"),
                   copy = TRUE)
     },
@@ -193,14 +178,8 @@ Belgium <- R6::R6Class("Belgium",
                level_2_region = PROVINCE,
                cases_new = n.x,
                hosp_new = n.y) %>%
-        left_join(self$region_codes$codes[2],
+        left_join(self$codes_lookup[[2]],
                   by = c("level_2_region"), copy = TRUE)
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )
