@@ -80,7 +80,7 @@ Belgium <- R6::R6Class("Belgium",
         ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
         "2020-04-22","Limburg","Flanders","50-59","F",10,
         "2021-02-17","VlaamsBrabant","Flanders","10-19","M",12
-      )
+      ) %>% mutate(DATE=as.Date(DATE),CASES=as.double(CASES))
       
       self$data$raw$main <-
         self$data$raw$main %>%
