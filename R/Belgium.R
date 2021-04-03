@@ -69,6 +69,25 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
+      
+      # vroom fails to load two lines in the main data set
+      # For now, we filter out the broken lines and replace them
+      # with the following data shim
+      
+      self$data$raw$original_main <- self$data$raw$main
+      
+      fixed_lines <- tibble::tribble(
+        ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
+        "2020-04-22","Limburg","Flanders","50-59","F",10,
+        "2021-02-17","VlaamsBrabant","Flanders","10-19","M",12
+      )
+      
+      self$data$raw$main <-
+        self$data$raw$main %>%
+          filter((REGION %in% self$codes_lookup[[1]]$level_1_region 
+                   | is.na(REGION))) %>%
+        bind_rows(fixed_lines)
+      
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
