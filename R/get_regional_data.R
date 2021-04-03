@@ -17,7 +17,7 @@
 #'  and the Level 1 data will be returned.
 #' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
 #' @inheritParams return_data
-#' @inheritParams process_internal
+#' @inheritParams initialise_dataclass
 #' @inheritParams message_verbose
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,

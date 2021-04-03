@@ -19,11 +19,13 @@ Germany <- R6::R6Class("Germany",
   public = list(
 
     # Core Attributes
+    #' @field country name of country to fetch data for
+    country = "Germany",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "bundesland", "2" = "landkreis"),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
@@ -112,12 +114,6 @@ Germany <- R6::R6Class("Germany",
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
         ungroup()
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
     }
   )
 )

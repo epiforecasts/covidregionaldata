@@ -47,11 +47,13 @@ Uk$new(
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{country}}{name of country to fetch data for}
+
 \item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{region_name}}{A list of region names in order of level.}
+\item{\code{supported_region_names}}{A list of region names in order of level.}
 
-\item{\code{region_code}}{A list of region codes in order of level.}
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -67,15 +69,6 @@ only entry, is be named main.}
 \item{\code{resolution}}{The resolution of the data to return}
 
 \item{\code{authority_data}}{The raw data for creating authority lookup tables}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{region_name}}{A list of region names in order of level.}
-
-\item{\code{region_code}}{A list of region codes in order of level.}
 }
 \if{html}{\out{</div>}}
 }
@@ -100,6 +93,7 @@ only entry, is be named main.}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
 }

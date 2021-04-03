@@ -25,17 +25,13 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{country}}{name of country to fetch data for}
+
 \item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{region_name}}{A list of region names in order of level.}
+\item{\code{supported_region_names}}{A list of region names in order of level.}
 
-\item{\code{region_code}}{A list of region codes in order of level.}
-
-\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
-
-\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
-
-\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 sometimes only entry, should be named main}
@@ -44,28 +40,22 @@ sometimes only entry, should be named main}
 }
 \if{html}{\out{</div>}}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{region_code}}{A list of region codes in order of level.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-clean}{\code{CountryTemplate$clean()}}
-\item \href{#method-new}{\code{CountryTemplate$new()}}
 \item \href{#method-clone}{\code{CountryTemplate$clone()}}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -82,23 +72,6 @@ sometimes only entry, should be named main}
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{pass additional arguments}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the country
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryTemplate$new(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{The args passed by \link{general_init}}
 }
 \if{html}{\out{</div>}}
 }

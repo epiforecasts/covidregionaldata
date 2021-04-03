@@ -22,37 +22,13 @@ get_available_datasets <- function() {
     function(x) {
       country_obj <- get(x)
       if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
-        public_fields <- get(x)$public_fields
-        out <- out["country", "get_data_function"]
-        out <- c(out, public_fields$supported_region_names)
-        out$data_url <- paste(
-          unlist(public_fields$data_url),
-          collapse = ", "
-        )
-        out$source_data_cols <- paste(
-          unlist(public_fields$source_data_cols),
-          collapse = ", "
-        )
-        dat <- as_tibble(out)
-        dat["country"] <- x
-        if (x %in% c("WHO", "ECDC")) {
-          dat["get_data_function"] <- "get_national_data"
-        } else {
-          dat["get_data_function"] <- "get_regional_data"
-        }
+        dat <- get(x)$new()
+        dat <- dat$summary()
         return(dat)
       }
     }
   )
   available_country_data <- valid_country_objects %>%
-    bind_rows() %>%
-    select(
-      .data$country,
-      .data$level_1_region,
-      .data$level_2_region,
-      .data$get_data_function,
-      .data$data_url,
-      .data$source_data_cols
-    )
+    bind_rows()
   return(available_country_data)
 }

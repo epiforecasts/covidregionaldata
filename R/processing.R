@@ -61,7 +61,7 @@ fill_empty_dates_with_na <- function(data) {
     complete(
       date = full_seq(data$date, period = 1),
       nesting(!!!syms(regions))
-      )
+    )
   return(data)
 }
 
@@ -174,12 +174,11 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-# nolint start
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange rename
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
 #' @importFrom rlang !!!
-# nolint end
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE) {

@@ -53,12 +53,12 @@ check_country_available <- function(country = character(), level = 1,
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
-#' #' @export
+#' @export
 #'
-general_init <- function(self, level = "1",
-                         totals = FALSE, localise = TRUE,
-                         verbose = TRUE, steps = FALSE) {
-  if (!is.null(self$supported_levels[[level]])) {
+initialise_dataclass <- function(self, level = "1",
+                                 totals = FALSE, localise = TRUE,
+                                 verbose = TRUE, steps = FALSE) {
+  if (any(self$supported_levels %in% level)) {
     self$level <- level
   } else {
     stop(level, " is not a supported level check supported_levels for options")
@@ -67,7 +67,6 @@ general_init <- function(self, level = "1",
   self$localise <- localise
   self$verbose <- verbose
   self$steps <- steps
-  self$country <- tolower(class(self)[1])
   self$region_name <- self$supported_region_names[[self$level]]
   self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
@@ -89,9 +88,9 @@ DataClass <- R6::R6Class(
     data = NULL,
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = NA),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
     #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
     region_name = NULL,
@@ -102,12 +101,14 @@ DataClass <- R6::R6Class(
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(),
-    #' @field data_url_level_1 List of named links to raw data to be 
+    #' @field data_url_level_1 List of named links to raw data to be
     #' downloaded only for level 1.
     data_url_level_1 = NULL,
-    #' @field data_url_level_2 List of named links to raw data to be 
+    #' @field data_url_level_2 List of named links to raw data to be
     #' downloaded only for level 2.
     data_url_level_2 = NULL,
+    #' @field source_data_cols existing columns within the raw data
+    source_data_cols = c(),
     #' @field level target region level
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
@@ -122,10 +123,16 @@ DataClass <- R6::R6Class(
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
-      self$code_name
     },
 
-    #' @description General function for downloading raw data.
+    #' @description Initialize the country
+    #' @param ... The args passed by [initialise_dataclass]
+    initialize = function(...) {
+      initialise_dataclass(self, ...)
+    },
+
+    #' @description Download raw data using the list
+    #' of supplied data_urls.
     #' @importFrom purrr map
     download = function() {
       data_url_list <- self$data_url
@@ -139,15 +146,13 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description General cleaning function
+    #' @description Clean data
     clean = function() {
       warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
       self$data$clean <- self$data$raw[["main"]]
     },
 
-    #' Shared regional dataset processing
-    #'
-    #' @description General function to processes regional data.
+    #' @description Processes data.
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       message_verbose(self$verbose, "Processing data")
@@ -184,6 +189,26 @@ DataClass <- R6::R6Class(
       } else {
         return(self$data$processed)
       }
+    },
+
+    #' @description Class summary information
+    #' @importFrom tibble tibble
+    #' @return Returns a single row summary tibble
+    summary = function() {
+      sum_df <- tibble(
+        country = self$country,
+        class = class(self)[1],
+        level_1_region = self$supported_region_names[["1"]],
+        level_2_region = ifelse(is.null(self$supported_region_names[["2"]]),
+          NA, self$supported_region_names[["2"]]
+        ),
+        get_data_function = ifelse(any(c("WHO", "ECDC") %in% class(self)[1]),
+          "get_national_data", "get_regional_data"
+        ),
+        data_url = paste(unlist(self$data_url), collapse = ", "),
+        source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
+      )
+      return(sum_df)
     }
   )
 )

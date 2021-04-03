@@ -22,11 +22,13 @@ UK <- R6::R6Class("UK", # rename to country name
   inherit = DataClass,
   public = list(
     # Core Attributes (amend each paramater for country specific infomation)
+    #' @field country name of country to fetch data for
+    country = "United Kingdom (UK)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
-    #' @field region_name A list of region names in order of level.
+    #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "region", "2" = "authority"),
-    #' @field region_code A list of region codes in order of level.
+    #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
@@ -60,6 +62,7 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description Specific function for getting region codes for UK .
     set_region_codes = function() {
+      self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
     #' @description UK specific download function
@@ -238,7 +241,7 @@ UK <- R6::R6Class("UK", # rename to country name
                           verbose = TRUE, steps = FALSE,
                           nhsregions = FALSE, release_date = NULL,
                           resolution = "utla") {
-      general_init(self,
+      initialise_dataclass(self,
         level = level, totals = totals,
         localise = localise, verbose = verbose,
         steps = steps
@@ -427,7 +430,7 @@ UK <- R6::R6Class("UK", # rename to country name
             "North East and Yorkshire", .data$level_1_region
           )
         ) %>%
-        group_by(date, .data$level_1_region)%>%
+        group_by(date, .data$level_1_region) %>%
         summarise(
           cases_new = sum(.data$cases_new, na.rm = TRUE),
           cases_total = sum(.data$cases_total, na.rm = TRUE),
