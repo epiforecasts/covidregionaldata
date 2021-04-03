@@ -26,7 +26,11 @@ Belgium <- R6::R6Class("Belgium",
     #' @field data_url List of named links to raw data.
     data_url = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
-      "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv",
+      "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
+    ),
+    #' @field data_url_level_2 List of named links to raw data for level 2;
+    #' not used or accessed when generating level 1 results.
+    data_url_level_2 = list(
       "deaths" = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
     ),
     #' @field source_data_cols existing columns within the raw data
