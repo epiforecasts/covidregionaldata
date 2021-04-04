@@ -23,8 +23,6 @@ test_who_level_1 <- function(region) {
   })
 }
 
-# Add data set specific custom tests here in the format of above using
-# variables from test_regional_dataset() environment
 test_UK_level_1 <- function(region) {
   data_name <- "UK level 1 with 'nhsregions=TRUE'"
   region$nhsregions <- TRUE
@@ -73,3 +71,6 @@ test_UK_level_1 <- function(region) {
     }
   })
 }
+
+# Add data set specific custom tests here in the format of above using
+# variables from test_regional_dataset() environment
