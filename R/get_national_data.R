@@ -60,7 +60,7 @@ get_national_data <- function(country, source = "who", steps = FALSE,
     }
     nation_class$data$clean <- filter(
       nation_class$data$clean,
-      .data$region_level_1 %in% tar_country
+      .data$level_1_region %in% tar_country
     )
   }
 
