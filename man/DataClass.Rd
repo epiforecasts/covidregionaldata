@@ -56,6 +56,7 @@ up to today's date.}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-process}{\code{DataClass$process()}}
+\item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-summary}{\code{DataClass$summary()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
@@ -84,7 +85,7 @@ Initialize the country
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{The args passed by \link{initialise_dataclass}}
+\item{\code{...}}{The args passed to \code{initialise_dataclass}}
 }
 \if{html}{\out{</div>}}
 }
@@ -122,10 +123,21 @@ Dynamically works for level 1 and level 2 regions.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get"></a>}}
+\if{latex}{\out{\hypertarget{method-get}{}}}
+\subsection{Method \code{get()}}{
+Get data related to the data class.
+Internally calls \code{download}, \code{clean}, and \code{process} methods.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$get()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-return"></a>}}
 \if{latex}{\out{\hypertarget{method-return}{}}}
 \subsection{Method \code{return()}}{
-Optional region specific return changes.
+Return data
 Designed to be called after \code{process}. For most datasets a
 custom method should not be needed.
 \subsection{Usage}{

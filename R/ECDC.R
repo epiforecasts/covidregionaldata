@@ -9,10 +9,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' national <- ECDC$new(verbose = TRUE, steps = TRUE)
-#' national$download()
-#' national$clean()
-#' national$process()
+#' national <- ECDC$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' national$return()
 #' }
 #'

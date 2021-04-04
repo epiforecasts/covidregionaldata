@@ -30,7 +30,7 @@ stratified by date and region.}
 
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning

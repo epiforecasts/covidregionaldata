@@ -49,15 +49,16 @@ check_country_available <- function(country = character(), level = 1,
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
 #' @param localise Logical, defaults to TRUE. Should region names be localised.
-#' @param verbose Logical, defaults to `TRUE`. Should verbose processing
+#' @param verbose Logical, defaults to TRUE. Should verbose processing
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
 #' steps be kept and output in a list.
+#' @param get Logical, defaults to FALSE. Should the class `get` method be
+#' called (this will download, clean, and process data at initialisation).
 #' @export
-#'
 initialise_dataclass <- function(self, level = "1",
                                  totals = FALSE, localise = TRUE,
-                                 verbose = TRUE, steps = FALSE) {
+                                 verbose = TRUE, steps = FALSE, get = FALSE) {
   if (any(self$supported_levels %in% level)) {
     self$level <- level
   } else {
@@ -70,6 +71,9 @@ initialise_dataclass <- function(self, level = "1",
   self$region_name <- self$supported_region_names[[self$level]]
   self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
+  if (get) {
+    self$get()
+  }
 }
 
 #' R6 Class containing non-country specific methods
@@ -120,7 +124,7 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Initialize the country
-    #' @param ... The args passed by [initialise_dataclass]
+    #' @param ... The args passed to `initialise_dataclass`
     initialize = function(...) {
       initialise_dataclass(self, ...)
     },
@@ -167,7 +171,15 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description Optional region specific return changes.
+    #' @description Get data related to the data class.
+    #' Internally calls `download`, `clean`, and `process` methods.
+    get = function() {
+      self$download()
+      self$clean()
+      self$process()
+    },
+
+    #' @description Return data
     #' Designed to be called after `process`. For most datasets a
     #' custom method should not be needed.
     return = function() {

@@ -9,10 +9,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Canada$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Canada$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Canada <- R6::R6Class("Canada",

@@ -12,10 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 UK <- R6::R6Class("UK", # rename to country name

@@ -7,10 +7,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Italy$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Italy <- R6::R6Class("Italy",

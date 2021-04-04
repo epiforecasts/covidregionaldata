@@ -18,10 +18,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Mexico$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Mexico <- R6::R6Class("Mexico",
