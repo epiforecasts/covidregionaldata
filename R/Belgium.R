@@ -4,7 +4,9 @@
 #'  and processing COVID-19 region level 1 and 2 data for Belgium.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+#' @source https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv
+#' @source https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv
+#' @source https://epistat.sciensano.be/Data/COVID19BE_MORT.csv
 #' @export
 #' @examples
 #' \dontrun{
@@ -27,7 +29,7 @@ Belgium <- R6::R6Class("Belgium",
     supported_region_names = list("1" = "region", "2" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "iso_3166_2"),
-    #' @field data_url List of named links to raw data.
+    #' @field data_url List of named links to raw data, used for all levels.
     data_url = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
       "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
@@ -69,25 +71,25 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      
+
       # vroom fails to load two lines in the main data set
       # For now, we filter out the broken lines and replace them
       # with the following data shim
-      
+
       self$data$raw$original_main <- self$data$raw$main
-      
+
       fixed_lines <- tibble::tribble(
         ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
-        "2020-04-22","Limburg","Flanders","50-59","F",10,
-        "2021-02-17","VlaamsBrabant","Flanders","10-19","M",12
-      ) %>% mutate(DATE=as.Date(DATE),CASES=as.double(CASES))
-      
+        "2020-04-22", "Limburg", "Flanders", "50-59", "F", 10,
+        "2021-02-17", "VlaamsBrabant", "Flanders", "10-19", "M", 12
+      ) %>% mutate(DATE = as.Date(DATE), CASES = as.double(CASES))
+
       self$data$raw$main <-
         self$data$raw$main %>%
-          filter((REGION %in% self$codes_lookup[[1]]$level_1_region 
+          filter((REGION %in% self$codes_lookup[[1]]$level_1_region
                    | is.na(REGION))) %>%
         bind_rows(fixed_lines)
-      
+
       if (self$level == "1") {
         self$clean_level_1()
       } else if (self$level == "2") {
@@ -162,7 +164,7 @@ Belgium <- R6::R6Class("Belgium",
       cases_data <- self$data$raw$main %>%
         select(DATE, REGION, PROVINCE, CASES) %>%
         mutate(
-          DATE = lubridate::ymd(DATE),
+          DATE = ymd(DATE),
           CASES = as.numeric(CASES)
         ) %>%
         replace_na(list(
@@ -176,7 +178,7 @@ Belgium <- R6::R6Class("Belgium",
       hosp_data <- self$data$raw$hosp %>%
         select(DATE, REGION, PROVINCE, NEW_IN) %>%
         mutate(
-          DATE = lubridate::ymd(DATE),
+          DATE = ymd(DATE),
           NEW_IN = as.numeric(NEW_IN)
         ) %>%
         replace_na(list(
