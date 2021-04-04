@@ -62,7 +62,7 @@ Germany <- R6::R6Class("Germany",
         select(
           date = .data$Meldedatum,
           level_1_region = .data$Bundesland,
-          level_w_region = .data$Landkreis,
+          level_2_region = .data$Landkreis,
           cases_new = .data$AnzahlFall,
           deaths_new = .data$AnzahlTodesfall
         ) %>%
@@ -86,7 +86,10 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
-        group_by(.data$level_1_region, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
@@ -105,7 +108,10 @@ Germany <- R6::R6Class("Germany",
             fixed = FALSE
           )
         ) %>%
-        group_by(.data$level_1_region, .data$level_2_region, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$level_2_region, .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))

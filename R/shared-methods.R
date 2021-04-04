@@ -177,6 +177,9 @@ DataClass <- R6::R6Class(
           "level_1_region_code" = self$supported_region_codes[["1"]]
         )
       )
+
+      region_vars <- region_vars[!is.null(region_vars)]
+      region_vars <- region_vars[!is.na(region_vars)]
       tar_level <- paste0("level_", self$level, "_region")
       self$data$processed <- process_internal(
         clean_data = self$data$clean,
