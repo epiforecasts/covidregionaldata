@@ -46,5 +46,12 @@ Check data for the requested country and region
 is available and return an initialised region class for that country.
 }
 \examples{
-check_country_available(country = "Italy")
+# Check for Italian data
+italy <- check_country_available("Italy")
+
+# Check for UK data with a partial name match
+uk <- check_country_available("United Kingdom")
+
+# Check for ECDC data
+ecdc <- check_country_available("ecdc")
 }

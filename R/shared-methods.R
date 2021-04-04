@@ -5,29 +5,46 @@
 #' @inheritParams get_regional_data
 #' @return The target countries specific object if available, e.g. [Italy()]
 #' @rdname check_country_available
+#' @importFrom stringr str_to_title str_replace_all str_detect
+#' @importFrom dplyr bind_rows filter
+#' @importFrom purrr map_lgl
 #' @export
 #' @examples
-#' check_country_available(country = "Italy")
+#' # Check for Italian data
+#' italy <- check_country_available("Italy")
+#'
+#' # Check for UK data with a partial name match
+#' uk <- check_country_available("United Kingdom")
+#'
+#' # Check for ECDC data
+#' ecdc <- check_country_available("ecdc")
 check_country_available <- function(country = character(), level = 1,
                                     totals = FALSE, localise = TRUE,
                                     verbose = TRUE, steps = FALSE, ...) {
   stopifnot(is.character(country))
   level <- as.character(level)
 
-  # if country is UK whole name must be upper case
-  if (country == "Uk") {
-    country <- toupper(country)
-  }
+  # construct short hand options
+  title_country <- str_to_title(country)
+  nospace <- str_replace_all(title_country, " ", "")
+  targets <- c(
+    title_country, toupper(title_country), nospace, toupper(nospace)
+  )
 
   # check we have data for desired country
-  available_sources <- covidregionaldata::get_available_datasets()
-  available_sources <- available_sources$country
-  if (!(country %in% available_sources)) {
-    stop(
-      paste0("No data available for country '", country, "'.")
-    )
+  datasets <- covidregionaldata::get_available_datasets()
+  target_class <- bind_rows(
+    filter(datasets, map_lgl(.data$class, ~ any(str_detect(., targets)))),
+    filter(datasets, map_lgl(.data$country, ~ any(str_detect(., targets))))
+  ) %>%
+    distinct()
+
+  if (nrow(target_class) == 0) {
+    stop("No data available for ", country, " see get_available_datasets() for
+    supported datasets")
   }
-  regionClass <- get(country)
+
+  regionClass <- get(target_class$class[1])
   region_class <- regionClass$new(
     level = level, totals = totals,
     localise = localise, verbose = verbose,
