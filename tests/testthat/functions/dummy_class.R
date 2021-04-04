@@ -15,5 +15,6 @@ dummy_class <- function(class) {
   replacePublicR6Method(class, "download", function() {
     return(invisible(NULL))
   })
+  class$verbose <- FALSE
   return(class)
 }

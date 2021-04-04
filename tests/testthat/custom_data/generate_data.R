@@ -1,7 +1,7 @@
 # helper functions
 source("tests/testthat/functions/dummy_class.R")
 # save level 1 mexico data for testing
-mexico <- covidregionaldata::Mexico$new(verbose = TRUE)
+mexico <- covidregionaldata::Mexico$new(verbose = FALSE)
 mexico <- dummy_class(mexico)
 saveRDS(mexico, "tests/testthat/custom_data/mexico_level_1_snap.rds")
 
