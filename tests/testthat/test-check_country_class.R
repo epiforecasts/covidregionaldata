@@ -42,4 +42,4 @@ check_country_class <- function(country) {
 
 # run tests
 available_country_data <- get_available_datasets()
-purrr::walk(available_country_data$country, check_country_class)
+purrr::walk(available_country_data$class, check_country_class)

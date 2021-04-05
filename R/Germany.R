@@ -8,10 +8,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2")
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2", get = TRUE)
 #' region$return()
 #' }
 Germany <- R6::R6Class("Germany",
@@ -19,14 +16,41 @@ Germany <- R6::R6Class("Germany",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "bundesland",
-    #' @field level_2_region the level 2 region name.
-    level_2_region = "landkreis",
-    #' @field data_url link to raw data
-    data_url = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv", # nolint
+    #' @field country name of country to fetch data for
+    country = "Germany",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1", "2"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "bundesland", "2" = "landkreis"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
+    #' @field data_url List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    data_url = list(
+      "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
+
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    #' @importFrom dplyr mutate
+    set_region_codes = function() {
+      self$codes_lookup$`1` <- tibble(
+        code = c(
+          "DE-BB", "DE-BE", "DE-BW", "DE-BY", "DE-HB", "DE-HE", "DE-HH",
+          "DE-MV", "DE-NI", "DE-NW", "DE-RP", "DE-SH", "DE-SL", "DE-SN",
+          "DE-ST", "DE-TH"
+        ),
+        region = c(
+          "Brandenburg", "Berlin", "Baden-W\u00FCrttemberg", "Bayern",
+          "Bremen", "Hessen", "Hamburg", "Mecklenburg-Vorpommern",
+          "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz",
+          "Schleswig-Holstein", "Saarland", "Sachsen", "Sachsen-Anhalt",
+          "Th\u00FCringen"
+        )
+      )
+    },
 
     #' @description directs to either level 1 or level 2 processing based on
     #' request.
@@ -34,15 +58,22 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom lubridate as_date ymd_hms
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
-      self$data$clean <- self$data$raw %>%
+      self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$Meldedatum,
-          region_level_1 = .data$Bundesland,
-          region_level_2 = .data$Landkreis,
+          level_1_region = .data$Bundesland,
+          level_2_region = .data$Landkreis,
           cases_new = .data$AnzahlFall,
           deaths_new = .data$AnzahlTodesfall
         ) %>%
-        mutate(date = as_date(ymd_hms(.data$date)))
+        mutate(date = as_date(ymd_hms(.data$date))) %>%
+        left_join(
+          self$codes_lookup$`1`,
+          by = c("level_1_region" = "region")
+        ) %>%
+        mutate(
+          level_1_region_code = .data$code,
+        )
 
       if (self$level == "1") {
         self$clean_level_1()
@@ -55,13 +86,15 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
-        group_by(.data$region_level_1, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup() %>%
-        full_join(self$data$codes_lookup, by = "region_level_1")
+        ungroup()
     },
 
     #' @description Germany Specific Landkreis Level Data Cleaning
@@ -70,24 +103,20 @@ Germany <- R6::R6Class("Germany",
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
         mutate(
-          region_level_2 = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)",
-            .data$region_level_2,
+          level_2_region = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)",
+            .data$level_2_region,
             fixed = FALSE
           )
         ) %>%
-        group_by(.data$region_level_1, .data$region_level_2, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$level_2_region, .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
         ) %>%
-        ungroup() %>%
-        full_join(self$data$codes_lookup, by = "region_level_1")
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
+        ungroup()
     }
   )
 )

@@ -1,9 +1,13 @@
+test_that("get_available_datasets works without error", {
+  expect_s3_class(get_available_datasets(), "data.frame")
+})
+
 data <- get_available_datasets()
 test_that(
   "Test column names are as expected",
   {
     expected_names <- c(
-      "country", "level_1_region",
+      "country", "class", "level_1_region",
       "level_2_region", "get_data_function",
       "data_url", "source_data_cols"
     )
@@ -37,7 +41,7 @@ test_that(
 
 # test each column for na values
 for (name in colnames(data)) {
-  if (name == "level_2_region") {
+  if (name %in% c("level_1_region", "level_2_region")) {
     next
   }
   test_that(
