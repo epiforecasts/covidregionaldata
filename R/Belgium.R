@@ -26,9 +26,11 @@ Belgium <- R6::R6Class("Belgium",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
-    supported_region_names = list("1" = "region", "2" = "province"),
+    supported_region_names = list("1" = "region",
+                                  "2" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
-    supported_region_codes = list("1" = "iso_3166_2", "2" = "iso_3166_2"),
+    supported_region_codes = list("1" = "iso_3166_2_region",
+                                  "2" = "iso_3166_2_province"),
     #' @field data_url List of named links to raw data, used for all levels.
     data_url = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",

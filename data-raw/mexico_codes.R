@@ -50,7 +50,7 @@ level_1 <- level_1 %>%
 # Use source data to get level 1 regions INEGI codes
 # - used for matching with level 2
 data_l1 <- check_country_available(country = "Mexico", level = "1")
-data_l1 <- data_l1$download() %>%
+data_l1 <- data_l1$download()[[1]] %>%
   select(inegi_level1 = cve_ent, level_1_region = nombre) %>%
   distinct()
 inegi_l1 <- data_l1 %>%
@@ -68,7 +68,7 @@ level_1_full <- left_join(level_1, inegi_l1, by = "level_1_region")
 # Level 2 -----------------------------------------------------------------
 # Use source data to get level 2 INEGI codes
 data_l2 <- check_country_available(country = "Mexico", level = "2")
-data_l2 <- data_l2$download()
+data_l2 <- data_l2$download()[[1]]
 level_2 <- data_l2 %>%
   select(
     level_2_region_code = cve_ent,

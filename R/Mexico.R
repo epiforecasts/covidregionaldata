@@ -138,10 +138,10 @@ Mexico <- R6::R6Class("Mexico",
     clean_level_1 = function() {
       self$data$clean <- self$data$raw$clean %>%
         mutate(
-          region_level_1 = str_to_title(.data$nombre),
-          region_level_1 = ifelse(.data$region_level_1 == "Distrito Federal",
+          level_1_region = str_to_title(.data$nombre),
+          level_1_region = ifelse(.data$level_1_region == "Distrito Federal",
             "Ciudad de Mexico",
-            .data$region_level_1
+            .data$level_1_region
           ),
           date = dmy(.data$date)
         ) %>%
@@ -170,8 +170,7 @@ Mexico <- R6::R6Class("Mexico",
           by = "level_2_region"
         ) %>%
         select(
-          -.data$inegi_state, -.data$cve_ent,
-          -.data$inegi_state, -.data$iso_code
+          -.data$cve_ent
         )
     }
   )

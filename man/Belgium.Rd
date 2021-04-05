@@ -4,7 +4,11 @@
 \alias{Belgium}
 \title{Belgium Class for downloading, cleaning and processing notification data}
 \source{
-https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv
+
+https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv
+
+https://epistat.sciensano.be/Data/COVID19BE_MORT.csv
 }
 \description{
 Country specific information for downloading, cleaning
@@ -36,7 +40,7 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{data_url}}{List of named links to raw data.}
+\item{\code{data_url}}{List of named links to raw data, used for all levels.}
 
 \item{\code{data_url_level_1}}{List of named links to raw data for level 1;
 not used or accessed when generating level 2 results.}
@@ -56,9 +60,10 @@ not used or accessed when generating level 2 results.}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
