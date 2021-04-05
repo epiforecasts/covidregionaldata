@@ -122,6 +122,12 @@ DataClass <- R6::R6Class(
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(),
+    #' @field data_url_level_1 List of named links to raw data to be
+    #' downloaded only for level 1.
+    data_url_level_1 = NULL,
+    #' @field data_url_level_2 List of named links to raw data to be
+    #' downloaded only for level 2.
+    data_url_level_2 = NULL,
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(),
     #' @field level target region level
@@ -150,8 +156,23 @@ DataClass <- R6::R6Class(
     #' of supplied data_urls.
     #' @importFrom purrr map
     download = function() {
-      self$data$raw <- map(self$data_url, csv_reader,
-        verbose = self$verbose
+      data_url_list <- self$data_url
+
+      if (self$level == 1 && !is.null(self$data_url_level_1)) {
+        if (length(self$data_url)>0) {
+          data_url_list <- merge(self$data_url, self$data_url_level_1)
+        } else {
+          data_url_list <- self$data_url_level_1
+        }
+      } else if (self$level == 2 && !is.null(self$data_url_level_2)) {
+        if (length(self$data_url)>0) {
+          data_url_list <- merge(self$data_url, self$data_url_level_2)
+        } else {
+          data_url_list <- self$data_url_level_2
+        }
+      }
+      self$data$raw <- map(data_url_list, csv_reader,
+                           verbose = self$verbose
       )
     },
 
