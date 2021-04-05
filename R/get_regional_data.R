@@ -71,14 +71,7 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     verbose = verbose, steps = steps, ...
   )
 
-  # download and cache raw data
-  region_class$download()
-
-  # dataset specifc cleaning
-  region_class$clean()
-
-  # non-specific cleaning and checks
-  region_class$process()
+  region_class$get()
 
   return(return_data(region_class,
     class = class

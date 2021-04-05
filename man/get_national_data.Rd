@@ -28,7 +28,7 @@ steps be kept and output in a list.}
 \code{Country} class object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{...}{additional arguments to pass to Country classes.}

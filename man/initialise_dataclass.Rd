@@ -10,7 +10,8 @@ initialise_dataclass(
   totals = FALSE,
   localise = TRUE,
   verbose = TRUE,
-  steps = FALSE
+  steps = FALSE,
+  get = FALSE
 )
 }
 \arguments{
@@ -27,11 +28,14 @@ stratified by date and region.}
 
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
+
+\item{get}{Logical, defaults to FALSE. Should the class \code{get} method be
+called (this will download, clean, and process data at initialisation).}
 }
 \description{
 Set up the country class with attributes set to input

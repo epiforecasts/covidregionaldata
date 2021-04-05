@@ -12,10 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 UK <- R6::R6Class("UK", # rename to country name
@@ -172,7 +169,7 @@ UK <- R6::R6Class("UK", # rename to country name
           level_2_region_code = .data$areaCode
         ) %>%
         # Join local authority codes to level 1 regions
-        left_join(self$code_lookup[["2"]],
+        left_join(self$codes_lookup[["2"]],
           by = "level_2_region"
         ) %>%
         rename(level_2_region_code = .data$level_2_region_code.x) %>%
@@ -206,20 +203,6 @@ UK <- R6::R6Class("UK", # rename to country name
 
     #' @description Specific initalize function for UK providing extra
     #' arguments specific to the UK
-    #' @param self The specific class object to attach values
-    #' @param level A character string indicating the target administrative
-    #' level of the data with the default being "1". Currently supported
-    #' options are level 1 ("1) and level 2 ("2").
-    #' Use `get_available_datasets` for supported options by dataset.
-    #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
-    #'  data per region up to today's date. If FALSE, returns the full dataset
-    #'  stratified by date and region.
-    #' @param localise Logical, defaults to TRUE. Should region names be
-    #' localised.
-    #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
-    #' messages and warnings be returned.
-    #' @param steps Logical, defaults to FALSE. Should all processing and
-    #' cleaning steps be kept and output in a list.
     #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.
@@ -227,6 +210,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' latest release. Dates should be in the format "yyyy-mm-dd".
     #' @param resolution "utla" (default) or "ltla", depending on which
     #' geographical resolution is preferred
+    #' @param ... Options arguments passed to `initialise_dataclass`
     #' @examples
     #' \dontrun{
     #' Uk$new(
@@ -236,19 +220,12 @@ UK <- R6::R6Class("UK", # rename to country name
     #'  resolution = "utla"
     #' )
     #' }
-    initialize = function(level = "1",
-                          totals = FALSE, localise = TRUE,
-                          verbose = TRUE, steps = FALSE,
-                          nhsregions = FALSE, release_date = NULL,
-                          resolution = "utla") {
-      initialise_dataclass(self,
-        level = level, totals = totals,
-        localise = localise, verbose = verbose,
-        steps = steps
-      )
+    initialize = function(nhsregions = FALSE, release_date = NULL,
+                          resolution = "utla", ...) {
       self$nhsregions <- nhsregions
       self$release_date <- release_date
       self$resolution <- resolution
+      initialise_dataclass(self, ...)
     },
 
     #' @field query_filters Set what filters to use to query the data

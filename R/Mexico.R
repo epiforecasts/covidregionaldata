@@ -18,10 +18,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Mexico$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Mexico <- R6::R6Class("Mexico",
@@ -120,8 +117,8 @@ Mexico <- R6::R6Class("Mexico",
       message_verbose(self$verbose, "Cleaning data")
 
       self$data$raw$clean <- full_join(
-        self$data$rawconfirmed,
-        self$data$rawdeceased,
+        self$data$raw$confirmed,
+        self$data$raw$deceased,
         by = c("cve_ent", "nombre", "date")
       )
 

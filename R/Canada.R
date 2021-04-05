@@ -9,10 +9,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Canada$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Canada$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Canada <- R6::R6Class("Canada",
@@ -25,7 +22,7 @@ Canada <- R6::R6Class("Canada",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
     #' @field supported_region_names A list of region names in order of level.
-    supported_region_names = list("1" = NA),
+    supported_region_names = list("1" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field data_url List of named links to raw data. The first, and
@@ -100,13 +97,12 @@ Canada <- R6::R6Class("Canada",
           recovered_total = numrecover,
           tested_total = numtested
         ) %>%
-        full_join(self$region_codes[[self$level]],
+        full_join(self$codes_lookup[[self$level]],
           by = c("level_1_region" = "region")
         ) %>%
         rename(
           level_1_region_code = code
         ) %>%
-        select(-level) %>%
         replace_na(list(
           deaths_total = 0, cases_total = 0,
           recovered_total = 0, tested_total = 0

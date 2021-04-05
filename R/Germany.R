@@ -8,10 +8,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2")
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2", get = TRUE)
 #' region$return()
 #' }
 Germany <- R6::R6Class("Germany",
@@ -64,15 +61,15 @@ Germany <- R6::R6Class("Germany",
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$Meldedatum,
-          region_level_1 = .data$Bundesland,
-          region_level_2 = .data$Landkreis,
+          level_1_region = .data$Bundesland,
+          level_2_region = .data$Landkreis,
           cases_new = .data$AnzahlFall,
           deaths_new = .data$AnzahlTodesfall
         ) %>%
         mutate(date = as_date(ymd_hms(.data$date))) %>%
         left_join(
           self$codes_lookup$`1`,
-          by = c("region_level_1" = "region")
+          by = c("level_1_region" = "region")
         ) %>%
         mutate(
           level_1_region_code = .data$code,
@@ -89,7 +86,10 @@ Germany <- R6::R6Class("Germany",
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
-        group_by(.data$region_level_1, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))
@@ -103,12 +103,15 @@ Germany <- R6::R6Class("Germany",
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
         mutate(
-          region_level_2 = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)",
-            .data$region_level_2,
+          level_2_region = gsub("(^[SL]K) (.*)", "\\2 \\(\\1\\)",
+            .data$level_2_region,
             fixed = FALSE
           )
         ) %>%
-        group_by(.data$region_level_1, .data$region_level_2, .data$date) %>%
+        group_by(
+          .data$level_1_region, .data$level_1_region_code,
+          .data$level_2_region, .data$date
+        ) %>%
         summarise(
           cases_new = as.numeric(sum(.data$cases_new > 0)),
           deaths_new = as.numeric(sum(.data$deaths_new > 0))

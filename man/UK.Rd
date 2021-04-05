@@ -21,10 +21,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
-region$download()
-region$clean()
-region$process()
+region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 
@@ -91,6 +88,7 @@ only entry, is be named main.}
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
@@ -154,39 +152,12 @@ UK Specific Level 2 Data Cleaning
 Specific initalize function for UK providing extra
 arguments specific to the UK
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$new(
-  level = "1",
-  totals = FALSE,
-  localise = TRUE,
-  verbose = TRUE,
-  steps = FALSE,
-  nhsregions = FALSE,
-  release_date = NULL,
-  resolution = "utla"
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{level}}{A character string indicating the target administrative
-level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
-Use \code{get_available_datasets} for supported options by dataset.}
-
-\item{\code{totals}}{Logical, defaults to FALSE. If TRUE, returns totalled
-data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.}
-
-\item{\code{localise}}{Logical, defaults to TRUE. Should region names be
-localised.}
-
-\item{\code{verbose}}{Logical, defaults to \code{TRUE}. Should verbose processing
-messages and warnings be returned.}
-
-\item{\code{steps}}{Logical, defaults to FALSE. Should all processing and
-cleaning steps be kept and output in a list.}
-
 \item{\code{nhsregions}}{Return subnational English regions using NHS region
 boundaries instead of PHE boundaries.}
 
@@ -196,7 +167,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{self}}{The specific class object to attach values}
+\item{\code{...}}{Options arguments passed to \code{initialise_dataclass}}
 }
 \if{html}{\out{</div>}}
 }

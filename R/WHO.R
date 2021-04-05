@@ -8,10 +8,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' national <- WHO$new(verbose = TRUE, steps = TRUE)
-#' national$download()
-#' national$clean()
-#' national$process()
+#' national <- WHO$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' national$return()
 #' }
 WHO <- R6::R6Class("WHO",

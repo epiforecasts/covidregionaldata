@@ -40,7 +40,7 @@ steps be kept and output in a list.}
 \code{Country} class object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{include_level_2_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Boolean. If TRUE, returns data stratified by

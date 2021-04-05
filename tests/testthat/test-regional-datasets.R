@@ -13,7 +13,7 @@ if (!is.null(getOption("testSource"))) {
 # should downloads be tested (defaults to FALSE)
 # set this to true when implementing a new data set
 # can also be controlled using an environment variable
-download <- TRUE
+download <- FALSE
 if (!is.null(getOption("testDownload"))) {
   download <- getOption("testDownload")
 }
@@ -22,7 +22,7 @@ if (!is.null(getOption("testDownload"))) {
 sources <- get_available_datasets() %>%
   filter(.data$get_data_function %in%
     c("get_regional_data", "get_national_data")) %>%
-  dplyr::select(source = country, level_1_region, level_2_region) %>%
+  dplyr::select(source = class, level_1_region, level_2_region) %>%
   tidyr::pivot_longer(
     cols = -source,
     names_to = "level",
