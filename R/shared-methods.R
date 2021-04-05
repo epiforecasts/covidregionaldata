@@ -157,9 +157,9 @@ DataClass <- R6::R6Class(
     #' @importFrom purrr map
     download = function() {
       data_url_list <- self$data_url
-      if ( self$level == 1 && !is.null(self$data_url_level_1)) {
+      if (self$level == 1 && !is.null(self$data_url_level_1)) {
         data_url_list <- merge(self$data_url, self$data_url_level_1)
-      } else if ( self$level == 2 && !is.null(self$data_url_level_2)) {
+      } else if (self$level == 2 && !is.null(self$data_url_level_2)) {
         data_url_list <- merge(self$data_url, self$data_url_level_2)
       }
       self$data$raw <- map(data_url_list, csv_reader,
