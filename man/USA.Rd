@@ -38,6 +38,9 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
+\item{\code{data_url}}{List of named links to raw data. Since there are no common
+data sources for level 1 and level 2 for the USA, this list is empty.}
+
 \item{\code{data_url_level_1}}{List of named links to raw data for level 1;
 not used or accessed when generating level 2 results.}
 

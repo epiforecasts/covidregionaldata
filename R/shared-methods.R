@@ -158,19 +158,18 @@ DataClass <- R6::R6Class(
     download = function() {
       data_url_list <- self$data_url
 
-      if (self$level == 1 && !is.null(self$data_url_level_1)) {
-        if (length(self$data_url)>0) {
-          data_url_list <- merge(self$data_url, self$data_url_level_1)
+      level_specific_data_url <- switch(self$level,
+                                        "1" = self$data_url_level_1,
+                                        "2" = self$data_url_level_2)
+
+      if (!is.null(level_specific_data_url)) {
+        if (length(self$data_url) > 0) {
+          data_url_list <- merge(self$data_url, level_specific_data_url)
         } else {
-          data_url_list <- self$data_url_level_1
-        }
-      } else if (self$level == 2 && !is.null(self$data_url_level_2)) {
-        if (length(self$data_url)>0) {
-          data_url_list <- merge(self$data_url, self$data_url_level_2)
-        } else {
-          data_url_list <- self$data_url_level_2
+          data_url_list <- level_specific_data_url
         }
       }
+
       self$data$raw <- map(data_url_list, csv_reader,
                            verbose = self$verbose
       )

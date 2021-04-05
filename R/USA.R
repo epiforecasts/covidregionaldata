@@ -29,6 +29,9 @@ USA <- R6::R6Class("USA",
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2",
                                   "2" = "fips"),
+    #' @field data_url List of named links to raw data. Since there are no common
+    #' data sources for level 1 and level 2 for the USA, this list is empty.
+    data_url = list(),
     #' @field data_url_level_1 List of named links to raw data for level 1;
     #' not used or accessed when generating level 2 results.
     data_url_level_1 = list(
