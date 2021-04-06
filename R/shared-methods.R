@@ -155,10 +155,23 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description Clean data
+    #' @description Dispatch cleaning methods to `clean_common` and level
+    #' specific cleaning
     clean = function() {
-      warning("Custom cleaning method not defined. 'clean' set as 'raw'.")
-      self$data$clean <- self$data$raw[["main"]]
+      self$clean_common()
+
+      specific <- paste0("clean_level_", self$level)
+
+      if (any(names(self$public_methods) %in% specific)) {
+        specific <- paste0("self$", specific, "()")
+        do.call(specific, list())
+      }
+    },
+
+    #' @description Cleaning methods that are common across a class.
+    #' By default this method is empty
+    clean_common = function() {
+
     },
 
     #' @description Processes data.
