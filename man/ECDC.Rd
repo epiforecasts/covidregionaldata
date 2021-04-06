@@ -16,10 +16,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-national <- ECDC$new(verbose = TRUE, steps = TRUE)
-national$download()
-national$clean()
-national$process()
+national <- ECDC$new(verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 
@@ -30,7 +27,13 @@ national$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{country}}{name of country to fetch data for}
+
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -44,16 +47,18 @@ only entry, is be named main.}
 \itemize{
 \item \href{#method-clean}{\code{ECDC$clean()}}
 \item \href{#method-return}{\code{ECDC$return()}}
-\item \href{#method-new}{\code{ECDC$new()}}
 \item \href{#method-clone}{\code{ECDC$clone()}}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -76,23 +81,6 @@ Specific return settings for the ECDC dataset.
 \if{html}{\out{<div class="r">}}\preformatted{ECDC$return()}\if{html}{\out{</div>}}
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the country
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDC$new(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{The args passed by \link{general_init}}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

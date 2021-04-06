@@ -9,10 +9,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Canada$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- Canada$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Canada <- R6::R6Class("Canada",
@@ -20,9 +17,14 @@ Canada <- R6::R6Class("Canada",
   public = list(
 
     # Core Attributes (amend each parameter for country specific information)
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "level_1_region", # for brevity - refers to
-    # provinces and territories
+    #' @field country name of country to fetch data for
+    country = "Canada",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "province"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
     #' @field data_url List of named links to raw data. The first, and
     #' only entry, is be named main.
     data_url = list(
@@ -33,6 +35,25 @@ Canada <- R6::R6Class("Canada",
       "cases_new", "cases_total", "deaths_new",
       "recovered_total", "tested_new"
     ),
+
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    set_region_codes = function() {
+      canada_codes <- tibble(
+        code = c(
+          "CA-AB", "CA-BC", "CA-MB", "CA-NB", "CA-NL",
+          "CA-NS", "CA-NT", "CA-NU", "CA-ON", "CA-PE",
+          "CA-QC", "CA-SK", "CA-YT"
+        ),
+        region = c(
+          "Alberta", "British Columbia", "Manitoba", "New Brunswick",
+          "Newfoundland and Labrador", "Nova Scotia", "Northwest Territories",
+          "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
+          "Saskatchewan", "Yukon"
+        )
+      )
+      self$codes_lookup <- list("1" = canada_codes)
+    },
 
     #' @description *Canada* specific provincial/territorial level data
     #' cleaning
@@ -69,27 +90,23 @@ Canada <- R6::R6Class("Canada",
           numtested = as.numeric(numtested)
         ) %>%
         rename(
-          region_level_1 = prname,
+          level_1_region = prname,
           deaths_total = numdeaths,
           cases_total = numtotal,
           cases_new = numtoday,
           recovered_total = numrecover,
           tested_total = numtested
         ) %>%
-        full_join(self$data$codes_lookup,
-          by = c("region_level_1")
+        full_join(self$codes_lookup[[self$level]],
+          by = c("level_1_region" = "region")
+        ) %>%
+        rename(
+          level_1_region_code = code
         ) %>%
         replace_na(list(
           deaths_total = 0, cases_total = 0,
           recovered_total = 0, tested_total = 0
         ))
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
-      # Add custom fields here
     }
   )
 )

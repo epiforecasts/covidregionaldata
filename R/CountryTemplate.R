@@ -6,7 +6,7 @@
 #' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
-#' region <- Italy$new(verbose = TRUE, steps = TRUE)
+#' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE)
 #' region$download()
 #' region$clean()
 #' region$process()
@@ -17,8 +17,14 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "name_of_level_1_regions", # add more levels as needed
+    #' @field country name of country to fetch data for
+    country = "",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = NA),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = NA),
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
     data_url = list(main = "url"),
@@ -31,17 +37,10 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     clean = function(...) {
       # function to clean the data (MUST BE CALLED clean)
       # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- something
+      # e.g. self$data$clean <- self$data$raw[["main"]]
       # No return statement is required
       # have a statment like this to indicate information to user if requested
       message_verbose(self$verbose, "Cleaning data")
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
-      # Add custom fields here
     }
   )
 )

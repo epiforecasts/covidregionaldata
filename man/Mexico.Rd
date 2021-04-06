@@ -9,16 +9,23 @@ https://datos.covid-19.conacyt.mx/#DownZCSV
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for Mexico.
+
+Notes on region codes:
+
+Level 1 codes = ISO-3166-2,
+source: https://en.wikipedia.org/wiki/ISO_3166-2:MX
+
+Level 2 codes = INEGI Mexican official statistics geocoding,
+source: raw data
+
+Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 }
 \details{
 Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- Mexico$new(verbose = TRUE, steps = TRUE)
-region$download()
-region$clean()
-region$process()
+region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
@@ -28,9 +35,13 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name}
+\item{\code{country}}{name of country to fetch data for}
 
-\item{\code{level_2_region}}{the level 2 region name.}
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -42,22 +53,34 @@ only entry, is be named main.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-set_region_codes}{\code{Mexico$set_region_codes()}}
 \item \href{#method-download}{\code{Mexico$download()}}
 \item \href{#method-clean}{\code{Mexico$clean()}}
 \item \href{#method-clean_level_1}{\code{Mexico$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Mexico$clean_level_2()}}
-\item \href{#method-new}{\code{Mexico$new()}}
 \item \href{#method-clone}{\code{Mexico$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Set up a table of region codes for clean data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$set_region_codes()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-download"></a>}}
@@ -101,23 +124,6 @@ Mexico Specific Municipality Level Data Cleaning
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_2()}\if{html}{\out{</div>}}
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the country
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$new(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{The args passed by \link{general_init}}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

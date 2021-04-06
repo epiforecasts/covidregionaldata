@@ -7,7 +7,7 @@ test_that(
   "Test column names are as expected",
   {
     expected_names <- c(
-      "country", "level_1_region",
+      "country", "class", "level_1_region",
       "level_2_region", "get_data_function",
       "data_url", "source_data_cols"
     )
@@ -41,7 +41,7 @@ test_that(
 
 # test each column for na values
 for (name in colnames(data)) {
-  if (name == "level_2_region") {
+  if (name %in% c("level_1_region", "level_2_region")) {
     next
   }
   test_that(

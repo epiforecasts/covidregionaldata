@@ -21,10 +21,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- UK$new(level = "1", verbose = TRUE, steps = TRUE)
-region$download()
-region$clean()
-region$process()
+region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 
@@ -47,9 +44,13 @@ Uk$new(
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{country}}{name of country to fetch data for}
 
-\item{\code{level_2_region}}{the level 2 region name}
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{data_url}}{List of named links to raw data. The first, and
 only entry, is be named main.}
@@ -57,8 +58,6 @@ only entry, is be named main.}
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
 \item{\code{query_filters}}{Set what filters to use to query the data}
-
-\item{\code{authority_lookup_table}}{Get table of authority structures}
 
 \item{\code{nhsregions}}{Whether to include NHS regions in the data}
 
@@ -73,36 +72,36 @@ only entry, is be named main.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-get_region_codes}{\code{UK$get_region_codes()}}
+\item \href{#method-set_region_codes}{\code{UK$set_region_codes()}}
 \item \href{#method-download}{\code{UK$download()}}
 \item \href{#method-clean}{\code{UK$clean()}}
 \item \href{#method-clean_level_1}{\code{UK$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{UK$clean_level_2()}}
-\item \href{#method-process}{\code{UK$process()}}
 \item \href{#method-new}{\code{UK$new()}}
 \item \href{#method-download_uk}{\code{UK$download_uk()}}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
 \item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
-\item \href{#method-download_authority_data}{\code{UK$download_authority_data()}}
-\item \href{#method-get_authority_lookup_table}{\code{UK$get_authority_lookup_table()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_region_codes"></a>}}
-\if{latex}{\out{\hypertarget{method-get_region_codes}{}}}
-\subsection{Method \code{get_region_codes()}}{
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
 Specific function for getting region codes for UK .
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$get_region_codes()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$set_region_codes()}\if{html}{\out{</div>}}
 }
 
 }
@@ -147,57 +146,18 @@ UK Specific Level 2 Data Cleaning
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-process"></a>}}
-\if{latex}{\out{\hypertarget{method-process}{}}}
-\subsection{Method \code{process()}}{
-UK specific function to processes regional data.
-Calls the parent process function but for level two regions does some
-column renaming.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$process()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Specific initalize function for UK providing extra
 arguments specific to the UK
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$new(
-  level = "1",
-  totals = FALSE,
-  localise = TRUE,
-  verbose = TRUE,
-  steps = FALSE,
-  nhsregions = FALSE,
-  release_date = NULL,
-  resolution = "utla"
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{level}}{A character string indicating the target administrative
-level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
-Use \code{get_available_datasets} for supported options by dataset.}
-
-\item{\code{totals}}{Logical, defaults to FALSE. If TRUE, returns totalled
-data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.}
-
-\item{\code{localise}}{Logical, defaults to TRUE. Should region names be
-localised.}
-
-\item{\code{verbose}}{Logical, defaults to \code{TRUE}. Should verbose processing
-messages and warnings be returned.}
-
-\item{\code{steps}}{Logical, defaults to FALSE. Should all processing and
-cleaning steps be kept and output in a list.}
-
 \item{\code{nhsregions}}{Return subnational English regions using NHS region
 boundaries instead of PHE boundaries.}
 
@@ -207,7 +167,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{self}}{The specific class object to attach values}
+\item{\code{...}}{Options arguments passed to \code{initialise_dataclass}}
 }
 \if{html}{\out{</div>}}
 }
@@ -293,26 +253,6 @@ Section 2, "2. Estimated new hospital cases"
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download_authority_data"></a>}}
-\if{latex}{\out{\hypertarget{method-download_authority_data}{}}}
-\subsection{Method \code{download_authority_data()}}{
-Download lookup table for UK authorities
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$download_authority_data()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_authority_lookup_table"></a>}}
-\if{latex}{\out{\hypertarget{method-get_authority_lookup_table}{}}}
-\subsection{Method \code{get_authority_lookup_table()}}{
-Get lookup table for UK authorities
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$get_authority_lookup_table()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
