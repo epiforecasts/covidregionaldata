@@ -30,8 +30,14 @@ downloading, processing, and returning data.
 
 \item{\code{codes_lookup}}{string or tibble Region codes for the target country}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
-sometimes only entry, should be named main}
+\item{\code{data_urls}}{List of named links to raw data.}
+
+\item{\code{common_data_urls}}{List of named links to raw data that are common
+across levels. The first entry should be named main.}
+
+\item{\code{level_data_urls}}{List of named links to raw data that are level
+specific. Any urls that share a name with a url from \code{common_data_urls}
+will be selected preferentially.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 

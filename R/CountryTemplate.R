@@ -25,9 +25,9 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     supported_region_names = list("1" = NA),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
-    data_url = list(main = "url"),
+    common_data_urls = list(main = "url"),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("col_1", "col_2", "col_3", "etc."),
 

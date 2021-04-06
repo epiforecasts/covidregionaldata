@@ -26,9 +26,8 @@ ECDC <- R6::R6Class("ECDC",
     supported_region_names = list("1" = "country"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_code"),
-    #' @field data_url List of named links to raw data. The first, and
-    #' only entry, is be named main.
-    data_url = list(
+    #' @field common_data_urls List of named links to raw data.
+    common_data_urls = list(
       "main" = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
     ),
     #' @field source_data_cols existing columns within the raw data
