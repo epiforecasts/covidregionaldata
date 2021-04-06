@@ -134,8 +134,10 @@ DataClass <- R6::R6Class(
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels. The first entry should be named main.
     common_data_urls = list(),
-    #' @field level_data_urls List of named links to raw data that are level
-    #' specific. Any urls that share a name with a url from `common_data_urls`
+    #' @field level_data_urls List of named lists of named links to raw data
+    #' that are level specific. Any urls that share a name with a url from
+    #' `common_data_urls`. Each top level list should be named after a supported
+    #' supported level.
     #' will be selected preferentially.
     level_data_urls = list(),
     #' @field source_data_cols existing columns within the raw data
