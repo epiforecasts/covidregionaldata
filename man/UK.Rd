@@ -74,7 +74,6 @@ only entry, is be named main.}
 \itemize{
 \item \href{#method-set_region_codes}{\code{UK$set_region_codes()}}
 \item \href{#method-download}{\code{UK$download()}}
-\item \href{#method-clean}{\code{UK$clean()}}
 \item \href{#method-clean_level_1}{\code{UK$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{UK$clean_level_2()}}
 \item \href{#method-new}{\code{UK$new()}}
@@ -86,8 +85,11 @@ only entry, is be named main.}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
@@ -116,20 +118,10 @@ UK specific download function
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
-UK specific cleaning, directs to level 1 or level 2
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$clean()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-UK Specific Region Level Data Cleaning
+Region Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -139,7 +131,7 @@ UK Specific Region Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-UK Specific Level 2 Data Cleaning
+Level 2 Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$clean_level_2()}\if{html}{\out{</div>}}
 }
@@ -149,8 +141,7 @@ UK Specific Level 2 Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Specific initalize function for UK providing extra
-arguments specific to the UK
+Initalize the UK Class
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }
@@ -191,7 +182,7 @@ Uk$new(
 \if{html}{\out{<a id="method-download_uk"></a>}}
 \if{latex}{\out{\hypertarget{method-download_uk}{}}}
 \subsection{Method \code{download_uk()}}{
-Helper function for downloading Uk data API
+Helper function for downloading data API
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$download_uk(filter)}\if{html}{\out{</div>}}
 }

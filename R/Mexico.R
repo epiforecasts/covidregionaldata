@@ -108,35 +108,26 @@ Mexico <- R6::R6Class("Mexico",
       self$data$raw <- list("confirmed" = confirmed, "deceased" = deceased)
     },
 
-    #' @description directs to either level 1 or level 2 processing based on
-    #' request.
+    #' @description Common Data Cleaning
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms
     #'
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
-
-      self$data$raw$clean <- full_join(
+    clean_common = function() {
+      self$data$clean <- full_join(
         self$data$raw$confirmed,
         self$data$raw$deceased,
         by = c("cve_ent", "nombre", "date")
       )
-
-      if (self$level == "1") {
-        self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
     },
 
-    #' @description Mexico Specific Estados Level Data Cleaning
+    #' @description Estados Level Data Cleaning
     #' @importFrom dplyr mutate full_join filter rename select distinct
     #' @importFrom stringr str_to_title
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
     #'
     clean_level_1 = function() {
-      self$data$clean <- self$data$raw$clean %>%
+      self$data$clean <- self$data$clean %>%
         mutate(
           level_1_region = str_to_title(.data$nombre),
           level_1_region = ifelse(.data$level_1_region == "Distrito Federal",
@@ -156,14 +147,14 @@ Mexico <- R6::R6Class("Mexico",
         distinct(.keep_all = TRUE)
     },
 
-    #' @description Mexico Specific Municipality Level Data Cleaning
+    #' @description Municipality Level Data Cleaning
     #' @importFrom dplyr mutate left_join filter rename select
     #' @importFrom stringr str_to_title
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
     #'
     clean_level_2 = function() {
-      self$data$clean <- self$data$raw$clean %>%
+      self$data$clean <- self$data$clean %>%
         rename(level_2_region = .data$nombre) %>%
         mutate(date = dmy(.data$date)) %>%
         left_join(self$codes_lookup[["2"]],

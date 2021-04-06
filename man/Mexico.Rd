@@ -55,15 +55,17 @@ only entry, is be named main.}
 \itemize{
 \item \href{#method-set_region_codes}{\code{Mexico$set_region_codes()}}
 \item \href{#method-download}{\code{Mexico$download()}}
-\item \href{#method-clean}{\code{Mexico$clean()}}
+\item \href{#method-clean_common}{\code{Mexico$clean_common()}}
 \item \href{#method-clean_level_1}{\code{Mexico$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Mexico$clean_level_2()}}
 \item \href{#method-clone}{\code{Mexico$clone()}}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
@@ -95,13 +97,12 @@ use a PHP script from the website.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
-directs to either level 1 or level 2 processing based on
-request.
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
+Common Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_common()}\if{html}{\out{</div>}}
 }
 
 }
@@ -109,7 +110,7 @@ request.
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-Mexico Specific Estados Level Data Cleaning
+Estados Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -119,7 +120,7 @@ Mexico Specific Estados Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-Mexico Specific Municipality Level Data Cleaning
+Municipality Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_2()}\if{html}{\out{</div>}}
 }

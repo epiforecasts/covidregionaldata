@@ -50,13 +50,12 @@ Italy <- R6::R6Class("Italy",
       )
     },
 
-    #' @description Italy specific state level data cleaning
+    #' @description State level data cleaning
     #' @importFrom dplyr mutate select arrange recode group_by ungroup
     #' @importFrom lubridate as_date ymd_hms
     #' @importFrom rlang .data
     #'
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         mutate(
           date = suppressWarnings(as_date(ymd_hms(.data$data))),

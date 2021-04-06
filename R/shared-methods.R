@@ -158,13 +158,14 @@ DataClass <- R6::R6Class(
     #' @description Dispatch cleaning methods to `clean_common` and level
     #' specific cleaning
     clean = function() {
+      message_verbose(self$verbose, "Cleaning data")
       self$clean_common()
 
       specific <- paste0("clean_level_", self$level)
 
-      if (any(names(self$public_methods) %in% specific)) {
+      if (any(names(get(class(self)[1])$public_methods) %in% specific)) {
         specific <- paste0("self$", specific, "()")
-        do.call(specific, list())
+        eval(parse(text = specific))
       }
     },
 
@@ -172,6 +173,10 @@ DataClass <- R6::R6Class(
     #' By default this method is empty
     clean_common = function() {
 
+    },
+
+    #' @description Filter method for a class
+    filter = function() {
     },
 
     #' @description Processes data.
@@ -211,6 +216,7 @@ DataClass <- R6::R6Class(
     get = function() {
       self$download()
       self$clean()
+      self$filter()
       self$process()
     },
 
