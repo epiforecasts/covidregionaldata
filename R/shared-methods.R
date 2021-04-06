@@ -166,7 +166,7 @@ DataClass <- R6::R6Class(
     #' of supplied data_urls.
     #' @importFrom purrr map
     download = function() {
-      self$data$raw <- map(self$data_url, csv_reader,
+      self$data$raw <- map(self$data_urls, csv_reader,
         verbose = self$verbose
       )
     },
