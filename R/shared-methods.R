@@ -183,27 +183,16 @@ DataClass <- R6::R6Class(
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       message_verbose(self$verbose, "Processing data")
-      region_vars <- switch(self$level,
-        "1" = c(
-          "level_1_region" = self$supported_region_names[["1"]],
-          "level_1_region_code" = self$supported_region_codes[["1"]]
-        ), # nolint
-        "2" = c(
-          "level_2_region" = self$supported_region_names[["2"]],
-          "level_2_region_code" = self$supported_region_codes[["2"]],
-          "level_1_region" = self$supported_region_names[["1"]],
-          "level_1_region_code" = self$supported_region_codes[["1"]]
-        )
+      region_vars <- region_dispatch(
+        level = self$level,
+        all_levels = self$supported_levels,
+        region_names = self$supported_region_names,
+        region_codes = self$supported_region_codes
       )
 
-      # filter out unnamed and therefore assumed to be not present vars
-      region_vars <- region_vars[!is.null(region_vars)]
-      region_vars <- region_vars[!is.na(region_vars)]
-
-      tar_level <- paste0("level_", self$level, "_region")
       self$data$processed <- process_internal(
         clean_data = self$data$clean,
-        level = tar_level,
+        level = paste0("level_", self$level, "_region"),
         group_vars = region_vars,
         totals = self$totals,
         localise = self$localise,
