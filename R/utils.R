@@ -32,7 +32,6 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
-      # Set up cache
       ch <- cache_filesystem(getOption("cache_path"))
       read_csv_fun <- memoise(vroom, cache = ch)
     }
@@ -64,12 +63,14 @@ message_verbose <- function(verbose = TRUE, ...) {
   return(invisible(NULL))
 }
 #' Add useMemoise to options
-#'
+#' @param path Path to cache directory, defaults to a temporary directory.
+#' @inheritParams message_verbose
 #' @description Adds useMemoise to options meaning memoise is
 #' used when reading data in.
 #' @export
-start_using_memoise <- function() {
-  options("useMemoise" = TRUE, cache_path = ".cache")
+start_using_memoise <- function(path = tempdir(), verbose = TRUE) {
+  message_verbose(verbose, "Using a cache at: ", path)
+  options("useMemoise" = TRUE, cache_path = path)
 }
 
 #' Stop using useMemoise

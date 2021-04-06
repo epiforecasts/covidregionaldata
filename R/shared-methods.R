@@ -6,7 +6,7 @@
 #' @return The target countries specific object if available, e.g. [Italy()]
 #' @rdname check_country_available
 #' @importFrom stringr str_to_title str_replace_all str_detect
-#' @importFrom dplyr bind_rows filter
+#' @importFrom dplyr bind_rows filter distinct
 #' @importFrom purrr map_lgl
 #' @export
 #' @examples
