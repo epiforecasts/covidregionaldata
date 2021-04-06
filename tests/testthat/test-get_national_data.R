@@ -1,5 +1,5 @@
 test_get_national_data <- function(source) {
-  test_that(paste0("get_national_data returns", source, " data"), {
+  test_that(paste0("get_national_data returns ", source, " data"), {
     national <- readRDS(paste0("custom_data/", source, ".rds"))
     true <- national$return()
     true_R6 <- national$clone()
@@ -16,11 +16,11 @@ test_get_national_data <- function(source) {
       }
     )
     d <- get_national_data(
-      country = "Afghanistan", source = source,
+      country = "Zambia", source = source,
       verbose = FALSE
     )
     expect_s3_class(d, "data.frame")
-    expect_true(all(d$country == "Afghanistan"))
+    expect_true(all(d$country == "Zambia"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
     expect_error(get_national_data(
       country = "rwfwf", source = source,

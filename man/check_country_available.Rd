@@ -24,14 +24,13 @@ of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
 options by dataset.}
 
-\item{totals}{Logical, defaults to \code{FALSE}. If `TRUE``, returns totalled
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
-\item{localise}{Logical, defaults to \code{TRUE}. Should region names be
-localised.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
@@ -47,5 +46,12 @@ Check data for the requested country and region
 is available and return an initialised region class for that country.
 }
 \examples{
-check_country_available(country = "Italy")
+# Check for Italian data
+italy <- check_country_available("Italy")
+
+# Check for UK data with a partial name match
+uk <- check_country_available("United Kingdom")
+
+# Check for ECDC data
+ecdc <- check_country_available("ecdc")
 }

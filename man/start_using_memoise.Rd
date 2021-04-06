@@ -4,7 +4,13 @@
 \alias{start_using_memoise}
 \title{Add useMemoise to options}
 \usage{
-start_using_memoise()
+start_using_memoise(path = tempdir(), verbose = TRUE)
+}
+\arguments{
+\item{path}{Path to cache directory, defaults to a temporary directory.}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
 }
 \description{
 Adds useMemoise to options meaning memoise is

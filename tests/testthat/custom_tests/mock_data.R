@@ -96,7 +96,7 @@ get_input_data_for_get_regional_data_tests_only_level_1_regions <- function() {
   ## To get the correct input -> delete NA columns, and rows with NAs in them
   input_data <- expected_data[, -c(3, 12, 13)]
   input_data <- input_data[-which(rowSums(is.na(input_data)) > 0), ]
-  colnames(input_data)[2] <- "region_level_1"
+  colnames(input_data)[2] <- "level_1_region"
   return(input_data)
 }
 
@@ -116,16 +116,16 @@ get_expected_totals_data_for_get_regional_data_tests_only_level_1_regions <- fun
 # get_regional_data() tests - including Level 2 regions
 get_input_data_for_get_regional_data_tests_with_level_2_regions <- function() {
   data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
-  colnames(data)[2] <- "region_level_2"
+  colnames(data)[2] <- "level_2_region"
   regions_table <- tibble::tibble(
-    region_level_2 = c("Northland", "Eastland", "Southland", "Westland", "Virginia"),
-    region_level_1 = c("Oneland", "Oneland", "Twoland", "Twoland", "USA")
+    level_2_region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"),
+    level_1_region = c("Oneland", "Oneland", "Twoland", "Twoland", "USA")
   )
 
   data <- data %>%
-    dplyr::left_join(regions_table, by = "region_level_2") %>%
+    dplyr::left_join(regions_table, by = "level_2_region") %>%
     dplyr::select(
-      date, region_level_2, region_level_1, cases_new, cases_total, deaths_new,
+      date, level_2_region, level_1_region, cases_new, cases_total, deaths_new,
       deaths_total, recovered_new, recovered_total,
       hosp_new, hosp_total
     )
@@ -206,12 +206,12 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
 
   # full data is data with all dates/regions + some NAs in the cases column
   expected_data <- data.frame(expand.grid(dates, regions))
-  colnames(expected_data) <- c("date", "region_level_1")
+  colnames(expected_data) <- c("date", "level_1_region")
   expected_data$date <- as.Date(expected_data$date)
-  expected_data$region_level_1 <- as.character(expected_data$region_level_1)
+  expected_data$level_1_region <- as.character(expected_data$level_1_region)
   expected_data <- expected_data %>%
-    dplyr::arrange(date, region_level_1) %>%
-    dplyr::left_join(region_codes, by = c("region_level_1" = "region"))
+    dplyr::arrange(date, level_1_region) %>%
+    dplyr::left_join(region_codes, by = c("level_1_region" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
   return(tibble::tibble(expected_data))
 }
@@ -222,7 +222,7 @@ get_input_data_for_complete_cumulative_columns_test <- function() {
   # add cumulative cases to partial data and then add NA rows
   partial_data <- expected_data[-c(6:9), ]
   partial_data_with_cum_cases_na <- partial_data %>%
-    dplyr::group_by(region_level_1) %>%
+    dplyr::group_by(level_1_region) %>%
     dplyr::mutate(cases_total = cumsum(cases))
   full_data_with_cum_cases_na <- covidregionaldata:::fill_empty_dates_with_na(partial_data_with_cum_cases_na)
 
@@ -235,7 +235,7 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
 
   # manually add cumulative cases to get expected data
   full_data_with_cum_cases_filled <- covidregionaldata:::fill_empty_dates_with_na(partial_data)
-  full_data_with_cum_cases_filled <- dplyr::arrange(full_data_with_cum_cases_filled, region_level_1, date)
+  full_data_with_cum_cases_filled <- dplyr::arrange(full_data_with_cum_cases_filled, level_1_region, date)
   full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, as.integer(c(1, 5, 5, 15, 2, 7, 7, 18, 3, 3, 3, 15)))
   colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 

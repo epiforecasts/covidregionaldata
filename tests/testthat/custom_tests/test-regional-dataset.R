@@ -2,9 +2,9 @@ source("custom_tests/regional-dataset-specific.R")
 
 expect_clean_cols <- function(data, level) {
   expect_s3_class(data[["date"]], "Date")
-  expect_type(data[["region_level_1"]], "character")
+  expect_type(data[["level_1_region"]], "character")
   if (level == "2") {
-    expect_type(data[["region_level_2"]], "character")
+    expect_type(data[["level_2_region"]], "character")
   }
 }
 
@@ -15,9 +15,9 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   expect_type(data[["deaths_new"]], "double")
   expect_type(data[["deaths_total"]], "double")
   if (!localised) {
-    expect_type(data[["region_level_1"]], "character")
+    expect_type(data[["level_1_region"]], "character")
     if (level == "2") {
-      expect_type(data[["region_level_2"]], "character")
+      expect_type(data[["level_2_region"]], "character")
     }
   }
 }
@@ -40,11 +40,16 @@ test_regional_dataset <- function(source, level, download = FALSE) {
   if (download) {
     test_that(paste0(data_name, " downloads sucessfully"), {
       region$download()
-      expect_s3_class(region$data$raw, "data.frame")
-      expect_true(nrow(region$data$raw) > 0)
-      expect_true(ncol(region$data$raw) >= 2)
+      purrr::walk(region$data$raw, function(data) {
+        expect_s3_class(data, "data.frame")
+        expect_true(nrow(data) > 0)
+        expect_true(ncol(data) >= 2)
+      })
     })
-    region$data$raw <- dplyr::slice_tail(region$data$raw, n = 1000)
+    region$data$raw <- purrr::map(region$data$raw,
+      dplyr::slice_tail,
+      n = 1000
+    )
     saveRDS(region$data$raw, raw_path)
   } else {
     region$data$raw <- readRDS(raw_path)
