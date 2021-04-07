@@ -23,8 +23,7 @@ Cuba <- R6::R6Class("Cuba",
     supported_region_names = list("1" = "provincia"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field common_data_urls List of named links to raw data. The first, and
-    #' only entry, is be named main.
+    #' @field common_data_urls List of named links to raw data.
     common_data_urls = list(
       "main" = "https://covid19cubadata.github.io/data/covid19-casos.csv" # nolint
     ),
