@@ -16,7 +16,7 @@ check_country_class <- function(country) {
     "country", "supported_levels",
     "supported_region_names",
     "supported_region_codes",
-    "data_url", "source_data_cols"
+    "common_data_urls", "source_data_cols"
   )
   purrr::walk(
     expected_public_fields,
