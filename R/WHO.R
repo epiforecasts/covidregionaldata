@@ -12,7 +12,7 @@
 #' national$return()
 #' }
 WHO <- R6::R6Class("WHO",
-  inherit = DataClass,
+  inherit = CountryDataClass,
   public = list(
 
     # Core Attributes
@@ -37,11 +37,10 @@ WHO <- R6::R6Class("WHO",
       "deaths_total"
     ),
 
-    #' @description WHO specific country level data cleaning
+    #' @description WHO specific data cleaning
     #' @importFrom dplyr mutate rename
     #' @importFrom countrycode countrycode
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]]
       colnames(self$data$clean) <- c(
         "date", "iso_code", "country", "who_region",

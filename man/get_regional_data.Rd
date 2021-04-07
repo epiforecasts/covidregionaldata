@@ -12,6 +12,7 @@ get_regional_data(
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
+  regions,
   include_level_2_regions = deprecated(),
   localise_regions = deprecated(),
   ...
@@ -42,6 +43,9 @@ Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
+
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field if present.}
 
 \item{include_level_2_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Boolean. If TRUE, returns data stratified by
 level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region

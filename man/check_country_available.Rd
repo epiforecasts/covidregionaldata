@@ -9,6 +9,7 @@ check_country_available(
   level = 1,
   totals = FALSE,
   localise = TRUE,
+  regions,
   verbose = TRUE,
   steps = FALSE,
   ...
@@ -29,6 +30,9 @@ data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
+
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field if present.}
 
 \item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
