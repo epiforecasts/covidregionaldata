@@ -1,0 +1,81 @@
+#' Italy Class for downloading, cleaning and processing notification data
+#' @description Country specific information for downloading, cleaning
+#'  and processing covid-19 region data for Italy.
+#'
+#' @details Inherits from `DataClass`
+#' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+#' @export
+#' @examples
+#' \dontrun{
+#' region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' region$return()
+#' }
+Cuba <- R6::R6Class("Cuba",
+  inherit = DataClass,
+  public = list(
+
+    # Core Attributes
+    #' @field country name of country to fetch data for
+    country = "Cuba",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list("1" = "provincia"),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list("1" = "iso_3166_2"),
+    #' @field common_data_urls List of named links to raw data. The first, and
+    #' only entry, is be named main.
+    common_data_urls = list(
+      "main" = "https://covid19cubadata.github.io/data/covid19-casos.csv" # nolint
+    ),
+    #' @field source_data_cols existing columns within the raw data
+    source_data_cols = c("cases_new"),
+
+    #' @description Set up a table of region codes for clean data
+    #' @importFrom tibble tibble
+    #' @importFrom dplyr mutate
+    set_region_codes = function() {
+      self$codes_lookup$`1` <- tibble(
+        code = c(
+          "CU-15", "CU-09", "CU-08", "CU-06", "CU-12", "CU-14", "CU-11",
+          "CU-03", "CU-10", "CU-04", "CU-16", "CU-01", "CU-07", "C8-13",
+          "CU-05", "CU-99"
+        ),
+        region = c(
+          "Artemisa", "Camagüey", "Ciego de Ávila", "Cienfuegos", "Granma",
+          "Guantánamo", "Holguín", "La Habana", "Las Tunas", "Matanzas",
+          "Mayabeque", "Pinar del Río", "Sancti Spíritus", "Santiago de Cuba",
+          "Villa Clara", "Isla de la Juventud"
+        )
+      )
+    },
+
+    #' @description Italy specific state level data cleaning
+    #' @importFrom dplyr count select filter mutate left_join rename
+    #' @importFrom lubridate as_date ymd
+    #' @importFrom rlang .data
+    #'
+    clean = function() {
+      message_verbose(self$verbose, "Cleaning data")
+      self$data$clean <- self$data$raw[["main"]] %>%
+        count(.data$fecha_confirmacion, .data$provincia) %>%
+        select(
+          date = .data$fecha_confirmacion,
+          level_1_region = .data$provincia,
+          cases_new = .data$n
+        ) %>%
+        filter(!is.na(level_1_region)) %>%
+        mutate(
+          cases_new = as.numeric(.data$cases_new),
+          date = as_date(ymd(.data$date))
+        ) %>%
+        left_join(
+          self$codes_lookup$`1`,
+          by = c("level_1_region" = "region")
+        ) %>%
+        rename(
+          level_1_region_code = .data$code,
+        )
+    }
+  )
+)
