@@ -55,8 +55,7 @@ Cuba <- R6::R6Class("Cuba",
     #' @importFrom lubridate as_date ymd
     #' @importFrom rlang .data
     #'
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         count(.data$fecha_confirmacion, .data$provincia) %>%
         select(
