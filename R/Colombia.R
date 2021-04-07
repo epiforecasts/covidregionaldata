@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 Colombia <- R6::R6Class("Colombia",
@@ -45,7 +45,6 @@ Colombia <- R6::R6Class("Colombia",
     #' @importFrom rlang .data
     #'
     clean_common = function() {
-      message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$fecha,
@@ -53,7 +52,7 @@ Colombia <- R6::R6Class("Colombia",
           cases_total = .data$casos
         ) %>%
         mutate(
-          date = lubridate::ymd(.data$date),
+          date = ymd(.data$date),
           level_1_region = iconv(.data$level_1_region,
             from = "UTF-8",
             to = "ASCII//TRANSLIT"

@@ -15,7 +15,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
+region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
