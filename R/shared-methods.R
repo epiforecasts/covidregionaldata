@@ -88,6 +88,16 @@ initialise_dataclass <- function(self, level = "1",
   self$region_name <- self$supported_region_names[[self$level]]
   self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
+
+  if (!is.null(self$level_data_urls[[self$level]])) {
+    self$data_urls <- merge(
+      self$common_data_urls,
+      self$level_data_urls[[self$level]]
+    )
+  } else {
+    self$data_urls <- self$common_data_urls
+  }
+
   if (get) {
     self$get()
   }
@@ -119,9 +129,17 @@ DataClass <- R6::R6Class(
     code_name = NULL,
     #' @field codes_lookup string or tibble Region codes for the target country
     codes_lookup = list(),
-    #' @field data_url List of named links to raw data. The first, and
-    #' sometimes only entry, should be named main
-    data_url = list(),
+    #' @field data_urls List of named links to raw data.
+    data_urls = list(),
+    #' @field common_data_urls List of named links to raw data that are common
+    #' across levels. The first entry should be named main.
+    common_data_urls = list(),
+    #' @field level_data_urls List of named lists of named links to raw data
+    #' that are level specific. Any urls that share a name with a url from
+    #' `common_data_urls`. Each top level list should be named after a supported
+    #' supported level.
+    #' will be selected preferentially.
+    level_data_urls = list(),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(),
     #' @field level target region level
@@ -150,7 +168,7 @@ DataClass <- R6::R6Class(
     #' of supplied data_urls.
     #' @importFrom purrr map
     download = function() {
-      self$data$raw <- map(self$data_url, csv_reader,
+      self$data$raw <- map(self$data_urls, csv_reader,
         verbose = self$verbose
       )
     },

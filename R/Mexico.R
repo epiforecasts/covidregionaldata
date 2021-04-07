@@ -34,12 +34,15 @@ Mexico <- R6::R6Class("Mexico",
     supported_region_names = list("1" = "estados", "2" = "municipios"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "inegi"),
-    #' @field data_url List of named links to raw data. The first, and
-    #' only entry, is be named main.
-    data_url = list(
-      "main" = "https://datos.covid-19.conacyt.mx/",
-      "1" = "Downloads/filesDD.php?csvmun",
-      "2" = "Downloads/filesDD.php?csvaxd"
+    #' @field common_data_urls List of named links to raw data.
+    common_data_urls = list(
+      "main" = "https://datos.covid-19.conacyt.mx/"
+    ),
+    #' @field level_data_urls List of named links to raw data that are level
+    #' specific.
+    level_data_urls = list(
+      "1" = list("snippet" = "Downloads/filesDD.php?csvmun"),
+      "2" = list("snippet" = "Downloads/filesDD.php?csvaxd")
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
@@ -67,8 +70,8 @@ Mexico <- R6::R6Class("Mexico",
     download = function() {
       . <- NULL
       script_url <- file.path(
-        self$data_url[["main"]],
-        self$data_url[[self$level]]
+        self$data_urls[["main"]],
+        self$data_urls[["snippet"]]
       )
 
       confirmed_url <- script_url %>%
@@ -92,7 +95,7 @@ Mexico <- R6::R6Class("Mexico",
       read_data <- function(target, new_name) {
         message_verbose(self$verbose, "Downloading ", new_name)
         dat <- csv_reader(
-          file.path(self$data_url[["main"]], target),
+          file.path(self$data_urls[["main"]], target),
           self$verbose
         )
 
