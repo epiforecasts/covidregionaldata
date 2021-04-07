@@ -16,7 +16,7 @@ get_available_datasets <- function() {
   # regional data
   starts_with_capitals_idx <- grep("^[A-Z]", envi)
   starts_with_capitals <- envi[starts_with_capitals_idx]
-  exclude <- c("DataClass", "CountryTemplate")
+  exclude <- c("DataClass", "CountryDataClass")
   valid_country_objects <- lapply(
     starts_with_capitals,
     function(x) {

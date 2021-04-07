@@ -3,6 +3,7 @@
 export("%>%")
 export(Canada)
 export(Colombia)
+export(CountryDataClass)
 export(ECDC)
 export(Germany)
 export(Italy)

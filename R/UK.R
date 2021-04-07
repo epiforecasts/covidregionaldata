@@ -83,18 +83,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description UK specific cleaning, directs to level 1 or level 2
-    #'
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
-      if (self$level == "1") {
-        self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
-    },
-
-    #' @description UK Specific Region Level Data Cleaning
+    #' @description Region Level Data Cleaning
     #' @importFrom dplyr bind_rows mutate rename %>%
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
@@ -139,7 +128,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description UK Specific Level 2 Data Cleaning
+    #' @description Level 2 Data Cleaning
     #' @importFrom dplyr mutate rename left_join select %>%
     #' @importFrom lubridate ymd
     #' @importFrom stringr str_detect
@@ -205,8 +194,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description Specific initalize function for UK providing extra
-    #' arguments specific to the UK
+    #' @description Initalize the UK Class
     #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.
@@ -243,7 +231,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @field authority_data The raw data for creating authority lookup tables
     authority_data = NA,
 
-    #' @description Helper function for downloading Uk data API
+    #' @description Helper function for downloading data API
     #' @importFrom purrr map safely compact reduce
     #' @importFrom dplyr full_join mutate
     #' @param filter region filters

@@ -5,18 +5,18 @@
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
 get_national_data(
-  country,
+  countries,
   source = "who",
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
+  country = deprecated(),
   ...
 )
 }
 \arguments{
-\item{country}{A character string specifying the country to get data from.
-Not case dependent. Name should be the English name. For a list of
-options use \code{get_available_datasets}.}
+\item{countries}{A character vector specifying country names of interest.
+Used to filter the data.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
@@ -30,6 +30,9 @@ Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
+
+\item{country}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A character string
+specifying a country to filter for.}
 
 \item{...}{additional arguments to pass to Country classes.}
 }
@@ -50,6 +53,6 @@ in a standard format.
 start_using_memoise()
 
 # download data for Canada keeping all processing steps
-get_national_data(country = "canada", source = "ecdc", steps = TRUE)
+get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 }
 }
