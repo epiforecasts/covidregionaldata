@@ -1,6 +1,6 @@
-#' Italy Class for downloading, cleaning and processing notification data
+#' Cuba Class for downloading, cleaning and processing notification data
 #' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Italy.
+#'  and processing covid-19 region data for Cuba
 #'
 #' @details Inherits from `DataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
@@ -50,7 +50,7 @@ Cuba <- R6::R6Class("Cuba",
       )
     },
 
-    #' @description Italy specific state level data cleaning
+    #' @description Cuba specific state level data cleaning
     #' @importFrom dplyr count select filter mutate left_join rename
     #' @importFrom lubridate as_date ymd
     #' @importFrom rlang .data

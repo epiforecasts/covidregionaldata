@@ -2,13 +2,13 @@
 % Please edit documentation in R/Cuba.R
 \name{Cuba}
 \alias{Cuba}
-\title{Italy Class for downloading, cleaning and processing notification data}
+\title{Cuba Class for downloading, cleaning and processing notification data}
 \source{
 https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
 }
 \description{
 Country specific information for downloading, cleaning
-and processing covid-19 region data for Italy.
+and processing covid-19 region data for Cuba
 }
 \details{
 Inherits from \code{DataClass}
@@ -74,7 +74,7 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-Italy specific state level data cleaning
+Cuba specific state level data cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Cuba$clean()}\if{html}{\out{</div>}}
 }
