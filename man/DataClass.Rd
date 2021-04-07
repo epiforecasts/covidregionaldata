@@ -53,6 +53,9 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
+
+\item{\code{target_regions}}{A character vector of regions to filter for. Used
+by the \verb{filter method}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -63,6 +66,8 @@ up to today's date.}
 \item \href{#method-new}{\code{DataClass$new()}}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
+\item \href{#method-clean_common}{\code{DataClass$clean_common()}}
+\item \href{#method-filter}{\code{DataClass$filter()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
@@ -93,7 +98,7 @@ Initialize the country
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{The args passed to \code{initialise_dataclass}}
+\item{\code{...}}{Parameters passed to \code{initialise_dataclass}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -113,11 +118,42 @@ of supplied data_urls.
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-Clean data
+Dispatch cleaning methods to \code{clean_common} and level
+specific cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
+Cleaning methods that are common across a class.
+By default this method is empty
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-filter"></a>}}
+\if{latex}{\out{\hypertarget{method-filter}{}}}
+\subsection{Method \code{filter()}}{
+Filter method for a class
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{regions}}{A character vector of target regions. Overrides the
+current class setting for \code{target_regions}. By default filters at the
+current spatial level of interest.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process"></a>}}
