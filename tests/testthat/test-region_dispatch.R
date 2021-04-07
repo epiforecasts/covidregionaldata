@@ -1,5 +1,3 @@
-
-
 all_levels <- list("1", "2", "nhs")
 region_names <- list("1" = "region", "2" = "province", "nhs" = "county")
 region_codes <- list("1" = "iso", "2" = "code")
