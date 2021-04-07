@@ -27,11 +27,15 @@ UK <- R6::R6Class("UK", # rename to country name
     supported_region_names = list("1" = "region", "2" = "authority"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
-    data_url = list(
-      "main" = "https://api.coronavirus.data.gov.uk/v2/data",
-      "nhs_base_url" = "https://www.england.nhs.uk/statistics"
+    common_data_urls = list(
+      "main" = "https://api.coronavirus.data.gov.uk/v2/data"
+    ),
+    #' @field level_data_urls List of named links to raw data that are level
+    #' specific.
+    level_data_urls = list(
+      "1" = list("nhs_base_url" = "https://www.england.nhs.uk/statistics")
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = list(
@@ -236,7 +240,7 @@ UK <- R6::R6Class("UK", # rename to country name
       csv_links <- map(
         1:(ceiling(length(self$source_data_cols) / 4)),
         ~ paste0(
-          self$data_url[["main"]], "?", unlist(filter), "&",
+          self$data_urls[["main"]], "?", unlist(filter), "&",
           paste(paste0(
             "metric=",
             self$source_data_cols[(1 + 4 * (. - 1)):min(
@@ -322,7 +326,7 @@ UK <- R6::R6Class("UK", # rename to country name
         England and English regions only."
       )
       nhs_url <- paste0(
-        self$data_url[["nhs_base_url"]],
+        self$data_urls[["nhs_base_url"]],
         "/wp-content/uploads/sites/2/",
         year(self$release_date), "/",
         ifelse(month(self$release_date) < 10,

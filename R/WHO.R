@@ -24,9 +24,9 @@ WHO <- R6::R6Class("WHO",
     supported_region_names = list("1" = "country"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_code"),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
-    data_url = list(
+    common_data_urls = list(
       "main" = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
     ),
     #' @field source_data_cols existing columns within the raw data

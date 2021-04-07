@@ -33,7 +33,7 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
+\item{\code{common_data_urls}}{List of named links to raw data. The first, and
 only entry, is be named main.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}

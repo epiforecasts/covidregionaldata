@@ -24,9 +24,9 @@ Germany <- R6::R6Class("Germany",
     supported_region_names = list("1" = "bundesland", "2" = "landkreis"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
-    data_url = list(
+    common_data_urls = list(
       "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
     ),
     #' @field source_data_cols existing columns within the raw data

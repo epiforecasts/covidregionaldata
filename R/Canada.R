@@ -25,9 +25,9 @@ Canada <- R6::R6Class("Canada",
     supported_region_names = list("1" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field data_url List of named links to raw data. The first, and
-    #' only entry, is be named main.
-    data_url = list(
+    #' @field common_data_urls List of named links to raw data that are common
+    #' across levels.
+    common_data_urls = list(
       "main" = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv" # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
