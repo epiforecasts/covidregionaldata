@@ -14,7 +14,7 @@
 #' }
 #'
 ECDC <- R6::R6Class("ECDC",
-  inherit = DataClass,
+  inherit = CountryDataClass,
   public = list(
 
     # Core Attributes

@@ -303,11 +303,26 @@ DataClass <- R6::R6Class(
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(
-    #' @description Filter method
-    #' @param regions A character vector of target countries. Overrides the
+    #' @description Filter method for country level data. Uses `countryname`
+    #' to match input countries with known names.
+    #' @param countries A character vector of target countries. Overrides the
     #' current class setting for `target_regions`.
-    filter = function(regions) {
-      super$filter(regions)
+    #' @importFrom countrycode countryname
+    filter = function(countries) {
+      if (!missing(countries)) {
+        self$target_regions <- countries
+      }
+
+      if (!is.null(self$target_regions)) {
+        self$target_regions <- countryname(
+          self$target_regions,
+          destination = "country.name.en"
+        )
+        if (all(is.na(self$target_regions))) {
+          stop("No countries found with target names")
+        }
+      }
+      super$filter()
     }
   )
 )

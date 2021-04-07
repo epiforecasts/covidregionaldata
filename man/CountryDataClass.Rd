@@ -39,15 +39,16 @@ Inherits from \code{DataClass}
 \if{html}{\out{<a id="method-filter"></a>}}
 \if{latex}{\out{\hypertarget{method-filter}{}}}
 \subsection{Method \code{filter()}}{
-Filter method
+Filter method for country level data. Uses \code{countryname}
+to match input countries with known names.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(regions)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(countries)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{regions}}{A character vector of target countries. Overrides the
+\item{\code{countries}}{A character vector of target countries. Overrides the
 current class setting for \code{target_regions}.}
 }
 \if{html}{\out{</div>}}

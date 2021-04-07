@@ -58,12 +58,6 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     localise <- localise_regions
   }
 
-  # format country string
-  country <- paste0(
-    toupper(substr(country, 1, 1)),
-    tolower(substr(country, 2, nchar(country)))
-  )
-
   # check data availability and initiate country class if available
   region_class <- check_country_available(
     country = country, level = level, regions = regions,

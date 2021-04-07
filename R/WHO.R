@@ -12,7 +12,7 @@
 #' national$return()
 #' }
 WHO <- R6::R6Class("WHO",
-  inherit = DataClass,
+  inherit = CountryDataClass,
   public = list(
 
     # Core Attributes
