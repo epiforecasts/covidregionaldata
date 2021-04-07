@@ -34,7 +34,7 @@
 #' }
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, steps = FALSE,
-                              class = FALSE, verbose = TRUE,
+                              class = FALSE, verbose = TRUE, regions,
                               include_level_2_regions = deprecated(),
                               localise_regions = deprecated(),
                               ...) {
@@ -66,7 +66,7 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
 
   # check data availability and initiate country class if available
   region_class <- check_country_available(
-    country = country, level = level,
+    country = country, level = level, regions = regions,
     totals = totals, localise = localise,
     verbose = verbose, steps = steps, ...
   )

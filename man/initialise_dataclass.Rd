@@ -7,6 +7,7 @@
 initialise_dataclass(
   self,
   level = "1",
+  regions,
   totals = FALSE,
   localise = TRUE,
   verbose = TRUE,
@@ -21,6 +22,9 @@ initialise_dataclass(
 of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
 options by dataset.}
+
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field if present.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset

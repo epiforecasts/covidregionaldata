@@ -53,6 +53,9 @@ up to today's date.}
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.}
+
+\item{\code{target_regions}}{A character vector of regions to filter for. Used
+by the \verb{filter method}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -95,7 +98,7 @@ Initialize the country
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{The args passed to \code{initialise_dataclass}}
+\item{\code{...}}{Parameters passed to \code{initialise_dataclass}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -139,9 +142,18 @@ By default this method is empty
 \subsection{Method \code{filter()}}{
 Filter method for a class
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{regions}}{A character vector of target regions. Overrides the
+current class setting for \code{target_regions}. By default filters at the
+current spatial level of interest.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process"></a>}}

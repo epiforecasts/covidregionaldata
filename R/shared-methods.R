@@ -20,7 +20,8 @@
 #' ecdc <- check_country_available("ecdc")
 check_country_available <- function(country = character(), level = 1,
                                     totals = FALSE, localise = TRUE,
-                                    verbose = TRUE, steps = FALSE, ...) {
+                                    regions, verbose = TRUE, steps = FALSE,
+                                    ...) {
   stopifnot(is.character(country))
   level <- as.character(level)
 
@@ -48,7 +49,7 @@ check_country_available <- function(country = character(), level = 1,
   region_class <- regionClass$new(
     level = level, totals = totals,
     localise = localise, verbose = verbose,
-    steps = steps, ...
+    steps = steps, regions = regions, ...
   )
 
   return(region_class)
@@ -62,6 +63,8 @@ check_country_available <- function(country = character(), level = 1,
 #' of the data with the default being "1". Currently supported options are
 #' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
 #' options by dataset.
+#' @param regions A character vector of target regions to be assigned to the
+#' `target_regions` field if present.
 #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
@@ -73,7 +76,7 @@ check_country_available <- function(country = character(), level = 1,
 #' @param get Logical, defaults to FALSE. Should the class `get` method be
 #' called (this will download, clean, and process data at initialisation).
 #' @export
-initialise_dataclass <- function(self, level = "1",
+initialise_dataclass <- function(self, level = "1", regions,
                                  totals = FALSE, localise = TRUE,
                                  verbose = TRUE, steps = FALSE, get = FALSE) {
   if (any(self$supported_levels %in% level)) {
@@ -88,6 +91,10 @@ initialise_dataclass <- function(self, level = "1",
   self$region_name <- self$supported_region_names[[self$level]]
   self$code_name <- self$supported_region_codes[[self$level]]
   self$set_region_codes()
+
+  if (!missing(regions)) {
+    self$target_regions <- regions
+  }
 
   if (!is.null(self$level_data_urls[[self$level]])) {
     self$data_urls <- merge(
@@ -153,13 +160,16 @@ DataClass <- R6::R6Class(
     verbose = NULL,
     #' @field steps Boolean. Keep data from each processing step.
     steps = NULL,
+    #' @field target_regions A character vector of regions to filter for. Used
+    #' by the `filter method`.
+    target_regions = NULL,
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
     },
 
     #' @description Initialize the country
-    #' @param ... The args passed to `initialise_dataclass`
+    #' @param ... Parameters passed to `initialise_dataclass`.
     initialize = function(...) {
       initialise_dataclass(self, ...)
     },
@@ -194,7 +204,30 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Filter method for a class
-    filter = function() {
+    #' @param regions A character vector of target regions. Overrides the
+    #' current class setting for `target_regions`. By default filters at the
+    #' current spatial level of interest.
+    #' @importFrom dplyr filter
+    #' @importFrom rlang !!
+    filter = function(regions) {
+      if (!missing(regions)) {
+        self$target_regions <- regions
+      }
+
+      if (!is.null(self$target_regions)) {
+        message_verbose(
+          self$verbose,
+          "Filtering data to: ", paste(self$target_regions, collapse = ", ")
+        )
+        condition <- paste0("level_", self$level, "_region")
+        self$data$clean <- self$data$clean %>%
+          filter(
+            eval(parse(text = condition)) %in% self$target_regions
+          )
+        if (nrow(self$data$clean) == 0) {
+          stop("No data found for target regions")
+        }
+      }
     },
 
     #' @description Processes data.
@@ -257,6 +290,24 @@ DataClass <- R6::R6Class(
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
       )
       return(sum_df)
+    }
+  )
+)
+
+#' R6 Class containing  national level methods
+#' @description Acts as parent class for individual across country objects,
+#' allowing them to access general methods.
+#'
+#' @details Inherits from `DataClass`
+#' @export
+CountryDataClass <- R6::R6Class("CountryDataClass",
+  inherit = DataClass,
+  public = list(
+    #' @description Filter method
+    #' @param regions A character vector of target countries. Overrides the
+    #' current class setting for `target_regions`.
+    filter = function(regions) {
+      super$filter(regions)
     }
   )
 )
