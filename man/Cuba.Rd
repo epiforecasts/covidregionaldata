@@ -44,14 +44,14 @@ only entry, is be named main.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Cuba$set_region_codes()}}
-\item \href{#method-clean}{\code{Cuba$clean()}}
+\item \href{#method-clean_common}{\code{Cuba$clean_common()}}
 \item \href{#method-clone}{\code{Cuba$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
@@ -73,12 +73,12 @@ Set up a table of region codes for clean data
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
 Cuba specific state level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Cuba$clean()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Cuba$clean_common()}\if{html}{\out{</div>}}
 }
 
 }
