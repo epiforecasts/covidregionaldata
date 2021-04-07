@@ -10,3 +10,9 @@
 #' level 2 UK data.
 #' @return A tibble of region codes and related information.
 "uk_codes"
+
+#' Region Codes for Colombia Dataset.
+#'
+#' @description The region codes for Colombia
+#' @return A tibble of region codes and related information.
+"colombia_codes"
