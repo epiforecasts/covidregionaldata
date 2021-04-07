@@ -44,7 +44,7 @@ Colombia <- R6::R6Class("Colombia",
     #' @importFrom stringr str_replace_all str_to_sentence str_to_title
     #' @importFrom rlang .data
     #'
-    clean = function() {
+    clean_common = function() {
       message_verbose(self$verbose, "Cleaning data")
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
