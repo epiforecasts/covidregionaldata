@@ -37,6 +37,7 @@ set_negative_values_to_zero <- function(data) {
   for (numeric_col_name in numeric_col_names) {
     if (numeric_col_name %in% colnames(data)) {
       data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
+      data[[numeric_col_name]] <- as.double(data[[numeric_col_name]])
     }
   }
   return(data)
