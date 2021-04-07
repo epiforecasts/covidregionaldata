@@ -55,20 +55,14 @@ Canada <- R6::R6Class("Canada",
       self$codes_lookup <- list("1" = canada_codes)
     },
 
-    #' @description *Canada* specific provincial/territorial level data
+    #' @description Provincial Level Data
     #' cleaning
     #' @param ... pass additional arguments
     #'
     #' @importFrom dplyr filter select mutate rename
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate dmy
-    clean = function(...) {
-      # function to clean the data (MUST BE CALLED clean)
-      # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- something
-      # No return statement is required
-      # have a statement like this to indicate information to user if requested
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
           pruid, prname, date,
