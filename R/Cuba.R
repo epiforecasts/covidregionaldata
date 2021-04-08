@@ -3,7 +3,7 @@
 #'  and processing covid-19 region data for Cuba
 #'
 #' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+#' @source https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
 #' @export
 #' @examples
 #' \dontrun{

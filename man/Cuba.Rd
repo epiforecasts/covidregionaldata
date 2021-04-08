@@ -4,7 +4,7 @@
 \alias{Cuba}
 \title{Cuba Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
 }
 \description{
 Country specific information for downloading, cleaning
