@@ -29,7 +29,7 @@ Belgium <- R6::R6Class("Belgium",
     supported_region_codes = list("1" = "iso_3166_2_region",
                                   "2" = "iso_3166_2_province"),
     #' @field common_data_urls List of named links to raw data that are common
-    #' across levels. The first entry should be named main.
+    #' across levels.
     common_data_urls = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
       "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
@@ -73,7 +73,6 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
     clean_common = function() {
-      message_verbose(self$verbose, "Cleaning data")
 
       # vroom fails to load two lines in the main data set
       # For now, we filter out the broken lines and replace them
@@ -99,7 +98,7 @@ Belgium <- R6::R6Class("Belgium",
       }
     },
 
-    #' @description Belgium Specific Region Level Data Cleaning
+    #' @description Region-level Data Cleaning
     # nolint start
     #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
     #' @importFrom tidyr replace_na
@@ -155,7 +154,7 @@ Belgium <- R6::R6Class("Belgium",
                   copy = TRUE)
     },
 
-    #' @description Belgium Specific Province Level Data Cleaning
+    #' @description Province-level Data Cleaning
     # nolint start
     #' @importFrom dplyr group_by summarise ungroup full_join tally mutate select rename
     #' @importFrom tidyr replace_na

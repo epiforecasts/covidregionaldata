@@ -38,7 +38,7 @@ region$return()
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
-across levels. The first entry should be named main.}
+across levels.}
 
 \item{\code{level_data_urls}}{List of named links to raw data specific to
 each level of regions. For Belgium, there are only additional data for
@@ -97,7 +97,7 @@ request.
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-Belgium Specific Region Level Data Cleaning
+Region-level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Belgium$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -107,7 +107,7 @@ Belgium Specific Region Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-Belgium Specific Province Level Data Cleaning
+Province-level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Belgium$clean_level_2()}\if{html}{\out{</div>}}
 }
