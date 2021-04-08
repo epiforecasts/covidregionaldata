@@ -11,9 +11,6 @@
 #' @examples
 #' \dontrun{
 #' region <- Belgium$new(verbose = TRUE, steps = TRUE, level = "2")
-#' region$download()
-#' region$clean()
-#' region$process()
 #' region$return()
 #' }
 Belgium <- R6::R6Class("Belgium",
@@ -31,15 +28,19 @@ Belgium <- R6::R6Class("Belgium",
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2_region",
                                   "2" = "iso_3166_2_province"),
-    #' @field data_url List of named links to raw data, used for all levels.
-    data_url = list(
+    #' @field common_data_urls List of named links to raw data that are common
+    #' across levels. The first entry should be named main.
+    common_data_urls = list(
       "main" = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv",
       "hosp" = "https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv"
     ),
-    #' @field data_url_level_1 List of named links to raw data for level 1;
-    #' not used or accessed when generating level 2 results.
-    data_url_level_1 = list(
-      "deaths" = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
+    #' @field level_data_urls List of named links to raw data specific to
+    #' each level of regions. For Belgium, there are only additional data for
+    #' level 1 regions.
+    level_data_urls = list(
+      "1" = list(
+        "deaths" = "https://epistat.sciensano.be/Data/COVID19BE_MORT.csv"
+      )
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
@@ -71,7 +72,7 @@ Belgium <- R6::R6Class("Belgium",
     #' request.
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
-    clean = function() {
+    clean_common = function() {
       message_verbose(self$verbose, "Cleaning data")
 
       # vroom fails to load two lines in the main data set
@@ -84,7 +85,8 @@ Belgium <- R6::R6Class("Belgium",
         ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
         "2020-04-22", "Limburg", "Flanders", "50-59", "F", 10,
         "2021-02-17", "VlaamsBrabant", "Flanders", "10-19", "M", 12
-      ) %>% mutate(DATE = as.Date(DATE), CASES = as.double(CASES))
+      ) %>%
+        mutate(DATE = as.Date(DATE), CASES = as.double(CASES))
 
       self$data$raw$main <-
         self$data$raw$main %>%

@@ -20,9 +20,6 @@ Inherits from \code{DataClass}
 \examples{
 \dontrun{
 region <- Belgium$new(verbose = TRUE, steps = TRUE, level = "2")
-region$download()
-region$clean()
-region$process()
 region$return()
 }
 }
@@ -40,10 +37,12 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{data_url}}{List of named links to raw data, used for all levels.}
+\item{\code{common_data_urls}}{List of named links to raw data that are common
+across levels. The first entry should be named main.}
 
-\item{\code{data_url_level_1}}{List of named links to raw data for level 1;
-not used or accessed when generating level 2 results.}
+\item{\code{level_data_urls}}{List of named links to raw data specific to
+each level of regions. For Belgium, there are only additional data for
+level 1 regions.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
@@ -62,7 +61,9 @@ not used or accessed when generating level 2 results.}
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}

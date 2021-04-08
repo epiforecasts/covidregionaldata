@@ -97,10 +97,14 @@ initialise_dataclass <- function(self, level = "1", regions,
   }
 
   if (!is.null(self$level_data_urls[[self$level]])) {
-    self$data_urls <- merge(
-      self$common_data_urls,
-      self$level_data_urls[[self$level]]
-    )
+    if (length(self$common_data_urls)>0) {
+      self$data_urls <- merge(
+        self$common_data_urls,
+        self$level_data_urls[[self$level]]
+      )
+    } else {
+      self$data_urls <- self$level_data_urls[[self$level]]
+    }
   } else {
     self$data_urls <- self$common_data_urls
   }
@@ -179,28 +183,8 @@ DataClass <- R6::R6Class(
     #' @importFrom purrr map
     download = function() {
 
-### FIX AND DISAGGREGATE
-
-      data_url_list <- self$data_url
-
-      level_specific_data_url <- switch(self$level,
-                                        "1" = self$data_url_level_1,
-                                        "2" = self$data_url_level_2)
-
-      if (!is.null(level_specific_data_url)) {
-        if (length(self$data_url) > 0) {
-          data_url_list <- merge(self$data_url, level_specific_data_url)
-        } else {
-          data_url_list <- level_specific_data_url
-        }
-      }
-
-      self$data$raw <- map(data_url_list, csv_reader,
-                           verbose = self$verbose
-#### =======
       self$data$raw <- map(self$data_urls, csv_reader,
         verbose = self$verbose
-#### from dev
       )
     },
 

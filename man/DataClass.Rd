@@ -41,12 +41,6 @@ that are level specific. Any urls that share a name with a url from
 supported level.
 will be selected preferentially.}
 
-\item{\code{data_url_level_1}}{List of named links to raw data to be
-downloaded only for level 1.}
-
-\item{\code{data_url_level_2}}{List of named links to raw data to be
-downloaded only for level 2.}
-
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
 \item{\code{level}}{target region level}
