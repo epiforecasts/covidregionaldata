@@ -119,12 +119,12 @@ Also adding new variable: hosp_new_first_admissions. This is NHS data for first 
       ) %>%
       dplyr::group_by(date, region_level_1) %>%
       dplyr::summarise(
-        cases_new = sum(cases_new, na.rm = TRUE),
-        cases_total = sum(cases_total, na.rm = TRUE),
-        deaths_new = sum(deaths_new, na.rm = TRUE),
-        deaths_total = sum(deaths_total, na.rm = TRUE),
-        hosp_new = sum(hosp_new, na.rm = TRUE),
-        hosp_total = sum(hosp_total, na.rm = TRUE),
+        cases_new = sum(cases_new),
+        cases_total = sum(cases_total),
+        deaths_new = sum(deaths_new),
+        deaths_total = sum(deaths_total),
+        hosp_new = sum(hosp_new),
+        hosp_total = sum(hosp_total),
         .groups = "drop"
       )
 
