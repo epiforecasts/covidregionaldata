@@ -45,35 +45,31 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
           "ZA-EC", "ZA-FS", "ZA-GP", "ZA-KZN", "ZA-LP",
           "ZA-MP", "ZA-NC", "ZA-NW", "ZA-WC"
         ),
-        region = c(
+        level_1_region = c(
           "Eastern Cape", "Free State", "Gauteng", "Kwazulu-Natal", "Limpopo",
           "Mpumalanga", "Northern Cape", "North-West", "Western Cape"
         )
       )
     },
 
-    #' @description South Africa-specific function for downloading raw data.
-    download = function() {
-      message_verbose(self$verbose, "Downloading data")
-      self$data$raw <- csv_reader(self$common_data_urls$main, self$verbose)
-      self$data$deaths <- csv_reader(self$level_data_urls$deaths, self$verbose)
-    },
-
-    #' @description SouthAfrica specific state level data cleaning
-    #' @importFrom dplyr mutate select arrange recode filter bind_rows na_if
+    #' @description Province level data cleaning
+    #' @importFrom dplyr mutate select bind_rows na_if
     #' @importFrom tidyr pivot_longer pivot_wider
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
     #'
     clean_common = function() {
-      self$data$clean <- bind_rows(self$data$raw$main, self$data$deaths,
+      self$data$raw$deaths$total <- as.double(self$data$raw$deaths$total)
+      self$data$clean <- bind_rows(self$data$raw$main,
+        self$data$raw$deaths,
         .id = "data"
-      ) %>%
+      )
+      self$data$clean <- self$data$clean %>%
         mutate(
-          data = factor(.data$data, c(1, 2), c("cases_total", "deaths_total")),
-          date = dmy(.data$date)
+          data = factor(data, c(1, 2), c("cases_total", "deaths_total")),
+          date = dmy(date)
         ) %>%
-        select(-c(YYYYMMDD, .data$total, .data$source)) %>%
+        select(-c(YYYYMMDD, total, source)) %>%
         pivot_longer(-c(data, date), names_to = "level_1_region_code") %>%
         pivot_wider(names_from = data) %>%
         mutate(
@@ -82,14 +78,8 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
         ) %>%
         left_join(
           self$codes_lookup$`1`,
-          by = c("level_1_region_code" = "region")
+          by = c("level_1_region_code" = "code")
         )
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      initialise_dataclass(self, ...)
     }
   )
 )
