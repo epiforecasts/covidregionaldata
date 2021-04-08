@@ -5,7 +5,8 @@
 \title{Internal Shared Regional Dataset Processing}
 \usage{
 process_internal(
-  region,
+  clean_data,
+  level,
   group_vars,
   totals = FALSE,
   localise = TRUE,
@@ -13,11 +14,14 @@ process_internal(
 )
 }
 \arguments{
-\item{region}{A given Country class object to process, e.g. \code{Italy()}}
+\item{clean_data}{The clean data for a country, e.g. \code{Italy$data$clean}}
 
-\item{group_vars}{A character vector of grouping variables. It is assumed
-that the first entry indicates the main region variable and the second
-indicates the code for this variable.}
+\item{level}{The level of the data, e.g. 'level_1_region'}
+
+\item{group_vars}{Grouping variables, used to
+for grouping and to localise names. It is assumed that the first entry
+indicates the main region variable and the second indicates the geocode for
+this variable.}
 
 \item{totals}{Logical, defaults to \code{FALSE}. If `TRUE``, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset

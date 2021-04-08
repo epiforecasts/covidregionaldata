@@ -17,7 +17,7 @@
 #'  and the Level 1 data will be returned.
 #' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
 #' @inheritParams return_data
-#' @inheritParams process_internal
+#' @inheritParams initialise_dataclass
 #' @inheritParams message_verbose
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
@@ -34,7 +34,7 @@
 #' }
 get_regional_data <- function(country, level = "1", totals = FALSE,
                               localise = TRUE, steps = FALSE,
-                              class = FALSE, verbose = TRUE,
+                              class = FALSE, verbose = TRUE, regions,
                               include_level_2_regions = deprecated(),
                               localise_regions = deprecated(),
                               ...) {
@@ -58,27 +58,14 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
     localise <- localise_regions
   }
 
-  # format country string
-  country <- paste0(
-    toupper(substr(country, 1, 1)),
-    tolower(substr(country, 2, nchar(country)))
-  )
-
   # check data availability and initiate country class if available
   region_class <- check_country_available(
-    country = country, level = level,
+    country = country, level = level, regions = regions,
     totals = totals, localise = localise,
     verbose = verbose, steps = steps, ...
   )
 
-  # download and cache raw data
-  region_class$download()
-
-  # dataset specifc cleaning
-  region_class$clean()
-
-  # non-specific cleaning and checks
-  region_class$process()
+  region_class$get()
 
   return(return_data(region_class,
     class = class

@@ -8,12 +8,15 @@ test_get_regional_data <- function(level) {
     mockery::stub(
       get_regional_data, "check_country_available",
       function(country, level, totals, localise,
-               verbose, steps) {
+               verbose, steps, regions) {
         class <- mexico$clone()
         class$totals <- totals
         class$localise <- localise
         class$verbose <- verbose
         class$steps <- steps
+        if (!missing(regions)) {
+          class$target_regions <- regions
+        }
         return(class)
       }
     )
@@ -38,13 +41,19 @@ test_get_regional_data <- function(level) {
       level = level, verbose = FALSE,
       localise = FALSE
     )
-    expect_true(any(colnames(d) %in% paste0("region_level_", level)))
+    expect_true(any(colnames(d) %in% paste0("level_", level, "_region")))
     d <- get_regional_data("mexico",
       level = level, verbose = FALSE,
       totals = TRUE
     )
     expect_true(any(grepl("total", colnames(d))))
     expect_true(!any(colnames(d) == "date"))
+    expect_error(
+      get_regional_data("mexico",
+        regions = "made up land",
+        verbose = FALSE
+      )
+    )
     # test depreciated args
     if (level == "2") {
       expect_warning(get_regional_data("mexico",

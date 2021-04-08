@@ -25,3 +25,4 @@ SMG.md
 ^\.pre-commit-config\.yaml$
 ^README\.Rmd$
 ^.*.pdf$
+^inst/CountryTemplate\.R$
