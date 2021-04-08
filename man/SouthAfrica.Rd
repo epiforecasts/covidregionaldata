@@ -4,9 +4,9 @@
 \alias{SouthAfrica}
 \title{SouthAfrica Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv # nolint
+https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv
 
-https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv # nolint
+https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv
 }
 \description{
 Country specific information for downloading, cleaning
@@ -35,11 +35,7 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{common_data_urls}}{List of named links to raw data. The first, and
-only entry, is be named main.}
-
-\item{\code{level_data_urls}}{List of named links to raw data that are level
-specific.}
+\item{\code{common_data_urls}}{List of named links to raw data.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }

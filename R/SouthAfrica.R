@@ -3,8 +3,10 @@
 #'  and processing covid-19 region data for South Africa.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv # nolint
-#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv # nolint
+# nolint start
+#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv
+#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv
+# nolint end
 #' @export
 #' @examples
 #' \dontrun{
@@ -14,7 +16,7 @@
 SouthAfrica <- R6::R6Class("SouthAfrica",
   inherit = DataClass,
   public = list(
-    # Core Attributes (amend each paramater for country specific infomation)
+    # Core Attributes
     #' @field country name of country to fetch data for
     country = "South Africa",
     #' @field supported_levels A list of supported levels.
@@ -23,15 +25,10 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
     supported_region_names = list("1" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field common_data_urls List of named links to raw data. The first, and
-    #' only entry, is be named main.
+    #' @field common_data_urls List of named links to raw data.
     common_data_urls = list(
-      "main" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv" # nolint
-    ),
-    #' @field level_data_urls List of named links to raw data that are level
-    #' specific.
-    level_data_urls = list(
-      "1" = list("deaths" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv") # nolint
+      "cases" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv", # nolint
+      "deaths" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv" # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new", "recovered_new"),
@@ -60,7 +57,7 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
     #'
     clean_common = function() {
       self$data$raw$deaths$total <- as.double(self$data$raw$deaths$total)
-      self$data$clean <- bind_rows(self$data$raw$main,
+      self$data$clean <- bind_rows(self$data$raw$cases,
         self$data$raw$deaths,
         .id = "data"
       )
