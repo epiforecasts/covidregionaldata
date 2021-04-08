@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' region <- Belgium$new(verbose = TRUE, steps = TRUE, level = "2")
+#' region <- Belgium$new(verbose = TRUE, steps = TRUE, get = TRUE, level = "2")
 #' region$return()
 #' }
 Belgium <- R6::R6Class("Belgium",
@@ -79,8 +79,6 @@ Belgium <- R6::R6Class("Belgium",
       # For now, we filter out the broken lines and replace them
       # with the following data shim
 
-      self$data$raw$original_main <- self$data$raw$main
-
       fixed_lines <- tibble::tribble(
         ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
         "2020-04-22", "Limburg", "Flanders", "50-59", "F", 10,
@@ -88,7 +86,7 @@ Belgium <- R6::R6Class("Belgium",
       ) %>%
         mutate(DATE = as.Date(DATE), CASES = as.double(CASES))
 
-      self$data$raw$main <-
+      self$data$raw$main_fixed <-
         self$data$raw$main %>%
           filter((REGION %in% self$codes_lookup[[1]]$level_1_region
                    | is.na(REGION))) %>%
@@ -108,7 +106,7 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom lubridate ymd
     # nolint end
     clean_level_1 = function() {
-      cases_data <- self$data$raw$main %>%
+      cases_data <- self$data$raw$main_fixed %>%
         select(DATE, REGION, CASES) %>%
         mutate(
           DATE = ymd(DATE),
@@ -165,7 +163,7 @@ Belgium <- R6::R6Class("Belgium",
     # nolint end
     #'
     clean_level_2 = function() {
-      cases_data <- self$data$raw$main %>%
+      cases_data <- self$data$raw$main_fixed %>%
         select(DATE, REGION, PROVINCE, CASES) %>%
         mutate(
           DATE = ymd(DATE),
