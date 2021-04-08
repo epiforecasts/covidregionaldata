@@ -83,7 +83,7 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-USA Specific State Level Data Cleaning
+State Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{USA$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -93,7 +93,7 @@ USA Specific State Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-USA Specific County Level Data Cleaning
+County Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{USA$clean_level_2()}\if{html}{\out{</div>}}
 }

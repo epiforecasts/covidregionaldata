@@ -36,8 +36,8 @@ USA <- R6::R6Class("USA",
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
     level_data_urls = list(
-      "1" = list("1" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"), # nolint
-      "2" = list("2" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") # nolint
+      "1" = list("state" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"), # nolint
+      "2" = list("county" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total"),
@@ -75,10 +75,10 @@ USA <- R6::R6Class("USA",
       self$codes_lookup$`2` <- self$codes_lookup$`1`
     },
 
-    #' @description USA Specific State Level Data Cleaning
+    #' @description State Level Data Cleaning
     #' @importFrom dplyr rename mutate select left_join
     clean_level_1 = function() {
-      self$data$clean <- self$data$raw$`1` %>%
+      self$data$clean <- self$data$raw$state %>%
         rename(
           level_1_region = state,
           cases_total = cases,
@@ -95,10 +95,10 @@ USA <- R6::R6Class("USA",
         )
     },
 
-    #' @description USA Specific County Level Data Cleaning
+    #' @description County Level Data Cleaning
     #' @importFrom dplyr mutate rename left_join
     clean_level_2 = function() {
-      self$data$clean <- self$data$raw$`2` %>%
+      self$data$clean <- self$data$raw$county %>%
         rename(
           level_2_region = county,
           level_1_region = state,
