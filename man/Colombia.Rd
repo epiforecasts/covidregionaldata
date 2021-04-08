@@ -4,7 +4,7 @@
 \alias{Colombia}
 \title{Colombia Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv  # nolint
 }
 \description{
 Country specific information for downloading, cleaning
