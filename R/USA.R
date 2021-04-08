@@ -75,16 +75,6 @@ USA <- R6::R6Class("USA",
       self$codes_lookup$`2` <- self$codes_lookup$`1`
     },
 
-    #' @description USA specific state level data cleaning
-    #'
-    clean_common = function() {
-      if (self$level == "1") {
-        self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
-    },
-
     #' @description USA Specific State Level Data Cleaning
     #' @importFrom dplyr rename mutate select left_join
     clean_level_1 = function() {
