@@ -32,9 +32,12 @@ USA <- R6::R6Class("USA",
     ),
     #' @field common_data_urls List of named links to raw data. Since there are
     #'  no common data sources for level 1 and 2, this list is empty.
-    common_data_urls = list(
-      "1" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv", # nolint
-      "2" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv" # nolint
+    common_data_urls = list(),
+    #' @field level_data_urls List of named links to raw data that are level
+    #' specific.
+    level_data_urls = list(
+      "1" = list("1" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"), # nolint
+      "2" = list("2" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total"),

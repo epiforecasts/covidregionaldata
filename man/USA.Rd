@@ -38,6 +38,9 @@ region$return()
 \item{\code{common_data_urls}}{List of named links to raw data. Since there are
 no common data sources for level 1 and 2, this list is empty.}
 
+\item{\code{level_data_urls}}{List of named links to raw data that are level
+specific.}
+
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
 \if{html}{\out{</div>}}
