@@ -35,8 +35,8 @@ region$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
-only entry, is be named main.}
+\item{\code{common_data_urls}}{List of named links to raw data that are common
+across levels.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
@@ -46,14 +46,16 @@ only entry, is be named main.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Canada$set_region_codes()}}
-\item \href{#method-clean}{\code{Canada$clean()}}
+\item \href{#method-clean_common}{\code{Canada$clean_common()}}
 \item \href{#method-clone}{\code{Canada$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
@@ -73,13 +75,13 @@ Set up a table of region codes for clean data
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
-\emph{Canada} specific provincial/territorial level data
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
+Provincial Level Data
 cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Canada$clean(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Canada$clean_common()}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

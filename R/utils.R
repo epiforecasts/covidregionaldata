@@ -32,7 +32,6 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
 
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
-      # Set up cache
       ch <- cache_filesystem(getOption("cache_path"))
       read_csv_fun <- memoise(vroom, cache = ch)
     }
@@ -64,12 +63,14 @@ message_verbose <- function(verbose = TRUE, ...) {
   return(invisible(NULL))
 }
 #' Add useMemoise to options
-#'
+#' @param path Path to cache directory, defaults to a temporary directory.
+#' @inheritParams message_verbose
 #' @description Adds useMemoise to options meaning memoise is
 #' used when reading data in.
 #' @export
-start_using_memoise <- function() {
-  options("useMemoise" = TRUE, cache_path = ".cache")
+start_using_memoise <- function(path = tempdir(), verbose = TRUE) {
+  message_verbose(verbose, "Using a cache at: ", path)
+  options("useMemoise" = TRUE, cache_path = path)
 }
 
 #' Stop using useMemoise
@@ -109,4 +110,41 @@ return_data <- function(obj, class = FALSE) {
     obj <- obj$return()
     return(obj)
   }
+}
+
+#' Control Grouping Variables used in process_internal
+#'
+#' @description Controls the grouping variables used in
+#' `process_internal` based on the supported regions present in the
+#' class.
+#' @param level A character string indicating the current level.
+#' @param all_levels A characater vector indicating all the levels supported.
+#' @param region_names A named list of region names named after the levels
+#'  supported.
+#' @param region_codes A named list of region codes named after the levels
+#' supported.
+#' @importFrom purrr map
+region_dispatch <- function(level, all_levels, region_names, region_codes) {
+  sel_levels <- all_levels[1:grep(level, all_levels)]
+
+  region_vars <- map(sel_levels, function(l) {
+    rn <- c()
+    if (!is.null(region_names[[l]])) {
+      rn <- c(region_names[[l]])
+      names(rn) <- paste0("level_", l, "_region")
+    }
+
+    rc <- c()
+    if (!is.null(region_codes[[l]])) {
+      rc <- c(region_codes[[l]])
+      names(rc) <- paste0("level_", l, "_region_code")
+    }
+    region_vars <- c(rn, rc)
+    return(region_vars)
+  })
+  region_vars <- unlist(region_vars)
+
+  region_vars <- region_vars[!is.null(region_vars)]
+  region_vars <- region_vars[!is.na(region_vars)]
+  return(region_vars)
 }

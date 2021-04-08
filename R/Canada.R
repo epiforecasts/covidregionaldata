@@ -25,9 +25,9 @@ Canada <- R6::R6Class("Canada",
     supported_region_names = list("1" = "province"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field data_url List of named links to raw data. The first, and
-    #' only entry, is be named main.
-    data_url = list(
+    #' @field common_data_urls List of named links to raw data that are common
+    #' across levels.
+    common_data_urls = list(
       "main" = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv" # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
@@ -55,20 +55,14 @@ Canada <- R6::R6Class("Canada",
       self$codes_lookup <- list("1" = canada_codes)
     },
 
-    #' @description *Canada* specific provincial/territorial level data
+    #' @description Provincial Level Data
     #' cleaning
     #' @param ... pass additional arguments
     #'
     #' @importFrom dplyr filter select mutate rename
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate dmy
-    clean = function(...) {
-      # function to clean the data (MUST BE CALLED clean)
-      # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- something
-      # No return statement is required
-      # have a statement like this to indicate information to user if requested
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
           pruid, prname, date,

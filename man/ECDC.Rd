@@ -21,8 +21,8 @@ national$return()
 }
 
 }
-\section{Super class}{
-\code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{ECDC}
+\section{Super classes}{
+\code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{ECDC}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -35,8 +35,7 @@ national$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
-only entry, is be named main.}
+\item{\code{common_data_urls}}{List of named links to raw data.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
@@ -45,7 +44,7 @@ only entry, is be named main.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-clean}{\code{ECDC$clean()}}
+\item \href{#method-clean_common}{\code{ECDC$clean_common()}}
 \item \href{#method-return}{\code{ECDC$return()}}
 \item \href{#method-clone}{\code{ECDC$clone()}}
 }
@@ -53,22 +52,24 @@ only entry, is be named main.}
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
 ECDC specific state level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDC$clean()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ECDC$clean_common()}\if{html}{\out{</div>}}
 }
 
 }

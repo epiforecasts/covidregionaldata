@@ -6,10 +6,7 @@
 #' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
-#' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
+#' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
 CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
@@ -25,22 +22,20 @@ CountryTemplate <- R6::R6Class("CountryTemplate", # rename to country name
     supported_region_names = list("1" = NA),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
-    data_url = list(main = "url"),
+    common_data_urls = list(main = "url"),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("col_1", "col_2", "col_3", "etc."),
 
-    #' @description *Country-name* specific state level data cleaning
-    #' @param ... pass additional arguments
+    #' @description *Country-name* data cleaning common across levels
     #'
-    clean = function(...) {
-      # function to clean the data (MUST BE CALLED clean)
-      # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- self$data$raw[["main"]]
-      # No return statement is required
-      # have a statment like this to indicate information to user if requested
-      message_verbose(self$verbose, "Cleaning data")
+    clean_commmon = function() {
+    },
+
+    #' @description *Country-name* data cleaning specific to spatial levels
+    #'
+    clean_level_1 = function() {
     }
   )
 )

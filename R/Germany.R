@@ -24,9 +24,9 @@ Germany <- R6::R6Class("Germany",
     supported_region_names = list("1" = "bundesland", "2" = "landkreis"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field data_url List of named links to raw data. The first, and
+    #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
-    data_url = list(
+    common_data_urls = list(
       "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
     ),
     #' @field source_data_cols existing columns within the raw data
@@ -52,12 +52,11 @@ Germany <- R6::R6Class("Germany",
       )
     },
 
-    #' @description directs to either level 1 or level 2 processing based on
+    #' @description Common Data Cleaning
     #' request.
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
-    clean = function() {
-      message_verbose(self$verbose, "Cleaning data")
+    clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         select(
           date = .data$Meldedatum,
@@ -74,15 +73,9 @@ Germany <- R6::R6Class("Germany",
         mutate(
           level_1_region_code = .data$code,
         )
-
-      if (self$level == "1") {
-        self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
     },
 
-    #' @description Germany Specific Bundesland Level Data Cleaning
+    #' @description Bundesland Level Data Cleaning
     #' @importFrom dplyr group_by summarise ungroup full_join
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
@@ -97,7 +90,7 @@ Germany <- R6::R6Class("Germany",
         ungroup()
     },
 
-    #' @description Germany Specific Landkreis Level Data Cleaning
+    #' @description Landkreis Level Data Cleaning
     #' @importFrom dplyr mutate group_by summarise ungroup full_join
     #'
     clean_level_2 = function() {
