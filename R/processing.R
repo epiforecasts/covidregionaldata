@@ -29,16 +29,8 @@ add_extra_na_cols <- function(data) {
 #' @param data A data frame
 #' @return A data frame with all relevant data > 0.
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c(
-    "deaths_total", "cases_total", "recovered_total", "hosp_total",
-    "tested_total", "cases_new", "deaths_new", "recovered_new", "hosp_new",
-    "tested_new"
-  )
-  for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)) {
-      data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
-    }
-  }
+  numeric_col_names <- names(unlist(lapply(data, is.numeric)))
+  data[numeric_col_names][data[numeric_col_names] < 0] <- 0
   return(data)
 }
 
