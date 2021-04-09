@@ -106,7 +106,7 @@ initialise_dataclass <- function(self, level = "1", regions,
       self$data_urls <- self$level_data_urls[[self$level]]
     }
   } else {
-    self$data_urls <- self$common_data_urls
+    self$data_urls <- self$level_data_urls[[self$level]]
   }
 
   if (get) {

@@ -16,3 +16,9 @@
 #' @description The region codes for Colombia
 #' @return A tibble of region codes and related information.
 "colombia_codes"
+
+#' Region Codes for France Dataset.
+#'
+#' @description The region codes for France
+#' @return A tibble of region codes and related information.
+"france_codes"
