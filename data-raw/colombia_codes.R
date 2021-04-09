@@ -22,7 +22,11 @@ level_1_region <- read_html(co_iso) %>%
   html_text()
 level_1_region <- level_1_region[1:33]
 
-colombia_codes <- data.frame(level_1_region_code, level_1_region) %>%
+colombia_codes <- data.frame(
+  level_1_region_code,
+  level_1_region,
+  stringsAsFactors = FALSE
+) %>%
   mutate(
     level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
     level_1_region = stri_trim_both(level_1_region),
