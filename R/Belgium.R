@@ -68,11 +68,14 @@ Belgium <- R6::R6Class("Belgium",
         )
     },
 
-    #' @description directs to either level 1 or level 2 processing based on
-    #' request.
-    #' @importFrom dplyr select mutate
-    #' @importFrom lubridate as_date ymd_hms
-    clean_common = function() {
+
+    #' @description Downloads data from source and (for Belgium)
+    #' applies an initial data patch.
+    #' @importFrom dplyr select mutate filter bind_rows
+    #' @importFrom tibble tribble
+    download = function() {
+      # do the actual downloading using the parent download method
+      super$download()
 
       # vroom fails to load two lines in the main data set
       # For now, we filter out the broken lines and replace them
@@ -85,17 +88,13 @@ Belgium <- R6::R6Class("Belgium",
       ) %>%
         mutate(DATE = as.Date(DATE), CASES = as.double(CASES))
 
-      self$data$raw$main_fixed <-
-        self$data$raw$main %>%
+      self$data$raw$main_broken <- self$data$raw$main
+      self$data$raw$main <-
+        self$data$raw$main_broken %>%
           filter((REGION %in% self$codes_lookup[[1]]$level_1_region
                    | is.na(REGION))) %>%
         bind_rows(fixed_lines)
 
-      if (self$level == "1") {
-        self$clean_level_1()
-      } else if (self$level == "2") {
-        self$clean_level_2()
-      }
     },
 
     #' @description Region-level Data Cleaning
@@ -105,7 +104,7 @@ Belgium <- R6::R6Class("Belgium",
     #' @importFrom lubridate ymd
     # nolint end
     clean_level_1 = function() {
-      cases_data <- self$data$raw$main_fixed %>%
+      cases_data <- self$data$raw$main %>%
         select(DATE, REGION, CASES) %>%
         mutate(
           DATE = ymd(DATE),
@@ -162,7 +161,7 @@ Belgium <- R6::R6Class("Belgium",
     # nolint end
     #'
     clean_level_2 = function() {
-      cases_data <- self$data$raw$main_fixed %>%
+      cases_data <- self$data$raw$main %>%
         select(DATE, REGION, PROVINCE, CASES) %>%
         mutate(
           DATE = ymd(DATE),

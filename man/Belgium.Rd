@@ -52,7 +52,7 @@ level 1 regions.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Belgium$set_region_codes()}}
-\item \href{#method-clean_common}{\code{Belgium$clean_common()}}
+\item \href{#method-download}{\code{Belgium$download()}}
 \item \href{#method-clean_level_1}{\code{Belgium$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Belgium$clean_level_2()}}
 \item \href{#method-clone}{\code{Belgium$clone()}}
@@ -62,7 +62,7 @@ level 1 regions.}
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
@@ -83,13 +83,13 @@ Set up a table of region codes for clean data
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_common"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_common}{}}}
-\subsection{Method \code{clean_common()}}{
-directs to either level 1 or level 2 processing based on
-request.
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Downloads data from source and (for Belgium)
+applies an initial data patch.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Belgium$clean_common()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Belgium$download()}\if{html}{\out{</div>}}
 }
 
 }
