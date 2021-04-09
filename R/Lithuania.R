@@ -120,11 +120,7 @@
 # nolint end
 #' @examples
 #' \dontrun{
-#' region <- Lithuania$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
-#' region$return()
+#' region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' }
 #' @export
 Lithuania <- R6::R6Class("Lithuania",
@@ -132,12 +128,25 @@ Lithuania <- R6::R6Class("Lithuania",
   public = list(
 
     # Core Attributes
-    #' @field level_1_region the level 1 region name.
-    level_1_region = "county", # apskritis
-    #' @field level_2_region the level 2 region name.
-    level_2_region = "municipality", # savivaldybe
-    #' @field data_url link to raw data
-    data_url = "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv", # nolint
+    #' @field country name of country to fetch data for
+    country = "Lithuania",
+    #' @field supported_levels A list of supported levels.
+    supported_levels = list("1", "2"),
+    #' @field supported_region_names A list of region names in order of level.
+    supported_region_names = list(
+      "1" = "county", # apskritis
+      "2" = "municipality" # savivaldybe
+    ),
+    #' @field supported_region_codes A list of region codes in order of level.
+    supported_region_codes = list(
+      "1" = "iso_3166_2", # default is to just give county data
+      "2" = "iso_3166_2_municipality" # if giving municipality data
+    ),
+    #' @field common_data_urls List of named links to raw data that are common
+    #' across levels.
+    common_data_urls = list(
+      "main" = "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv" # nolint
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "cases_new", "tested_new", "recovered_total", "deaths_new"
@@ -155,23 +164,22 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @field national_data whether to return data rows for national results
     national_data = FALSE,
 
-    #' @description *Lithuania* specific state level data cleaning
-    #' @param ... pass additional arguments
+    #' @description Set up a table of region codes for clean data
+    set_region_codes = function() {
+      self$codes_lookup <- list(
+        "1" = lithuania_codes,
+        "2" = lithuania_codes
+      )
+    },
+
+    #' @description Common data cleaning for both levels
     #'
     # nolint start
     #' @importFrom dplyr mutate group_by summarise if_else filter select bind_rows rename left_join everything across lead
     #' @importFrom tidyselect all_of
     #' @importFrom lubridate as_date
     # nolint end
-    clean = function(...) {
-      # function to clean the data (MUST BE CALLED clean)
-      # modify the data variable 'region' in place and add using 'self'
-      # e.g. self$data$clean <- something
-      # No return statement is required
-      # have a statement like this to indicate information to user if requested
-      if (self$verbose) {
-        message("Cleaning data")
-      }
+    clean_common = function() {
 
       # Process two params which let us switch what OSP fields are returned
       # for the number of deaths and the number of recovered cases.
@@ -190,7 +198,8 @@ Lithuania <- R6::R6Class("Lithuania",
       # return NULL
       #
       if (is.null(death_field)) {
-        message(paste0(
+        message_verbose(self$verbose,
+          paste0(
           "death_definition of \"", self$death_definition,
           "\" not recognised, defaulting to \"of\""
         ))
@@ -210,7 +219,7 @@ Lithuania <- R6::R6Class("Lithuania",
       # return NULL
       #
       if (is.null(death_field)) {
-        message(paste0(
+        message_verbose(self$verbose, paste0(
           "recovered_definition of \"", self$recovered_definition,
           "\" not recognised, defaulting to \"official\""
         ))
@@ -222,12 +231,12 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Get relevant column names for differences (i.e. not percentages
       # or qualitative)
-      sum_cols <- names(select(self$data$raw,
+      sum_cols <- names(select(self$data$raw$main,
                                "population":tidyselect::last_col()))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
       # Take the difference between national and sum of counties' data
-      unassigned <- self$data$raw %>%
+      unassigned <- self$data$raw$main %>%
         mutate(national = ifelse(.data$municipality_name == "Lietuva",
           "national", "municipality"
         )) %>%
@@ -268,7 +277,8 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Join unknown locations to main dataset
       osp_data_w_unassigned <- bind_rows(
-        self$data$raw %>% select(-.data$object_id, -.data$municipality_code),
+        self$data$raw$main %>%
+          select(-.data$object_id, -.data$municipality_code),
         unassigned
       )
 
@@ -291,11 +301,13 @@ Lithuania <- R6::R6Class("Lithuania",
         rename(
           cases_new = .data$incidence,
           cases_total = .data$cumulative_totals,
-          region_level_2 = .data$municipality_name
+          level_2_region = .data$municipality_name
         ) %>%
-        left_join(self$data$codes_lookup, by = c("region_level_2")) %>%
+        left_join(self$codes_lookup[["2"]],
+                  by = c("level_2_region"),
+                  copy = TRUE) %>%
         select(
-          date, region_level_1, region_level_2,
+          date, level_1_region, level_2_region,
           cases_new, cases_total, deaths_new,
           tested_new, recovered_total,
           everything()
@@ -306,14 +318,11 @@ Lithuania <- R6::R6Class("Lithuania",
       if (!self$all_osp_fields) {
         self$data$clean <- self$data$clean %>%
           select(
-            date, region_level_1, region_level_2,
+            date, level_1_region, level_2_region,
             level_1_region_code, level_2_region_code,
             cases_new, cases_total, deaths_new, tested_new, recovered_total
           )
       }
-      if (self$level == "1") {
-        self$clean_level_1()
-      } 
     },
 
     #' @description Lithuania Specific County Level Data Cleaning
@@ -327,13 +336,13 @@ Lithuania <- R6::R6Class("Lithuania",
 
       self$data$clean <- self$data$clean %>%
         group_by(.data$date,
-                        .data$region_level_1, .data$level_1_region_code) %>%
+                        .data$level_1_region, .data$level_1_region_code) %>%
         summarise(
           across(tidyselect::vars_select_helpers$where(is.numeric),
                         sum)) %>%
-        mutate(region_level_1
-                      = if_else(is.na(.data$region_level_1),
-                                       "Lietuva", .data$region_level_1
+        mutate(level_1_region
+                      = if_else(is.na(.data$level_1_region),
+                                       "Lietuva", .data$level_1_region
                       )) %>%
         ungroup()
       # Fix percentages, where necessary
@@ -381,13 +390,12 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @param all_osp_fields A logical scalar. Should all the meaningful
     #'   data fields from the OSP source be returned? (Defaults `FALSE`)
     #'
-    #' @param ... The args passed by [general_init]
+    #' @param ... Parameters passed to `initialise_dataclass`.
     initialize = function(death_definition = "of",
                           recovered_definition = "official",
                           all_osp_fields = FALSE,
                           national_data = FALSE, ...) {
-      general_init(self, ...)
-      # Add custom fields here
+      initialise_dataclass(self, ...)
       self$death_definition <- death_definition
       self$recovered_definition <- recovered_definition
       self$all_osp_fields <- all_osp_fields
