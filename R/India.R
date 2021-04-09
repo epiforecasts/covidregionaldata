@@ -61,35 +61,32 @@ India <- R6::R6Class("India",
     #' @importFrom rlang .data
     #'
     clean_common = function() {
-      india_cases <- self$data$raw$main %>%
-        filter(Status == "Confirmed") %>%
-        select(Date, self$codes_lookup$`1`[["code"]]) %>%
-        pivot_longer(-Date, names_to = "state", values_to = "cases_new")
-
-      india_deaths <- self$data$raw$main %>%
-        filter(Status == "Deceased") %>%
-        select(Date, self$codes_lookup$`1`[["code"]]) %>%
-        pivot_longer(-Date, names_to = "state", values_to = "deaths_new")
-
-      india_recoveries <- self$data$raw$main %>%
-        filter(Status == "Recovered") %>%
-        select(Date, self$codes_lookup$`1`[["code"]]) %>%
-        pivot_longer(-Date, names_to = "state", values_to = "recovered_new")
-
-      cases_and_death_data <- full_join(india_cases, india_deaths,
-        by = c("Date" = "Date", "state" = "state")
-      )
-      cases_and_death_data <- full_join(cases_and_death_data,
-        india_recoveries,
-        by = c("Date" = "Date", "state" = "state")
-      )
-
-      self$data$clean <- cases_and_death_data %>%
+      params <- c("Confirmed", "Deceased", "Recovered")
+      data <- map(params, self$get_desired_status)
+      cases_deaths_recovered <- data %>%
+        reduce(
+          full_join,
+          by = c("Date" = "Date", "state" = "state")
+        )
+      self$data$clean <- cases_deaths_recovered %>%
         mutate(Date = dmy(Date)) %>%
         rename(date = Date) %>%
         left_join(self$codes_lookup$`1`, by = c("state" = "code")) %>%
         mutate(level_1_region_code = paste0("IN-", state)) %>%
         select(-state)
+    },
+
+    #' @description Ectract data from raw India table
+    #' @importFrom dplyr select filter
+    #' @importFrom tidyr pivot_longer
+    #' @importFrom rlang .data
+    #' @param status The data to extract
+    #'
+    get_desired_status = function(status) {
+      india_cases <- self$data$raw$main %>%
+        filter(Status == status) %>%
+        select(Date, self$codes_lookup$`1`[["code"]]) %>%
+        pivot_longer(-Date, names_to = "state", values_to = "cases_new")
     }
   )
 )

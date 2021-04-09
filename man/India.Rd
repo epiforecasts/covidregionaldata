@@ -44,6 +44,7 @@ region$return()
 \itemize{
 \item \href{#method-set_region_codes}{\code{India$set_region_codes()}}
 \item \href{#method-clean_common}{\code{India$clean_common()}}
+\item \href{#method-get_desired_status}{\code{India$get_desired_status()}}
 \item \href{#method-clone}{\code{India$clone()}}
 }
 }
@@ -80,6 +81,23 @@ India state level data cleaning
 \if{html}{\out{<div class="r">}}\preformatted{India$clean_common()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_desired_status"></a>}}
+\if{latex}{\out{\hypertarget{method-get_desired_status}{}}}
+\subsection{Method \code{get_desired_status()}}{
+Ectract data from raw India table
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{India$get_desired_status(status)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{status}}{The data to extract}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
