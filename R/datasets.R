@@ -17,6 +17,16 @@
 #' @return A tibble of region codes and related information.
 "colombia_codes"
 
+#' Region Codes for Lithuania Dataset.
+#'
+#' @description The region codes for Lithuania
+#' @return A tibble of region codes and related information,
+#' including ISO 3166:2 codes for counties (apskritis)
+#' and municipalities (savivaldybe), and noting which
+#' municipalities are city municipalities or regional
+#' municipalities.
+"lithuania_codes"
+
 #' Region Codes for France Dataset.
 #'
 #' @description The region codes for France
