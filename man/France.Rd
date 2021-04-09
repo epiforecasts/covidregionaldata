@@ -19,7 +19,7 @@ Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
-region <- France$new(verbose = TRUE, steps = TRUE, get = TRUE)
+region <- France$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 
