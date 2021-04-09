@@ -51,16 +51,13 @@ France <- R6::R6Class("France",
     #' @importFrom tibble tibble
     #' @importFrom dplyr select
     set_region_codes = function() {
-      if (self$level == "1") {
-        self$codes_lookup$`1` <- france_codes %>%
-          select(
-            .data$level_1_region_code,
-            .data$level_1_region,
-            .data$insee_code
-          )
-      } else if (self$level == "2") {
-        self$codes_lookup$`2` <- france_codes
-      }
+      self$codes_lookup$`1` <- france_codes %>%
+        select(
+          .data$level_1_region_code,
+          .data$level_1_region,
+          .data$insee_code
+        )
+      self$codes_lookup$`2` <- france_codes
     },
 
     #' @description France Specific Region Level Data Cleaning
@@ -69,16 +66,17 @@ France <- R6::R6Class("France",
     #' @importFrom lubridate as_date ymd
     clean_level_1 = function() {
       self$data$clean <- self$data$raw$cases %>%
-        filter(cl_age90 == 0) %>%
+        filter(.data$cl_age90 == 0) %>%
         select(
-          date = jour,
-          insee_code = reg,
-          cases_new = P,
-          tested_new = `T`
+          date = .data$jour,
+          insee_code = .data$reg,
+          cases_new = .data$P,
+          tested_new = .data$`T`
         ) %>%
         mutate(date = as_date(ymd(date))) %>%
         left_join(
           self$codes_lookup$`1`,
+          insee_code = reg,
           by = c("insee_code")
         )
     },
@@ -89,12 +87,12 @@ France <- R6::R6Class("France",
     #' @importFrom lubridate as_date ymd
     clean_level_2 = function() {
       cases_data <- self$data$raw$cases %>%
-        filter(cl_age90 == 0) %>%
+        filter(.data$cl_age90 == 0) %>%
         select(
-          date = jour,
-          level_2_region_code = dep,
-          cases_new = P,
-          tested_new = `T`
+          date = .data$jour,
+          level_2_region_code = .data$dep,
+          cases_new = .data$P,
+          tested_new = .data$`T`
         ) %>%
         mutate(date = as_date(ymd(date)))
 
