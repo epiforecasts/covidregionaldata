@@ -60,7 +60,7 @@ France <- R6::R6Class("France",
       self$codes_lookup$`2` <- france_codes
     },
 
-    #' @description France Specific Region Level Data Cleaning
+    #' @description Region Level Data Cleaning
     #'
     #' @importFrom dplyr filter mutate left_join select
     #' @importFrom lubridate as_date ymd
@@ -81,7 +81,7 @@ France <- R6::R6Class("France",
         )
     },
 
-    #' @description France Specific Department Level Data Cleaning
+    #' @description Department Level Data Cleaning
     #'
     #' @importFrom dplyr filter mutate left_join rename select full_join
     #' @importFrom lubridate as_date ymd
