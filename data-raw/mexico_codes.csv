@@ -1,33 +1,76 @@
-inegi_state,region_level_1,iso_code
-01,Aguascalientes,MX-AGU
-02,Baja California,MX-BCN
-03,Baja California Sur,MX-BCS
-04,Campeche,MX-CAM
-07,Chiapas,MX-CHP
-08,Chihuahua,MX-CHH
-09,Ciudad de Mexico,MX-CMX
-05,Coahuila,MX-COA
-06,Colima,MX-COL
-10,Durango,MX-DUR
-11,Guanajuato,MX-GUA
-12,Guerrero,MX-GRO
-13,Hidalgo,MX-HID
-14,Jalisco,MX-JAL
-15,Mexico,MX-MEX
-16,Michoacan,MX-MIC
-17,Morelos,MX-MOR
-18,Nayarit,MX-NAY
-19,Nuevo Leon,MX-NLE
-20,Oaxaca,MX-OAX
-21,Puebla,MX-PUE
-22,Queretaro,MX-QUE
-23,Quintana Roo,MX-ROO
-24,San Luis Potosi,MX-SLP
-25,Sinaloa,MX-SIN
-26,Sonora,MX-SON
-27,Tabasco,MX-TAB
-28,Tamaulipas,MX-TAM
-29,Tlaxcala,MX-TLA
-30,Veracruz,MX-VER
-31,Yucatan,MX-YUC
-32,Zacatecas,MX-ZAC
+level_1_region_code	level_1_region	level_2_region_code	level_2_region
+MX-CMX	Ciudad de Mexico	NA	NA
+MX-AGU	Aguascalientes	NA	NA
+MX-BCN	Baja California	NA	NA
+MX-BCS	Baja California Sur	NA	NA
+MX-CAM	Campeche	NA	NA
+MX-COA	Coahuila	NA	NA
+MX-COL	Colima	NA	NA
+MX-CHP	Chiapas	NA	NA
+MX-CHH	Chihuahua	NA	NA
+MX-DUR	Durango	NA	NA
+MX-GUA	Guanajuato	NA	NA
+MX-GRO	Guerrero	NA	NA
+MX-GRO	Guerrero	NA	NA
+MX-GRO	Guerrero	NA	NA
+MX-HID	Hidalgo	NA	NA
+MX-HID	Hidalgo	NA	NA
+MX-HID	Hidalgo	NA	NA
+MX-HID	Hidalgo	NA	NA
+MX-HID	Hidalgo	NA	NA
+MX-JAL	Jalisco	NA	NA
+MX-MEX	Mexico	NA	NA
+MX-MIC	Michoacan	NA	NA
+MX-MOR	Morelos	NA	NA
+MX-MOR	Morelos	NA	NA
+MX-MOR	Morelos	NA	NA
+MX-MOR	Morelos	NA	NA
+MX-MOR	Morelos	NA	NA
+MX-NAY	Nayarit	NA	NA
+MX-NLE	Nuevo Leon	NA	NA
+MX-OAX	Oaxaca	NA	NA
+MX-PUE	Puebla	NA	NA
+MX-QUE	Queretaro	NA	NA
+MX-ROO	Quintana Roo	NA	NA
+MX-SLP	San Luis Potosi	NA	NA
+MX-SIN	Sinaloa	NA	NA
+MX-SON	Sonora	NA	NA
+MX-TAB	Tabasco	NA	NA
+MX-TAM	Tamaulipas	NA	NA
+MX-TLA	Tlaxcala	NA	NA
+MX-VER	Veracruz	NA	NA
+MX-YUC	Yucatan	NA	NA
+MX-ZAC	Zacatecas	NA	NA
+NA	NA	01	AGUASCALIENTES
+NA	NA	02	BAJA CALIFORNIA
+NA	NA	03	BAJA CALIFORNIA SUR
+NA	NA	04	CAMPECHE
+NA	NA	07	CHIAPAS
+NA	NA	08	CHIHUAHUA
+NA	NA	09	DISTRITO FEDERAL
+NA	NA	05	COAHUILA
+NA	NA	06	COLIMA
+NA	NA	10	DURANGO
+NA	NA	11	GUANAJUATO
+NA	NA	12	GUERRERO
+NA	NA	13	HIDALGO
+NA	NA	14	JALISCO
+NA	NA	15	MEXICO
+NA	NA	16	MICHOACAN
+NA	NA	17	MORELOS
+NA	NA	18	"NAYARIT"
+NA	NA	19	NUEVO LEON
+NA	NA	20	OAXACA
+NA	NA	21	PUEBLA
+NA	NA	22	QUERETARO
+NA	NA	23	QUINTANA ROO
+NA	NA	24	SAN LUIS POTOSI
+NA	NA	25	SINALOA
+NA	NA	26	SONORA
+NA	NA	27	TABASCO
+NA	NA	28	TAMAULIPAS
+NA	NA	29	TLAXCALA
+NA	NA	30	VERACRUZ
+NA	NA	31	YUCATAN
+NA	NA	32	ZACATECAS
+NA	NA	000	Nacional

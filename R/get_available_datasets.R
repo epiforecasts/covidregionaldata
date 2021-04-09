@@ -16,37 +16,19 @@ get_available_datasets <- function() {
   # regional data
   starts_with_capitals_idx <- grep("^[A-Z]", envi)
   starts_with_capitals <- envi[starts_with_capitals_idx]
-  exclude <- c("DataClass", "CountryTemplate")
+  exclude <- c("DataClass", "CountryDataClass")
   valid_country_objects <- lapply(
     starts_with_capitals,
     function(x) {
       country_obj <- get(x)
       if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
-        public_fields <- get(x)$public_fields
-        public_fields$source_data_cols <- paste(
-          unlist(public_fields$source_data_cols),
-          collapse = " "
-        )
-        dat <- as_tibble(public_fields)
-        dat["country"] <- x
-        if (x %in% c("WHO", "ECDC")) {
-          dat["get_data_function"] <- "get_national_data"
-        } else {
-          dat["get_data_function"] <- "get_regional_data"
-        }
+        dat <- get(x)$new()
+        dat <- dat$summary()
         return(dat)
       }
     }
   )
   available_country_data <- valid_country_objects %>%
-    bind_rows() %>%
-    select(
-      .data$country,
-      .data$level_1_region,
-      .data$level_2_region,
-      .data$get_data_function,
-      .data$data_url,
-      .data$source_data_cols
-    )
+    bind_rows()
   return(available_country_data)
 }
