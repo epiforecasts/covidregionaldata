@@ -45,7 +45,7 @@ USA <- R6::R6Class("USA",
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tribble
     set_region_codes = function() {
-      self$codes_lookup$`1` <- usa_codes <- tibble(
+      self$codes_lookup <- usa_codes <- tibble(
         level_1_region_code = c(
           "US-AL", "US-AK", "US-AZ", "US-AR", "US-CA", "US-CO", "US-CT",
           "US-DE", "US-FL", "US-GA", "US-HI", "US-ID", "US-IL", "US-IN",
@@ -72,7 +72,6 @@ USA <- R6::R6Class("USA",
           "Minor Outlying Islands", "Virgin Islands"
         )
       )
-      self$codes_lookup$`2` <- self$codes_lookup$`1`
     },
 
     #' @description State Level Data Cleaning
@@ -89,7 +88,7 @@ USA <- R6::R6Class("USA",
           deaths_total = replace(deaths_total, deaths_total < 0, 0)
         ) %>%
         select(date, level_1_region, cases_total, deaths_total) %>%
-        left_join(self$codes_lookup[[1]],
+        left_join(self$codes_lookup,
           by = c("level_1_region" = "region"),
           copy = TRUE
         )
@@ -110,7 +109,7 @@ USA <- R6::R6Class("USA",
           cases_total = replace(cases_total, cases_total < 0, 0),
           deaths_total = replace(deaths_total, deaths_total < 0, 0)
         ) %>%
-        left_join(self$codes_lookup[[2]],
+        left_join(self$codes_lookup,
           by = c("level_1_region" = "region"),
           copy = TRUE
         )
