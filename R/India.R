@@ -59,6 +59,7 @@ India <- R6::R6Class("India",
     #' @importFrom tidyr pivot_longer
     #' @importFrom lubridate dmy
     #' @importFrom rlang .data
+    #' @importFrom purrr map reduce
     #'
     clean_common = function() {
       params <- c("Confirmed", "Deceased", "Recovered")
@@ -76,7 +77,7 @@ India <- R6::R6Class("India",
         select(-state)
     },
 
-    #' @description Ectract data from raw India table
+    #' @description Extract data from raw table
     #' @importFrom dplyr select filter
     #' @importFrom tidyr pivot_longer
     #' @importFrom rlang .data
