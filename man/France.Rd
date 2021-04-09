@@ -86,7 +86,7 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-France Specific Region Level Data Cleaning
+Region Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{France$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -96,7 +96,7 @@ France Specific Region Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-France Specific Department Level Data Cleaning
+Department Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{France$clean_level_2()}\if{html}{\out{</div>}}
 }
