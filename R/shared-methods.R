@@ -97,9 +97,14 @@ initialise_dataclass <- function(self, level = "1", regions,
   }
 
   if (!is.null(self$level_data_urls[[self$level]])) {
-    self$data_urls <- unlist(
-      list(self$common_data_urls, self$level_data_urls[[self$level]])
-    )
+    if (length(self$common_data_urls) > 0) {
+      self$data_urls <- merge(
+        self$common_data_urls,
+        self$level_data_urls[[self$level]]
+      )
+    } else {
+      self$data_urls <- self$level_data_urls[[self$level]]
+    }
   } else {
     self$data_urls <- self$common_data_urls
   }
