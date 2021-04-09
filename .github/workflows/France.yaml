@@ -2,10 +2,10 @@ on:
   schedule:
     - cron: '2 0 * * *'
 
-name: Italy
+name: France
 
 jobs:
-  Italy:
+  France:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -40,6 +40,6 @@ jobs:
       - name:
         run: |
           options("testDownload" = TRUE)
-          options("testSource" = "Italy")
+          options("testSource" = "France")
           testthat::test_file("test-regional-datasets.R", reporter = c("summary", "fail")) 
         shell: Rscript {0}
