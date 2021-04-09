@@ -57,8 +57,8 @@ aB
 abbott
 abE
 aboutus
-ac
 aC
+aca
 ACAdP
 acaps
 ACAPS
@@ -85,7 +85,6 @@ Antwerpen
 Ao
 aoxWlIy
 api
-apskritis
 aQ
 Aq
 AQQE
@@ -221,7 +220,6 @@ config
 Config
 coronavirus
 countrycode
-CoV
 covid
 Covid
 COVID
@@ -309,6 +307,7 @@ Dq
 DQ
 ds
 Ds
+dsfsi
 dt
 DT
 DunE
@@ -341,11 +340,13 @@ eb
 ec
 ecdc
 ECDC
+Ectract
 eD
 ͤd
 eDKKK
 EE
 eF
+efd
 eGGG
 eH
 EI
@@ -401,6 +402,7 @@ F٘
 ٙf
 ٝF
 fA
+fadff
 fb
 FB
 fƂ
@@ -457,7 +459,6 @@ gcc
 Ġdgg
 gE
 GĒ
-geocode
 geocoding
 germany
 getRversion
@@ -573,7 +574,6 @@ iAO
 ic
 iC
 Ic
-ICD
 ie
 iE
 ie'vk
@@ -606,7 +606,6 @@ int
 io
 iOv
 iP
-IPC
 iR
 iso
 isp
@@ -678,7 +677,6 @@ JS
 jsonlite
 Jt
 ju
-jure
 jUO
 jv
 jw
@@ -956,7 +954,6 @@ ORCID
 org
 Organisation
 os
-OSP
 Ot
 ǾT
 ou
@@ -1136,9 +1133,7 @@ sam
 samabbott
 sanitised
 sanitises
-SARS
 saveRDS
-savivaldybe
 Sbb
 sD
 seabbs
@@ -1166,7 +1161,7 @@ SMh
 snKdL
 soD
 sophie
-spi
+SouthAfrica
 sprintf
 sQc
 sQL
@@ -1182,7 +1177,6 @@ Subnational
 subregion
 sudo
 summarise
-supertracker
 Sur
 SUR
 svg
@@ -1284,7 +1278,6 @@ uNb
 uo
 u֛o
 uR
-urls
 uS
 useMemoise
 usethis

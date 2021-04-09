@@ -26,3 +26,9 @@
 #' municipalities are city municipalities or regional
 #' municipalities.
 "lithuania_codes"
+
+#' Region Codes for France Dataset.
+#'
+#' @description The region codes for France
+#' @return A tibble of region codes and related information.
+"france_codes"
