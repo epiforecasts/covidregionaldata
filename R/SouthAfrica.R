@@ -56,12 +56,12 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
     #' @importFrom rlang .data
     #'
     clean_common = function() {
-      self$data$raw$deaths$total <- as.double(self$data$raw$deaths$total)
+      deaths_copy <- self$data$raw$deaths
+      deaths_copy$total <- as.double(self$data$raw$deaths$total)
       self$data$clean <- bind_rows(self$data$raw$cases,
-        self$data$raw$deaths,
+        deaths_copy,
         .id = "data"
-      )
-      self$data$clean <- self$data$clean %>%
+      ) %>%
         mutate(
           data = factor(data, c(1, 2), c("cases_total", "deaths_total")),
           date = dmy(date)
