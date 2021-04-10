@@ -3,12 +3,12 @@ Title: Subnational Data for the Covid-19 Outbreak
 Version: 0.9.0.1
 Authors@R: 
     c(person(given = "Sam Abbott",
-             role = "aut",
+             role = c("aut", "cre"),
              email = "sam.abbott@lshtm.ac.uk",
              comment = c(ORCID = "0000-0001-8057-8037")),
       person(given = "Katharine",
              family = "Sherratt",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "katharine.sherratt@lshtm.ac.uk",
              comment = c(ORCID = "0000-0003-4413-453X")),
       person(given = "Joe",
