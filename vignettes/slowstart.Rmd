@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -64,7 +64,7 @@ Access sub-national level data for a specific country over time by using `covidr
 This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below.
 
 The function takes 3 arguments:
-* `country` - the English name of the country of interest. Not case sensitive
+* `countries` - the English name of the countries of interest. Not case sensitive
 * `totals` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be a table of total counts (one row per region) _or_ time series data (one row per region/date combination).
 * `include_level_2_regions` (optional, default is FALSE) - a Boolean (TRUE/FALSE), denoting whether the data returned should be stratified by admin level 1 region (usually the largest subregion available) or admin level 2 region (usually the second largest).
 
@@ -73,7 +73,7 @@ This returns a dataset with one row for each region for each date. For all regio
 For example, data for Belgium Level 1 regions over time can be accessed using:
 
 ```{r}
-get_regional_data(country = "Belgium")
+get_regional_data(countries = "Belgium")
 ```
 This returns a dataset in this format:
 
@@ -116,26 +116,6 @@ This returns a dataset with one row for each region, in the same format:
 Flanders|BE-VLG|34195|4878|0|9694|0
 Wallonia|BE-WAL|19093|3362|0|5321|0
 Brussels|BE-BRU|6229|1482|0|2657|0
-
-## Sub-national coverage
-
-We include sub-national data in the following countries. These are the accepted country names when using `get_regional_data(country = "")`.
-
-**Continent** | **Country**|**Level 1**|**Level 2**
-:-----:| :-----:|:-----:|:-----:
-Europe | Belgium | Region | Province
-Europe | France  | Région | Département
-Europe | Germany | Bundesland | Landkreis
-Europe | UK | NHS region | Local authority
-Europe | Italy | Region | NA
-Americas | Brazil | State | City
-Americas | USA | State | County
-Americas | Canada | Province | NA
-Americas | Colombia | Department  | NA
-Americas | Cuba | Province | NA
-Americas | Mexico | Estado | Municipio 
-Asia | Afghanistan | Province | NA
-Asia | India | States | NA
 
 ## Data glossary
 
