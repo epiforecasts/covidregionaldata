@@ -22,8 +22,8 @@ if (!is.null(getOption("testDownload"))) {
 # problems parsing downloaded data
 # can also be controlled using an environment variable
 vroom_check <- FALSE
-if (!is.null(getOption("checkVroom"))) {
-  vroom_check <- getOption("checkVroom")
+if (!is.null(getOption("testVroom"))) {
+  vroom_check <- getOption("testVroom")
 }
 
 

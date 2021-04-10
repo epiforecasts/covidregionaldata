@@ -37,8 +37,9 @@ test_regional_dataset <- function(source, level, download = FALSE, vroom_check =
     download <- TRUE
   }
 
+  browser()
   if (download) {
-    test_that(paste0(data_name, " downloads sucessfully"), {
+    test_that(paste0(data_name, " downloads successfully"), {
       region$download()
       purrr::walk(region$data$raw, function(data) {
         expect_s3_class(data, "data.frame")
@@ -46,23 +47,26 @@ test_regional_dataset <- function(source, level, download = FALSE, vroom_check =
         expect_true(ncol(data) >= 2)
       })
     })
-    if (vroom_check) {
-      problems_list <- purrr::map(region$data$raw,
-        vroom::problems)
-      purrr::walk(problems_list, function(data) {
-        expect_s3_class(data, "data.frame")
-        expect_true(nrow(data) == 0)
-      })
-    }
+  } else {
+    region$data$raw <- readRDS(raw_path)
+  }
+
+  if (vroom_check) {
+    problems_list <- purrr::map(region$data$raw,
+                                vroom::problems)
+    purrr::walk(problems_list, function(data) {
+      expect_s3_class(data, "data.frame")
+      expect_true(nrow(data) == 0)
+    })
+  }
+
+  if (download) {
     region$data$raw <- purrr::map(region$data$raw,
       dplyr::slice_tail,
       n = 1000
     )
     saveRDS(region$data$raw, raw_path)
-  } else {
-    region$data$raw <- readRDS(raw_path)
-  }
-
+  } 
   test_that(paste0(data_name, " can be cleaned as expected"), {
     region$clean()
     expect_s3_class(region$data$clean, "data.frame")
