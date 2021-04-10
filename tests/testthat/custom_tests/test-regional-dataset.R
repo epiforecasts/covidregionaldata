@@ -22,7 +22,7 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   }
 }
 
-test_regional_dataset <- function(source, level, download = FALSE) {
+test_regional_dataset <- function(source, level, download = FALSE, vroom_check = FALSE ) {
   data_name <- paste0(source, " at level ", level)
 
   region <- eval(parse(
@@ -46,6 +46,14 @@ test_regional_dataset <- function(source, level, download = FALSE) {
         expect_true(ncol(data) >= 2)
       })
     })
+    if (vroom_check) {
+      problems_list <- purrr::map(region$data$raw,
+        vroom::problems)
+      purrr::walk(problems_list, function(data) {
+        expect_s3_class(data, "data.frame")
+        expect_true(nrow(data) == 0)
+      })
+    }
     region$data$raw <- purrr::map(region$data$raw,
       dplyr::slice_tail,
       n = 1000

@@ -17,6 +17,15 @@ download <- FALSE
 if (!is.null(getOption("testDownload"))) {
   download <- getOption("testDownload")
 }
+# should vroom problems be checked (defaults to FALSE)
+# set this to true to check whether vroom is encountering
+# problems parsing downloaded data
+# can also be controlled using an environment variable
+vroom_check <- FALSE
+if (!is.null(getOption("checkVroom"))) {
+  vroom_check <- getOption("checkVroom")
+}
+
 
 # get datasets for testing
 sources <- get_available_datasets() %>%
@@ -48,6 +57,7 @@ sources %>%
     ~ test_regional_dataset(
       source = .$source[[1]],
       level = .$level[[1]],
-      download = download
+      download = download,
+      vroom_check = vroom_check
     )
   )
