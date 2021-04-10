@@ -271,6 +271,7 @@ de
 defautls
 DejaVu
 Département
+dependences
 deps
 desc
 dev
@@ -1078,6 +1079,7 @@ regioni
 rEGRa
 reparameterise
 repo
+reprex
 rf
 rFD
 rG
@@ -1099,6 +1101,7 @@ Rnt
 Ro
 Roo
 ROO
+roxygen
 Roxygen
 RoxygenNote
 rp
@@ -1174,6 +1177,7 @@ st
 SȚ
 standardised
 stringr
+styler
 SU
 subnational
 Subnational
@@ -1224,6 +1228,7 @@ tibble
 tibbles
 tidyr
 tidyselect
+tidyverse
 tK
 tl
 TLA

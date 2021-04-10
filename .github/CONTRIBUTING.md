@@ -1,4 +1,4 @@
-# Contributing to covidregionaldata
+# Contributing to `covidregionaldata`
 
 This outlines how to propose a change to covidregionaldata. 
 
