@@ -1,4 +1,4 @@
-+on:
+on:
   schedule:
     - cron: '2 0 * * *'
 
