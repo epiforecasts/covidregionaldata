@@ -86,7 +86,7 @@ India state level data cleaning
 \if{html}{\out{<a id="method-get_desired_status"></a>}}
 \if{latex}{\out{\hypertarget{method-get_desired_status}{}}}
 \subsection{Method \code{get_desired_status()}}{
-Ectract data from raw India table
+Extract data from raw table
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{India$get_desired_status(status)}\if{html}{\out{</div>}}
 }
