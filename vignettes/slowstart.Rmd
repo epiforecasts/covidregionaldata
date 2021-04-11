@@ -33,7 +33,7 @@ Both the World Health Organisation (WHO) and European Centre for Disease Control
 get_national_data()
 ```
 
-This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below.
+This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documention (`?get_national_data`) for details of optional arguments.
 
 Data is returned with no gaps in the structure of the data by country over time, and NAs fill in where data are not available.
 
@@ -45,7 +45,7 @@ Access sub-national level data for a specific country over time using `get_regio
 
 This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documention (`?get_regional_data`) for details of optional arguments.
 
-As for national level data any gaps in reported data arefilled with NAs.
+As for national level data any gaps in reported data are filled with NAs.
 
 For example, data for Belgium Level 1 regions over time can be accessed using:
 
@@ -126,10 +126,9 @@ Note that Date is not included if the `totals` argument is set to TRUE. Level 2 
 * `tested_new`: tests for that day
 * `tested_total`: total tests completed up to and including that day
 
-The exception to this is data for the UK. This is in its raw state, as regions have separate and sometimes incompatible data reporting.
-
 #### National data
+
 In addition to the above, the following columns are included when using `get_national_data()`.
 * `un_region`: country geographical region defined by the United Nations.
 * `who_region`: only included when `source = "WHO"`. Country geographical region defined by WHO.
-* `population_2019`: only included when `source = "ECDC"` (the default). Total country population estimate in 2019.
+* `population_2019`: only included when `source = "ECDC"`. Total country population estimate in 2019.

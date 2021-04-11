@@ -42,7 +42,7 @@ Authors@R:
              email = "patrick.barks@epicentre.msf.org"),
       person(given = "Paul",
              family = "Campbell",
-             role = "aut",
+             role = "ctb",
              email = " paul.campbell@epicentre.msf.org"),
       person(given = "Flavio",
              family = "Finger",

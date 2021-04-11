@@ -8,6 +8,7 @@
 #' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- SouthAfrica$new(verbose = TRUE, steps = TRUE, get = TRUE)

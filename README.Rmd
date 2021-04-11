@@ -158,15 +158,13 @@ uk_nots_2 %>%
 
 Level 2 data is only available for some countries, see `get_available_datasets` for supported nations. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd)
 
-## Dataset status
+## Citation
 
-| **Dataset** | **GitHub status** | *CRAN status* |
-| :--- | :---: | :---: |
-| WHO   |  [![WHO](https://github.com/epiforecasts/covidregionaldata/workflows/WHO/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/who.yaml)    | *working* |
-| ECDC  |  [![ECDC](https://github.com/epiforecasts/covidregionaldata/workflows/ECDC/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/ecdc.yaml)    | *working* |
-| Mexico  |  [![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)    | *working* |
-| Italy  |  [![Italy](https://github.com/epiforecasts/covidregionaldata/workflows/Italy/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/italy.yaml)    | *working* |
-| Germany  |  [![Germany](https://github.com/epiforecasts/covidregionaldata/workflows/Germany/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/germany.yaml)    | *working* |
+If using `covidregionaldata` in your work please consider citing it using the following, 
+
+```{r, echo = FALSE}
+citation("covidregionaldata")
+```
 
 ## Development
 

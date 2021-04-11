@@ -7,6 +7,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' national <- ECDC$new(verbose = TRUE, steps = TRUE, get = TRUE)
@@ -89,21 +90,26 @@ ECDC <- R6::R6Class("ECDC",
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function() {
-      self$data$return <- self$data$processed %>%
-        group_by(.data$country) %>%
-        fill(.data$population_2019, .data$un_region, .direction = "updown") %>%
-        ungroup()
+      self$data$return <- self$data$processed
+      if (!self$totals) {
+        self$data$return <- self$data$return %>%
+          group_by(.data$country) %>%
+          fill(.data$population_2019, .data$un_region,
+            .direction = "updown"
+          ) %>%
+          ungroup()
 
-      self$data$return <- self$data$return %>%
-        select(
-          .data$date, .data$un_region, .data$country,
-          .data$iso_code, .data$population_2019,
-          .data$cases_new, .data$cases_total,
-          .data$deaths_new, .data$deaths_total, .data$recovered_new,
-          .data$recovered_total, .data$hosp_new, .data$hosp_total,
-          .data$tested_new, .data$tested_total
-        ) %>%
-        arrange(.data$date, .data$country)
+        self$data$return <- self$data$return %>%
+          select(
+            .data$date, .data$un_region, .data$country,
+            .data$iso_code, .data$population_2019,
+            .data$cases_new, .data$cases_total,
+            .data$deaths_new, .data$deaths_total, .data$recovered_new,
+            .data$recovered_total, .data$hosp_new, .data$hosp_total,
+            .data$tested_new, .data$tested_total
+          ) %>%
+          arrange(.data$date, .data$country)
+      }
 
       if (self$steps) {
         return(self$data)

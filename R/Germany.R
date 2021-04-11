@@ -6,6 +6,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Germany$new(verbose = TRUE, steps = TRUE, level = "2", get = TRUE)

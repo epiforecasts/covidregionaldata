@@ -5,6 +5,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Cuba$new(verbose = TRUE, steps = TRUE, get = TRUE)

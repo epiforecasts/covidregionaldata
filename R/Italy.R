@@ -5,6 +5,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
@@ -70,10 +71,11 @@ Italy <- R6::R6Class("Italy",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
         group_by(.data$date, .data$level_1_region) %>%
-        summarise(cases_total = sum(.data$cases_total, na.rm = TRUE),
-                  deaths_total = sum(.data$cases_total, na.rm = TRUE),
-                  tested_total = sum(.data$cases_total, na.rm = TRUE),
-               ) %>%
+        summarise(
+          cases_total = sum(.data$cases_total, na.rm = TRUE),
+          deaths_total = sum(.data$cases_total, na.rm = TRUE),
+          tested_total = sum(.data$cases_total, na.rm = TRUE),
+        ) %>%
         ungroup() %>%
         full_join(self$codes_lookup[["1"]],
           by = c("level_1_region" = "region")

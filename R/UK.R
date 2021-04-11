@@ -10,6 +10,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://coronavirus.data.gov.uk/details/download #nolint
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)

@@ -5,6 +5,7 @@
 #' @details Inherits from `DataClass`
 #' @source https://api.covid19india.org/csv/latest/state_wise_daily.csv
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- India$new(verbose = TRUE, steps = TRUE, get = TRUE)

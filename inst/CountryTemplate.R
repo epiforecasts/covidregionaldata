@@ -5,6 +5,7 @@
 #'
 #' @details Inherits from `DataClass`
 #' @examples
+#' @concept dataset
 #' \dontrun{
 #' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()

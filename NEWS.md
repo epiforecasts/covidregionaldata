@@ -10,6 +10,10 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions 
 * Filter datasets for regions and countries of interest. 
 * Access the underlying methods for data sets.
 
+## Documentation
+
+* All vignettes have been updated for readability.
+* A quickstart has been added to the package README.
 ## Technical improvements
 * `get_regional_data()` and `get_national_data()` now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the `get_` functions. However, all datasets are now available to be used as R6 methods (see `get_available_datasets`) which may allow for more modular use cases.
 * Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: https://github.com/epiforecasts/covidregionaldata#readme).

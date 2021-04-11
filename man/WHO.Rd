@@ -19,6 +19,7 @@ national <- WHO$new(verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 }
+\concept{dataset}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{WHO}
 }

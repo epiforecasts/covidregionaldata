@@ -133,6 +133,7 @@ many of these are still ill).
 region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Lithuania}
 }
