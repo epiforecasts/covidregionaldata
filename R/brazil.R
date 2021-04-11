@@ -105,8 +105,9 @@ Brazil <- R6::R6Class("Brazil",
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
         mutate(level_2_region = gsub("/[A-Z]*", "", level_2_region)) %>%
-        mutate(level_2_region = recode(level_2_region,
-         "CASO SEM LOCALIZA\u00c7\u00c3O DEFINIDA" = "Unknown City")) %>%
+        mutate(level_2_region = gsub("^CASO SEM.*DEFINIDA",
+          "Unknown City",
+          level_2_region)) %>%
         group_by(date, level_1_region, level_1_region_code, level_2_region) %>%
         summarise(
           cases_new = sum(as.numeric(cases_new)),
