@@ -18,3 +18,4 @@ fill_empty_dates_with_na) then cumulative data columns will have NAs which
 can cause issues later. This function fills these values with the previous
 non-NA value.
 }
+\concept{utility}

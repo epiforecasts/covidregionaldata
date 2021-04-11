@@ -6,6 +6,7 @@
 #' @param data A data frame
 #' @return A tibble with relevant NA columns added
 #' @importFrom tibble tibble
+#' @concept utility
 add_extra_na_cols <- function(data) {
   expected_col_names <- c(
     "cases_new", "cases_total", "deaths_new", "deaths_total",
@@ -28,6 +29,7 @@ add_extra_na_cols <- function(data) {
 #' the datasets should always be > 0.
 #' @param data A data frame
 #' @return A data frame with all relevant data > 0.
+#' @concept utility
 set_negative_values_to_zero <- function(data) {
   numeric_col_names <- c(
     "deaths_total", "cases_total", "recovered_total", "hosp_total",
@@ -54,6 +56,7 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tidyr complete full_seq nesting
 #' @importFrom tidyselect starts_with
 #' @importFrom rlang !!! syms
+#' @concept utility
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
     names()
@@ -76,6 +79,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom dplyr group_by
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
+#' @concept utility
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c(
     "deaths_total", "cases_total", "recovered_total",
@@ -102,6 +106,7 @@ complete_cumulative_columns <- function(data) {
 #' @importFrom tidyselect ends_with
 #' @importFrom tibble tibble
 #' @importFrom rlang !! :=
+#' @concept utility
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
 
@@ -143,6 +148,7 @@ calculate_columns_from_existing_data <- function(data) {
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by summarise select arrange
 #' @importFrom tibble tibble
+#' @concept utility
 totalise_data <- function(data) {
   data <- data %>%
     summarise(
@@ -174,6 +180,7 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
+#' @concept utility
 #' @importFrom dplyr do group_by_at across ungroup select everything arrange
 #' @importFrom dplyr rename
 #' @importFrom tidyr drop_na
