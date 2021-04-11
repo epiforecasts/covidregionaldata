@@ -70,6 +70,7 @@ Brazil <- R6::R6Class("Brazil",
         filter(state != "TOTAL") %>%
         left_join(self$codes_lookup,
           by = c("state" = "level_1_region_code")) %>%
+        mutate(state = gsub("^", "BR-", state)) %>%
         select(date,
           level_1_region = state_name,
           level_2_region = city,
