@@ -4,7 +4,7 @@
 \alias{Germany}
 \title{Germany Class for downloading, cleaning and processing notification data}
 \source{
-https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+\url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}
 }
 \description{
 Country specific information for downloading, cleaning

@@ -4,11 +4,11 @@
 \alias{Belgium}
 \title{Belgium Class for downloading, cleaning and processing notification data}
 \source{
-https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv
+\url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 
-https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv
+\url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 
-https://epistat.sciensano.be/Data/COVID19BE_MORT.csv
+\url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 }
 \description{
 Country specific information for downloading, cleaning
@@ -35,7 +35,10 @@ region$return()
 
 \item{\code{supported_region_names}}{A list of region names in order of level.}
 
-\item{\code{supported_region_codes}}{A list of region codes in order of level.}
+\item{\code{supported_region_codes}}{A list of region codes in order of level.
+ISO 3166-2 codes are used for both region and province levels in
+Belgium, and for provinces these are marked as being
+\code{iso_3166_2_province}}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
 across levels.}

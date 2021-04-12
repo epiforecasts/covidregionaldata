@@ -4,9 +4,9 @@
 \alias{SouthAfrica}
 \title{SouthAfrica Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv
+\url{https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv}
 
-https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv
+\url{https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv}
 }
 \description{
 Country specific information for downloading, cleaning

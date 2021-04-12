@@ -4,7 +4,7 @@
 \alias{Cuba}
 \title{Cuba Class for downloading, cleaning and processing notification data}
 \source{
-https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
+\url{https://covid19cubadata.github.io/data/covid19-casos.csv}
 }
 \description{
 Country specific information for downloading, cleaning

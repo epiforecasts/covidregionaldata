@@ -4,7 +4,7 @@
 \alias{Mexico}
 \title{Meixco Class for downloading, cleaning and processing notification data}
 \source{
-https://datos.covid-19.conacyt.mx/#DownZCSV
+\url{https://datos.covid-19.conacyt.mx/#DownZCSV}
 }
 \description{
 Country specific information for downloading, cleaning

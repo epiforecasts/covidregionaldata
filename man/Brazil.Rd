@@ -4,7 +4,7 @@
 \alias{Brazil}
 \title{Brazil Class for downloading, cleaning and processing notification data}
 \source{
-https://github.com/wcota/covid19br
+\url{https://github.com/wcota/covid19br}
 }
 \description{
 Country specific information for downloading, cleaning

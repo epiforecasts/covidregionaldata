@@ -4,9 +4,9 @@
 \alias{USA}
 \title{USA Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv # nolint
+\url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
 
-https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv # nolint
+\url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
 }
 \description{
 Country specific information for downloading, cleaning
