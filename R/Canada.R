@@ -5,7 +5,7 @@
 #'
 #' Data is sourced from \url{https://health-infobase.canada.ca}.
 #' @details Inherits from `DataClass`
-#' @source https://health-infobase.canada.ca
+#' @source \url{https://health-infobase.canada.ca}
 #' @export
 #' @examples
 #' \dontrun{

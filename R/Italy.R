@@ -3,7 +3,9 @@
 #'  and processing covid-19 region data for Italy.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+# nolint start
+#' @source \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}
+# nolint end
 #' @export
 #' @examples
 #' \dontrun{

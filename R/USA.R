@@ -3,8 +3,10 @@
 #'  and processing covid-19 region data for USA.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv # nolint
-#' @source https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv # nolint
+# nolint start
+#' @source \url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
+#' @source \url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
+# nolint end
 #' @export
 #' @examples
 #' \dontrun{

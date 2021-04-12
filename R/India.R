@@ -3,7 +3,7 @@
 #'  and processing covid-19 region data for India.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://api.covid19india.org/csv/latest/state_wise_daily.csv
+#' @source \url{https://api.covid19india.org/csv/latest/state_wise_daily.csv}
 #' @export
 #' @examples
 #' \dontrun{

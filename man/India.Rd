@@ -4,7 +4,7 @@
 \alias{India}
 \title{India Class for downloading, cleaning and processing notification data}
 \source{
-https://api.covid19india.org/csv/latest/state_wise_daily.csv
+\url{https://api.covid19india.org/csv/latest/state_wise_daily.csv}
 }
 \description{
 Country specific information for downloading, cleaning
