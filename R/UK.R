@@ -306,7 +306,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' Separate NHS data is available for "first" admissions, excluding
     #' readmissions. This is available for England + English regions only.
     # nolint start
-    #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
+    #'   See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
     # nolint end
     #'     Section 2, "2. Estimated new hospital cases"
     #' @return nhs data.frame of nhs regions
@@ -362,7 +362,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' Separate NHS data is available for "first" admissions, excluding
     #' readmissions. This is available for England + English regions only.
     # nolint start
-    #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/
+    #'   See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
     # nolint end
     #'     Section 2, "2. Estimated new hospital cases"
     #' @importFrom lubridate year month
