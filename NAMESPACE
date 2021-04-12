@@ -2,6 +2,7 @@
 
 export("%>%")
 export(Belgium)
+export(Brazil)
 export(Canada)
 export(Colombia)
 export(CountryDataClass)

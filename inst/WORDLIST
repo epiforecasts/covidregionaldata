@@ -62,6 +62,7 @@ aca
 ACAdP
 acaps
 ACAPS
+ac
 acf
 adffj
 ae
@@ -73,6 +74,7 @@ af
 ͣF
 Âf
 afghanistan
+AGESEX
 AGU
 aH
 aI
@@ -85,6 +87,7 @@ Antwerpen
 Ao
 aoxWlIy
 api
+apskritis
 aQ
 Aq
 AQQE
@@ -219,7 +222,9 @@ conacyt
 config
 Config
 coronavirus
+Cota
 countrycode
+CoV
 covid
 Covid
 COVID
@@ -459,6 +464,7 @@ gcc
 Ġdgg
 gE
 GĒ
+geocode
 geocoding
 germany
 getRversion
@@ -574,6 +580,7 @@ iAO
 ic
 iC
 Ic
+ICD
 ie
 iE
 ie'vk
@@ -606,6 +613,7 @@ int
 io
 iOv
 iP
+IPC
 iR
 iso
 isp
@@ -678,6 +686,7 @@ jsonlite
 Jt
 ju
 jUO
+jure
 jv
 jw
 Jw
@@ -954,6 +963,7 @@ ORCID
 org
 Organisation
 os
+OSP
 Ot
 ǾT
 ou
@@ -1133,7 +1143,11 @@ sam
 samabbott
 sanitised
 sanitises
+SARS
 saveRDS
+savivaldybe
+SciELOPreprints
+sciensano
 Sbb
 sD
 seabbs
@@ -1162,6 +1176,7 @@ snKdL
 soD
 sophie
 SouthAfrica
+spi
 sprintf
 sQc
 sQL
@@ -1177,6 +1192,7 @@ Subnational
 subregion
 sudo
 summarise
+supertracker
 Sur
 SUR
 svg
@@ -1278,6 +1294,7 @@ uNb
 uo
 u֛o
 uR
+urls
 uS
 useMemoise
 usethis
