@@ -35,7 +35,7 @@
 ֝
 ҆
 ́
-̀
+̀
 ̀
 ̆
 ̂
@@ -160,6 +160,7 @@ aca
 ACAdP
 acaps
 ACAPS
+ac
 acf
 aD
 ADB
@@ -182,6 +183,7 @@ afghanistan
 AfI
 ag
 aG
+
 AGESEX
 AGU
 aH
@@ -218,6 +220,7 @@ APG
 ăPg
 api
 APqI
+apskritis
 aQ
 Aq
 AQQE
@@ -382,7 +385,7 @@ B벎щX
 Ć
 ĉ
 Č
-ċ
+ċ
 Ċ
 Ç
 c͊
@@ -479,6 +482,7 @@ conacyt
 config
 Config
 coronavirus
+Cota
 countrycode
 CountryDataClass
 CoV
@@ -1169,6 +1173,7 @@ iƈ
 iD
 îd
 iDL
+ICD
 ie
 iE
 ie'vk
@@ -1971,6 +1976,7 @@ os
 OSkb
 OSP
 oT
+OSP
 Ot
 oŤ
 ǾT
@@ -2342,7 +2348,11 @@ sam
 samabbott
 sanitised
 sanitises
+SARS
 saveRDS
+savivaldybe
+SciELOPreprints
+sciensano
 Sbb
 SCC
 Scgܒ
@@ -2386,6 +2396,7 @@ soD
 SoG
 sophie
 SouthAfrica
+spi
 sprintf
 sQc
 sQL
@@ -2411,6 +2422,7 @@ Subnational
 subregion
 sudo
 summarise
+supertracker
 Sur
 SUR
 sut
@@ -2644,6 +2656,7 @@ ur
 uR
 uRf
 URRr
+urls
 uS
 useMemoise
 usethis
