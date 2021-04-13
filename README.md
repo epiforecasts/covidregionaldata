@@ -61,7 +61,7 @@ library(ggplot2)
 library(scales)
 ```
 
-### Setup Data caching
+### Setup data caching
 
 This package can optionally use a data cache from `memoise` to locally
 cache downloads. This can be enabled using the following (this will the
@@ -69,7 +69,7 @@ temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/Rtmp3gUicv
+#> Using a cache at: /tmp/RtmpTl3BHb
 ```
 
 To stop using `memoise` use,
