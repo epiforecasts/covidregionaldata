@@ -14,11 +14,15 @@ If you want to make a bigger change, it's a good idea to first file an issue and
 If you’ve found a bug, please file an issue that illustrates the bug with a minimal 
 [reprex](https://www.tidyverse.org/help/#reprex) (this will also help you write a unit test, if needed).
 
+## Adding support for a dataset
+
+If interested in adding support for a dataset please see our [adding a dataset guide](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/ADDING-DATA.md) once you have finished reading this guide.
+
 ### Pull request process
 
 *   Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("epiforecasts/EpiNow2", fork = TRUE)`.
 
-*   Install all development dependences with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`. 
+*   Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`. 
     If R CMD check doesn't pass cleanly, it's a good idea to ask for help before continuing. 
 *   Create a Git branch for your pull request (PR). We recommend using `usethis::pr_init("brief-description-of-change")`.
 
