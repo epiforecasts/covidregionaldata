@@ -5,6 +5,7 @@
 #'
 #' @source \url{https://covid19.who.int/}
 #' @concept dataset
+#' @export
 #' @examples
 #' \dontrun{
 #' national <- WHO$new(verbose = TRUE, steps = TRUE, get = TRUE)
