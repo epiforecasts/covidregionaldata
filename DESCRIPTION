@@ -3,12 +3,12 @@ Title: Subnational Data for the Covid-19 Outbreak
 Version: 0.9.0.1
 Authors@R: 
     c(person(given = "Sam Abbott",
-             role = "aut",
+             role = c("aut", "cre"),
              email = "sam.abbott@lshtm.ac.uk",
              comment = c(ORCID = "0000-0001-8057-8037")),
       person(given = "Katharine",
              family = "Sherratt",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "katharine.sherratt@lshtm.ac.uk",
              comment = c(ORCID = "0000-0003-4413-453X")),
       person(given = "Joe",
@@ -42,7 +42,7 @@ Authors@R:
              email = "patrick.barks@epicentre.msf.org"),
       person(given = "Paul",
              family = "Campbell",
-             role = "aut",
+             role = "ctb",
              email = " paul.campbell@epicentre.msf.org"),
       person(given = "Flavio",
              family = "Finger",
@@ -66,25 +66,7 @@ Description: An interface to subnational and national level Covid-19 data.
     cases.  Wherever available we also provide data on deaths,
     hospitalisations, and tests.  National level data is also supported
     using a range of data sources as well as linelist data and links to
-    intervention data sets. Data sources included: WHO
-    <https://covid19.who.int>; ACAPS interventions
-    <https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset>;
-    patient linelist: <https://github.com/beoutbreakprepared/nCoV2019>),
-    regional data (Afghanistan:
-    <https://data.humdata.org/dataset/afghanistan-covid-19-statistics-per-province>;
-    Belgium: <https://epistat.wiv-isp.be/covid/>; Brazil:
-    <https://github.com/wcota/covid19br>; Canada:
-    <https://health-infobase.canada.ca/>; Colombia:
-    <https://github.com/danielcs88/colombia_covid-19>; Germany:
-    <https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0>;
-    France: <https://www.data.gouv.fr/fr/pages/donnees-coronavirus>;
-    India: <https://api.covid19india.org/>; Italy:
-    <https://github.com/pcm-dpc/COVID-19>; UK:
-    <https://coronavirus.data.gov.uk>,
-    <https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/>;
-    USA: <https://github.com/nytimes/covid-19-data>), Cuba:
-    <https://covid19cubadata.github.io>, and geocoding data (Colombia:
-    <https://en.wikipedia.org/wiki/ISO_3166-2:CO>).
+    intervention data sets.
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata,
     https://github.com/epiforecasts/covidregionaldata

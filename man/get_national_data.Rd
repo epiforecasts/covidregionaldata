@@ -7,6 +7,7 @@
 get_national_data(
   countries,
   source = "who",
+  totals = FALSE,
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
@@ -20,6 +21,10 @@ Used to filter the data.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
+
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}

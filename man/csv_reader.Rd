@@ -23,3 +23,4 @@ A data table
 \description{
 Checks for use of memoise and then uses vroom::vroom.
 }
+\concept{utility}

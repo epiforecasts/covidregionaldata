@@ -16,6 +16,7 @@
 #' @details Inherits from `DataClass`
 #' @source \url{https://datos.covid-19.conacyt.mx/#DownZCSV}
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)

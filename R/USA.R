@@ -8,6 +8,7 @@
 #' @source \url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- USA$new(verbose = TRUE, steps = TRUE, get = TRUE)

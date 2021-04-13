@@ -12,6 +12,7 @@
 #' @source \url{https://coronavirus.data.gov.uk/details/download}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)

@@ -29,8 +29,8 @@
 #' # download data for Canada keeping all processing steps
 #' get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 #' }
-get_national_data <- function(countries, source = "who", steps = FALSE,
-                              class = FALSE, verbose = TRUE,
+get_national_data <- function(countries, source = "who", totals = FALSE,
+                              steps = FALSE, class = FALSE, verbose = TRUE,
                               country = deprecated(),
                               ...) {
   if (is_present(country)) {
@@ -44,7 +44,7 @@ get_national_data <- function(countries, source = "who", steps = FALSE,
   # check data availability and initiate country class if available
   nation_class <- check_country_available(
     country = source, level = "1",
-    totals = FALSE, localise = TRUE,
+    totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
     regions = countries, ...
   )

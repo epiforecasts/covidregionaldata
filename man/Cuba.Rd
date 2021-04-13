@@ -19,6 +19,7 @@ region <- Cuba$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Cuba}
 }

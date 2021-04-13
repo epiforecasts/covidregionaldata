@@ -21,6 +21,7 @@ national$return()
 }
 
 }
+\concept{dataset}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{ECDC}
 }

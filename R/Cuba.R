@@ -7,6 +7,7 @@
 #' @source \url{https://covid19cubadata.github.io/data/covid19-casos.csv}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Cuba$new(verbose = TRUE, steps = TRUE, get = TRUE)

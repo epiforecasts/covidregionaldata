@@ -17,3 +17,4 @@ Adds extra columns filled with NAs to a dataset.
 This ensures that all datasets from the covidregionaldata package return
 datasets of the same underlying structure (i.e. same columns).
 }
+\concept{utility}

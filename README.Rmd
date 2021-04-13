@@ -59,7 +59,7 @@ library(scales)
 
 ### Setup Data caching
 
-This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will use a `.cache` in the current directory),
+This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will the temporary directory by default),
 
 ```{r}
 start_using_memoise()
@@ -89,18 +89,17 @@ nots
 This can also be filtered for a country of interest,
 
 ```{r}
-get_national_data(country = "France", verbose = FALSE)
+g7 <- c(
+  "United States", "United Kingdom", "France", "Germany",
+  "Italy", "Canada", "Japan"
+)
+g7_nots <- get_national_data(countries = g7, verbose = FALSE)
 ```
 
 Using this data we can compare case information between countries, for example here is the number of deaths over time for each country in the G7:
 
 ```{r g7_plot, warning = FALSE, message = FALSE}
-g7 <- c(
-  "United States", "United Kingdom", "France", "Germany",
-  "Italy", "Canada", "Japan"
-)
-nots %>%
-  filter(country %in% g7) %>%
+g7_nots %>%
   ggplot() +
   aes(x = date, y = deaths_new, col = country) +
   geom_line(alpha = 0.4) +
@@ -159,16 +158,14 @@ uk_nots_2 %>%
 
 Level 2 data is only available for some countries, see `get_available_datasets` for supported nations. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd)
 
-## Dataset status
+## Citation
 
-| **Dataset** | **GitHub status** | *CRAN status* |
-| :--- | :---: | :---: |
-| WHO   |  [![WHO](https://github.com/epiforecasts/covidregionaldata/workflows/WHO/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/who.yaml)    | *working* |
-| ECDC  |  [![ECDC](https://github.com/epiforecasts/covidregionaldata/workflows/ECDC/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/ecdc.yaml)    | *working* |
-| Mexico  |  [![Mexico](https://github.com/epiforecasts/covidregionaldata/workflows/Mexico/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/mexico.yaml)    | *working* |
-| Italy  |  [![Italy](https://github.com/epiforecasts/covidregionaldata/workflows/Italy/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/italy.yaml)    | *working* |
-| Germany  |  [![Germany](https://github.com/epiforecasts/covidregionaldata/workflows/Germany/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions/workflows/germany.yaml)    | *working* |
+If using `covidregionaldata` in your work please consider citing it using the following, 
+
+```{r, echo = FALSE}
+citation("covidregionaldata")
+```
 
 ## Development
 
-We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more details, start with the [contributing guide](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/contributing.md).
+We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the [issues](https://github.com/epiforecasts/covidregionaldata/issues). Please check and add to the issues, and/or add a [pull request](https://github.com/epiforecasts/covidregionaldata/pulls). For more details, start with the [contributing guide](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/CONTRIBUTING.md).

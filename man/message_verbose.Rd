@@ -16,3 +16,4 @@ messages and warnings be returned.}
 A wrapper for \code{message} that only prints output when
 \code{verbose = TRUE}.
 }
+\concept{utility}

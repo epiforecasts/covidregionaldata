@@ -7,6 +7,7 @@
 #' @source \url{https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)

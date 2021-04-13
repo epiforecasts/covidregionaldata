@@ -12,6 +12,7 @@ test_get_national_data <- function(source) {
         class <- national$clone()
         class$verbose <- verbose
         class$steps <- steps
+        class$totals <- totals
         if (!missing(regions)) {
           class$target_regions <- regions
         }
@@ -49,6 +50,11 @@ test_get_national_data <- function(source) {
         verbose = FALSE
       )
     )
+    totals <- get_national_data(totals = TRUE, verbose = FALSE)
+    expect_s3_class(totals, "data.frame")
+    expect_true(nrow(totals) > 0)
+    expect_true(sum(grepl("_total", colnames(totals))) > 4)
+    expect_true(all(!grepl("date", colnames(totals))))
   })
 }
 
