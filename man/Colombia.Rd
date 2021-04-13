@@ -8,7 +8,7 @@
 }
 \description{
 Information for downloading, cleaning
-and processing covid-19 region data for Colombia
+and processing COVID-19 region data for Colombia
 }
 \examples{
 \dontrun{

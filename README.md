@@ -1,16 +1,25 @@
 
-# Subnational data for the Covid-19 outbreak
+# Subnational data for the COVID-19 outbreak
 
-[![badge](https://img.shields.io/badge/Launch-package-lightblue.svg)](https://mybinder.org/v2/gh/epiforecasts/covidregionaldata/master?urlpath=rstudio)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.9.0-green.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/)
-[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 [![metacran
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
 
-An interface to subnational and national level Covid-19 data. For all
+[![MIT
+license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/)
+[![GitHub
+contributors](https://img.shields.io/github/contributors/epiforecasts/covidregionaldata)](https://github.com/epiforecasts/covidregionaldata/graphs/contributors)
+[![PRs
+Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
+[![GitHub
+commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
+
+An interface to subnational and national level COVID-19 data. For all
 countries supported, this includes a daily time-series of cases.
 Wherever available we also provide data on deaths, hospitalisations, and
 tests. National level data is also supported using a range of data
@@ -60,7 +69,7 @@ temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmplUocdM
+#> Using a cache at: /tmp/RtmpyygU9Z
 ```
 
 To stop using `memoise` use,
@@ -83,7 +92,7 @@ use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 109,740
+#> Rows: 110,212
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -95,7 +104,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 109,740 x 15
+#> # A tibble: 110,212 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -108,7 +117,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 109,730 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 110,202 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -149,7 +158,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 5,694 x 22
+#> # A tibble: 5,720 x 26
 #>    date       region    iso_3166_2 cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>     <chr>          <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mid… E12000004         NA          NA         NA           NA
@@ -162,13 +171,16 @@ uk_nots
 #>  8 2020-01-30 Scotland  S92000003         NA          NA         NA           NA
 #>  9 2020-01-30 South Ea… E12000008         NA          NA         NA           NA
 #> 10 2020-01-30 South We… E12000009         NA          NA         NA           NA
-#> # … with 5,684 more rows, and 15 more variables: recovered_new <dbl>,
+#> # … with 5,710 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
 #> #   newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>,
 #> #   cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>,
-#> #   newDeaths28DaysByPublishDate <dbl>
+#> #   newDeaths28DaysByPublishDate <dbl>, newPillarFourTestsByPublishDate <lgl>,
+#> #   newPillarOneTestsByPublishDate <dbl>,
+#> #   newPillarThreeTestsByPublishDate <dbl>,
+#> #   newPillarTwoTestsByPublishDate <dbl>
 ```
 
 Now we have the data we can create plots, for example the time-series of
@@ -195,7 +207,7 @@ authorities),
 ``` r
 uk_nots_2 <- get_regional_data(country = "UK", level = "2", verbose = FALSE)
 uk_nots_2
-#> # A tibble: 93,762 x 24
+#> # A tibble: 94,600 x 24
 #>    date       region  iso_3166_2 authority ons_region_code cases_new cases_total
 #>    <date>     <chr>   <chr>      <chr>     <chr>               <dbl>       <dbl>
 #>  1 2020-01-30 East M… E12000004  Derby     E06000015              NA          NA
@@ -208,7 +220,7 @@ uk_nots_2
 #>  8 2020-01-30 East M… E12000004  Nottingh… E10000024              NA          NA
 #>  9 2020-01-30 East M… E12000004  Rutland   E06000017              NA          NA
 #> 10 2020-01-30 East o… E12000006  Bedford   E06000055              NA          NA
-#> # … with 93,752 more rows, and 17 more variables: deaths_new <dbl>,
+#> # … with 94,590 more rows, and 17 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>,
 #> #   areaType <chr>, cumCasesByPublishDate <dbl>, cumCasesBySpecimenDate <dbl>,
@@ -249,13 +261,13 @@ using the following,
     #> 
     #>   Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen,
     #>   Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020).
-    #>   covidregionaldata: Subnational Data for the Covid-19 Outbreak, DOI:
+    #>   covidregionaldata: Subnational Data for the COVID-19 Outbreak, DOI:
     #>   10.5281/zenodo.3957539
     #> 
     #> A BibTeX entry for LaTeX users is
     #> 
     #>   @Article{,
-    #>     title = {covidregionaldata: Subnational Data for the Covid-19 Outbreak},
+    #>     title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},
     #>     author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},
     #>     journal = {-},
     #>     year = {2020},

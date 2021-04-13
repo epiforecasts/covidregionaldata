@@ -1,5 +1,5 @@
 Package: covidregionaldata
-Title: Subnational Data for the Covid-19 Outbreak
+Title: Subnational Data for the COVID-19 Outbreak
 Version: 0.9.0
 Authors@R: 
     c(person(given = "Sam Abbott",
@@ -61,7 +61,7 @@ Authors@R:
              family = "Funk",
              role = "aut",
              email = "sebastian.funk@lshtm.ac.uk"))
-Description: An interface to subnational and national level Covid-19 data.
+Description: An interface to subnational and national level COVID-19 data.
     For all countries supported, this includes a daily time-series of
     cases.  Wherever available we also provide data on deaths,
     hospitalisations, and tests.  National level data is also supported

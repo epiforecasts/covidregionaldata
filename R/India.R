@@ -1,6 +1,6 @@
 #' India Class for downloading, cleaning and processing notification data
 #' @description Information for downloading, cleaning
-#'  and processing covid-19 region data for India.
+#'  and processing COVID-19 region data for India.
 #'
 #' @source \url{https://www.covid19india.org}
 #' @export

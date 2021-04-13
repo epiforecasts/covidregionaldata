@@ -1,7 +1,7 @@
-#' Fetch standardised sub-national Covid-19 data
+#' Fetch standardised sub-national COVID-19 data
 #'
 #' @description Downloads, cleans and processes regional data
-#' for Covid-19.
+#' for COVID-19.
 #' @param country A character string specifying the country to get data from.
 #' Not case dependent. Name should be the English name. For a list of
 #' options use `get_available_datasets`.

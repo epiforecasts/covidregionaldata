@@ -1,6 +1,6 @@
 #' Italy Class for downloading, cleaning and processing notification data
 #' @description Information for downloading, cleaning
-#'  and processing covid-19 region data for Italy.
+#'  and processing COVID-19 region data for Italy.
 #'
 # nolint start
 #' @source \url{https://github.com/pcm-dpc/COVID-19/}

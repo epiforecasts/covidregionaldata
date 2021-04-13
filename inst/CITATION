@@ -1,7 +1,7 @@
 citHeader("To cite covidregionaldata in publications use:")
 
 citEntry(entry = "Article",
-  title        = "covidregionaldata: Subnational Data for the Covid-19 Outbreak",
+  title        = "covidregionaldata: Subnational Data for the COVID-19 Outbreak",
   author       = personList(as.person("Sam Abbott"), 
     as.person("Katharine Sherratt"), as.person("Joe Palmer"),
     as.person("Richard Martin-Nielsen"), as.person("Jonnie Bevan"),
@@ -16,6 +16,6 @@ citEntry(entry = "Article",
   textVersion  =
   paste("Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen,
          Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020).",
-        "covidregionaldata: Subnational Data for the Covid-19 Outbreak, ",
+        "covidregionaldata: Subnational Data for the COVID-19 Outbreak, ",
         "DOI: 10.5281/zenodo.3957539")
 )

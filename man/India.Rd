@@ -8,7 +8,7 @@
 }
 \description{
 Information for downloading, cleaning
-and processing covid-19 region data for India.
+and processing COVID-19 region data for India.
 }
 \examples{
 \dontrun{

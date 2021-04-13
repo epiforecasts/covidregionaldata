@@ -12,7 +12,7 @@
 }
 \description{
 Information for downloading, cleaning
-and processing covid-19 region data for France.
+and processin COVID-19 region data for France.
 }
 \examples{
 \dontrun{

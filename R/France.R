@@ -1,7 +1,7 @@
 #' France Class containing country specific attributes and methods
 #'
 #' @description Information for downloading, cleaning
-#' and processing covid-19 region data for France.
+#' and processin COVID-19 region data for France.
 #'
 # nolint start
 #' @source \url{https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675}

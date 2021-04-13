@@ -1,7 +1,7 @@
 #' Lithuania Class for downloading, cleaning and processing notification data
 #'
 #' @description Information for downloading, cleaning
-#'  and processing covid-19 region level 1 and 2 data for Lithuania.
+#'  and processing COVID-19 region level 1 and 2 data for Lithuania.
 #'
 #' @details Inherits from `DataClass`
 #'

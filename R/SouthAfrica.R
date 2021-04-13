@@ -1,6 +1,6 @@
 #' SouthAfrica Class for downloading, cleaning and processing notification data
 #' @description Information for downloading, cleaning
-#'  and processing covid-19 region data for South Africa.
+#'  and processing COVID-19 region data for South Africa.
 #'
 # nolint start
 #' @source \url{https://github.com/dsfsi/covid19za/}

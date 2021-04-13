@@ -1,7 +1,7 @@
 #' R6 Class containing specific attributes and methods for WHO data
 #'
 #' @description Information for downloading, cleaning
-#'  and processing covid-19 region data from the World Health Organisation
+#'  and processing COVID-19 region data from the World Health Organisation
 #'
 #' @source \url{https://covid19.who.int/}
 #' @concept dataset

@@ -8,7 +8,7 @@
 }
 \description{
 Information for downloading, cleaning
-and processing covid-19 region data from the World Health Organisation
+and processing COVID-19 region data from the World Health Organisation
 }
 \examples{
 \dontrun{

@@ -18,7 +18,7 @@ Should only certain variables (id, country, onset date, days' delay),
 and observations (patients with a report delay) be returned}
 }
 \value{
-A linelist of reported cases of Covid-19
+A linelist of reported cases of COVID-19
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

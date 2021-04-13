@@ -16,7 +16,7 @@
 #' @param report_delay_only Logical, defaults to `FALSE`.
 #'  Should only certain variables (id, country, onset date, days' delay),
 #'  and observations (patients with a report delay) be returned
-#' @return A linelist of reported cases of Covid-19
+#' @return A linelist of reported cases of COVID-19
 #' @source \url{https://github.com/beoutbreakprepared/nCoV2019}
 #'
 #' @keywords internal
