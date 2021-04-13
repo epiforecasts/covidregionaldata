@@ -4,16 +4,11 @@
 \alias{USA}
 \title{USA Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
-
-\url{https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv}
+\url{https://github.com/nytimes/covid-19-data/}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for USA.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

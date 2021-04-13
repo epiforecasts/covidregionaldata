@@ -7,7 +7,7 @@
 \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region level 1 and 2 data for Lithuania.
 }
 \details{

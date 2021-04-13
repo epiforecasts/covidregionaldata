@@ -1,9 +1,8 @@
 #' India Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #'  and processing covid-19 region data for India.
 #'
-#' @details Inherits from `DataClass`
-#' @source \url{https://api.covid19india.org/csv/latest/state_wise_daily.csv}
+#' @source \url{https://www.covid19india.org}
 #' @export
 #' @concept dataset
 #' @examples

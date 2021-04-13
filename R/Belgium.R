@@ -1,9 +1,8 @@
 #' Belgium Class for downloading, cleaning and processing notification data
 #'
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #'  and processing COVID-19 region level 1 and 2 data for Belgium.
 #'
-#' @details Inherits from `DataClass`
 #' @concept dataset
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}

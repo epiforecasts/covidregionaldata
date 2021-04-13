@@ -4,14 +4,11 @@
 \alias{India}
 \title{India Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://api.covid19india.org/csv/latest/state_wise_daily.csv}
+\url{https://www.covid19india.org}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for India.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

@@ -4,14 +4,11 @@
 \alias{Italy}
 \title{Italy Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}
+\url{https://github.com/pcm-dpc/COVID-19/}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for Italy.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

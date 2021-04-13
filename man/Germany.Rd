@@ -7,11 +7,8 @@
 \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing COVID-19 region level 1 and 2 data for Germany.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

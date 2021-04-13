@@ -1,11 +1,9 @@
 #' R6 Class containing specific attributes and methods for WHO data
 #'
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #'  and processing covid-19 region data from the World Health Organisation
 #'
-#' @details Inherits from `DataClass`
-#' @source \url{https://covid19.who.int/WHO-COVID-19-global-data.csv}
-#' @export
+#' @source \url{https://covid19.who.int/}
 #' @concept dataset
 #' @examples
 #' \dontrun{

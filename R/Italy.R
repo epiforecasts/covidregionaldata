@@ -1,10 +1,9 @@
 #' Italy Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #'  and processing covid-19 region data for Italy.
 #'
-#' @details Inherits from `DataClass`
 # nolint start
-#' @source \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}
+#' @source \url{https://github.com/pcm-dpc/COVID-19/}
 # nolint end
 #' @export
 #' @concept dataset

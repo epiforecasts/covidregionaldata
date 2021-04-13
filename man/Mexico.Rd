@@ -4,10 +4,10 @@
 \alias{Mexico}
 \title{Meixco Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://datos.covid-19.conacyt.mx/#DownZCSV}
+\url{https://datos.covid-19.conacyt.mx/}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for Mexico.
 
 Notes on region codes:
@@ -19,9 +19,6 @@ Level 2 codes = INEGI Mexican official statistics geocoding,
 source: raw data
 
 Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

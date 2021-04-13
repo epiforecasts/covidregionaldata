@@ -7,11 +7,8 @@
 \url{https://github.com/wcota/covid19br}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Brazil.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Brazil.
 
 Data available on Github, curated by Wesley Cota:
 DOI 10.1590/SciELOPreprints.362

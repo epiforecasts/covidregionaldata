@@ -1,11 +1,12 @@
-#' R6 Class containing specific attributes and methods for ECDC dataset
+#' R6 Class containing specific attributes and methods for the ECDC dataset
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data from the European Centre for
-#'  Disease Prevention and Control.
+#' @description Information for downloading, cleaning
+#'  and processing the European Centre for
+#'  Disease Prevention and Control COVID-19 data.
 #'
-#' @details Inherits from `DataClass`
-#' @source \url{https://opendata.ecdc.europa.eu/covid19/casedistribution/csv}
+# nolint start
+#' @source \url{https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide}
+# nolint end
 #' @export
 #' @concept dataset
 #' @examples

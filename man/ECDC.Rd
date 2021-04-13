@@ -2,17 +2,14 @@
 % Please edit documentation in R/ECDC.R
 \name{ECDC}
 \alias{ECDC}
-\title{R6 Class containing specific attributes and methods for ECDC dataset}
+\title{R6 Class containing specific attributes and methods for the ECDC dataset}
 \source{
-\url{https://opendata.ecdc.europa.eu/covid19/casedistribution/csv}
+\url{https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data from the European Centre for
-Disease Prevention and Control.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing the European Centre for
+Disease Prevention and Control COVID-19 data.
 }
 \examples{
 \dontrun{

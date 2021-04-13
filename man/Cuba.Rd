@@ -4,14 +4,11 @@
 \alias{Cuba}
 \title{Cuba Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://covid19cubadata.github.io/data/covid19-casos.csv}
+\url{https://covid19cubadata.github.io/}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for Cuba
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{

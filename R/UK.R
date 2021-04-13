@@ -7,7 +7,6 @@
 #' boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
 #' download from (release_date) and a geographical resolution (resolution).
 #'
-#' @details Inherits from `DataClass`
 # nolint start
 #' @source \url{https://coronavirus.data.gov.uk/details/download}
 # nolint end

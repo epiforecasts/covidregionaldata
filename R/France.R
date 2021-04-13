@@ -1,9 +1,7 @@
 #' France Class containing country specific attributes and methods
 #'
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #' and processing covid-19 region data for France.
-#'
-#' @details Inherits from `DataClass`
 #'
 # nolint start
 #' @source \url{https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675}
@@ -17,7 +15,6 @@
 #' region <- France$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-#'
 France <- R6::R6Class("France",
   inherit = DataClass,
   public = list(

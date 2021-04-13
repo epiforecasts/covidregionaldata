@@ -11,18 +11,14 @@
 \url{https://www.data.gouv.fr/fr/datasets/r/001aca18-df6a-45c8-89e6-f82d689e6c01}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for France.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
 region <- France$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
-
 }
 \concept{dataset}
 \section{Super class}{

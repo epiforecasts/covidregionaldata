@@ -16,9 +16,6 @@ including options to return subnational English regions using NHS region
 boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
 download from (release_date) and a geographical resolution (resolution).
 }
-\details{
-Inherits from \code{DataClass}
-}
 \examples{
 \dontrun{
 region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)

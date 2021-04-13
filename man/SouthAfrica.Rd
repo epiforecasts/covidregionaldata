@@ -4,16 +4,11 @@
 \alias{SouthAfrica}
 \title{SouthAfrica Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv}
-
-\url{https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv}
+\url{https://github.com/dsfsi/covid19za/}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing covid-19 region data for South Africa.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
