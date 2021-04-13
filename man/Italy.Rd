@@ -4,7 +4,7 @@
 \alias{Italy}
 \title{Italy Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint}
+\url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}
 }
 \description{
 Country specific information for downloading, cleaning

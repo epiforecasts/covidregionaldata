@@ -32,8 +32,10 @@ Belgium <- R6::R6Class("Belgium",
     #' ISO 3166-2 codes are used for both region and province levels in
     #' Belgium, and for provinces these are marked as being
     #' `iso_3166_2_province`
-    supported_region_codes = list("1" = "iso_3166_2",
-                                  "2" = "iso_3166_2_province"),
+    supported_region_codes = list(
+      "1" = "iso_3166_2",
+      "2" = "iso_3166_2_province"
+    ),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels.
     common_data_urls = list(

@@ -36,7 +36,6 @@
 ҆
 ́
 ̀
-̀
 ̆
 ̂
 ̊
@@ -44,7 +43,6 @@
 ̃
 ̸
 ̧
-݅
 ͞
 ͋
 ͛
@@ -52,15 +50,15 @@
 ݁
 ̾
 ̒
-̕
+݅
 ͝
 ̎
+̕
 ͚
 ̼
 ͟
 ̻
 ͕
-̩
 ͙
 ݆
 ͢
@@ -75,8 +73,9 @@
 ̟
 ͎
 ̯
-̷
+̩
 ̶
+̷
 ̉
 ̏
 ̛
@@ -155,12 +154,12 @@ abbott
 abE
 aBee
 aboutus
+ac
 aC
 aca
 ACAdP
 acaps
 ACAPS
-ac
 acf
 aD
 ADB
@@ -183,7 +182,6 @@ afghanistan
 AfI
 ag
 aG
-
 AGESEX
 AGU
 aH
@@ -201,14 +199,18 @@ aJmB
 AJrȵv
 aJz
 Ak
+Akmenės
 aL
 AŁg
 aLnk
 ALternatively
 alU
+Alytaus
+Alytus
 Aɱ
 anonymised
 Antwerpen
+Anykščių
 ao
 aO
 Ao
@@ -316,6 +318,8 @@ bHi
 BHl
 BHU
 BIp
+Birštono
+Biržų
 bj
 bJ
 Bj
@@ -385,12 +389,13 @@ B벎щX
 Ć
 ĉ
 Č
+ċ
 ċ
 Ċ
 Ç
 c͊
-c͜
 c͢
+c͜
 ֳC
 cǎ
 Caȼ
@@ -499,6 +504,7 @@ cr
 cran
 crd
 cre
+createComment
 Crlfl
 cron
 cronologia
@@ -572,6 +578,7 @@ deps
 desc
 dev
 develVersion
+devtools
 df
 dfffffFEEu
 dg
@@ -626,6 +633,7 @@ dqc
 DQf
 dr
 Drc
+Druskininkų
 ds
 dS
 Ds
@@ -729,6 +737,7 @@ eK
 EK
 Ekl
 ElEEEK
+Elektrėnų
 eMP
 eN
 england
@@ -745,6 +754,7 @@ eP
 EP
 epicentre
 epiforecasts
+EpiForecasts
 epistat
 epO
 Epx
@@ -1102,6 +1112,7 @@ HSB
 hsUM
 HSWWWRR
 Hta
+http
 https
 httpv
 httr
@@ -1173,7 +1184,6 @@ iƈ
 iD
 îd
 iDL
-ICD
 ie
 iE
 ie'vk
@@ -1183,6 +1193,7 @@ iFE
 Ig
 IG
 igĭ
+Ignalinos
 ĩgU
 IgUc
 iGф
@@ -1355,6 +1366,8 @@ JNVfψ
 jo
 joel
 jòF
+Jonavos
+Joniškio
 jonnie
 Jonnie
 jp
@@ -1378,6 +1391,7 @@ jTN
 ju
 jU
 jUO
+Jurbarko
 jure
 juv
 jv
@@ -1428,8 +1442,12 @@ k֬
 K'D
 ka
 kǎ
+Kaišiadorių
+Kalvarijos
 katharine
 kathsherratt
+Kauno
+Kazlų
 kB
 kC
 KCI
@@ -1438,6 +1456,8 @@ kD
 kDwzK
 kȡT
 kE
+Kėdainių
+Kelmės
 kf
 Kf
 kFO
@@ -1464,6 +1484,8 @@ KjX
 kk
 kK
 kkk'N
+Klaipėda
+Klaipėdos
 ̭KLM
 KLs
 kly
@@ -1490,6 +1512,7 @@ kr
 kR
 kra
 Kreise
+Kretingos
 Krrr
 ksA
 kSJ
@@ -1497,6 +1520,7 @@ KsR
 kst
 kTX
 ku
+Kupiškio
 kv
 kV
 Kv
@@ -1535,6 +1559,7 @@ l'i
 lA
 lǎ
 Landkreis
+Lazdijų
 LazyData
 lbK
 Lbr
@@ -1666,6 +1691,9 @@ l솊
 m̘
 macOS
 magrittr
+Marijampolė
+Marijampolės
+Mažeikių
 mb
 MbfUU
 mBP
@@ -1678,6 +1706,7 @@ mcL
 mCW
 Mcy
 mCydl
+md
 mD
 ݅md
 mdyϜ
@@ -1686,6 +1715,7 @@ Meakin
 meaking
 Meixco
 memoise
+MERCHANTABILITY
 metacran
 Mf
 MF
@@ -1712,6 +1742,7 @@ MNN
 mnڌ
 mO
 mOB
+Molėtų
 MOR
 Morelos
 MORELOS
@@ -1783,6 +1814,7 @@ NDΏ
 ne
 Nė
 NEɫ
+Neringos
 ֫neuX
 newAdmissions
 newCasesByPublishDate
@@ -1831,6 +1863,7 @@ NņXq
 nO
 Nǭ
 nolint
+NONINFRINGEMENT
 NOO
 npgeo
 npjA
@@ -1848,6 +1881,7 @@ nt
 nT
 Nͭ
 nTD
+nThank
 Nty
 nU
 Nǘ
@@ -1976,7 +2010,6 @@ os
 OSkb
 OSP
 oT
-OSP
 Ot
 oŤ
 ǾT
@@ -2017,8 +2050,14 @@ oڴ
 p'H
 Pˆ
 pA
+Pagėgių
+Pakruojo
+Palangos
 pandoc
+Panevėžio
+Panevėžys
 params
+Pasvalio
 patrick
 paul
 paulcampbell
@@ -2056,6 +2095,7 @@ pkgbuild
 pkgdown
 pkgs
 Plg
+Plungės
 PĻY
 PmjY
 pmV
@@ -2074,6 +2114,8 @@ pP
 pq
 PqKxץ
 pR
+pre
+Prienų
 pRRҙ
 ps
 pS
@@ -2209,6 +2251,8 @@ r̄
 Ȑ
 r'c
 rA
+Radviliškio
+Raseinių
 rb
 rB
 Rbb
@@ -2241,6 +2285,7 @@ ri
 rI
 Ri
 RichardMN
+Rietavo
 rj
 RJ
 rK
@@ -2260,6 +2305,7 @@ RNH
 Rnt
 Ro
 roc
+Rokiškio
 Roo
 ROO
 roW
@@ -2285,10 +2331,12 @@ Rscript
 rspm
 RSPM
 rss
+rstudio
 rT
 RTޫ
 rU
 Rud
+Rūdos
 ruO
 rup
 ruu
@@ -2344,18 +2392,20 @@ sa
 sA
 Sa
 Sã
+Šakių
+Šalčininkų
 sam
 samabbott
 sanitised
 sanitises
 SARS
+sav
 saveRDS
 savivaldybe
-SciELOPreprints
-sciensano
 Sbb
 SCC
 Scgܒ
+SciELOPreprints
 sciensano
 sCٵH
 sD
@@ -2364,6 +2414,7 @@ se
 seabbs
 sebastian
 sessioninfo
+sexualized
 sF
 șf
 sg
@@ -2374,14 +2425,20 @@ sherratt
 Sherratt
 SHP
 sI
+Šiauliai
+Šiaulių
+Šilalės
+Šilutės
 Sinaloa
 SINALOA
 sIR
+Širvintų
 sj
 sJ
 sk
 sK
 SKa
+Skuodo
 sl
 ſl
 slowstart
@@ -2392,6 +2449,7 @@ SMh
 snKdL
 sO
 sö
+socio
 soD
 SoG
 sophie
@@ -2417,6 +2475,7 @@ sU
 Su
 SU
 SUٔ
+sublicense
 subnational
 Subnational
 subregion
@@ -2427,6 +2486,7 @@ Sur
 SUR
 sut
 sV
+Švenčionių
 svg
 sw
 sW
@@ -2473,6 +2533,8 @@ TAMAULIPAS
 TǻȎ
 tAR
 TArw
+Tauragė
+Tauragės
 tªZ
 tB
 ͭb
@@ -2484,6 +2546,8 @@ TdG
 Tdw
 te
 tE
+Telšiai
+Telšių
 tEQ
 tessella
 testDownload
@@ -2508,6 +2572,7 @@ tibble
 tibbles
 tidyr
 tidyselect
+tidyvere
 tidyverse
 tii
 tj
@@ -2531,6 +2596,7 @@ tp
 TQ
 TQY
 tR
+Trakų
 transcient
 TRw
 tS
@@ -2636,6 +2702,7 @@ uID
 UJ
 ujFF
 uk
+Ukmergės
 ul
 Ũl
 ulu
@@ -2655,14 +2722,16 @@ UQz
 ur
 uR
 uRf
-URRr
 urls
+URRr
 uS
 useMemoise
 usethis
 UsH
 usl
 uT
+Utena
+Utenos
 utla
 UTT
 uttt
@@ -2713,6 +2782,7 @@ vܼ
 ͌V
 ֳv
 va
+Varėnos
 VAt
 vc
 V֡C
@@ -2733,6 +2803,9 @@ vh
 Vh
 vIg
 VignetteBuilder
+Vilkaviškio
+Vilniaus
+Visagino
 visualisation
 vIx
 vJ
@@ -2873,6 +2946,7 @@ wNU
 wO
 Wo
 WO
+WORKDIR
 ֤wOx
 wp
 wq
@@ -3133,6 +3207,7 @@ ZAC
 Zacatecas
 ZACATECAS
 Zǡj
+Zarasų
 zb
 zB
 Zb
