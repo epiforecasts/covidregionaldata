@@ -7,6 +7,7 @@
 #' DOI 10.1590/SciELOPreprints.362
 #'
 #' @source \url{https://github.com/wcota/covid19br}
+#' @concept dataset
 #' @export
 #' @examples
 #' \dontrun{
