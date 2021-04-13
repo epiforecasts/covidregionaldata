@@ -1,14 +1,31 @@
-#' Get Linelist Data
+#' Get patient linelist data
 #'
-#' @description This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
-#' @param clean Logical, defaults to `TRUE`. Should the data returned be cleaned for use.
-#' @param report_delay_only Logical, defaults to `FALSE`. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned
+#' @description
+#'  `r lifecycle::badge("deprecated")`
+#'
+#'  Provides a public international patient linelist from January 2020 to June
+#'  2020.
+#'
+#'  This version of the linelist has stopped updating. The new version of the
+#'  linelist is free but requires a login.
+#'
+#'  See: https://global.health/
+#'
+#' @param clean Logical, defaults to `TRUE`.
+#'  Should the data returned be cleaned for use.
+#' @param report_delay_only Logical, defaults to `FALSE`.
+#'  Should only certain variables (id, country, onset date, days' delay),
+#'  and observations (patients with a report delay) be returned
+#' @return A linelist of reported cases of COVID-19
+#' @source \url{https://github.com/beoutbreakprepared/nCoV2019}
+#'
+#' @keywords internal
+#'
+#' @importFrom lifecycle deprecate_warn
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom lubridate dmy
 #' @importFrom tibble as_tibble
-#' @return A linelist of case data
-#' @export
-#' @author Sam Abbott <sam.abbott@lshtm.ac.uk>
+#' @importFrom utils download.file untar
 #' @examples
 #' \dontrun{
 #' # Get the complete linelist
@@ -17,19 +34,28 @@
 #' # Return the report delay only
 #' get_linelist(report_delay_only = TRUE)
 #' }
+#'
 get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
+  deprecate_warn(
+    when = "0.9.0",
+    what = "covidregionaldata::get_linelist()",
+    details = c(
+      "Linelist no longer accessible through this package.",
+      "The linelist is now hosted at: https://global.health/"
+    )
+  )
+
   tmpdir <- tempdir()
   linelist <- try(csv_reader(file.path(tmpdir, "latestdata.csv")))
 
   if (any(class(linelist) %in% "try-error")) {
     message("Downloading linelist")
 
-    url <- "https://github.com/beoutbreakprepared/nCoV2019/raw/master/latest_data/latestdata.tar.gz"
-
-
+    url <- "https://github.com/beoutbreakprepared/nCoV2019/raw/master/latest_data/latestdata.tar.gz" # nolint
     download.file(url, destfile = file.path(tmpdir, "tmp.tar.gz"))
-
-    untar(file.path(tmpdir, "tmp.tar.gz"), files = "latestdata.csv", exdir = tmpdir)
+    untar(file.path(tmpdir, "tmp.tar.gz"),
+      files = "latestdata.csv", exdir = tmpdir
+    )
 
     linelist <- try(csv_reader(file.path(tmpdir, "latestdata.csv")))
 
@@ -42,38 +68,49 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
     }
   }
 
-
-
-  if (clean) {
+  if (clean | report_delay_only) {
     linelist <- linelist %>%
-      dplyr::mutate(
-        date_confirm = suppressWarnings(lubridate::dmy(date_confirmation)),
-        date_onset = suppressWarnings(lubridate::dmy(date_onset_symptoms)),
-        date_admission_hospital = suppressWarnings(lubridate::dmy(date_admission_hospital)),
-        date_death_or_discharge = suppressWarnings(lubridate::dmy(date_death_or_discharge)),
-        death = ifelse(outcome %in% c("dead", "death", "died", "deceases", "Dead", "Death", "Died", "Deceased"),
-          TRUE, FALSE
-        ),
-        delay_onset_report = as.integer(as.Date(date_confirm) - as.Date(date_onset)),
-        delay_onset_admission = as.integer(as.Date(date_admission_hospital) - as.Date(date_onset)),
-        delay_onset_death = ifelse(death == TRUE,
-          as.integer(as.Date(date_death_or_discharge) - as.Date(date_onset)),
+      mutate(
+        date_confirm = suppressWarnings(lubridate::dmy(.data$date_confirmation)),
+        date_onset = suppressWarnings(lubridate::dmy(.data$date_onset_symptoms)),
+        date_admission_hospital =
+          suppressWarnings(lubridate::dmy(.data$date_admission_hospital)),
+        date_death_or_discharge =
+          suppressWarnings(lubridate::dmy(.data$date_death_or_discharge)),
+        death = ifelse(.data$outcome %in% c(
+          "dead", "death", "died",
+          "deceases", "Dead", "Death",
+          "Died", "Deceased"
+        ), TRUE, FALSE),
+        delay_onset_report =
+          as.integer(as.Date(.data$date_confirm) - as.Date(.data$date_onset)),
+        delay_onset_admission =
+          as.integer(as.Date(.data$date_admission_hospital) -
+            as.Date(.data$date_onset)),
+        delay_onset_death = ifelse(.data$death == TRUE,
+          as.integer(as.Date(.data$date_death_or_discharge) -
+            as.Date(.data$date_onset)),
           NA
         )
       ) %>%
-      dplyr::select(
-        id = ID, country, death,
-        date_onset, date_confirm, date_admission_hospital, date_death_or_discharge,
-        delay_onset_report, delay_onset_admission, delay_onset_death
+      select(
+        id = .data$ID, .data$country, .data$death,
+        .data$date_onset, .data$date_confirm,
+        .data$date_admission_hospital, .data$date_death_or_discharge,
+        .data$delay_onset_report, .data$delay_onset_admission,
+        .data$delay_onset_death
       )
   }
 
   if (report_delay_only) {
     linelist <- dplyr::filter(
       linelist,
-      !is.na(delay_onset_report)
+      !is.na(.data$delay_onset_report)
     ) %>%
-      dplyr::select(id, country, date_onset, delay_onset_report)
+      dplyr::select(
+        .data$id, .data$country,
+        .data$date_onset, .data$delay_onset_report
+      )
   }
 
   message("Note: This linelist covers January to June 2020. We will update when a new data source becomes available.")

@@ -2,41 +2,74 @@
 % Please edit documentation in R/get_regional_data.R
 \name{get_regional_data}
 \alias{get_regional_data}
-\title{Fetch standardised sub-national Covid-19 data}
+\title{Fetch standardised sub-national COVID-19 data}
 \usage{
 get_regional_data(
   country,
+  level = "1",
   totals = FALSE,
-  include_level_2_regions = FALSE,
-  localise_regions = TRUE,
+  localise = TRUE,
+  steps = FALSE,
+  class = FALSE,
+  verbose = TRUE,
+  regions,
+  include_level_2_regions = deprecated(),
+  localise_regions = deprecated(),
   ...
 )
 }
 \arguments{
-\item{country}{Character A string specifying the country to get data from. Not case dependent.
-Name should be the English name. For a list of options see the README.}
+\item{country}{A character string specifying the country to get data from.
+Not case dependent. Name should be the English name. For a list of
+options use \code{get_available_datasets}.}
 
-\item{totals}{Boolean. If TRUE, returns totalled data per region up to today's date. If FALSE, returns the full dataset stratified by date and region.}
+\item{level}{A character string indicating the target administrative level
+of the data with the default being "1". Currently supported options are
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
+options by dataset.}
 
-\item{include_level_2_regions}{Boolean. If TRUE, returns data stratified by level 2 regions. If FALSE, stratified by Level 1.
-Note that Level 2 region data Sis not always available. In these cases the user will get a warning and the Level 1 data will be returned.}
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
 
-\item{localise_regions}{Logical, defaults to TRUE. Should region names be localised.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
-\item{...}{pass additional arguments to regional function calls}
+\item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
+steps be kept and output in a list.}
+
+\item{class}{Logical, defaults to FALSE. If TRUE returns the
+\code{Country} class object rather than a tibble or a list of tibbles.
+Overrides \code{steps}.}
+
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
+messages and warnings be returned.}
+
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field if present.}
+
+\item{include_level_2_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Boolean. If TRUE, returns data stratified by
+level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
+data is not always available. In these cases the user will get a warning
+and the Level 1 data will be returned.}
+
+\item{localise_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, defaults to TRUE. Should region names be localised.}
+
+\item{...}{additional arguments to pass to country specific functionality.}
 }
 \value{
-A tibble with data related to cases, deaths, hospitalisations, recoveries and testing stratified by regions within the given country.
+A tibble with data related to cases, deaths, hospitalisations,
+recoveries and testing stratified by regions within the given country.
 }
 \description{
-The main calculation function for covidregionaldata. Gets raw data using the country-specific function. Adds the region codes.
-Then adds columns which were missing from the raw data (calculating cumulative counts from new dailies and vice versa),
-cleans and sanitises further. Adds rows and columns of NA values so that data is in a standard format.
+Downloads, cleans and processes regional data
+for COVID-19.
 }
 \examples{
-
 \dontrun{
-get_regional_data(country = "canada", totals = TRUE, include_level_2_regions = FALSE)
-}
+# set up a data cache
+start_using_memoise()
 
+# download data for Italy keeping all processing steps
+get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
+}
 }

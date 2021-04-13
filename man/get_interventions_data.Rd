@@ -2,21 +2,27 @@
 % Please edit documentation in R/get_interventions_data.R
 \name{get_interventions_data}
 \alias{get_interventions_data}
-\title{Import ACAPS Government Interventions dataset}
+\title{Get ACAPS Government Interventions dataset}
+\source{
+\url{https://www.acaps.org/covid-19-government-measures-dataset}
+}
 \usage{
 get_interventions_data()
 }
 \value{
-a dataframe of government interventions compiled by ACAPS
+a dataframe of government interventions up to Dec 2020 from ACAPS
 }
 \description{
-Data available here: https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset#
-}
-\examples{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-## Code
-get_interventions_data
+Downloads the ACAPS Government Interventions dataset.
+This function is deprecated: data are no longer updated as of December 2020.
+
+Over 100 alternative datasets are available, covering government
+interventions worldwide. Several include subnational level policy.
+See: https://supertracker.spi.ox.ac.uk/policy-trackers/
 }
 \author{
 Paul Campbell @paulcampbell91
 }
+\keyword{internal}

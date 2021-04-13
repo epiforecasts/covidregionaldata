@@ -2,14 +2,13 @@
 % Please edit documentation in R/get_info_covidregionaldata.R
 \name{get_info_covidregionaldata}
 \alias{get_info_covidregionaldata}
-\title{Get meta information about the covidregionaldata datasets.
-Use this also as a guide for setting up new country datasets}
+\title{Get available datasets}
 \usage{
 get_info_covidregionaldata()
 }
-\value{
-A tibble of metadata about covidregionaldata
-}
 \description{
-Find out function names, data returned, subregion level and raw data sources, alongside package info
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function is deprecated. Please use \code{get_available_datasets()} instead.
 }
+\keyword{internal}

@@ -2,20 +2,34 @@
 % Please edit documentation in R/get_linelist.R
 \name{get_linelist}
 \alias{get_linelist}
-\title{Get Linelist Data}
+\title{Get patient linelist data}
+\source{
+\url{https://github.com/beoutbreakprepared/nCoV2019}
+}
 \usage{
 get_linelist(clean = TRUE, report_delay_only = FALSE)
 }
 \arguments{
-\item{clean}{Logical, defaults to \code{TRUE}. Should the data returned be cleaned for use.}
+\item{clean}{Logical, defaults to \code{TRUE}.
+Should the data returned be cleaned for use.}
 
-\item{report_delay_only}{Logical, defaults to \code{FALSE}. Should only certain variables (id, country, onset date, days' delay), and observations (patients with a report delay) be returned}
+\item{report_delay_only}{Logical, defaults to \code{FALSE}.
+Should only certain variables (id, country, onset date, days' delay),
+and observations (patients with a report delay) be returned}
 }
 \value{
-A linelist of case data
+A linelist of reported cases of COVID-19
 }
 \description{
-This function downloads the latest linelist. As this linelist is experiencing a high user demand it may not always be available.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Provides a public international patient linelist from January 2020 to June
+2020.
+
+This version of the linelist has stopped updating. The new version of the
+linelist is free but requires a login.
+
+See: https://global.health/
 }
 \examples{
 \dontrun{
@@ -25,7 +39,6 @@ get_linelist()
 # Return the report delay only
 get_linelist(report_delay_only = TRUE)
 }
+
 }
-\author{
-Sam Abbott \href{mailto:sam.abbott@lshtm.ac.uk}{sam.abbott@lshtm.ac.uk}
-}
+\keyword{internal}

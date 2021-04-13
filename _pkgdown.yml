@@ -25,7 +25,7 @@ navbar:
     - text: "Package overview"
       href: articles/slowstart.html
     - text: "Data Status"
-      href: articles/data_checks.html  
+      href: articles/data-status.html  
     - text: News
       href: news/index.html
     - icon: fa-file-code-o
@@ -37,21 +37,24 @@ navbar:
 
 reference:
   - title: Get Covid-19 Data
-    desc: Functions that download datasets or provide information on available data.
+    desc: Functions that provide interfaces to download cleaned and processed datasets.
     contents:
-      - get_info_covidregionaldata
       - get_national_data
       - get_regional_data
-      - get_linelist
-      - get_interventions_data
+  - title: Dataset Classes
+    desc: Clases that define individual datasets and contain all the methods needed to download, process, and clean them.
+    contents:
+      - has_concept("dataset")
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
-      - -get_info_covidregionaldata
-      - -get_national_data
-      - -get_linelist
-      - -get_interventions_data
-      - contains("get")
-      - contains("fill")
-      - contains("csv")
-      - contains("cumulative")
+      - get_available_datasets
+      - check_country_available
+      - DataClass
+      - CountryDataClass
+      - initialise_dataclass
+      - has_concept("utility")
+  - title: Datasets
+    desc: Package datasets
+    contents:
+      - ends_with("_codes")

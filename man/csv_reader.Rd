@@ -4,10 +4,16 @@
 \alias{csv_reader}
 \title{Custom CSV reading function}
 \usage{
-csv_reader(file, ...)
+csv_reader(file, verbose = FALSE, guess_max = 1000, ...)
 }
 \arguments{
 \item{file}{A URL or filepath to a CSV}
+
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+messages and warnings be returned.}
+
+\item{guess_max}{Maximum number of records to use for guessing column types.
+Defaults to a 1000.}
 
 \item{...}{extra parameters to be passed to vroom::vroom}
 }
@@ -15,5 +21,6 @@ csv_reader(file, ...)
 A data table
 }
 \description{
-Checks for use of memoise and then uses whichever read_csv function is needed by user
+Checks for use of memoise and then uses vroom::vroom.
 }
+\concept{utility}

@@ -1,3 +1,29 @@
+# covidregionaldata 0.9.0
+
+In this major release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
+
+Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions to this release.
+
+## New features
+
+* Track data processing from raw to clean using the `step = TRUE` argument in `get_regional_data()`.
+* Filter datasets for regions and countries of interest. 
+* Access the underlying methods for data sets.
+
+## Documentation
+
+* All vignettes have been updated for readability.
+* A quickstart has been added to the package README.
+## Technical improvements
+* `get_regional_data()` and `get_national_data()` now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the `get_` functions. However, all datasets are now available to be used as R6 methods (see `get_available_datasets`) which may allow for more modular use cases.
+* Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: https://github.com/epiforecasts/covidregionaldata#readme).
+
+## Deprecated functions
+
+* `get_available_datasets()` replaces `get_info_covidregionaldata()` to view available data. `get_info_covidregionaldata()` is deprecated.
+* `get_interventions_data()` is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/
+* `get_linelist` is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with `covidregionaldata`.
+
 # covidregionaldata 0.8.3
 
 ## New data sets
@@ -21,16 +47,16 @@
 * Replaced silently broken functions for converting cumulative data to daily and vice versa.
 * Removed integration with Covid19R formatting.
 * UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these don't fit into the existing data structure and are not available at lower level regions.
-* Removed code that required ECDC variables to work. 
+* Removed code that required ECDC variables to work.
 * Update the ECDC source to pull data from the new weekly snapshots. Updated the variables. In a later update the downloading the now archived daily data will be made possible.
 
 # covidregionaldata 0.8.2
 
 * Updates the API backend used to extract UK data to V2. Adds a release date variable which can be used to return data releases from specified dates rather than the latest snapshot.
 * Various fixes to maintain compatibility with data set sources.
-* Adds a quickstart vignette with examples of exploratory data analysis. 
+* Adds a quickstart vignette with examples of exploratory data analysis.
 
-# covidregionaldata 0.7.0 
+# covidregionaldata 0.7.0
 
 ## Breaking changes
 
@@ -43,16 +69,16 @@
 
 * Additional delays added to `get_linelist` when `clean_dates = TRUE`.
 
-# covidregionaldata 0.6.0 
+# covidregionaldata 0.6.0
 
-* Added whitespace trimming to all regional data functions. 
+* Added whitespace trimming to all regional data functions.
 * Fixed region codes for Colombia.
 * Fixed region name cleaning for afghanistan.
-* Updated UK data source and expanded available variables based on the newly implemented API. 
+* Updated UK data source and expanded available variables based on the newly implemented API.
 * Enabled regional localisation to be optional.
 * Minor quality of life changes.
 
-# covidregionaldata 0.5.0 
+# covidregionaldata 0.5.0
 
 * Release candidate.
 
@@ -65,9 +91,9 @@
 # covidregionaldata 0.3.0
 
 * Added a function to extract case counts by region for Italy.
-* Function to extract ECDC cases. 
+* Function to extract ECDC cases.
 * Added a function to extract case counts by region in Germany.
-* Fixed cache reset. 
+* Fixed cache reset.
 * Added a `covidregionaldata` cache of the public linelist as a fall back option if the source is not available.
 
 # covidregionaldata 0.2.0
