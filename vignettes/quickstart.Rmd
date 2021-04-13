@@ -81,7 +81,7 @@ all_countries %>%
 Using `get_national_data(totals = TRUE)` we can obtain total cases and deaths for all nations up to the latest date reported. This is useful to get a snapshot of the current running total for each country. Note how the data is sorted by the total number of cases:
 
 ```{r}
-all_countries_totals <- get_national_data(totals = TRUE)
+all_countries_totals <- get_national_data(totals = TRUE, verbose = FALSE)
 all_countries_totals
 ```
 
@@ -110,7 +110,10 @@ usa_states %>%
 The `totals` argument can also be used in `get_regional_data` to return the cumulative number of cases or deaths over time.
 
 ```{r,}
-usa_states_totals <- get_regional_data(country = "USA", totals = TRUE)
+usa_states_totals <- get_regional_data(
+  country = "USA", totals = TRUE,
+  verbose = FALSE
+)
 ```
 
 Let's plot the total deaths for each state, ordered by total deaths:
@@ -132,7 +135,7 @@ usa_states_totals %>%
 Most countries have a hierarchy of political subdivisions. Where data are available, use the `level = "2"` argument to `get_regional_data`. We can dig down further into each US state by looking at data by county:
 
 ```{r, eval = FALSE}
-usa_counties <- get_regional_data(country = "USA", level = "2")
+usa_counties <- get_regional_data(country = "USA", level = "2", verbose = FALSE)
 ```
 
 This returns data for each county on each day of reported data. As there are more than 3,000 counties in the US, with some reporting data since the 21st January, this makes for a very large download.
@@ -140,7 +143,7 @@ This returns data for each county on each day of reported data. As there are mor
 The same method will work for different countries where data are available, returning relevant sub-national units for each country. In Germany, data are available for Bundesland (federated state) and Kreise (district) areas.
 
 ```{r fig.width = 6}
-get_regional_data(country = "Germany", totals = TRUE) %>%
+get_regional_data(country = "Germany", totals = TRUE, verbose = FALSE) %>%
   ggplot() +
   aes(x = reorder(bundesland, -deaths_total), y = deaths_total) +
   geom_bar(stat = "identity") +
@@ -161,7 +164,7 @@ For simplicity here we will use the `rworldmap` package, which uses data from `r
 
 ```{r fig.width = 6}
 # Get latest worldwide WHO data
-map_data <- get_national_data(totals = TRUE) %>%
+map_data <- get_national_data(totals = TRUE, verbose = FALSE) %>%
   rworldmap::joinCountryData2Map(
     joinCode = "ISO2",
     nameJoinColumn = "iso_code"
