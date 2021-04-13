@@ -4,7 +4,7 @@
 \alias{ECDC}
 \title{R6 Class containing specific attributes and methods for ECDC dataset}
 \source{
-https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+\url{https://opendata.ecdc.europa.eu/covid19/casedistribution/csv}
 }
 \description{
 Country specific information for downloading, cleaning

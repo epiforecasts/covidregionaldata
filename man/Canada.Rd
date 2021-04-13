@@ -4,7 +4,7 @@
 \alias{Canada}
 \title{Canada Class containing country specific attributes and methods}
 \source{
-https://health-infobase.canada.ca
+\url{https://health-infobase.canada.ca}
 }
 \description{
 Country specific information for downloading, cleaning

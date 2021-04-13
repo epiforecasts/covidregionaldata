@@ -4,7 +4,7 @@
 \alias{Colombia}
 \title{Colombia Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv  # nolint
+\url{https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv}
 }
 \description{
 Country specific information for downloading, cleaning

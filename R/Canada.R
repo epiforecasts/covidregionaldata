@@ -5,8 +5,8 @@
 #'
 #' Data is sourced from \url{https://health-infobase.canada.ca}.
 #' @details Inherits from `DataClass`
-#' @source https://health-infobase.canada.ca
 #' @concept dataset
+#' @source \url{https://health-infobase.canada.ca}
 #' @export
 #' @examples
 #' \dontrun{

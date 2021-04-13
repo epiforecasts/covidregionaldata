@@ -5,7 +5,7 @@
 #'  Disease Prevention and Control.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+#' @source \url{https://opendata.ecdc.europa.eu/covid19/casedistribution/csv}
 #' @export
 #' @concept dataset
 #' @examples

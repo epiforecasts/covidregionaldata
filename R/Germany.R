@@ -4,7 +4,9 @@
 #'  and processing COVID-19 region level 1 and 2 data for Germany.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv  # nolint
+# nolint start
+#' @source \url{https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv}
+# nolint end
 #' @export
 #' @concept dataset
 #' @examples

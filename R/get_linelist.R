@@ -17,7 +17,7 @@
 #'  Should only certain variables (id, country, onset date, days' delay),
 #'  and observations (patients with a report delay) be returned
 #' @return A linelist of reported cases of Covid-19
-#' @source https://github.com/beoutbreakprepared/nCoV2019
+#' @source \url{https://github.com/beoutbreakprepared/nCoV2019}
 #'
 #' @keywords internal
 #'

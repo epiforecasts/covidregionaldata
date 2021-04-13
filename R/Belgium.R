@@ -4,10 +4,10 @@
 #'  and processing COVID-19 region level 1 and 2 data for Belgium.
 #'
 #' @details Inherits from `DataClass`
-#' @source https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv
-#' @source https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv
-#' @source https://epistat.sciensano.be/Data/COVID19BE_MORT.csv
 #' @concept dataset
+#' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
+#' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
+#' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @export
 #' @examples
 #' \dontrun{
@@ -29,10 +29,11 @@ Belgium <- R6::R6Class("Belgium",
       "2" = "province"
     ),
     #' @field supported_region_codes A list of region codes in order of level.
-    supported_region_codes = list(
-      "1" = "iso_3166_2_region",
-      "2" = "iso_3166_2_province"
-    ),
+    #' ISO 3166-2 codes are used for both region and province levels in
+    #' Belgium, and for provinces these are marked as being
+    #' `iso_3166_2_province`
+    supported_region_codes = list("1" = "iso_3166_2",
+                                  "2" = "iso_3166_2_province"),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels.
     common_data_urls = list(

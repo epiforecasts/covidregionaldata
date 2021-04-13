@@ -7,7 +7,7 @@
 #' Data available on Github, curated by Wesley Cota:
 #' DOI 10.1590/SciELOPreprints.362
 #'
-#' @source https://github.com/wcota/covid19br
+#' @source \url{https://github.com/wcota/covid19br}
 #' @export
 #' @examples
 #' \dontrun{

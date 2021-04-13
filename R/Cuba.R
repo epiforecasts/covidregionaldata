@@ -3,7 +3,9 @@
 #'  and processing covid-19 region data for Cuba
 #'
 #' @details Inherits from `DataClass`
-#' @source https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
+# nolint start
+#' @source \url{https://covid19cubadata.github.io/data/covid19-casos.csv}
+# nolint end
 #' @export
 #' @concept dataset
 #' @examples

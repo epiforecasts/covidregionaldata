@@ -4,7 +4,7 @@
 \alias{get_interventions_data}
 \title{Get ACAPS Government Interventions dataset}
 \source{
-https://www.acaps.org/covid-19-government-measures-dataset
+\url{https://www.acaps.org/covid-19-government-measures-dataset}
 }
 \usage{
 get_interventions_data()

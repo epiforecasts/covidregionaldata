@@ -14,7 +14,7 @@
 #'  Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 #'
 #' @details Inherits from `DataClass`
-#' @source https://datos.covid-19.conacyt.mx/#DownZCSV
+#' @source \url{https://datos.covid-19.conacyt.mx/#DownZCSV}
 #' @export
 #' @concept dataset
 #' @examples

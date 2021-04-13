@@ -4,7 +4,7 @@
 #'  and processing covid-19 region data from the World Health Organisation
 #'
 #' @details Inherits from `DataClass`
-#' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
+#' @source \url{https://covid19.who.int/WHO-COVID-19-global-data.csv}
 #' @export
 #' @concept dataset
 #' @examples

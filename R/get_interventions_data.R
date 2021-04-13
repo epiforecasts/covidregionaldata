@@ -11,7 +11,7 @@
 #'  See: https://supertracker.spi.ox.ac.uk/policy-trackers/
 #'
 #' @return a dataframe of government interventions up to Dec 2020 from ACAPS
-#' @source https://www.acaps.org/covid-19-government-measures-dataset
+#' @source \url{https://www.acaps.org/covid-19-government-measures-dataset}
 #' @author Paul Campbell @paulcampbell91
 #'
 #' @keywords internal
