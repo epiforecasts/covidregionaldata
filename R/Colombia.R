@@ -3,7 +3,9 @@
 #'  and processing covid-19 region data for Colombia
 #'
 #' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv  # nolint
+# nolint start
+#' @source \url{https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv}
+# nolint end
 #' @export
 #' @examples
 #' \dontrun{

@@ -4,7 +4,7 @@
 \alias{get_linelist}
 \title{Get patient linelist data}
 \source{
-https://github.com/beoutbreakprepared/nCoV2019
+\url{https://github.com/beoutbreakprepared/nCoV2019}
 }
 \usage{
 get_linelist(clean = TRUE, report_delay_only = FALSE)
