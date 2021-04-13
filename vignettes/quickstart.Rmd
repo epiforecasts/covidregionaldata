@@ -140,21 +140,7 @@ usa_counties <- get_regional_data(country = "USA", level = "2", verbose = FALSE)
 
 This returns data for each county on each day of reported data. As there are more than 3,000 counties in the US, with some reporting data since the 21st January, this makes for a very large download.
 
-The same method will work for different countries where data are available, returning relevant sub-national units for each country. In Germany, data are available for Bundesland (federated state) and Kreise (district) areas.
-
-```{r fig.width = 6}
-get_regional_data(country = "Germany", totals = TRUE, verbose = FALSE) %>%
-  ggplot() +
-  aes(x = reorder(bundesland, -deaths_total), y = deaths_total) +
-  geom_bar(stat = "identity") +
-  labs(x = "Bundesland", y = "All reported Covid-19 deaths") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 90),
-    axis.title.y = element_text(hjust = 1),
-    legend.position = "bottom"
-  )
-```
+The same method will work for different countries where data are available, returning relevant sub-national units for each country. For example, in Germany data are available for Bundesland (federated state) and Kreise (district) areas.
 
 ## Mapping data
 

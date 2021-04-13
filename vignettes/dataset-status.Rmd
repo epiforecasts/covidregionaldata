@@ -2,7 +2,7 @@
 title: "Dataset status"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{dataset-status}
+  %\VignetteIndexEntry{Dataset status}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
