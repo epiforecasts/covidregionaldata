@@ -28,9 +28,11 @@ add_extra_na_cols <- function(data) {
 #' the datasets should always be > 0.
 #' @param data A data frame
 #' @return A data frame with all relevant data > 0.
+#' @importFrom dplyr mutate_if
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- names(unlist(lapply(data, is.numeric)))
-  data[numeric_col_names][data[numeric_col_names] < 0] <- 0
+  data <- suppressMessages(
+    mutate_if(data, is.numeric, ~ replace(., . < 0, 0))
+  )
   return(data)
 }
 
