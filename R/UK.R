@@ -264,7 +264,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
       # download and link all data into a single data frame
       safe_reader <- safely(csv_reader)
-      csv <- map(csv_links, (~ safe_reader(., verbose = self$verbose)[[1]]))
+      csv <- map(csv_links, ~ safe_reader(., verbose = self$verbose)[[1]])
       csv <- compact(csv)
       csv <- reduce(csv, full_join,
         by = c("date", "areaType", "areaCode", "areaName")
