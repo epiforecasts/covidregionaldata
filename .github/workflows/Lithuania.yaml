@@ -43,5 +43,6 @@ jobs:
         run: |
           options("testDownload" = TRUE)
           options("testSource" = "Lithuania")
+          devtools::load_all()
           testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail"))
         shell: Rscript {0}
