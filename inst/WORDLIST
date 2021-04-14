@@ -25,8 +25,8 @@ cloneable
 CMD
 Codecov
 colour
-coronavirus
 Config
+coronavirus
 Cota
 countrycode
 CountryDataClass
@@ -79,6 +79,7 @@ https
 httr
 ICD
 INEGI
+initalize
 Initalize
 initialisation
 initialise
@@ -127,8 +128,8 @@ patrick
 paul
 paulcampbell
 PHE
-positivity
 pkgdown
+positivity
 PRs
 purrr
 quickstart

@@ -111,7 +111,7 @@ parameters. Should only be called by a \code{Country} class object.
 \item{\code{level}}{A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
 options are level 1 ("1) and level 2 ("2").
-Use \code{get_available_datasets} for supported  options by dataset.}
+Use \link{get_available_datasets} for supported  options by dataset.}
 
 \item{\code{regions}}{A character vector of target regions to be assigned to
 the\code{target_regions} field if present.}
