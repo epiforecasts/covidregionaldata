@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '10 11 * * *'
+    - cron: '25 11 * * *'
 
 name: USA
 
