@@ -5,20 +5,21 @@
 #'  datasets of the same underlying structure (i.e. same columns).
 #' @param data A data frame
 #' @return A tibble with relevant NA columns added
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble add_column
+#' @importFrom rlang !!!
+#' @concept utility
 add_extra_na_cols <- function(data) {
   expected_col_names <- c(
-    "cases_new", "cases_total", "deaths_new", "deaths_total",
-    "recovered_new", "recovered_total", "tested_new", "tested_total",
-    "hosp_new", "hosp_total"
+    "cases_new", "cases_total", "deaths_new", "deaths_total", "recovered_new",
+    "recovered_total", "tested_new", "tested_total", "hosp_new", "hosp_total"
   )
-  for (colname in expected_col_names) {
-    if (!(colname %in% colnames(data))) {
-      original_col_names <- colnames(data)
-      data$new_col <- rep(NA_real_, dim(data)[1])
-      colnames(data) <- c(original_col_names, colname)
-    }
-  }
+
+  new_cols <- rep(list(NA_real_), length(expected_col_names))
+  names(new_cols) <- expected_col_names
+  data <- add_column(
+    data,
+    !!!new_cols[!(names(new_cols) %in% names(data))]
+  )
   return(data)
 }
 
@@ -28,17 +29,12 @@ add_extra_na_cols <- function(data) {
 #' the datasets should always be > 0.
 #' @param data A data frame
 #' @return A data frame with all relevant data > 0.
+#' @importFrom dplyr mutate_if
+#' @concept utility
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c(
-    "deaths_total", "cases_total", "recovered_total", "hosp_total",
-    "tested_total", "cases_new", "deaths_new", "recovered_new", "hosp_new",
-    "tested_new"
+  data <- suppressMessages(
+    mutate_if(data, is.numeric, ~ replace(., . < 0, 0))
   )
-  for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)) {
-      data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
-    }
-  }
   return(data)
 }
 
@@ -54,6 +50,7 @@ set_negative_values_to_zero <- function(data) {
 #' @importFrom tidyr complete full_seq nesting
 #' @importFrom tidyselect starts_with
 #' @importFrom rlang !!! syms
+#' @concept utility
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
     names()
@@ -76,6 +73,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom dplyr group_by
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
+#' @concept utility
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c(
     "deaths_total", "cases_total", "recovered_total",
@@ -102,6 +100,7 @@ complete_cumulative_columns <- function(data) {
 #' @importFrom tidyselect ends_with
 #' @importFrom tibble tibble
 #' @importFrom rlang !! :=
+#' @concept utility
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
 
@@ -143,6 +142,7 @@ calculate_columns_from_existing_data <- function(data) {
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by summarise select arrange
 #' @importFrom tibble tibble
+#' @concept utility
 totalise_data <- function(data) {
   data <- data %>%
     summarise(
@@ -174,6 +174,7 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
+#' @concept utility
 #' @importFrom dplyr do group_by_at across ungroup select everything arrange
 #' @importFrom dplyr rename
 #' @importFrom tidyr drop_na

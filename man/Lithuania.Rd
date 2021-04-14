@@ -4,11 +4,11 @@
 \alias{Lithuania}
 \title{Lithuania Class for downloading, cleaning and processing notification data}
 \source{
-https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0
+\url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region level 1 and 2 data for Lithuania.
+Information for downloading, cleaning
+and processing COVID-19 region level 1 and 2 data for Lithuania.
 }
 \details{
 Inherits from \code{DataClass}
@@ -133,6 +133,7 @@ many of these are still ill).
 region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Lithuania}
 }

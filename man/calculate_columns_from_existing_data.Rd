@@ -18,3 +18,4 @@ Checks which columns are missing (cumulative/daily counts) and
 if one is present and the other not then calculates the second from the
 first.
 }
+\concept{utility}

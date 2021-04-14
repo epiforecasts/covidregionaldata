@@ -4,14 +4,11 @@
 \alias{India}
 \title{India Class for downloading, cleaning and processing notification data}
 \source{
-https://api.covid19india.org/csv/latest/state_wise_daily.csv
+\url{https://www.covid19india.org}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for India.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for India.
 }
 \examples{
 \dontrun{
@@ -19,6 +16,7 @@ region <- India$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{India}
 }

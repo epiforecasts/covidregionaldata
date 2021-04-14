@@ -1,11 +1,12 @@
 #' USA Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for USA.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for USA.
 #'
-#' @details Inherits from `DataClass`
-#' @source https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv # nolint
-#' @source https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv # nolint
+# nolint start
+#' @source \url{https://github.com/nytimes/covid-19-data/}
+# nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- USA$new(verbose = TRUE, steps = TRUE, get = TRUE)

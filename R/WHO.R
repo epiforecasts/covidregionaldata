@@ -1,10 +1,10 @@
 #' R6 Class containing specific attributes and methods for WHO data
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data from the World Health Organisation
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data from the World Health Organisation
 #'
-#' @details Inherits from `DataClass`
-#' @source https://covid19.who.int/WHO-COVID-19-global-data.csv
+#' @source \url{https://covid19.who.int/}
+#' @concept dataset
 #' @export
 #' @examples
 #' \dontrun{
@@ -68,20 +68,23 @@ WHO <- R6::R6Class("WHO",
     #' @importFrom dplyr group_by ungroup select arrange
     #' @importFrom tidyr fill
     return = function() {
-      self$data$return <- self$data$processed %>%
-        group_by(.data$country) %>%
-        fill(.data$who_region, .data$un_region, .direction = "updown") %>%
-        ungroup()
+      self$data$return <- self$data$processed
+      if (!self$totals) {
+        self$data$return <- self$data$return %>%
+          group_by(.data$country) %>%
+          fill(.data$who_region, .data$un_region, .direction = "updown") %>%
+          ungroup()
 
-      self$data$return <- self$data$return %>%
-        select(
-          .data$date, .data$un_region, .data$who_region, .data$country,
-          .data$iso_code, .data$cases_new, .data$cases_total,
-          .data$deaths_new, .data$deaths_total, .data$recovered_new,
-          .data$recovered_total, .data$hosp_new, .data$hosp_total,
-          .data$tested_new, .data$tested_total
-        ) %>%
-        arrange(.data$date, .data$country)
+        self$data$return <- self$data$return %>%
+          select(
+            .data$date, .data$un_region, .data$who_region, .data$country,
+            .data$iso_code, .data$cases_new, .data$cases_total,
+            .data$deaths_new, .data$deaths_total, .data$recovered_new,
+            .data$recovered_total, .data$hosp_new, .data$hosp_total,
+            .data$tested_new, .data$tested_total
+          ) %>%
+          arrange(.data$date, .data$country)
+      }
 
       if (self$steps) {
         return(self$data)

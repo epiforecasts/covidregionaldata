@@ -1,11 +1,10 @@
 #' Canada Class containing country specific attributes and methods
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Canada.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Canada.
 #'
-#' Data is sourced from \url{https://health-infobase.canada.ca}.
-#' @details Inherits from `DataClass`
-#' @source https://health-infobase.canada.ca
+#' @concept dataset
+#' @source \url{https://health-infobase.canada.ca}
 #' @export
 #' @examples
 #' \dontrun{

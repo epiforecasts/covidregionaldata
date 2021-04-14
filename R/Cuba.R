@@ -1,10 +1,12 @@
 #' Cuba Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Cuba
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Cuba
 #'
-#' @details Inherits from `DataClass`
-#' @source https://covid19cubadata.github.io/data/covid19-casos.csv  # nolint
+# nolint start
+#' @source \url{https://covid19cubadata.github.io/}
+# nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Cuba$new(verbose = TRUE, steps = TRUE, get = TRUE)

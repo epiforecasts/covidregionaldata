@@ -27,9 +27,10 @@ rlang::`.data`
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
+#' @importFrom withr with_envvar
+#' @concept utility
 csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   read_csv_fun <- vroom
-
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       ch <- cache_filesystem(getOption("cache_path"))
@@ -40,9 +41,12 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
     message("Downloading data from ", file)
     data <- read_csv_fun(file, ..., guess_max = guess_max)
   } else {
-    data <- suppressWarnings(
-      suppressMessages(
-        read_csv_fun(file, ..., guess_max = guess_max)
+    with_envvar(
+      new = c("VROOM_SHOW_PROGRESS" = "false"),
+      data <- suppressWarnings(
+        suppressMessages(
+          read_csv_fun(file, ..., guess_max = guess_max)
+        )
       )
     )
   }
@@ -56,6 +60,7 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
 #' @param ... Additional arguments passed to `message`.
+#' @concept utility
 message_verbose <- function(verbose = TRUE, ...) {
   if (verbose) {
     message(...)
@@ -67,7 +72,9 @@ message_verbose <- function(verbose = TRUE, ...) {
 #' @inheritParams message_verbose
 #' @description Adds useMemoise to options meaning memoise is
 #' used when reading data in.
+#' @concept utility
 #' @export
+#' @concept utility
 start_using_memoise <- function(path = tempdir(), verbose = TRUE) {
   message_verbose(verbose, "Using a cache at: ", path)
   options("useMemoise" = TRUE, cache_path = path)
@@ -77,7 +84,9 @@ start_using_memoise <- function(path = tempdir(), verbose = TRUE) {
 #'
 #' @description Sets useMemoise in options to NULL, meaning memoise isn't used
 #' when reading data in
+#' @concept utility
 #' @export
+#' @concept utility
 stop_using_memoise <- function() {
   if (!is.null(options("useMemoise"))) {
     options("useMemoise" = NULL)
@@ -89,6 +98,7 @@ stop_using_memoise <- function() {
 #' @return Null
 #' @export
 #' @importFrom memoise cache_filesystem
+#' @concept utility
 reset_cache <- function() {
   unlink(getOption("cache_path"), recursive = TRUE)
   cache_filesystem(getOption("cache_path"))
@@ -103,6 +113,7 @@ reset_cache <- function() {
 #' @param class Logical, defaults to FALSE. If TRUE returns the
 #' `Country` class object rather than a tibble or a list of tibbles.
 #' Overrides `steps`.
+#' @concept utility
 return_data <- function(obj, class = FALSE) {
   if (class) {
     return(obj)
@@ -124,6 +135,7 @@ return_data <- function(obj, class = FALSE) {
 #' @param region_codes A named list of region codes named after the levels
 #' supported.
 #' @importFrom purrr map
+#' @concept utility
 region_dispatch <- function(level, all_levels, region_names, region_codes) {
   sel_levels <- all_levels[1:grep(level, all_levels)]
 

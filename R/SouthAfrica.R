@@ -1,13 +1,12 @@
 #' SouthAfrica Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for South Africa.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for South Africa.
 #'
-#' @details Inherits from `DataClass`
 # nolint start
-#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv
-#' @source https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv
+#' @source \url{https://github.com/dsfsi/covid19za/}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- SouthAfrica$new(verbose = TRUE, steps = TRUE, get = TRUE)

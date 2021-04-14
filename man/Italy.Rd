@@ -4,14 +4,11 @@
 \alias{Italy}
 \title{Italy Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+\url{https://github.com/pcm-dpc/COVID-19/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Italy.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Italy.
 }
 \examples{
 \dontrun{
@@ -19,6 +16,7 @@ region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Italy}
 }

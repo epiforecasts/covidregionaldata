@@ -7,9 +7,11 @@
 #' boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
 #' download from (release_date) and a geographical resolution (resolution).
 #'
-#' @details Inherits from `DataClass`
-#' @source https://coronavirus.data.gov.uk/details/download #nolint
+# nolint start
+#' @source \url{https://coronavirus.data.gov.uk/details/download}
+# nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
@@ -262,7 +264,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
       # download and link all data into a single data frame
       safe_reader <- safely(csv_reader)
-      csv <- map(csv_links, ~ safe_reader(.)[[1]], verbose = self$verbose)
+      csv <- map(csv_links, ~ safe_reader(., verbose = self$verbose)[[1]])
       csv <- compact(csv)
       csv <- reduce(csv, full_join,
         by = c("date", "areaType", "areaCode", "areaName")
@@ -303,10 +305,14 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @description Download NHS data for level 1 regions
     #' Separate NHS data is available for "first" admissions, excluding
     #' readmissions. This is available for England + English regions only.
-    #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+    # nolint start
+    #'   See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
+    # nolint end
     #'     Section 2, "2. Estimated new hospital cases"
     #' @return nhs data.frame of nhs regions
-    #' @source https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
+    # nolint start
+    #' @source \url{https://coronavirus.data.gov.uk/details/download}
+    # nolint end
     #' @importFrom lubridate year month
     #' @importFrom readxl read_excel cell_limits
     #' @importFrom dplyr %>%
@@ -355,7 +361,9 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @description Add NHS data for level 1 regions
     #' Separate NHS data is available for "first" admissions, excluding
     #' readmissions. This is available for England + English regions only.
-    #'   See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+    # nolint start
+    #'   See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
+    # nolint end
     #'     Section 2, "2. Estimated new hospital cases"
     #' @importFrom lubridate year month
     #' @importFrom readxl read_excel cell_limits
@@ -401,12 +409,12 @@ UK <- R6::R6Class("UK", # rename to country name
         ) %>%
         group_by(date, .data$level_1_region) %>%
         summarise(
-          cases_new = sum(.data$cases_new, na.rm = TRUE),
-          cases_total = sum(.data$cases_total, na.rm = TRUE),
-          deaths_new = sum(.data$deaths_new, na.rm = TRUE),
-          deaths_total = sum(.data$deaths_total, na.rm = TRUE),
-          hosp_new = sum(.data$hosp_new, na.rm = TRUE),
-          hosp_total = sum(.data$hosp_total, na.rm = TRUE),
+          cases_new = sum(.data$cases_new),
+          cases_total = sum(.data$cases_total),
+          deaths_new = sum(.data$deaths_new),
+          deaths_total = sum(.data$deaths_total),
+          hosp_new = sum(.data$hosp_new),
+          hosp_total = sum(.data$hosp_total),
           .groups = "drop"
         )
 

@@ -11,4 +11,3 @@ WORKDIR /home/rstudio/covidregionaldata
 
 ## Install missing packages.
 RUN Rscript -e "devtools::install_dev_deps()"
-

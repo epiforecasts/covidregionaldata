@@ -15,3 +15,4 @@ A data table, totalled up
 \description{
 Get totals data given the time series data.
 }
+\concept{utility}

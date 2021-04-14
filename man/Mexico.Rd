@@ -4,11 +4,11 @@
 \alias{Mexico}
 \title{Meixco Class for downloading, cleaning and processing notification data}
 \source{
-https://datos.covid-19.conacyt.mx/#DownZCSV
+\url{https://datos.covid-19.conacyt.mx/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Mexico.
+Information for downloading, cleaning
+and processing COVID-19 region data for Mexico.
 
 Notes on region codes:
 
@@ -20,15 +20,13 @@ source: raw data
 
 Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 }
-\details{
-Inherits from \code{DataClass}
-}
 \examples{
 \dontrun{
 region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Mexico}
 }

@@ -5,9 +5,9 @@
 \title{United Kingdom Class for downloading, cleaning and processing notification
 data.}
 \source{
-https://coronavirus.data.gov.uk/details/download #nolint
+\url{https://coronavirus.data.gov.uk/details/download}
 
-https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/ # nolint
+\url{https://coronavirus.data.gov.uk/details/download}
 }
 \description{
 Extracts daily COVID-19 data for the UK, stratified by region
@@ -15,9 +15,6 @@ and nation. Contains additional options to other country class objects,
 including options to return subnational English regions using NHS region
 boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
 download from (release_date) and a geographical resolution (resolution).
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
@@ -38,6 +35,7 @@ Uk$new(
 )
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{UK}
 }
@@ -215,7 +213,7 @@ Set filters for UK data api query.
 Download NHS data for level 1 regions
 Separate NHS data is available for "first" admissions, excluding
 readmissions. This is available for England + English regions only.
-See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$download_nhs_regions()}\if{html}{\out{</div>}}
@@ -232,7 +230,7 @@ nhs data.frame of nhs regions
 Add NHS data for level 1 regions
 Separate NHS data is available for "first" admissions, excluding
 readmissions. This is available for England + English regions only.
-See: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/ # nolint
+See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$add_nhs_regions(clean_data, nhs_data)}\if{html}{\out{</div>}}
