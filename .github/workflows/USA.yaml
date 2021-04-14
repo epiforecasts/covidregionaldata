@@ -38,7 +38,7 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name:
+      - name: Test dataset
         run: |
           options("testDownload" = TRUE)
           options("testSource" = "USA")
