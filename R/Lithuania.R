@@ -401,8 +401,7 @@ Lithuania <- R6::R6Class("Lithuania",
     #'   returned?  (Defaults `FALSE`)
     #' @param all_osp_fields A logical scalar. Should all the meaningful
     #'   data fields from the OSP source be returned? (Defaults `FALSE`)
-    #'
-    #' @param ... Parameters passed to parent `initalize`
+    #' @param ... Parameters passed to `DataClass` initalize
     initialize = function(death_definition = "of",
                           recovered_definition = "official",
                           all_osp_fields = FALSE,

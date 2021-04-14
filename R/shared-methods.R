@@ -119,7 +119,7 @@ DataClass <- R6::R6Class(
     #' @param level A character string indicating the target administrative
     #' level of the data with the default being "1". Currently supported
     #' options are level 1 ("1) and level 2 ("2").
-    #' Use `get_available_datasets` for supported  options by dataset.
+    #' Use [get_available_datasets] for supported  options by dataset.
     #' @param regions A character vector of target regions to be assigned to
     #' the`target_regions` field if present.
     #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
