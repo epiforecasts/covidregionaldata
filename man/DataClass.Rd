@@ -9,7 +9,10 @@ allowing them to access general methods.
 }
 \details{
 All countries have shared methods for extracting region codes,
-downloading, processing, and returning data.
+downloading, processing, and returning data. These functions are contained
+within this parent class and so are accessible by all countries which
+inherit from here. Individual countries can overwrite any functions or
+fields providing they define a class with the same name.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -24,13 +27,13 @@ downloading, processing, and returning data.
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+\item{\code{region_name}}{string Name for the region column, e.g. 'region'}
 
 \item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
 
 \item{\code{codes_lookup}}{string or tibble Region codes for the target country}
 
-\item{\code{data_urls}}{List of named links to raw data.}
+\item{\code{data_urls}}{List of named url links to raw data.}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
 across levels. The first entry should be named main.}
@@ -48,7 +51,7 @@ will be selected preferentially.}
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
 up to today's date.}
 
-\item{\code{localise}}{Boolean. Should region names be localised.}
+\item{\code{localise}}{Boolean. Should region names be localized.}
 
 \item{\code{verbose}}{Boolean. Display information at various stages.}
 
@@ -138,8 +141,9 @@ called (this will download, clean, and process data at initialisation).}
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-Download raw data using the list
-of supplied data_urls.
+Download raw data from \code{data_urls}, stores a named list
+of the \code{data_url} name and the corresponding raw data table in
+\code{data$raw}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
 }
@@ -149,8 +153,12 @@ of supplied data_urls.
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-Dispatch cleaning methods to \code{clean_common} and level
-specific cleaning
+Cleans raw data (corrects format, converts column types,
+etc). Works on raw data and so should be called after \code{download}.
+Calls the specific country cleaning method (\code{clean_common}). For
+countries with multiple levels, level specific cleaning functions which
+are defined in said country are called providing they are named
+\code{clean_level_[1/2]}. Cleaned data it stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
@@ -161,7 +169,8 @@ specific cleaning
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
 Cleaning methods that are common across a class.
-By default this method is empty
+By default this method is empty as if any code is required it should be
+defined in a country specific \code{clean_common} method.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
 }
@@ -171,7 +180,8 @@ By default this method is empty
 \if{html}{\out{<a id="method-filter"></a>}}
 \if{latex}{\out{\hypertarget{method-filter}{}}}
 \subsection{Method \code{filter()}}{
-Filter method for a class
+Filter cleaned data for a specific region  To be called
+after \code{clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
 }
@@ -190,7 +200,12 @@ current spatial level of interest.}
 \if{html}{\out{<a id="method-process"></a>}}
 \if{latex}{\out{\hypertarget{method-process}{}}}
 \subsection{Method \code{process()}}{
-Processes data.
+Processes data by adding and calculating absent columns.
+Called on clean data (after \code{clean}).
+Some countries may have data as new events (e.g. number of
+new cases for that day) whilst others have a running total up to that
+date. Processing calculates these based on what the data comes with
+via the functions \code{region_dispatch} and \code{process_internal}.
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
@@ -201,8 +216,9 @@ Dynamically works for level 1 and level 2 regions.
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-Get data related to the data class.
-Internally calls \code{download}, \code{clean}, and \code{process} methods.
+Get data related to the data class. This runs each distinct
+step in the workflow in order.
+Internally calls \code{download}, \code{clean}, \code{filter} and \code{process} methods.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$get()}\if{html}{\out{</div>}}
 }
@@ -212,9 +228,10 @@ Internally calls \code{download}, \code{clean}, and \code{process} methods.
 \if{html}{\out{<a id="method-return"></a>}}
 \if{latex}{\out{\hypertarget{method-return}{}}}
 \subsection{Method \code{return()}}{
-Return data
-Designed to be called after \code{process}. For most datasets a
-custom method should not be needed.
+Return data. Designed to be called after \code{process}, this
+uses the steps argument to return either a list of all the data
+preserved at each step or just the processed data.
+For most datasets a custom method should not be needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$return()}\if{html}{\out{</div>}}
 }
@@ -224,13 +241,17 @@ custom method should not be needed.
 \if{html}{\out{<a id="method-summary"></a>}}
 \if{latex}{\out{\hypertarget{method-summary}{}}}
 \subsection{Method \code{summary()}}{
-Class summary information
+Create a table of summary information for the country
+being processed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-Returns a single row summary tibble
+Returns a single row summary tibble containing the country name,
+class, level 1 and 2 region names, the function calling it
+(\code{get_regional_data} or \code{get_national_data}) the url of the raw data
+and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}
