@@ -1,7 +1,7 @@
 # load testing function and tools.
 # set up custom tests using:
 # custom_tests/regional-dataset-specific.R
-source("custom_tests/test-regional-dataset.R")
+#source("custom_tests/test-regional-dataset.R")
 
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.
@@ -24,8 +24,10 @@ library(switchr)
 initialSetup <- FALSE
 
 if(initialSetup) {
-  crd_new <- GithubManifest("epiforecasts/covidregionaldata@dev")
-  crd_old <- GithubManifest("epiforecasts/covidregionaldata@master")
+  removeLib("oldcovidregionaldata")
+  removeLib("newcovidregionaldata")
+  crd_new <- GithubManifest("epiforecasts/covidregionaldata@0.9.0")
+  crd_old <- GithubManifest("epiforecasts/covidregionaldata@0.8.3")
   #removeLib("oldcovidregionaldata")
   switchTo("oldcovidregionaldata", seed = crd_old)
   ip_list_old <- installed.packages()
@@ -33,9 +35,10 @@ if(initialSetup) {
   switchTo("newcovidregionaldata", seed = crd_new)
   ip_list_new <- installed.packages()
   switchBack()
+  waldo::compare(ip_list_old, ip_list_new)
 } 
 
-waldo::compare(ip_list_old, ip_list_new)
+
 
 switchTo("newcovidregionaldata")
 
@@ -66,13 +69,46 @@ if (!is.null(source_of_interest)) {
 sources %>%
   dplyr::rowwise() %>%
   dplyr::group_split() %>%
-  purrr::walk(
-    ~ test_regional_dataset(
-      source = .$source[[1]],
-      level = .$level[[1]],
-      download = download
+  purrr::map(
+    ~ get_regional_data(
+      country = .$source[[1]],
+      level = .$level[[1]]
     )
-  )
+  ) -> new_version_output
+
+saveRDS(new_version_output, "newversionoutput.rds")
+
+switchBack()
+## now switch to the old version
+#
+
+switchTo("oldcovidregionaldata")
+
+library(covidregionaldata)
+library(dplyr)
+
+get_regional_data_wrapper <- function(country, level = 1) {
+  if (level == 1) {
+    get_regional_data(country)
+  } else {
+    get_regional_data(country, include_level_2_regions = TRUE)
+  }
+}
+
+# apply tests to each data source in turn
+sources %>%
+  dplyr::rowwise() %>%
+  dplyr::group_split() %>%
+  purrr::map(
+    ~ get_regional_data_wrapper(
+      country = .$source[[1]],
+      level = .$level[[1]]
+    )
+  ) -> new_version_output
+
+saveRDS(new_version_output, "oldversionoutput.rds")
+
+switchBack()
 
 # man = PkgManifest(name = "covidregionaldata",
 #                   url = "https://github.com/epiforecasts/covidregionaldata",
