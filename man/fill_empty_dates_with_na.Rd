@@ -18,3 +18,4 @@ where data was not collected for all regions. This function finds dates
 which have data for some regions, but not all, and adds rows of NAs for the
 missing regions. This is mainly for reasons of completeness.
 }
+\concept{utility}

@@ -1,9 +1,9 @@
 #' Belgium Class for downloading, cleaning and processing notification data
 #'
-#' @description Country specific information for downloading, cleaning
+#' @description Information for downloading, cleaning
 #'  and processing COVID-19 region level 1 and 2 data for Belgium.
 #'
-#' @details Inherits from `DataClass`
+#' @concept dataset
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
@@ -23,14 +23,18 @@ Belgium <- R6::R6Class("Belgium",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
-    supported_region_names = list("1" = "region",
-                                  "2" = "province"),
+    supported_region_names = list(
+      "1" = "region",
+      "2" = "province"
+    ),
     #' @field supported_region_codes A list of region codes in order of level.
     #' ISO 3166-2 codes are used for both region and province levels in
     #' Belgium, and for provinces these are marked as being
     #' `iso_3166_2_province`
-    supported_region_codes = list("1" = "iso_3166_2",
-                                  "2" = "iso_3166_2_province"),
+    supported_region_codes = list(
+      "1" = "iso_3166_2",
+      "2" = "iso_3166_2_province"
+    ),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels.
     common_data_urls = list(
@@ -56,19 +60,19 @@ Belgium <- R6::R6Class("Belgium",
         level_1_region = c("Brussels", "Flanders", "Wallonia")
       )
       self$codes_lookup$`2` <- tibble::tribble(
-        ~level_2_region_code,    ~level_2_region, ~level_1_region_code,
-                    "BE-VAN",        "Antwerpen",      "BE-VLG",
-                    "BE-WBR",    "BrabantWallon",      "BE-WAL",
-                    "BE-WHT",          "Hainaut",      "BE-WAL",
-                    "BE-WLG",       "Li\u00e8ge",      "BE-WAL",
-                    "BE-VLI",          "Limburg",      "BE-VLG",
-                    "BE-WLX",       "Luxembourg",      "BE-WAL",
-                    "BE-WNA",            "Namur",      "BE-WAL",
-                    "BE-VOV",   "OostVlaanderen",      "BE-VLG",
-                    "BE-VBR",    "VlaamsBrabant",      "BE-VLG",
-                    "BE-VWV",   "WestVlaanderen",      "BE-VLG",
-                    "BE-BRU",         "Brussels",      "BE-BRU"
-        )
+        ~level_2_region_code, ~level_2_region, ~level_1_region_code,
+        "BE-VAN", "Antwerpen", "BE-VLG",
+        "BE-WBR", "BrabantWallon", "BE-WAL",
+        "BE-WHT", "Hainaut", "BE-WAL",
+        "BE-WLG", "Li\u00e8ge", "BE-WAL",
+        "BE-VLI", "Limburg", "BE-VLG",
+        "BE-WLX", "Luxembourg", "BE-WAL",
+        "BE-WNA", "Namur", "BE-WAL",
+        "BE-VOV", "OostVlaanderen", "BE-VLG",
+        "BE-VBR", "VlaamsBrabant", "BE-VLG",
+        "BE-VWV", "WestVlaanderen", "BE-VLG",
+        "BE-BRU", "Brussels", "BE-BRU"
+      )
     },
 
 
@@ -94,10 +98,9 @@ Belgium <- R6::R6Class("Belgium",
       self$data$raw$main_broken <- self$data$raw$main
       self$data$raw$main <-
         self$data$raw$main_broken %>%
-          filter((REGION %in% self$codes_lookup[[1]]$level_1_region
-                   | is.na(REGION))) %>%
+        filter((REGION %in% self$codes_lookup[[1]]$level_1_region
+        | is.na(REGION))) %>%
         bind_rows(fixed_lines)
-
     },
 
     #' @description Region-level Data Cleaning
@@ -142,18 +145,23 @@ Belgium <- R6::R6Class("Belgium",
 
       # Join the three datasets and rename columns
       cases_and_hosp_data <- full_join(cases_data,
-                                       hosp_data,
-                                       by = c("DATE", "REGION"))
+        hosp_data,
+        by = c("DATE", "REGION")
+      )
 
       all_data <- full_join(cases_and_hosp_data,
-                                   deaths_data,
-                                   by = c("DATE", "REGION")) %>%
-        rename(date = DATE, level_1_region = REGION,
-               cases_new = n.x, hosp_new = n.y, deaths_new = n)
+        deaths_data,
+        by = c("DATE", "REGION")
+      ) %>%
+        rename(
+          date = DATE, level_1_region = REGION,
+          cases_new = n.x, hosp_new = n.y, deaths_new = n
+        )
       self$data$clean <-
         left_join(all_data, self$codes_lookup[[1]],
-                  by = c("level_1_region"),
-                  copy = TRUE)
+          by = c("level_1_region"),
+          copy = TRUE
+        )
     },
 
     #' @description Province-level Data Cleaning
@@ -194,16 +202,22 @@ Belgium <- R6::R6Class("Belgium",
 
       # Join the two datasets and rename columns
       self$data$clean <- full_join(cases_data, hosp_data,
-                                   by = c("DATE",
-                                          "PROVINCE",
-                                          "REGION")) %>%
-        rename(date = DATE,
-               level_1_region = REGION,
-               level_2_region = PROVINCE,
-               cases_new = n.x,
-               hosp_new = n.y) %>%
+        by = c(
+          "DATE",
+          "PROVINCE",
+          "REGION"
+        )
+      ) %>%
+        rename(
+          date = DATE,
+          level_1_region = REGION,
+          level_2_region = PROVINCE,
+          cases_new = n.x,
+          hosp_new = n.y
+        ) %>%
         left_join(self$codes_lookup[[2]],
-                  by = c("level_2_region"), copy = TRUE)
+          by = c("level_2_region"), copy = TRUE
+        )
     }
   )
 )

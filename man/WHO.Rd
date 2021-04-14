@@ -4,14 +4,11 @@
 \alias{WHO}
 \title{R6 Class containing specific attributes and methods for WHO data}
 \source{
-\url{https://covid19.who.int/WHO-COVID-19-global-data.csv}
+\url{https://covid19.who.int/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data from the World Health Organisation
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data from the World Health Organisation
 }
 \examples{
 \dontrun{
@@ -19,6 +16,7 @@ national <- WHO$new(verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 }
+\concept{dataset}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{WHO}
 }

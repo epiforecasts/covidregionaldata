@@ -101,8 +101,7 @@ initialise_dataclass <- function(self, level = "1", regions,
       self$data_urls <- unlist(merge(
         self$level_data_urls[[self$level]],
         self$common_data_urls
-        )
-      )
+      ))
     } else {
       self$data_urls <- self$level_data_urls[[self$level]]
     }

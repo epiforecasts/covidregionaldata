@@ -1,12 +1,12 @@
 #' Italy Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Italy.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Italy.
 #'
-#' @details Inherits from `DataClass`
 # nolint start
-#' @source \url{https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv}
+#' @source \url{https://github.com/pcm-dpc/COVID-19/}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
@@ -72,10 +72,11 @@ Italy <- R6::R6Class("Italy",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
         group_by(.data$date, .data$level_1_region) %>%
-        summarise(cases_total = sum(.data$cases_total, na.rm = TRUE),
-                  deaths_total = sum(.data$cases_total, na.rm = TRUE),
-                  tested_total = sum(.data$cases_total, na.rm = TRUE),
-               ) %>%
+        summarise(
+          cases_total = sum(.data$cases_total, na.rm = TRUE),
+          deaths_total = sum(.data$cases_total, na.rm = TRUE),
+          tested_total = sum(.data$cases_total, na.rm = TRUE),
+        ) %>%
         ungroup() %>%
         full_join(self$codes_lookup[["1"]],
           by = c("level_1_region" = "region")

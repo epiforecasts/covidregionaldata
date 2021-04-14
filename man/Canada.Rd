@@ -7,13 +7,8 @@
 \url{https://health-infobase.canada.ca}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Canada.
-
-Data is sourced from \url{https://health-infobase.canada.ca}.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Canada.
 }
 \examples{
 \dontrun{
@@ -21,6 +16,7 @@ region <- Canada$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Canada}
 }

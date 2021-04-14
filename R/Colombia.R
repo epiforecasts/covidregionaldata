@@ -1,12 +1,12 @@
 #' Colombia Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Colombia
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Colombia
 #'
-#' @details Inherits from `DataClass`
 # nolint start
-#' @source \url{https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv}
+#' @source \url{https://github.com/danielcs88/colombia_covid-19/}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)

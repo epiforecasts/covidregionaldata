@@ -1,7 +1,7 @@
 #' Lithuania Class for downloading, cleaning and processing notification data
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region level 1 and 2 data for Lithuania.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region level 1 and 2 data for Lithuania.
 #'
 #' @details Inherits from `DataClass`
 #'
@@ -123,6 +123,7 @@
 #' region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' }
 #' @export
+#' @concept dataset
 Lithuania <- R6::R6Class("Lithuania",
   inherit = DataClass,
   public = list(
@@ -198,11 +199,13 @@ Lithuania <- R6::R6Class("Lithuania",
       # return NULL
       #
       if (is.null(death_field)) {
-        message_verbose(self$verbose,
+        message_verbose(
+          self$verbose,
           paste0(
-          "death_definition of \"", self$death_definition,
-          "\" not recognised, defaulting to \"of\""
-        ))
+            "death_definition of \"", self$death_definition,
+            "\" not recognised, defaulting to \"of\""
+          )
+        )
         death_field <- "daily_deaths_def1"
       }
 
@@ -231,8 +234,10 @@ Lithuania <- R6::R6Class("Lithuania",
 
       # Get relevant column names for differences (i.e. not percentages
       # or qualitative)
-      sum_cols <- names(select(self$data$raw$main,
-                               "population":tidyselect::last_col()))
+      sum_cols <- names(select(
+        self$data$raw$main,
+        "population":tidyselect::last_col()
+      ))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
       # Take the difference between national and sum of counties' data
@@ -304,8 +309,9 @@ Lithuania <- R6::R6Class("Lithuania",
           level_2_region = .data$municipality_name
         ) %>%
         left_join(self$codes_lookup[["2"]],
-                  by = c("level_2_region"),
-                  copy = TRUE) %>%
+          by = c("level_2_region"),
+          copy = TRUE
+        ) %>%
         select(
           date, level_1_region, level_2_region,
           cases_new, cases_total, deaths_new,
@@ -333,17 +339,23 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @importFrom dplyr group_by summarise ungroup full_join across if_else
     #' @importFrom tidyselect vars_select_helpers
     clean_level_1 = function() {
-
       self$data$clean <- self$data$clean %>%
-        group_by(.data$date,
-                        .data$level_1_region, .data$level_1_region_code) %>%
+        group_by(
+          .data$date,
+          .data$level_1_region, .data$level_1_region_code
+        ) %>%
         summarise(
-          across(tidyselect::vars_select_helpers$where(is.numeric),
-                        sum)) %>%
-        mutate(level_1_region
-                      = if_else(is.na(.data$level_1_region),
-                                       "Lietuva", .data$level_1_region
-                      )) %>%
+          across(
+            tidyselect::vars_select_helpers$where(is.numeric),
+            sum
+          )
+        ) %>%
+        mutate(
+          level_1_region
+          = if_else(is.na(.data$level_1_region),
+            "Lietuva", .data$level_1_region
+          )
+        ) %>%
         ungroup()
       # Fix percentages, where necessary
       if (self$all_osp_fields) {
@@ -402,6 +414,4 @@ Lithuania <- R6::R6Class("Lithuania",
       self$national_data <- national_data
     }
   )
-
-
 )

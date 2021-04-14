@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '2 0 * * *'
+    - cron: '12 0 * * *'
 
 name: ECDC
 
@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes"))
-          remotes::install_dev_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Install package

@@ -22,3 +22,4 @@ Controls the grouping variables used in
 \code{process_internal} based on the supported regions present in the
 class.
 }
+\concept{utility}

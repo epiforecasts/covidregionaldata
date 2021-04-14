@@ -7,11 +7,11 @@
 #' boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
 #' download from (release_date) and a geographical resolution (resolution).
 #'
-#' @details Inherits from `DataClass`
 # nolint start
 #' @source \url{https://coronavirus.data.gov.uk/details/download}
 # nolint end
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
@@ -409,12 +409,12 @@ UK <- R6::R6Class("UK", # rename to country name
         ) %>%
         group_by(date, .data$level_1_region) %>%
         summarise(
-          cases_new = sum(.data$cases_new, na.rm = TRUE),
-          cases_total = sum(.data$cases_total, na.rm = TRUE),
-          deaths_new = sum(.data$deaths_new, na.rm = TRUE),
-          deaths_total = sum(.data$deaths_total, na.rm = TRUE),
-          hosp_new = sum(.data$hosp_new, na.rm = TRUE),
-          hosp_total = sum(.data$hosp_total, na.rm = TRUE),
+          cases_new = sum(.data$cases_new),
+          cases_total = sum(.data$cases_total),
+          deaths_new = sum(.data$deaths_new),
+          deaths_total = sum(.data$deaths_total),
+          hosp_new = sum(.data$hosp_new),
+          hosp_total = sum(.data$hosp_total),
           .groups = "drop"
         )
 

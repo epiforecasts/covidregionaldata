@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_regional_data.R
 \name{get_regional_data}
 \alias{get_regional_data}
-\title{Fetch standardised sub-national Covid-19 data}
+\title{Fetch standardised sub-national COVID-19 data}
 \usage{
 get_regional_data(
   country,
@@ -62,7 +62,7 @@ recoveries and testing stratified by regions within the given country.
 }
 \description{
 Downloads, cleans and processes regional data
-for Covid-19.
+for COVID-19.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,7 @@
 #' Meixco Class for downloading, cleaning and processing notification data
 #'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Mexico.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Mexico.
 #'
 #'  Notes on region codes:
 #'
@@ -13,9 +13,9 @@
 #'
 #'  Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 #'
-#' @details Inherits from `DataClass`
-#' @source \url{https://datos.covid-19.conacyt.mx/#DownZCSV}
+#' @source \url{https://datos.covid-19.conacyt.mx/}
 #' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)

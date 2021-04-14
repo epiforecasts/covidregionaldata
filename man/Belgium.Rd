@@ -11,11 +11,8 @@
 \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 }
 \description{
-Country specific information for downloading, cleaning
+Information for downloading, cleaning
 and processing COVID-19 region level 1 and 2 data for Belgium.
-}
-\details{
-Inherits from \code{DataClass}
 }
 \examples{
 \dontrun{
@@ -23,6 +20,7 @@ region <- Belgium$new(verbose = TRUE, steps = TRUE, get = TRUE, level = "2")
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Belgium}
 }

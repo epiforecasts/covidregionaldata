@@ -16,3 +16,4 @@ messages and warnings be returned.}
 Adds useMemoise to options meaning memoise is
 used when reading data in.
 }
+\concept{utility}

@@ -4,14 +4,11 @@
 \alias{Colombia}
 \title{Colombia Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv}
+\url{https://github.com/danielcs88/colombia_covid-19/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Colombia
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Colombia
 }
 \examples{
 \dontrun{
@@ -19,6 +16,7 @@ region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Colombia}
 }

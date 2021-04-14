@@ -1,13 +1,13 @@
 #' Brazil Class for downloading, cleaning and processing notification data
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for Brazil.
+#' @description Information for downloading, cleaning
+#'  and processing COVID-19 region data for Brazil.
 #'
-#' @details Inherits from `DataClass`
 #'
 #' Data available on Github, curated by Wesley Cota:
 #' DOI 10.1590/SciELOPreprints.362
 #'
 #' @source \url{https://github.com/wcota/covid19br}
+#' @concept dataset
 #' @export
 #' @examples
 #' \dontrun{
@@ -69,7 +69,8 @@ Brazil <- R6::R6Class("Brazil",
         mutate(date = ymd(date)) %>%
         filter(state != "TOTAL") %>%
         left_join(self$codes_lookup,
-          by = c("state" = "level_1_region_code")) %>%
+          by = c("state" = "level_1_region_code")
+        ) %>%
         mutate(state = gsub("^", "BR-", state)) %>%
         select(date,
           level_1_region = state_name,
@@ -79,7 +80,7 @@ Brazil <- R6::R6Class("Brazil",
           cases_total = totalCases,
           deaths_new = newDeaths,
           deaths_total = deaths
-          )
+        )
     },
 
     #' @description State Level Data Cleaning
@@ -105,9 +106,11 @@ Brazil <- R6::R6Class("Brazil",
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
         mutate(level_2_region = gsub("/[A-Z]*", "", level_2_region)) %>%
-        mutate(level_2_region = gsub("^CASO SEM.*DEFINIDA",
+        mutate(level_2_region = gsub(
+          "^CASO SEM.*DEFINIDA",
           "Unknown City",
-          level_2_region)) %>%
+          level_2_region
+        )) %>%
         group_by(date, level_1_region, level_1_region_code, level_2_region) %>%
         summarise(
           cases_new = sum(as.numeric(cases_new)),
@@ -118,6 +121,5 @@ Brazil <- R6::R6Class("Brazil",
         ) %>%
         ungroup()
     }
-
   )
 )
