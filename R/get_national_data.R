@@ -6,18 +6,20 @@
 #'  and sanitises further. Adds rows and columns of NA values so that data is
 #'  in a standard format.
 #'
+#' @param countries A character vector specifying country names of interest.
+#' Used to filter the data.
+#' @param country `r lifecycle::badge("deprecated")` A character string
+#'  specifying a country to filter for.
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
 #' @inheritParams get_regional_data
-#' @inheritParams general_init
+#' @inheritParams initialise_dataclass
 #' @param ... additional arguments to pass to Country classes.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
 #' @inheritParams return_data
 #' @inheritParams get_regional_data
-#' @importFrom dplyr group_by arrange select ungroup do everything
-#' @importFrom tidyr drop_na fill
-#' @importFrom countrycode countryname
+#' @importFrom lifecycle deprecated is_present deprecate_warn
 #' @export
 #' @examples
 #' \dontrun{
@@ -25,47 +27,29 @@
 #' start_using_memoise()
 #'
 #' # download data for Canada keeping all processing steps
-#' get_national_data(country = "canada", source = "ecdc", steps = TRUE)
+#' get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 #' }
-get_national_data <- function(country, source = "who", steps = FALSE,
-                              class = FALSE, verbose = TRUE,
+get_national_data <- function(countries, source = "who", totals = FALSE,
+                              steps = FALSE, class = FALSE, verbose = TRUE,
+                              country = deprecated(),
                               ...) {
-
-  # format source name
-  source <- toupper(source)
+  if (is_present(country)) {
+    deprecate_warn(
+      "0.9.0",
+      "covidregionaldata::get_national_data(country = )", "covidregionaldata::get_national_data(countries = )"
+    )
+    countries <- country
+  }
 
   # check data availability and initiate country class if available
   nation_class <- check_country_available(
     country = source, level = "1",
-    totals = FALSE, localise = TRUE,
-    verbose = verbose, steps = steps, ...
+    totals = totals, localise = TRUE,
+    verbose = verbose, steps = steps,
+    regions = countries, ...
   )
 
-  # download and cache raw data
-  nation_class$download()
-
-  # dataset specifc cleaning
-  nation_class$clean()
-
-  # filter for country of interest
-  if (!missing(country)) {
-    message_verbose(
-      verbose, paste("Filtering", source, "data for", country)
-    )
-    tar_country <- country
-    tar_country <- countryname(tar_country, destination = "country.name.en")
-    if (is.na(tar_country)) {
-      stop("Country name not recognised. Please enter a character string, with
-            no abbreviation.")
-    }
-    nation_class$data$clean <- filter(
-      nation_class$data$clean,
-      .data$region_level_1 %in% tar_country
-    )
-  }
-
-  # non-specific cleaning and checks
-  nation_class$process()
+  nation_class$get()
 
   return(return_data(nation_class,
     class = class

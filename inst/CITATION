@@ -1,11 +1,11 @@
 citHeader("To cite covidregionaldata in publications use:")
 
 citEntry(entry = "Article",
-  title        = "covidregionaldata: Subnational Data for the Covid-19 Outbreak",
-  author       = personList(as.person("Sam Abbott"), as.person("Katharine Sherratt"), as.person("Jonnie Bevan"), 
-                            as.person("Hamish Gibbs"), as.person("Joel Hellewell"), as.person("James Munday"),
-                            as.person("Patrick Barks"), as.person("Paul Campbell"), as.person("Flavio Finger"), 
-                            as.person("Sebastian Funk")),
+  title        = "covidregionaldata: Subnational Data for the COVID-19 Outbreak",
+  author       = personList(as.person("Sam Abbott"), 
+    as.person("Katharine Sherratt"), as.person("Joe Palmer"),
+    as.person("Richard Martin-Nielsen"), as.person("Jonnie Bevan"),
+     as.person("Hamish Gibbs"), as.person("Sebastian Funk")),
   journal      = "-",
   year         = "2020",
   volume       = "-",
@@ -14,9 +14,8 @@ citEntry(entry = "Article",
   doi          = "10.5281/zenodo.3957539",
 
   textVersion  =
-  paste("Sam Abbott, Katharine Sherratt, Jonnie Bevan, Hamish Gibbs, Joel Hellewell, James Munday, Patrick Barks,
-         Paul Campbell, Flavio Finger, and Sebastian Funk (2020).",
-        "covidregionaldata: Subnational Data for the Covid-19 Outbreak, ",
+  paste("Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen,
+         Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020).",
+        "covidregionaldata: Subnational Data for the COVID-19 Outbreak, ",
         "DOI: 10.5281/zenodo.3957539")
 )
-

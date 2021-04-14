@@ -5,20 +5,21 @@
 #'  datasets of the same underlying structure (i.e. same columns).
 #' @param data A data frame
 #' @return A tibble with relevant NA columns added
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble add_column
+#' @importFrom rlang !!!
+#' @concept utility
 add_extra_na_cols <- function(data) {
   expected_col_names <- c(
-    "cases_new", "cases_total", "deaths_new", "deaths_total",
-    "recovered_new", "recovered_total", "tested_new", "tested_total",
-    "hosp_new", "hosp_total"
+    "cases_new", "cases_total", "deaths_new", "deaths_total", "recovered_new",
+    "recovered_total", "tested_new", "tested_total", "hosp_new", "hosp_total"
   )
-  for (colname in expected_col_names) {
-    if (!(colname %in% colnames(data))) {
-      original_col_names <- colnames(data)
-      data$new_col <- rep(NA_integer_, dim(data)[1])
-      colnames(data) <- c(original_col_names, colname)
-    }
-  }
+
+  new_cols <- rep(list(NA_real_), length(expected_col_names))
+  names(new_cols) <- expected_col_names
+  data <- add_column(
+    data,
+    !!!new_cols[!(names(new_cols) %in% names(data))]
+  )
   return(data)
 }
 
@@ -28,17 +29,12 @@ add_extra_na_cols <- function(data) {
 #' the datasets should always be > 0.
 #' @param data A data frame
 #' @return A data frame with all relevant data > 0.
+#' @importFrom dplyr mutate_if
+#' @concept utility
 set_negative_values_to_zero <- function(data) {
-  numeric_col_names <- c(
-    "deaths_total", "cases_total", "recovered_total", "hosp_total",
-    "tested_total", "cases_new", "deaths_new", "recovered_new", "hosp_new",
-    "tested_new"
+  data <- suppressMessages(
+    mutate_if(data, is.numeric, ~ replace(., . < 0, 0))
   )
-  for (numeric_col_name in numeric_col_names) {
-    if (numeric_col_name %in% colnames(data)) {
-      data[which(data[, numeric_col_name] < 0), numeric_col_name] <- 0
-    }
-  }
   return(data)
 }
 
@@ -52,27 +48,17 @@ set_negative_values_to_zero <- function(data) {
 #' @return A tibble with rows of NAs added.
 #' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
+#' @importFrom tidyselect starts_with
+#' @importFrom rlang !!! syms
+#' @concept utility
 fill_empty_dates_with_na <- function(data) {
-  region_level_1 <- NULL
-  region_level_2 <- NULL
-  level_2_region_code <- NULL
-  level_1_region_code <- NULL
-  if ("region_level_2" %in% colnames(data)) {
-    data <- data %>%
-      complete(
-        date = full_seq(data$date, period = 1),
-        nesting(
-          region_level_2, level_2_region_code,
-          region_level_1, level_1_region_code
-        )
-      )
-  } else {
-    data <- data %>%
-      complete(
-        date = full_seq(data$date, period = 1),
-        nesting(region_level_1, level_1_region_code)
-      )
-  }
+  regions <- select(data, starts_with("level_")) %>%
+    names()
+  data <- data %>%
+    complete(
+      date = full_seq(data$date, period = 1),
+      nesting(!!!syms(regions))
+    )
   return(data)
 }
 
@@ -87,6 +73,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @importFrom dplyr group_by
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
+#' @concept utility
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c(
     "deaths_total", "cases_total", "recovered_total",
@@ -110,8 +97,10 @@ complete_cumulative_columns <- function(data) {
 #' @return A data frame with extra columns if required
 #' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
 #' @importFrom tidyr replace_na
+#' @importFrom tidyselect ends_with
 #' @importFrom tibble tibble
 #' @importFrom rlang !! :=
+#' @concept utility
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
 
@@ -123,7 +112,7 @@ calculate_columns_from_existing_data <- function(data) {
       !(cumulative_count_name %in% colnames(data))) {
       # in this case the daily count is there but there are no cumulative counts
       data <- data %>%
-        group_by_at(vars(starts_with("region_level"))) %>%
+        group_by_at(vars(ends_with("_region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         mutate(
           !!cumulative_count_name :=
@@ -133,7 +122,7 @@ calculate_columns_from_existing_data <- function(data) {
       cumulative_count_name %in% colnames(data)) {
       # in this case the cumulative counts are there but no daily counts
       data <- data %>%
-        group_by_at(vars(starts_with("region_level"))) %>%
+        group_by_at(vars(ends_with("_region"))) %>%
         arrange(date, .by_group = TRUE) %>%
         fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
         mutate(
@@ -153,6 +142,7 @@ calculate_columns_from_existing_data <- function(data) {
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by summarise select arrange
 #' @importFrom tibble tibble
+#' @concept utility
 totalise_data <- function(data) {
   data <- data %>%
     summarise(
@@ -171,10 +161,12 @@ totalise_data <- function(data) {
 #'
 #' @description Internal shared regional data cleaning designed to be called
 #' by `process`.
-#' @param region A given Country class object to process, e.g. `Italy()`
-#' @param group_vars A character vector of grouping variables. It is assumed
-#' that the first entry indicates the main region variable and the second
-#' indicates the code for this variable.
+#' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
+#' @param level The level of the data, e.g. 'level_1_region'
+#' @param group_vars Grouping variables, used to
+#' for grouping and to localise names. It is assumed that the first entry
+#' indicates the main region variable and the second indicates the geocode for
+#' this variable.
 #' @param totals Logical, defaults to `FALSE`. If `TRUE``, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
@@ -182,16 +174,21 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-#' @importFrom dplyr do group_by_at ungroup select everything arrange rename
+#' @concept utility
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr rename
 #' @importFrom tidyr drop_na
 #' @importFrom tidyselect all_of
-#' @importFrom rlang !! :=
-process_internal <- function(region, group_vars, totals = FALSE,
-                             localise = TRUE, verbose = TRUE) {
-  if (!any(class(region$clean) %in% "data.frame")) {
+#' @importFrom rlang !!!
+process_internal <- function(clean_data, level, group_vars,
+                             totals = FALSE, localise = TRUE,
+                             verbose = TRUE) {
+  if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
-  dat <- group_by_at(region$clean, .vars = group_vars)
+  group_vars_standard <- names(group_vars)
+
+  dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
   . <- NULL
   dat <- dat %>%
@@ -204,7 +201,7 @@ process_internal <- function(region, group_vars, totals = FALSE,
     dat <- dat %>%
       select(all_of(
         c(
-          group_vars, "cases_total", "deaths_total", "recovered_total",
+          group_vars_standard, "cases_total", "deaths_total", "recovered_total",
           "hosp_total", "tested_total"
         )
       ))
@@ -215,21 +212,21 @@ process_internal <- function(region, group_vars, totals = FALSE,
       complete_cumulative_columns() %>%
       select(
         all_of(c(
-          "date", group_vars, "cases_new", "cases_total",
+          "date", group_vars_standard, "cases_new", "cases_total",
           "deaths_new", "deaths_total", "recovered_new", "recovered_total",
           "hosp_new", "hosp_total", "tested_new", "tested_total"
         )),
         everything()
       ) %>%
-      arrange(.data$date, all_of(group_vars[1]))
+      arrange(.data$date, all_of(group_vars_standard[1]))
   }
   dat <- ungroup(dat)
 
   if (localise) {
-    dat <- rename(dat, !!region$level := !!group_vars[1])
+    old <- names(group_vars)
+    names(old) <- group_vars
+    dat <- rename(dat, !!!old)
   }
-  dat <- rename(dat, !!region$code := !!group_vars[2])
 
-  region$processed <- dat
-  return(region)
+  return(dat)
 }

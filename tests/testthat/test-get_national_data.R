@@ -1,5 +1,5 @@
 test_get_national_data <- function(source) {
-  test_that(paste0("get_national_data returns", source, " data"), {
+  test_that(paste0("get_national_data returns ", source, " data"), {
     national <- readRDS(paste0("custom_data/", source, ".rds"))
     true <- national$return()
     true_R6 <- national$clone()
@@ -8,22 +8,35 @@ test_get_national_data <- function(source) {
     mockery::stub(
       get_national_data, "check_country_available",
       function(country, level, totals, localise,
-               verbose, steps) {
+               verbose, steps, regions) {
         class <- national$clone()
         class$verbose <- verbose
         class$steps <- steps
+        class$totals <- totals
+        if (!missing(regions)) {
+          class$target_regions <- regions
+        }
         return(class)
       }
     )
     d <- get_national_data(
-      country = "Afghanistan", source = source,
+      countries = "Zambia", source = source,
+      verbose = FALSE
+    )
+    p <- get_national_data(
+      countries = "zambia", source = source,
       verbose = FALSE
     )
     expect_s3_class(d, "data.frame")
-    expect_true(all(d$country == "Afghanistan"))
+    expect_true(all(d$country == "Zambia"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
+    expect_equal(d, p)
     expect_error(get_national_data(
-      country = "rwfwf", source = source,
+      countries = "rwfwf", source = source,
+      verbose = FALSE
+    ))
+    expect_warning(get_national_data(
+      country = "Zambia", source = source,
       verbose = FALSE
     ))
     expect_equal(
@@ -37,6 +50,11 @@ test_get_national_data <- function(source) {
         verbose = FALSE
       )
     )
+    totals <- get_national_data(totals = TRUE, verbose = FALSE)
+    expect_s3_class(totals, "data.frame")
+    expect_true(nrow(totals) > 0)
+    expect_true(sum(grepl("_total", colnames(totals))) > 4)
+    expect_true(all(!grepl("date", colnames(totals))))
   })
 }
 

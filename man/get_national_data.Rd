@@ -5,21 +5,26 @@
 \title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
 \usage{
 get_national_data(
-  country,
+  countries,
   source = "who",
+  totals = FALSE,
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
+  country = deprecated(),
   ...
 )
 }
 \arguments{
-\item{country}{A character string specifying the country to get data from.
-Not case dependent. Name should be the English name. For a list of
-options use \code{get_available_datasets}.}
+\item{countries}{A character vector specifying country names of interest.
+Used to filter the data.}
 
 \item{source}{A character string specifying the data source: "WHO", or
 "ECDC". Not case dependent. Defaults to WHO.}
+
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
@@ -28,8 +33,11 @@ steps be kept and output in a list.}
 \code{Country} class object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
-\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
+\item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
+
+\item{country}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A character string
+specifying a country to filter for.}
 
 \item{...}{additional arguments to pass to Country classes.}
 }
@@ -50,6 +58,6 @@ in a standard format.
 start_using_memoise()
 
 # download data for Canada keeping all processing steps
-get_national_data(country = "canada", source = "ecdc", steps = TRUE)
+get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 }
 }

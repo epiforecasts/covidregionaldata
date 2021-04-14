@@ -20,9 +20,9 @@ if (!is.null(getOption("testDownload"))) {
 
 # get datasets for testing
 sources <- get_available_datasets() %>%
-  filter(.data$get_data_function %in%
+  dplyr::filter(.data$get_data_function %in%
     c("get_regional_data", "get_national_data")) %>%
-  dplyr::select(source = country, level_1_region, level_2_region) %>%
+  dplyr::select(source = class, level_1_region, level_2_region) %>%
   tidyr::pivot_longer(
     cols = -source,
     names_to = "level",
@@ -39,10 +39,6 @@ if (!is.null(source_of_interest)) {
   sources <- sources %>%
     dplyr::filter(source %in% source_of_interest)
 }
-
-# filter out UK level 2 as broken
-sources <- sources %>%
-  dplyr::filter(!(source %in% "UK" & level == "2"))
 
 # apply tests to each data source in turn
 sources %>%

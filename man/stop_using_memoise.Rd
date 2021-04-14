@@ -10,3 +10,4 @@ stop_using_memoise()
 Sets useMemoise in options to NULL, meaning memoise isn't used
 when reading data in
 }
+\concept{utility}
