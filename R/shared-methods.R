@@ -68,7 +68,7 @@ check_country_available <- function(country = character(), level = 1,
 #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @param localise Logical, defaults to TRUE. Should region names be localized.
 #' @param verbose Logical, defaults to TRUE. Should verbose processing
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
@@ -120,7 +120,10 @@ initialise_dataclass <- function(self, level = "1", regions,
 #' allowing them to access general methods.
 #'
 #' @details All countries have shared methods for extracting region codes,
-#' downloading, processing, and returning data.
+#' downloading, processing, and returning data. These functions are contained
+#' within this parent class and so are accessible by all countries which
+#' inherit from here. Individual countries can overwrite any functions or
+#' fields providing they define a class with the same name.
 DataClass <- R6::R6Class(
   "DataClass",
   public = list(
@@ -134,13 +137,13 @@ DataClass <- R6::R6Class(
     supported_region_names = list("1" = NA),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
-    #' @field region_name string Name for the codes column, e.g. 'iso_3166_2'
+    #' @field region_name string Name for the region column, e.g. 'region'
     region_name = NULL,
     #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
     code_name = NULL,
     #' @field codes_lookup string or tibble Region codes for the target country
     codes_lookup = list(),
-    #' @field data_urls List of named links to raw data.
+    #' @field data_urls List of named url links to raw data.
     data_urls = list(),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels. The first entry should be named main.
@@ -158,7 +161,7 @@ DataClass <- R6::R6Class(
     #' @field totals Boolean. If TRUE, returns totalled data per region
     #' up to today's date.
     totals = NULL,
-    #' @field localise Boolean. Should region names be localised.
+    #' @field localise Boolean. Should region names be localized.
     localise = NULL,
     #' @field verbose Boolean. Display information at various stages.
     verbose = NULL,
@@ -178,8 +181,9 @@ DataClass <- R6::R6Class(
       initialise_dataclass(self, ...)
     },
 
-    #' @description Download raw data using the list
-    #' of supplied data_urls.
+    #' @description Download raw data from `data_urls`, stores a named list
+    #' of the `data_url` name and the corresponding raw data table in
+    #' `data$raw`
     #' @importFrom purrr map
     download = function() {
       self$data$raw <- map(self$data_urls, csv_reader,
@@ -187,8 +191,12 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description Dispatch cleaning methods to `clean_common` and level
-    #' specific cleaning
+    #' @description Cleans raw data (corrects format, converts column types,
+    #' etc). Works on raw data and so should be called after `download`.
+    #' Calls the specific country cleaning method (`clean_common`). For
+    #' countries with multiple levels, level specific cleaning functions which
+    #' are defined in said country are called providing they are named
+    #' `clean_level_[1/2]`. Cleaned data it stored in `data$clean`
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
       self$clean_common()
@@ -202,12 +210,14 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Cleaning methods that are common across a class.
-    #' By default this method is empty
+    #' By default this method is empty as if any code is required it should be
+    #' defined in a country specific `clean_common` method.
     clean_common = function() {
 
     },
 
-    #' @description Filter method for a class
+    #' @description Filter cleaned data for a specific region  To be called
+    #' after `clean`
     #' @param regions A character vector of target regions. Overrides the
     #' current class setting for `target_regions`. By default filters at the
     #' current spatial level of interest.
@@ -234,7 +244,12 @@ DataClass <- R6::R6Class(
       }
     },
 
-    #' @description Processes data.
+    #' @description Processes data by adding and calculating absent columns.
+    #' Called on clean data (after `clean`).
+    #' Some countries may have data as new events (e.g. number of
+    #' new cases for that day) whilst others have a running total up to that
+    #' date. Processing calculates these based on what the data comes with
+    #' via the functions `region_dispatch` and `process_internal`.
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       message_verbose(self$verbose, "Processing data")
@@ -255,8 +270,9 @@ DataClass <- R6::R6Class(
       )
     },
 
-    #' @description Get data related to the data class.
-    #' Internally calls `download`, `clean`, and `process` methods.
+    #' @description Get data related to the data class. This runs each distinct
+    #' step in the workflow in order.
+    #' Internally calls `download`, `clean`, `filter` and `process` methods.
     get = function() {
       self$download()
       self$clean()
@@ -264,9 +280,10 @@ DataClass <- R6::R6Class(
       self$process()
     },
 
-    #' @description Return data
-    #' Designed to be called after `process`. For most datasets a
-    #' custom method should not be needed.
+    #' @description Return data. Designed to be called after `process`, this
+    #' uses the steps argument to return either a list of all the data
+    #' preserved at each step or just the processed data.
+    #' For most datasets a custom method should not be needed.
     return = function() {
       self$data$return <- NA
       if (self$steps) {
@@ -276,9 +293,13 @@ DataClass <- R6::R6Class(
       }
     },
 
-    #' @description Class summary information
+    #' @description Create a table of summary information for the country
+    #' being processed.
     #' @importFrom tibble tibble
-    #' @return Returns a single row summary tibble
+    #' @return Returns a single row summary tibble containing the country name,
+    #' class, level 1 and 2 region names, the function calling it
+    #' (`get_regional_data` or `get_national_data`) the url of the raw data
+    #' and the columns present in the raw data.
     summary = function() {
       sum_df <- tibble(
         country = self$country,
@@ -299,8 +320,9 @@ DataClass <- R6::R6Class(
 )
 
 #' R6 Class containing  national level methods
-#' @description Acts as parent class for individual across country objects,
-#' allowing them to access general methods.
+#' @description Acts as parent class for national data classes, (`WHO`` and
+#' `ECDC`) allowing them to access general methods.defined in `DataClass`.
+#' Adds filters to get the target country from national data sources.
 #'
 #' @details Inherits from `DataClass`
 #' @export
