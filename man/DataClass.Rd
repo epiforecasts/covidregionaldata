@@ -37,7 +37,7 @@ across levels. The first entry should be named main.}
 
 \item{\code{level_data_urls}}{List of named lists of named links to raw data
 that are level specific. Any urls that share a name with a url from
-\code{common_data_urls}. Each top level list should be named after a supported
+\code{common_data_urls}. Each top level list should be named after a
 supported level.
 will be selected preferentially.}
 
@@ -90,15 +90,46 @@ region codes.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initialize the country
+initialize function used by all \code{Country} class objects.
+Set up the country class with attributes set to input
+parameters. Should only be called by a \code{Country} class object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
+  level = "1",
+  regions,
+  totals = FALSE,
+  localise = TRUE,
+  verbose = TRUE,
+  steps = FALSE,
+  get = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Parameters passed to \code{initialise_dataclass}.}
+\item{\code{level}}{A character string indicating the target administrative
+level of the data with the default being "1". Currently supported
+options are level 1 ("1) and level 2 ("2").
+Use \code{get_available_datasets} for supported  options by dataset.}
+
+\item{\code{regions}}{A character vector of target regions to be assigned to
+the\code{target_regions} field if present.}
+
+\item{\code{totals}}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
+
+\item{\code{localise}}{Logical, defaults to TRUE. Should region names be
+localised.}
+
+\item{\code{verbose}}{Logical, defaults to TRUE. Should verbose processing}
+
+\item{\code{steps}}{Logical, defaults to FALSE. Should all processing and
+cleaning steps be kept and output in a list.}
+
+\item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
+called (this will download, clean, and process data at initialisation).}
 }
 \if{html}{\out{</div>}}
 }

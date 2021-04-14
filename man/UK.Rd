@@ -159,7 +159,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{...}}{Options arguments passed to \code{initialise_dataclass}}
+\item{\code{...}}{Options arguments passed to parent \code{initalize}}
 }
 \if{html}{\out{</div>}}
 }

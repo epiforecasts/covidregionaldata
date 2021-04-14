@@ -257,7 +257,7 @@ data fields from the OSP source be returned? (Defaults \code{FALSE})}
 \item{\code{national_data}}{A logical scalar. Should national values be
 returned?  (Defaults \code{FALSE})}
 
-\item{\code{...}}{Parameters passed to \code{initialise_dataclass}.}
+\item{\code{...}}{Parameters passed to parent \code{initalize}}
 }
 \if{html}{\out{</div>}}
 }

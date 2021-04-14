@@ -17,6 +17,8 @@ Clases
 cloneable
 CMD
 Codecov
+colour
+coronavirus
 Cota
 CountryDataClass
 CoV
@@ -29,6 +31,8 @@ dataclass
 DataClass
 dd
 DD
+de
+De
 dependences
 deps
 desc
@@ -54,6 +58,7 @@ https
 ICD
 INEGI
 Initalize
+initialisation
 initialise
 io
 IPC
@@ -67,6 +72,7 @@ Limburg
 linelist
 Linelist
 linelists
+localised
 lshtm
 ltla
 macOS
@@ -85,10 +91,12 @@ OSP
 params
 paulcampbell
 PHE
+positivity
 PRs
 quickstart
 Rds
 README
+readmissions
 reparameterise
 reprex
 roxygen
@@ -114,6 +122,7 @@ testthat
 tibble
 tibbles
 tidyverse
+totalled
 transcient
 uk
 urls
