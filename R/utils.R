@@ -27,10 +27,10 @@ rlang::`.data`
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom tibble tibble
+#' @importFrom withr with_envvar
 #' @concept utility
 csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   read_csv_fun <- vroom
-
   if (!is.null(getOption("useMemoise"))) {
     if (getOption("useMemoise")) {
       ch <- cache_filesystem(getOption("cache_path"))
@@ -41,9 +41,12 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
     message("Downloading data from ", file)
     data <- read_csv_fun(file, ..., guess_max = guess_max)
   } else {
-    data <- suppressWarnings(
-      suppressMessages(
-        read_csv_fun(file, ..., guess_max = guess_max)
+    with_envvar(
+      new = c("VROOM_SHOW_PROGRESS" = "false"),
+      data <- suppressWarnings(
+        suppressMessages(
+          read_csv_fun(file, ..., guess_max = guess_max)
+        )
       )
     )
   }
