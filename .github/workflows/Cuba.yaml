@@ -42,5 +42,6 @@ jobs:
         run: |
           options("testDownload" = TRUE)
           options("testSource" = "Cuba")
+          library(covidregionaldata)
           testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail")) 
         shell: Rscript {0}
