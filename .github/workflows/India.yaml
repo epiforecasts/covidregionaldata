@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '12 0 * * *'
+    - cron: '5 12 * * *'
 
 name: India
 
