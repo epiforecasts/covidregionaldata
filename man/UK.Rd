@@ -78,7 +78,7 @@ specific.}
 \item \href{#method-clean_level_1}{\code{UK$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{UK$clean_level_2()}}
 \item \href{#method-new}{\code{UK$new()}}
-\item \href{#method-download_uk}{\code{UK$download_uk()}}
+\item \href{#method-download_filter}{\code{UK$download_filter()}}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
 \item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
@@ -180,12 +180,12 @@ Uk$new(
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download_uk"></a>}}
-\if{latex}{\out{\hypertarget{method-download_uk}{}}}
-\subsection{Method \code{download_uk()}}{
+\if{html}{\out{<a id="method-download_filter"></a>}}
+\if{latex}{\out{\hypertarget{method-download_filter}{}}}
+\subsection{Method \code{download_filter()}}{
 Helper function for downloading data API
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$download_uk(filter)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$download_filter(filter)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

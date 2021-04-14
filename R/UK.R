@@ -75,7 +75,7 @@ UK <- R6::R6Class("UK", # rename to country name
       # set up filters
       self$set_filters()
       message_verbose(self$verbose, "Downloading UK data.")
-      self$data$raw <- map(self$query_filters, self$download_uk)
+      self$data$raw <- map(self$query_filters, self$download_filter)
 
       if (self$level == "1") {
         # get NHS data if requested
@@ -237,7 +237,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom purrr map safely compact reduce
     #' @importFrom dplyr full_join mutate
     #' @param filter region filters
-    download_uk = function(filter) {
+    download_filter = function(filter) {
       # build a list of download links as limited to 4 variables per request
       csv_links <- map(
         1:(ceiling(length(self$source_data_cols) / 4)),
