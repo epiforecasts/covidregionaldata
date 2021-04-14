@@ -1,6 +1,7 @@
 on:
   schedule:
-    - cron: '25 11 * * *'
+    - cron: '50 11 * * *'
+  workflow_dispatch:
 
 name: USA
 
@@ -41,5 +42,5 @@ jobs:
         run: |
           options("testDownload" = TRUE)
           options("testSource" = "USA")
-          testthat::test_file("test-regional-datasets.R", reporter = c("summary", "fail")) 
+          testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail")) 
         shell: Rscript {0}
