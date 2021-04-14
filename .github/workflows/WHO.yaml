@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '17 12 * * *'
+    - cron: '26 12 * * *'
   workflow_dispatch:
 
 name: WHO
@@ -33,6 +33,7 @@ jobs:
         run: |
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
+          install.packages("devtools")
         shell: Rscript {0}
 
       - name: Install package
