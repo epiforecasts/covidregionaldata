@@ -142,7 +142,7 @@ Level 2 Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initalize the UK Class `DataClass``
+Initalize the UK Class \code{DataClass}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }

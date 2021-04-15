@@ -196,7 +196,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description Initalize the UK Class `DataClass``
+    #' @description Initalize the UK Class `DataClass`
     #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.

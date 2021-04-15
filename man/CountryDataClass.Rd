@@ -4,7 +4,8 @@
 \alias{CountryDataClass}
 \title{R6 Class containing  national level methods}
 \description{
-Acts as parent class for national data classes, (\verb{WHO`` and }ECDC\verb{) allowing them to access general methods.defined in }DataClass`.
+Acts as parent class for national data classes, (\code{WHO} and
+\code{ECDC}) allowing them to access general methods.defined in \code{DataClass}.
 Adds filters to get the target country from national data sources.
 }
 \details{

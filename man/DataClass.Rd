@@ -94,8 +94,8 @@ region codes.
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 initialize function used by all \code{Country} class objects.
-Set up the country class with attributes set to input
-parameters. Should only be called by a \code{Country} class object.
+Set up the country class with attributes set to input parameters.
+Should only be called by a \code{Country} class object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
   level = "1",
@@ -114,7 +114,8 @@ parameters. Should only be called by a \code{Country} class object.
 \item{\code{level}}{A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
 options are level 1 ("1) and level 2 ("2").
-Use \link{get_available_datasets} for supported  options by dataset.}
+Use \code{\link{get_available_datasets}} for supported options by
+dataset.}
 
 \item{\code{regions}}{A character vector of target regions to be assigned to
 the\code{target_regions} field if present.}

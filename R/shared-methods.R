@@ -117,12 +117,13 @@ DataClass <- R6::R6Class(
     },
 
     #' @description initialize function used by all `Country` class objects.
-    #' Set up the country class with attributes set to input
-    #' parameters. Should only be called by a `Country` class object.
+    #' Set up the country class with attributes set to input parameters.
+    #' Should only be called by a `Country` class object.
     #' @param level A character string indicating the target administrative
     #' level of the data with the default being "1". Currently supported
     #' options are level 1 ("1) and level 2 ("2").
-    #' Use [get_available_datasets] for supported  options by dataset.
+    #' Use \code{\link{get_available_datasets}} for supported options by
+    #' dataset.
     #' @param regions A character vector of target regions to be assigned to
     #' the`target_regions` field if present.
     #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
@@ -316,7 +317,7 @@ DataClass <- R6::R6Class(
 )
 
 #' R6 Class containing  national level methods
-#' @description Acts as parent class for national data classes, (`WHO`` and
+#' @description Acts as parent class for national data classes, (`WHO` and
 #' `ECDC`) allowing them to access general methods.defined in `DataClass`.
 #' Adds filters to get the target country from national data sources.
 #'
