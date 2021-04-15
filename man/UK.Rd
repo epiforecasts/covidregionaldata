@@ -112,7 +112,7 @@ Specific function for getting region codes for UK .
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-UK specific download function.
+UK specific \code{download()} function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$download()}\if{html}{\out{</div>}}
 }

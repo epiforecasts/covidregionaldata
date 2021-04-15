@@ -19,8 +19,8 @@ fields providing they define a method with the same name.
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{data}}{Once initialised, a list of named dataframes: raw
-(list of named raw dataframes) clean (cleaned data) and processed
+\item{\code{data}}{Once initialised, a list of named data frames: raw
+(list of named raw data frames) clean (cleaned data) and processed
 (processed data). Data is accessed using \verb{$data}.}
 
 \item{\code{supported_levels}}{A list of supported levels.}
@@ -42,7 +42,7 @@ filled by country specific codes in
 \href{#method-set_region_codes}{\code{set_region_codes()}}}
 
 \item{\code{data_urls}}{List of named common and shared url links to raw data.
-Prefers common if there is a name conflict.}
+Prefers shared if there is a name conflict.}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
 across levels. The first entry should be named main.}
@@ -174,7 +174,7 @@ etc). Works on raw data and so should be called after
 \href{#method-download}{\code{download()}}
 Calls the specific country cleaning method (\code{clean_common}) followed by
 level specific cleaning.methods which are defined in said country.
-\code{clean_level_[1/2]}. Cleaned data it stored in \code{data$clean}
+\code{clean_level_[1/2]}. Cleaned data is stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }

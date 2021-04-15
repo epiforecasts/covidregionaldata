@@ -68,7 +68,7 @@ UK <- R6::R6Class("UK", # rename to country name
       self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
-    #' @description UK specific download function.
+    #' @description UK specific `download()` function.
     #' @importFrom purrr map
     #' @importFrom dplyr bind_rows
     download = function() {

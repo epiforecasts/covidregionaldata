@@ -70,8 +70,8 @@ DataClass <- R6::R6Class(
   public = list(
     #' @field country name of country to fetch data for
     country = "",
-    #' @field data Once initialised, a list of named dataframes: raw
-    #' (list of named raw dataframes) clean (cleaned data) and processed
+    #' @field data Once initialised, a list of named data frames: raw
+    #' (list of named raw data frames) clean (cleaned data) and processed
     #' (processed data). Data is accessed using `$data`.
     data = NULL,
     #' @field supported_levels A list of supported levels.
@@ -93,7 +93,7 @@ DataClass <- R6::R6Class(
     #' \href{#method-set_region_codes}{\code{set_region_codes()}}
     codes_lookup = list(),
     #' @field data_urls List of named common and shared url links to raw data.
-    #' Prefers common if there is a name conflict.
+    #' Prefers shared if there is a name conflict.
     data_urls = list(),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels. The first entry should be named main.
@@ -208,7 +208,7 @@ DataClass <- R6::R6Class(
     #' \href{#method-download}{\code{download()}}
     #' Calls the specific country cleaning method (`clean_common`) followed by
     #' level specific cleaning.methods which are defined in said country.
-    #' `clean_level_[1/2]`. Cleaned data it stored in `data$clean`
+    #' `clean_level_[1/2]`. Cleaned data is stored in `data$clean`
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
       self$clean_common()
@@ -348,7 +348,7 @@ DataClass <- R6::R6Class(
 
 #' R6 Class containing  national level methods
 #' @description Acts as parent class for national data classes, (`WHO()` and
-#' `ECDC()`) allowing them to access general methods defined in `DataClass()`.
+#' `ECDC()`) allowing them to access general methods defined in [DataClass()].
 #' Adds filters to get the target country from national data sources.
 #'
 #' @details Inherits from `DataClass`
