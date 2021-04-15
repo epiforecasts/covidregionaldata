@@ -196,7 +196,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description Initalize the UK Class
+    #' @description Initalize the UK Class `DataClass`
     #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.
@@ -204,7 +204,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' latest release. Dates should be in the format "yyyy-mm-dd".
     #' @param resolution "utla" (default) or "ltla", depending on which
     #' geographical resolution is preferred
-    #' @param ... Options arguments passed to `initialise_dataclass`
+    #' @param ... Optional arguments passed to `DataClass` initalize.
     #' @examples
     #' \dontrun{
     #' Uk$new(
@@ -219,7 +219,7 @@ UK <- R6::R6Class("UK", # rename to country name
       self$nhsregions <- nhsregions
       self$release_date <- release_date
       self$resolution <- resolution
-      initialise_dataclass(self, ...)
+      super$initialize(...)
     },
 
     #' @field query_filters Set what filters to use to query the data

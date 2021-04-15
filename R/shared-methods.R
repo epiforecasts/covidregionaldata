@@ -55,65 +55,6 @@ check_country_available <- function(country = character(), level = 1,
   return(region_class)
 }
 
-#' initialize function used by all `Country` class objects.
-#' @description Set up the country class with attributes set to input
-#' parameters. Should only be called by a `Country` class object.
-#' @param self The specific class object to attach values
-#' @param level A character string indicating the target administrative level
-#' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
-#' options by dataset.
-#' @param regions A character vector of target regions to be assigned to the
-#' `target_regions` field if present.
-#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
-#'  data per region up to today's date. If FALSE, returns the full dataset
-#'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localized.
-#' @param verbose Logical, defaults to TRUE. Should verbose processing
-#' messages and warnings be returned.
-#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
-#' steps be kept and output in a list.
-#' @param get Logical, defaults to FALSE. Should the class `get` method be
-#' called (this will download, clean, and process data at initialisation).
-#' @export
-initialise_dataclass <- function(self, level = "1", regions,
-                                 totals = FALSE, localise = TRUE,
-                                 verbose = TRUE, steps = FALSE, get = FALSE) {
-  if (any(self$supported_levels %in% level)) {
-    self$level <- level
-  } else {
-    stop(level, " is not a supported level check supported_levels for options")
-  }
-  self$totals <- totals
-  self$localise <- localise
-  self$verbose <- verbose
-  self$steps <- steps
-  self$region_name <- self$supported_region_names[[self$level]]
-  self$code_name <- self$supported_region_codes[[self$level]]
-  self$set_region_codes()
-
-  if (!missing(regions)) {
-    self$target_regions <- regions
-  }
-
-  if (!is.null(self$level_data_urls[[self$level]])) {
-    if (length(self$common_data_urls) > 0) {
-      self$data_urls <- unlist(merge(
-        self$level_data_urls[[self$level]],
-        self$common_data_urls
-      ))
-    } else {
-      self$data_urls <- self$level_data_urls[[self$level]]
-    }
-  } else {
-    self$data_urls <- self$common_data_urls
-  }
-
-  if (get) {
-    self$get()
-  }
-}
-
 #' R6 Class containing non-country specific methods
 #'
 #' @description Acts as parent class for individual country objects,
@@ -150,7 +91,7 @@ DataClass <- R6::R6Class(
     common_data_urls = list(),
     #' @field level_data_urls List of named lists of named links to raw data
     #' that are level specific. Any urls that share a name with a url from
-    #' `common_data_urls`. Each top level list should be named after a supported
+    #' `common_data_urls`. Each top level list should be named after a
     #' supported level.
     #' will be selected preferentially.
     level_data_urls = list(),
@@ -175,10 +116,66 @@ DataClass <- R6::R6Class(
     set_region_codes = function() {
     },
 
-    #' @description Initialize the country
-    #' @param ... Parameters passed to `initialise_dataclass`.
-    initialize = function(...) {
-      initialise_dataclass(self, ...)
+    #' @description initialize function used by all `Country` class objects.
+    #' Set up the country class with attributes set to input parameters.
+    #' Should only be called by a `Country` class object.
+    #' @param level A character string indicating the target administrative
+    #' level of the data with the default being "1". Currently supported
+    #' options are level 1 ("1) and level 2 ("2").
+    #' Use \code{\link{get_available_datasets}} for supported options by
+    #' dataset.
+    #' @param regions A character vector of target regions to be assigned to
+    #' the`target_regions` field if present.
+    #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+    #'  data per region up to today's date. If FALSE, returns the full dataset
+    #'  stratified by date and region.
+    #' @param localise Logical, defaults to TRUE. Should region names be
+    #' localised.
+    #' @param verbose Logical, defaults to TRUE. Should verbose processing
+    #' @param steps Logical, defaults to FALSE. Should all processing and
+    #' cleaning steps be kept and output in a list.
+    #' @param get Logical, defaults to FALSE. Should the class `get` method be
+    #' called (this will download, clean, and process data at initialisation).
+    #' @export
+    initialize = function(level = "1", regions,
+                          totals = FALSE, localise = TRUE,
+                          verbose = TRUE, steps = FALSE, get = FALSE) {
+      if (any(self$supported_levels %in% level)) {
+        self$level <- level
+      } else {
+        stop(
+          level,
+          " is not a supported level check supported_levels for options"
+        )
+      }
+      self$totals <- totals
+      self$localise <- localise
+      self$verbose <- verbose
+      self$steps <- steps
+      self$region_name <- self$supported_region_names[[self$level]]
+      self$code_name <- self$supported_region_codes[[self$level]]
+      self$set_region_codes()
+
+      if (!missing(regions)) {
+        self$target_regions <- regions
+      }
+
+      if (!is.null(self$level_data_urls[[self$level]])) {
+        if (length(self$common_data_urls) > 0) {
+          self$data_urls <- unlist(merge(
+            self$level_data_urls[[self$level]],
+            self$common_data_urls
+          ))
+        } else {
+          self$data_urls <- self$level_data_urls[[self$level]]
+        }
+      } else {
+        self$data_urls <- self$common_data_urls
+      }
+
+      if (get) {
+        self$get()
+      }
     },
 
     #' @description Download raw data from `data_urls`, stores a named list
@@ -320,7 +317,7 @@ DataClass <- R6::R6Class(
 )
 
 #' R6 Class containing  national level methods
-#' @description Acts as parent class for national data classes, (`WHO`` and
+#' @description Acts as parent class for national data classes, (`WHO` and
 #' `ECDC`) allowing them to access general methods.defined in `DataClass`.
 #' Adds filters to get the target country from national data sources.
 #'

@@ -24,7 +24,9 @@ Clases
 cloneable
 CMD
 Codecov
+colour
 Config
+coronavirus
 Cota
 countrycode
 CountryDataClass
@@ -40,6 +42,8 @@ dataclass
 DataClass
 dd
 DD
+de
+De
 dependences
 deps
 desc
@@ -75,6 +79,7 @@ https
 httr
 ICD
 INEGI
+initalize
 Initalize
 initialisation
 initialise
@@ -126,6 +131,7 @@ paul
 paulcampbell
 PHE
 pkgdown
+positivity
 PRs
 purrr
 quickstart
