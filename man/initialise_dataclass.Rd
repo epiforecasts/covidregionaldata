@@ -30,7 +30,7 @@ options by dataset.}
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
-\item{localise}{Logical, defaults to TRUE. Should region names be localized.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
 \item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}

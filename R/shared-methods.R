@@ -68,7 +68,7 @@ check_country_available <- function(country = character(), level = 1,
 #' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
 #'  data per region up to today's date. If FALSE, returns the full dataset
 #'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localized.
+#' @param localise Logical, defaults to TRUE. Should region names be localised.
 #' @param verbose Logical, defaults to TRUE. Should verbose processing
 #' messages and warnings be returned.
 #' @param steps Logical, defaults to FALSE. Should all processing and cleaning
@@ -129,7 +129,9 @@ DataClass <- R6::R6Class(
   public = list(
     #' @field country name of country to fetch data for
     country = "",
-    #' @field data data frame for requested region
+    #' @field data list of named dataframe: raw (list of named raw dataframes)
+    #' clean (cleaned data) and processed (processed data). Data is accessed
+    #' using `$data`.
     data = NULL,
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
@@ -137,7 +139,8 @@ DataClass <- R6::R6Class(
     supported_region_names = list("1" = NA),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = NA),
-    #' @field region_name string Name for the region column, e.g. 'region'
+    #' @field region_name string Name for the region column, e.g. 'region'.
+    #' This field is filled at initialisation.
     region_name = NULL,
     #' @field code_name string Name for the codes column, e.g. 'iso_3166_2'
     code_name = NULL,
@@ -156,16 +159,19 @@ DataClass <- R6::R6Class(
     level_data_urls = list(),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(),
-    #' @field level target region level
+    #' @field level target region level. This field is filled at initialisation.
     level = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
-    #' up to today's date.
+    #' up to today's date. This field is filled at initialisation.
     totals = NULL,
-    #' @field localise Boolean. Should region names be localized.
+    #' @field localise Boolean. Should region names be localised.
+    #' This field is filled at initialisation.
     localise = NULL,
     #' @field verbose Boolean. Display information at various stages.
+    #' This field is filled at initialisation.
     verbose = NULL,
     #' @field steps Boolean. Keep data from each processing step.
+    #' This field is filled at initialisation.
     steps = NULL,
     #' @field target_regions A character vector of regions to filter for. Used
     #' by the `filter method`.
@@ -193,9 +199,8 @@ DataClass <- R6::R6Class(
 
     #' @description Cleans raw data (corrects format, converts column types,
     #' etc). Works on raw data and so should be called after `download`.
-    #' Calls the specific country cleaning method (`clean_common`). For
-    #' countries with multiple levels, level specific cleaning functions which
-    #' are defined in said country are called providing they are named
+    #' Calls the specific country cleaning method (`clean_common`) followed by
+    #' level specific cleaning.methods which are defined in said country.
     #' `clean_level_[1/2]`. Cleaned data it stored in `data$clean`
     clean = function() {
       message_verbose(self$verbose, "Cleaning data")
@@ -249,7 +254,17 @@ DataClass <- R6::R6Class(
     #' Some countries may have data as new events (e.g. number of
     #' new cases for that day) whilst others have a running total up to that
     #' date. Processing calculates these based on what the data comes with
-    #' via the functions `region_dispatch` and `process_internal`.
+    #' via the functions `region_dispatch` and `process_internal`, which does
+    #' the following:
+    #' \itemize{
+    #' \item{Adds columns not present in the data `add_extra_na_cos()`}
+    #' \item{Ensures there are no negative values
+    #' `set_negative_values_to_zero()`}
+    #' \item{Removes NA dates `fill_empty_dates_with_na()`}
+    #' \item{Calculates cumulative data `complete_cumulative_columns()`}
+    #' \item{Calculates missing columns from existing ones
+    #' `calculate_columns_from_existing_data()`}
+    #' }
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
       message_verbose(self$verbose, "Processing data")

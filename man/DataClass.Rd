@@ -19,7 +19,9 @@ fields providing they define a class with the same name.
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{data}}{data frame for requested region}
+\item{\code{data}}{list of named dataframe: raw (list of named raw dataframes)
+clean (cleaned data) and processed (processed data). Data is accessed
+using \verb{$data}.}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
@@ -27,7 +29,8 @@ fields providing they define a class with the same name.
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{region_name}}{string Name for the region column, e.g. 'region'}
+\item{\code{region_name}}{string Name for the region column, e.g. 'region'.
+This field is filled at initialisation.}
 
 \item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
 
@@ -46,16 +49,19 @@ will be selected preferentially.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
-\item{\code{level}}{target region level}
+\item{\code{level}}{target region level. This field is filled at initialisation.}
 
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
-up to today's date.}
+up to today's date. This field is filled at initialisation.}
 
-\item{\code{localise}}{Boolean. Should region names be localized.}
+\item{\code{localise}}{Boolean. Should region names be localised.
+This field is filled at initialisation.}
 
-\item{\code{verbose}}{Boolean. Display information at various stages.}
+\item{\code{verbose}}{Boolean. Display information at various stages.
+This field is filled at initialisation.}
 
-\item{\code{steps}}{Boolean. Keep data from each processing step.}
+\item{\code{steps}}{Boolean. Keep data from each processing step.
+This field is filled at initialisation.}
 
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
@@ -124,9 +130,8 @@ of the \code{data_url} name and the corresponding raw data table in
 \subsection{Method \code{clean()}}{
 Cleans raw data (corrects format, converts column types,
 etc). Works on raw data and so should be called after \code{download}.
-Calls the specific country cleaning method (\code{clean_common}). For
-countries with multiple levels, level specific cleaning functions which
-are defined in said country are called providing they are named
+Calls the specific country cleaning method (\code{clean_common}) followed by
+level specific cleaning.methods which are defined in said country.
 \code{clean_level_[1/2]}. Cleaned data it stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
@@ -174,7 +179,17 @@ Called on clean data (after \code{clean}).
 Some countries may have data as new events (e.g. number of
 new cases for that day) whilst others have a running total up to that
 date. Processing calculates these based on what the data comes with
-via the functions \code{region_dispatch} and \code{process_internal}.
+via the functions \code{region_dispatch} and \code{process_internal}, which does
+the following:
+\itemize{
+\item{Adds columns not present in the data \code{add_extra_na_cos()}}
+\item{Ensures there are no negative values
+\code{set_negative_values_to_zero()}}
+\item{Removes NA dates \code{fill_empty_dates_with_na()}}
+\item{Calculates cumulative data \code{complete_cumulative_columns()}}
+\item{Calculates missing columns from existing ones
+\code{calculate_columns_from_existing_data()}}
+}
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
