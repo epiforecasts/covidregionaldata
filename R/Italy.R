@@ -27,9 +27,11 @@ Italy <- R6::R6Class("Italy",
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv" # nolint
+      "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total", "tested_total"),
 

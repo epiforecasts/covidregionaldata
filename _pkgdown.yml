@@ -52,7 +52,6 @@ reference:
       - check_country_available
       - DataClass
       - CountryDataClass
-      - initialise_dataclass
       - has_concept("utility")
   - title: Datasets
     desc: Package datasets
