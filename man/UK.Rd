@@ -142,7 +142,7 @@ Level 2 Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initalize the UK Class
+Initalize the UK Class \code{DataClass}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }
@@ -159,7 +159,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{...}}{Options arguments passed to \code{initialise_dataclass}}
+\item{\code{...}}{Optional arguments passed to \code{DataClass} initalize.}
 }
 \if{html}{\out{</div>}}
 }
