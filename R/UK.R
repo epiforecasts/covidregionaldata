@@ -68,14 +68,14 @@ UK <- R6::R6Class("UK", # rename to country name
       self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
-    #' @description UK specific download function
+    #' @description UK specific `download()` function.
     #' @importFrom purrr map
     #' @importFrom dplyr bind_rows
     download = function() {
       # set up filters
       self$set_filters()
       message_verbose(self$verbose, "Downloading UK data.")
-      self$data$raw <- map(self$query_filters, self$download_uk)
+      self$data$raw <- map(self$query_filters, self$download_filter)
 
       if (self$level == "1") {
         # get NHS data if requested
@@ -204,7 +204,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' latest release. Dates should be in the format "yyyy-mm-dd".
     #' @param resolution "utla" (default) or "ltla", depending on which
     #' geographical resolution is preferred
-    #' @param ... Options arguments passed to `initialise_dataclass`
+    #' @param ... Optional arguments passed to [DataClass()] initalize.
     #' @examples
     #' \dontrun{
     #' Uk$new(
@@ -219,7 +219,7 @@ UK <- R6::R6Class("UK", # rename to country name
       self$nhsregions <- nhsregions
       self$release_date <- release_date
       self$resolution <- resolution
-      initialise_dataclass(self, ...)
+      super$initialize(...)
     },
 
     #' @field query_filters Set what filters to use to query the data
@@ -237,7 +237,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @importFrom purrr map safely compact reduce
     #' @importFrom dplyr full_join mutate
     #' @param filter region filters
-    download_uk = function(filter) {
+    download_filter = function(filter) {
       # build a list of download links as limited to 4 variables per request
       csv_links <- map(
         1:(ceiling(length(self$source_data_cols) / 4)),

@@ -3,7 +3,6 @@
 #' @description Information for downloading, cleaning
 #'  and processing COVID-19 region level 1 and 2 data for Lithuania.
 #'
-#' @details Inherits from `DataClass`
 #'
 #' @section OSP Data fields:
 #'
@@ -145,9 +144,11 @@ Lithuania <- R6::R6Class("Lithuania",
     ),
     #' @field common_data_urls List of named links to raw data that are common
     #' across levels.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv" # nolint
+      "main" = "https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "cases_new", "tested_new", "recovered_total", "deaths_new"
@@ -401,13 +402,12 @@ Lithuania <- R6::R6Class("Lithuania",
     #'   returned?  (Defaults `FALSE`)
     #' @param all_osp_fields A logical scalar. Should all the meaningful
     #'   data fields from the OSP source be returned? (Defaults `FALSE`)
-    #'
-    #' @param ... Parameters passed to `initialise_dataclass`.
+    #' @param ... Parameters passed to [DataClass()] initalize
     initialize = function(death_definition = "of",
                           recovered_definition = "official",
                           all_osp_fields = FALSE,
                           national_data = FALSE, ...) {
-      initialise_dataclass(self, ...)
+      super$initialize(...)
       self$death_definition <- death_definition
       self$recovered_definition <- recovered_definition
       self$all_osp_fields <- all_osp_fields

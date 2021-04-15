@@ -43,7 +43,7 @@ steps be kept and output in a list.}
 \item{...}{additional arguments to pass to country specific functionality.}
 }
 \value{
-The target countries specific object if available, e.g. \code{\link[=Italy]{Italy()}}
+The target countries specific object if available, e.g. \code{Italy()}
 }
 \description{
 Check data for the requested country and region

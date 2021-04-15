@@ -4,8 +4,9 @@
 \alias{CountryDataClass}
 \title{R6 Class containing  national level methods}
 \description{
-Acts as parent class for individual across country objects,
-allowing them to access general methods.
+Acts as parent class for national data classes, (\code{WHO()} and
+\code{ECDC()}) allowing them to access general methods defined in \code{\link[=DataClass]{DataClass()}}.
+Adds filters to get the target country from national data sources.
 }
 \details{
 Inherits from \code{DataClass}

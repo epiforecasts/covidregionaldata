@@ -13,7 +13,6 @@
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
 #' @inheritParams get_regional_data
-#' @inheritParams initialise_dataclass
 #' @param ... additional arguments to pass to Country classes.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
