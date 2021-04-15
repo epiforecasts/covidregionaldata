@@ -182,7 +182,7 @@ date. Processing calculates these based on what the data comes with
 via the functions \code{region_dispatch} and \code{process_internal}, which does
 the following:
 \itemize{
-\item{Adds columns not present in the data \code{add_extra_na_cos()}}
+\item{Adds columns not present in the data \code{add_extra_na_cols()}}
 \item{Ensures there are no negative values
 \code{set_negative_values_to_zero()}}
 \item{Removes NA dates \code{fill_empty_dates_with_na()}}

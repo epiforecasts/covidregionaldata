@@ -3,7 +3,7 @@
 #' @description Check data for the requested country and region
 #' is available and return an initialised region class for that country.
 #' @inheritParams get_regional_data
-#' @return The target countries specific object if available, e.g. [Italy()]
+#' @return The target countries specific object if available, e.g. `Italy()`
 #' @rdname check_country_available
 #' @importFrom stringr str_to_title str_replace_all str_detect
 #' @importFrom dplyr bind_rows filter distinct
@@ -61,7 +61,7 @@ check_country_available <- function(country = character(), level = 1,
 #' @param self The specific class object to attach values
 #' @param level A character string indicating the target administrative level
 #' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets()` for supported
 #' options by dataset.
 #' @param regions A character vector of target regions to be assigned to the
 #' `target_regions` field if present.
@@ -257,7 +257,7 @@ DataClass <- R6::R6Class(
     #' via the functions `region_dispatch` and `process_internal`, which does
     #' the following:
     #' \itemize{
-    #' \item{Adds columns not present in the data `add_extra_na_cos()`}
+    #' \item{Adds columns not present in the data `add_extra_na_cols()`}
     #' \item{Ensures there are no negative values
     #' `set_negative_values_to_zero()`}
     #' \item{Removes NA dates `fill_empty_dates_with_na()`}
