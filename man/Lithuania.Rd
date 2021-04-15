@@ -10,9 +10,6 @@
 Information for downloading, cleaning
 and processing COVID-19 region level 1 and 2 data for Lithuania.
 }
-\details{
-Inherits from \code{DataClass}
-}
 \section{OSP Data fields}{
 
 
@@ -257,7 +254,7 @@ data fields from the OSP source be returned? (Defaults \code{FALSE})}
 \item{\code{national_data}}{A logical scalar. Should national values be
 returned?  (Defaults \code{FALSE})}
 
-\item{\code{...}}{Parameters passed to \code{DataClass} initalize}
+\item{\code{...}}{Parameters passed to \code{DataClass()} initalize}
 }
 \if{html}{\out{</div>}}
 }

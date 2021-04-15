@@ -77,7 +77,6 @@ Set up a table of region codes for clean data
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
 Common Data Cleaning
-request.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Germany$clean_common()}\if{html}{\out{</div>}}
 }

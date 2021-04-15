@@ -161,7 +161,8 @@ of the \code{data_url} name and the corresponding raw data table in
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
 Cleans raw data (corrects format, converts column types,
-etc). Works on raw data and so should be called after \code{download}.
+etc). Works on raw data and so should be called after
+\href{#method-download}{\code{download()}}
 Calls the specific country cleaning method (\code{clean_common}) followed by
 level specific cleaning.methods which are defined in said country.
 \code{clean_level_[1/2]}. Cleaned data it stored in \code{data$clean}
@@ -187,7 +188,7 @@ defined in a country specific \code{clean_common} method.
 \if{latex}{\out{\hypertarget{method-filter}{}}}
 \subsection{Method \code{filter()}}{
 Filter cleaned data for a specific region  To be called
-after \code{clean}
+after \href{#method-clean}{\code{clean()}}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
 }
@@ -207,12 +208,12 @@ current spatial level of interest.}
 \if{latex}{\out{\hypertarget{method-process}{}}}
 \subsection{Method \code{process()}}{
 Processes data by adding and calculating absent columns.
-Called on clean data (after \code{clean}).
+Called on clean data (after \href{#method-clean}{\code{clean()}}).
 Some countries may have data as new events (e.g. number of
 new cases for that day) whilst others have a running total up to that
 date. Processing calculates these based on what the data comes with
-via the functions \code{region_dispatch} and \code{process_internal}, which does
-the following:
+via the functions \code{region_dispatch()} and \code{process_internal()},
+which does the following:
 \itemize{
 \item{Adds columns not present in the data \code{add_extra_na_cols()}}
 \item{Ensures there are no negative values
@@ -234,7 +235,12 @@ Dynamically works for level 1 and level 2 regions.
 \subsection{Method \code{get()}}{
 Get data related to the data class. This runs each distinct
 step in the workflow in order.
-Internally calls \code{download}, \code{clean}, \code{filter} and \code{process} methods.
+Internally calls \href{#method-download}{\code{download()}},
+\href{#method-clean}{\code{clean()}},
+\href{#method-filter}{\code{filter()}} and
+\href{#method-process}{\code{process()}}
+
+\code{download}, \code{clean}, \code{filter} and \code{process} methods.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$get()}\if{html}{\out{</div>}}
 }
@@ -244,9 +250,10 @@ Internally calls \code{download}, \code{clean}, \code{filter} and \code{process}
 \if{html}{\out{<a id="method-return"></a>}}
 \if{latex}{\out{\hypertarget{method-return}{}}}
 \subsection{Method \code{return()}}{
-Return data. Designed to be called after \code{process}, this
-uses the steps argument to return either a list of all the data
-preserved at each step or just the processed data.
+Return data. Designed to be called after
+\href{#method-process}{\code{process()}}
+this uses the steps argument to return either a
+list of all the data preserved at each step or just the processed data.
 For most datasets a custom method should not be needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$return()}\if{html}{\out{</div>}}
@@ -266,7 +273,7 @@ being processed.
 \subsection{Returns}{
 Returns a single row summary tibble containing the country name,
 class, level 1 and 2 region names, the function calling it
-(\code{get_regional_data} or \code{get_national_data}) the url of the raw data
+(\code{get_regional_data()} or \code{get_national_data()}) the url of the raw data
 and the columns present in the raw data.
 }
 }

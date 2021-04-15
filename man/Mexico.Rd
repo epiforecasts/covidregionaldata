@@ -89,7 +89,7 @@ Set up a table of region codes for clean data
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 Data download function for Mexico data. This replaces the
-generic download function in \code{DataClass}. To get the latest data
+generic download function in \code{DataClass()}. To get the latest data
 use a PHP script from the website.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$download()}\if{html}{\out{</div>}}

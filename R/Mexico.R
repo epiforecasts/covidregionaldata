@@ -59,7 +59,7 @@ Mexico <- R6::R6Class("Mexico",
     },
 
     #' @description Data download function for Mexico data. This replaces the
-    #' generic download function in `DataClass`. To get the latest data
+    #' generic download function in `DataClass()`. To get the latest data
     #' use a PHP script from the website.
     #' @importFrom httr POST content
     #' @importFrom xml2 xml_find_first xml_text

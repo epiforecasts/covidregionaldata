@@ -195,7 +195,8 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Cleans raw data (corrects format, converts column types,
-    #' etc). Works on raw data and so should be called after `download`.
+    #' etc). Works on raw data and so should be called after
+    #' \href{#method-download}{\code{download()}}
     #' Calls the specific country cleaning method (`clean_common`) followed by
     #' level specific cleaning.methods which are defined in said country.
     #' `clean_level_[1/2]`. Cleaned data it stored in `data$clean`
@@ -219,7 +220,7 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Filter cleaned data for a specific region  To be called
-    #' after `clean`
+    #' after \href{#method-clean}{\code{clean()}}
     #' @param regions A character vector of target regions. Overrides the
     #' current class setting for `target_regions`. By default filters at the
     #' current spatial level of interest.
@@ -247,12 +248,12 @@ DataClass <- R6::R6Class(
     },
 
     #' @description Processes data by adding and calculating absent columns.
-    #' Called on clean data (after `clean`).
+    #' Called on clean data (after \href{#method-clean}{\code{clean()}}).
     #' Some countries may have data as new events (e.g. number of
     #' new cases for that day) whilst others have a running total up to that
     #' date. Processing calculates these based on what the data comes with
-    #' via the functions `region_dispatch` and `process_internal`, which does
-    #' the following:
+    #' via the functions `region_dispatch()` and `process_internal()`,
+    #' which does the following:
     #' \itemize{
     #' \item{Adds columns not present in the data `add_extra_na_cols()`}
     #' \item{Ensures there are no negative values
@@ -284,7 +285,12 @@ DataClass <- R6::R6Class(
 
     #' @description Get data related to the data class. This runs each distinct
     #' step in the workflow in order.
-    #' Internally calls `download`, `clean`, `filter` and `process` methods.
+    #' Internally calls \href{#method-download}{\code{download()}},
+    #' \href{#method-clean}{\code{clean()}},
+    #' \href{#method-filter}{\code{filter()}} and
+    #' \href{#method-process}{\code{process()}}
+    #'
+    #' `download`, `clean`, `filter` and `process` methods.
     get = function() {
       self$download()
       self$clean()
@@ -292,9 +298,10 @@ DataClass <- R6::R6Class(
       self$process()
     },
 
-    #' @description Return data. Designed to be called after `process`, this
-    #' uses the steps argument to return either a list of all the data
-    #' preserved at each step or just the processed data.
+    #' @description Return data. Designed to be called after
+    #' \href{#method-process}{\code{process()}}
+    #' this uses the steps argument to return either a
+    #' list of all the data preserved at each step or just the processed data.
     #' For most datasets a custom method should not be needed.
     return = function() {
       self$data$return <- NA
@@ -310,7 +317,7 @@ DataClass <- R6::R6Class(
     #' @importFrom tibble tibble
     #' @return Returns a single row summary tibble containing the country name,
     #' class, level 1 and 2 region names, the function calling it
-    #' (`get_regional_data` or `get_national_data`) the url of the raw data
+    #' (`get_regional_data()` or `get_national_data()`) the url of the raw data
     #' and the columns present in the raw data.
     summary = function() {
       sum_df <- tibble(
@@ -332,8 +339,8 @@ DataClass <- R6::R6Class(
 )
 
 #' R6 Class containing  national level methods
-#' @description Acts as parent class for national data classes, (`WHO` and
-#' `ECDC`) allowing them to access general methods.defined in `DataClass`.
+#' @description Acts as parent class for national data classes, (`WHO()` and
+#' `ECDC()`) allowing them to access general methods.defined in `DataClass()`.
 #' Adds filters to get the target country from national data sources.
 #'
 #' @details Inherits from `DataClass`

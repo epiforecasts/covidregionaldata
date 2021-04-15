@@ -113,6 +113,7 @@ Specific function for getting region codes for UK .
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 UK specific download function
+overwrites \code{DataClass()} download.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$download()}\if{html}{\out{</div>}}
 }
@@ -142,7 +143,7 @@ Level 2 Data Cleaning
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initalize the UK Class \code{DataClass}
+Initalize the UK Class \code{DataClass()}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$new(nhsregions = FALSE, release_date = NULL, resolution = "utla", ...)}\if{html}{\out{</div>}}
 }
@@ -159,7 +160,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{...}}{Optional arguments passed to \code{DataClass} initalize.}
+\item{\code{...}}{Optional arguments passed to \code{DataClass()} initalize.}
 }
 \if{html}{\out{</div>}}
 }

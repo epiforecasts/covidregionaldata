@@ -28,9 +28,11 @@ Germany <- R6::R6Class("Germany",
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv" # nolint
+      "main" = "https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
 
@@ -55,7 +57,6 @@ Germany <- R6::R6Class("Germany",
     },
 
     #' @description Common Data Cleaning
-    #' request.
     #' @importFrom dplyr select mutate
     #' @importFrom lubridate as_date ymd_hms
     clean_common = function() {

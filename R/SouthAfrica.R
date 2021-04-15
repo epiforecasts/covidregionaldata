@@ -25,10 +25,12 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data.
+    # nolint start
     common_data_urls = list(
-      "cases" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv", # nolint
-      "deaths" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv" # nolint
+      "cases" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_confirmed.csv",
+      "deaths" = "https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_provincial_cumulative_timeline_deaths.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new", "recovered_new"),
 

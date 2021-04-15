@@ -26,9 +26,11 @@ Colombia <- R6::R6Class("Colombia",
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv" # nolint
+      "main" = "https://raw.githubusercontent.com/danielcs88/colombia_covid-19/master/datos/cronologia.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total"),
 
