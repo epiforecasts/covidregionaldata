@@ -22,7 +22,9 @@ JHU <- R6::R6Class("JHU", # rename to country name
     level_1_region = "country", # add more levels as needed
     #' @field data_url List of named links to raw data. The first, and
     #' sometimes only entry, should be named main
-    data_url = list(main = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"), # nolint
+    # nolint start
+    data_url = list(main = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("confirmed", "deaths", "recovered"),
 
@@ -31,13 +33,13 @@ JHU <- R6::R6Class("JHU", # rename to country name
     #'
     download = function() {
       paths <- paste0(
-        data_url$main,
+        self$data_url$main,
         "time_series_covid19_",
-        vals,
+        self$source_data_cols,
         "_global.csv"
       )
-      data_list <- map(paths, csv_reader)
-      names(data_list) <- paste0("daily_", vals)
+      data_list <- map(paths, csv_reader, verbose = self$verbose)
+      names(data_list) <- paste0("daily_", self$source_data_cols)
       self$data$raw <- data_list
     },
 
@@ -71,23 +73,18 @@ JHU <- R6::R6Class("JHU", # rename to country name
         ) %>%
         rename(
           date = .data$Date,
-          region_level_1 = .data$`Province/State`,
+          level_1_region = .data$`Province/State`,
           country = .data$`Country/Region`,
           cases_total = .data$daily_confirmed,
           deaths_total = .data$daily_deaths,
           recovered_total = .data$daily_recovered
         ) %>%
         replace_na(
-          region_level_1 = "Unknown",
-          country = "Unknown"
+          list(
+            level_1_region = "Unknown",
+            country = "Unknown"
+          )
         )
-    },
-
-    #' @description Initialize the country
-    #' @param ... The args passed by [general_init]
-    initialize = function(...) {
-      general_init(self, ...)
-      # Add custom fields here
     }
   )
 )
