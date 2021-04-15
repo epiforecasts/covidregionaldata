@@ -63,7 +63,7 @@ Mexico <- R6::R6Class("Mexico",
     #' use a PHP script from the website.
     #' @importFrom httr POST content
     #' @importFrom xml2 xml_find_first xml_text
-    #' @importFrom dplyr select full_join
+    #' @importFrom dplyr select full_join mutate_at
     #' @importFrom rlang .data
     #' @importFrom tidyr pivot_longer
     #'
@@ -100,6 +100,10 @@ Mexico <- R6::R6Class("Mexico",
         )
 
         dat <- dat %>%
+          mutate_at(
+            vars(-cve_ent, -poblacion, -nombre),
+            as.double
+          ) %>%
           select(-.data$poblacion) %>%
           pivot_longer(-c("cve_ent", "nombre"),
             names_to = "date", values_to = new_name
