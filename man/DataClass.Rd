@@ -12,16 +12,16 @@ All countries have shared methods for extracting region codes,
 downloading, processing, and returning data. These functions are contained
 within this parent class and so are accessible by all countries which
 inherit from here. Individual countries can overwrite any functions or
-fields providing they define a class with the same name.
+fields providing they define a method with the same name.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{data}}{list of named dataframe: raw (list of named raw dataframes)
-clean (cleaned data) and processed (processed data). Data is accessed
-using \verb{$data}.}
+\item{\code{data}}{Once initialised, a list of named dataframes: raw
+(list of named raw dataframes) clean (cleaned data) and processed
+(processed data). Data is accessed using \verb{$data}.}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
@@ -30,38 +30,48 @@ using \verb{$data}.}
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{region_name}}{string Name for the region column, e.g. 'region'.
-This field is filled at initialisation.}
+This field is filled at initialisation with the region name for the
+specified level (supported_region_names$level).}
 
-\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'
+Filled at initialisation with the code name associated with the
+requested level (supported_region_codes$level).}
 
-\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country
+filled by country specific codes in
+\href{#method-set_region_codes}{\code{set_region_codes()}}}
 
-\item{\code{data_urls}}{List of named url links to raw data.}
+\item{\code{data_urls}}{List of named common and shared url links to raw data.
+Prefers common if there is a name conflict.}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
 across levels. The first entry should be named main.}
 
-\item{\code{level_data_urls}}{List of named lists of named links to raw data
-that are level specific. Any urls that share a name with a url from
-\code{common_data_urls}. Each top level list should be named after a
-supported level.
-will be selected preferentially.}
+\item{\code{level_data_urls}}{List of named links to raw data that are level
+specific. Any urls that share a name with a url from
+\code{common_data_urls} will be selected preferentially. Each top level
+list should be named after a supported level.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
-\item{\code{level}}{target region level. This field is filled at initialisation.}
+\item{\code{level}}{target region level. This field is filled at initialisation
+using user inputs or defaults in \verb{$new()}}
 
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
-up to today's date. This field is filled at initialisation.}
+up to today's date. This field is filled at initialisation using user
+inputs or defaults in \verb{$new()}}
 
 \item{\code{localise}}{Boolean. Should region names be localised.
-This field is filled at initialisation.}
+This field is filled at initialisation using user inputs or defaults
+in \verb{$new()}}
 
 \item{\code{verbose}}{Boolean. Display information at various stages.
-This field is filled at initialisation.}
+This field is filled at initialisation. using user inputs or defaults
+in \verb{$new()}}
 
 \item{\code{steps}}{Boolean. Keep data from each processing step.
-This field is filled at initialisation.}
+This field is filled at initialisation.using user inputs or defaults
+in \verb{$new()}}
 
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
@@ -120,8 +130,7 @@ Should only be called by a \code{Country} class object.
 \item{\code{level}}{A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
 options are level 1 ("1) and level 2 ("2").
-Use \code{\link{get_available_datasets}} for supported options by
-dataset.}
+Use \code{get_available_datasets()} for supported options by dataset.}
 
 \item{\code{regions}}{A character vector of target regions to be assigned to
 the\code{target_regions} field if present.}
@@ -239,7 +248,6 @@ Internally calls \href{#method-download}{\code{download()}},
 \href{#method-clean}{\code{clean()}},
 \href{#method-filter}{\code{filter()}} and
 \href{#method-process}{\code{process()}}
-
 \code{download}, \code{clean}, \code{filter} and \code{process} methods.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$get()}\if{html}{\out{</div>}}

@@ -68,8 +68,7 @@ UK <- R6::R6Class("UK", # rename to country name
       self$codes_lookup$`2` <- covidregionaldata::uk_codes
     },
 
-    #' @description UK specific download function
-    #' overwrites `DataClass()` download.
+    #' @description UK specific download function.
     #' @importFrom purrr map
     #' @importFrom dplyr bind_rows
     download = function() {
@@ -197,7 +196,7 @@ UK <- R6::R6Class("UK", # rename to country name
       }
     },
 
-    #' @description Initalize the UK Class `DataClass()`
+    #' @description Initalize the UK Class
     #' @export
     #' @param nhsregions Return subnational English regions using NHS region
     #' boundaries instead of PHE boundaries.
@@ -205,7 +204,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' latest release. Dates should be in the format "yyyy-mm-dd".
     #' @param resolution "utla" (default) or "ltla", depending on which
     #' geographical resolution is preferred
-    #' @param ... Optional arguments passed to `DataClass()` initalize.
+    #' @param ... Optional arguments passed to [DataClass()] initalize.
     #' @examples
     #' \dontrun{
     #' Uk$new(
