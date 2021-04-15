@@ -99,11 +99,15 @@ Mexico <- R6::R6Class("Mexico",
           self$verbose
         )
 
-        dat <- dat %>%
+        dat <- suppressWarnings(
           mutate_at(
+            dat,
             vars(-cve_ent, -poblacion, -nombre),
             as.double
-          ) %>%
+          )
+        )
+
+        dat <- dat %>%
           select(-.data$poblacion) %>%
           pivot_longer(-c("cve_ent", "nombre"),
             names_to = "date", values_to = new_name
