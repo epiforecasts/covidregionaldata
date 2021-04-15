@@ -6,10 +6,6 @@
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.
 # Can also be set using environment variables
-source_of_interest <- NULL
-if (!is.null(getOption("testSource"))) {
-  source_of_interest <- getOption("testSource")
-}
 
 library(switchr)
 #switchrBaseDir(file.path(tempdir(), ".switchr"))
@@ -21,7 +17,16 @@ library(switchr)
 #   options(repos = reps)
 # }
 # 
+
+source_of_interest <- NULL
+if (!is.null(getOption("testSource"))) {
+  source_of_interest <- getOption("testSource")
+}
+
 initialSetup <- FALSE
+if (!is.null(getOption("initialSetup"))) {
+  initialSetup <- getOption("initialSetup")
+}
 
 if(initialSetup) {
   removeLib("oldcovidregionaldata")
