@@ -9,14 +9,19 @@ allowing them to access general methods.
 }
 \details{
 All countries have shared methods for extracting region codes,
-downloading, processing, and returning data.
+downloading, processing, and returning data. These functions are contained
+within this parent class and so are accessible by all countries which
+inherit from here. Individual countries can overwrite any functions or
+fields providing they define a method with the same name.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{country}}{name of country to fetch data for}
 
-\item{\code{data}}{data frame for requested region}
+\item{\code{data}}{Once initialised, a list of named data frames: raw
+(list of named raw data frames) clean (cleaned data) and processed
+(processed data). Data is accessed using \verb{$data}.}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
@@ -24,35 +29,49 @@ downloading, processing, and returning data.
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{region_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+\item{\code{region_name}}{string Name for the region column, e.g. 'region'.
+This field is filled at initialisation with the region name for the
+specified level (supported_region_names$level).}
 
-\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'}
+\item{\code{code_name}}{string Name for the codes column, e.g. 'iso_3166_2'
+Filled at initialisation with the code name associated with the
+requested level (supported_region_codes$level).}
 
-\item{\code{codes_lookup}}{string or tibble Region codes for the target country}
+\item{\code{codes_lookup}}{string or tibble Region codes for the target country
+filled by country specific codes in
+\href{#method-set_region_codes}{\code{set_region_codes()}}}
 
-\item{\code{data_urls}}{List of named links to raw data.}
+\item{\code{data_urls}}{List of named common and shared url links to raw data.
+Prefers shared if there is a name conflict.}
 
 \item{\code{common_data_urls}}{List of named links to raw data that are common
 across levels. The first entry should be named main.}
 
-\item{\code{level_data_urls}}{List of named lists of named links to raw data
-that are level specific. Any urls that share a name with a url from
-\code{common_data_urls}. Each top level list should be named after a supported
-supported level.
-will be selected preferentially.}
+\item{\code{level_data_urls}}{List of named links to raw data that are level
+specific. Any urls that share a name with a url from
+\code{common_data_urls} will be selected preferentially. Each top level
+list should be named after a supported level.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
-\item{\code{level}}{target region level}
+\item{\code{level}}{target region level. This field is filled at initialisation
+using user inputs or defaults in \verb{$new()}}
 
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
-up to today's date.}
+up to today's date. This field is filled at initialisation using user
+inputs or defaults in \verb{$new()}}
 
-\item{\code{localise}}{Boolean. Should region names be localised.}
+\item{\code{localise}}{Boolean. Should region names be localised.
+This field is filled at initialisation using user inputs or defaults
+in \verb{$new()}}
 
-\item{\code{verbose}}{Boolean. Display information at various stages.}
+\item{\code{verbose}}{Boolean. Display information at various stages.
+This field is filled at initialisation. using user inputs or defaults
+in \verb{$new()}}
 
-\item{\code{steps}}{Boolean. Keep data from each processing step.}
+\item{\code{steps}}{Boolean. Keep data from each processing step.
+This field is filled at initialisation.using user inputs or defaults
+in \verb{$new()}}
 
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
@@ -90,15 +109,46 @@ region codes.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Initialize the country
+initialize function used by all \code{Country} class objects.
+Set up the country class with attributes set to input parameters.
+Should only be called by a \code{Country} class object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
+  level = "1",
+  regions,
+  totals = FALSE,
+  localise = TRUE,
+  verbose = TRUE,
+  steps = FALSE,
+  get = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Parameters passed to \code{initialise_dataclass}.}
+\item{\code{level}}{A character string indicating the target administrative
+level of the data with the default being "1". Currently supported
+options are level 1 ("1) and level 2 ("2").
+Use \code{get_available_datasets()} for supported options by dataset.}
+
+\item{\code{regions}}{A character vector of target regions to be assigned to
+the\code{target_regions} field if present.}
+
+\item{\code{totals}}{Logical, defaults to FALSE. If TRUE, returns totalled
+data per region up to today's date. If FALSE, returns the full dataset
+stratified by date and region.}
+
+\item{\code{localise}}{Logical, defaults to TRUE. Should region names be
+localised.}
+
+\item{\code{verbose}}{Logical, defaults to TRUE. Should verbose processing}
+
+\item{\code{steps}}{Logical, defaults to FALSE. Should all processing and
+cleaning steps be kept and output in a list.}
+
+\item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
+called (this will download, clean, and process data at initialisation).}
 }
 \if{html}{\out{</div>}}
 }
@@ -107,8 +157,9 @@ Initialize the country
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-Download raw data using the list
-of supplied data_urls.
+Download raw data from \code{data_urls}, stores a named list
+of the \code{data_url} name and the corresponding raw data table in
+\code{data$raw}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
 }
@@ -118,8 +169,12 @@ of supplied data_urls.
 \if{html}{\out{<a id="method-clean"></a>}}
 \if{latex}{\out{\hypertarget{method-clean}{}}}
 \subsection{Method \code{clean()}}{
-Dispatch cleaning methods to \code{clean_common} and level
-specific cleaning
+Cleans raw data (corrects format, converts column types,
+etc). Works on raw data and so should be called after
+\href{#method-download}{\code{download()}}
+Calls the specific country cleaning method (\code{clean_common}) followed by
+level specific cleaning.methods which are defined in said country.
+\code{clean_level_[1/2]}. Cleaned data is stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
 }
@@ -130,7 +185,8 @@ specific cleaning
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
 Cleaning methods that are common across a class.
-By default this method is empty
+By default this method is empty as if any code is required it should be
+defined in a country specific \code{clean_common} method.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
 }
@@ -140,7 +196,8 @@ By default this method is empty
 \if{html}{\out{<a id="method-filter"></a>}}
 \if{latex}{\out{\hypertarget{method-filter}{}}}
 \subsection{Method \code{filter()}}{
-Filter method for a class
+Filter cleaned data for a specific region  To be called
+after \href{#method-clean}{\code{clean()}}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
 }
@@ -159,7 +216,22 @@ current spatial level of interest.}
 \if{html}{\out{<a id="method-process"></a>}}
 \if{latex}{\out{\hypertarget{method-process}{}}}
 \subsection{Method \code{process()}}{
-Processes data.
+Processes data by adding and calculating absent columns.
+Called on clean data (after \href{#method-clean}{\code{clean()}}).
+Some countries may have data as new events (e.g. number of
+new cases for that day) whilst others have a running total up to that
+date. Processing calculates these based on what the data comes with
+via the functions \code{region_dispatch()} and \code{process_internal()},
+which does the following:
+\itemize{
+\item{Adds columns not present in the data \code{add_extra_na_cols()}}
+\item{Ensures there are no negative values
+\code{set_negative_values_to_zero()}}
+\item{Removes NA dates \code{fill_empty_dates_with_na()}}
+\item{Calculates cumulative data \code{complete_cumulative_columns()}}
+\item{Calculates missing columns from existing ones
+\code{calculate_columns_from_existing_data()}}
+}
 Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
@@ -170,8 +242,13 @@ Dynamically works for level 1 and level 2 regions.
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-Get data related to the data class.
-Internally calls \code{download}, \code{clean}, and \code{process} methods.
+Get data related to the data class. This runs each distinct
+step in the workflow in order.
+Internally calls \href{#method-download}{\code{download()}},
+\href{#method-clean}{\code{clean()}},
+\href{#method-filter}{\code{filter()}} and
+\href{#method-process}{\code{process()}}
+\code{download}, \code{clean}, \code{filter} and \code{process} methods.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$get()}\if{html}{\out{</div>}}
 }
@@ -181,9 +258,11 @@ Internally calls \code{download}, \code{clean}, and \code{process} methods.
 \if{html}{\out{<a id="method-return"></a>}}
 \if{latex}{\out{\hypertarget{method-return}{}}}
 \subsection{Method \code{return()}}{
-Return data
-Designed to be called after \code{process}. For most datasets a
-custom method should not be needed.
+Return data. Designed to be called after
+\href{#method-process}{\code{process()}}
+this uses the steps argument to return either a
+list of all the data preserved at each step or just the processed data.
+For most datasets a custom method should not be needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$return()}\if{html}{\out{</div>}}
 }
@@ -193,13 +272,17 @@ custom method should not be needed.
 \if{html}{\out{<a id="method-summary"></a>}}
 \if{latex}{\out{\hypertarget{method-summary}{}}}
 \subsection{Method \code{summary()}}{
-Class summary information
+Create a table of summary information for the country
+being processed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-Returns a single row summary tibble
+Returns a single row summary tibble containing the country name,
+class, level 1 and 2 region names, the function calling it
+(\code{get_regional_data()} or \code{get_national_data()}) the url of the raw data
+and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}

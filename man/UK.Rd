@@ -112,7 +112,7 @@ Specific function for getting region codes for UK .
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-UK specific download function
+UK specific \code{download()} function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$download()}\if{html}{\out{</div>}}
 }
@@ -159,7 +159,7 @@ latest release. Dates should be in the format "yyyy-mm-dd".}
 \item{\code{resolution}}{"utla" (default) or "ltla", depending on which
 geographical resolution is preferred}
 
-\item{\code{...}}{Options arguments passed to \code{initialise_dataclass}}
+\item{\code{...}}{Optional arguments passed to \code{\link[=DataClass]{DataClass()}} initalize.}
 }
 \if{html}{\out{</div>}}
 }
