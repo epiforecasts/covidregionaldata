@@ -70,7 +70,7 @@ fill_empty_dates_with_na <- function(data) {
 #'  non-NA value.
 #' @param data A data frame
 #' @return A data tibble with NAs filled in for cumulative data columns.
-#' @importFrom dplyr group_by
+#' @importFrom purrr map
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
 #' @concept utility
@@ -79,13 +79,14 @@ complete_cumulative_columns <- function(data) {
     "deaths_total", "cases_total", "recovered_total",
     "hosp_total", "tested_total"
   )
-  for (cumulative_col_name in cumulative_col_names) {
-    if (cumulative_col_name %in% colnames(data)) {
-      data <- fill(data, all_of(cumulative_col_name))
-    }
-  }
+  idx <- cumulative_col_names %in% colnames(data)
+  targets <- cumulative_col_names[idx]
+  map(targets, ~ {
+    data <<- fill(data, all_of(.x))
+  })
   return(data)
 }
+
 
 #' Cumulative counts from daily counts or daily counts from cumulative,
 #' dependent on which columns already exist
@@ -124,7 +125,8 @@ calculate_columns_from_existing_data <- function(data) {
       data <- data %>%
         group_by_at(vars(ends_with("_region"))) %>%
         arrange(date, .by_group = TRUE) %>%
-        fill(!!cumulative_count_name) %>% # Fill LOCF for cumulative data
+        fill(!!cumulative_count_name) %>%
+        # Fill LOCF for cumulative data
         mutate(
           !!count_today_name :=
             (!!as.name(cumulative_count_name)) -
