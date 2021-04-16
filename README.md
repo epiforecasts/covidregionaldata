@@ -6,6 +6,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lif
 [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master)
+[![Data
+status](https://img.shields.io/badge/Data-status-lightblue.svg?style=flat)](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html)
 [![metacran
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
 
@@ -49,7 +51,7 @@ remotes::install_github("epiforecasts/covidregionaldata")
 
 ## Quick start
 
-[![Documentation](https://img.shields.io/badge/Package-documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata/)
+[![Documentation](https://img.shields.io/badge/Documentation-lightgrey.svg?style=flat)](https://epiforecasts.io/covidregionaldata/)
 
 Load `covidregionaldata`, `dplyr`, `scales`, and `ggplot2` (all used in
 this quick start),
@@ -69,7 +71,7 @@ temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpTl3BHb
+#> Using a cache at: /tmp/RtmpTY0EO1
 ```
 
 To stop using `memoise` use,
@@ -92,7 +94,7 @@ use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 110,212
+#> Rows: 110,809
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -104,7 +106,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 110,212 x 15
+#> # A tibble: 110,919 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -117,7 +119,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 110,202 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 110,909 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -158,7 +160,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 5,720 x 26
+#> # A tibble: 5,746 x 26
 #>    date       region    iso_3166_2 cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>     <chr>          <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mid… E12000004         NA          NA         NA           NA
@@ -171,7 +173,7 @@ uk_nots
 #>  8 2020-01-30 Scotland  S92000003         NA          NA         NA           NA
 #>  9 2020-01-30 South Ea… E12000008         NA          NA         NA           NA
 #> 10 2020-01-30 South We… E12000009         NA          NA         NA           NA
-#> # … with 5,710 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 5,736 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
@@ -201,55 +203,9 @@ uk_nots %>%
 
 <img src="man/figures/README-uk_plot-1.png" width="100%" />
 
-We can also explore data for level 2 regions (here Upper-tier local
-authorities),
-
-``` r
-uk_nots_2 <- get_regional_data(country = "UK", level = "2", verbose = FALSE)
-uk_nots_2
-#> # A tibble: 94,600 x 24
-#>    date       region  iso_3166_2 authority ons_region_code cases_new cases_total
-#>    <date>     <chr>   <chr>      <chr>     <chr>               <dbl>       <dbl>
-#>  1 2020-01-30 East M… E12000004  Derby     E06000015              NA          NA
-#>  2 2020-01-30 East M… E12000004  Derbyshi… E10000007              NA          NA
-#>  3 2020-01-30 East M… E12000004  Leicester E06000016              NA          NA
-#>  4 2020-01-30 East M… E12000004  Leiceste… E10000018              NA          NA
-#>  5 2020-01-30 East M… E12000004  Lincolns… E10000019              NA          NA
-#>  6 2020-01-30 East M… E12000004  Northamp… E10000021              NA          NA
-#>  7 2020-01-30 East M… E12000004  Nottingh… E06000018              NA          NA
-#>  8 2020-01-30 East M… E12000004  Nottingh… E10000024              NA          NA
-#>  9 2020-01-30 East M… E12000004  Rutland   E06000017              NA          NA
-#> 10 2020-01-30 East o… E12000006  Bedford   E06000055              NA          NA
-#> # … with 94,590 more rows, and 17 more variables: deaths_new <dbl>,
-#> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
-#> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>,
-#> #   areaType <chr>, cumCasesByPublishDate <dbl>, cumCasesBySpecimenDate <dbl>,
-#> #   newCasesByPublishDate <dbl>, newCasesBySpecimenDate <dbl>,
-#> #   cumDeaths28DaysByDeathDate <dbl>, cumDeaths28DaysByPublishDate <dbl>,
-#> #   newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>
-```
-
-now as an example we can plot cases in the East Midlands,
-
-``` r
-uk_nots_2 %>%
-  filter(region %in% c("East Midlands")) %>%
-  ggplot() +
-  aes(x = date, y = cases_new, col = authority) +
-  geom_line(alpha = 0.4) +
-  labs(x = "Date", y = "Reported Covid-19 cases") +
-  scale_y_continuous(labels = comma) +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  guides(col = guide_legend(title = "Authority"))
-```
-
-<img src="man/figures/README-utla_plot-1.png" width="100%" />
-
-Level 2 data is only available for some countries, see
-`get_available_datasets` for supported nations. For further examples see
-the [quick start
-vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd)
+See `get_available_datasets()` for supported regions and subregional
+levels. For further examples see the [quick start
+vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
 
 ## Citation
 
@@ -279,6 +235,8 @@ using the following,
 
 ## Development
 
+[![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
+
 We welcome contributions and new contributors\! We particularly
 appreciate help adding new data sources for countries at sub-national
 level, or work on priority problems in the
@@ -286,4 +244,4 @@ level, or work on priority problems in the
 Please check and add to the issues, and/or add a [pull
 request](https://github.com/epiforecasts/covidregionaldata/pulls). For
 more details, start with the [contributing
-guide](https://github.com/epiforecasts/covidregionaldata/tree/master/.github/CONTRIBUTING.md).
+guide](https://github.com/epiforecasts/covidregionaldata/wiki/Contributing).
