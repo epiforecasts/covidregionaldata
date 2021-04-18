@@ -50,8 +50,9 @@ switchTo("newcovidregionaldata")
 library(covidregionaldata)
 library(dplyr)
 sources <- get_available_datasets() %>%
+  # temporary block - just regional data
   filter(get_data_function %in%
-           c("get_regional_data", "get_national_data")) %>%
+           c("get_regional_data")) %>% # , "get_national_data"
   dplyr::select(source = class, level_1_region, level_2_region) %>%
   tidyr::pivot_longer(
     cols = -source,
@@ -70,11 +71,25 @@ if (!is.null(source_of_interest)) {
     dplyr::filter(source %in% source_of_interest)
 }
 
+
 # apply tests to each data source in turn
-sources %>%
-  dplyr::rowwise() %>%
-  dplyr::group_split() %>%
-  purrr::map(
+dl_list <- sources %>%
+  # addin 
+  filter(source != "SouthAfrica") %>% # level == 1,
+  mutate(label = paste0(source, "_", level)) %>%
+  select(label, source, level, regions) %>%
+  # end addin
+  #dplyr::rowwise() %>%
+  group_by(label) %>%
+  #tidyr::nest() %>%
+  dplyr::group_split()
+
+names(dl_list) <- pull(sources %>%
+                         filter(source != "SouthAfrica") %>% # level == 1,
+                         mutate(label = paste0(source, "_", level)) %>%
+                         select(label))
+#%>%
+dl_list %>% purrr::map(
     ~ get_regional_data(
       country = .$source[[1]],
       level = .$level[[1]]
