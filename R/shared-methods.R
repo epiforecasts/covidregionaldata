@@ -326,12 +326,12 @@ DataClass <- R6::R6Class(
     #' list of all the data preserved at each step or just the processed data.
     #' For most datasets a custom method should not be needed.
     return = function() {
+      if (is.null(self$data)) {
+        stop("Data must first be downloaded (dowload), cleaned (clean) or
+             processed (process)")
+      }
       self$data$return <- NA
       if (self$steps) {
-        if (is.null(self$data)) {
-          stop("Data must first be downloaded (dowload), cleaned (clean) or
-               processed (process)")
-        }
         return(self$data)
       } else {
         if (is.null(self$data$processed)) {

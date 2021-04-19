@@ -11,6 +11,8 @@ test_that("DataClass methods cannot be called when the previous method have not
   expect_error(a$filter())
   expect_error(a$process())
   expect_error(a$return())
+  a$steps <- TRUE
+  expect_error(a$return())
 })
 
 D <- R6::R6Class("D",
