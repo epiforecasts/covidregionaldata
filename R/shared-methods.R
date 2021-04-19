@@ -198,6 +198,9 @@ DataClass <- R6::R6Class(
     #' `data$raw`
     #' @importFrom purrr map
     download = function() {
+      if (length(self$data_urls) == 0) {
+        stop("No data to download as data_urls is empty")
+      }
       self$data$raw <- map(self$data_urls, csv_reader,
         verbose = self$verbose
       )
@@ -210,6 +213,9 @@ DataClass <- R6::R6Class(
     #' level specific cleaning.methods which are defined in said country.
     #' `clean_level_[1/2]`. Cleaned data is stored in `data$clean`
     clean = function() {
+      if (is.null(self$data$raw)) {
+        stop("Data must first be downloaded using the download method")
+      }
       message_verbose(self$verbose, "Cleaning data")
       self$clean_common()
 
@@ -236,6 +242,10 @@ DataClass <- R6::R6Class(
     #' @importFrom dplyr filter
     #' @importFrom rlang !!
     filter = function(regions) {
+      if (is.null(self$data$clean)) {
+        stop("Data must first be cleaned using the clean method")
+      }
+
       if (!missing(regions)) {
         self$target_regions <- regions
       }
@@ -274,6 +284,10 @@ DataClass <- R6::R6Class(
     #' }
     #' Dynamically works for level 1 and level 2 regions.
     process = function() {
+      if (is.null(self$data$clean)) {
+        stop("Data must first be cleaned using the clean method")
+      }
+
       message_verbose(self$verbose, "Processing data")
       region_vars <- region_dispatch(
         level = self$level,
@@ -314,8 +328,15 @@ DataClass <- R6::R6Class(
     return = function() {
       self$data$return <- NA
       if (self$steps) {
+        if (is.null(self$data)) {
+          stop("Data must first be downloaded (dowload), cleaned (clean) or
+               processed (process)")
+        }
         return(self$data)
       } else {
+        if (is.null(self$data$processed)) {
+          stop("Data must first be proccessed using the process method")
+        }
         return(self$data$processed)
       }
     },
