@@ -31,9 +31,14 @@ if (!is.null(getOption("initialSetup"))) {
 if(initialSetup) {
   removeLib("oldcovidregionaldata")
   removeLib("newcovidregionaldata")
-  crd_new <- GithubManifest("epiforecasts/covidregionaldata@0.9.0")
-  crd_old <- GithubManifest("epiforecasts/covidregionaldata@0.8.3")
-  #removeLib("oldcovidregionaldata")
+  
+  # switchr cannot correctly pull releases from github, so 
+  # we have stashed a version of the 0.8.3 release in a branch
+  # on a separate account
+  #
+  crd_new <- GithubManifest("epiforecasts/covidregionaldata@master")
+  crd_old <- GithubManifest("richardmn/covidregionaldata@old-0_8_3")
+  
   switchTo("oldcovidregionaldata", seed = crd_old)
   ip_list_old <- installed.packages()
   switchBack()
@@ -42,8 +47,6 @@ if(initialSetup) {
   switchBack()
   waldo::compare(ip_list_old, ip_list_new)
 } 
-
-
 
 switchTo("newcovidregionaldata")
 
@@ -116,17 +119,15 @@ get_regional_data_wrapper <- function(country, level = 1) {
 }
 
 # apply tests to each data source in turn
-sources %>%
-  dplyr::rowwise() %>%
-  dplyr::group_split() %>%
+dl_list %>%
   purrr::map(
     ~ get_regional_data_wrapper(
       country = .$source[[1]],
       level = .$level[[1]]
     )
-  ) -> new_version_output
+  ) -> old_version_output
 
-saveRDS(new_version_output, "oldversionoutput.rds")
+saveRDS(old_version_output, "oldversionoutput.rds")
 
 switchBack()
 
