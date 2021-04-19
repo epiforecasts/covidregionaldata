@@ -2,7 +2,7 @@ test_that("DataClass can be initialised", {
   expect_error(DataClass$new(), NA)
 })
 
-test_that("DataClass methods cannot be called when the previous method has not
+test_that("DataClass methods cannot be called when the previous method have not
            been called", {
   a <- DataClass$new()
   expect_error(a$get())
