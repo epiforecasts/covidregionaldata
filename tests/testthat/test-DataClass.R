@@ -4,13 +4,13 @@ test_that("DataClass can be initialised", {
 
 test_that("DataClass methods cannot be called when the previous method has not
            been called", {
-  d <- DataClass$new()
-  expect_error(d$get())
-  expect_error(d$download())
-  expect_error(d$clean())
-  expect_error(d$filter())
-  expect_error(d$process())
-  expect_error(d$return())
+  a <- DataClass$new()
+  expect_error(a$get())
+  expect_error(a$download())
+  expect_error(a$clean())
+  expect_error(a$filter())
+  expect_error(a$process())
+  expect_error(a$return())
 })
 
 D <- R6::R6Class("D",

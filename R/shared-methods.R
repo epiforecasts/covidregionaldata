@@ -221,7 +221,7 @@ DataClass <- R6::R6Class(
 
       specific <- paste0("clean_level_", self$level)
 
-      if (any(names(get(class(self)[1])$public_methods) %in% specific)) {
+      if (any(names(self) %in% specific)) {
         specific <- paste0("self$", specific, "()")
         eval(parse(text = specific))
       }
