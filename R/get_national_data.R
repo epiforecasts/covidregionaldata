@@ -41,8 +41,8 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
   }
 
   # check data availability and initiate country class if available
-  nation_class <- check_country_available(
-    country = source, level = "1",
+  nation_class <- initialise_dataclass(
+    class = source, level = "1",
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
     regions = countries, ...

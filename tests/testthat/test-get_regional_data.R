@@ -6,8 +6,8 @@ test_get_regional_data <- function(level) {
     true_R6$steps <- TRUE
     true_steps <- true_R6$return()
     mockery::stub(
-      get_regional_data, "check_country_available",
-      function(country, level, totals, localise,
+      get_regional_data, "initialise_dataclass",
+      function(class, level, totals, localise,
                verbose, steps, regions) {
         class <- mexico$clone()
         class$totals <- totals

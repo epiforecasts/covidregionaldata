@@ -1,18 +1,18 @@
-test_that("Test error is thrown for numeric country", {
+test_that("Test error is thrown for numeric class", {
   expect_error(
-    check_country_available(
-      country = 1, level = "1",
+    initialise_dataclass(
+      class = 1, level = "1",
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE
     ),
-    "is.character(country) is not TRUE",
+    "is.character(class) is not TRUE",
     fixed = TRUE
   )
 })
-test_that("Test error is thrown for unknown country/source", {
+test_that("Test error is thrown for unknown class/source", {
   expect_error(
-    check_country_available(
-      country = "amadeupcountry", level = "1",
+    initialise_dataclass(
+      class = "amadeupclass", level = "1",
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE
     )
@@ -20,16 +20,16 @@ test_that("Test error is thrown for unknown country/source", {
 })
 test_that("Test error is thrown when level not available for data", {
   expect_error(
-    check_country_available(
-      country = "Italy", level = "2",
+    initialise_dataclass(
+      class = "Italy", level = "2",
       totals = FALSE, localise = TRUE,
       verbose = FALSE, steps = FALSE
     )
   )
 })
 test_that("Test returns an R6 object", {
-  region_class <- check_country_available(
-    country = "WHO", level = "1",
+  region_class <- initialise_dataclass(
+    class = "WHO", level = "1",
     totals = FALSE, localise = TRUE,
     verbose = FALSE, steps = FALSE
   )
@@ -37,14 +37,14 @@ test_that("Test returns an R6 object", {
   expect_equal(to_check[length(to_check)], "R6")
 })
 test_that("Test that datasets with spaces can be found", {
-  uk <- check_country_available("United Kingdom")
+  uk <- initialise_dataclass("United Kingdom")
   expect_equal(class(uk)[1], "UK")
 })
 test_that("Test that datasets with lower case", {
-  ecdc <- check_country_available("ecdc")
+  ecdc <- initialise_dataclass("ecdc")
   expect_equal(class(ecdc)[1], "ECDC")
 })
 test_that("Test that datasets with partial name matches", {
-  uk <- check_country_available("united kingd")
+  uk <- initialise_dataclass("united kingd")
   expect_equal(class(uk)[1], "UK")
 })

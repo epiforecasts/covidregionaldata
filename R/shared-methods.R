@@ -1,38 +1,41 @@
-#' Check country and regions are available and set up country class
+#' Initialise a child class of DataClass if it exists
 #'
-#' @description Check data for the requested country and region
-#' is available and return an initialised region class for that country.
+#' @description Initialise a child class of DataClass if it exists.
+#' @param class A character string specifying the `DataClass` to initialise.
+#' Not case dependent and matching is based on either the class name or the its
+#' country definition. For a list of options use `get_available_datasets()`.
 #' @inheritParams get_regional_data
-#' @return The target countries specific object if available, e.g. `Italy()`
-#' @rdname check_country_available
+#' @return An initialised version of the target class if available,
+#' e.g. `Italy()`
+#' @rdname initialise_dataclass
 #' @importFrom stringr str_to_title str_replace_all str_detect
 #' @importFrom dplyr bind_rows filter distinct
 #' @importFrom purrr map_lgl
 #' @export
 #' @examples
-#' # Check for Italian data
-#' italy <- check_country_available("Italy")
+#' # Initialise Italian data
+#' italy <- initialise_dataclass("Italy")
 #'
-#' # Check for UK data with a partial name match
-#' uk <- check_country_available("United Kingdom")
+#' # Initialise UK data with a partial name match
+#' uk <- initialise_dataclass("United Kingdom")
 #'
-#' # Check for ECDC data
-#' ecdc <- check_country_available("ecdc")
-check_country_available <- function(country = character(), level = 1,
-                                    totals = FALSE, localise = TRUE,
-                                    regions, verbose = TRUE, steps = FALSE,
-                                    ...) {
-  stopifnot(is.character(country))
+#' # Initialise ECDC data
+#' ecdc <- initialise_dataclass("ecdc")
+initialise_dataclass <- function(class = character(), level = 1,
+                                 totals = FALSE, localise = TRUE,
+                                 regions, verbose = TRUE, steps = FALSE,
+                                 ...) {
+  stopifnot(is.character(class))
   level <- as.character(level)
 
   # construct short hand options
-  title_country <- str_to_title(country)
-  nospace <- str_replace_all(title_country, " ", "")
+  title_class <- str_to_title(class)
+  nospace <- str_replace_all(title_class, " ", "")
   targets <- c(
-    title_country, toupper(title_country), nospace, toupper(nospace)
+    title_class, toupper(title_class), nospace, toupper(nospace)
   )
 
-  # check we have data for desired country
+  # check we have data for desired class
   datasets <- covidregionaldata::get_available_datasets()
   target_class <- bind_rows(
     filter(datasets, map_lgl(.data$class, ~ any(str_detect(., targets)))),
@@ -41,7 +44,7 @@ check_country_available <- function(country = character(), level = 1,
     distinct()
 
   if (nrow(target_class) == 0) {
-    stop("No data available for ", country, " see get_available_datasets() for
+    stop("No data available for ", class, " see get_available_datasets() for
     supported datasets")
   }
 
