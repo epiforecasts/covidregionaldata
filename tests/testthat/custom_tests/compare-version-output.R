@@ -148,4 +148,5 @@ saveRDS(old_version_output, "oldversionoutput.rds")
 switchBack()
 
 # Use waldo to compare the two lists
-waldo::compare(old_version_output,new_version_output)
+#waldo::compare(old_version_output,new_version_output)
+purrr::map2(old_version_output, new_version_output, waldo::compare)
