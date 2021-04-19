@@ -1,32 +1,35 @@
-# load testing function and tools.
-# set up custom tests using:
-# custom_tests/regional-dataset-specific.R
-#source("custom_tests/test-regional-dataset.R")
+#
+# custom code to load and compare output from two different
+# versions of covidregionaldata using switchr
+#
+# WARNINGS:
+#  * This code takes a long time (on the order of a couple of hours)
+#    and generates large output files (1.2gb total).
+#  * This code uses switchr which may not interact well with other
+#    elements of your work environment. You may want to run this
+#    outside of RStudio
 
+# OPTIONS
+# testSource:
 # should a single dataset be tested vs all datasets
 # set this when implementing a new dataset.
-# Can also be set using environment variables
-
-library(switchr)
-#switchrBaseDir(file.path(tempdir(), ".switchr"))
-
-# reps = options("repos")[[1]]
-# options(width=40)
-# if(reps["CRAN"] == "@CRAN@") {
-#   reps["CRAN"] = "https://cloud.r-project.org"
-#   options(repos = reps)
-# }
-# 
 
 source_of_interest <- NULL
 if (!is.null(getOption("testSource"))) {
   source_of_interest <- getOption("testSource")
 }
 
+# initialSetup
+# should the switchr framework be built from scratch or
+# can it be assumed to be in place
+
 initialSetup <- FALSE
 if (!is.null(getOption("initialSetup"))) {
   initialSetup <- getOption("initialSetup")
 }
+
+library(switchr)
+#switchrBaseDir(file.path(tempdir(), ".switchr"))
 
 if(initialSetup) {
   removeLib("oldcovidregionaldata")
@@ -48,10 +51,17 @@ if(initialSetup) {
   waldo::compare(ip_list_old, ip_list_new)
 } 
 
+## Working from new version of covidregionaldata
+#
+
 switchTo("newcovidregionaldata")
 
 library(covidregionaldata)
 library(dplyr)
+
+start_using_memoise()
+
+# Build a list of data sources available, based on the newer version
 sources <- get_available_datasets() %>%
   # temporary block - just regional data
   filter(get_data_function %in%
@@ -74,11 +84,9 @@ if (!is.null(source_of_interest)) {
     dplyr::filter(source %in% source_of_interest)
 }
 
-
-# apply tests to each data source in turn
 dl_list <- sources %>%
   # addin 
-  filter(source != "SouthAfrica") %>% # level == 1,
+  filter(source != "SouthAfrica") %>%
   mutate(label = paste0(source, "_", level)) %>%
   select(label, source, level, regions) %>%
   # end addin
@@ -88,10 +96,12 @@ dl_list <- sources %>%
   dplyr::group_split()
 
 names(dl_list) <- pull(sources %>%
-                         filter(source != "SouthAfrica") %>% # level == 1,
+                         filter(source != "SouthAfrica") %>%
                          mutate(label = paste0(source, "_", level)) %>%
                          select(label))
-#%>%
+
+# Now call get_regional_data on each item of the list and store it in a
+# new list
 dl_list %>% purrr::map(
     ~ get_regional_data(
       country = .$source[[1]],
@@ -102,7 +112,8 @@ dl_list %>% purrr::map(
 saveRDS(new_version_output, "newversionoutput.rds")
 
 switchBack()
-## now switch to the old version
+
+## Now switch to the old version
 #
 
 switchTo("oldcovidregionaldata")
@@ -110,6 +121,10 @@ switchTo("oldcovidregionaldata")
 library(covidregionaldata)
 library(dplyr)
 
+start_using_memoise()
+
+# Wrapper to the old version of get_regional_data so that it can
+# be applied to the same format of list as the new version
 get_regional_data_wrapper <- function(country, level = 1) {
   if (level == 1) {
     get_regional_data(country)
@@ -118,7 +133,8 @@ get_regional_data_wrapper <- function(country, level = 1) {
   }
 }
 
-# apply tests to each data source in turn
+# Now call get_regional_data_wrapper on each item of the list and store it
+# in a new list
 dl_list %>%
   purrr::map(
     ~ get_regional_data_wrapper(
@@ -131,8 +147,5 @@ saveRDS(old_version_output, "oldversionoutput.rds")
 
 switchBack()
 
-# man = PkgManifest(name = "covidregionaldata",
-#                   url = "https://github.com/epiforecasts/covidregionaldata",
-#                   type = "git")
-# man
-#install_packages()
+# Use waldo to compare the two lists
+waldo::compare(old_version_output,new_version_output)
