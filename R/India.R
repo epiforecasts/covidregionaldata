@@ -69,8 +69,7 @@ India <- R6::R6Class("India",
           full_join,
           by = c(
             "Date" = "Date",
-            "state" = "state",
-            "cases_new" = "cases_new"
+            "state" = "state"
           )
         )
       self$data$clean <- cases_deaths_recovered %>%
@@ -88,10 +87,19 @@ India <- R6::R6Class("India",
     #' @param status The data to extract
     #'
     get_desired_status = function(status) {
+      conversion <- list(
+        "Confirmed" = "cases_new",
+        "Deceased" = "deaths_new",
+        "Recovered"  = "recovered_new"
+      )
       india_cases <- self$data$raw$main %>%
         filter(Status == status) %>%
         select(Date, self$codes_lookup$`1`[["code"]]) %>%
-        pivot_longer(-Date, names_to = "state", values_to = "cases_new")
+        pivot_longer(
+          -Date,
+          names_to = "state",
+          values_to = conversion[[status]]
+        )
     }
   )
 )
