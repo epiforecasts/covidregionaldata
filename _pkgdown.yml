@@ -41,6 +41,7 @@ reference:
     contents:
       - get_national_data
       - get_regional_data
+      - initialise_dataclass
   - title: Dataset Classes
     desc: Clases that define individual datasets and contain all the methods needed to download, process, and clean them.
     contents:
@@ -49,7 +50,6 @@ reference:
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
       - get_available_datasets
-      - check_country_available
       - DataClass
       - CountryDataClass
       - has_concept("utility")
