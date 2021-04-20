@@ -70,7 +70,6 @@ fill_empty_dates_with_na <- function(data) {
 #'  non-NA value.
 #' @param data A data frame
 #' @return A data tibble with NAs filled in for cumulative data columns.
-#' @importFrom purrr map
 #' @importFrom tidyr fill
 #' @importFrom tidyselect all_of
 #' @concept utility
@@ -81,9 +80,7 @@ complete_cumulative_columns <- function(data) {
   )
   idx <- cumulative_col_names %in% colnames(data)
   targets <- cumulative_col_names[idx]
-  map(targets, ~ {
-    data <<- fill(data, all_of(.x))
-  })
+  data <- fill(data, all_of(targets))
   return(data)
 }
 
@@ -97,6 +94,7 @@ complete_cumulative_columns <- function(data) {
 #' @param data A data frame
 #' @return A data frame with extra columns if required
 #' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
+#' @importFrom purrr walk2
 #' @importFrom tidyr replace_na
 #' @importFrom tidyselect ends_with
 #' @importFrom tibble tibble
@@ -104,36 +102,40 @@ complete_cumulative_columns <- function(data) {
 #' @concept utility
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
+  count_today_name <- paste0(possible_counts, "_new")
+  cumulative_count_name <- paste0(possible_counts, "_total")
+  idx_1 <- (count_today_name %in% colnames(data) &
+    !(cumulative_count_name %in% colnames(data)))
+  idx_2 <- (!(count_today_name %in% colnames(data)) &
+    cumulative_count_name %in% colnames(data))
+  data <- data %>%
+    group_by_at(vars(ends_with("_region"))) %>%
+    arrange(date, .by_group = TRUE)
 
-  for (count in possible_counts) {
-    count_today_name <- paste0(count, "_new")
-    cumulative_count_name <- paste0(count, "_total")
-
-    if (count_today_name %in% colnames(data) &
-      !(cumulative_count_name %in% colnames(data))) {
-      # in this case the daily count is there but there are no cumulative counts
-      data <- data %>%
-        group_by_at(vars(ends_with("_region"))) %>%
-        arrange(date, .by_group = TRUE) %>%
+  # if new is avaliable but total is not, calculate totals
+  walk2(
+    count_today_name[idx_1], cumulative_count_name[idx_1],
+    ~ {
+      data <<- data %>%
         mutate(
-          !!cumulative_count_name :=
-            cumsum(replace_na(!!as.name(count_today_name), 0))
-        )
-    } else if (!(count_today_name %in% colnames(data)) &
-      cumulative_count_name %in% colnames(data)) {
-      # in this case the cumulative counts are there but no daily counts
-      data <- data %>%
-        group_by_at(vars(ends_with("_region"))) %>%
-        arrange(date, .by_group = TRUE) %>%
-        fill(!!cumulative_count_name) %>%
-        # Fill LOCF for cumulative data
-        mutate(
-          !!count_today_name :=
-            (!!as.name(cumulative_count_name)) -
-            lag(!!as.name(cumulative_count_name), default = 0)
+          !!.y := cumsum(replace_na(!!as.name(.x), 0))
         )
     }
-  }
+  )
+
+  # if total is avaliable but new is not, calculate new
+  walk2(
+    count_today_name[idx_2], cumulative_count_name[idx_2],
+    ~ {
+      data <<- data %>%
+        fill(!!.y) %>%
+        mutate(
+          !!.x :=
+            (!!as.name(.y)) -
+            lag(!!as.name(.y), default = 0)
+        )
+    }
+  )
   return(data)
 }
 
