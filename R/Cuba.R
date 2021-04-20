@@ -40,7 +40,7 @@ Cuba <- R6::R6Class("Cuba",
       self$codes_lookup$`1` <- tibble(
         code = c(
           "CU-15", "CU-09", "CU-08", "CU-06", "CU-12", "CU-14", "CU-11",
-          "CU-03", "CU-10", "CU-04", "CU-16", "CU-01", "CU-07", "C8-13",
+          "CU-03", "CU-10", "CU-04", "CU-16", "CU-01", "CU-07", "CU-13",
           "CU-05", "CU-99"
         ),
         region = c(
