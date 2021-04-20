@@ -67,7 +67,11 @@ India <- R6::R6Class("India",
       cases_deaths_recovered <- data %>%
         reduce(
           full_join,
-          by = c("Date" = "Date", "state" = "state")
+          by = c(
+            "Date" = "Date",
+            "state" = "state",
+            "cases_new" = "cases_new"
+          )
         )
       self$data$clean <- cases_deaths_recovered %>%
         mutate(Date = dmy(Date)) %>%
