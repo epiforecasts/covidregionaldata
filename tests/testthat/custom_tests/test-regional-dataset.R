@@ -23,31 +23,16 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
 }
 
 expect_columns_contain_data <- function(data_name, region) {
-  cols2check <- list()
-  if (length(region$source_data_cols[grep(
-    "cases",
-    tolower(region$source_data_cols)
-  )]) > 0) {
-    append(cols2check, c("cases_new", "cases_total"))
+  cols_present <- function(col) {
+    if (length(region$source_data_cols[grep(
+        col, tolower(region$source_data_cols))]) > 0) {
+      return(paste0(col, c("_new", "cases_total")))
+  }else{
+      return(NULL)
+    }
   }
-  if (length(region$source_data_cols[grep(
-    "deaths",
-    tolower(region$source_data_cols)
-  )]) > 0) {
-    append(cols2check, c("deaths_new", "deaths_total"))
-  }
-  if (length(region$source_data_cols[grep(
-    "recovered",
-    tolower(region$source_data_cols)
-  )]) > 0) {
-    append(cols2check, c("recovered_new", "recovered_total"))
-  }
-  if (length(region$source_data_cols[grep(
-    "test",
-    tolower(region$source_data_cols)
-  )]) > 0) {
-    append(cols2check, c("tested_new", "tested_total"))
-  }
+  cols <- c("cases", "deaths", "recovered", "test")
+  cols2check <- purrr::map_chr(cols,  cols_present)
   purrr::walk(
     cols2check,
     ~ {
