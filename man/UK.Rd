@@ -13,7 +13,7 @@ data.}
 Extracts daily COVID-19 data for the UK, stratified by region
 and nation. Contains additional options to other country class objects,
 including options to return subnational English regions using NHS region
-boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
+boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
 download from (release_date) and a geographical resolution (resolution).
 }
 \examples{
@@ -27,7 +27,7 @@ region$return()
 ## ------------------------------------------------
 
 \dontrun{
-Uk$new(
+UK$new(
  level = 1, localise = TRUE,
  verbose = True, steps = FALSE,
  nhsregions = FALSE, release_date = NULL,
@@ -166,7 +166,7 @@ geographical resolution is preferred}
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{\dontrun{
-Uk$new(
+UK$new(
  level = 1, localise = TRUE,
  verbose = True, steps = FALSE,
  nhsregions = FALSE, release_date = NULL,

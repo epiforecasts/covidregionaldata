@@ -6,8 +6,8 @@ test_get_national_data <- function(source) {
     true_R6$steps <- TRUE
     true_steps <- true_R6$return()
     mockery::stub(
-      get_national_data, "check_country_available",
-      function(country, level, totals, localise,
+      get_national_data, "initialise_dataclass",
+      function(class, level, totals, localise,
                verbose, steps, regions) {
         class <- national$clone()
         class$verbose <- verbose
