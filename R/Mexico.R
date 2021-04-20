@@ -41,8 +41,8 @@ Mexico <- R6::R6Class("Mexico",
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
     level_data_urls = list(
-      "1" = list("snippet" = "Downloads/filesDD.php?csvmun"),
-      "2" = list("snippet" = "Downloads/filesDD.php?csvaxd")
+      "1" = list("snippet" = "Downloads/filesDD.php?csvaxd"),
+      "2" = list("snippet" = "Downloads/filesDD.php?csvmun")
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
