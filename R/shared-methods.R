@@ -327,7 +327,7 @@ DataClass <- R6::R6Class(
     #' For most datasets a custom method should not be needed.
     return = function() {
       if (is.null(self$data)) {
-        stop("Data must first be downloaded (dowload), cleaned (clean) or
+        stop("Data must first be downloaded (download), cleaned (clean) or
              processed (process)")
       }
       self$data$return <- NA
