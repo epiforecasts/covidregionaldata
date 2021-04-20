@@ -4,7 +4,7 @@
 #' @description Extracts daily COVID-19 data for the UK, stratified by region
 #' and nation. Contains additional options to other country class objects,
 #' including options to return subnational English regions using NHS region
-#' boundaries instead of PHE boundaries (nhsregions=TRUE), a release date to
+#' boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
 #' download from (release_date) and a geographical resolution (resolution).
 #'
 # nolint start
@@ -105,7 +105,7 @@ UK <- R6::R6Class("UK", # rename to country name
         ) %>%
         # Hospitalisations and tested variables are only available for nations
         # (not regions)
-        #   sub-national English regions are available in the NHS data below
+        # sub-national English regions are available in the NHS data below
         # (with arg nhsregions = TRUE)
         rename(
           hosp_new = .data$newAdmissions,
@@ -207,7 +207,7 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @param ... Optional arguments passed to [DataClass()] initalize.
     #' @examples
     #' \dontrun{
-    #' Uk$new(
+    #' UK$new(
     #'  level = 1, localise = TRUE,
     #'  verbose = True, steps = FALSE,
     #'  nhsregions = FALSE, release_date = NULL,
