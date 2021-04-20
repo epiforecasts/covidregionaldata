@@ -15,23 +15,40 @@
 # set this when implementing a new dataset.
 
 source_of_interest <- NULL
-if (!is.null(getOption("testSource"))) {
-  source_of_interest <- getOption("testSource")
+if (!is.null(getOption("source_of_interest"))) {
+  source_of_interest <- getOption("source_of_interest")
 }
 
-# initialSetup
+# initial_setup:
 # should the switchr framework be built from scratch or
 # can it be assumed to be in place
 
-initialSetup <- FALSE
-if (!is.null(getOption("initialSetup"))) {
-  initialSetup <- getOption("initialSetup")
+initial_setup <- FALSE
+if (!is.null(getOption("initial_setup"))) {
+  initialSetup <- getOption("initial_setup")
 }
+
+# save_data_files:
+# should the data files be saved
+
+save_data_files <- FALSE
+if (!is.null(getOption("save_data_files"))) {
+  initialSetup <- getOption("save_data_files")
+}
+
+# save_comparison:
+# should the comparison data set be saved
+
+save_comparison <- FALSE
+if (!is.null(getOption("save_comparison"))) {
+  initialSetup <- getOption("save_comparison")
+}
+
 
 library(switchr)
 #switchrBaseDir(file.path(tempdir(), ".switchr"))
 
-if(initialSetup) {
+if(initial_setup) {
   removeLib("oldcovidregionaldata")
   removeLib("newcovidregionaldata")
   
@@ -43,12 +60,12 @@ if(initialSetup) {
   crd_old <- GithubManifest("richardmn/covidregionaldata@old-0_8_3")
   
   switchTo("oldcovidregionaldata", seed = crd_old)
-  ip_list_old <- installed.packages()
+  #ip_list_old <- installed.packages()
   switchBack()
   switchTo("newcovidregionaldata", seed = crd_new)
-  ip_list_new <- installed.packages()
+  #ip_list_new <- installed.packages()
   switchBack()
-  waldo::compare(ip_list_old, ip_list_new)
+#  waldo::compare(ip_list_old, ip_list_new)
 } 
 
 ## Working from new version of covidregionaldata
@@ -78,6 +95,7 @@ sources <- get_available_datasets() %>%
   ) %>%
   tidyr::drop_na(regions)
 
+
 # filter out target datasets
 if (!is.null(source_of_interest)) {
   sources <- sources %>%
@@ -85,18 +103,14 @@ if (!is.null(source_of_interest)) {
 }
 
 dl_list <- sources %>%
-  # addin 
-  filter(source != "SouthAfrica") %>%
+  #filter(source != "SouthAfrica") %>%
   mutate(label = paste0(source, "_", level)) %>%
   select(label, source, level, regions) %>%
-  # end addin
-  #dplyr::rowwise() %>%
   group_by(label) %>%
-  #tidyr::nest() %>%
   dplyr::group_split()
 
 names(dl_list) <- pull(sources %>%
-                         filter(source != "SouthAfrica") %>%
+                         #filter(source != "SouthAfrica") %>%
                          mutate(label = paste0(source, "_", level)) %>%
                          select(label))
 
@@ -109,7 +123,7 @@ dl_list %>% purrr::map(
     )
   ) -> new_version_output
 
-saveRDS(new_version_output, "newversionoutput.rds")
+if (save_data_files) saveRDS(new_version_output, "newversionoutput.rds")
 
 switchBack()
 
@@ -126,6 +140,9 @@ start_using_memoise()
 # Wrapper to the old version of get_regional_data so that it can
 # be applied to the same format of list as the new version
 get_regional_data_wrapper <- function(country, level = 1) {
+  if (country == "SouthAfrica") {
+    country <- "South Africa"
+  }
   if (level == 1) {
     get_regional_data(country)
   } else {
@@ -143,10 +160,15 @@ dl_list %>%
     )
   ) -> old_version_output
 
-saveRDS(old_version_output, "oldversionoutput.rds")
+if (save_data_files) saveRDS(old_version_output, "oldversionoutput.rds")
 
 switchBack()
 
 # Use waldo to compare the two lists
 #waldo::compare(old_version_output,new_version_output)
-purrr::map2(old_version_output, new_version_output, waldo::compare)
+waldo_comparison <-
+  purrr::map2(old_version_output, new_version_output, waldo::compare)
+
+if (save_comparison) saveRDS(waldo_comparison, "oldnewcomparison.rds")
+
+waldo_comparison
