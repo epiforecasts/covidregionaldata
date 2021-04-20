@@ -64,9 +64,6 @@
     <loc>epiforecasts.io/covidregionaldata/reference/calculate_columns_from_existing_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/check_country_available.html</loc>
-  </url>
-  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/colombia_codes.html</loc>
   </url>
   <url>
@@ -98,6 +95,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/get_regional_data.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/initialise_dataclass.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/lithuania_codes.html</loc>
