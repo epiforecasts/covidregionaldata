@@ -44,10 +44,10 @@ Cuba <- R6::R6Class("Cuba",
           "CU-05", "CU-99"
         ),
         region = c(
-          "Artemisa", "Camag\\u00fcey", "Ciego de \\u00c1vila", "Cienfuegos",
-          "Granma", "Guant\\u00e1namo", "Holgu\\u00edn", "La Habana",
-          "Las Tunas", "Matanzas", "Mayabeque", "Pinar del R\\u00edo",
-          "Sancti Sp\\u00edritus", "Santiago de Cuba", "Villa Clara",
+          "Artemisa", "Camag\u00fcey", "Ciego de \u00c1vila", "Cienfuegos",
+          "Granma", "Guant\u00e1namo", "Holgu\u00edn", "La Habana",
+          "Las Tunas", "Matanzas", "Mayabeque", "Pinar del R\u00edo",
+          "Sancti Sp\u00edritus", "Santiago de Cuba", "Villa Clara",
           "Isla de la Juventud"
         )
       )
