@@ -89,6 +89,7 @@ sources <- get_available_datasets() %>%
     names_to = "level",
     values_to = "regions"
   ) %>%
+  filter(source != "SouthAfrica") %>%
   dplyr::mutate(
     level = stringr::str_split(level, "_"),
     level = purrr::map_chr(level, ~ .[2])
@@ -103,7 +104,6 @@ if (!is.null(source_of_interest)) {
 }
 
 dl_list <- sources %>%
-  #filter(source != "SouthAfrica") %>%
   mutate(label = paste0(source, "_", level)) %>%
   select(label, source, level, regions) %>%
   group_by(label) %>%
@@ -140,9 +140,9 @@ start_using_memoise()
 # Wrapper to the old version of get_regional_data so that it can
 # be applied to the same format of list as the new version
 get_regional_data_wrapper <- function(country, level = 1) {
-  if (country == "SouthAfrica") {
-    country <- "South Africa"
-  }
+  # if (country == "SouthAfrica") {
+  #   country <- "South Africa"
+  # }
   if (level == 1) {
     get_regional_data(country)
   } else {
