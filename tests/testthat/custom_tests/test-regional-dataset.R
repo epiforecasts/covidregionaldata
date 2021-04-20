@@ -22,18 +22,39 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   }
 }
 
-expect_columns_contain_data <- function(data_name, data) {
-  cols2check <- list(
-    "cases_new", "cases_total",
-    "deaths_new", "deaths_total"
-  )
+expect_columns_contain_data <- function(data_name, region) {
+  cols2check <- list()
+  if (length(region$source_data_cols[grep(
+    "cases",
+    tolower(region$source_data_cols)
+  )]) > 0) {
+    append(cols2check, c("cases_new", "cases_total"))
+  }
+  if (length(region$source_data_cols[grep(
+    "deaths",
+    tolower(region$source_data_cols)
+  )]) > 0) {
+    append(cols2check, c("deaths_new", "deaths_total"))
+  }
+  if (length(region$source_data_cols[grep(
+    "recovered",
+    tolower(region$source_data_cols)
+  )]) > 0) {
+    append(cols2check, c("recovered_new", "recovered_total"))
+  }
+  if (length(region$source_data_cols[grep(
+    "test",
+    tolower(region$source_data_cols)
+  )]) > 0) {
+    append(cols2check, c("tested_new", "tested_total"))
+  }
   purrr::walk(
     cols2check,
     ~ {
       test_that(
         paste0(data_name, "column '", .x, "' is not just composed of NA"),
         {
-          expect_true(nrow(data %>% filter(!is.na(!!.x))) > 0)
+          expect_true(nrow(region$data$processed %>% filter(!is.na(!!.x))) > 0)
         }
       )
     }
@@ -107,10 +128,7 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     }
   })
 
-  if (download) {
-    # only test for columns being NAs if download is true
-    expect_columns_contain_data(data_name, region$data$processed)
-  }
+  expect_columns_contain_data(data_name, region)
 
   custom_test <- paste0("test_", source, "_level_", level)
   if (!exists(custom_test)) {
