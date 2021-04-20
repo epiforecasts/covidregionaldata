@@ -47,6 +47,7 @@ test_that("DataClass can clean data", {
 d$clean()
 
 test_that("DataClass can filter data", {
+  expect_error(d$filter("MadeUpLand"))
   expect_error(d$filter("Zambia"), NA)
   expect_s3_class(d$data$clean, "data.frame")
   expect_equal(unique(d$data$clean$level_1_region), "Zambia")
@@ -64,6 +65,12 @@ suppressMessages(d$process())
 test_that("DataClass can return data", {
   expect_error(d$return(), NA)
   expect_s3_class(d$return(), "data.frame")
+  d$steps <- TRUE
+  expect_equal(names(d$return()), c("raw", "clean", "processed", "return"))
+})
+
+test_that("DataClass can use the get method", {
+  expect_error(suppressMessages(d$get()), NA)
   d$steps <- TRUE
   expect_equal(names(d$return()), c("raw", "clean", "processed", "return"))
 })

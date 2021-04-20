@@ -22,6 +22,32 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   }
 }
 
+expect_columns_contain_data <- function(data_name, region) {
+  cols_present <- function(col) {
+    if (length(region$source_data_cols[grep(
+      col, tolower(region$source_data_cols)
+    )]) > 0) {
+      return(paste0(col, c("_new", "_total")))
+    } else {
+      return(NULL)
+    }
+  }
+  cols <- c("cases", "deaths", "recovered", "test")
+  cols2check <- purrr::map(cols, cols_present)
+  cols2check <- unlist(cols2check)
+  purrr::walk(
+    cols2check,
+    ~ {
+      test_that(
+        paste0(data_name, "column '", .x, "' is not just composed of NA"),
+        {
+          expect_true(nrow(region$data$processed %>% filter(!is.na(!!.x))) > 0)
+        }
+      )
+    }
+  )
+}
+
 test_regional_dataset <- function(source, level, download = FALSE) {
   data_name <- paste0(source, " at level ", level)
 
@@ -88,6 +114,8 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       expect_true(ncol(returned) >= 2)
     }
   })
+
+  expect_columns_contain_data(data_name, region)
 
   custom_test <- paste0("test_", source, "_level_", level)
   if (!exists(custom_test)) {
