@@ -259,12 +259,14 @@ DataClass <- R6::R6Class(
           "Filtering data to: ", paste(self$target_regions, collapse = ", ")
         )
         condition <- paste0("level_", self$level, "_region")
-        self$data$clean <- self$data$clean %>%
+        dt <- self$data$clean %>%
           filter(
             eval(parse(text = condition)) %in% self$target_regions
           )
-        if (nrow(self$data$clean) == 0) {
+        if (nrow(dt) == 0) {
           stop("No data found for target regions")
+        } else {
+          self$data$clean <- dt
         }
       }
     },
