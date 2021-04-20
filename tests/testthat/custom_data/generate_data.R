@@ -15,7 +15,7 @@ saveRDS(mexico, "tests/testthat/custom_data/mexico_level_2_snap.rds")
 ecdc <- ECDC$new(verbose = TRUE)
 ecdc <- dummy_class(ecdc)
 saveRDS(ecdc, "tests/testthat/custom_data/ecdc.rds")
-
+vroom::vroom_write(ecdc$data$clean, "tests/testthat/custom_data/ecdc.csv")
 # save a snapshot of the WHO data
 who <- WHO$new(verbose = TRUE)
 who <- dummy_class(who)
