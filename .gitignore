@@ -10,5 +10,4 @@ inst/doc
 *.pdf
 /doc/
 /Meta/
-oldversionoutput.rds
-newversionoutput.rds
+
