@@ -31,7 +31,7 @@ Mexico <- R6::R6Class("Mexico",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
-    supported_region_names = list("1" = "estados", "2" = "municipios"),
+    supported_region_names = list("1" = "estado", "2" = "municipio"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "inegi"),
     #' @field common_data_urls List of named links to raw data.
@@ -41,8 +41,8 @@ Mexico <- R6::R6Class("Mexico",
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
     level_data_urls = list(
-      "1" = list("snippet" = "Downloads/filesDD.php?csvmun"),
-      "2" = list("snippet" = "Downloads/filesDD.php?csvaxd")
+      "1" = list("snippet" = "Downloads/filesDD.php?csvaxd"),
+      "2" = list("snippet" = "Downloads/filesDD.php?csvmun")
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
