@@ -25,7 +25,7 @@ if (!is.null(getOption("source_of_interest"))) {
 
 initial_setup <- FALSE
 if (!is.null(getOption("initial_setup"))) {
-  initialSetup <- getOption("initial_setup")
+  initial_setup <- getOption("initial_setup")
 }
 
 # save_data_files:
@@ -33,19 +33,20 @@ if (!is.null(getOption("initial_setup"))) {
 
 save_data_files <- TRUE
 if (!is.null(getOption("save_data_files"))) {
-  initialSetup <- getOption("save_data_files")
+  save_data_files <- getOption("save_data_files")
 }
 
 # save_comparison:
 # should the comparison data set be saved
 
-save_comparison <- TRUE
-if (!is.null(getOption("save_comparison"))) {
-  initialSetup <- getOption("save_comparison")
-}
+# save_comparison <- TRUE
+# if (!is.null(getOption("save_comparison"))) {
+#   save_comparison <- getOption("save_comparison")
+# }
 
-run_new <- FALSE
-run_old <- TRUE
+
+run_new <- TRUE
+run_old <- FALSE
 
 library(switchr)
 #switchrBaseDir(file.path(tempdir(), ".switchr"))
@@ -80,42 +81,42 @@ library(covidregionaldata)
 library(dplyr)
 
 start_using_memoise()
-
-# Build a list of data sources available, based on the newer version
-sources <- get_available_datasets() %>%
-  # temporary block - just regional data
-  filter(get_data_function %in%
-           c("get_regional_data")) %>% # , "get_national_data"
-  dplyr::select(source = class, level_1_region, level_2_region) %>%
-  tidyr::pivot_longer(
-    cols = -source,
-    names_to = "level",
-    values_to = "regions"
-  ) %>%
-  filter(source != "SouthAfrica") %>%
-  dplyr::mutate(
-    level = stringr::str_split(level, "_"),
-    level = purrr::map_chr(level, ~ .[2])
-  ) %>%
-  tidyr::drop_na(regions)
-
-
-# filter out target datasets
-if (!is.null(source_of_interest)) {
-  sources <- sources %>%
-    dplyr::filter(source %in% source_of_interest)
-}
-
-dl_list <- sources %>%
-  mutate(label = paste0(source, "_", level)) %>%
-  select(label, source, level, regions) %>%
-  group_by(label) %>%
-  dplyr::group_split()
-
-names(dl_list) <- pull(sources %>%
-                         #filter(source != "SouthAfrica") %>%
-                         mutate(label = paste0(source, "_", level)) %>%
-                         select(label))
+#
+# # Build a list of data sources available, based on the newer version
+# sources <- get_available_datasets() %>%
+#   # temporary block - just regional data
+#   filter(get_data_function %in%
+#            c("get_regional_data")) %>% # , "get_national_data"
+#   dplyr::select(source = class, level_1_region, level_2_region) %>%
+#   tidyr::pivot_longer(
+#     cols = -source,
+#     names_to = "level",
+#     values_to = "regions"
+#   ) %>%
+#   filter(source != "SouthAfrica") %>%
+#   dplyr::mutate(
+#     level = stringr::str_split(level, "_"),
+#     level = purrr::map_chr(level, ~ .[2])
+#   ) %>%
+#   tidyr::drop_na(regions)
+#
+#
+# # filter out target datasets
+# if (!is.null(source_of_interest)) {
+#   sources <- sources %>%
+#     dplyr::filter(source %in% source_of_interest)
+# }
+#
+# dl_list <- sources %>%
+#   mutate(label = paste0(source, "_", level)) %>%
+#   select(label, source, level, regions) %>%
+#   group_by(label) %>%
+#   dplyr::group_split()
+#
+# names(dl_list) <- pull(sources %>%
+#                          #filter(source != "SouthAfrica") %>%
+#                          mutate(label = paste0(source, "_", level)) %>%
+#                          select(label))
 
 # Now call get_regional_data on each item of the list and store it in a
 # new list
@@ -171,11 +172,11 @@ if (save_data_files)
 switchBack()
 }
 # Use waldo to compare the two lists
-#waldo::compare(old_version_output,new_version_output)
-waldo_comparison <-
-  purrr::map2(old_version_output, new_version_output, waldo::compare)
-
-if (save_comparison)
-{ saveRDS(waldo_comparison, "oldnewcomparison.rds") }
-
-waldo_comparison
+# #waldo::compare(old_version_output,new_version_output)
+# waldo_comparison <-
+#   purrr::map2(old_version_output, new_version_output, waldo::compare)
+#
+# if (save_comparison)
+# { saveRDS(waldo_comparison, "oldnewcomparison.rds") }
+#
+# waldo_comparison

@@ -25,7 +25,7 @@ if (!is.null(getOption("source_of_interest"))) {
 
 initial_setup <- FALSE
 if (!is.null(getOption("initial_setup"))) {
-  initialSetup <- getOption("initial_setup")
+  initial_setup <- getOption("initial_setup")
 }
 
 # save_data_files:
@@ -33,16 +33,17 @@ if (!is.null(getOption("initial_setup"))) {
 
 save_data_files <- TRUE
 if (!is.null(getOption("save_data_files"))) {
-  initialSetup <- getOption("save_data_files")
+  save_data_files <- getOption("save_data_files")
 }
 
 # save_comparison:
 # should the comparison data set be saved
+# 
+# save_comparison <- TRUE
+# if (!is.null(getOption("save_comparison"))) {
+#   save_comparison <- getOption("save_comparison")
+# }
 
-save_comparison <- TRUE
-if (!is.null(getOption("save_comparison"))) {
-  initialSetup <- getOption("save_comparison")
-}
 
 run_new <- FALSE
 run_old <- TRUE
