@@ -31,7 +31,7 @@ if (!is.null(getOption("initial_setup"))) {
 # save_data_files:
 # should the data files be saved
 
-save_data_files <- FALSE
+save_data_files <- TRUE
 if (!is.null(getOption("save_data_files"))) {
   initialSetup <- getOption("save_data_files")
 }
@@ -39,11 +39,13 @@ if (!is.null(getOption("save_data_files"))) {
 # save_comparison:
 # should the comparison data set be saved
 
-save_comparison <- FALSE
+save_comparison <- TRUE
 if (!is.null(getOption("save_comparison"))) {
   initialSetup <- getOption("save_comparison")
 }
 
+run_new <- FALSE
+run_old <- TRUE
 
 library(switchr)
 #switchrBaseDir(file.path(tempdir(), ".switchr"))
@@ -51,14 +53,14 @@ library(switchr)
 if(initial_setup) {
   removeLib("oldcovidregionaldata")
   removeLib("newcovidregionaldata")
-  
-  # switchr cannot correctly pull releases from github, so 
+
+  # switchr cannot correctly pull releases from github, so
   # we have stashed a version of the 0.8.3 release in a branch
   # on a separate account
   #
   crd_new <- GithubManifest("epiforecasts/covidregionaldata@master")
   crd_old <- GithubManifest("richardmn/covidregionaldata@old-0_8_3")
-  
+
   switchTo("oldcovidregionaldata", seed = crd_old)
   #ip_list_old <- installed.packages()
   switchBack()
@@ -66,11 +68,12 @@ if(initial_setup) {
   #ip_list_new <- installed.packages()
   switchBack()
 #  waldo::compare(ip_list_old, ip_list_new)
-} 
+}
 
 ## Working from new version of covidregionaldata
 #
 
+if (run_new) {
 switchTo("newcovidregionaldata")
 
 library(covidregionaldata)
@@ -123,19 +126,21 @@ dl_list %>% purrr::map(
     )
   ) -> new_version_output
 
-if (save_data_files) saveRDS(new_version_output, "newversionoutput.rds")
+if (save_data_files)
+{ saveRDS(new_version_output, "newversionoutput.rds") }
 
 switchBack()
-
+}
 ## Now switch to the old version
 #
 
+if (run_old) {
 switchTo("oldcovidregionaldata")
 
 library(covidregionaldata)
 library(dplyr)
 
-start_using_memoise()
+#start_using_memoise()
 
 # Wrapper to the old version of get_regional_data so that it can
 # be applied to the same format of list as the new version
@@ -160,15 +165,17 @@ dl_list %>%
     )
   ) -> old_version_output
 
-if (save_data_files) saveRDS(old_version_output, "oldversionoutput.rds")
+if (save_data_files)
+{ saveRDS(old_version_output, "oldversionoutput.rds") }
 
 switchBack()
-
+}
 # Use waldo to compare the two lists
 #waldo::compare(old_version_output,new_version_output)
 waldo_comparison <-
   purrr::map2(old_version_output, new_version_output, waldo::compare)
 
-if (save_comparison) saveRDS(waldo_comparison, "oldnewcomparison.rds")
+if (save_comparison)
+{ saveRDS(waldo_comparison, "oldnewcomparison.rds") }
 
 waldo_comparison
