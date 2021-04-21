@@ -4,14 +4,10 @@
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for John Hopkins University.
 #'
-#' @details Inherits from `DataClass`
 #' @examples
 #' \dontrun{
-#' region <- JHU$new(verbose = TRUE, steps = TRUE)
-#' region$download()
-#' region$clean()
-#' region$process()
-#' region$return()
+#' national <- JHU$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' national$return()
 #' }
 JHU <- R6::R6Class("JHU", # rename to country name
   inherit = CountryDataClass,
