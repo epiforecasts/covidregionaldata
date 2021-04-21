@@ -16,8 +16,19 @@
 #'  data is not always available. In these cases the user will get a warning
 #'  and the Level 1 data will be returned.
 #' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
+#' @param level A character string indicating the target administrative level
+#' of the data with the default being "1". Currently supported options are
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
+#' options by dataset.
+#' @param regions A character vector of target regions to be assigned to the
+#' `target_regions` field if present.
+#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+#'  data per region up to today's date. If FALSE, returns the full dataset
+#'  stratified by date and region.
+#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @param verbose Logical, defaults to TRUE. Should verbose processing
+#' messages and warnings be returned.
 #' @inheritParams return_data
-#' @inheritParams initialise_dataclass
 #' @inheritParams message_verbose
 #' @param ... additional arguments to pass to country specific functionality.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
@@ -59,14 +70,13 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   }
 
   # check data availability and initiate country class if available
-  region_class <- check_country_available(
-    country = country, level = level, regions = regions,
+  region_class <- initialise_dataclass(
+    class = country, level = level, regions = regions,
     totals = totals, localise = localise,
     verbose = verbose, steps = steps, ...
   )
 
   region_class$get()
-
   return(return_data(region_class,
     class = class
   ))

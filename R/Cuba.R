@@ -26,9 +26,11 @@ Cuba <- R6::R6Class("Cuba",
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://covid19cubadata.github.io/data/covid19-casos.csv" # nolint
+      "main" = "https://covid19cubadata.github.io/data/covid19-casos.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new"),
 
@@ -38,14 +40,14 @@ Cuba <- R6::R6Class("Cuba",
       self$codes_lookup$`1` <- tibble(
         code = c(
           "CU-15", "CU-09", "CU-08", "CU-06", "CU-12", "CU-14", "CU-11",
-          "CU-03", "CU-10", "CU-04", "CU-16", "CU-01", "CU-07", "C8-13",
+          "CU-03", "CU-10", "CU-04", "CU-16", "CU-01", "CU-07", "CU-13",
           "CU-05", "CU-99"
         ),
         region = c(
-          "Artemisa", "Camag\\u00fcey", "Ciego de \\u00c1vila", "Cienfuegos",
-          "Granma", "Guant\\u00e1namo", "Holgu\\u00edn", "La Habana",
-          "Las Tunas", "Matanzas", "Mayabeque", "Pinar del R\\u00edo",
-          "Sancti Sp\\u00edritus", "Santiago de Cuba", "Villa Clara",
+          "Artemisa", "Camag\u00fcey", "Ciego de \u00c1vila", "Cienfuegos",
+          "Granma", "Guant\u00e1namo", "Holgu\u00edn", "La Habana",
+          "Las Tunas", "Matanzas", "Mayabeque", "Pinar del R\u00edo",
+          "Sancti Sp\u00edritus", "Santiago de Cuba", "Villa Clara",
           "Isla de la Juventud"
         )
       )

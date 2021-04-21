@@ -36,10 +36,12 @@ USA <- R6::R6Class("USA",
     common_data_urls = list(),
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
+    # nolint start
     level_data_urls = list(
-      "1" = list("state" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"), # nolint
-      "2" = list("county" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") # nolint
+      "1" = list("state" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"),
+      "2" = list("county" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total"),
 

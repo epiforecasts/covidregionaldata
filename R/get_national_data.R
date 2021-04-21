@@ -13,7 +13,6 @@
 #' @param source A character string specifying the data source: "WHO", or
 #'  "ECDC". Not case dependent. Defaults to WHO.
 #' @inheritParams get_regional_data
-#' @inheritParams initialise_dataclass
 #' @param ... additional arguments to pass to Country classes.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
@@ -42,8 +41,8 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
   }
 
   # check data availability and initiate country class if available
-  nation_class <- check_country_available(
-    country = source, level = "1",
+  nation_class <- initialise_dataclass(
+    class = source, level = "1",
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
     regions = countries, ...

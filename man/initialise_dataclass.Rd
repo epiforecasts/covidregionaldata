@@ -2,29 +2,28 @@
 % Please edit documentation in R/shared-methods.R
 \name{initialise_dataclass}
 \alias{initialise_dataclass}
-\title{initialize function used by all \code{Country} class objects.}
+\title{Initialise a child class of DataClass if it exists}
 \usage{
 initialise_dataclass(
-  self,
-  level = "1",
-  regions,
+  class = character(),
+  level = 1,
   totals = FALSE,
   localise = TRUE,
+  regions,
   verbose = TRUE,
   steps = FALSE,
-  get = FALSE
+  ...
 )
 }
 \arguments{
-\item{self}{The specific class object to attach values}
+\item{class}{A character string specifying the \code{DataClass} to initialise.
+Not case dependent and matching is based on either the class name or the its
+country definition. For a list of options use \code{get_available_datasets()}.}
 
 \item{level}{A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
 options by dataset.}
-
-\item{regions}{A character vector of target regions to be assigned to the
-\code{target_regions} field if present.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
@@ -32,16 +31,31 @@ stratified by date and region.}
 
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field if present.}
+
 \item{verbose}{Logical, defaults to TRUE. Should verbose processing
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
-\item{get}{Logical, defaults to FALSE. Should the class \code{get} method be
-called (this will download, clean, and process data at initialisation).}
+\item{...}{additional arguments to pass to country specific functionality.}
+}
+\value{
+An initialised version of the target class if available,
+e.g. \code{Italy()}
 }
 \description{
-Set up the country class with attributes set to input
-parameters. Should only be called by a \code{Country} class object.
+Initialise a child class of DataClass if it exists.
+}
+\examples{
+# Initialise Italian data
+italy <- initialise_dataclass("Italy")
+
+# Initialise UK data with a partial name match
+uk <- initialise_dataclass("United Kingdom")
+
+# Initialise ECDC data
+ecdc <- initialise_dataclass("ecdc")
 }
