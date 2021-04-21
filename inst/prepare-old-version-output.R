@@ -38,7 +38,7 @@ if (!is.null(getOption("save_data_files"))) {
 
 # save_comparison:
 # should the comparison data set be saved
-# 
+#
 # save_comparison <- TRUE
 # if (!is.null(getOption("save_comparison"))) {
 #   save_comparison <- getOption("save_comparison")
@@ -171,12 +171,12 @@ if (save_data_files)
 
 switchBack()
 }
-# Use waldo to compare the two lists
-#waldo::compare(old_version_output,new_version_output)
-waldo_comparison <-
-  purrr::map2(old_version_output, new_version_output, waldo::compare)
-
-if (save_comparison)
-{ saveRDS(waldo_comparison, "oldnewcomparison.rds") }
-
-waldo_comparison
+# # Use waldo to compare the two lists
+# #waldo::compare(old_version_output,new_version_output)
+# waldo_comparison <-
+#   purrr::map2(old_version_output, new_version_output, waldo::compare)
+#
+# if (save_comparison)
+# { saveRDS(waldo_comparison, "oldnewcomparison.rds") }
+#
+# waldo_comparison
