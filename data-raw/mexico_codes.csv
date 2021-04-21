@@ -11,20 +11,10 @@ MX-CHH	Chihuahua	NA	NA
 MX-DUR	Durango	NA	NA
 MX-GUA	Guanajuato	NA	NA
 MX-GRO	Guerrero	NA	NA
-MX-GRO	Guerrero	NA	NA
-MX-GRO	Guerrero	NA	NA
-MX-HID	Hidalgo	NA	NA
-MX-HID	Hidalgo	NA	NA
-MX-HID	Hidalgo	NA	NA
-MX-HID	Hidalgo	NA	NA
 MX-HID	Hidalgo	NA	NA
 MX-JAL	Jalisco	NA	NA
 MX-MEX	Mexico	NA	NA
 MX-MIC	Michoacan	NA	NA
-MX-MOR	Morelos	NA	NA
-MX-MOR	Morelos	NA	NA
-MX-MOR	Morelos	NA	NA
-MX-MOR	Morelos	NA	NA
 MX-MOR	Morelos	NA	NA
 MX-NAY	Nayarit	NA	NA
 MX-NLE	Nuevo Leon	NA	NA
@@ -41,36 +31,2460 @@ MX-TLA	Tlaxcala	NA	NA
 MX-VER	Veracruz	NA	NA
 MX-YUC	Yucatan	NA	NA
 MX-ZAC	Zacatecas	NA	NA
-NA	NA	01	AGUASCALIENTES
-NA	NA	02	BAJA CALIFORNIA
-NA	NA	03	BAJA CALIFORNIA SUR
-NA	NA	04	CAMPECHE
-NA	NA	07	CHIAPAS
-NA	NA	08	CHIHUAHUA
-NA	NA	09	DISTRITO FEDERAL
-NA	NA	05	COAHUILA
-NA	NA	06	COLIMA
-NA	NA	10	DURANGO
-NA	NA	11	GUANAJUATO
-NA	NA	12	GUERRERO
-NA	NA	13	HIDALGO
-NA	NA	14	JALISCO
-NA	NA	15	MEXICO
-NA	NA	16	MICHOACAN
-NA	NA	17	MORELOS
-NA	NA	18	"NAYARIT"
-NA	NA	19	NUEVO LEON
-NA	NA	20	OAXACA
-NA	NA	21	PUEBLA
-NA	NA	22	QUERETARO
-NA	NA	23	QUINTANA ROO
-NA	NA	24	SAN LUIS POTOSI
-NA	NA	25	SINALOA
-NA	NA	26	SONORA
-NA	NA	27	TABASCO
-NA	NA	28	TAMAULIPAS
-NA	NA	29	TLAXCALA
-NA	NA	30	VERACRUZ
-NA	NA	31	YUCATAN
-NA	NA	32	ZACATECAS
-NA	NA	000	Nacional
+MX-MIC	Michoacan	16046	Juarez
+MX-MIC	Michoacan	16047	Jungapeo
+MX-MIC	Michoacan	16048	Lagunillas
+MX-MIC	Michoacan	16049	Madero
+MX-COA	Coahuila	05035	Torreon
+MX-COA	Coahuila	05036	Viesca
+MX-CHP	Chiapas	07012	Berriozabal
+MX-GUA	Guanajuato	11038	Tarandacuao
+MX-GUA	Guanajuato	11039	Tarimoro
+MX-GUA	Guanajuato	11040	Tierra Blanca
+MX-CHP	Chiapas	07061	Ocozocoautla de Espinosa
+MX-CHP	Chiapas	07062	Ostuacan
+MX-GRO	Guerrero	12009	Atlamajalcingo del Monte
+MX-GRO	Guerrero	12010	Atlixtac
+MX-GRO	Guerrero	12013	Azoyu
+MX-CHP	Chiapas	07092	Tecpatan
+MX-CHP	Chiapas	07093	Tenejapa
+MX-CHP	Chiapas	07094	Teopisca
+MX-CHP	Chiapas	07096	Tila
+MX-CHP	Chiapas	07097	Tonala
+MX-CHP	Chiapas	07098	Totolapa
+MX-CHP	Chiapas	07099	La Trinitaria
+MX-CHP	Chiapas	07100	Tumbala
+MX-HID	Hidalgo	13047	Pacula
+MX-CHH	Chihuahua	08054	Riva Palacio
+MX-CHH	Chihuahua	08055	Rosales
+MX-CHH	Chihuahua	08056	Rosario
+MX-HID	Hidalgo	13061	Tepeapulco
+MX-JAL	Jalisco	14011	Atengo
+MX-JAL	Jalisco	14051	Juanacatlan
+MX-DUR	Durango	10037	Topia
+MX-JAL	Jalisco	14120	Zapopan
+MX-JAL	Jalisco	14121	Zapotiltic
+MX-JAL	Jalisco	14122	Zapotitlan de Vadillo
+MX-JAL	Jalisco	14123	Zapotlan del Rey
+MX-JAL	Jalisco	14124	Zapotlanejo
+MX-HID	Hidalgo	13071	Tlahuiltepa
+MX-HID	Hidalgo	13072	Tlanalapa
+MX-MEX	Mexico	15021	Coatepec Harinas
+MX-MEX	Mexico	15029	Chicoloapan
+MX-MEX	Mexico	15075	San Martin de las Piramides
+MX-MOR	Morelos	17024	Tlaltizapan de Zapata
+MX-MOR	Morelos	17025	Tlaquiltenango
+MX-NLE	Nuevo Leon	19002	Agualeguas
+MX-NLE	Nuevo Leon	19003	Los Aldamas
+MX-NLE	Nuevo Leon	19004	Allende
+MX-NLE	Nuevo Leon	19005	Anahuac
+MX-NLE	Nuevo Leon	19009	Cadereyta Jimenez
+MX-NLE	Nuevo Leon	19011	Cerralvo
+MX-NLE	Nuevo Leon	19012	Cienega de Flores
+MX-NLE	Nuevo Leon	19013	China
+MX-NLE	Nuevo Leon	19014	Doctor Arroyo
+MX-NLE	Nuevo Leon	19015	Doctor Coss
+MX-NLE	Nuevo Leon	19031	Juarez
+MX-NLE	Nuevo Leon	19032	Lampazos de Naranjo
+MX-NLE	Nuevo Leon	19033	Linares
+MX-NLE	Nuevo Leon	19034	Marin
+MX-OAX	Oaxaca	20028	Heroica Ciudad de Ejutla de Crespo
+MX-NLE	Nuevo Leon	19037	Mina
+MX-NLE	Nuevo Leon	19038	Montemorelos
+MX-NLE	Nuevo Leon	19039	Monterrey
+MX-NLE	Nuevo Leon	19048	Santa Catarina
+MX-NLE	Nuevo Leon	19049	Santiago
+MX-NLE	Nuevo Leon	19050	Vallecillo
+MX-NLE	Nuevo Leon	19051	Villaldama
+MX-OAX	Oaxaca	20068	Ocotlan de Morelos
+MX-OAX	Oaxaca	20002	Acatlan de Perez Figueroa
+MX-OAX	Oaxaca	20031	Tamazulapam del Espiritu Santo
+MX-OAX	Oaxaca	20005	Asuncion Ixtaltepec
+MX-OAX	Oaxaca	20006	Asuncion Nochixtlan
+MX-OAX	Oaxaca	20008	Asuncion Tlacolulita
+MX-OAX	Oaxaca	20009	Ayotzintepec
+MX-OAX	Oaxaca	20010	El Barrio de la Soledad
+MX-OAX	Oaxaca	20012	Candelaria Loxicha
+MX-OAX	Oaxaca	20015	Coatecas Altas
+MX-OAX	Oaxaca	20018	Concepcion Buenavista
+MX-OAX	Oaxaca	20113	San Baltazar Loxicha
+MX-OAX	Oaxaca	20036	Guevea de Humboldt
+MX-OAX	Oaxaca	20039	Heroica Ciudad de Huajuapan de Leon
+MX-OAX	Oaxaca	20041	Huautla de Jimenez
+MX-OAX	Oaxaca	20042	Ixtlan de Juarez
+MX-OAX	Oaxaca	20043	Heroica Ciudad de Juchitan de Zaragoza
+MX-OAX	Oaxaca	20044	Loma Bonita
+MX-OAX	Oaxaca	20059	Miahuatlan de Porfirio Diaz
+MX-OAX	Oaxaca	20073	Putla Villa de Guerrero
+MX-OAX	Oaxaca	20093	San Andres Lagunas
+MX-OAX	Oaxaca	20198	San Juan Guichicovi
+MX-OAX	Oaxaca	20085	San Agustin Loxicha
+MX-OAX	Oaxaca	20098	San Andres Teotilalpam
+MX-OAX	Oaxaca	20104	San Antonino el Alto
+MX-OAX	Oaxaca	20205	San Juan Lalana
+MX-OAX	Oaxaca	20207	San Juan Mazatlan
+MX-OAX	Oaxaca	20152	San Francisco Tlapancingo
+MX-OAX	Oaxaca	20161	San Jeronimo Sosola
+MX-OAX	Oaxaca	20175	San Juan Bautista Atatlahuca
+MX-OAX	Oaxaca	20141	San Francisco del Mar
+MX-OAX	Oaxaca	20177	San Juan Bautista Cuicatlan
+MX-OAX	Oaxaca	20147	San Francisco Nuxaño
+MX-OAX	Oaxaca	20149	San Francisco Sola
+MX-OAX	Oaxaca	20155	San Ildefonso Sola
+MX-OAX	Oaxaca	20156	San Ildefonso Villa Alta
+MX-OAX	Oaxaca	20159	San Jeronimo Coatlan
+MX-OAX	Oaxaca	20164	San Jorge Nuchita
+MX-OAX	Oaxaca	20184	San Juan Bautista Tuxtepec
+MX-OAX	Oaxaca	20185	San Juan Cacahuatepec
+MX-OAX	Oaxaca	20186	San Juan Cieneguilla
+MX-OAX	Oaxaca	20190	San Juan Cotzocon
+MX-OAX	Oaxaca	20211	San Juan Ozolotepec
+MX-OAX	Oaxaca	20212	San Juan Petlapa
+MX-OAX	Oaxaca	20213	San Juan Quiahije
+MX-OAX	Oaxaca	20214	San Juan Quiotepec
+MX-OAX	Oaxaca	20202	San Juan Lachao
+MX-OAX	Oaxaca	20217	San Juan Tamazola
+MX-OAX	Oaxaca	20515	Santo Domingo Tehuantepec
+MX-OAX	Oaxaca	20526	Santos Reyes Nopala
+MX-OAX	Oaxaca	20457	Santiago Camotlan
+MX-OAX	Oaxaca	20229	San Lorenzo Texmelucan
+MX-OAX	Oaxaca	20230	San Lorenzo Victoria
+MX-OAX	Oaxaca	20232	San Lucas Ojitlan
+MX-OAX	Oaxaca	20277	Villa Sola de Vega
+MX-OAX	Oaxaca	20278	San Miguel Soyaltepec
+MX-OAX	Oaxaca	20279	San Miguel Suchixtepec
+MX-OAX	Oaxaca	20261	San Miguel Amatitlan
+MX-OAX	Oaxaca	20272	San Miguel Panixtlahuaca
+MX-OAX	Oaxaca	20273	San Miguel Peras
+MX-OAX	Oaxaca	20275	San Miguel Quetzaltepec
+MX-OAX	Oaxaca	20290	San Nicolas Hidalgo
+MX-OAX	Oaxaca	20291	San Pablo Coatlan
+MX-OAX	Oaxaca	20549	Villa Tezoatlan de Segura y Luna
+MX-OAX	Oaxaca	20306	San Pedro el Alto
+MX-OAX	Oaxaca	20309	San Pedro Ixcatlan
+MX-OAX	Oaxaca	20334	Villa de Tututepec de Melchor Ocampo
+MX-OAX	Oaxaca	20318	San Pedro Mixtepec Distrito 22
+MX-OAX	Oaxaca	20324	San Pedro Pochutla
+MX-OAX	Oaxaca	20337	San Pedro y San Pablo Ayutla
+MX-OAX	Oaxaca	20340	San Pedro y San Pablo Tequixtepec
+MX-OAX	Oaxaca	20341	San Pedro Yucunama
+MX-SON	Sonora	26024	Divisaderos
+MX-SON	Sonora	26025	Empalme
+MX-SON	Sonora	26026	Etchojoa
+MX-OAX	Oaxaca	20364	Santa Catarina Juquila
+MX-OAX	Oaxaca	20366	Santa Catarina Loxicha
+MX-OAX	Oaxaca	20401	Santa Maria Colotepec
+MX-OAX	Oaxaca	20371	Santa Catarina Ticua
+MX-OAX	Oaxaca	20377	Santa Cruz Itundujia
+MX-OAX	Oaxaca	20378	Santa Cruz Mixtepec
+MX-OAX	Oaxaca	20385	Santa Cruz Xoxocotlan
+MX-OAX	Oaxaca	20386	Santa Cruz Zenzontepec
+MX-OAX	Oaxaca	20389	Santa Ines Yatzeche
+MX-OAX	Oaxaca	20394	Santa Maria Alotepec
+MX-OAX	Oaxaca	20397	Heroica Ciudad de Tlaxiaco
+MX-OAX	Oaxaca	20406	Santa Maria Chilchotla
+MX-OAX	Oaxaca	20407	Santa Maria Chimalapa
+MX-OAX	Oaxaca	20410	Santa Maria Ecatepec
+MX-OAX	Oaxaca	20413	Santa Maria Huatulco
+MX-OAX	Oaxaca	20417	Santa Maria Jacatepec
+MX-OAX	Oaxaca	20424	Santa Maria Ozolotepec
+MX-OAX	Oaxaca	20426	Santa Maria Peñoles
+MX-OAX	Oaxaca	20427	Santa Maria Petapa
+MX-OAX	Oaxaca	20435	Santa Maria Tepantlali
+MX-OAX	Oaxaca	20447	Santa Maria Zacatepec
+MX-OAX	Oaxaca	20450	Santiago Amoltepec
+MX-OAX	Oaxaca	20459	Santiago Chazumba
+MX-OAX	Oaxaca	20460	Santiago Choapam
+MX-OAX	Oaxaca	20466	Santiago Ixtayutla
+MX-OAX	Oaxaca	20467	Santiago Jamiltepec
+MX-OAX	Oaxaca	20470	Santiago Lachiguiri
+MX-OAX	Oaxaca	20477	Santiago Minas
+MX-OAX	Oaxaca	20479	Santiago Nejapilla
+MX-OAX	Oaxaca	20481	Santiago Nuyoo
+MX-OAX	Oaxaca	20484	Santiago Tamazola
+MX-OAX	Oaxaca	20498	Santiago Yaveo
+MX-OAX	Oaxaca	20492	Santiago Tilantongo
+MX-OAX	Oaxaca	20495	Santiago Xanica
+MX-OAX	Oaxaca	20500	Santiago Yosondua
+MX-OAX	Oaxaca	20513	Santo Domingo Petapa
+MX-OAX	Oaxaca	20543	Tataltepec de Valdes
+MX-PUE	Puebla	21017	Atempan
+MX-PUE	Puebla	21018	Atexcal
+MX-PUE	Puebla	21019	Atlixco
+MX-PUE	Puebla	21071	Huauchinango
+MX-PUE	Puebla	21072	Huehuetla
+MX-PUE	Puebla	21022	Atzitzihuacan
+MX-PUE	Puebla	21023	Atzitzintla
+MX-PUE	Puebla	21024	Axutla
+MX-PUE	Puebla	21025	Ayotoxco de Guerrero
+MX-PUE	Puebla	21026	Calpan
+MX-PUE	Puebla	21027	Caltepec
+MX-PUE	Puebla	21031	Coatzingo
+MX-PUE	Puebla	21032	Cohetzala
+MX-PUE	Puebla	21033	Cohuecan
+MX-PUE	Puebla	21035	Coxcatlan
+MX-PUE	Puebla	21036	Coyomeapan
+MX-PUE	Puebla	21037	Coyotepec
+MX-PUE	Puebla	21081	Ixcamilpa de Guerrero
+MX-PUE	Puebla	21082	Ixcaquixtla
+MX-PUE	Puebla	21083	Ixtacamaxtitlan
+MX-PUE	Puebla	21092	Juan N. Mendez
+MX-PUE	Puebla	21093	Lafragua
+MX-PUE	Puebla	21094	Libres
+MX-PUE	Puebla	21096	Mazapiltepec de Juarez
+MX-PUE	Puebla	21098	Molcaxac
+MX-PUE	Puebla	21126	San Jeronimo Tecuanipan
+MX-PUE	Puebla	21127	San Jeronimo Xayacatlan
+MX-PUE	Puebla	21128	San Jose Chiapa
+MX-PUE	Puebla	21129	San Jose Miahuatlan
+MX-PUE	Puebla	21130	San Juan Atenco
+MX-PUE	Puebla	21119	San Andres Cholula
+MX-PUE	Puebla	21120	San Antonio Cañada
+MX-PUE	Puebla	21121	San Diego la Mesa Tochimiltzingo
+MX-PUE	Puebla	21122	San Felipe Teotlalcingo
+MX-PUE	Puebla	21123	San Felipe Tepatlan
+MX-PUE	Puebla	21145	San Sebastian Tlacotepec
+MX-PUE	Puebla	21146	Santa Catarina Tlaltempan
+MX-PUE	Puebla	21147	Santa Ines Ahuatempan
+MX-PUE	Puebla	21148	Santa Isabel Cholula
+MX-PUE	Puebla	21149	Santiago Miahuatlan
+MX-PUE	Puebla	21150	Huehuetlan el Grande
+MX-QUE	Queretaro	22003	Arroyo Seco
+MX-ROO	Quintana Roo	23007	Lazaro Cardenas
+MX-ROO	Quintana Roo	23008	Solidaridad
+MX-ROO	Quintana Roo	23009	Tulum
+MX-SLP	San Luis Potosi	24008	Cerritos
+MX-SLP	San Luis Potosi	24009	Cerro de San Pedro
+MX-SLP	San Luis Potosi	24010	Ciudad del Maiz
+MX-SLP	San Luis Potosi	24011	Ciudad Fernandez
+MX-SLP	San Luis Potosi	24012	Tancanhuitz
+MX-SLP	San Luis Potosi	24013	Ciudad Valles
+MX-SLP	San Luis Potosi	24015	Charcas
+MX-SLP	San Luis Potosi	24016	Ebano
+MX-SLP	San Luis Potosi	24017	Guadalcazar
+MX-SLP	San Luis Potosi	24019	Lagunillas
+MX-SLP	San Luis Potosi	24046	Villa de Arriaga
+MX-SLP	San Luis Potosi	24047	Villa de Guadalupe
+MX-SLP	San Luis Potosi	24051	Villa Hidalgo
+MX-SLP	San Luis Potosi	24052	Villa Juarez
+MX-SLP	San Luis Potosi	24053	Axtla de Terrazas
+MX-SLP	San Luis Potosi	24057	Matlapa
+MX-SON	Sonora	26006	Arizpe
+MX-SON	Sonora	26008	Bacadehuachi
+MX-SON	Sonora	26022	Cucurpe
+MX-SON	Sonora	26029	Guaymas
+MX-SON	Sonora	26033	Huatabampo
+MX-SON	Sonora	26036	Magdalena
+MX-SON	Sonora	26040	Nacori Chico
+MX-SON	Sonora	26045	Opodepe
+MX-SON	Sonora	26051	Rosario
+MX-SON	Sonora	26052	Sahuaripa
+MX-SON	Sonora	26055	San Luis Rio Colorado
+MX-SON	Sonora	26062	Suaqui Grande
+MX-SON	Sonora	26064	Trincheras
+MX-SON	Sonora	26058	Santa Ana
+MX-TAM	Tamaulipas	28037	Soto la Marina
+MX-TAM	Tamaulipas	28038	Tampico
+MX-TAM	Tamaulipas	28039	Tula
+MX-TLA	Tlaxcala	29015	Ixtacuixtla de Mariano Matamoros
+MX-TLA	Tlaxcala	29016	Ixtenco
+MX-TLA	Tlaxcala	29017	Mazatecochco de Jose Maria Morelos
+MX-TLA	Tlaxcala	29018	Contla de Juan Cuamatzi
+MX-SON	Sonora	26069	Yecora
+MX-SON	Sonora	26071	Benito Juarez
+MX-SON	Sonora	26072	San Ignacio Rio Muerto
+MX-TAB	Tabasco	27001	Balancan
+MX-TAM	Tamaulipas	28005	Burgos
+MX-TAM	Tamaulipas	28007	Camargo
+MX-TAM	Tamaulipas	28008	Casas
+MX-TAM	Tamaulipas	28010	Cruillas
+MX-TAM	Tamaulipas	28011	Gomez Farias
+MX-TAM	Tamaulipas	28012	Gonzalez
+MX-TAM	Tamaulipas	28013	Güemez
+MX-TAM	Tamaulipas	28014	Guerrero
+MX-TAM	Tamaulipas	28015	Gustavo Diaz Ordaz
+MX-TAM	Tamaulipas	28016	Hidalgo
+MX-TLA	Tlaxcala	29055	San Lucas Tecopilco
+MX-VER	Veracruz	30012	Amatitlan
+MX-VER	Veracruz	30013	Naranjos Amatlan
+MX-VER	Veracruz	30014	Amatlan de los Reyes
+MX-VER	Veracruz	30015	Angel R. Cabada
+MX-VER	Veracruz	30016	La Antigua
+MX-VER	Veracruz	30017	Apazapan
+MX-VER	Veracruz	30093	Jilotepec
+MX-VER	Veracruz	30094	Juan Rodriguez Clara
+MX-VER	Veracruz	30095	Juchique de Ferrer
+MX-TLA	Tlaxcala	29020	Sanctorum de Lazaro Cardenas
+MX-TLA	Tlaxcala	29021	Nanacamilpa de Mariano Arista
+MX-TLA	Tlaxcala	29022	Acuamanala de Miguel Hidalgo
+MX-TLA	Tlaxcala	29023	Nativitas
+MX-TLA	Tlaxcala	29024	Panotla
+MX-TLA	Tlaxcala	29025	San Pablo del Monte
+MX-TLA	Tlaxcala	29026	Santa Cruz Tlaxcala
+MX-VER	Veracruz	30097	Lerdo de Tejada
+MX-TLA	Tlaxcala	29028	Teolocholco
+MX-TLA	Tlaxcala	29029	Tepeyanco
+MX-TLA	Tlaxcala	29030	Terrenate
+MX-TLA	Tlaxcala	29031	Tetla de la Solidaridad
+MX-TLA	Tlaxcala	29032	Tetlatlahuca
+MX-TLA	Tlaxcala	29033	Tlaxcala
+MX-TLA	Tlaxcala	29043	Yauhquemehcan
+MX-TLA	Tlaxcala	29044	Zacatelco
+MX-VER	Veracruz	30177	Tlacolulan
+MX-VER	Veracruz	30178	Tlacotalpan
+MX-VER	Veracruz	30179	Tlacotepec de Mejia
+MX-VER	Veracruz	30180	Tlachichilco
+MX-VER	Veracruz	30181	Tlalixcoyan
+MX-VER	Veracruz	30182	Tlalnelhuayocan
+MX-VER	Veracruz	30183	Tlapacoyan
+MX-VER	Veracruz	30184	Tlaquilpa
+MX-TLA	Tlaxcala	29046	Emiliano Zapata
+MX-TLA	Tlaxcala	29050	San Francisco Tetlanohcan
+MX-TLA	Tlaxcala	29052	San Jose Teacalco
+MX-VER	Veracruz	30001	Acajete
+MX-VER	Veracruz	30019	Astacinga
+MX-VER	Veracruz	30020	Atlahuilco
+MX-VER	Veracruz	30021	Atoyac
+MX-VER	Veracruz	30022	Atzacan
+MX-VER	Veracruz	30023	Atzalan
+MX-VER	Veracruz	30024	Tlaltetela
+MX-VER	Veracruz	30025	Ayahualulco
+MX-VER	Veracruz	30026	Banderilla
+MX-VER	Veracruz	30042	Colipa
+MX-VER	Veracruz	30043	Comapa
+MX-VER	Veracruz	30044	Cordoba
+MX-VER	Veracruz	30045	Cosamaloapan de Carpio
+MX-VER	Veracruz	30046	Cosautlan de Carvajal
+MX-VER	Veracruz	30047	Coscomatepec
+MX-VER	Veracruz	30048	Cosoleacaque
+MX-VER	Veracruz	30049	Cotaxtla
+MX-VER	Veracruz	30050	Coxquihui
+MX-VER	Veracruz	30051	Coyutla
+MX-VER	Veracruz	30052	Cuichapa
+MX-VER	Veracruz	30053	Cuitlahuac
+MX-VER	Veracruz	30054	Chacaltianguis
+MX-VER	Veracruz	30055	Chalma
+MX-VER	Veracruz	30056	Chiconamel
+MX-VER	Veracruz	30065	Emiliano Zapata
+MX-VER	Veracruz	30066	Espinal
+MX-VER	Veracruz	30067	Filomeno Mata
+MX-VER	Veracruz	30068	Fortin
+MX-VER	Veracruz	30069	Gutierrez Zamora
+MX-VER	Veracruz	30070	Hidalgotitlan
+MX-VER	Veracruz	30071	Huatusco
+MX-VER	Veracruz	30072	Huayacocotla
+MX-VER	Veracruz	30073	Hueyapan de Ocampo
+MX-VER	Veracruz	30099	Maltrata
+MX-VER	Veracruz	30100	Manlio Fabio Altamirano
+MX-VER	Veracruz	30101	Mariano Escobedo
+MX-VER	Veracruz	30102	Martinez de la Torre
+MX-VER	Veracruz	30103	Mecatlan
+MX-VER	Veracruz	30104	Mecayapan
+MX-VER	Veracruz	30105	Medellin
+MX-VER	Veracruz	30106	Miahuatlan
+MX-VER	Veracruz	30117	Omealca
+MX-VER	Veracruz	30121	Ozuluama de Mascareñas
+MX-VER	Veracruz	30122	Pajapan
+MX-VER	Veracruz	30123	Panuco
+MX-VER	Veracruz	30124	Papantla
+MX-VER	Veracruz	30132	Las Vigas de Ramirez
+MX-VER	Veracruz	30137	Los Reyes
+MX-VER	Veracruz	30139	Saltabarranca
+MX-VER	Veracruz	30186	Tomatlan
+MX-VER	Veracruz	30187	Tonayan
+MX-VER	Veracruz	30188	Totutla
+MX-VER	Veracruz	30189	Tuxpan
+MX-VER	Veracruz	30191	Ursulo Galvan
+MX-VER	Veracruz	30195	Xoxocotla
+MX-VER	Veracruz	30200	Zentla
+MX-VER	Veracruz	30201	Zongolica
+MX-VER	Veracruz	30202	Zontecomatlan de Lopez y Fuentes
+MX-VER	Veracruz	30203	Zozocolco de Hidalgo
+MX-VER	Veracruz	30204	Agua Dulce
+MX-VER	Veracruz	30205	El Higo
+MX-VER	Veracruz	30207	Tres Valles
+MX-VER	Veracruz	30208	Carlos A. Carrillo
+MX-VER	Veracruz	30209	Tatahuicapan de Juarez
+MX-VER	Veracruz	30210	Uxpanapa
+MX-VER	Veracruz	30211	San Rafael
+MX-VER	Veracruz	30212	Santiago Sochiapan
+MX-YUC	Yucatan	31006	Buctzotz
+MX-YUC	Yucatan	31050	Merida
+MX-YUC	Yucatan	31008	Calotmul
+MX-YUC	Yucatan	31011	Celestun
+MX-YUC	Yucatan	31058	Peto
+MX-YUC	Yucatan	31059	Progreso
+MX-YUC	Yucatan	31017	Chankom
+MX-YUC	Yucatan	31019	Chemax
+MX-YUC	Yucatan	31065	San Felipe
+MX-YUC	Yucatan	31028	Dzilam de Bravo
+MX-YUC	Yucatan	31029	Dzilam Gonzalez
+MX-YUC	Yucatan	31030	Dzitas
+MX-YUC	Yucatan	31032	Espita
+MX-YUC	Yucatan	31036	Homun
+MX-YUC	Yucatan	31040	Izamal
+MX-YUC	Yucatan	31047	Mani
+MX-YUC	Yucatan	31052	Motul
+MX-YUC	Yucatan	31101	Uman
+MX-YUC	Yucatan	31102	Valladolid
+MX-YUC	Yucatan	31061	Rio Lagartos
+MX-ZAC	Zacatecas	32037	Panuco
+MX-ZAC	Zacatecas	32038	Pinos
+MX-ZAC	Zacatecas	32039	Rio Grande
+MX-ZAC	Zacatecas	32040	Sain Alto
+MX-YUC	Yucatan	31066	Santa Elena
+MX-YUC	Yucatan	31067	Seye
+MX-YUC	Yucatan	31069	Sotuta
+MX-YUC	Yucatan	31071	Sudzal
+MX-YUC	Yucatan	31079	Tekax
+MX-YUC	Yucatan	31081	Tekom
+MX-YUC	Yucatan	31084	Temax
+MX-YUC	Yucatan	31085	Temozon
+MX-YUC	Yucatan	31089	Ticul
+MX-YUC	Yucatan	31091	Tinum
+MX-YUC	Yucatan	31092	Tixcacalcupul
+MX-YUC	Yucatan	31093	Tixkokob
+MX-YUC	Yucatan	31096	Tizimin
+MX-YUC	Yucatan	31098	Tzucacab
+MX-YUC	Yucatan	31099	Uayma
+MX-YUC	Yucatan	31104	Yaxcaba
+MX-ZAC	Zacatecas	32001	Apozol
+MX-ZAC	Zacatecas	32002	Apulco
+MX-ZAC	Zacatecas	32042	Sombrerete
+MX-ZAC	Zacatecas	32043	Susticacan
+MX-ZAC	Zacatecas	32044	Tabasco
+MX-ZAC	Zacatecas	32045	Tepechitlan
+MX-ZAC	Zacatecas	32046	Tepetongo
+MX-ZAC	Zacatecas	32047	Teul de Gonzalez Ortega
+MX-ZAC	Zacatecas	32048	Tlaltenango de Sanchez Roman
+MX-ZAC	Zacatecas	32049	Valparaiso
+MX-ZAC	Zacatecas	32050	Vetagrande
+MX-ZAC	Zacatecas	32051	Villa de Cos
+MX-AGU	Aguascalientes	01001	Aguascalientes
+MX-AGU	Aguascalientes	01002	Asientos
+MX-AGU	Aguascalientes	01003	Calvillo
+MX-AGU	Aguascalientes	01008	San Jose de Gracia
+MX-AGU	Aguascalientes	01009	Tepezala
+MX-AGU	Aguascalientes	01010	El Llano
+MX-AGU	Aguascalientes	01011	San Francisco de los Romo
+MX-BCN	Baja California	02001	Ensenada
+MX-BCN	Baja California	02002	Mexicali
+MX-BCN	Baja California	02003	Tecate
+MX-BCN	Baja California	02004	Tijuana
+MX-BCN	Baja California	02005	Playas de Rosarito
+MX-BCS	Baja California Sur	03001	Comondu
+MX-BCS	Baja California Sur	03002	Mulege
+MX-BCS	Baja California Sur	03003	La Paz
+MX-BCS	Baja California Sur	03008	Los Cabos
+MX-BCS	Baja California Sur	03009	Loreto
+MX-CAM	Campeche	04001	Calkini
+MX-CAM	Campeche	04002	Campeche
+MX-CAM	Campeche	04003	Carmen
+MX-CAM	Campeche	04004	Champoton
+MX-CAM	Campeche	04005	Hecelchakan
+MX-CHP	Chiapas	07046	Jiquipilas
+MX-CHP	Chiapas	07112	San Juan Cancuc
+MX-MOR	Morelos	17004	Ayala
+MX-NAY	Nayarit	18006	Ixtlan del Rio
+MX-HID	Hidalgo	13018	Chapulhuacan
+MX-MIC	Michoacan	16015	Coalcoman de Vazquez Pallares
+MX-MIC	Michoacan	16016	Coeneo
+MX-MIC	Michoacan	16017	Contepec
+MX-MIC	Michoacan	16018	Copandaro
+MX-AGU	Aguascalientes	01004	Cosio
+MX-AGU	Aguascalientes	01005	Jesus Maria
+MX-AGU	Aguascalientes	01006	Pabellon de Arteaga
+MX-AGU	Aguascalientes	01007	Rincon de Romos
+MX-CAM	Campeche	04006	Hopelchen
+MX-CAM	Campeche	04007	Palizada
+MX-CAM	Campeche	04008	Tenabo
+MX-CAM	Campeche	04009	Escarcega
+MX-COA	Coahuila	05002	Acuña
+MX-MIC	Michoacan	16041	Irimbo
+MX-MIC	Michoacan	16042	Ixtlan
+MX-MIC	Michoacan	16043	Jacona
+MX-MIC	Michoacan	16044	Jimenez
+MX-MIC	Michoacan	16067	Penjamillo
+MX-MIC	Michoacan	16092	Tiquicheo de Nicolas Romero
+MX-MIC	Michoacan	16109	Zinaparo
+MX-CHH	Chihuahua	08030	Guazapares
+MX-NAY	Nayarit	18010	Rosamorada
+MX-JAL	Jalisco	14119	Zacoalco de Torres
+MX-MIC	Michoacan	16019	Cotija
+MX-MIC	Michoacan	16020	Cuitzeo
+MX-MIC	Michoacan	16021	Charapan
+MX-MIC	Michoacan	16022	Charo
+MX-MEX	Mexico	15115	Xonacatlan
+MX-CAM	Campeche	04010	Calakmul
+MX-CAM	Campeche	04011	Candelaria
+MX-COA	Coahuila	05001	Abasolo
+MX-COA	Coahuila	05003	Allende
+MX-COA	Coahuila	05004	Arteaga
+MX-COA	Coahuila	05005	Candela
+MX-COA	Coahuila	05006	Castaños
+MX-COA	Coahuila	05019	Morelos
+MX-COA	Coahuila	05020	Muzquiz
+MX-MIC	Michoacan	16045	Jiquilpan
+MX-COA	Coahuila	05007	Cuatro Cienegas
+MX-MIC	Michoacan	16050	Maravatio
+MX-MIC	Michoacan	16051	Marcos Castellanos
+MX-MIC	Michoacan	16052	Lazaro Cardenas
+MX-MIC	Michoacan	16053	Morelia
+MX-OAX	Oaxaca	20049	Magdalena Ocotlan
+MX-MIC	Michoacan	16088	Tarimbaro
+MX-MIC	Michoacan	16089	Tepalcatepec
+MX-CHP	Chiapas	07072	Pueblo Nuevo Solistahuacan
+MX-MIC	Michoacan	16112	Zitacuaro
+MX-CHH	Chihuahua	08048	Namiquipa
+MX-GUA	Guanajuato	11024	Pueblo Nuevo
+MX-JAL	Jalisco	14006	Ameca
+MX-COA	Coahuila	05008	Escobedo
+MX-COA	Coahuila	05009	Francisco I. Madero
+MX-COA	Coahuila	05021	Nadadores
+MX-MIC	Michoacan	16059	Nuevo Urecho
+MX-MIC	Michoacan	16060	Numaran
+MX-MIC	Michoacan	16061	Ocampo
+MX-MIC	Michoacan	16062	Pajacuaran
+MX-MIC	Michoacan	16063	Panindicuaro
+MX-MIC	Michoacan	16064	Paracuaro
+MX-MIC	Michoacan	16065	Paracho
+MX-MIC	Michoacan	16066	Patzcuaro
+MX-COA	Coahuila	05010	Frontera
+MX-COA	Coahuila	05029	Sacramento
+MX-COA	Coahuila	05030	Saltillo
+MX-COA	Coahuila	05031	San Buenaventura
+MX-COA	Coahuila	05032	San Juan de Sabinas
+MX-MIC	Michoacan	16068	Periban
+MX-COA	Coahuila	05011	General Cepeda
+MX-COA	Coahuila	05012	Guerrero
+MX-CHP	Chiapas	07008	Angel Albino Corzo
+MX-CHP	Chiapas	07009	Arriaga
+MX-MIC	Michoacan	16069	La Piedad
+MX-MIC	Michoacan	16070	Purepero
+MX-MIC	Michoacan	16071	Puruandiro
+MX-MIC	Michoacan	16072	Querendaro
+MX-MIC	Michoacan	16073	Quiroga
+MX-MIC	Michoacan	16074	Cojumatlan de Regules
+MX-MIC	Michoacan	16075	Los Reyes
+MX-MIC	Michoacan	16076	Sahuayo
+MX-MIC	Michoacan	16077	San Lucas
+MX-MIC	Michoacan	16078	Santa Ana Maya
+MX-MIC	Michoacan	16079	Salvador Escalante
+MX-MIC	Michoacan	16080	Senguio
+MX-MIC	Michoacan	16081	Susupuato
+MX-MIC	Michoacan	16082	Tacambaro
+MX-MIC	Michoacan	16083	Tancitaro
+MX-MIC	Michoacan	16084	Tangamandapio
+MX-MIC	Michoacan	16085	Tangancicuaro
+MX-MIC	Michoacan	16086	Tanhuato
+MX-MIC	Michoacan	16087	Taretan
+MX-COA	Coahuila	05013	Hidalgo
+MX-COA	Coahuila	05014	Jimenez
+MX-CHP	Chiapas	07036	La Grandeza
+MX-CHP	Chiapas	07037	Huehuetan
+MX-COA	Coahuila	05015	Juarez
+MX-COA	Coahuila	05016	Lamadrid
+MX-COA	Coahuila	05017	Matamoros
+MX-CHP	Chiapas	07038	Huixtan
+MX-CHP	Chiapas	07039	Huitiupan
+MX-CHP	Chiapas	07040	Huixtla
+MX-CHP	Chiapas	07041	La Independencia
+MX-CHP	Chiapas	07042	Ixhuatan
+MX-CHP	Chiapas	07043	Ixtacomitan
+MX-CHP	Chiapas	07044	Ixtapa
+MX-CHP	Chiapas	07045	Ixtapangajoya
+MX-COA	Coahuila	05018	Monclova
+MX-CHP	Chiapas	07047	Jitotol
+MX-CHP	Chiapas	07048	Juarez
+MX-CHP	Chiapas	07049	Larrainzar
+MX-CHP	Chiapas	07050	La Libertad
+MX-CHP	Chiapas	07051	Mapastepec
+MX-CHP	Chiapas	07052	Las Margaritas
+MX-MIC	Michoacan	16090	Tingambato
+MX-MIC	Michoacan	16091	Tingüindin
+MX-COA	Coahuila	05022	Nava
+MX-COA	Coahuila	05023	Ocampo
+MX-CHP	Chiapas	07070	El Porvenir
+MX-CHP	Chiapas	07071	Villa Comaltitlan
+MX-COA	Coahuila	05024	Parras
+MX-COA	Coahuila	05025	Piedras Negras
+MX-CHP	Chiapas	07106	Venustiano Carranza
+MX-CHP	Chiapas	07107	Villa Corzo
+MX-CHP	Chiapas	07108	Villaflores
+MX-CHP	Chiapas	07109	Yajalon
+MX-CHP	Chiapas	07110	San Lucas
+MX-CHP	Chiapas	07111	Zinacantan
+MX-COA	Coahuila	05026	Progreso
+MX-COA	Coahuila	05027	Ramos Arizpe
+MX-MIC	Michoacan	16093	Tlalpujahua
+MX-MIC	Michoacan	16094	Tlazazalca
+MX-MIC	Michoacan	16095	Tocumbo
+MX-MIC	Michoacan	16096	Tumbiscatio
+MX-MIC	Michoacan	16097	Turicato
+MX-MIC	Michoacan	16098	Tuxpan
+MX-MIC	Michoacan	16099	Tuzantla
+MX-MIC	Michoacan	16100	Tzintzuntzan
+MX-MIC	Michoacan	16101	Tzitzio
+MX-MIC	Michoacan	16102	Uruapan
+MX-MIC	Michoacan	16103	Venustiano Carranza
+MX-MIC	Michoacan	16104	Villamar
+MX-MIC	Michoacan	16105	Vista Hermosa
+MX-MIC	Michoacan	16106	Yurecuaro
+MX-MIC	Michoacan	16107	Zacapu
+MX-MIC	Michoacan	16108	Zamora
+MX-COA	Coahuila	05028	Sabinas
+MX-MIC	Michoacan	16110	Zinapecuaro
+MX-MIC	Michoacan	16111	Ziracuaretiro
+MX-COA	Coahuila	05033	San Pedro
+MX-MIC	Michoacan	16113	Jose Sixto Verduzco
+MX-MOR	Morelos	17001	Amacuzac
+MX-MOR	Morelos	17002	Atlatlahucan
+MX-MOR	Morelos	17003	Axochiapan
+MX-COA	Coahuila	05034	Sierra Mojada
+MX-MOR	Morelos	17019	Tepalcingo
+MX-GRO	Guerrero	12055	Taxco de Alarcon
+MX-MEX	Mexico	15051	Lerma
+MX-MIC	Michoacan	16040	Indaparapeo
+MX-COA	Coahuila	05037	Villa Union
+MX-CHP	Chiapas	07113	Aldama
+MX-CHP	Chiapas	07114	Benemerito de las Americas
+MX-COA	Coahuila	05038	Zaragoza
+MX-COL	Colima	06001	Armeria
+MX-COL	Colima	06002	Colima
+MX-COL	Colima	06003	Comala
+MX-COL	Colima	06004	Coquimatlan
+MX-COL	Colima	06005	Cuauhtemoc
+MX-COL	Colima	06006	Ixtlahuacan
+MX-COL	Colima	06007	Manzanillo
+MX-COL	Colima	06008	Minatitlan
+MX-COL	Colima	06009	Tecoman
+MX-COL	Colima	06010	Villa de Alvarez
+MX-CHP	Chiapas	07001	Acacoyagua
+MX-CHP	Chiapas	07002	Acala
+MX-CHP	Chiapas	07003	Acapetahua
+MX-CHP	Chiapas	07004	Altamirano
+MX-CHP	Chiapas	07005	Amatan
+MX-CHH	Chihuahua	08020	Chinipas
+MX-CHH	Chihuahua	08021	Delicias
+MX-CHH	Chihuahua	08022	Dr. Belisario Dominguez
+MX-CHH	Chihuahua	08023	Galeana
+MX-CHH	Chihuahua	08024	Santa Isabel
+MX-CHH	Chihuahua	08025	Gomez Farias
+MX-CHH	Chihuahua	08026	Gran Morelos
+MX-CHH	Chihuahua	08027	Guachochi
+MX-CHH	Chihuahua	08028	Guadalupe
+MX-CHH	Chihuahua	08029	Guadalupe y Calvo
+MX-CHP	Chiapas	07006	Amatenango de la Frontera
+MX-CHH	Chihuahua	08031	Guerrero
+MX-CHH	Chihuahua	08032	Hidalgo del Parral
+MX-CHH	Chihuahua	08033	Huejotitan
+MX-CHH	Chihuahua	08034	Ignacio Zaragoza
+MX-CHH	Chihuahua	08035	Janos
+MX-CHH	Chihuahua	08036	Jimenez
+MX-CHH	Chihuahua	08037	Juarez
+MX-CHH	Chihuahua	08038	Julimes
+MX-CHH	Chihuahua	08039	Lopez
+MX-CHH	Chihuahua	08040	Madera
+MX-CHH	Chihuahua	08041	Maguarichi
+MX-CHH	Chihuahua	08042	Manuel Benavides
+MX-CHH	Chihuahua	08043	Matachi
+MX-CHH	Chihuahua	08044	Matamoros
+MX-CHH	Chihuahua	08045	Meoqui
+MX-CHH	Chihuahua	08046	Morelos
+MX-CHH	Chihuahua	08047	Moris
+MX-CHP	Chiapas	07007	Amatenango del Valle
+MX-CHP	Chiapas	07010	Bejucal de Ocampo
+MX-CHH	Chihuahua	08049	Nonoava
+MX-CHH	Chihuahua	08050	Nuevo Casas Grandes
+MX-CHH	Chihuahua	08051	Ocampo
+MX-CHH	Chihuahua	08052	Ojinaga
+MX-MOR	Morelos	17009	Huitzilac
+MX-MOR	Morelos	17010	Jantetelco
+MX-MOR	Morelos	17011	Jiutepec
+MX-MOR	Morelos	17012	Jojutla
+MX-MOR	Morelos	17013	Jonacatepec
+MX-MOR	Morelos	17014	Mazatepec
+MX-MOR	Morelos	17015	Miacatlan
+MX-MOR	Morelos	17016	Ocuituco
+MX-MOR	Morelos	17017	Puente de Ixtla
+MX-MOR	Morelos	17018	Temixco
+MX-CHP	Chiapas	07011	Bella Vista
+MX-CHP	Chiapas	07013	Bochil
+MX-CHP	Chiapas	07014	El Bosque
+MX-CHP	Chiapas	07015	Cacahoatan
+MX-CHP	Chiapas	07016	Catazaja
+MX-CHP	Chiapas	07017	Cintalapa
+MX-CHP	Chiapas	07018	Coapilla
+MX-CHP	Chiapas	07019	Comitan de Dominguez
+MX-CHP	Chiapas	07020	La Concordia
+MX-CHP	Chiapas	07021	Copainala
+MX-CHP	Chiapas	07022	Chalchihuitan
+MX-CHP	Chiapas	07023	Chamula
+MX-CMX	Ciudad de Mexico	09013	Xochimilco
+MX-MOR	Morelos	17020	Tepoztlan
+MX-MOR	Morelos	17021	Tetecala
+MX-MOR	Morelos	17022	Tetela del Volcan
+MX-OAX	Oaxaca	20050	Magdalena Peñasco
+MX-DUR	Durango	10010	Hidalgo
+MX-CHP	Chiapas	07024	Chanal
+MX-CHP	Chiapas	07025	Chapultenango
+MX-CHP	Chiapas	07026	Chenalho
+MX-CHP	Chiapas	07027	Chiapa de Corzo
+MX-CHP	Chiapas	07028	Chiapilla
+MX-DUR	Durango	10003	Coneto de Comonfort
+MX-DUR	Durango	10004	Cuencame
+MX-DUR	Durango	10005	Durango
+MX-DUR	Durango	10006	General Simon Bolivar
+MX-DUR	Durango	10007	Gomez Palacio
+MX-DUR	Durango	10008	Guadalupe Victoria
+MX-DUR	Durango	10009	Guanacevi
+MX-CHP	Chiapas	07029	Chicoasen
+MX-CHP	Chiapas	07030	Chicomuselo
+MX-CHP	Chiapas	07031	Chilon
+MX-CHP	Chiapas	07032	Escuintla
+MX-DUR	Durango	10011	Inde
+MX-DUR	Durango	10012	Lerdo
+MX-DUR	Durango	10013	Mapimi
+MX-DUR	Durango	10014	Mezquital
+MX-DUR	Durango	10015	Nazas
+MX-DUR	Durango	10016	Nombre de Dios
+MX-DUR	Durango	10017	Ocampo
+MX-DUR	Durango	10018	El Oro
+MX-DUR	Durango	10019	Otaez
+MX-DUR	Durango	10020	Panuco de Coronado
+MX-DUR	Durango	10021	Peñon Blanco
+MX-DUR	Durango	10022	Poanas
+MX-DUR	Durango	10023	Pueblo Nuevo
+MX-DUR	Durango	10024	Rodeo
+MX-DUR	Durango	10025	San Bernardo
+MX-DUR	Durango	10026	San Dimas
+MX-DUR	Durango	10027	San Juan de Guadalupe
+MX-DUR	Durango	10028	San Juan del Rio
+MX-NAY	Nayarit	18003	Amatlan de Cañas
+MX-NAY	Nayarit	18004	Compostela
+MX-NAY	Nayarit	18005	Huajicori
+MX-CHP	Chiapas	07033	Francisco Leon
+MX-CHP	Chiapas	07034	Frontera Comalapa
+MX-CHP	Chiapas	07035	Frontera Hidalgo
+MX-DUR	Durango	10033	Suchil
+MX-DUR	Durango	10034	Tamazula
+MX-DUR	Durango	10035	Tepehuanes
+MX-NAY	Nayarit	18007	Jala
+MX-NAY	Nayarit	18008	Xalisco
+MX-NAY	Nayarit	18009	Del Nayar
+MX-CHP	Chiapas	07053	Mazapa de Madero
+MX-GUA	Guanajuato	11010	Coroneo
+MX-GUA	Guanajuato	11011	Cortazar
+MX-GUA	Guanajuato	11012	Cueramaro
+MX-GUA	Guanajuato	11013	Doctor Mora
+MX-GUA	Guanajuato	11014	Dolores Hidalgo Cuna de la Independencia Nacional
+MX-GUA	Guanajuato	11015	Guanajuato
+MX-GUA	Guanajuato	11016	Huanimaro
+MX-GUA	Guanajuato	11017	Irapuato
+MX-GUA	Guanajuato	11018	Jaral del Progreso
+MX-GUA	Guanajuato	11019	Jerecuaro
+MX-GUA	Guanajuato	11020	Leon
+MX-GUA	Guanajuato	11021	Moroleon
+MX-GUA	Guanajuato	11022	Ocampo
+MX-GUA	Guanajuato	11023	Penjamo
+MX-CHP	Chiapas	07054	Mazatan
+MX-GUA	Guanajuato	11025	Purisima del Rincon
+MX-GUA	Guanajuato	11026	Romita
+MX-GUA	Guanajuato	11027	Salamanca
+MX-GUA	Guanajuato	11028	Salvatierra
+MX-GUA	Guanajuato	11029	San Diego de la Union
+MX-GUA	Guanajuato	11030	San Felipe
+MX-GUA	Guanajuato	11031	San Francisco del Rincon
+MX-GUA	Guanajuato	11032	San Jose Iturbide
+MX-GUA	Guanajuato	11033	San Luis de la Paz
+MX-GUA	Guanajuato	11034	Santa Catarina
+MX-GUA	Guanajuato	11035	Santa Cruz de Juventino Rosas
+MX-GUA	Guanajuato	11036	Santiago Maravatio
+MX-GUA	Guanajuato	11037	Silao de la Victoria
+MX-CHP	Chiapas	07055	Metapa
+MX-GUA	Guanajuato	11041	Uriangato
+MX-GUA	Guanajuato	11042	Valle de Santiago
+MX-GUA	Guanajuato	11043	Victoria
+MX-GUA	Guanajuato	11044	Villagran
+MX-GUA	Guanajuato	11045	Xichu
+MX-GUA	Guanajuato	11046	Yuriria
+MX-GRO	Guerrero	12001	Acapulco de Juarez
+MX-GRO	Guerrero	12002	Ahuacuotzingo
+MX-GRO	Guerrero	12003	Ajuchitlan del Progreso
+MX-GRO	Guerrero	12004	Alcozauca de Guerrero
+MX-NAY	Nayarit	18011	Ruiz
+MX-NAY	Nayarit	18012	San Blas
+MX-NAY	Nayarit	18013	San Pedro Lagunillas
+MX-NAY	Nayarit	18014	Santa Maria del Oro
+MX-NAY	Nayarit	18015	Santiago Ixcuintla
+MX-NAY	Nayarit	18016	Tecuala
+MX-NAY	Nayarit	18017	Tepic
+MX-NAY	Nayarit	18018	Tuxpan
+MX-NAY	Nayarit	18019	La Yesca
+MX-NAY	Nayarit	18020	Bahia de Banderas
+MX-OAX	Oaxaca	20051	Magdalena Teitipac
+MX-HID	Hidalgo	13028	Huejutla de Reyes
+MX-MEX	Mexico	15013	Atizapan de Zaragoza
+MX-MIC	Michoacan	16031	Epitacio Huerta
+MX-CHP	Chiapas	07056	Mitontic
+MX-CHP	Chiapas	07057	Motozintla
+MX-GRO	Guerrero	12005	Alpoyeca
+MX-GRO	Guerrero	12006	Apaxtla
+MX-CHP	Chiapas	07058	Nicolas Ruiz
+MX-CHP	Chiapas	07059	Ocosingo
+MX-GRO	Guerrero	12007	Arcelia
+MX-GRO	Guerrero	12008	Atenango del Rio
+MX-CHP	Chiapas	07060	Ocotepec
+MX-GRO	Guerrero	12011	Atoyac de Alvarez
+MX-GRO	Guerrero	12012	Ayutla de los Libres
+MX-GRO	Guerrero	12014	Benito Juarez
+MX-GRO	Guerrero	12015	Buenavista de Cuellar
+MX-GRO	Guerrero	12016	Coahuayutla de Jose Maria Izazaga
+MX-GRO	Guerrero	12017	Cocula
+MX-GRO	Guerrero	12018	Copala
+MX-GRO	Guerrero	12019	Copalillo
+MX-GRO	Guerrero	12020	Copanatoyac
+MX-GRO	Guerrero	12021	Coyuca de Benitez
+MX-GRO	Guerrero	12022	Coyuca de Catalan
+MX-GRO	Guerrero	12023	Cuajinicuilapa
+MX-JAL	Jalisco	14041	Huejucar
+MX-SON	Sonora	26013	Banamichi
+MX-NAY	Nayarit	18002	Ahuacatlan
+MX-CHP	Chiapas	07063	Osumacinta
+MX-CHP	Chiapas	07064	Oxchuc
+MX-CHP	Chiapas	07065	Palenque
+MX-CHP	Chiapas	07066	Pantelho
+MX-CHP	Chiapas	07067	Pantepec
+MX-CHP	Chiapas	07068	Pichucalco
+MX-CHP	Chiapas	07069	Pijijiapan
+MX-GRO	Guerrero	12053	San Marcos
+MX-GRO	Guerrero	12054	San Miguel Totolapan
+MX-CHP	Chiapas	07073	Rayon
+MX-CHP	Chiapas	07074	Reforma
+MX-CHP	Chiapas	07075	Las Rosas
+MX-CHP	Chiapas	07076	Sabanilla
+MX-CHP	Chiapas	07077	Salto de Agua
+MX-CHP	Chiapas	07078	San Cristobal de las Casas
+MX-CHP	Chiapas	07079	San Fernando
+MX-CHP	Chiapas	07080	Siltepec
+MX-CHP	Chiapas	07081	Simojovel
+MX-CHP	Chiapas	07082	Sitala
+MX-CHP	Chiapas	07083	Socoltenango
+MX-CHP	Chiapas	07084	Solosuchiapa
+MX-CHP	Chiapas	07085	Soyalo
+MX-CHP	Chiapas	07086	Suchiapa
+MX-CHP	Chiapas	07087	Suchiate
+MX-CHP	Chiapas	07088	Sunuapa
+MX-CHP	Chiapas	07089	Tapachula
+MX-CHP	Chiapas	07090	Tapalapa
+MX-GRO	Guerrero	12056	Tecoanapa
+MX-GRO	Guerrero	12057	Tecpan de Galeana
+MX-GRO	Guerrero	12058	Teloloapan
+MX-GRO	Guerrero	12059	Tepecoacuilco de Trujano
+MX-GRO	Guerrero	12060	Tetipac
+MX-GRO	Guerrero	12061	Tixtla de Guerrero
+MX-GRO	Guerrero	12062	Tlacoachistlahuaca
+MX-GRO	Guerrero	12063	Tlacoapa
+MX-GRO	Guerrero	12064	Tlalchapa
+MX-NLE	Nuevo Leon	19024	General Zaragoza
+MX-NLE	Nuevo Leon	19025	General Zuazua
+MX-CHP	Chiapas	07091	Tapilula
+MX-CHP	Chiapas	07101	Tuxtla Gutierrez
+MX-CHP	Chiapas	07102	Tuxtla Chico
+MX-CHP	Chiapas	07103	Tuzantan
+MX-CHP	Chiapas	07104	Tzimol
+MX-GRO	Guerrero	12071	Xochistlahuaca
+MX-GRO	Guerrero	12072	Zapotitlan Tablas
+MX-GRO	Guerrero	12073	Zirandaro
+MX-GRO	Guerrero	12074	Zitlala
+MX-GRO	Guerrero	12075	Eduardo Neri
+MX-GRO	Guerrero	12076	Acatepec
+MX-GRO	Guerrero	12077	Marquelia
+MX-GRO	Guerrero	12078	Cochoapa el Grande
+MX-GRO	Guerrero	12079	Jose Joaquin de Herrera
+MX-NLE	Nuevo Leon	19026	Guadalupe
+MX-NLE	Nuevo Leon	19027	Los Herreras
+MX-NLE	Nuevo Leon	19028	Higueras
+MX-JAL	Jalisco	14050	Jocotepec
+MX-MIC	Michoacan	16005	Angangueo
+MX-CHP	Chiapas	07105	Union Juarez
+MX-CHP	Chiapas	07115	Maravilla Tenejapa
+MX-CHP	Chiapas	07116	Marques de Comillas
+MX-HID	Hidalgo	13019	Chilcuautla
+MX-HID	Hidalgo	13020	Eloxochitlan
+MX-HID	Hidalgo	13021	Emiliano Zapata
+MX-HID	Hidalgo	13022	Epazoyucan
+MX-HID	Hidalgo	13023	Francisco I. Madero
+MX-HID	Hidalgo	13024	Huasca de Ocampo
+MX-HID	Hidalgo	13025	Huautla
+MX-HID	Hidalgo	13026	Huazalingo
+MX-HID	Hidalgo	13027	Huehuetla
+MX-CHP	Chiapas	07117	Montecristo de Guerrero
+MX-HID	Hidalgo	13029	Huichapan
+MX-HID	Hidalgo	13030	Ixmiquilpan
+MX-HID	Hidalgo	13031	Jacala de Ledezma
+MX-HID	Hidalgo	13032	Jaltocan
+MX-HID	Hidalgo	13033	Juarez Hidalgo
+MX-HID	Hidalgo	13034	Lolotla
+MX-HID	Hidalgo	13035	Metepec
+MX-HID	Hidalgo	13036	San Agustin Metzquititlan
+MX-HID	Hidalgo	13037	Metztitlan
+MX-HID	Hidalgo	13038	Mineral del Chico
+MX-HID	Hidalgo	13039	Mineral del Monte
+MX-HID	Hidalgo	13040	La Mision
+MX-HID	Hidalgo	13041	Mixquiahuala de Juarez
+MX-HID	Hidalgo	13042	Molango de Escamilla
+MX-HID	Hidalgo	13043	Nicolas Flores
+MX-HID	Hidalgo	13044	Nopala de Villagran
+MX-HID	Hidalgo	13045	Omitlan de Juarez
+MX-HID	Hidalgo	13046	San Felipe Orizatlan
+MX-HID	Hidalgo	13048	Pachuca de Soto
+MX-HID	Hidalgo	13049	Pisaflores
+MX-HID	Hidalgo	13050	Progreso de Obregon
+MX-HID	Hidalgo	13051	Mineral de la Reforma
+MX-HID	Hidalgo	13052	San Agustin Tlaxiaca
+MX-HID	Hidalgo	13053	San Bartolo Tutotepec
+MX-HID	Hidalgo	13054	San Salvador
+MX-HID	Hidalgo	13055	Santiago de Anaya
+MX-HID	Hidalgo	13056	Santiago Tulantepec de Lugo Guerrero
+MX-HID	Hidalgo	13057	Singuilucan
+MX-HID	Hidalgo	13058	Tasquillo
+MX-HID	Hidalgo	13059	Tecozautla
+MX-CHP	Chiapas	07118	San Andres Duraznal
+MX-CHP	Chiapas	07119	Santiago el Pinar
+MX-CHH	Chihuahua	08001	Ahumada
+MX-CHH	Chihuahua	08002	Aldama
+MX-CHH	Chihuahua	08003	Allende
+MX-HID	Hidalgo	13060	Tenango de Doria
+MX-CHH	Chihuahua	08004	Aquiles Serdan
+MX-CHH	Chihuahua	08005	Ascension
+MX-CHH	Chihuahua	08006	Bachiniva
+MX-CHH	Chihuahua	08007	Balleza
+MX-CHH	Chihuahua	08008	Batopilas
+MX-CHH	Chihuahua	08009	Bocoyna
+MX-CHH	Chihuahua	08010	Buenaventura
+MX-CHH	Chihuahua	08011	Camargo
+MX-CHH	Chihuahua	08012	Carichi
+MX-CHH	Chihuahua	08013	Casas Grandes
+MX-CHH	Chihuahua	08014	Coronado
+MX-CHH	Chihuahua	08015	Coyame del Sotol
+MX-CHH	Chihuahua	08016	La Cruz
+MX-CHH	Chihuahua	08017	Cuauhtemoc
+MX-CHH	Chihuahua	08018	Cusihuiriachi
+MX-CHH	Chihuahua	08019	Chihuahua
+MX-CHH	Chihuahua	08053	Praxedis G. Guerrero
+MX-HID	Hidalgo	13062	Tepehuacan de Guerrero
+MX-HID	Hidalgo	13063	Tepeji del Rio de Ocampo
+MX-HID	Hidalgo	13064	Tepetitlan
+MX-GUA	Guanajuato	11009	Comonfort
+MX-CHH	Chihuahua	08057	San Francisco de Borja
+MX-CHH	Chihuahua	08058	San Francisco de Conchos
+MX-CHH	Chihuahua	08059	San Francisco del Oro
+MX-JAL	Jalisco	14007	San Juanito de Escobedo
+MX-JAL	Jalisco	14008	Arandas
+MX-JAL	Jalisco	14009	El Arenal
+MX-JAL	Jalisco	14010	Atemajac de Brizuela
+MX-JAL	Jalisco	14012	Atenguillo
+MX-JAL	Jalisco	14013	Atotonilco el Alto
+MX-JAL	Jalisco	14014	Atoyac
+MX-JAL	Jalisco	14015	Autlan de Navarro
+MX-JAL	Jalisco	14016	Ayotlan
+MX-JAL	Jalisco	14017	Ayutla
+MX-JAL	Jalisco	14018	La Barca
+MX-JAL	Jalisco	14019	Bolaños
+MX-JAL	Jalisco	14020	Cabo Corrientes
+MX-JAL	Jalisco	14021	Casimiro Castillo
+MX-JAL	Jalisco	14022	Cihuatlan
+MX-JAL	Jalisco	14023	Zapotlan el Grande
+MX-JAL	Jalisco	14024	Cocula
+MX-JAL	Jalisco	14025	Colotlan
+MX-JAL	Jalisco	14026	Concepcion de Buenos Aires
+MX-JAL	Jalisco	14027	Cuautitlan de Garcia Barragan
+MX-JAL	Jalisco	14028	Cuautla
+MX-JAL	Jalisco	14029	Cuquio
+MX-JAL	Jalisco	14030	Chapala
+MX-JAL	Jalisco	14031	Chimaltitan
+MX-JAL	Jalisco	14032	Chiquilistlan
+MX-CHH	Chihuahua	08060	Santa Barbara
+MX-CHH	Chihuahua	08061	Satevo
+MX-CHH	Chihuahua	08062	Saucillo
+MX-CHH	Chihuahua	08063	Temosachic
+MX-CHH	Chihuahua	08064	El Tule
+MX-CHH	Chihuahua	08065	Urique
+MX-CHH	Chihuahua	08066	Uruachi
+MX-CHH	Chihuahua	08067	Valle de Zaragoza
+MX-JAL	Jalisco	14033	Degollado
+MX-JAL	Jalisco	14034	Ejutla
+MX-JAL	Jalisco	14035	Encarnacion de Diaz
+MX-JAL	Jalisco	14036	Etzatlan
+MX-JAL	Jalisco	14037	El Grullo
+MX-JAL	Jalisco	14038	Guachinango
+MX-JAL	Jalisco	14039	Guadalajara
+MX-JAL	Jalisco	14040	Hostotipaquillo
+MX-CMX	Ciudad de Mexico	09002	Azcapotzalco
+MX-CMX	Ciudad de Mexico	09003	Coyoacan
+MX-CMX	Ciudad de Mexico	09004	Cuajimalpa de Morelos
+MX-CMX	Ciudad de Mexico	09005	Gustavo A. Madero
+MX-CMX	Ciudad de Mexico	09006	Iztacalco
+MX-CMX	Ciudad de Mexico	09007	Iztapalapa
+MX-CMX	Ciudad de Mexico	09008	La Magdalena Contreras
+MX-JAL	Jalisco	14042	Huejuquilla el Alto
+MX-JAL	Jalisco	14043	La Huerta
+MX-JAL	Jalisco	14044	Ixtlahuacan de los Membrillos
+MX-JAL	Jalisco	14045	Ixtlahuacan del Rio
+MX-JAL	Jalisco	14046	Jalostotitlan
+MX-JAL	Jalisco	14047	Jamay
+MX-JAL	Jalisco	14048	Jesus Maria
+MX-JAL	Jalisco	14049	Jilotlan de los Dolores
+MX-CMX	Ciudad de Mexico	09009	Milpa Alta
+MX-CMX	Ciudad de Mexico	09010	Alvaro Obregon
+MX-CMX	Ciudad de Mexico	09011	Tlahuac
+MX-CMX	Ciudad de Mexico	09012	Tlalpan
+MX-CMX	Ciudad de Mexico	09014	Benito Juarez
+MX-JAL	Jalisco	14052	Juchitlan
+MX-JAL	Jalisco	14053	Lagos de Moreno
+MX-JAL	Jalisco	14054	El Limon
+MX-JAL	Jalisco	14055	Magdalena
+MX-JAL	Jalisco	14056	Santa Maria del Oro
+MX-JAL	Jalisco	14057	La Manzanilla de la Paz
+MX-JAL	Jalisco	14058	Mascota
+MX-JAL	Jalisco	14059	Mazamitla
+MX-JAL	Jalisco	14060	Mexticacan
+MX-JAL	Jalisco	14061	Mezquitic
+MX-JAL	Jalisco	14062	Mixtlan
+MX-JAL	Jalisco	14063	Ocotlan
+MX-JAL	Jalisco	14064	Ojuelos de Jalisco
+MX-JAL	Jalisco	14065	Pihuamo
+MX-JAL	Jalisco	14066	Poncitlan
+MX-GRO	Guerrero	12052	San Luis Acatlan
+MX-CMX	Ciudad de Mexico	09015	Cuauhtemoc
+MX-CMX	Ciudad de Mexico	09016	Miguel Hidalgo
+MX-JAL	Jalisco	14067	Puerto Vallarta
+MX-JAL	Jalisco	14068	Villa Purificacion
+MX-JAL	Jalisco	14069	Quitupan
+MX-JAL	Jalisco	14070	El Salto
+MX-JAL	Jalisco	14071	San Cristobal de la Barranca
+MX-JAL	Jalisco	14072	San Diego de Alejandria
+MX-JAL	Jalisco	14073	San Juan de los Lagos
+MX-JAL	Jalisco	14074	San Julian
+MX-CMX	Ciudad de Mexico	09017	Venustiano Carranza
+MX-DUR	Durango	10001	Canatlan
+MX-DUR	Durango	10002	Canelas
+MX-DUR	Durango	10029	San Luis del Cordero
+MX-DUR	Durango	10030	San Pedro del Gallo
+MX-DUR	Durango	10031	Santa Clara
+MX-DUR	Durango	10032	Santiago Papasquiaro
+MX-DUR	Durango	10036	Tlahualilo
+MX-JAL	Jalisco	14075	San Marcos
+MX-JAL	Jalisco	14076	San Martin de Bolaños
+MX-JAL	Jalisco	14077	San Martin Hidalgo
+MX-JAL	Jalisco	14078	San Miguel el Alto
+MX-JAL	Jalisco	14079	Gomez Farias
+MX-JAL	Jalisco	14080	San Sebastian del Oeste
+MX-JAL	Jalisco	14081	Santa Maria de los Angeles
+MX-JAL	Jalisco	14082	Sayula
+MX-JAL	Jalisco	14083	Tala
+MX-JAL	Jalisco	14084	Talpa de Allende
+MX-JAL	Jalisco	14085	Tamazula de Gordiano
+MX-JAL	Jalisco	14086	Tapalpa
+MX-JAL	Jalisco	14087	Tecalitlan
+MX-JAL	Jalisco	14088	Tecolotlan
+MX-JAL	Jalisco	14089	Techaluta de Montenegro
+MX-JAL	Jalisco	14090	Tenamaxtlan
+MX-JAL	Jalisco	14091	Teocaltiche
+MX-JAL	Jalisco	14092	Teocuitatlan de Corona
+MX-JAL	Jalisco	14093	Tepatitlan de Morelos
+MX-JAL	Jalisco	14094	Tequila
+MX-JAL	Jalisco	14095	Teuchitlan
+MX-JAL	Jalisco	14096	Tizapan el Alto
+MX-JAL	Jalisco	14097	Tlajomulco de Zuñiga
+MX-JAL	Jalisco	14098	San Pedro Tlaquepaque
+MX-JAL	Jalisco	14099	Toliman
+MX-JAL	Jalisco	14100	Tomatlan
+MX-JAL	Jalisco	14101	Tonala
+MX-JAL	Jalisco	14102	Tonaya
+MX-JAL	Jalisco	14103	Tonila
+MX-JAL	Jalisco	14104	Totatiche
+MX-JAL	Jalisco	14105	Tototlan
+MX-JAL	Jalisco	14106	Tuxcacuesco
+MX-JAL	Jalisco	14107	Tuxcueca
+MX-JAL	Jalisco	14108	Tuxpan
+MX-DUR	Durango	10038	Vicente Guerrero
+MX-DUR	Durango	10039	Nuevo Ideal
+MX-GUA	Guanajuato	11001	Abasolo
+MX-GUA	Guanajuato	11002	Acambaro
+MX-GUA	Guanajuato	11003	San Miguel de Allende
+MX-GUA	Guanajuato	11004	Apaseo el Alto
+MX-GUA	Guanajuato	11005	Apaseo el Grande
+MX-GUA	Guanajuato	11006	Atarjea
+MX-GUA	Guanajuato	11007	Celaya
+MX-GUA	Guanajuato	11008	Manuel Doblado
+MX-GRO	Guerrero	12024	Cualac
+MX-GRO	Guerrero	12025	Cuautepec
+MX-GRO	Guerrero	12026	Cuetzala del Progreso
+MX-GRO	Guerrero	12027	Cutzamala de Pinzon
+MX-GRO	Guerrero	12028	Chilapa de Alvarez
+MX-GRO	Guerrero	12029	Chilpancingo de los Bravo
+MX-GRO	Guerrero	12030	Florencio Villarreal
+MX-GRO	Guerrero	12031	General Canuto A. Neri
+MX-GRO	Guerrero	12032	General Heliodoro Castillo
+MX-GRO	Guerrero	12033	Huamuxtitlan
+MX-GRO	Guerrero	12034	Huitzuco de los Figueroa
+MX-GRO	Guerrero	12035	Iguala de la Independencia
+MX-GRO	Guerrero	12036	Igualapa
+MX-GRO	Guerrero	12037	Ixcateopan de Cuauhtemoc
+MX-GRO	Guerrero	12038	Zihuatanejo de Azueta
+MX-GRO	Guerrero	12039	Juan R. Escudero
+MX-GRO	Guerrero	12040	Leonardo Bravo
+MX-GRO	Guerrero	12041	Malinaltepec
+MX-GRO	Guerrero	12042	Martir de Cuilapan
+MX-GRO	Guerrero	12043	Metlatonoc
+MX-GRO	Guerrero	12044	Mochitlan
+MX-GRO	Guerrero	12045	Olinala
+MX-GRO	Guerrero	12046	Ometepec
+MX-GRO	Guerrero	12047	Pedro Ascencio Alquisiras
+MX-GRO	Guerrero	12048	Petatlan
+MX-GRO	Guerrero	12049	Pilcaya
+MX-GRO	Guerrero	12050	Pungarabato
+MX-GRO	Guerrero	12051	Quechultenango
+MX-GRO	Guerrero	12065	Tlalixtaquilla de Maldonado
+MX-GRO	Guerrero	12066	Tlapa de Comonfort
+MX-GRO	Guerrero	12067	Tlapehuala
+MX-GRO	Guerrero	12068	La Union de Isidoro Montes de Oca
+MX-GRO	Guerrero	12069	Xalpatlahuac
+MX-GRO	Guerrero	12070	Xochihuehuetlan
+MX-GRO	Guerrero	12080	Juchitan
+MX-GRO	Guerrero	12081	Iliatenco
+MX-HID	Hidalgo	13001	Acatlan
+MX-HID	Hidalgo	13002	Acaxochitlan
+MX-HID	Hidalgo	13003	Actopan
+MX-HID	Hidalgo	13004	Agua Blanca de Iturbide
+MX-HID	Hidalgo	13005	Ajacuba
+MX-HID	Hidalgo	13006	Alfajayucan
+MX-HID	Hidalgo	13007	Almoloya
+MX-HID	Hidalgo	13008	Apan
+MX-HID	Hidalgo	13009	El Arenal
+MX-HID	Hidalgo	13010	Atitalaquia
+MX-HID	Hidalgo	13011	Atlapexco
+MX-HID	Hidalgo	13012	Atotonilco el Grande
+MX-HID	Hidalgo	13013	Atotonilco de Tula
+MX-HID	Hidalgo	13014	Calnali
+MX-HID	Hidalgo	13015	Cardonal
+MX-HID	Hidalgo	13016	Cuautepec de Hinojosa
+MX-HID	Hidalgo	13017	Chapantongo
+MX-HID	Hidalgo	13065	Tetepango
+MX-HID	Hidalgo	13066	Villa de Tezontepec
+MX-HID	Hidalgo	13067	Tezontepec de Aldama
+MX-HID	Hidalgo	13068	Tianguistengo
+MX-JAL	Jalisco	14109	Union de San Antonio
+MX-JAL	Jalisco	14110	Union de Tula
+MX-JAL	Jalisco	14111	Valle de Guadalupe
+MX-JAL	Jalisco	14112	Valle de Juarez
+MX-JAL	Jalisco	14113	San Gabriel
+MX-JAL	Jalisco	14114	Villa Corona
+MX-JAL	Jalisco	14115	Villa Guerrero
+MX-JAL	Jalisco	14116	Villa Hidalgo
+MX-JAL	Jalisco	14117	Cañadas de Obregon
+MX-JAL	Jalisco	14118	Yahualica de Gonzalez Gallo
+MX-HID	Hidalgo	13069	Tizayuca
+MX-HID	Hidalgo	13070	Tlahuelilpan
+MX-HID	Hidalgo	13073	Tlanchinol
+MX-MEX	Mexico	15014	Atlacomulco
+MX-MEX	Mexico	15015	Atlautla
+MX-MEX	Mexico	15016	Axapusco
+MX-MEX	Mexico	15017	Ayapango
+MX-MEX	Mexico	15018	Calimaya
+MX-MEX	Mexico	15019	Capulhuac
+MX-OAX	Oaxaca	20440	Santa Maria Totolapilla
+MX-OAX	Oaxaca	20441	Santa Maria Xadani
+MX-HID	Hidalgo	13074	Tlaxcoapan
+MX-HID	Hidalgo	13075	Tolcayuca
+MX-HID	Hidalgo	13076	Tula de Allende
+MX-HID	Hidalgo	13077	Tulancingo de Bravo
+MX-HID	Hidalgo	13078	Xochiatipan
+MX-HID	Hidalgo	13079	Xochicoatlan
+MX-HID	Hidalgo	13080	Yahualica
+MX-HID	Hidalgo	13081	Zacualtipan de Angeles
+MX-HID	Hidalgo	13082	Zapotlan de Juarez
+MX-HID	Hidalgo	13083	Zempoala
+MX-HID	Hidalgo	13084	Zimapan
+MX-JAL	Jalisco	14001	Acatic
+MX-JAL	Jalisco	14002	Acatlan de Juarez
+MX-JAL	Jalisco	14003	Ahualulco de Mercado
+MX-JAL	Jalisco	14004	Amacueca
+MX-JAL	Jalisco	14005	Amatitan
+MX-JAL	Jalisco	14125	San Ignacio Cerro Gordo
+MX-MEX	Mexico	15001	Acambay de Ruiz Castañeda
+MX-MEX	Mexico	15002	Acolman
+MX-MEX	Mexico	15003	Aculco
+MX-MEX	Mexico	15004	Almoloya de Alquisiras
+MX-MEX	Mexico	15005	Almoloya de Juarez
+MX-MEX	Mexico	15044	Jaltenco
+MX-MEX	Mexico	15045	Jilotepec
+MX-MEX	Mexico	15046	Jilotzingo
+MX-MEX	Mexico	15047	Jiquipilco
+MX-MEX	Mexico	15048	Jocotitlan
+MX-MEX	Mexico	15049	Joquicingo
+MX-MEX	Mexico	15050	Juchitepec
+MX-MEX	Mexico	15006	Almoloya del Rio
+MX-MEX	Mexico	15007	Amanalco
+MX-MEX	Mexico	15008	Amatepec
+MX-MEX	Mexico	15009	Amecameca
+MX-MEX	Mexico	15010	Apaxco
+MX-MEX	Mexico	15011	Atenco
+MX-MEX	Mexico	15012	Atizapan
+MX-MEX	Mexico	15020	Coacalco de Berriozabal
+MX-MEX	Mexico	15052	Malinalco
+MX-MEX	Mexico	15022	Cocotitlan
+MX-MEX	Mexico	15023	Coyotepec
+MX-MEX	Mexico	15024	Cuautitlan
+MX-MEX	Mexico	15025	Chalco
+MX-MEX	Mexico	15026	Chapa de Mota
+MX-MEX	Mexico	15058	Nezahualcoyotl
+MX-OAX	Oaxaca	20086	San Agustin Tlacotepec
+MX-MEX	Mexico	15027	Chapultepec
+MX-MEX	Mexico	15063	Ocuilan
+MX-MEX	Mexico	15064	El Oro
+MX-MEX	Mexico	15065	Otumba
+MX-MEX	Mexico	15066	Otzoloapan
+MX-MEX	Mexico	15067	Otzolotepec
+MX-MEX	Mexico	15068	Ozumba
+MX-MEX	Mexico	15069	Papalotla
+MX-MEX	Mexico	15070	La Paz
+MX-MEX	Mexico	15071	Polotitlan
+MX-MEX	Mexico	15072	Rayon
+MX-MEX	Mexico	15073	San Antonio la Isla
+MX-MEX	Mexico	15074	San Felipe del Progreso
+MX-MEX	Mexico	15028	Chiautla
+MX-MEX	Mexico	15030	Chiconcuac
+MX-MEX	Mexico	15031	Chimalhuacan
+MX-MEX	Mexico	15032	Donato Guerra
+MX-MEX	Mexico	15033	Ecatepec de Morelos
+MX-MEX	Mexico	15034	Ecatzingo
+MX-MEX	Mexico	15035	Huehuetoca
+MX-MEX	Mexico	15036	Hueypoxtla
+MX-MEX	Mexico	15037	Huixquilucan
+MX-MEX	Mexico	15038	Isidro Fabela
+MX-MEX	Mexico	15039	Ixtapaluca
+MX-MEX	Mexico	15040	Ixtapan de la Sal
+MX-MEX	Mexico	15041	Ixtapan del Oro
+MX-MEX	Mexico	15042	Ixtlahuaca
+MX-MEX	Mexico	15043	Xalatlaco
+MX-MEX	Mexico	15116	Zacazonapan
+MX-MEX	Mexico	15117	Zacualpan
+MX-MEX	Mexico	15118	Zinacantepec
+MX-MEX	Mexico	15119	Zumpahuacan
+MX-MEX	Mexico	15120	Zumpango
+MX-MEX	Mexico	15121	Cuautitlan Izcalli
+MX-SON	Sonora	26011	Bacoachi
+MX-SON	Sonora	26012	Bacum
+MX-MEX	Mexico	15053	Melchor Ocampo
+MX-MEX	Mexico	15054	Metepec
+MX-MEX	Mexico	15055	Mexicaltzingo
+MX-MEX	Mexico	15056	Morelos
+MX-MEX	Mexico	15057	Naucalpan de Juarez
+MX-MEX	Mexico	15059	Nextlalpan
+MX-MEX	Mexico	15060	Nicolas Romero
+MX-MEX	Mexico	15061	Nopaltepec
+MX-MEX	Mexico	15062	Ocoyoacac
+MX-MEX	Mexico	15076	San Mateo Atenco
+MX-MEX	Mexico	15077	San Simon de Guerrero
+MX-MEX	Mexico	15078	Santo Tomas
+MX-MEX	Mexico	15079	Soyaniquilpan de Juarez
+MX-MEX	Mexico	15080	Sultepec
+MX-MEX	Mexico	15081	Tecamac
+MX-MEX	Mexico	15082	Tejupilco
+MX-SON	Sonora	26014	Baviacora
+MX-MEX	Mexico	15125	Tonanitla
+MX-MEX	Mexico	15098	Texcalyacac
+MX-MEX	Mexico	15099	Texcoco
+MX-MIC	Michoacan	16009	Ario
+MX-MIC	Michoacan	16010	Arteaga
+MX-MIC	Michoacan	16011	Briseñas
+MX-MIC	Michoacan	16012	Buenavista
+MX-MIC	Michoacan	16013	Caracuaro
+MX-MIC	Michoacan	16014	Coahuayana
+MX-MEX	Mexico	15083	Temamatla
+MX-MEX	Mexico	15084	Temascalapa
+MX-MEX	Mexico	15085	Temascalcingo
+MX-MEX	Mexico	15086	Temascaltepec
+MX-MEX	Mexico	15087	Temoaya
+MX-MEX	Mexico	15088	Tenancingo
+MX-MEX	Mexico	15089	Tenango del Aire
+MX-MEX	Mexico	15090	Tenango del Valle
+MX-MIC	Michoacan	16001	Acuitzio
+MX-MIC	Michoacan	16002	Aguililla
+MX-MEX	Mexico	15091	Teoloyucan
+MX-MEX	Mexico	15092	Teotihuacan
+MX-MEX	Mexico	15093	Tepetlaoxtoc
+MX-MEX	Mexico	15094	Tepetlixpa
+MX-MEX	Mexico	15095	Tepotzotlan
+MX-MEX	Mexico	15096	Tequixquiac
+MX-MEX	Mexico	15097	Texcaltitlan
+MX-MIC	Michoacan	16003	Alvaro Obregon
+MX-MIC	Michoacan	16004	Angamacutiro
+MX-MEX	Mexico	15100	Tezoyuca
+MX-MEX	Mexico	15101	Tianguistenco
+MX-MEX	Mexico	15102	Timilpan
+MX-MEX	Mexico	15103	Tlalmanalco
+MX-MEX	Mexico	15104	Tlalnepantla de Baz
+MX-MEX	Mexico	15105	Tlatlaya
+MX-MEX	Mexico	15106	Toluca
+MX-MEX	Mexico	15107	Tonatico
+MX-MEX	Mexico	15108	Tultepec
+MX-MEX	Mexico	15109	Tultitlan
+MX-MEX	Mexico	15110	Valle de Bravo
+MX-MEX	Mexico	15111	Villa de Allende
+MX-MEX	Mexico	15112	Villa del Carbon
+MX-MEX	Mexico	15113	Villa Guerrero
+MX-MEX	Mexico	15114	Villa Victoria
+MX-MEX	Mexico	15122	Valle de Chalco Solidaridad
+MX-MEX	Mexico	15123	Luvianos
+MX-MEX	Mexico	15124	San Jose del Rincon
+MX-MIC	Michoacan	16006	Apatzingan
+MX-MIC	Michoacan	16032	Erongaricuaro
+MX-MIC	Michoacan	16033	Gabriel Zamora
+MX-MIC	Michoacan	16034	Hidalgo
+MX-MIC	Michoacan	16035	La Huacana
+MX-MIC	Michoacan	16036	Huandacareo
+MX-MIC	Michoacan	16037	Huaniqueo
+MX-MIC	Michoacan	16038	Huetamo
+MX-MIC	Michoacan	16039	Huiramba
+MX-MIC	Michoacan	16007	Aporo
+MX-MIC	Michoacan	16008	Aquila
+MX-MIC	Michoacan	16023	Chavinda
+MX-MIC	Michoacan	16024	Cheran
+MX-MIC	Michoacan	16025	Chilchota
+MX-MIC	Michoacan	16026	Chinicuila
+MX-MIC	Michoacan	16027	Chucandiro
+MX-MIC	Michoacan	16028	Churintzio
+MX-MIC	Michoacan	16029	Churumuco
+MX-MIC	Michoacan	16030	Ecuandureo
+MX-MIC	Michoacan	16054	Morelos
+MX-MIC	Michoacan	16055	Mugica
+MX-MIC	Michoacan	16056	Nahuatzen
+MX-MIC	Michoacan	16057	Nocupetaro
+MX-MIC	Michoacan	16058	Nuevo Parangaricutiro
+MX-MOR	Morelos	17005	Coatlan del Rio
+MX-MOR	Morelos	17006	Cuautla
+MX-MOR	Morelos	17007	Cuernavaca
+MX-MOR	Morelos	17008	Emiliano Zapata
+MX-SON	Sonora	26015	Bavispe
+MX-SON	Sonora	26016	Benjamin Hill
+MX-MOR	Morelos	17023	Tlalnepantla
+MX-MOR	Morelos	17026	Tlayacapan
+MX-OAX	Oaxaca	20053	Magdalena Tlacotepec
+MX-SON	Sonora	26017	Caborca
+MX-SON	Sonora	26018	Cajeme
+MX-MOR	Morelos	17027	Totolapan
+MX-MOR	Morelos	17028	Xochitepec
+MX-MOR	Morelos	17029	Yautepec
+MX-MOR	Morelos	17030	Yecapixtla
+MX-MOR	Morelos	17031	Zacatepec
+MX-MOR	Morelos	17032	Zacualpan
+MX-MOR	Morelos	17033	Temoac
+MX-NAY	Nayarit	18001	Acaponeta
+MX-NLE	Nuevo Leon	19001	Abasolo
+MX-NLE	Nuevo Leon	19006	Apodaca
+MX-NLE	Nuevo Leon	19007	Aramberri
+MX-NLE	Nuevo Leon	19008	Bustamante
+MX-NLE	Nuevo Leon	19029	Hualahuises
+MX-NLE	Nuevo Leon	19010	El Carmen
+MX-NLE	Nuevo Leon	19016	Doctor Gonzalez
+MX-NLE	Nuevo Leon	19017	Galeana
+MX-NLE	Nuevo Leon	19018	Garcia
+MX-NLE	Nuevo Leon	19019	San Pedro Garza Garcia
+MX-NLE	Nuevo Leon	19020	General Bravo
+MX-NLE	Nuevo Leon	19021	General Escobedo
+MX-NLE	Nuevo Leon	19022	General Teran
+MX-NLE	Nuevo Leon	19023	General Treviño
+MX-OAX	Oaxaca	20021	Cosolapa
+MX-OAX	Oaxaca	20054	Magdalena Zahuatlan
+MX-OAX	Oaxaca	20055	Mariscala de Juarez
+MX-NLE	Nuevo Leon	19030	Iturbide
+MX-NLE	Nuevo Leon	19035	Melchor Ocampo
+MX-OAX	Oaxaca	20027	Chiquihuitlan de Benito Juarez
+MX-NLE	Nuevo Leon	19036	Mier y Noriega
+MX-NLE	Nuevo Leon	19040	Paras
+MX-NLE	Nuevo Leon	19041	Pesqueria
+MX-NLE	Nuevo Leon	19042	Los Ramones
+MX-OAX	Oaxaca	20056	Martires de Tacubaya
+MX-OAX	Oaxaca	20057	Matias Romero Avendaño
+MX-NLE	Nuevo Leon	19043	Rayones
+MX-NLE	Nuevo Leon	19044	Sabinas Hidalgo
+MX-NLE	Nuevo Leon	19045	Salinas Victoria
+MX-NLE	Nuevo Leon	19046	San Nicolas de los Garza
+MX-OAX	Oaxaca	20063	Nazareno Etla
+MX-OAX	Oaxaca	20064	Nejapa de Madero
+MX-NLE	Nuevo Leon	19047	Hidalgo
+MX-OAX	Oaxaca	20001	Abejones
+MX-OAX	Oaxaca	20089	San Andres Dinicuiti
+MX-OAX	Oaxaca	20003	Asuncion Cacalotepec
+MX-OAX	Oaxaca	20030	El Espinal
+MX-OAX	Oaxaca	20004	Asuncion Cuyotepeji
+MX-OAX	Oaxaca	20007	Asuncion Ocotlan
+MX-OAX	Oaxaca	20011	Calihuala
+MX-OAX	Oaxaca	20033	Guadalupe Etla
+MX-OAX	Oaxaca	20013	Cienega de Zimatlan
+MX-OAX	Oaxaca	20014	Ciudad Ixtepec
+MX-OAX	Oaxaca	20016	Coicoyan de las Flores
+MX-OAX	Oaxaca	20017	La Compañia
+MX-OAX	Oaxaca	20091	San Andres Huayapam
+MX-OAX	Oaxaca	20019	Concepcion Papalo
+MX-OAX	Oaxaca	20020	Constancia del Rosario
+MX-OAX	Oaxaca	20022	Cosoltepec
+MX-OAX	Oaxaca	20023	Cuilapam de Guerrero
+MX-OAX	Oaxaca	20024	Cuyamecalco Villa de Zaragoza
+MX-OAX	Oaxaca	20025	Chahuites
+MX-OAX	Oaxaca	20112	San Baltazar Chichicapam
+MX-OAX	Oaxaca	20026	Chalcatongo de Hidalgo
+MX-OAX	Oaxaca	20281	San Miguel Tecomatlan
+MX-OAX	Oaxaca	20029	Eloxochitlan de Flores Magon
+MX-OAX	Oaxaca	20196	San Juan Evangelista Analco
+MX-OAX	Oaxaca	20032	Fresnillo de Trujano
+MX-OAX	Oaxaca	20117	San Bartolome Loxicha
+MX-OAX	Oaxaca	20034	Guadalupe de Ramirez
+MX-OAX	Oaxaca	20035	Guelatao de Juarez
+MX-OAX	Oaxaca	20075	Reforma de Pineda
+MX-OAX	Oaxaca	20037	Mesones Hidalgo
+MX-OAX	Oaxaca	20118	San Bartolome Quialana
+MX-OAX	Oaxaca	20038	Villa Hidalgo
+MX-OAX	Oaxaca	20040	Huautepec
+MX-OAX	Oaxaca	20045	Magdalena Apasco
+MX-OAX	Oaxaca	20047	Santa Magdalena Jicotlan
+MX-OAX	Oaxaca	20046	Magdalena Jaltepec
+MX-OAX	Oaxaca	20048	Magdalena Mixtepec
+MX-OAX	Oaxaca	20052	Magdalena Tequisistlan
+MX-OAX	Oaxaca	20058	Mazatlan Villa de Flores
+MX-OAX	Oaxaca	20060	Mixistlan de la Reforma
+MX-OAX	Oaxaca	20061	Monjas
+MX-OAX	Oaxaca	20062	Natividad
+MX-OAX	Oaxaca	20065	Ixpantepec Nieves
+MX-OAX	Oaxaca	20066	Santiago Niltepec
+MX-OAX	Oaxaca	20067	Oaxaca de Juarez
+MX-OAX	Oaxaca	20069	La Pe
+MX-OAX	Oaxaca	20070	Pinotepa de Don Luis
+MX-OAX	Oaxaca	20071	Pluma Hidalgo
+MX-OAX	Oaxaca	20092	San Andres Ixtlahuaca
+MX-OAX	Oaxaca	20072	San Jose del Progreso
+MX-OAX	Oaxaca	20074	Santa Catarina Quioquitani
+MX-OAX	Oaxaca	20076	La Reforma
+MX-OAX	Oaxaca	20078	Rojas de Cuauhtemoc
+MX-OAX	Oaxaca	20099	San Andres Tepetlapa
+MX-OAX	Oaxaca	20077	Reyes Etla
+MX-OAX	Oaxaca	20197	San Juan Guelavia
+MX-OAX	Oaxaca	20079	Salina Cruz
+MX-OAX	Oaxaca	20081	San Agustin Atenango
+MX-OAX	Oaxaca	20080	San Agustin Amatengo
+MX-OAX	Oaxaca	20084	San Agustin Etla
+MX-OAX	Oaxaca	20082	San Agustin Chayuco
+MX-OAX	Oaxaca	20083	San Agustin de las Juntas
+MX-OAX	Oaxaca	20087	San Agustin Yatareni
+MX-OAX	Oaxaca	20090	San Andres Huaxpaltepec
+MX-OAX	Oaxaca	20088	San Andres Cabecera Nueva
+MX-OAX	Oaxaca	20094	San Andres Nuxiño
+MX-OAX	Oaxaca	20100	San Andres Yaa
+MX-OAX	Oaxaca	20101	San Andres Zabache
+MX-OAX	Oaxaca	20095	San Andres Paxtlan
+MX-OAX	Oaxaca	20096	San Andres Sinaxtla
+MX-OAX	Oaxaca	20097	San Andres Solaga
+MX-OAX	Oaxaca	20102	San Andres Zautla
+MX-OAX	Oaxaca	20103	San Antonino Castillo Velasco
+MX-OAX	Oaxaca	20204	San Juan Lajarcia
+MX-OAX	Oaxaca	20105	San Antonino Monte Verde
+MX-OAX	Oaxaca	20106	San Antonio Acutla
+MX-OAX	Oaxaca	20107	San Antonio de la Cal
+MX-OAX	Oaxaca	20108	San Antonio Huitepec
+MX-OAX	Oaxaca	20206	San Juan de los Cues
+MX-OAX	Oaxaca	20109	San Antonio Nanahuatipam
+MX-OAX	Oaxaca	20110	San Antonio Sinicahua
+MX-OAX	Oaxaca	20111	San Antonio Tepetlapa
+MX-OAX	Oaxaca	20114	San Baltazar Yatzachi el Bajo
+MX-OAX	Oaxaca	20131	San Dionisio Ocotepec
+MX-OAX	Oaxaca	20115	San Bartolo Coyotepec
+MX-OAX	Oaxaca	20116	San Bartolome Ayautla
+MX-OAX	Oaxaca	20119	San Bartolome Yucuañe
+MX-OAX	Oaxaca	20120	San Bartolome Zoogocho
+MX-OAX	Oaxaca	20452	Santiago Apostol
+MX-OAX	Oaxaca	20121	San Bartolo Soyaltepec
+MX-OAX	Oaxaca	20122	San Bartolo Yautepec
+MX-OAX	Oaxaca	20123	San Bernardo Mixtepec
+MX-OAX	Oaxaca	20124	San Blas Atempa
+MX-OAX	Oaxaca	20125	San Carlos Yautepec
+MX-OAX	Oaxaca	20199	San Juan Ihualtepec
+MX-OAX	Oaxaca	20139	San Francisco Chapulapa
+MX-OAX	Oaxaca	20135	San Felipe Tejalapam
+MX-OAX	Oaxaca	20126	San Cristobal Amatlan
+MX-OAX	Oaxaca	20127	San Cristobal Amoltepec
+MX-OAX	Oaxaca	20153	San Gabriel Mixtepec
+MX-OAX	Oaxaca	20172	San Juan Achiutla
+MX-OAX	Oaxaca	20128	San Cristobal Lachirioag
+MX-OAX	Oaxaca	20129	San Cristobal Suchixtlahuaca
+MX-OAX	Oaxaca	20130	San Dionisio del Mar
+MX-OAX	Oaxaca	20132	San Dionisio Ocotlan
+MX-OAX	Oaxaca	20160	San Jeronimo Silacayoapilla
+MX-OAX	Oaxaca	20133	San Esteban Atatlahuca
+MX-OAX	Oaxaca	20134	San Felipe Jalapa de Diaz
+MX-OAX	Oaxaca	20136	San Felipe Usila
+MX-OAX	Oaxaca	20174	Animas Trujano
+MX-OAX	Oaxaca	20137	San Francisco Cahuacua
+MX-OAX	Oaxaca	20138	San Francisco Cajonos
+MX-OAX	Oaxaca	20140	San Francisco Chindua
+MX-OAX	Oaxaca	20176	San Juan Bautista Coixtlahuaca
+MX-OAX	Oaxaca	20142	San Francisco Huehuetlan
+MX-OAX	Oaxaca	20143	San Francisco Ixhuatan
+MX-OAX	Oaxaca	20144	San Francisco Jaltepetongo
+MX-OAX	Oaxaca	20145	San Francisco Lachigolo
+MX-OAX	Oaxaca	20146	San Francisco Logueche
+MX-OAX	Oaxaca	20223	San Juan Yatzona
+MX-OAX	Oaxaca	20148	San Francisco Ozolotepec
+MX-OAX	Oaxaca	20150	San Francisco Telixtlahuaca
+MX-OAX	Oaxaca	20151	San Francisco Teopan
+MX-OAX	Oaxaca	20154	San Ildefonso Amatlan
+MX-OAX	Oaxaca	20157	San Jacinto Amilpas
+MX-OAX	Oaxaca	20178	San Juan Bautista Guelache
+MX-OAX	Oaxaca	20158	San Jacinto Tlacotepec
+MX-OAX	Oaxaca	20162	San Jeronimo Taviche
+MX-OAX	Oaxaca	20179	San Juan Bautista Jayacatlan
+MX-OAX	Oaxaca	20249	San Mateo Yoloxochitlan
+MX-OAX	Oaxaca	20163	San Jeronimo Tecoatl
+MX-OAX	Oaxaca	20165	San Jose Ayuquila
+MX-OAX	Oaxaca	20187	San Juan Coatzospam
+MX-OAX	Oaxaca	20166	San Jose Chiltepec
+MX-OAX	Oaxaca	20167	San Jose del Peñasco
+MX-OAX	Oaxaca	20168	San Jose Estancia Grande
+MX-OAX	Oaxaca	20263	San Miguel Coatlan
+MX-OAX	Oaxaca	20264	San Miguel Chicahua
+MX-OAX	Oaxaca	20169	San Jose Independencia
+MX-OAX	Oaxaca	20267	San Miguel del Rio
+MX-OAX	Oaxaca	20170	San Jose Lachiguiri
+MX-OAX	Oaxaca	20171	San Jose Tenango
+MX-OAX	Oaxaca	20173	San Juan Atepec
+MX-OAX	Oaxaca	20180	San Juan Bautista Lo de Soto
+MX-OAX	Oaxaca	20188	San Juan Colorado
+MX-OAX	Oaxaca	20181	San Juan Bautista Suchitepec
+MX-OAX	Oaxaca	20191	San Juan Chicomezuchil
+MX-OAX	Oaxaca	20182	San Juan Bautista Tlacoatzintepec
+MX-OAX	Oaxaca	20192	San Juan Chilateca
+MX-OAX	Oaxaca	20183	San Juan Bautista Tlachichilco
+MX-OAX	Oaxaca	20189	San Juan Comaltepec
+MX-OAX	Oaxaca	20193	San Juan del Estado
+MX-OAX	Oaxaca	20194	San Juan del Rio
+MX-OAX	Oaxaca	20195	San Juan Diuxi
+MX-OAX	Oaxaca	20210	San Juan Ñumi
+MX-OAX	Oaxaca	20219	San Juan Teitipac
+MX-OAX	Oaxaca	20220	San Juan Tepeuxila
+MX-OAX	Oaxaca	20200	San Juan Juquila Mixes
+MX-OAX	Oaxaca	20201	San Juan Juquila Vijanos
+MX-OAX	Oaxaca	20203	San Juan Lachigalla
+MX-OAX	Oaxaca	20208	San Juan Mixtepec Distrito 08
+MX-OAX	Oaxaca	20215	San Juan Sayultepec
+MX-OAX	Oaxaca	20209	San Juan Mixtepec Distrito 26
+MX-OAX	Oaxaca	20514	Santo Domingo Roayaga
+MX-OAX	Oaxaca	20216	San Juan Tabaa
+MX-OAX	Oaxaca	20218	San Juan Teita
+MX-OAX	Oaxaca	20516	Santo Domingo Teojomulco
+MX-OAX	Oaxaca	20517	Santo Domingo Tepuxtepec
+MX-OAX	Oaxaca	20221	San Juan Teposcolula
+MX-OAX	Oaxaca	20524	Santo Domingo Yodohino
+MX-OAX	Oaxaca	20525	Santo Domingo Zanatepec
+MX-OAX	Oaxaca	20222	San Juan Yaee
+MX-OAX	Oaxaca	20233	San Lucas Quiavini
+MX-OAX	Oaxaca	20224	San Juan Yucuita
+MX-OAX	Oaxaca	20239	San Martin Huamelulpam
+MX-OAX	Oaxaca	20242	San Martin Peras
+MX-OAX	Oaxaca	20225	San Lorenzo
+MX-OAX	Oaxaca	20244	San Martin Toxpalan
+MX-OAX	Oaxaca	20226	San Lorenzo Albarradas
+MX-OAX	Oaxaca	20456	Santiago Cacaloxtepec
+MX-OAX	Oaxaca	20227	San Lorenzo Cacaotepec
+MX-OAX	Oaxaca	20228	San Lorenzo Cuaunecuiltitla
+MX-OAX	Oaxaca	20231	San Lucas Camotlan
+MX-OAX	Oaxaca	20234	San Lucas Zoquiapam
+MX-OAX	Oaxaca	20235	San Luis Amatlan
+MX-OAX	Oaxaca	20236	San Marcial Ozolotepec
+MX-OAX	Oaxaca	20237	San Marcos Arteaga
+MX-OAX	Oaxaca	20238	San Martin de los Cansecos
+MX-OAX	Oaxaca	20240	San Martin Itunyoso
+MX-OAX	Oaxaca	20241	San Martin Lachila
+MX-OAX	Oaxaca	20243	San Martin Tilcajete
+MX-OAX	Oaxaca	20245	San Martin Zacatepec
+MX-OAX	Oaxaca	20246	San Mateo Cajonos
+MX-OAX	Oaxaca	20248	San Mateo del Mar
+MX-OAX	Oaxaca	20250	San Mateo Etlatongo
+MX-OAX	Oaxaca	20251	San Mateo Nejapam
+MX-OAX	Oaxaca	20247	Capulalpam de Mendez
+MX-OAX	Oaxaca	20270	San Miguel Huautla
+MX-OAX	Oaxaca	20255	San Mateo Sindihui
+MX-OAX	Oaxaca	20252	San Mateo Peñasco
+MX-OAX	Oaxaca	20253	San Mateo Piñas
+MX-OAX	Oaxaca	20254	San Mateo Rio Hondo
+MX-OAX	Oaxaca	20276	San Miguel Santa Flor
+MX-OAX	Oaxaca	20256	San Mateo Tlapiltepec
+MX-OAX	Oaxaca	20258	San Miguel Achiutla
+MX-OAX	Oaxaca	20257	San Melchor Betaza
+MX-OAX	Oaxaca	20259	San Miguel Ahuehuetitlan
+MX-OAX	Oaxaca	20260	San Miguel Aloapam
+MX-OAX	Oaxaca	20262	San Miguel Amatlan
+MX-OAX	Oaxaca	20284	San Miguel Tilquiapam
+MX-OAX	Oaxaca	20265	San Miguel Chimalapa
+MX-OAX	Oaxaca	20266	San Miguel del Puerto
+MX-OAX	Oaxaca	20268	San Miguel Ejutla
+MX-OAX	Oaxaca	20269	San Miguel el Grande
+MX-OAX	Oaxaca	20271	San Miguel Mixtepec
+MX-OAX	Oaxaca	20274	San Miguel Piedras
+MX-OAX	Oaxaca	20280	Villa Talea de Castro
+MX-OAX	Oaxaca	20282	San Miguel Tenango
+MX-OAX	Oaxaca	20283	San Miguel Tequixtepec
+MX-OAX	Oaxaca	20547	Teotongo
+MX-OAX	Oaxaca	20285	San Miguel Tlacamama
+MX-OAX	Oaxaca	20548	Tepelmeme Villa de Morelos
+MX-OAX	Oaxaca	20388	Santa Ines del Monte
+MX-OAX	Oaxaca	20286	San Miguel Tlacotepec
+MX-OAX	Oaxaca	20287	San Miguel Tulancingo
+MX-OAX	Oaxaca	20288	San Miguel Yotao
+MX-OAX	Oaxaca	20462	Santiago Huajolotitlan
+MX-OAX	Oaxaca	20289	San Nicolas
+MX-OAX	Oaxaca	20292	San Pablo Cuatro Venados
+MX-OAX	Oaxaca	20295	San Pablo Huixtepec
+MX-OAX	Oaxaca	20293	San Pablo Etla
+MX-OAX	Oaxaca	20294	San Pablo Huitzo
+MX-OAX	Oaxaca	20296	San Pablo Macuiltianguis
+MX-OAX	Oaxaca	20297	San Pablo Tijaltepec
+MX-OAX	Oaxaca	20299	San Pablo Yaganiza
+MX-OAX	Oaxaca	20298	San Pablo Villa de Mitla
+MX-OAX	Oaxaca	20300	San Pedro Amuzgos
+MX-OAX	Oaxaca	20303	San Pedro Cajonos
+MX-OAX	Oaxaca	20301	San Pedro Apostol
+MX-OAX	Oaxaca	20302	San Pedro Atoyac
+MX-OAX	Oaxaca	20304	San Pedro Coxcaltepec Cantaros
+MX-OAX	Oaxaca	20305	San Pedro Comitancillo
+MX-OAX	Oaxaca	20331	San Pedro Tidaa
+MX-OAX	Oaxaca	20307	San Pedro Huamelula
+MX-OAX	Oaxaca	20308	San Pedro Huilotepec
+MX-OAX	Oaxaca	20332	San Pedro Topiltepec
+MX-OAX	Oaxaca	20310	San Pedro Ixtlahuaca
+MX-OAX	Oaxaca	20311	San Pedro Jaltepetongo
+MX-OAX	Oaxaca	20333	San Pedro Totolapam
+MX-OAX	Oaxaca	20312	San Pedro Jicayan
+MX-OAX	Oaxaca	20313	San Pedro Jocotipac
+MX-OAX	Oaxaca	20314	San Pedro Juchatengo
+MX-OAX	Oaxaca	20555	Trinidad Zaachila
+MX-OAX	Oaxaca	20315	San Pedro Martir
+MX-OAX	Oaxaca	20316	San Pedro Martir Quiechapa
+MX-OAX	Oaxaca	20556	La Trinidad Vista Hermosa
+MX-OAX	Oaxaca	20317	San Pedro Martir Yucuxaco
+MX-OAX	Oaxaca	20362	Santa Catarina Cuixtla
+MX-OAX	Oaxaca	20319	San Pedro Mixtepec Distrito 26
+MX-OAX	Oaxaca	20320	San Pedro Molinos
+MX-OAX	Oaxaca	20321	San Pedro Nopala
+MX-OAX	Oaxaca	20322	San Pedro Ocopetatillo
+MX-OAX	Oaxaca	20323	San Pedro Ocotepec
+MX-OAX	Oaxaca	20325	San Pedro Quiatoni
+MX-OAX	Oaxaca	20342	San Raymundo Jalpan
+MX-OAX	Oaxaca	20326	San Pedro Sochiapam
+MX-OAX	Oaxaca	20327	San Pedro Tapanatepec
+MX-OAX	Oaxaca	20328	San Pedro Taviche
+MX-OAX	Oaxaca	20329	San Pedro Teozacoalco
+MX-OAX	Oaxaca	20330	San Pedro Teutila
+MX-OAX	Oaxaca	20335	San Pedro Yaneri
+MX-OAX	Oaxaca	20367	Santa Catarina Mechoacan
+MX-OAX	Oaxaca	20336	San Pedro Yolox
+MX-OAX	Oaxaca	20368	Santa Catarina Minas
+MX-OAX	Oaxaca	20338	Villa de Etla
+MX-OAX	Oaxaca	20339	San Pedro y San Pablo Teposcolula
+MX-OAX	Oaxaca	20343	San Sebastian Abasolo
+MX-OAX	Oaxaca	20346	San Sebastian Nicananduta
+MX-OAX	Oaxaca	20344	San Sebastian Coatlan
+MX-OAX	Oaxaca	20345	San Sebastian Ixcapa
+MX-OAX	Oaxaca	20356	Santa Ana del Valle
+MX-OAX	Oaxaca	20357	Santa Ana Tavela
+MX-OAX	Oaxaca	20347	San Sebastian Rio Hondo
+MX-OAX	Oaxaca	20348	San Sebastian Tecomaxtlahuaca
+MX-SON	Sonora	26023	Cumpas
+MX-OAX	Oaxaca	20349	San Sebastian Teitipac
+MX-OAX	Oaxaca	20360	Santa Ana Zegache
+MX-OAX	Oaxaca	20350	San Sebastian Tutla
+MX-OAX	Oaxaca	20351	San Simon Almolongas
+MX-OAX	Oaxaca	20540	Villa de Tamazulapam del Progreso
+MX-OAX	Oaxaca	20352	San Simon Zahuatlan
+MX-OAX	Oaxaca	20353	Santa Ana
+MX-OAX	Oaxaca	20354	Santa Ana Ateixtlahuaca
+MX-OAX	Oaxaca	20355	Santa Ana Cuauhtemoc
+MX-OAX	Oaxaca	20358	Santa Ana Tlapacoyan
+MX-OAX	Oaxaca	20359	Santa Ana Yareni
+MX-OAX	Oaxaca	20361	Santa Catalina Quieri
+MX-OAX	Oaxaca	20363	Santa Catarina Ixtepeji
+MX-OAX	Oaxaca	20369	Santa Catarina Quiane
+MX-OAX	Oaxaca	20365	Santa Catarina Lachatao
+MX-OAX	Oaxaca	20370	Santa Catarina Tayata
+MX-OAX	Oaxaca	20376	Santa Cruz de Bravo
+MX-OAX	Oaxaca	20372	Santa Catarina Yosonotu
+MX-OAX	Oaxaca	20373	Santa Catarina Zapoquila
+MX-OAX	Oaxaca	20374	Santa Cruz Acatepec
+MX-OAX	Oaxaca	20375	Santa Cruz Amilpas
+MX-OAX	Oaxaca	20379	Santa Cruz Nundaco
+MX-OAX	Oaxaca	20380	Santa Cruz Papalutla
+MX-OAX	Oaxaca	20381	Santa Cruz Tacache de Mina
+MX-OAX	Oaxaca	20382	Santa Cruz Tacahua
+MX-OAX	Oaxaca	20383	Santa Cruz Tayata
+MX-OAX	Oaxaca	20403	Santa Maria Coyotepec
+MX-OAX	Oaxaca	20387	Santa Gertrudis
+MX-OAX	Oaxaca	20384	Santa Cruz Xitla
+MX-OAX	Oaxaca	20390	Santa Lucia del Camino
+MX-OAX	Oaxaca	20391	Santa Lucia Miahuatlan
+MX-OAX	Oaxaca	20408	Santa Maria del Rosario
+MX-OAX	Oaxaca	20392	Santa Lucia Monteverde
+MX-OAX	Oaxaca	20393	Santa Lucia Ocotlan
+MX-OAX	Oaxaca	20395	Santa Maria Apazco
+MX-OAX	Oaxaca	20396	Santa Maria la Asuncion
+MX-OAX	Oaxaca	20418	Santa Maria Jalapa del Marques
+MX-OAX	Oaxaca	20398	Ayoquezco de Aldama
+MX-OAX	Oaxaca	20399	Santa Maria Atzompa
+MX-OAX	Oaxaca	20400	Santa Maria Camotlan
+MX-OAX	Oaxaca	20402	Santa Maria Cortijo
+MX-OAX	Oaxaca	20419	Santa Maria Jaltianguis
+MX-OAX	Oaxaca	20404	Santa Maria Chachoapam
+MX-OAX	Oaxaca	20405	Villa de Chilapa de Diaz
+MX-OAX	Oaxaca	20432	Santa Maria Temaxcalapa
+MX-OAX	Oaxaca	20409	Santa Maria del Tule
+MX-OAX	Oaxaca	20411	Santa Maria Guelace
+MX-OAX	Oaxaca	20436	Santa Maria Texcatitlan
+MX-OAX	Oaxaca	20437	Santa Maria Tlahuitoltepec
+MX-OAX	Oaxaca	20412	Santa Maria Guienagati
+MX-OAX	Oaxaca	20414	Santa Maria Huazolotitlan
+MX-OAX	Oaxaca	20415	Santa Maria Ipalapa
+MX-OAX	Oaxaca	20416	Santa Maria Ixcatlan
+MX-OAX	Oaxaca	20420	Santa Maria Lachixio
+MX-OAX	Oaxaca	20421	Santa Maria Mixtequilla
+MX-OAX	Oaxaca	20422	Santa Maria Nativitas
+MX-OAX	Oaxaca	20423	Santa Maria Nduayaco
+MX-OAX	Oaxaca	20425	Santa Maria Papalo
+MX-OAX	Oaxaca	20518	Santo Domingo Tlatayapam
+MX-OAX	Oaxaca	20428	Santa Maria Quiegolani
+MX-OAX	Oaxaca	20429	Santa Maria Sola
+MX-OAX	Oaxaca	20430	Santa Maria Tataltepec
+MX-PUE	Puebla	21058	Chilchotla
+MX-OAX	Oaxaca	20431	Santa Maria Tecomavaca
+MX-QUE	Queretaro	22002	Pinal de Amoles
+MX-OAX	Oaxaca	20433	Santa Maria Temaxcaltepec
+MX-OAX	Oaxaca	20438	Santa Maria Tlalixtac
+MX-SLP	San Luis Potosi	24034	San Vicente Tancuayalab
+MX-OAX	Oaxaca	20434	Santa Maria Teopoxco
+MX-SLP	San Luis Potosi	24041	Tanlajas
+MX-OAX	Oaxaca	20439	Santa Maria Tonameca
+MX-PUE	Puebla	21200	Xochiapulco
+MX-OAX	Oaxaca	20442	Santa Maria Yalina
+MX-OAX	Oaxaca	20444	Santa Maria Yolotepec
+MX-SIN	Sinaloa	25016	San Ignacio
+MX-OAX	Oaxaca	20443	Santa Maria Yavesia
+MX-OAX	Oaxaca	20445	Santa Maria Yosoyua
+MX-OAX	Oaxaca	20446	Santa Maria Yucuhiti
+MX-OAX	Oaxaca	20448	Santa Maria Zaniza
+MX-OAX	Oaxaca	20449	Santa Maria Zoquitlan
+MX-OAX	Oaxaca	20451	Santiago Apoala
+MX-OAX	Oaxaca	20453	Santiago Astata
+MX-OAX	Oaxaca	20463	Santiago Huauclilla
+MX-OAX	Oaxaca	20454	Santiago Atitlan
+MX-OAX	Oaxaca	20464	Santiago Ihuitlan Plumas
+MX-OAX	Oaxaca	20455	Santiago Ayuquililla
+MX-OAX	Oaxaca	20458	Santiago Comaltepec
+MX-OAX	Oaxaca	20461	Santiago del Rio
+MX-OAX	Oaxaca	20465	Santiago Ixcuintepec
+MX-OAX	Oaxaca	20468	Santiago Jocotepec
+MX-OAX	Oaxaca	20469	Santiago Juxtlahuaca
+MX-OAX	Oaxaca	20471	Santiago Lalopa
+MX-OAX	Oaxaca	20472	Santiago Laollaga
+MX-OAX	Oaxaca	20486	Villa Tejupam de la Union
+MX-OAX	Oaxaca	20473	Santiago Laxopa
+MX-OAX	Oaxaca	20474	Santiago Llano Grande
+MX-OAX	Oaxaca	20475	Santiago Matatlan
+MX-OAX	Oaxaca	20476	Santiago Miltepec
+MX-OAX	Oaxaca	20493	Santiago Tillo
+MX-OAX	Oaxaca	20478	Santiago Nacaltepec
+MX-OAX	Oaxaca	20480	Santiago Nundiche
+MX-OAX	Oaxaca	20482	Santiago Pinotepa Nacional
+MX-OAX	Oaxaca	20483	Santiago Suchilquitongo
+MX-OAX	Oaxaca	20497	Santiago Yaitepec
+MX-OAX	Oaxaca	20485	Santiago Tapextla
+MX-OAX	Oaxaca	20487	Santiago Tenango
+MX-OAX	Oaxaca	20488	Santiago Tepetlapa
+MX-OAX	Oaxaca	20502	Santiago Zacatepec
+MX-OAX	Oaxaca	20489	Santiago Tetepec
+MX-OAX	Oaxaca	20490	Santiago Texcalcingo
+MX-OAX	Oaxaca	20503	Santiago Zoochila
+MX-OAX	Oaxaca	20491	Santiago Textitlan
+MX-OAX	Oaxaca	20494	Santiago Tlazoyaltepec
+MX-OAX	Oaxaca	20496	Santiago Xiacui
+MX-OAX	Oaxaca	20499	Santiago Yolomecatl
+MX-OAX	Oaxaca	20504	Nuevo Zoquiapam
+MX-OAX	Oaxaca	20501	Santiago Yucuyachi
+MX-OAX	Oaxaca	20505	Santo Domingo Ingenio
+MX-OAX	Oaxaca	20506	Santo Domingo Albarradas
+MX-OAX	Oaxaca	20507	Santo Domingo Armenta
+MX-OAX	Oaxaca	20508	Santo Domingo Chihuitan
+MX-OAX	Oaxaca	20509	Santo Domingo de Morelos
+MX-OAX	Oaxaca	20510	Santo Domingo Ixcatlan
+MX-OAX	Oaxaca	20511	Santo Domingo Nuxaa
+MX-OAX	Oaxaca	20512	Santo Domingo Ozolotepec
+MX-OAX	Oaxaca	20519	Santo Domingo Tomaltepec
+MX-OAX	Oaxaca	20541	Tanetze de Zaragoza
+MX-OAX	Oaxaca	20520	Santo Domingo Tonala
+MX-OAX	Oaxaca	20521	Santo Domingo Tonaltepec
+MX-OAX	Oaxaca	20522	Santo Domingo Xagacia
+MX-OAX	Oaxaca	20523	Santo Domingo Yanhuitlan
+MX-OAX	Oaxaca	20527	Santos Reyes Papalo
+MX-OAX	Oaxaca	20528	Santos Reyes Tepejillo
+MX-OAX	Oaxaca	20529	Santos Reyes Yucuna
+MX-OAX	Oaxaca	20535	San Vicente Lachixio
+MX-OAX	Oaxaca	20530	Santo Tomas Jalieza
+MX-OAX	Oaxaca	20531	Santo Tomas Mazaltepec
+MX-OAX	Oaxaca	20536	San Vicente Nuñu
+MX-OAX	Oaxaca	20532	Santo Tomas Ocotepec
+MX-OAX	Oaxaca	20537	Silacayoapam
+MX-OAX	Oaxaca	20538	Sitio de Xitlapehua
+MX-OAX	Oaxaca	20533	Santo Tomas Tamazulapan
+MX-OAX	Oaxaca	20539	Soledad Etla
+MX-OAX	Oaxaca	20534	San Vicente Coatlan
+MX-OAX	Oaxaca	20542	Taniche
+MX-OAX	Oaxaca	20544	Teococuilco de Marcos Perez
+MX-OAX	Oaxaca	20546	Teotitlan del Valle
+MX-OAX	Oaxaca	20545	Teotitlan de Flores Magon
+MX-OAX	Oaxaca	20550	San Jeronimo Tlacochahuaya
+MX-OAX	Oaxaca	20558	Valerio Trujano
+MX-OAX	Oaxaca	20551	Tlacolula de Matamoros
+MX-OAX	Oaxaca	20552	Tlacotepec Plumas
+MX-OAX	Oaxaca	20553	Tlalixtac de Cabrera
+MX-OAX	Oaxaca	20561	Yaxe
+MX-OAX	Oaxaca	20562	Magdalena Yodocono de Porfirio Diaz
+MX-OAX	Oaxaca	20554	Totontepec Villa de Morelos
+MX-OAX	Oaxaca	20568	Zapotitlan Palmas
+MX-OAX	Oaxaca	20557	Union Hidalgo
+MX-OAX	Oaxaca	20559	San Juan Bautista Valle Nacional
+MX-OAX	Oaxaca	20560	Villa Diaz Ordaz
+MX-OAX	Oaxaca	20563	Yogana
+MX-OAX	Oaxaca	20569	Santa Ines de Zaragoza
+MX-OAX	Oaxaca	20570	Zimatlan de Alvarez
+MX-PUE	Puebla	21001	Acajete
+MX-PUE	Puebla	21002	Acateno
+MX-PUE	Puebla	21003	Acatlan
+MX-PUE	Puebla	21004	Acatzingo
+MX-PUE	Puebla	21005	Acteopan
+MX-PUE	Puebla	21006	Ahuacatlan
+MX-PUE	Puebla	21007	Ahuatlan
+MX-PUE	Puebla	21008	Ahuazotepec
+MX-PUE	Puebla	21009	Ahuehuetitla
+MX-PUE	Puebla	21010	Ajalpan
+MX-PUE	Puebla	21011	Albino Zertuche
+MX-PUE	Puebla	21012	Aljojuca
+MX-PUE	Puebla	21013	Altepexi
+MX-PUE	Puebla	21014	Amixtlan
+MX-PUE	Puebla	21015	Amozoc
+MX-PUE	Puebla	21016	Aquixtla
+MX-OAX	Oaxaca	20564	Yutanduchi de Guerrero
+MX-OAX	Oaxaca	20565	Villa de Zaachila
+MX-OAX	Oaxaca	20566	San Mateo Yucutindoo
+MX-PUE	Puebla	21059	Chinantla
+MX-PUE	Puebla	21060	Domingo Arenas
+MX-PUE	Puebla	21061	Eloxochitlan
+MX-PUE	Puebla	21062	Epatlan
+MX-PUE	Puebla	21063	Esperanza
+MX-PUE	Puebla	21064	Francisco Z. Mena
+MX-PUE	Puebla	21065	General Felipe Angeles
+MX-PUE	Puebla	21066	Guadalupe
+MX-PUE	Puebla	21067	Guadalupe Victoria
+MX-PUE	Puebla	21068	Hermenegildo Galeana
+MX-PUE	Puebla	21069	Huaquechula
+MX-PUE	Puebla	21070	Huatlatlauca
+MX-OAX	Oaxaca	20567	Zapotitlan Lagunas
+MX-PUE	Puebla	21073	Huehuetlan el Chico
+MX-PUE	Puebla	21074	Huejotzingo
+MX-PUE	Puebla	21075	Hueyapan
+MX-PUE	Puebla	21076	Hueytamalco
+MX-PUE	Puebla	21077	Hueytlalpan
+MX-PUE	Puebla	21078	Huitzilan de Serdan
+MX-PUE	Puebla	21079	Huitziltepec
+MX-PUE	Puebla	21020	Atoyatempan
+MX-PUE	Puebla	21021	Atzala
+MX-SON	Sonora	26038	Moctezuma
+MX-PUE	Puebla	21028	Camocuautla
+MX-PUE	Puebla	21029	Caxhuacan
+MX-PUE	Puebla	21030	Coatepec
+MX-PUE	Puebla	21034	Coronango
+MX-SON	Sonora	26039	Naco
+MX-PUE	Puebla	21038	Cuapiaxtla de Madero
+MX-PUE	Puebla	21039	Cuautempan
+MX-PUE	Puebla	21040	Cuautinchan
+MX-PUE	Puebla	21041	Cuautlancingo
+MX-PUE	Puebla	21042	Cuayuca de Andrade
+MX-PUE	Puebla	21043	Cuetzalan del Progreso
+MX-PUE	Puebla	21044	Cuyoaco
+MX-PUE	Puebla	21045	Chalchicomula de Sesma
+MX-PUE	Puebla	21046	Chapulco
+MX-PUE	Puebla	21047	Chiautla
+MX-PUE	Puebla	21048	Chiautzingo
+MX-PUE	Puebla	21049	Chiconcuautla
+MX-PUE	Puebla	21050	Chichiquila
+MX-PUE	Puebla	21051	Chietla
+MX-PUE	Puebla	21052	Chigmecatitlan
+MX-PUE	Puebla	21053	Chignahuapan
+MX-PUE	Puebla	21054	Chignautla
+MX-PUE	Puebla	21055	Chila
+MX-PUE	Puebla	21056	Chila de la Sal
+MX-PUE	Puebla	21057	Honey
+MX-PUE	Puebla	21080	Atlequizayan
+MX-PUE	Puebla	21084	Ixtepec
+MX-PUE	Puebla	21085	Izucar de Matamoros
+MX-PUE	Puebla	21086	Jalpan
+MX-PUE	Puebla	21087	Jolalpan
+MX-PUE	Puebla	21088	Jonotla
+MX-PUE	Puebla	21089	Jopala
+MX-PUE	Puebla	21090	Juan C. Bonilla
+MX-SON	Sonora	26041	Nacozari de Garcia
+MX-PUE	Puebla	21091	Juan Galindo
+MX-SON	Sonora	26042	Navojoa
+MX-PUE	Puebla	21095	La Magdalena Tlatlauquitepec
+MX-VER	Veracruz	30092	Xico
+MX-PUE	Puebla	21097	Mixtla
+MX-PUE	Puebla	21099	Cañada Morelos
+MX-PUE	Puebla	21100	Naupan
+MX-PUE	Puebla	21101	Nauzontla
+MX-PUE	Puebla	21102	Nealtican
+MX-PUE	Puebla	21103	Nicolas Bravo
+MX-PUE	Puebla	21104	Nopalucan
+MX-PUE	Puebla	21105	Ocotepec
+MX-PUE	Puebla	21106	Ocoyucan
+MX-PUE	Puebla	21107	Olintla
+MX-PUE	Puebla	21108	Oriental
+MX-PUE	Puebla	21109	Pahuatlan
+MX-PUE	Puebla	21110	Palmar de Bravo
+MX-PUE	Puebla	21111	Pantepec
+MX-PUE	Puebla	21112	Petlalcingo
+MX-PUE	Puebla	21113	Piaxtla
+MX-PUE	Puebla	21114	Puebla
+MX-PUE	Puebla	21115	Quecholac
+MX-PUE	Puebla	21116	Quimixtlan
+MX-SON	Sonora	26031	Huachinera
+MX-VER	Veracruz	30176	Tlacojalpan
+MX-PUE	Puebla	21117	Rafael Lara Grajales
+MX-PUE	Puebla	21125	San Gregorio Atzompa
+MX-PUE	Puebla	21131	San Juan Atzompa
+MX-PUE	Puebla	21132	San Martin Texmelucan
+MX-SON	Sonora	26048	Puerto Peñasco
+MX-SON	Sonora	26049	Quiriego
+MX-TLA	Tlaxcala	29047	Lazaro Cardenas
+MX-TLA	Tlaxcala	29048	La Magdalena Tlaltelulco
+MX-PUE	Puebla	21118	Los Reyes de Juarez
+MX-PUE	Puebla	21124	San Gabriel Chilac
+MX-PUE	Puebla	21201	Xochiltepec
+MX-PUE	Puebla	21202	Xochitlan de Vicente Suarez
+MX-PUE	Puebla	21203	Xochitlan Todos Santos
+MX-PUE	Puebla	21204	Yaonahuac
+MX-PUE	Puebla	21205	Yehualtepec
+MX-PUE	Puebla	21206	Zacapala
+MX-PUE	Puebla	21207	Zacapoaxtla
+MX-PUE	Puebla	21208	Zacatlan
+MX-PUE	Puebla	21209	Zapotitlan
+MX-PUE	Puebla	21210	Zapotitlan de Mendez
+MX-PUE	Puebla	21211	Zaragoza
+MX-PUE	Puebla	21212	Zautla
+MX-PUE	Puebla	21213	Zihuateutla
+MX-PUE	Puebla	21133	San Martin Totoltepec
+MX-PUE	Puebla	21134	San Matias Tlalancaleca
+MX-PUE	Puebla	21135	San Miguel Ixitlan
+MX-PUE	Puebla	21136	San Miguel Xoxtla
+MX-PUE	Puebla	21137	San Nicolas Buenos Aires
+MX-PUE	Puebla	21138	San Nicolas de los Ranchos
+MX-PUE	Puebla	21139	San Pablo Anicano
+MX-PUE	Puebla	21140	San Pedro Cholula
+MX-PUE	Puebla	21141	San Pedro Yeloixtlahuaca
+MX-PUE	Puebla	21142	San Salvador el Seco
+MX-PUE	Puebla	21143	San Salvador el Verde
+MX-QUE	Queretaro	22001	Amealco de Bonfil
+MX-PUE	Puebla	21144	San Salvador Huixcolotla
+MX-QUE	Queretaro	22004	Cadereyta de Montes
+MX-QUE	Queretaro	22005	Colon
+MX-QUE	Queretaro	22006	Corregidora
+MX-QUE	Queretaro	22007	Ezequiel Montes
+MX-QUE	Queretaro	22008	Huimilpan
+MX-QUE	Queretaro	22009	Jalpan de Serra
+MX-QUE	Queretaro	22010	Landa de Matamoros
+MX-QUE	Queretaro	22011	El Marques
+MX-QUE	Queretaro	22012	Pedro Escobedo
+MX-QUE	Queretaro	22013	Peñamiller
+MX-QUE	Queretaro	22014	Queretaro
+MX-QUE	Queretaro	22015	San Joaquin
+MX-QUE	Queretaro	22016	San Juan del Rio
+MX-QUE	Queretaro	22017	Tequisquiapan
+MX-QUE	Queretaro	22018	Toliman
+MX-ROO	Quintana Roo	23001	Cozumel
+MX-ROO	Quintana Roo	23002	Felipe Carrillo Puerto
+MX-ROO	Quintana Roo	23003	Isla Mujeres
+MX-ROO	Quintana Roo	23004	Othon P. Blanco
+MX-ROO	Quintana Roo	23005	Benito Juarez
+MX-PUE	Puebla	21151	Santo Tomas Hueyotlipan
+MX-PUE	Puebla	21152	Soltepec
+MX-PUE	Puebla	21153	Tecali de Herrera
+MX-PUE	Puebla	21154	Tecamachalco
+MX-PUE	Puebla	21155	Tecomatlan
+MX-PUE	Puebla	21156	Tehuacan
+MX-PUE	Puebla	21157	Tehuitzingo
+MX-PUE	Puebla	21158	Tenampulco
+MX-PUE	Puebla	21159	Teopantlan
+MX-PUE	Puebla	21160	Teotlalco
+MX-PUE	Puebla	21161	Tepanco de Lopez
+MX-PUE	Puebla	21162	Tepango de Rodriguez
+MX-PUE	Puebla	21163	Tepatlaxco de Hidalgo
+MX-PUE	Puebla	21164	Tepeaca
+MX-PUE	Puebla	21165	Tepemaxalco
+MX-PUE	Puebla	21166	Tepeojuma
+MX-PUE	Puebla	21167	Tepetzintla
+MX-PUE	Puebla	21168	Tepexco
+MX-PUE	Puebla	21169	Tepexi de Rodriguez
+MX-PUE	Puebla	21170	Tepeyahualco
+MX-SLP	San Luis Potosi	24023	Rayon
+MX-SLP	San Luis Potosi	24024	Rioverde
+MX-SLP	San Luis Potosi	24025	Salinas
+MX-SLP	San Luis Potosi	24026	San Antonio
+MX-SLP	San Luis Potosi	24027	San Ciro de Acosta
+MX-SLP	San Luis Potosi	24028	San Luis Potosi
+MX-SLP	San Luis Potosi	24029	San Martin Chalchicuautla
+MX-SLP	San Luis Potosi	24030	San Nicolas Tolentino
+MX-SLP	San Luis Potosi	24031	Santa Catarina
+MX-SLP	San Luis Potosi	24032	Santa Maria del Rio
+MX-SLP	San Luis Potosi	24033	Santo Domingo
+MX-PUE	Puebla	21171	Tepeyahualco de Cuauhtemoc
+MX-PUE	Puebla	21172	Tetela de Ocampo
+MX-PUE	Puebla	21173	Teteles de Avila Castillo
+MX-PUE	Puebla	21174	Teziutlan
+MX-PUE	Puebla	21175	Tianguismanalco
+MX-PUE	Puebla	21176	Tilapa
+MX-PUE	Puebla	21177	Tlacotepec de Benito Juarez
+MX-PUE	Puebla	21178	Tlacuilotepec
+MX-PUE	Puebla	21179	Tlachichuca
+MX-PUE	Puebla	21180	Tlahuapan
+MX-PUE	Puebla	21181	Tlaltenango
+MX-SLP	San Luis Potosi	24035	Soledad de Graciano Sanchez
+MX-SLP	San Luis Potosi	24036	Tamasopo
+MX-SLP	San Luis Potosi	24037	Tamazunchale
+MX-SLP	San Luis Potosi	24038	Tampacan
+MX-SLP	San Luis Potosi	24039	Tampamolon Corona
+MX-SLP	San Luis Potosi	24040	Tamuin
+MX-PUE	Puebla	21182	Tlanepantla
+MX-PUE	Puebla	21183	Tlaola
+MX-PUE	Puebla	21184	Tlapacoya
+MX-PUE	Puebla	21185	Tlapanala
+MX-PUE	Puebla	21186	Tlatlauquitepec
+MX-PUE	Puebla	21187	Tlaxco
+MX-PUE	Puebla	21188	Tochimilco
+MX-PUE	Puebla	21189	Tochtepec
+MX-PUE	Puebla	21190	Totoltepec de Guerrero
+MX-PUE	Puebla	21191	Tulcingo
+MX-PUE	Puebla	21192	Tuzamapan de Galeana
+MX-PUE	Puebla	21193	Tzicatlacoyan
+MX-PUE	Puebla	21194	Venustiano Carranza
+MX-PUE	Puebla	21195	Vicente Guerrero
+MX-PUE	Puebla	21196	Xayacatlan de Bravo
+MX-PUE	Puebla	21197	Xicotepec
+MX-PUE	Puebla	21198	Xicotlan
+MX-PUE	Puebla	21199	Xiutetelco
+MX-PUE	Puebla	21214	Zinacatepec
+MX-PUE	Puebla	21215	Zongozotla
+MX-PUE	Puebla	21216	Zoquiapan
+MX-PUE	Puebla	21217	Zoquitlan
+MX-ROO	Quintana Roo	23006	Jose Maria Morelos
+MX-ROO	Quintana Roo	23010	Bacalar
+MX-SLP	San Luis Potosi	24001	Ahualulco
+MX-SLP	San Luis Potosi	24002	Alaquines
+MX-SLP	San Luis Potosi	24003	Aquismon
+MX-SLP	San Luis Potosi	24004	Armadillo de los Infante
+MX-SLP	San Luis Potosi	24042	Tanquian de Escobedo
+MX-SLP	San Luis Potosi	24043	Tierra Nueva
+MX-SLP	San Luis Potosi	24005	Cardenas
+MX-SLP	San Luis Potosi	24006	Catorce
+MX-SLP	San Luis Potosi	24048	Villa de la Paz
+MX-SLP	San Luis Potosi	24007	Cedral
+MX-SIN	Sinaloa	25017	Sinaloa
+MX-SIN	Sinaloa	25018	Navolato
+MX-SON	Sonora	26001	Aconchi
+MX-SON	Sonora	26002	Agua Prieta
+MX-SON	Sonora	26003	Alamos
+MX-SON	Sonora	26004	Altar
+MX-SLP	San Luis Potosi	24014	Coxcatlan
+MX-SLP	San Luis Potosi	24018	Huehuetlan
+MX-SLP	San Luis Potosi	24020	Matehuala
+MX-SLP	San Luis Potosi	24021	Mexquitic de Carmona
+MX-SLP	San Luis Potosi	24022	Moctezuma
+MX-SLP	San Luis Potosi	24044	Vanegas
+MX-SLP	San Luis Potosi	24045	Venado
+MX-SLP	San Luis Potosi	24049	Villa de Ramos
+MX-SLP	San Luis Potosi	24050	Villa de Reyes
+MX-SLP	San Luis Potosi	24054	Xilitla
+MX-SLP	San Luis Potosi	24055	Zaragoza
+MX-SLP	San Luis Potosi	24056	Villa de Arista
+MX-SON	Sonora	26005	Arivechi
+MX-SLP	San Luis Potosi	24058	El Naranjo
+MX-SIN	Sinaloa	25001	Ahome
+MX-SIN	Sinaloa	25002	Angostura
+MX-SIN	Sinaloa	25003	Badiraguato
+MX-SIN	Sinaloa	25004	Concordia
+MX-SIN	Sinaloa	25005	Cosala
+MX-SIN	Sinaloa	25006	Culiacan
+MX-SIN	Sinaloa	25007	Choix
+MX-SIN	Sinaloa	25008	Elota
+MX-SIN	Sinaloa	25009	Escuinapa
+MX-SIN	Sinaloa	25010	El Fuerte
+MX-SIN	Sinaloa	25011	Guasave
+MX-SIN	Sinaloa	25012	Mazatlan
+MX-SIN	Sinaloa	25013	Mocorito
+MX-SIN	Sinaloa	25014	Rosario
+MX-SIN	Sinaloa	25015	Salvador Alvarado
+MX-SON	Sonora	26007	Atil
+MX-SON	Sonora	26010	Bacerac
+MX-SON	Sonora	26009	Bacanora
+MX-SON	Sonora	26019	Cananea
+MX-SON	Sonora	26027	Fronteras
+MX-SON	Sonora	26020	Carbo
+MX-SON	Sonora	26021	La Colorada
+MX-SON	Sonora	26028	Granados
+MX-SON	Sonora	26030	Hermosillo
+MX-SON	Sonora	26032	Huasabas
+MX-SON	Sonora	26034	Huepac
+MX-SON	Sonora	26035	Imuris
+MX-SON	Sonora	26037	Mazatan
+MX-SON	Sonora	26043	Nogales
+MX-SON	Sonora	26044	Onavas
+MX-SON	Sonora	26046	Oquitoa
+MX-SON	Sonora	26047	Pitiquito
+MX-SON	Sonora	26050	Rayon
+MX-SON	Sonora	26053	San Felipe de Jesus
+MX-SON	Sonora	26054	San Javier
+MX-SON	Sonora	26061	Soyopa
+MX-SON	Sonora	26056	San Miguel de Horcasitas
+MX-SON	Sonora	26063	Tepache
+MX-SON	Sonora	26057	San Pedro de la Cueva
+MX-SON	Sonora	26059	Santa Cruz
+MX-SON	Sonora	26060	Saric
+MX-TAM	Tamaulipas	28028	Nuevo Morelos
+MX-SON	Sonora	26065	Tubutama
+MX-TAM	Tamaulipas	28036	San Nicolas
+MX-SON	Sonora	26066	Ures
+MX-SON	Sonora	26067	Villa Hidalgo
+MX-SON	Sonora	26068	Villa Pesqueira
+MX-SON	Sonora	26070	General Plutarco Elias Calles
+MX-TAB	Tabasco	27002	Cardenas
+MX-TAB	Tabasco	27003	Centla
+MX-TAB	Tabasco	27004	Centro
+MX-TAB	Tabasco	27005	Comalcalco
+MX-TAB	Tabasco	27006	Cunduacan
+MX-TAB	Tabasco	27007	Emiliano Zapata
+MX-TAB	Tabasco	27008	Huimanguillo
+MX-TAB	Tabasco	27009	Jalapa
+MX-TAB	Tabasco	27010	Jalpa de Mendez
+MX-TAB	Tabasco	27011	Jonuta
+MX-TAB	Tabasco	27012	Macuspana
+MX-TAB	Tabasco	27013	Nacajuca
+MX-TAB	Tabasco	27014	Paraiso
+MX-TAB	Tabasco	27015	Tacotalpa
+MX-TAB	Tabasco	27016	Teapa
+MX-TAB	Tabasco	27017	Tenosique
+MX-TAM	Tamaulipas	28001	Abasolo
+MX-TAM	Tamaulipas	28002	Aldama
+MX-TAM	Tamaulipas	28003	Altamira
+MX-TAM	Tamaulipas	28004	Antiguo Morelos
+MX-TAM	Tamaulipas	28006	Bustamante
+MX-TAM	Tamaulipas	28009	Ciudad Madero
+MX-TAM	Tamaulipas	28017	Jaumave
+MX-TLA	Tlaxcala	29054	San Lorenzo Axocomanitla
+MX-TAM	Tamaulipas	28018	Jimenez
+MX-TAM	Tamaulipas	28019	Llera
+MX-TAM	Tamaulipas	28020	Mainero
+MX-TAM	Tamaulipas	28021	El Mante
+MX-TAM	Tamaulipas	28022	Matamoros
+MX-TAM	Tamaulipas	28023	Mendez
+MX-TAM	Tamaulipas	28024	Mier
+MX-TAM	Tamaulipas	28025	Miguel Aleman
+MX-TAM	Tamaulipas	28026	Miquihuana
+MX-TAM	Tamaulipas	28027	Nuevo Laredo
+MX-VER	Veracruz	30079	Ixhuacan de los Reyes
+MX-VER	Veracruz	30080	Ixhuatlan del Cafe
+MX-VER	Veracruz	30081	Ixhuatlancillo
+MX-TAM	Tamaulipas	28029	Ocampo
+MX-TAM	Tamaulipas	28030	Padilla
+MX-TAM	Tamaulipas	28031	Palmillas
+MX-TAM	Tamaulipas	28032	Reynosa
+MX-TAM	Tamaulipas	28033	Rio Bravo
+MX-TAM	Tamaulipas	28034	San Carlos
+MX-TAM	Tamaulipas	28035	San Fernando
+MX-VER	Veracruz	30082	Ixhuatlan del Sureste
+MX-VER	Veracruz	30083	Ixhuatlan de Madero
+MX-VER	Veracruz	30084	Ixmatlahuacan
+MX-VER	Veracruz	30085	Ixtaczoquitlan
+MX-VER	Veracruz	30086	Jalacingo
+MX-VER	Veracruz	30087	Xalapa
+MX-VER	Veracruz	30088	Jalcomulco
+MX-VER	Veracruz	30089	Jaltipan
+MX-VER	Veracruz	30090	Jamapa
+MX-VER	Veracruz	30091	Jesus Carranza
+MX-TAM	Tamaulipas	28040	Valle Hermoso
+MX-TAM	Tamaulipas	28041	Victoria
+MX-TAM	Tamaulipas	28042	Villagran
+MX-TAM	Tamaulipas	28043	Xicotencatl
+MX-TLA	Tlaxcala	29001	Amaxac de Guerrero
+MX-TLA	Tlaxcala	29002	Apetatitlan de Antonio Carvajal
+MX-TLA	Tlaxcala	29003	Atlangatepec
+MX-TLA	Tlaxcala	29004	Altzayanca
+MX-TLA	Tlaxcala	29005	Apizaco
+MX-TLA	Tlaxcala	29006	Calpulalpan
+MX-TLA	Tlaxcala	29007	El Carmen Tequexquitla
+MX-TLA	Tlaxcala	29008	Cuapiaxtla
+MX-TLA	Tlaxcala	29009	Cuaxomulco
+MX-TLA	Tlaxcala	29010	Chiautempan
+MX-TLA	Tlaxcala	29011	Muñoz de Domingo Arenas
+MX-TLA	Tlaxcala	29012	Españita
+MX-TLA	Tlaxcala	29013	Huamantla
+MX-TLA	Tlaxcala	29014	Hueyotlipan
+MX-TLA	Tlaxcala	29019	Tepetitla de Lardizabal
+MX-TLA	Tlaxcala	29027	Tenancingo
+MX-TLA	Tlaxcala	29034	Tlaxco
+MX-VER	Veracruz	30115	Nogales
+MX-TLA	Tlaxcala	29035	Tocatlan
+MX-TLA	Tlaxcala	29036	Totolac
+MX-TLA	Tlaxcala	29037	Ziltlaltepec de Trinidad Sanchez Santos
+MX-TLA	Tlaxcala	29038	Tzompantepec
+MX-TLA	Tlaxcala	29039	Xaloztoc
+MX-TLA	Tlaxcala	29040	Xaltocan
+MX-TLA	Tlaxcala	29041	Papalotla de Xicohtencatl
+MX-VER	Veracruz	30166	Tepetlan
+MX-VER	Veracruz	30167	Tepetzintla
+MX-VER	Veracruz	30168	Tequila
+MX-VER	Veracruz	30169	Jose Azueta
+MX-VER	Veracruz	30170	Texcatepec
+MX-VER	Veracruz	30171	Texhuacan
+MX-VER	Veracruz	30172	Texistepec
+MX-VER	Veracruz	30173	Tezonapa
+MX-VER	Veracruz	30174	Tierra Blanca
+MX-VER	Veracruz	30175	Tihuatlan
+MX-TLA	Tlaxcala	29042	Xicohtzinco
+MX-TLA	Tlaxcala	29045	Benito Juarez
+MX-YUC	Yucatan	31020	Chicxulub Pueblo
+MX-YUC	Yucatan	31021	Chichimila
+MX-TLA	Tlaxcala	29057	Santa Apolonia Teacalco
+MX-TLA	Tlaxcala	29049	San Damian Texoloc
+MX-TLA	Tlaxcala	29051	San Jeronimo Zacualpan
+MX-TLA	Tlaxcala	29053	San Juan Huactzinco
+MX-TLA	Tlaxcala	29056	Santa Ana Nopalucan
+MX-YUC	Yucatan	31024	Chumayel
+MX-VER	Veracruz	30041	Coetzala
+MX-VER	Veracruz	30057	Chiconquiaco
+MX-VER	Veracruz	30058	Chicontepec
+MX-TLA	Tlaxcala	29058	Santa Catarina Ayometla
+MX-TLA	Tlaxcala	29059	Santa Cruz Quilehtla
+MX-VER	Veracruz	30059	Chinameca
+MX-VER	Veracruz	30060	Chinampa de Gorostiza
+MX-TLA	Tlaxcala	29060	Santa Isabel Xiloxoxtla
+MX-VER	Veracruz	30061	Las Choapas
+MX-VER	Veracruz	30062	Chocaman
+MX-VER	Veracruz	30063	Chontla
+MX-VER	Veracruz	30002	Acatlan
+MX-VER	Veracruz	30003	Acayucan
+MX-VER	Veracruz	30004	Actopan
+MX-VER	Veracruz	30005	Acula
+MX-VER	Veracruz	30006	Acultzingo
+MX-VER	Veracruz	30007	Camaron de Tejeda
+MX-VER	Veracruz	30008	Alpatlahuac
+MX-VER	Veracruz	30009	Alto Lucero de Gutierrez Barrios
+MX-VER	Veracruz	30010	Altotonga
+MX-VER	Veracruz	30011	Alvarado
+MX-VER	Veracruz	30018	Aquila
+MX-VER	Veracruz	30027	Benito Juarez
+MX-VER	Veracruz	30028	Boca del Rio
+MX-VER	Veracruz	30029	Calcahualco
+MX-VER	Veracruz	30030	Camerino Z. Mendoza
+MX-VER	Veracruz	30031	Carrillo Puerto
+MX-VER	Veracruz	30032	Catemaco
+MX-VER	Veracruz	30033	Cazones de Herrera
+MX-VER	Veracruz	30034	Cerro Azul
+MX-VER	Veracruz	30035	Citlaltepetl
+MX-VER	Veracruz	30036	Coacoatzintla
+MX-VER	Veracruz	30037	Coahuitlan
+MX-VER	Veracruz	30038	Coatepec
+MX-VER	Veracruz	30039	Coatzacoalcos
+MX-VER	Veracruz	30040	Coatzintla
+MX-VER	Veracruz	30165	Tepatlaxco
+MX-VER	Veracruz	30064	Chumatlan
+MX-ZAC	Zacatecas	32036	Ojocaliente
+MX-VER	Veracruz	30074	Huiloapan de Cuauhtemoc
+MX-VER	Veracruz	30075	Ignacio de la Llave
+MX-VER	Veracruz	30076	Ilamatlan
+MX-VER	Veracruz	30077	Isla
+MX-VER	Veracruz	30078	Ixcatepec
+MX-VER	Veracruz	30096	Landero y Coss
+MX-VER	Veracruz	30098	Magdalena
+MX-VER	Veracruz	30107	Las Minas
+MX-VER	Veracruz	30108	Minatitlan
+MX-VER	Veracruz	30109	Misantla
+MX-VER	Veracruz	30110	Mixtla de Altamirano
+MX-VER	Veracruz	30111	Moloacan
+MX-VER	Veracruz	30112	Naolinco
+MX-VER	Veracruz	30113	Naranjal
+MX-VER	Veracruz	30114	Nautla
+MX-VER	Veracruz	30116	Oluta
+MX-VER	Veracruz	30118	Orizaba
+MX-VER	Veracruz	30119	Otatitlan
+MX-VER	Veracruz	30120	Oteapan
+MX-VER	Veracruz	30125	Paso del Macho
+MX-VER	Veracruz	30126	Paso de Ovejas
+MX-VER	Veracruz	30127	La Perla
+MX-VER	Veracruz	30128	Perote
+MX-VER	Veracruz	30129	Platon Sanchez
+MX-VER	Veracruz	30130	Playa Vicente
+MX-VER	Veracruz	30131	Poza Rica de Hidalgo
+MX-VER	Veracruz	30133	Pueblo Viejo
+MX-VER	Veracruz	30134	Puente Nacional
+MX-VER	Veracruz	30135	Rafael Delgado
+MX-VER	Veracruz	30136	Rafael Lucio
+MX-VER	Veracruz	30138	Rio Blanco
+MX-VER	Veracruz	30140	San Andres Tenejapan
+MX-VER	Veracruz	30141	San Andres Tuxtla
+MX-VER	Veracruz	30142	San Juan Evangelista
+MX-VER	Veracruz	30143	Santiago Tuxtla
+MX-VER	Veracruz	30144	Sayula de Aleman
+MX-VER	Veracruz	30145	Soconusco
+MX-VER	Veracruz	30146	Sochiapa
+MX-VER	Veracruz	30147	Soledad Atzompa
+MX-VER	Veracruz	30148	Soledad de Doblado
+MX-VER	Veracruz	30149	Soteapan
+MX-VER	Veracruz	30150	Tamalin
+MX-VER	Veracruz	30151	Tamiahua
+MX-VER	Veracruz	30152	Tampico Alto
+MX-VER	Veracruz	30153	Tancoco
+MX-VER	Veracruz	30154	Tantima
+MX-VER	Veracruz	30155	Tantoyuca
+MX-VER	Veracruz	30156	Tatatila
+MX-VER	Veracruz	30157	Castillo de Teayo
+MX-VER	Veracruz	30158	Tecolutla
+MX-VER	Veracruz	30159	Tehuipango
+MX-VER	Veracruz	30160	Alamo Temapache
+MX-VER	Veracruz	30161	Tempoal
+MX-VER	Veracruz	30162	Tenampa
+MX-VER	Veracruz	30163	Tenochtitlan
+MX-VER	Veracruz	30164	Teocelo
+MX-VER	Veracruz	30185	Tlilapan
+MX-VER	Veracruz	30190	Tuxtilla
+MX-VER	Veracruz	30192	Vega de Alatorre
+MX-VER	Veracruz	30193	Veracruz
+MX-VER	Veracruz	30194	Villa Aldama
+MX-VER	Veracruz	30196	Yanga
+MX-VER	Veracruz	30197	Yecuatla
+MX-VER	Veracruz	30198	Zacualpan
+MX-VER	Veracruz	30199	Zaragoza
+MX-VER	Veracruz	30206	Nanchital de Lazaro Cardenas del Rio
+MX-YUC	Yucatan	31001	Abala
+MX-YUC	Yucatan	31002	Acanceh
+MX-YUC	Yucatan	31003	Akil
+MX-YUC	Yucatan	31004	Baca
+MX-YUC	Yucatan	31005	Bokoba
+MX-YUC	Yucatan	31049	Mayapan
+MX-YUC	Yucatan	31007	Cacalchen
+MX-YUC	Yucatan	31009	Cansahcab
+MX-YUC	Yucatan	31055	Opichen
+MX-YUC	Yucatan	31056	Oxkutzcab
+MX-YUC	Yucatan	31057	Panaba
+MX-YUC	Yucatan	31010	Cantamayec
+MX-YUC	Yucatan	31012	Cenotillo
+MX-YUC	Yucatan	31013	Conkal
+MX-YUC	Yucatan	31014	Cuncunul
+MX-YUC	Yucatan	31015	Cuzama
+MX-YUC	Yucatan	31016	Chacsinkin
+MX-YUC	Yucatan	31018	Chapab
+MX-YUC	Yucatan	31022	Chikindzonot
+MX-YUC	Yucatan	31064	Sanahcat
+MX-YUC	Yucatan	31023	Chochola
+MX-YUC	Yucatan	31025	Dzan
+MX-YUC	Yucatan	31026	Dzemul
+MX-YUC	Yucatan	31027	Dzidzantun
+MX-YUC	Yucatan	31031	Dzoncauich
+MX-YUC	Yucatan	31033	Halacho
+MX-YUC	Yucatan	31034	Hocaba
+MX-YUC	Yucatan	31035	Hoctun
+MX-YUC	Yucatan	31037	Huhi
+MX-YUC	Yucatan	31038	Hunucma
+MX-YUC	Yucatan	31039	Ixil
+MX-YUC	Yucatan	31041	Kanasin
+MX-YUC	Yucatan	31042	Kantunil
+MX-YUC	Yucatan	31072	Suma
+MX-YUC	Yucatan	31043	Kaua
+MX-YUC	Yucatan	31044	Kinchil
+MX-YUC	Yucatan	31045	Kopoma
+MX-YUC	Yucatan	31046	Mama
+MX-YUC	Yucatan	31048	Maxcanu
+MX-YUC	Yucatan	31073	Tahdziu
+MX-YUC	Yucatan	31051	Mococha
+MX-YUC	Yucatan	31053	Muna
+MX-YUC	Yucatan	31100	Ucu
+MX-YUC	Yucatan	31054	Muxupip
+MX-ZAC	Zacatecas	32017	Guadalupe
+MX-ZAC	Zacatecas	32018	Huanusco
+MX-ZAC	Zacatecas	32019	Jalpa
+MX-ZAC	Zacatecas	32020	Jerez
+MX-ZAC	Zacatecas	32021	Jimenez del Teul
+MX-ZAC	Zacatecas	32022	Juan Aldama
+MX-ZAC	Zacatecas	32023	Juchipila
+MX-ZAC	Zacatecas	32024	Loreto
+MX-ZAC	Zacatecas	32025	Luis Moya
+MX-ZAC	Zacatecas	32026	Mazapil
+MX-ZAC	Zacatecas	32027	Melchor Ocampo
+MX-ZAC	Zacatecas	32028	Mezquital del Oro
+MX-ZAC	Zacatecas	32029	Miguel Auza
+MX-ZAC	Zacatecas	32030	Momax
+MX-ZAC	Zacatecas	32031	Monte Escobedo
+MX-ZAC	Zacatecas	32032	Morelos
+MX-ZAC	Zacatecas	32033	Moyahua de Estrada
+MX-ZAC	Zacatecas	32034	Nochistlan de Mejia
+MX-ZAC	Zacatecas	32035	Noria de Angeles
+MX-YUC	Yucatan	31060	Quintana Roo
+MX-YUC	Yucatan	31062	Sacalum
+MX-YUC	Yucatan	31063	Samahil
+MX-ZAC	Zacatecas	32057	Trancoso
+MX-YUC	Yucatan	31068	Sinanche
+MX-YUC	Yucatan	31070	Sucila
+MX-YUC	Yucatan	31074	Tahmek
+MX-YUC	Yucatan	31075	Teabo
+MX-YUC	Yucatan	31076	Tecoh
+MX-YUC	Yucatan	31077	Tekal de Venegas
+MX-YUC	Yucatan	31078	Tekanto
+MX-YUC	Yucatan	31080	Tekit
+MX-YUC	Yucatan	31082	Telchac Pueblo
+MX-YUC	Yucatan	31083	Telchac Puerto
+MX-YUC	Yucatan	31086	Tepakan
+MX-YUC	Yucatan	31087	Tetiz
+MX-YUC	Yucatan	31088	Teya
+MX-YUC	Yucatan	31090	Timucuy
+MX-YUC	Yucatan	31094	Tixmehuac
+MX-YUC	Yucatan	31095	Tixpehual
+MX-YUC	Yucatan	31097	Tunkas
+MX-YUC	Yucatan	31103	Xocchel
+MX-YUC	Yucatan	31105	Yaxkukul
+MX-YUC	Yucatan	31106	Yobain
+MX-ZAC	Zacatecas	32003	Atolinga
+MX-ZAC	Zacatecas	32004	Benito Juarez
+MX-ZAC	Zacatecas	32005	Calera
+MX-ZAC	Zacatecas	32006	Cañitas de Felipe Pescador
+MX-ZAC	Zacatecas	32007	Concepcion del Oro
+MX-ZAC	Zacatecas	32008	Cuauhtemoc
+MX-ZAC	Zacatecas	32009	Chalchihuites
+MX-ZAC	Zacatecas	32010	Fresnillo
+MX-ZAC	Zacatecas	32011	Trinidad Garcia de la Cadena
+MX-ZAC	Zacatecas	32012	Genaro Codina
+MX-ZAC	Zacatecas	32013	General Enrique Estrada
+MX-ZAC	Zacatecas	32014	General Francisco R. Murguia
+MX-ZAC	Zacatecas	32015	El Plateado de Joaquin Amaro
+MX-ZAC	Zacatecas	32016	General Panfilo Natera
+MX-ZAC	Zacatecas	32041	El Salvador
+MX-ZAC	Zacatecas	32052	Villa Garcia
+MX-ZAC	Zacatecas	32053	Villa Gonzalez Ortega
+MX-ZAC	Zacatecas	32054	Villa Hidalgo
+MX-ZAC	Zacatecas	32055	Villanueva
+MX-ZAC	Zacatecas	32056	Zacatecas
+MX-ZAC	Zacatecas	32058	Santa Maria de la Paz
