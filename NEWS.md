@@ -25,6 +25,18 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions 
 * `get_interventions_data()` is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/
 * `get_linelist` is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with `covidregionaldata`.
 
+## Data changes since 0.8.3
+
+* Colombia now has capitalized region names.
+* ISO 3166-2 codes for CU-09, CU-08, CU-14 and CU-11 have been dropped for Cuba.
+* Germany level 2 region codes have been removed (previously was all NAs).
+* India uses NA for unknown region codes, a change from IN-UN previously.
+* Italy column region is now regioni.
+* Mexico codes 'inegi_code' has been changed to 'inegi'.
+* UK Level 1 'ons_region_code' is now 'iso_3166_2'.
+* UK level 2 used to have "authority" and "ltla_code", now is "iso_3166_2" and "authority".
+
+
 # covidregionaldata 0.8.3
 
 ## New data sets
