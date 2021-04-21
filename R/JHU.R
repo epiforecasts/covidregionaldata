@@ -129,15 +129,27 @@ JHU <- R6::R6Class("JHU", # rename to country name
     return = function() {
       self$data$return <- self$data$processed
       if (!self$totals) {
-        self$data$return <- self$data$return %>%
-          select(
-            .data$date, .data$country_code, .data$country,
-            .data$iso_code, .data$cases_new, .data$cases_total,
-            .data$deaths_new, .data$deaths_total, .data$recovered_new,
-            .data$recovered_total, .data$hosp_new, .data$hosp_total,
-            .data$tested_new, .data$tested_total
-          ) %>%
-          arrange(.data$date, .data$country)
+        if (self$level == "1") {
+          self$data$return <- self$data$return %>%
+            select(
+              .data$date, .data$iso_3166_1_alpha_3, .data$country,
+              .data$cases_new, .data$cases_total,
+              .data$deaths_new, .data$deaths_total, .data$recovered_new,
+              .data$recovered_total, .data$hosp_new, .data$hosp_total,
+              .data$tested_new, .data$tested_total
+            ) %>%
+            arrange(.data$date, .data$country)
+        } else if (self$level == "2") {
+          self$data$return <- self$data$return %>%
+            select(
+              .data$date, .data$iso_3166_1_alpha_3, .data$country,
+              .data$iso_code, .data$region, .data$cases_new, .data$cases_total,
+              .data$deaths_new, .data$deaths_total, .data$recovered_new,
+              .data$recovered_total, .data$hosp_new, .data$hosp_total,
+              .data$tested_new, .data$tested_total
+            ) %>%
+            arrange(.data$date, .data$country)
+        }
       }
 
       if (self$steps) {
