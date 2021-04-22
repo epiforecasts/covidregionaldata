@@ -28,7 +28,10 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "region", "2" = "authority"),
     #' @field supported_region_codes A list of region codes in order of level.
-    supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
+    supported_region_codes = list(
+      "1" = "region_code",
+      "2" = "local_authority_code"
+    ),
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
     common_data_urls = list(
