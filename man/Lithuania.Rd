@@ -4,7 +4,7 @@
 \alias{Lithuania}
 \title{Lithuania Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
+\url{https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 }
 \description{
 Information for downloading, cleaning

@@ -9,7 +9,7 @@ replacePublicR6Method <- function(r6Instance, fName, fun) {
 
 dummy_class <- function(class) {
   class$download()
-  class$data$raw <- purrr::map(class$data$raw, ~ dplyr::slice_tail(., n = 1000))
+  class$data$raw <- purrr::map(class$data$raw, ~ dplyr::slice_tail(., n = 250))
   class$clean()
   class$process()
   replacePublicR6Method(class, "download", function() {

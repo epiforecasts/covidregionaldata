@@ -6,12 +6,13 @@
 \usage{
 initialise_dataclass(
   class = character(),
-  level = 1,
+  level = "1",
   totals = FALSE,
   localise = TRUE,
   regions,
   verbose = TRUE,
   steps = FALSE,
+  get = FALSE,
   ...
 )
 }
@@ -22,7 +23,7 @@ country definition. For a list of options use \code{get_available_datasets()}.}
 
 \item{level}{A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
-level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets()} for supported
 options by dataset.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
@@ -32,15 +33,18 @@ stratified by date and region.}
 \item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
 \item{regions}{A character vector of target regions to be assigned to the
-\code{target_regions} field if present.}
+\code{target_regions} field and used to filter the returned data.}
 
-\item{verbose}{Logical, defaults to TRUE. Should verbose processing
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
-\item{...}{additional arguments to pass to country specific functionality.}
+\item{get}{Logical, defaults to FALSE. Should the class \code{get} method be
+called (this will download, clean, and process data at initialisation).}
+
+\item{...}{Additional arguments to pass to class specific functionality.}
 }
 \value{
 An initialised version of the target class if available,

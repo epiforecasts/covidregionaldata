@@ -35,7 +35,7 @@ test_that("An inherited DataClass class can be intialised", {
 test_that("DataClass can download data", {
   expect_error(d$download(), NA)
   expect_s3_class(d$data$raw$main, "data.frame")
-  expect_equal(nrow(d$data$raw$main), 1000)
+  expect_equal(nrow(d$data$raw$main), 250)
 })
 d$download()
 
@@ -48,9 +48,9 @@ d$clean()
 
 test_that("DataClass can filter data", {
   expect_error(d$filter("MadeUpLand"))
-  expect_error(d$filter("Zambia"), NA)
+  expect_error(d$filter("Zimbabwe"), NA)
   expect_s3_class(d$data$clean, "data.frame")
-  expect_equal(unique(d$data$clean$level_1_region), "Zambia")
+  expect_equal(unique(d$data$clean$level_1_region), "Zimbabwe")
   expect_true(nrow(d$data$clean) != 0)
 })
 d$filter()

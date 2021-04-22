@@ -115,7 +115,7 @@
 #' many of these are still ill).
 #'
 # nolint start
-#' @source \url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
+#' @source \url{https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 # nolint end
 #' @examples
 #' \dontrun{

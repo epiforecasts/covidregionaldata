@@ -71,7 +71,7 @@ temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpTY0EO1
+#> Using a cache at: /tmp/RtmpCNnpb9
 ```
 
 To stop using `memoise` use,
@@ -94,7 +94,7 @@ use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 110,809
+#> Rows: 112,812
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -106,7 +106,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 110,919 x 15
+#> # A tibble: 112,812 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -119,7 +119,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 110,909 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 112,802 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -160,20 +160,20 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 5,746 x 26
-#>    date       region    iso_3166_2 cases_new cases_total deaths_new deaths_total
-#>    <date>     <chr>     <chr>          <dbl>       <dbl>      <dbl>        <dbl>
-#>  1 2020-01-30 East Mid… E12000004         NA          NA         NA           NA
-#>  2 2020-01-30 East of … E12000006         NA          NA         NA           NA
-#>  3 2020-01-30 England   E92000001          2           2         NA           NA
-#>  4 2020-01-30 London    E12000007         NA          NA         NA           NA
-#>  5 2020-01-30 North Ea… E12000001         NA          NA         NA           NA
-#>  6 2020-01-30 North We… E12000002         NA          NA         NA           NA
-#>  7 2020-01-30 Northern… N92000002         NA          NA         NA           NA
-#>  8 2020-01-30 Scotland  S92000003         NA          NA         NA           NA
-#>  9 2020-01-30 South Ea… E12000008         NA          NA         NA           NA
-#> 10 2020-01-30 South We… E12000009         NA          NA         NA           NA
-#> # … with 5,736 more rows, and 19 more variables: recovered_new <dbl>,
+#> # A tibble: 5,837 x 26
+#>    date       region   region_code cases_new cases_total deaths_new deaths_total
+#>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
+#>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
+#>  2 2020-01-30 East of… E12000006          NA          NA         NA           NA
+#>  3 2020-01-30 England  E92000001           2           2         NA           NA
+#>  4 2020-01-30 London   E12000007          NA          NA         NA           NA
+#>  5 2020-01-30 North E… E12000001          NA          NA         NA           NA
+#>  6 2020-01-30 North W… E12000002          NA          NA         NA           NA
+#>  7 2020-01-30 Norther… N92000002          NA          NA         NA           NA
+#>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
+#>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
+#> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
+#> # … with 5,827 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
@@ -245,3 +245,6 @@ Please check and add to the issues, and/or add a [pull
 request](https://github.com/epiforecasts/covidregionaldata/pulls). For
 more details, start with the [contributing
 guide](https://github.com/epiforecasts/covidregionaldata/wiki/Contributing).
+For details of the steps required to add support for a dataset see the
+[adding data
+guide](https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data).

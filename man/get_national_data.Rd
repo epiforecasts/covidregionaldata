@@ -33,13 +33,13 @@ steps be kept and output in a list.}
 \code{Country} class object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
-\item{verbose}{Logical, defaults to TRUE. Should verbose processing
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
 \item{country}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A character string
 specifying a country to filter for.}
 
-\item{...}{additional arguments to pass to Country classes.}
+\item{...}{Additional arguments to pass to class specific functionality.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,
