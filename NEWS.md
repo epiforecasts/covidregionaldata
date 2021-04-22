@@ -1,14 +1,14 @@
 # covidregionaldata 0.9.0
 
-In this major release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
+In this release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
 
-Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions to this release.
+Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions to this release. Thanks to @RichardMN for volunteering his time.
 
 ## New features
 
 * Track data processing from raw to clean using the `step = TRUE` argument in `get_regional_data()`.
 * Filter datasets for regions and countries of interest. 
-* Access the underlying methods for data sets.
+* Access the underlying methods for data sets and all steps in the data processing pipeline.
 
 ## Documentation
 

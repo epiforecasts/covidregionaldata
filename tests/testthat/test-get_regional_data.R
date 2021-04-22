@@ -1,24 +1,16 @@
+source("functions/test_initialise.R")
 test_get_regional_data <- function(level) {
   test_that(paste0("get_regional_data returns level ", level, " data"), {
-    mexico <- readRDS(paste0("custom_data/mexico_level_", level, "_snap.rds"))
+    mexico <- readRDS(
+      paste0("custom_data/mexico_level_", level, "_snap.rds")
+    )
     true <- mexico$return()
     true_R6 <- mexico$clone()
     true_R6$steps <- TRUE
     true_steps <- true_R6$return()
     mockery::stub(
       get_regional_data, "initialise_dataclass",
-      function(class, level, totals, localise,
-               verbose, steps, regions) {
-        class <- mexico$clone()
-        class$totals <- totals
-        class$localise <- localise
-        class$verbose <- verbose
-        class$steps <- steps
-        if (!missing(regions)) {
-          class$target_regions <- regions
-        }
-        return(class)
-      }
+      test_initialise(class = mexico)
     )
     d <- get_regional_data("mexico", level = level, verbose = FALSE)
     expect_s3_class(d, "data.frame")

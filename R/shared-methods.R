@@ -4,9 +4,24 @@
 #' @param class A character string specifying the `DataClass` to initialise.
 #' Not case dependent and matching is based on either the class name or the its
 #' country definition. For a list of options use `get_available_datasets()`.
-#' @inheritParams get_regional_data
+#' @param level A character string indicating the target administrative level
+#' of the data with the default being "1". Currently supported options are
+#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets()` for supported
+#' options by dataset.
+#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
+#' steps be kept and output in a list.
+#' @param regions A character vector of target regions to be assigned to the
+#' `target_regions` field and used to filter the returned data.
+#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
+#'  data per region up to today's date. If FALSE, returns the full dataset
+#'  stratified by date and region.
+#' @param localise Logical, defaults to TRUE. Should region names be localised.
+#' @param get Logical, defaults to FALSE. Should the class `get` method be
+#' called (this will download, clean, and process data at initialisation).
+#' @param ... Additional arguments to pass to class specific functionality.
 #' @return An initialised version of the target class if available,
 #' e.g. `Italy()`
+#' @inheritParams message_verbose
 #' @rdname initialise_dataclass
 #' @importFrom stringr str_to_title str_replace_all str_detect
 #' @importFrom dplyr bind_rows filter distinct
@@ -21,10 +36,10 @@
 #'
 #' # Initialise ECDC data
 #' ecdc <- initialise_dataclass("ecdc")
-initialise_dataclass <- function(class = character(), level = 1,
+initialise_dataclass <- function(class = character(), level = "1",
                                  totals = FALSE, localise = TRUE,
                                  regions, verbose = TRUE, steps = FALSE,
-                                 ...) {
+                                 get = FALSE, ...) {
   stopifnot(is.character(class))
   level <- as.character(level)
 
@@ -52,7 +67,7 @@ initialise_dataclass <- function(class = character(), level = 1,
   region_class <- regionClass$new(
     level = level, totals = totals,
     localise = localise, verbose = verbose,
-    steps = steps, regions = regions, ...
+    steps = steps, regions = regions, get = get, ...
   )
 
   return(region_class)
