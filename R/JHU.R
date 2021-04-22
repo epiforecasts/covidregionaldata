@@ -3,7 +3,11 @@
 #'
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for John Hopkins University.
-#'
+# nolint start
+#' @source \url{https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data}
+# nolint end
+#' @export
+#' @concept dataset
 #' @examples
 #' \dontrun{
 #' national <- JHU$new(verbose = TRUE, steps = TRUE, get = TRUE)

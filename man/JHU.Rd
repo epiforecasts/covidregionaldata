@@ -4,6 +4,9 @@
 \alias{JHU}
 \title{R6 Class containing specific attributes and methods for John Hopkins
 University data}
+\source{
+\url{https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data}
+}
 \description{
 Country specific information for downloading, cleaning
 and processing covid-19 region data for John Hopkins University.
@@ -14,6 +17,7 @@ national <- JHU$new(verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 }
+\concept{dataset}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{JHU}
 }
