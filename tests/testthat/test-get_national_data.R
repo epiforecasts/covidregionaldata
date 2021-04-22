@@ -11,15 +11,15 @@ test_get_national_data <- function(source) {
       test_initialise(class = national)
     )
     d <- get_national_data(
-      countries = "Zambia", source = source,
+      countries = "Zimbabwe", source = source,
       verbose = FALSE
     )
     p <- get_national_data(
-      countries = "zambia", source = source,
+      countries = "zimbabwe", source = source,
       verbose = FALSE
     )
     expect_s3_class(d, "data.frame")
-    expect_true(all(d$country == "Zambia"))
+    expect_true(all(d$country == "Zimbabwe"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
     expect_equal(d, p)
     expect_error(get_national_data(
@@ -27,7 +27,7 @@ test_get_national_data <- function(source) {
       verbose = FALSE
     ))
     expect_warning(get_national_data(
-      country = "Zambia", source = source,
+      country = "Zimbabwe", source = source,
       verbose = FALSE
     ))
     expect_equal(
