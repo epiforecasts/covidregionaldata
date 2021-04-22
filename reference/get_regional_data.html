@@ -182,7 +182,7 @@ options use <code>get_available_datasets</code>.</p></td>
       <th>level</th>
       <td><p>A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
-level 1 ("1) and level 2 ("2"). Use <code>get_available_datasets</code> for supported
+level 1 ("1) and level 2 ("2"). Use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code> for supported
 options by dataset.</p></td>
     </tr>
     <tr>
@@ -208,13 +208,13 @@ Overrides <code>steps</code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Logical, defaults to TRUE. Should verbose processing
+      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
 messages and warnings be returned.</p></td>
     </tr>
     <tr>
       <th>regions</th>
       <td><p>A character vector of target regions to be assigned to the
-<code>target_regions</code> field if present.</p></td>
+<code>target_regions</code> field and used to filter the returned data.</p></td>
     </tr>
     <tr>
       <th>include_level_2_regions</th>
@@ -229,7 +229,7 @@ and the Level 1 data will be returned.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments to pass to country specific functionality.</p></td>
+      <td><p>Additional arguments to pass to class specific functionality.</p></td>
     </tr>
     </table>
 

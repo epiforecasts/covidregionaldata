@@ -155,12 +155,13 @@
 
     <pre class="usage"><span class='fu'>initialise_dataclass</span><span class='op'>(</span>
   class <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  level <span class='op'>=</span> <span class='fl'>1</span>,
+  level <span class='op'>=</span> <span class='st'>"1"</span>,
   totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
   localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>regions</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   steps <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  get <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -177,7 +178,7 @@ country definition. For a list of options use <code><a href='get_available_datas
       <th>level</th>
       <td><p>A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
-level 1 ("1) and level 2 ("2"). Use <code>get_available_datasets</code> for supported
+level 1 ("1) and level 2 ("2"). Use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code> for supported
 options by dataset.</p></td>
     </tr>
     <tr>
@@ -193,11 +194,11 @@ stratified by date and region.</p></td>
     <tr>
       <th>regions</th>
       <td><p>A character vector of target regions to be assigned to the
-<code>target_regions</code> field if present.</p></td>
+<code>target_regions</code> field and used to filter the returned data.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Logical, defaults to TRUE. Should verbose processing
+      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
 messages and warnings be returned.</p></td>
     </tr>
     <tr>
@@ -206,8 +207,13 @@ messages and warnings be returned.</p></td>
 steps be kept and output in a list.</p></td>
     </tr>
     <tr>
+      <th>get</th>
+      <td><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
+called (this will download, clean, and process data at initialisation).</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>additional arguments to pass to country specific functionality.</p></td>
+      <td><p>Additional arguments to pass to class specific functionality.</p></td>
     </tr>
     </table>
 

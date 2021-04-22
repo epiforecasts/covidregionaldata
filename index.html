@@ -96,13 +96,13 @@
   <div class="contents col-md-9">
 <div id="subnational-data-for-the-covid-19-outbreak" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#subnational-data-for-the-covid-19-outbreak" class="anchor"></a>Subnational data for the COVID-19 outbreak</h1></div>
+<a href="#subnational-data-for-the-covid-19-outbreak" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak</h1></div>
 
 <p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="DOI"></a></p>
 <p>An interface to subnational and national level COVID-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as linelist data and links to intervention data sets.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span><span class="op">)</span></code></pre></div>
@@ -117,7 +117,7 @@
 </div>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
 <p><a href="https://epiforecasts.io/covidregionaldata/"><img src="https://img.shields.io/badge/Documentation-lightgrey.svg?style=flat" alt="Documentation"></a></p>
 <p>Load <code>covidregionaldata</code>, <code>dplyr</code>, <code>scales</code>, and <code>ggplot2</code> (all used in this quick start),</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -127,11 +127,11 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span></code></pre></div>
 <div id="setup-data-caching" class="section level3">
 <h3 class="hasAnchor">
-<a href="#setup-data-caching" class="anchor"></a>Setup data caching</h3>
+<a href="#setup-data-caching" class="anchor" aria-hidden="true"></a>Setup data caching</h3>
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /tmp/RtmpTY0EO1</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpCNnpb9</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -141,12 +141,12 @@
 </div>
 <div id="national-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#national-data" class="anchor"></a>National data</h3>
+<a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h3>
 <p>To get worldwide time-series data by country (sourced from the WHO), use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 110,809</span>
+<span class="co">#&gt; Rows: 112,812</span>
 <span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
@@ -158,7 +158,7 @@
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 110,919 x 15</span>
+<span class="co">#&gt; # A tibble: 112,812 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -171,7 +171,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 110,909 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 112,802 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -196,25 +196,25 @@
 </div>
 <div id="subnational-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#subnational-data" class="anchor"></a>Subnational data</h3>
+<a href="#subnational-data" class="anchor" aria-hidden="true"></a>Subnational data</h3>
 <p>To get time-series data for subnational regions of a specific country, for example by level 1 region in the UK, use:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 5,746 x 26</span>
-<span class="co">#&gt;    date       region    iso_3166_2 cases_new cases_total deaths_new deaths_total</span>
-<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2020-01-30 East Mid… E12000004         NA          NA         NA           NA</span>
-<span class="co">#&gt;  2 2020-01-30 East of … E12000006         NA          NA         NA           NA</span>
-<span class="co">#&gt;  3 2020-01-30 England   E92000001          2           2         NA           NA</span>
-<span class="co">#&gt;  4 2020-01-30 London    E12000007         NA          NA         NA           NA</span>
-<span class="co">#&gt;  5 2020-01-30 North Ea… E12000001         NA          NA         NA           NA</span>
-<span class="co">#&gt;  6 2020-01-30 North We… E12000002         NA          NA         NA           NA</span>
-<span class="co">#&gt;  7 2020-01-30 Northern… N92000002         NA          NA         NA           NA</span>
-<span class="co">#&gt;  8 2020-01-30 Scotland  S92000003         NA          NA         NA           NA</span>
-<span class="co">#&gt;  9 2020-01-30 South Ea… E12000008         NA          NA         NA           NA</span>
-<span class="co">#&gt; 10 2020-01-30 South We… E12000009         NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 5,736 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # A tibble: 5,837 x 26</span>
+<span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
+<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
+<span class="co">#&gt;  2 2020-01-30 East of… E12000006          NA          NA         NA           NA</span>
+<span class="co">#&gt;  3 2020-01-30 England  E92000001           2           2         NA           NA</span>
+<span class="co">#&gt;  4 2020-01-30 London   E12000007          NA          NA         NA           NA</span>
+<span class="co">#&gt;  5 2020-01-30 North E… E12000001          NA          NA         NA           NA</span>
+<span class="co">#&gt;  6 2020-01-30 North W… E12000002          NA          NA         NA           NA</span>
+<span class="co">#&gt;  7 2020-01-30 Norther… N92000002          NA          NA         NA           NA</span>
+<span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
+<span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
+<span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
+<span class="co">#&gt; # … with 5,827 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
@@ -242,7 +242,7 @@
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
 <p>If using <code>covidregionaldata</code> in your work please consider citing it using the following,</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; To cite covidregionaldata in publications use:</span></span>
@@ -267,9 +267,9 @@
 </div>
 <div id="development" class="section level2">
 <h2 class="hasAnchor">
-<a href="#development" class="anchor"></a>Development</h2>
+<a href="#development" class="anchor" aria-hidden="true"></a>Development</h2>
 <p><a href="https://github.com/epiforecasts/covidregionaldata/wiki/" class="external-link"><img src="https://img.shields.io/badge/Wiki-lightblue.svg?style=flat" alt="Development"></a></p>
-<p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues" class="external-link">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls" class="external-link">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing" class="external-link">contributing guide</a>.</p>
+<p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues" class="external-link">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls" class="external-link">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing" class="external-link">contributing guide</a>. For details of the steps required to add support for a dataset see the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data" class="external-link">adding data guide</a>.</p>
 </div>
 </div>
   </div>

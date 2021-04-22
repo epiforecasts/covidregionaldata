@@ -147,22 +147,22 @@
 
     <div id="covidregionaldata-090" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.0">
-<a href="#covidregionaldata-090" class="anchor"></a>covidregionaldata 0.9.0<small> Unreleased </small>
+<a href="#covidregionaldata-090" class="anchor" aria-hidden="true"></a>covidregionaldata 0.9.0<small> Unreleased </small>
 </h1>
-<p>In this major release <code>covidregionaldata</code> has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install <code>covidregionaldata@0.8.3</code> from GitHub.</p>
-<p>Thanks to <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>, <a href='https://github.com/RichardMN'>@RichardMN</a>, and <a href='https://github.com/kathsherratt'>@kathsherratt</a> for major contributions to this release.</p>
+<p>In this release <code>covidregionaldata</code> has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install <code>covidregionaldata@0.8.3</code> from GitHub.</p>
+<p>Thanks to <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>, <a href='https://github.com/RichardMN'>@RichardMN</a>, and <a href='https://github.com/kathsherratt'>@kathsherratt</a> for major contributions to this release. Thanks to <a href='https://github.com/RichardMN'>@RichardMN</a> for volunteering his time.</p>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features" class="anchor" aria-hidden="true"></a>New features</h2>
 <ul>
 <li>Track data processing from raw to clean using the <code>step = TRUE</code> argument in <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>.</li>
 <li>Filter datasets for regions and countries of interest.</li>
-<li>Access the underlying methods for data sets.</li>
+<li>Access the underlying methods for data sets and all steps in the data processing pipeline.</li>
 </ul>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
 <ul>
 <li>All vignettes have been updated for readability.</li>
 <li>A quickstart has been added to the package README.</li>
@@ -170,7 +170,7 @@
 </div>
 <div id="technical-improvements" class="section level2">
 <h2 class="hasAnchor">
-<a href="#technical-improvements" class="anchor"></a>Technical improvements</h2>
+<a href="#technical-improvements" class="anchor" aria-hidden="true"></a>Technical improvements</h2>
 <ul>
 <li>
 <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code> now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the <code>get_</code> functions. However, all datasets are now available to be used as R6 methods (see <code>get_available_datasets</code>) which may allow for more modular use cases.</li>
@@ -179,7 +179,7 @@
 </div>
 <div id="deprecated-functions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deprecated-functions" class="anchor"></a>Deprecated functions</h2>
+<a href="#deprecated-functions" class="anchor" aria-hidden="true"></a>Deprecated functions</h2>
 <ul>
 <li>
 <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> replaces <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> to view available data. <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> is deprecated.</li>
@@ -191,7 +191,7 @@
 </div>
 <div id="data-changes-since-083" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-changes-since-083" class="anchor"></a>Data changes since 0.8.3</h2>
+<a href="#data-changes-since-083" class="anchor" aria-hidden="true"></a>Data changes since 0.8.3</h2>
 <ul>
 <li>Colombia now has capitalized region names.</li>
 <li>Germany level 2 region codes have been removed (previously was all NAs).</li>
@@ -205,11 +205,11 @@
 </div>
     <div id="covidregionaldata-083" class="section level1">
 <h1 class="page-header" data-toc-text="0.8.3">
-<a href="#covidregionaldata-083" class="anchor"></a>covidregionaldata 0.8.3<small> Unreleased </small>
+<a href="#covidregionaldata-083" class="anchor" aria-hidden="true"></a>covidregionaldata 0.8.3<small> Unreleased </small>
 </h1>
 <div id="new-data-sets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-data-sets" class="anchor"></a>New data sets</h2>
+<a href="#new-data-sets" class="anchor" aria-hidden="true"></a>New data sets</h2>
 <ul>
 <li>Level 1 admin data for Cuba</li>
 <li>Level 1 admin data for South Africa</li>
@@ -217,7 +217,7 @@
 </div>
 <div id="data-set-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-set-changes" class="anchor"></a>Data set changes</h2>
+<a href="#data-set-changes" class="anchor" aria-hidden="true"></a>Data set changes</h2>
 <ul>
 <li>UK data - added option to get either lower tier or upper tier local authorities (level 2 regions).</li>
 <li>Updated Northern Ireland case data to be by specimen date by default rather than by date of report as was previously the case. This means that in the UK all data except for data streams from Wales and Scotland are by date of specimen.</li>
@@ -226,7 +226,7 @@
 </div>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor" aria-hidden="true"></a>New features</h2>
 <ul>
 <li>Relevant up to date package information can be fetched using <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code>.</li>
 <li>Switched to using <code>vroom</code> for faster <code>csv</code> downloads.</li>
@@ -234,7 +234,7 @@
 </div>
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<a href="#other-changes" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul>
 <li>Replaced silently broken functions for converting cumulative data to daily and vice versa.</li>
 <li>Removed integration with Covid19R formatting.</li>
@@ -246,7 +246,7 @@
 </div>
     <div id="covidregionaldata-082" class="section level1">
 <h1 class="page-header" data-toc-text="0.8.2">
-<a href="#covidregionaldata-082" class="anchor"></a>covidregionaldata 0.8.2<small> 2020-12-12 </small>
+<a href="#covidregionaldata-082" class="anchor" aria-hidden="true"></a>covidregionaldata 0.8.2<small> 2020-12-12 </small>
 </h1>
 <ul>
 <li>Updates the API backend used to extract UK data to V2. Adds a release date variable which can be used to return data releases from specified dates rather than the latest snapshot.</li>
@@ -256,11 +256,11 @@
 </div>
     <div id="covidregionaldata-070" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.0">
-<a href="#covidregionaldata-070" class="anchor"></a>covidregionaldata 0.7.0<small> Unreleased </small>
+<a href="#covidregionaldata-070" class="anchor" aria-hidden="true"></a>covidregionaldata 0.7.0<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>get_linelist</code>: argument <code>clean</code> changed to <code>clean_dates</code> to reflect slight change in use case.</li>
@@ -268,7 +268,7 @@
 </div>
 <div id="changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes" class="anchor"></a>Changes</h2>
+<a href="#changes" class="anchor" aria-hidden="true"></a>Changes</h2>
 <ul>
 <li><p>Added new option to return UK data by NHS region. This will also return “first admissions” hospital data (excludes readmissions). Specify ‘nhsregions = TRUE’. Default is FALSE, returning ONS regions as before.</p></li>
 <li><p>Fixed inconsistent reference dates for variables in UK data. cases_new and cases_total now by “Specimen date” (date of test), while deaths_new and deaths_total are by “Date of death”, for all regions and nations.</p></li>
@@ -278,7 +278,7 @@
 </div>
     <div id="covidregionaldata-060" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
-<a href="#covidregionaldata-060" class="anchor"></a>covidregionaldata 0.6.0<small> 2020-08-27 </small>
+<a href="#covidregionaldata-060" class="anchor" aria-hidden="true"></a>covidregionaldata 0.6.0<small> 2020-08-27 </small>
 </h1>
 <ul>
 <li>Added whitespace trimming to all regional data functions.</li>
@@ -291,7 +291,7 @@
 </div>
     <div id="covidregionaldata-050" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.0">
-<a href="#covidregionaldata-050" class="anchor"></a>covidregionaldata 0.5.0<small> 2020-07-24 </small>
+<a href="#covidregionaldata-050" class="anchor" aria-hidden="true"></a>covidregionaldata 0.5.0<small> 2020-07-24 </small>
 </h1>
 <ul>
 <li>Release candidate.</li>
@@ -299,7 +299,7 @@
 </div>
     <div id="covidregionaldata-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
-<a href="#covidregionaldata-040" class="anchor"></a>covidregionaldata 0.4.0<small> Unreleased </small>
+<a href="#covidregionaldata-040" class="anchor" aria-hidden="true"></a>covidregionaldata 0.4.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added functions to extract regional cases for Spain, Japan, South Korea, the United Kingdom, and the United States.</li>
@@ -309,7 +309,7 @@
 </div>
     <div id="covidregionaldata-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#covidregionaldata-030" class="anchor"></a>covidregionaldata 0.3.0<small> Unreleased </small>
+<a href="#covidregionaldata-030" class="anchor" aria-hidden="true"></a>covidregionaldata 0.3.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added a function to extract case counts by region for Italy.</li>
@@ -321,7 +321,7 @@
 </div>
     <div id="covidregionaldata-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#covidregionaldata-020" class="anchor"></a>covidregionaldata 0.2.0<small> Unreleased </small>
+<a href="#covidregionaldata-020" class="anchor" aria-hidden="true"></a>covidregionaldata 0.2.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added <code>memoise</code> functionality to automatically cache in the current directory all remote resources.</li>
@@ -332,7 +332,7 @@
 </div>
     <div id="covidregionaldata-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#covidregionaldata-010" class="anchor"></a>covidregionaldata 0.1.0<small> Unreleased </small>
+<a href="#covidregionaldata-010" class="anchor" aria-hidden="true"></a>covidregionaldata 0.1.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
