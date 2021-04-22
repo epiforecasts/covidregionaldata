@@ -26,3 +26,7 @@ SMG.md
 ^README\.Rmd$
 ^.*.pdf$
 ^inst/CountryTemplate\.R$
+^inst/prepare-new-version-output.R$
+^inst/compare-version-output.R$
+^inst/prepare-old-version-output.R$
+^inst/make-dl-list.R$

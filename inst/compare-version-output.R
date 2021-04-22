@@ -44,7 +44,7 @@ if (!is.null(getOption("save_comparison"))) {
   save_comparison <- getOption("save_comparison")
 }
 
-run_new <- FALSE
+run_new <- TRUE
 run_old <- TRUE
 
 library(switchr)
