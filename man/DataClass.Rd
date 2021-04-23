@@ -280,9 +280,9 @@ being processed.
 
 \subsection{Returns}{
 Returns a single row summary tibble containing the country name,
-class, level 1 and 2 region names, the function calling it
-(\code{get_regional_data()} or \code{get_national_data()}) the url of the raw data
-and the columns present in the raw data.
+class, level 1 and 2 region names, the type of data, the function
+calling it (\code{get_regional_data()} or \code{get_national_data()}) the url of
+the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}

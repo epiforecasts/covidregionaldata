@@ -8,7 +8,7 @@ test_that(
   {
     expected_names <- c(
       "country", "class", "level_1_region",
-      "level_2_region", "get_data_function",
+      "level_2_region", "type",
       "data_url", "source_data_cols"
     )
     expect_identical(colnames(data), expected_names)
@@ -51,3 +51,15 @@ for (name in colnames(data)) {
     }
   )
 }
+
+test_that("Regional level datasets can be filtered for", {
+  reg <- get_available_datasets("regional")
+  expect_equal(nrow(dplyr::filter(reg, class %in% "ECDC")), 0)
+  expect_equal(unique(reg$type), "regional")
+})
+
+test_that("National level datasets can be filtered for", {
+  nat <- get_available_datasets("national")
+  expect_equal(nrow(dplyr::filter(nat, class %in% "Italy")), 0)
+  expect_equal(unique(nat$type), "national")
+})

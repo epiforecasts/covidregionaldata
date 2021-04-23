@@ -2,7 +2,7 @@
 test_initialise <- function(class) {
   test_class <- class
   test_fn <- function(class, level, totals, localise,
-                      verbose, steps, regions, get) {
+                      verbose, steps, regions, get, type) {
     class <- test_class$clone()
     class$verbose <- verbose
     class$steps <- steps

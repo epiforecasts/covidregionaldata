@@ -54,7 +54,8 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region_class <- initialise_dataclass(
     class = country, level = level, regions = regions,
     totals = totals, localise = localise,
-    verbose = verbose, steps = steps, get = TRUE, ...
+    verbose = verbose, steps = steps, get = TRUE,
+    type = "regional", ...
   )
 
   return(

@@ -42,7 +42,8 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
     class = source, level = "1",
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
-    regions = countries, get = TRUE, ...
+    regions = countries, get = TRUE, 
+    type = "national", ...
   )
 
   return(
