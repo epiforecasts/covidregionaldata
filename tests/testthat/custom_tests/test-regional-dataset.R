@@ -43,11 +43,34 @@ expect_columns_contain_data <- function(data_name, region) {
     cols2check,
     ~ {
       test_that(
-        paste0(data_name, "column '", .x, "' is not just composed of NA"),
+        paste0(data_name, " column '", .x, "' is not just composed of NA"),
         {
           expect_true(nrow(region$data$processed %>% filter(!is.na(!!.x))) > 0)
         }
       )
+    }
+  )
+}
+
+expect_cases_greater_than_deaths <- function(data_name, region) {
+  y <- region$data$processed %>%
+    group_by(
+      !!rlang::sym(region$supported_region_names[[region$level]])
+    ) %>%
+    summarise(
+      cases = sum(cases_new, na.rm = TRUE),
+      deaths = sum(deaths_new, na.rm = TRUE)
+    )
+  test_that(
+    paste0(data_name, " total cases > total deaths for all levels"),
+    {
+      expect_true(all(y$cases >= y$deaths))
+    }
+  )
+  test_that(
+    paste0(data_name, " total cases != total deaths for all levels"),
+    {
+      expect_false(all(y$cases == y$deaths))
     }
   )
 }
@@ -120,6 +143,7 @@ test_regional_dataset <- function(source, level, download = FALSE) {
   })
 
   expect_columns_contain_data(data_name, region)
+  expect_cases_greater_than_deaths(data_name, region)
 
   custom_test <- paste0("test_", source, "_level_", level)
   if (!exists(custom_test)) {
