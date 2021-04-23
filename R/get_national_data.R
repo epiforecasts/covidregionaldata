@@ -10,8 +10,9 @@
 #' Used to filter the data.
 #' @param country `r lifecycle::badge("deprecated")` A character string
 #'  specifying a country to filter for.
-#' @param source A character string specifying the data source: "WHO", or
-#'  "ECDC". Not case dependent. Defaults to WHO.
+#' @param source A character string specifying the data source (not case
+#'  dependent). Defaults to WHO (the World Health Organisation). See
+#' `get_available_datasets("natioanl")` for all options.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
 #' @inheritParams get_regional_data
@@ -42,7 +43,8 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
     class = source, level = "1",
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
-    regions = countries, get = TRUE, ...
+    regions = countries, get = TRUE,
+    type = "national", ...
   )
 
   return(

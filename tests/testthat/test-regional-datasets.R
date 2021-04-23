@@ -20,8 +20,8 @@ if (!is.null(getOption("testDownload"))) {
 
 # get datasets for testing
 sources <- get_available_datasets() %>%
-  dplyr::filter(.data$get_data_function %in%
-    c("get_regional_data", "get_national_data")) %>%
+  dplyr::filter(.data$type %in%
+    c("national", "regional")) %>%
   dplyr::select(source = class, level_1_region, level_2_region) %>%
   tidyr::pivot_longer(
     cols = -source,

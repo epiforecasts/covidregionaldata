@@ -1,4 +1,4 @@
-#' France Class containing country specific attributes and methods
+#' France Class containing origin specific attributes and methods
 #'
 #' @description Information for downloading, cleaning
 #' and processing COVID-19 region data for France.
@@ -19,9 +19,9 @@ France <- R6::R6Class("France",
   inherit = DataClass,
   public = list(
 
-    # Core Attributes (amend each paramater for country specific infomation)
-    #' @field country name of country to fetch data for
-    country = "France",
+    # Core Attributes (amend each paramater for origin specific infomation)
+    #' @field origin name of origin to fetch data for
+    origin = "France",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

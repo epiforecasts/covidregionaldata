@@ -15,8 +15,8 @@ India <- R6::R6Class("India",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "India",
+    #' @field origin name of origin to fetch data for
+    origin = "India",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
     #' @field supported_region_names A list of region names in order of level.

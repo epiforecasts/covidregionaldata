@@ -83,8 +83,8 @@ test_that("DataClass returns a summary", {
   expect_equal(
     names(sum),
     c(
-      "country", "class", "level_1_region", "level_2_region",
-      "get_data_function", "data_url", "source_data_cols"
+      "origin", "class", "level_1_region", "level_2_region",
+      "type", "data_urls", "source_data_cols"
     )
   )
   expect_true(sum$class[1] == "D")

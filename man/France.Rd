@@ -2,7 +2,7 @@
 % Please edit documentation in R/France.R
 \name{France}
 \alias{France}
-\title{France Class containing country specific attributes and methods}
+\title{France Class containing origin specific attributes and methods}
 \source{
 \url{https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675}
 
@@ -27,7 +27,7 @@ region$return()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
