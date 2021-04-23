@@ -25,7 +25,7 @@ An interface to subnational and national level COVID-19 data. For all
 countries supported, this includes a daily time-series of cases.
 Wherever available we also provide data on deaths, hospitalisations, and
 tests. National level data is also supported using a range of data
-sources as well as linelist data and links to intervention data sets.
+sources as well as line list data and links to intervention data sets.
 
 ## Installation
 
@@ -71,7 +71,7 @@ temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpCNnpb9
+#> Using a cache at: /var/folders/yl/vwcpf66n49jc7shvv7p72jh80000gr/T//RtmpQUoDEI
 ```
 
 To stop using `memoise` use,
@@ -237,7 +237,7 @@ using the following,
 
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
 
-We welcome contributions and new contributors\! We particularly
+We welcome contributions and new contributors! We particularly
 appreciate help adding new data sources for countries at sub-national
 level, or work on priority problems in the
 [issues](https://github.com/epiforecasts/covidregionaldata/issues).
