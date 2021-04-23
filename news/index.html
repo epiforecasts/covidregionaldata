@@ -173,7 +173,7 @@
 <a href="#technical-improvements" class="anchor" aria-hidden="true"></a>Technical improvements</h2>
 <ul>
 <li>
-<code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code> now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the <code>get_</code> functions. However, all datasets are now available to be used as R6 methods (see <code>get_available_datasets</code>) which may allow for more modular use cases.</li>
+<code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code> now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the <code>get_</code> functions. However, all datasets are now available to be used as R6 methods (see <code>get_available_datasets</code>) which may allow for more modular use cases. These classes can also be initialised using <code><a href="../reference/initialise_dataclass.html">initialise_dataclass()</a></code> which is used internally by both <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code>.</li>
 <li>Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: https://github.com/epiforecasts/covidregionaldata#readme).</li>
 </ul>
 </div>
@@ -200,6 +200,8 @@
 <li>Mexico codes ‘inegi_code’ has been changed to ‘inegi’.</li>
 <li>UK Level 1 ‘ons_region_code’ is now ‘region_code’.</li>
 <li>UK level 2 “ltla_code” is now “local_authority_code”.</li>
+<li>
+<code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> now return an origin column rather than a country column and a type column rather than a get_data_function to better reflect the types of data supported.</li>
 </ul>
 </div>
 </div>
