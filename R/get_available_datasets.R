@@ -18,10 +18,10 @@
 #' @examples
 #' # see all available datasets
 #' get_available_datasets()
-#' 
+#'
 #' # see only national level datasets
 #' get_available_datasets("national")
-#' 
+#'
 #' # see only regional level datasets
 #' get_available_datasets("regional")
 get_available_datasets <- function(type) {
@@ -43,12 +43,12 @@ get_available_datasets <- function(type) {
   )
   available_country_data <- valid_country_objects %>%
     bind_rows()
-  
+
   if (!missing(type)) {
     target_type <- match.arg(
-    type, 
-    choices = c("national", "regional"),
-    several.ok = TRUE
+      type,
+      choices = c("national", "regional"),
+      several.ok = TRUE
     )
     available_country_data <- available_country_data %>%
       filter(type %in% target_type)

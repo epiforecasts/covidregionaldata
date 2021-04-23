@@ -173,8 +173,10 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
-        rename(level_2_region = .data$nombre,
-               level_2_region_code = cve_ent) %>%
+        rename(
+          level_2_region = .data$nombre,
+          level_2_region_code = cve_ent
+        ) %>%
         mutate(date = dmy(.data$date)) %>%
         left_join(self$codes_lookup[["2"]],
           by = c("level_2_region_code", "level_2_region")

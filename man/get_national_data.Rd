@@ -19,8 +19,9 @@ get_national_data(
 \item{countries}{A character vector specifying country names of interest.
 Used to filter the data.}
 
-\item{source}{A character string specifying the data source: "WHO", or
-"ECDC". Not case dependent. Defaults to WHO.}
+\item{source}{A character string specifying the data source (not case
+dependent). Defaults to WHO (the World Health Organisation). See
+\code{get_available_datasets("natioanl")} for all options.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset

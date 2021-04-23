@@ -62,7 +62,8 @@ initialise_dataclass <- function(class = character(), level = "1",
 
   if (nrow(target_class) == 0) {
     stop(
-      "No data available for ", class, " see get_available_datasets(type = c(", paste(type, collapse = ", ") , ")) for supported datasets")
+      "No data available for ", class, " see get_available_datasets(type = c(", paste(type, collapse = ", "), ")) for supported datasets"
+    )
   }
 
   regionClass <- get(target_class$class[1])
@@ -89,7 +90,7 @@ DataClass <- R6::R6Class(
   "DataClass",
   public = list(
     #' @field origin the origin of the data source. For regional data sources
-    #' this will usually be the name of the country. 
+    #' this will usually be the name of the country.
     origin = "",
     #' @field data Once initialised, a list of named data frames: raw
     #' (list of named raw data frames) clean (cleaned data) and processed

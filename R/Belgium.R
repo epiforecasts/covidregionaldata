@@ -98,8 +98,8 @@ Belgium <- R6::R6Class("Belgium",
       self$data$raw$main_broken <- self$data$raw$main
       self$data$raw$main <-
         self$data$raw$main_broken %>%
-        filter((REGION %in% self$codes_lookup[[1]]$level_1_region
-        | is.na(REGION))) %>%
+        filter((REGION %in% self$codes_lookup[[1]]$level_1_region |
+          is.na(REGION))) %>%
         bind_rows(fixed_lines)
     },
 

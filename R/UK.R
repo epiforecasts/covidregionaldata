@@ -17,7 +17,7 @@
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-UK <- R6::R6Class("UK", 
+UK <- R6::R6Class("UK",
   inherit = DataClass,
   public = list(
     # Core Attributes (amend each paramater for origin specific infomation)

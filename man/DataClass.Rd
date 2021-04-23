@@ -282,7 +282,7 @@ being processed.
 \subsection{Returns}{
 Returns a single row summary tibble containing the origin of the
 data source, class, level 1 and 2 region names, the type of data,
-the url of the raw data and the columns present in the raw data.
+the urls of the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}
