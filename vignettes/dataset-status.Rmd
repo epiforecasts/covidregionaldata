@@ -24,8 +24,8 @@ library(knitr)
 
 ```{r, echo = FALSE}
 datasets <- get_available_datasets() %>%
-  arrange(country) %>%
-  select(Region = country, Method = class) %>%
+  arrange(origin) %>%
+  select(Origin = origin, Method = class) %>%
   mutate(
     `GitHub status` = paste0(
       "[![", Method,

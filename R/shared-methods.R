@@ -22,6 +22,7 @@
 #' @return An initialised version of the target class if available,
 #' e.g. `Italy()`
 #' @inheritParams message_verbose
+#' @inheritParams get_available_datasets
 #' @rdname initialise_dataclass
 #' @importFrom stringr str_to_title str_replace_all str_detect
 #' @importFrom dplyr bind_rows filter distinct
@@ -39,7 +40,8 @@
 initialise_dataclass <- function(class = character(), level = "1",
                                  totals = FALSE, localise = TRUE,
                                  regions, verbose = TRUE, steps = FALSE,
-                                 get = FALSE, ...) {
+                                 get = FALSE, type = c("national", "regional"),
+                                 ...) {
   stopifnot(is.character(class))
   level <- as.character(level)
 
@@ -51,16 +53,17 @@ initialise_dataclass <- function(class = character(), level = "1",
   )
 
   # check we have data for desired class
-  datasets <- covidregionaldata::get_available_datasets()
+  datasets <- covidregionaldata::get_available_datasets(type)
   target_class <- bind_rows(
     filter(datasets, map_lgl(.data$class, ~ any(str_detect(., targets)))),
-    filter(datasets, map_lgl(.data$country, ~ any(str_detect(., targets))))
+    filter(datasets, map_lgl(.data$origin, ~ any(str_detect(., targets))))
   ) %>%
     distinct()
 
   if (nrow(target_class) == 0) {
-    stop("No data available for ", class, " see get_available_datasets() for
-    supported datasets")
+    stop(
+      "No data available for ", class, " see get_available_datasets(type = c(", paste(type, collapse = ", "), ")) for supported datasets"
+    )
   }
 
   regionClass <- get(target_class$class[1])
@@ -73,9 +76,9 @@ initialise_dataclass <- function(class = character(), level = "1",
   return(region_class)
 }
 
-#' R6 Class containing non-country specific methods
+#' R6 Class containing non-origin specific methods
 #'
-#' @description Acts as parent class for individual country objects,
+#' @description Acts as parent class for individual origin objects,
 #' allowing them to access general methods.
 #'
 #' @details All countries have shared methods for extracting region codes,
@@ -86,8 +89,9 @@ initialise_dataclass <- function(class = character(), level = "1",
 DataClass <- R6::R6Class(
   "DataClass",
   public = list(
-    #' @field country name of country to fetch data for
-    country = "",
+    #' @field origin the origin of the data source. For regional data sources
+    #' this will usually be the name of the country.
+    origin = "",
     #' @field data Once initialised, a list of named data frames: raw
     #' (list of named raw data frames) clean (cleaned data) and processed
     #' (processed data). Data is accessed using `$data`.
@@ -106,8 +110,8 @@ DataClass <- R6::R6Class(
     #' Filled at initialisation with the code name associated with the
     #' requested level (supported_region_codes$level).
     code_name = NULL,
-    #' @field codes_lookup string or tibble Region codes for the target country
-    #' filled by country specific codes in
+    #' @field codes_lookup string or tibble Region codes for the target origin
+    #' filled by origin specific codes in
     #' \href{#method-set_region_codes}{\code{set_region_codes()}}
     codes_lookup = list(),
     #' @field data_urls List of named common and shared url links to raw data.
@@ -150,9 +154,9 @@ DataClass <- R6::R6Class(
     set_region_codes = function() {
     },
 
-    #' @description initialize function used by all `Country` class objects.
-    #' Set up the country class with attributes set to input parameters.
-    #' Should only be called by a `Country` class object.
+    #' @description Initialize function used by all `DataClass` objects.
+    #' Set up the `DataClass` class with attributes set to input parameters.
+    #' Should only be called by a `DataClass` class object.
     #' @param level A character string indicating the target administrative
     #' level of the data with the default being "1". Currently supported
     #' options are level 1 ("1) and level 2 ("2").
@@ -227,8 +231,8 @@ DataClass <- R6::R6Class(
     #' @description Cleans raw data (corrects format, converts column types,
     #' etc). Works on raw data and so should be called after
     #' \href{#method-download}{\code{download()}}
-    #' Calls the specific country cleaning method (`clean_common`) followed by
-    #' level specific cleaning.methods which are defined in said country.
+    #' Calls the specific class specific cleaning method (`clean_common`)
+    #' followed by level specific cleaning methods.
     #' `clean_level_[1/2]`. Cleaned data is stored in `data$clean`
     clean = function() {
       if (is.null(self$data$raw)) {
@@ -247,7 +251,7 @@ DataClass <- R6::R6Class(
 
     #' @description Cleaning methods that are common across a class.
     #' By default this method is empty as if any code is required it should be
-    #' defined in a country specific `clean_common` method.
+    #' defined in a child class specific `clean_common` method.
     clean_common = function() {
 
     },
@@ -361,25 +365,24 @@ DataClass <- R6::R6Class(
       }
     },
 
-    #' @description Create a table of summary information for the country
+    #' @description Create a table of summary information for the data set
     #' being processed.
     #' @importFrom tibble tibble
-    #' @return Returns a single row summary tibble containing the country name,
-    #' class, level 1 and 2 region names, the function calling it
-    #' (`get_regional_data()` or `get_national_data()`) the url of the raw data
-    #' and the columns present in the raw data.
+    #' @return Returns a single row summary tibble containing the origin of the
+    #' data source, class, level 1 and 2 region names, the type of data,
+    #' the urls of the raw data and the columns present in the raw data.
     summary = function() {
       sum_df <- tibble(
-        country = self$country,
+        origin = self$origin,
         class = class(self)[1],
         level_1_region = self$supported_region_names[["1"]],
         level_2_region = ifelse(is.null(self$supported_region_names[["2"]]),
           NA, self$supported_region_names[["2"]]
         ),
-        get_data_function = ifelse(any(c("WHO", "ECDC") %in% class(self)[1]),
-          "get_national_data", "get_regional_data"
+        type = ifelse(any(class(self) %in% "CountryDataClass"),
+          "national", "regional"
         ),
-        data_url = paste(unlist(self$data_url), collapse = ", "),
+        data_urls = paste(unlist(self$data_urls), collapse = ", "),
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
       )
       return(sum_df)

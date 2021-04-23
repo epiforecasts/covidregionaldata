@@ -13,6 +13,7 @@ initialise_dataclass(
   verbose = TRUE,
   steps = FALSE,
   get = FALSE,
+  type = c("national", "regional"),
   ...
 )
 }
@@ -43,6 +44,12 @@ steps be kept and output in a list.}
 
 \item{get}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
+
+\item{type}{A character vector indicating the types of data to
+return. Current options include "national" (which are datasets at the
+national level which inherit from \code{CountryDataClass}) and
+"regional" (which are datasets at the regional level which inherit
+directly from \code{DataClass}).}
 
 \item{...}{Additional arguments to pass to class specific functionality.}
 }

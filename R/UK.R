@@ -2,10 +2,10 @@
 #' data.
 #'
 #' @description Extracts daily COVID-19 data for the UK, stratified by region
-#' and nation. Contains additional options to other country class objects,
-#' including options to return subnational English regions using NHS region
-#' boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
-#' download from (release_date) and a geographical resolution (resolution).
+#' and nation. Additional options for this class are: to return subnational
+#' English regions using NHS region boundaries instead of PHE boundaries
+#' (nhsregions = TRUE), a release date to download from (release_date) and a
+#' geographical resolution (resolution).
 #'
 # nolint start
 #' @source \url{https://coronavirus.data.gov.uk/details/download}
@@ -17,12 +17,12 @@
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-UK <- R6::R6Class("UK", # rename to country name
+UK <- R6::R6Class("UK",
   inherit = DataClass,
   public = list(
-    # Core Attributes (amend each paramater for country specific infomation)
-    #' @field country name of country to fetch data for
-    country = "United Kingdom (UK)",
+    # Core Attributes (amend each paramater for origin specific infomation)
+    #' @field origin name of origin to fetch data for
+    origin = "United Kingdom (UK)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

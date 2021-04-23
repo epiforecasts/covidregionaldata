@@ -10,7 +10,7 @@ return_data(obj, class = FALSE)
 \item{obj}{A Class based on a \code{DataClass}}
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object rather than a tibble or a list of tibbles.
+\code{DataClass} object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 }
 \description{

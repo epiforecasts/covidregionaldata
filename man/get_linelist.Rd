@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_linelist.R
 \name{get_linelist}
 \alias{get_linelist}
-\title{Get patient linelist data}
+\title{Get patient line list data}
 \source{
 \url{https://github.com/beoutbreakprepared/nCoV2019}
 }
@@ -18,16 +18,16 @@ Should only certain variables (id, country, onset date, days' delay),
 and observations (patients with a report delay) be returned}
 }
 \value{
-A linelist of reported cases of COVID-19
+A line list of reported cases of COVID-19
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Provides a public international patient linelist from January 2020 to June
+Provides a public international patient line list from January 2020 to June
 2020.
 
-This version of the linelist has stopped updating. The new version of the
-linelist is free but requires a login.
+This version of the line list has stopped updating. The new version of the
+line list is free but requires a login.
 
 See: https://global.health/
 }
