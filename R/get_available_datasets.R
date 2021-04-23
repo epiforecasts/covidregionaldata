@@ -4,9 +4,9 @@
 #' The function searches the environment for R6 class objects and
 #' extracts the summary information from the available classes using
 #' their `summary` methods.
-#' @param type A character vector indiciating the the types of data to
+#' @param type A character vector indicating the types of data to
 #' return. Current options include "national" (which are datasets at the
-#' national level which inherit from`CountryDataClass`) and
+#' national level which inherit from `CountryDataClass`) and
 #' "regional" (which are datasets at the regional level which inherit
 #' directly from `DataClass`).
 #' @return A list of available countries and the region level

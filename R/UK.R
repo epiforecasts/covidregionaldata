@@ -2,7 +2,7 @@
 #' data.
 #'
 #' @description Extracts daily COVID-19 data for the UK, stratified by region
-#' and nation. Additional options for this clas are: to return subnational
+#' and nation. Additional options for this class are: to return subnational
 #' English regions using NHS region boundaries instead of PHE boundaries
 #' (nhsregions = TRUE), a release date to download from (release_date) and a
 #' geographical resolution (resolution).
