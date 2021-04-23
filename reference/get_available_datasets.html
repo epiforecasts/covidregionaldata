@@ -157,8 +157,20 @@ The function searches the environment for R6 class objects and
 extracts the country name and what level it has from the object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='va'>type</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>type</th>
+      <td><p>A character vector indiciating the the types of data to
+return. Current options include "national" (which are datasets at the
+national level which inherit from<code>CountryDataClass</code>) and
+"regional" (which are datasets at the regional level which inherit
+directly from <code>DataClass</code>).</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -168,25 +180,24 @@ data is available for</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 7</span><span>
-#&gt;    country        class  level_1_region level_2_region get_data_functi… data_url
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Belgium        Belgi… region         province       get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Brazil         Brazil state          city           get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Canada         Canada province       </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Colombia       Colom… departamento   </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Cuba           Cuba   provincia      </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> European Cent… ECDC   country        </span><span style='color: #BB0000;'>NA</span><span>             get_national_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> France         France region         department     get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Germany        Germa… bundesland     landkreis      get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> India          India  state          </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Italy          Italy  regioni        </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> Lithuania      Lithu… county         municipality   get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> Mexico         Mexico estado         municipio      get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> South Africa   South… province       </span><span style='color: #BB0000;'>NA</span><span>             get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> United Kingdo… UK     region         authority      get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span> United States… USA    state          county         get_regional_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span> World Health … WHO    country        </span><span style='color: #BB0000;'>NA</span><span>             get_national_da… </span><span style='color: #949494;'>""</span><span>      
-#&gt; </span><span style='color: #949494;'># … with 1 more variable: source_data_cols &lt;chr&gt;</span><span></div></span></pre>
+#&gt;    country  class level_1_region level_2_region type  data_url source_data_cols 
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Belgium  Belg… region         province       regi… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Brazil   Braz… state          city           regi… </span><span style='color: #949494;'>""</span><span>       cases_total, dea…
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Canada   Cana… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_new, cases…
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Colombia Colo… departamento   </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_total      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Cuba     Cuba  provincia      </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_new        
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Europea… ECDC  country        </span><span style='color: #BB0000;'>NA</span><span>             nati… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> France   Fran… region         department     regi… </span><span style='color: #949494;'>""</span><span>       cases_new, teste…
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Germany  Germ… bundesland     landkreis      regi… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> India    India state          </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Italy    Italy regioni        </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_total, dea…
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> Lithuan… Lith… county         municipality   regi… </span><span style='color: #949494;'>""</span><span>       cases_new, teste…
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> Mexico   Mexi… estado         municipio      regi… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span> South A… Sout… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… </span><span style='color: #949494;'>""</span><span>       cases_new, death…
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span> United … UK    region         authority      regi… </span><span style='color: #949494;'>""</span><span>       newCasesBySpecim…
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span> United … USA   state          county         regi… </span><span style='color: #949494;'>""</span><span>       cases_total, dea…
+#&gt; </span><span style='color: #BCBCBC;'>16</span><span> World H… WHO   country        </span><span style='color: #BB0000;'>NA</span><span>             nati… </span><span style='color: #949494;'>""</span><span>       cases_new, cases…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

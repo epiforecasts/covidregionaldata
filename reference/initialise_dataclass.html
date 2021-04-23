@@ -162,6 +162,7 @@
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   steps <span class='op'>=</span> <span class='cn'>FALSE</span>,
   get <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"national"</span>, <span class='st'>"regional"</span><span class='op'>)</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -210,6 +211,14 @@ steps be kept and output in a list.</p></td>
       <th>get</th>
       <td><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
 called (this will download, clean, and process data at initialisation).</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>A character vector indiciating the the types of data to
+return. Current options include "national" (which are datasets at the
+national level which inherit from<code>CountryDataClass</code>) and
+"regional" (which are datasets at the regional level which inherit
+directly from <code>DataClass</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
