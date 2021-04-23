@@ -9,7 +9,7 @@ test_that(
     expected_names <- c(
       "origin", "class", "level_1_region",
       "level_2_region", "type",
-      "data_url", "source_data_cols"
+      "data_urls", "source_data_cols"
     )
     expect_identical(colnames(data), expected_names)
   }

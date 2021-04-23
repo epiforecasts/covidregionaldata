@@ -369,7 +369,7 @@ DataClass <- R6::R6Class(
     #' @importFrom tibble tibble
     #' @return Returns a single row summary tibble containing the origin of the
     #' data source, class, level 1 and 2 region names, the type of data,
-    #' the url of the raw data and the columns present in the raw data.
+    #' the urls of the raw data and the columns present in the raw data.
     summary = function() {
       sum_df <- tibble(
         origin = self$origin,
@@ -381,7 +381,7 @@ DataClass <- R6::R6Class(
         type = ifelse(any(class(self) %in% "CountryDataClass"),
           "national", "regional"
         ),
-        data_url = paste(unlist(self$data_url), collapse = ", "),
+        data_urls = paste(unlist(self$data_urls), collapse = ", "),
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
       )
       return(sum_df)
