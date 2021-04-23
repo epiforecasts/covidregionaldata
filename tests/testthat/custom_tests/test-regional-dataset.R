@@ -35,6 +35,10 @@ expect_columns_contain_data <- function(data_name, region) {
   cols <- c("cases", "deaths", "recovered", "test")
   cols2check <- purrr::map(cols, cols_present)
   cols2check <- unlist(cols2check)
+  cols2check <- append(
+    cols2check,
+    region$supported_region_names[[region$level]]
+  )
   purrr::walk(
     cols2check,
     ~ {
