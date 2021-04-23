@@ -38,7 +38,7 @@ stratified by date and region.}
 steps be kept and output in a list.}
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object rather than a tibble or a list of tibbles.
+\code{DataClass} object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing

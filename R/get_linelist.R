@@ -41,7 +41,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
     what = "covidregionaldata::get_linelist()",
     details = c(
       "Linelist no longer accessible through this package.",
-      "The linelist is now hosted at: https://global.health/"
+      "The line list is now hosted at: https://global.health/"
     )
   )
 
@@ -113,7 +113,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
       )
   }
 
-  message("Note: This linelist covers January to June 2020. We will update when a new data source becomes available.")
+  message("Note: This line list covers January to June 2020. We will update when a new data source becomes available.")
 
   return(linelist)
 }

@@ -17,8 +17,8 @@ USA <- R6::R6Class("USA",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "United States of America (USA)",
+    #' @field origin name of origin to fetch data for
+    origin = "United States of America (USA)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

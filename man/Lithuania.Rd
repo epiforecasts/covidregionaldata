@@ -137,7 +137,7 @@ region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 

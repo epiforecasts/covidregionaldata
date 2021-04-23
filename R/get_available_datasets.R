@@ -2,7 +2,8 @@
 #'
 #' @description Show what countries have what level data available.
 #' The function searches the environment for R6 class objects and
-#' extracts the country name and what level it has from the object.
+#' extracts the summary information from the available classes using
+#' their `summary` methods.
 #' @param type A character vector indiciating the the types of data to
 #' return. Current options include "national" (which are datasets at the
 #' national level which inherit from`CountryDataClass`) and

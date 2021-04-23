@@ -18,8 +18,8 @@ Germany <- R6::R6Class("Germany",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "Germany",
+    #' @field origin name of origin to fetch data for
+    origin = "Germany",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

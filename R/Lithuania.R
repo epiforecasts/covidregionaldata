@@ -128,8 +128,8 @@ Lithuania <- R6::R6Class("Lithuania",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "Lithuania",
+    #' @field origin name of origin to fetch data for
+    origin = "Lithuania",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.

@@ -2,9 +2,9 @@
 % Please edit documentation in R/shared-methods.R
 \name{DataClass}
 \alias{DataClass}
-\title{R6 Class containing non-country specific methods}
+\title{R6 Class containing non-origin specific methods}
 \description{
-Acts as parent class for individual country objects,
+Acts as parent class for individual origin objects,
 allowing them to access general methods.
 }
 \details{
@@ -17,7 +17,8 @@ fields providing they define a method with the same name.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{the origin of the data source. For regional data sources
+this will usually be the name of the country.}
 
 \item{\code{data}}{Once initialised, a list of named data frames: raw
 (list of named raw data frames) clean (cleaned data) and processed
@@ -37,8 +38,8 @@ specified level (supported_region_names$level).}
 Filled at initialisation with the code name associated with the
 requested level (supported_region_codes$level).}
 
-\item{\code{codes_lookup}}{string or tibble Region codes for the target country
-filled by country specific codes in
+\item{\code{codes_lookup}}{string or tibble Region codes for the target origin
+filled by origin specific codes in
 \href{#method-set_region_codes}{\code{set_region_codes()}}}
 
 \item{\code{data_urls}}{List of named common and shared url links to raw data.
@@ -109,9 +110,9 @@ region codes.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-initialize function used by all \code{Country} class objects.
-Set up the country class with attributes set to input parameters.
-Should only be called by a \code{Country} class object.
+Initialize function used by all \code{DataClass} objects.
+Set up the \code{DataClass} class with attributes set to input parameters.
+Should only be called by a \code{DataClass} class object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
   level = "1",
@@ -172,8 +173,8 @@ of the \code{data_url} name and the corresponding raw data table in
 Cleans raw data (corrects format, converts column types,
 etc). Works on raw data and so should be called after
 \href{#method-download}{\code{download()}}
-Calls the specific country cleaning method (\code{clean_common}) followed by
-level specific cleaning.methods which are defined in said country.
+Calls the specific class specific cleaning method (\code{clean_common})
+followed by level specific cleaning methods.
 \code{clean_level_[1/2]}. Cleaned data is stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
@@ -186,7 +187,7 @@ level specific cleaning.methods which are defined in said country.
 \subsection{Method \code{clean_common()}}{
 Cleaning methods that are common across a class.
 By default this method is empty as if any code is required it should be
-defined in a country specific \code{clean_common} method.
+defined in a child class specific \code{clean_common} method.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
 }
@@ -272,17 +273,16 @@ For most datasets a custom method should not be needed.
 \if{html}{\out{<a id="method-summary"></a>}}
 \if{latex}{\out{\hypertarget{method-summary}{}}}
 \subsection{Method \code{summary()}}{
-Create a table of summary information for the country
+Create a table of summary information for the data set
 being processed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-Returns a single row summary tibble containing the country name,
-class, level 1 and 2 region names, the type of data, the function
-calling it (\code{get_regional_data()} or \code{get_national_data()}) the url of
-the raw data and the columns present in the raw data.
+Returns a single row summary tibble containing the origin of the
+data source, class, level 1 and 2 region names, the type of data,
+the url of the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}

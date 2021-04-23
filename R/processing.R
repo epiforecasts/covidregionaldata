@@ -165,7 +165,7 @@ totalise_data <- function(data) {
 #'
 #' @description Internal shared regional data cleaning designed to be called
 #' by `process`.
-#' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
+#' @param clean_data The clean data for a class, e.g. `Italy$data$clean`
 #' @param level The level of the data, e.g. 'level_1_region'
 #' @param group_vars Grouping variables, used to
 #' for grouping and to localise names. It is assumed that the first entry

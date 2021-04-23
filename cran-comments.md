@@ -7,4 +7,4 @@
 
 0 errors | 0 warnings | 1 note
 
-* This release fixes all issues with previous version that was archived on CRAN.
+* This release fixes all issues with previous version that was archived on CRAN for a policy violation on the 2021-01-06.

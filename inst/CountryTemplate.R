@@ -15,7 +15,7 @@ CountryTemplate <- R6::R6Class("CountryTemplate",
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field country name of country to fetch data for
+    #' @field origin name of country to fetch data for
     country = "CountryTemplate",
     #' @field supported_levels List of supported levels.
     supported_levels = list("1"),
