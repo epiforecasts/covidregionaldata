@@ -15,7 +15,7 @@ if (!is.null(getOption("testSource"))) {
 # get datasets for testing
 sources <- get_available_datasets() %>%
   dplyr::filter(.data$type %in%
-                  c("national", "regional")) %>%
+                  c("regional")) %>%
   dplyr::select(source = class, level_1_region, level_2_region) %>%
   tidyr::pivot_longer(
     cols = -source,
