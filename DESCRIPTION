@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for the COVID-19 Outbreak
-Version: 0.9.0
+Version: 0.9.1.1000
 Authors@R: 
     c(person(given = "Sam Abbott",
              role = c("aut", "cre"),

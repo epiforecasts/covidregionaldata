@@ -19,6 +19,7 @@ contributors](https://img.shields.io/github/contributors/epiforecasts/covidregio
 Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
 [![GitHub
 commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
 An interface to subnational and national level COVID-19 data. For all
 countries supported, this includes a daily time-series of cases.
