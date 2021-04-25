@@ -1,6 +1,7 @@
 # covidregionaldata 0.9.1
 
- In progress development release.
+In development release.
+ 
 # covidregionaldata 0.9.0
 
 In this release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
