@@ -160,3 +160,36 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
   region_vars <- region_vars[!is.na(region_vars)]
   return(region_vars)
 }
+
+#' Constructs list of options for processing
+#'
+#' @description Contructs processing options including user arguments.
+#' @param process_options list, additional arguments to control what
+#' functions are called during processing. For some datasets setting these
+#' to FALSE may cause errors, but for others improve speed.
+format_process_options <- function(process_options) {
+  base_options <- list(
+    "calculate_columns_from_existing_data" = TRUE,
+    "add_extra_na_cols" = TRUE,
+    "set_negative_values_to_zero" = TRUE
+  )
+  if (!(is.list(process_options))) {
+    stop("Process options must be a list")
+  }
+  if (is.null(names(process_options))) {
+    return(base_options)
+  }
+  if (!(all(names(process_options) %in% names(base_options)))) {
+    stop("option not supported")
+  }
+  walk(
+    names(process_options),
+    ~ {
+      if (!(is.logical(process_options[[.x]]))) {
+        stop(paste("argument for", .x, "is not logical"))
+      }
+      base_options[[.x]] <<- process_options[[.x]]
+    }
+  )
+  return(base_options)
+}

@@ -76,6 +76,10 @@ in \verb{$new()}}
 
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
+
+\item{\code{process_options}}{A named list of string function names .giving a
+Bool of TRUE or FALSE which indicates if that processing function is
+called during processing.}
 }
 \if{html}{\out{</div>}}
 }
@@ -121,7 +125,8 @@ Should only be called by a \code{DataClass} class object.
   localise = TRUE,
   verbose = TRUE,
   steps = FALSE,
-  get = FALSE
+  get = FALSE,
+  process_options = list()
 )}\if{html}{\out{</div>}}
 }
 
@@ -150,6 +155,14 @@ cleaning steps be kept and output in a list.}
 
 \item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
+
+\item{\code{process_options}}{list, additional arguments to control what
+functions are called during processing. For some datasets setting these
+to FALSE may cause errors, but for others improve speed.
+Avaliable options are:
+"calculate_columns_from_existing_data" = TRUE,
+"add_extra_na_cols" = TRUE,
+"set_negative_values_to_zero" = TRUE}
 }
 \if{html}{\out{</div>}}
 }

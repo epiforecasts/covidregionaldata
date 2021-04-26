@@ -161,6 +161,22 @@ totalise_data <- function(data) {
   return(data)
 }
 
+#' Get totals data given the time series data.
+#'
+#' @description Get totals data given the time series data.
+#' @param data A data table
+#' @param process_options list of options for processing
+#' @importFrom purrr walk
+run_process_steps <- function(data, process_options) {
+  . <- NULL
+  popt <- names(which(unlist(process_options)))
+  data <- data %>%
+    do(get(popt[1])(.)) %>%
+    get(popt[2])() %>%
+    get(popt[3])()
+  return(data)
+}
+
 #' Internal Shared Regional Dataset Processing
 #'
 #' @description Internal shared regional data cleaning designed to be called
@@ -178,6 +194,9 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
+#' @param process_options list, additional arguments to control what
+#' functions are called during processing. For some datasets setting these
+#' to FALSE may cause errors, but for others improve speed.
 #' @concept utility
 #' @importFrom dplyr do group_by_at across ungroup select everything arrange
 #' @importFrom dplyr rename
@@ -186,7 +205,12 @@ totalise_data <- function(data) {
 #' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
-                             verbose = TRUE) {
+                             verbose = TRUE,
+                             process_options = list(
+                               "calculate_columns_from_existing_data" = TRUE,
+                               "add_extra_na_cols" = TRUE,
+                               "set_negative_values_to_zero" = TRUE
+                             )) {
   if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
@@ -194,11 +218,7 @@ process_internal <- function(clean_data, level, group_vars,
 
   dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
-  . <- NULL
-  dat <- dat %>%
-    do(calculate_columns_from_existing_data(.)) %>%
-    add_extra_na_cols() %>%
-    set_negative_values_to_zero()
+  dat <- run_process_steps(dat, process_options)
 
   if (totals) {
     dat <- totalise_data(dat)

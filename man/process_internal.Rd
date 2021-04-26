@@ -10,7 +10,9 @@ process_internal(
   group_vars,
   totals = FALSE,
   localise = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  process_options = list(calculate_columns_from_existing_data = TRUE, add_extra_na_cols
+    = TRUE, set_negative_values_to_zero = TRUE)
 )
 }
 \arguments{
@@ -32,6 +34,10 @@ localised.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{process_options}{list, additional arguments to control what
+functions are called during processing. For some datasets setting these
+to FALSE may cause errors, but for others improve speed.}
 }
 \description{
 Internal shared regional data cleaning designed to be called
