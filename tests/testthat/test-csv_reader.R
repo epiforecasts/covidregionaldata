@@ -17,11 +17,11 @@ test_that("csv_reader can read in a simple dataset", {
 })
 
 test_that("csv_reader verbosity is controlled as expected", {
-  expect_equal(
+  expect_gte(
     length(capture.output(tmp <- csv_reader(test_path, verbose = TRUE),
       type = "message"
     )),
-    8
+    1
   )
   expect_equal(
     length(capture.output(tmp <- csv_reader(test_path, verbose = FALSE),

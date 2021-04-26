@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_regional_data.R
 \name{get_regional_data}
 \alias{get_regional_data}
-\title{Fetch standardised sub-national Covid-19 data}
+\title{Fetch standardised sub-national COVID-19 data}
 \usage{
 get_regional_data(
   country,
@@ -12,6 +12,7 @@ get_regional_data(
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
+  regions,
   include_level_2_regions = deprecated(),
   localise_regions = deprecated(),
   ...
@@ -24,25 +25,27 @@ options use \code{get_available_datasets}.}
 
 \item{level}{A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
-level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets} for supported
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets()} for supported
 options by dataset.}
 
-\item{totals}{Logical, defaults to \code{FALSE}. If `TRUE``, returns totalled
+\item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.}
 
-\item{localise}{Logical, defaults to \code{TRUE}. Should region names be
-localised.}
+\item{localise}{Logical, defaults to TRUE. Should region names be localised.}
 
 \item{steps}{Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.}
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object rather than a tibble or a list of tibbles.
+\code{DataClass} object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{regions}{A character vector of target regions to be assigned to the
+\code{target_regions} field and used to filter the returned data.}
 
 \item{include_level_2_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Boolean. If TRUE, returns data stratified by
 level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
@@ -51,7 +54,7 @@ and the Level 1 data will be returned.}
 
 \item{localise_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, defaults to TRUE. Should region names be localised.}
 
-\item{...}{additional arguments to pass to country specific functionality.}
+\item{...}{Additional arguments to pass to class specific functionality.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,
@@ -59,7 +62,7 @@ recoveries and testing stratified by regions within the given country.
 }
 \description{
 Downloads, cleans and processes regional data
-for Covid-19.
+for COVID-19.
 }
 \examples{
 \dontrun{

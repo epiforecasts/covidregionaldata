@@ -2,9 +2,9 @@ source("custom_tests/regional-dataset-specific.R")
 
 expect_clean_cols <- function(data, level) {
   expect_s3_class(data[["date"]], "Date")
-  expect_type(data[["region_level_1"]], "character")
+  expect_type(data[["level_1_region"]], "character")
   if (level == "2") {
-    expect_type(data[["region_level_2"]], "character")
+    expect_type(data[["level_2_region"]], "character")
   }
 }
 
@@ -15,11 +15,37 @@ expect_processed_cols <- function(data, level, localised = TRUE) {
   expect_type(data[["deaths_new"]], "double")
   expect_type(data[["deaths_total"]], "double")
   if (!localised) {
-    expect_type(data[["region_level_1"]], "character")
+    expect_type(data[["level_1_region"]], "character")
     if (level == "2") {
-      expect_type(data[["region_level_2"]], "character")
+      expect_type(data[["level_2_region"]], "character")
     }
   }
+}
+
+expect_columns_contain_data <- function(data_name, region) {
+  cols_present <- function(col) {
+    if (length(region$source_data_cols[grep(
+      col, tolower(region$source_data_cols)
+    )]) > 0) {
+      return(paste0(col, c("_new", "_total")))
+    } else {
+      return(NULL)
+    }
+  }
+  cols <- c("cases", "deaths", "recovered", "test")
+  cols2check <- purrr::map(cols, cols_present)
+  cols2check <- unlist(cols2check)
+  purrr::walk(
+    cols2check,
+    ~ {
+      test_that(
+        paste0(data_name, "column '", .x, "' is not just composed of NA"),
+        {
+          expect_true(nrow(region$data$processed %>% filter(!is.na(!!.x))) > 0)
+        }
+      )
+    }
+  )
 }
 
 test_regional_dataset <- function(source, level, download = FALSE) {
@@ -48,7 +74,7 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     })
     region$data$raw <- purrr::map(region$data$raw,
       dplyr::slice_tail,
-      n = 1000
+      n = 250
     )
     saveRDS(region$data$raw, raw_path)
   } else {
@@ -88,6 +114,8 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       expect_true(ncol(returned) >= 2)
     }
   })
+
+  expect_columns_contain_data(data_name, region)
 
   custom_test <- paste0("test_", source, "_level_", level)
   if (!exists(custom_test)) {

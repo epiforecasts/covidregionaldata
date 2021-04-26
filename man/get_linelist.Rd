@@ -2,9 +2,9 @@
 % Please edit documentation in R/get_linelist.R
 \name{get_linelist}
 \alias{get_linelist}
-\title{Get patient linelist data}
+\title{Get patient line list data}
 \source{
-https://github.com/beoutbreakprepared/nCoV2019
+\url{https://github.com/beoutbreakprepared/nCoV2019}
 }
 \usage{
 get_linelist(clean = TRUE, report_delay_only = FALSE)
@@ -18,16 +18,16 @@ Should only certain variables (id, country, onset date, days' delay),
 and observations (patients with a report delay) be returned}
 }
 \value{
-A linelist of reported cases of Covid-19
+A line list of reported cases of COVID-19
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Provides a public international patient linelist from January 2020 to June
+Provides a public international patient line list from January 2020 to June
 2020.
 
-This version of the linelist has stopped updating. The new version of the
-linelist is free but requires a login.
+This version of the line list has stopped updating. The new version of the
+line list is free but requires a login.
 
 See: https://global.health/
 }
@@ -39,8 +39,6 @@ get_linelist()
 # Return the report delay only
 get_linelist(report_delay_only = TRUE)
 }
-}
-\author{
-Sam Abbott \href{mailto:sam.abbott@lshtm.ac.uk}{sam.abbott@lshtm.ac.uk}
+
 }
 \keyword{internal}

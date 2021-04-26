@@ -4,33 +4,34 @@
 \alias{Italy}
 \title{Italy Class for downloading, cleaning and processing notification data}
 \source{
-https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv  # nolint
+\url{https://github.com/pcm-dpc/COVID-19/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Italy.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Italy.
 }
 \examples{
 \dontrun{
-region <- Italy$new(verbose = TRUE, steps = TRUE)
-region$download()
-region$clean()
-region$process()
+region <- Italy$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Italy}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name.}
+\item{\code{origin}}{name of origin to fetch data for}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
+\item{\code{supported_levels}}{A list of supported levels.}
+
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
+
+\item{\code{common_data_urls}}{List of named links to raw data. The first, and
 only entry, is be named main.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
@@ -40,47 +41,44 @@ only entry, is be named main.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-clean}{\code{Italy$clean()}}
-\item \href{#method-new}{\code{Italy$new()}}
+\item \href{#method-set_region_codes}{\code{Italy$set_region_codes()}}
+\item \href{#method-clean_common}{\code{Italy$clean_common()}}
 \item \href{#method-clone}{\code{Italy$clone()}}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
-Italy specific state level data cleaning
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Set up a table of region codes for clean data
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Italy$clean()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Italy$set_region_codes()}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the country
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
+State level data cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Italy$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Italy$clean_common()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{The args passed by \link{general_init}}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

@@ -4,36 +4,47 @@
 \alias{Mexico}
 \title{Meixco Class for downloading, cleaning and processing notification data}
 \source{
-https://datos.covid-19.conacyt.mx/#DownZCSV
+\url{https://datos.covid-19.conacyt.mx/}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for Mexico.
-}
-\details{
-Inherits from \code{DataClass}
+Information for downloading, cleaning
+and processing COVID-19 region data for Mexico.
+
+Notes on region codes:
+
+Level 1 codes = ISO-3166-2,
+source: https://en.wikipedia.org/wiki/ISO_3166-2:MX
+
+Level 2 codes = INEGI Mexican official statistics geocoding,
+source: raw data
+
+Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes
 }
 \examples{
 \dontrun{
-region <- Mexico$new(verbose = TRUE, steps = TRUE)
-region$download()
-region$clean()
-region$process()
+region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\concept{dataset}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Mexico}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{level_1_region}}{the level 1 region name}
+\item{\code{origin}}{name of origin to fetch data for}
 
-\item{\code{level_2_region}}{the level 2 region name.}
+\item{\code{supported_levels}}{A list of supported levels.}
 
-\item{\code{data_url}}{List of named links to raw data. The first, and
-only entry, is be named main.}
+\item{\code{supported_region_names}}{A list of region names in order of level.}
+
+\item{\code{supported_region_codes}}{A list of region codes in order of level.}
+
+\item{\code{common_data_urls}}{List of named links to raw data.}
+
+\item{\code{level_data_urls}}{List of named links to raw data that are level
+specific.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 }
@@ -42,29 +53,43 @@ only entry, is be named main.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-set_region_codes}{\code{Mexico$set_region_codes()}}
 \item \href{#method-download}{\code{Mexico$download()}}
-\item \href{#method-clean}{\code{Mexico$clean()}}
+\item \href{#method-clean_common}{\code{Mexico$clean_common()}}
 \item \href{#method-clean_level_1}{\code{Mexico$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Mexico$clean_level_2()}}
-\item \href{#method-new}{\code{Mexico$new()}}
 \item \href{#method-clone}{\code{Mexico$clone()}}
 }
 }
 \if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
+\out{<details ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-get_region_codes}{\code{covidregionaldata::DataClass$get_region_codes()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_region_codes"></a>}}
+\if{latex}{\out{\hypertarget{method-set_region_codes}{}}}
+\subsection{Method \code{set_region_codes()}}{
+Set up a table of region codes for clean data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$set_region_codes()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-Data download function for Mexico data. This replaces the
-generic download function in \code{DataClass}. To get the latest data
+Data \code{download()} function for Mexico data. This replaces
+the generic download function in \code{\link[=DataClass]{DataClass()}}. To get the latest data
 use a PHP script from the website.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$download()}\if{html}{\out{</div>}}
@@ -72,13 +97,12 @@ use a PHP script from the website.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean"></a>}}
-\if{latex}{\out{\hypertarget{method-clean}{}}}
-\subsection{Method \code{clean()}}{
-directs to either level 1 or level 2 processing based on
-request.
+\if{html}{\out{<a id="method-clean_common"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_common}{}}}
+\subsection{Method \code{clean_common()}}{
+Common Data Cleaning
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_common()}\if{html}{\out{</div>}}
 }
 
 }
@@ -86,7 +110,7 @@ request.
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-Mexico Specific Estados Level Data Cleaning
+Estados Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -96,28 +120,11 @@ Mexico Specific Estados Level Data Cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-Mexico Specific Municipality Level Data Cleaning
+Municipality Level Data Cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Mexico$clean_level_2()}\if{html}{\out{</div>}}
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the country
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Mexico$new(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{The args passed by \link{general_init}}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

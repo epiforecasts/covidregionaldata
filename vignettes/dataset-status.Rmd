@@ -1,0 +1,40 @@
+---
+title: "Dataset status"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dataset status}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transcient issues may affect our testing of datasets and so our checks may occassionally show a spurious failure. 
+
+```{r, include = FALSE}
+library(covidregionaldata)
+library(dplyr)
+library(knitr)
+```
+
+```{r, echo = FALSE}
+datasets <- get_available_datasets() %>%
+  arrange(origin) %>%
+  select(Origin = origin, Method = class) %>%
+  mutate(
+    `GitHub status` = paste0(
+      "[![", Method,
+      "](https://github.com/epiforecasts/covidregionaldata/workflows/",
+      Method, "/badge.svg)]",
+      "(https://github.com/epiforecasts/covidregionaldata/actions/workflows/", # nolint
+      Method, ".yaml)"
+    ),
+    `CRAN status` = "*working*"
+  )
+kable(datasets)
+```
