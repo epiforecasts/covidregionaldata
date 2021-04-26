@@ -56,7 +56,7 @@ library(scales)
 
 ### Setup data caching
 
-This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will the temporary directory by default),
+This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),
 
 ```{r}
 start_using_memoise()
