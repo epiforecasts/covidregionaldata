@@ -4,7 +4,7 @@
 \alias{Lithuania}
 \title{Lithuania Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
+\url{https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 }
 \description{
 Information for downloading, cleaning
@@ -137,7 +137,7 @@ region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 

@@ -9,10 +9,15 @@ replacePublicR6Method <- function(r6Instance, fName, fun) {
 
 dummy_class <- function(class) {
   class$download()
-  class$data$raw <- purrr::map(class$data$raw, ~ dplyr::slice_tail(., n = 1000))
+  class$data$raw <- purrr::map(class$data$raw, ~ dplyr::slice_tail(., n = 250))
+  class$data$raw <- purrr::map(class$data$raw, ~ .[, 1:min(20, ncol(.))])
   class$clean()
+  class$data$clean <- dplyr::slice_tail(class$data$clean, n = 250)
   class$process()
   replacePublicR6Method(class, "download", function() {
+    return(invisible(NULL))
+  })
+  replacePublicR6Method(class, "clean", function() {
     return(invisible(NULL))
   })
   class$verbose <- FALSE

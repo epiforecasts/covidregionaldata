@@ -13,6 +13,6 @@ test_that("CountryDataClass specific filter method works correctly", {
   c <- C$new(verbose = FALSE)
   suppressMessages(c$get())
   expect_error(c$filter("madeupland"))
-  expect_error(c$filter("zambia"), NA)
-  expect_error(c$filter("Zambia"), NA)
+  expect_error(c$filter("zimbabwe"), NA)
+  expect_error(c$filter("Zimbabwe"), NA)
 })

@@ -37,13 +37,13 @@ navbar:
 
 reference:
   - title: Get Covid-19 Data
-    desc: Functions that provide interfaces to download cleaned and processed datasets.
+    desc: Functions that provide interfaces to download cleaned and processed datasets. Internally these functions call the classes documented below and so optional class specific arguments can also be used.
     contents:
       - get_national_data
       - get_regional_data
       - initialise_dataclass
   - title: Dataset Classes
-    desc: Clases that define individual datasets and contain all the methods needed to download, process, and clean them.
+    desc: Classes that define individual datasets and contain all the methods needed to download, process, and clean them.
     contents:
       - has_concept("dataset")
   - title: Utilities

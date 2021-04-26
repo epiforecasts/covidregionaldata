@@ -26,8 +26,8 @@ Mexico <- R6::R6Class("Mexico",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "Mexico",
+    #' @field origin name of origin to fetch data for
+    origin = "Mexico",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
@@ -173,8 +173,10 @@ Mexico <- R6::R6Class("Mexico",
     #'
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
-        rename(level_2_region = .data$nombre,
-               level_2_region_code = cve_ent) %>%
+        rename(
+          level_2_region = .data$nombre,
+          level_2_region_code = cve_ent
+        ) %>%
         mutate(date = dmy(.data$date)) %>%
         left_join(self$codes_lookup[["2"]],
           by = c("level_2_region_code", "level_2_region")

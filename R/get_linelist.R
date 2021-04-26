@@ -1,13 +1,13 @@
-#' Get patient linelist data
+#' Get patient line list data
 #'
 #' @description
 #'  `r lifecycle::badge("deprecated")`
 #'
-#'  Provides a public international patient linelist from January 2020 to June
+#'  Provides a public international patient line list from January 2020 to June
 #'  2020.
 #'
-#'  This version of the linelist has stopped updating. The new version of the
-#'  linelist is free but requires a login.
+#'  This version of the line list has stopped updating. The new version of the
+#'  line list is free but requires a login.
 #'
 #'  See: https://global.health/
 #'
@@ -16,7 +16,7 @@
 #' @param report_delay_only Logical, defaults to `FALSE`.
 #'  Should only certain variables (id, country, onset date, days' delay),
 #'  and observations (patients with a report delay) be returned
-#' @return A linelist of reported cases of COVID-19
+#' @return A line list of reported cases of COVID-19
 #' @source \url{https://github.com/beoutbreakprepared/nCoV2019}
 #'
 #' @keywords internal
@@ -41,7 +41,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
     what = "covidregionaldata::get_linelist()",
     details = c(
       "Linelist no longer accessible through this package.",
-      "The linelist is now hosted at: https://global.health/"
+      "The line list is now hosted at: https://global.health/"
     )
   )
 
@@ -113,7 +113,7 @@ get_linelist <- function(clean = TRUE, report_delay_only = FALSE) {
       )
   }
 
-  message("Note: This linelist covers January to June 2020. We will update when a new data source becomes available.")
+  message("Note: This line list covers January to June 2020. We will update when a new data source becomes available.")
 
   return(linelist)
 }

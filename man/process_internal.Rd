@@ -14,7 +14,7 @@ process_internal(
 )
 }
 \arguments{
-\item{clean_data}{The clean data for a country, e.g. \code{Italy$data$clean}}
+\item{clean_data}{The clean data for a class, e.g. \code{Italy$data$clean}}
 
 \item{level}{The level of the data, e.g. 'level_1_region'}
 

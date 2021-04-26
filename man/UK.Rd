@@ -11,10 +11,10 @@ data.}
 }
 \description{
 Extracts daily COVID-19 data for the UK, stratified by region
-and nation. Contains additional options to other country class objects,
-including options to return subnational English regions using NHS region
-boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
-download from (release_date) and a geographical resolution (resolution).
+and nation. Additional options for this class are: to return subnational
+English regions using NHS region boundaries instead of PHE boundaries
+(nhsregions = TRUE), a release date to download from (release_date) and a
+geographical resolution (resolution).
 }
 \examples{
 \dontrun{
@@ -42,7 +42,7 @@ UK$new(
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 

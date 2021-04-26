@@ -1,3 +1,4 @@
+source("functions/test_initialise.R")
 test_get_national_data <- function(source) {
   test_that(paste0("get_national_data returns ", source, " data"), {
     national <- readRDS(paste0("custom_data/", source, ".rds"))
@@ -7,28 +8,18 @@ test_get_national_data <- function(source) {
     true_steps <- true_R6$return()
     mockery::stub(
       get_national_data, "initialise_dataclass",
-      function(class, level, totals, localise,
-               verbose, steps, regions) {
-        class <- national$clone()
-        class$verbose <- verbose
-        class$steps <- steps
-        class$totals <- totals
-        if (!missing(regions)) {
-          class$target_regions <- regions
-        }
-        return(class)
-      }
+      test_initialise(class = national)
     )
     d <- get_national_data(
-      countries = "Zambia", source = source,
+      countries = "Zimbabwe", source = source,
       verbose = FALSE
     )
     p <- get_national_data(
-      countries = "zambia", source = source,
+      countries = "zimbabwe", source = source,
       verbose = FALSE
     )
     expect_s3_class(d, "data.frame")
-    expect_true(all(d$country == "Zambia"))
+    expect_true(all(d$country == "Zimbabwe"))
     expect_true(sum(as.numeric(d$cases_new) < 0, na.rm = TRUE) == 0)
     expect_equal(d, p)
     expect_error(get_national_data(
@@ -36,7 +27,7 @@ test_get_national_data <- function(source) {
       verbose = FALSE
     ))
     expect_warning(get_national_data(
-      country = "Zambia", source = source,
+      country = "Zimbabwe", source = source,
       verbose = FALSE
     ))
     expect_equal(
