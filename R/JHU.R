@@ -18,8 +18,8 @@ JHU <- R6::R6Class("JHU", # rename to country name
   public = list(
 
     # Core Attributes (amend each paramater for country specific infomation)
-    #' @field country name of country to fetch data for
-    country = "John Hopkins University (JHU)",
+    #' @field origin name of country to fetch data for
+    origin = "John Hopkins University (JHU)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
