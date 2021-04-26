@@ -128,10 +128,10 @@
 <div id="setup-data-caching" class="section level3">
 <h3 class="hasAnchor">
 <a href="#setup-data-caching" class="anchor" aria-hidden="true"></a>Setup data caching</h3>
-<p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will the temporary directory by default),</p>
+<p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /var/folders/yl/vwcpf66n49jc7shvv7p72jh80000gr/T//Rtmpe8Mric</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /var/folders/yl/vwcpf66n49jc7shvv7p72jh80000gr/T//Rtmp0DJBfK</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -146,7 +146,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 112,937</span>
+<span class="co">#&gt; Rows: 113,523</span>
 <span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
@@ -158,7 +158,7 @@
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 113,048 x 15</span>
+<span class="co">#&gt; # A tibble: 113,523 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -171,7 +171,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 113,038 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 113,513 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -201,7 +201,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 5,850 x 26</span>
+<span class="co">#&gt; # A tibble: 5,876 x 26</span>
 <span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
@@ -214,7 +214,7 @@
 <span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
 <span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
 <span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 5,840 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 5,866 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
