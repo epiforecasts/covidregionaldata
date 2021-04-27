@@ -97,7 +97,7 @@ JHU <- R6::R6Class("JHU", # rename to country name
     },
 
     #' @description JHU specific country level data cleaning
-    #' @importFrom dplyr select summarise group_by
+    #' @importFrom dplyr select summarise group_by across
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
@@ -122,42 +122,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$level_2_region_code, .data$level_2_region,
           .data$cases_total, deaths_total, .data$recovered_total
         )
-    },
-
-    #' @description Specific return settings for the JHU dataset.
-    #' @importFrom dplyr group_by ungroup select arrange
-    #' @importFrom tidyr fill
-    return = function() {
-      self$data$return <- self$data$processed
-      if (!self$totals) {
-        if (self$level == "1") {
-          self$data$return <- self$data$return %>%
-            select(
-              .data$date, .data$iso_3166_1_alpha_3, .data$country,
-              .data$cases_new, .data$cases_total,
-              .data$deaths_new, .data$deaths_total, .data$recovered_new,
-              .data$recovered_total, .data$hosp_new, .data$hosp_total,
-              .data$tested_new, .data$tested_total
-            ) %>%
-            arrange(.data$date, .data$country)
-        } else if (self$level == "2") {
-          self$data$return <- self$data$return %>%
-            select(
-              .data$date, .data$iso_3166_1_alpha_3, .data$country,
-              .data$iso_code, .data$region, .data$cases_new, .data$cases_total,
-              .data$deaths_new, .data$deaths_total, .data$recovered_new,
-              .data$recovered_total, .data$hosp_new, .data$hosp_total,
-              .data$tested_new, .data$tested_total
-            ) %>%
-            arrange(.data$date, .data$country)
-        }
-      }
-
-      if (self$steps) {
-        return(self$data)
-      } else {
-        return(self$data$return)
-      }
     }
   )
 )

@@ -33,7 +33,8 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
   if (is_present(country)) {
     deprecate_warn(
       "0.9.0",
-      "covidregionaldata::get_national_data(country = )", "covidregionaldata::get_national_data(countries = )"
+      "covidregionaldata::get_national_data(country = )",
+      "covidregionaldata::get_national_data(countries = )"
     )
     countries <- country
   }

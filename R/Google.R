@@ -1,6 +1,6 @@
 #' R6 Class containing specific attributes and methods for Google data
 #'
-#' @description Google data specific information for downloading, cleaning
+#' @description Google specific information for downloading, cleaning
 #'  and processing covid-19 region data for an example Country.
 #'
 #' @source \url{https://github.com/GoogleCloudPlatform/covid-19-open-data}
@@ -8,22 +8,26 @@
 #' @concept dataset
 #' @examples
 #' \dontrun{
-#' region <- GoogleData$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' region <- Google$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-GoogleData <- R6::R6Class("GoogleData",
-  inherit = DataClass,
+Google <- R6::R6Class("Google",
+  inherit = CountryDataClass,
   public = list(
 
     #' @field origin name of country to fetch data for
-    origin = "Google Data",
+    origin = "Google",
     #' @field supported_levels A list of supported levels.
-    supported_levels = list("1", "2"),
+    supported_levels = list("1", "2", "3"),
     #' @field supported_region_names A list of region names in order of level.
-    supported_region_names = list("1" = "country", "2" = "subregion"),
+    supported_region_names = list(
+      "1" = "country",
+      "2" = "subregion",
+      "3" = "subregion2"
+    ),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list(
-      "1" = "iso_3166_1_alpha_3", "2" = "iso_code"
+      "1" = "iso_3166_1_alpha_3", "2" = "iso_code", "3" = "subregion2_code"
     ),
     #' @field common_data_urls List of named links to raw data.
     # nolint start
@@ -68,6 +72,8 @@ GoogleData <- R6::R6Class("GoogleData",
           .data$country_name,
           .data$subregion1_code,
           .data$subregion1_name,
+          .data$subregion2_code,
+          .data$subregion2_name,
           .data$new_confirmed,
           .data$total_confirmed,
           .data$new_deceased,
@@ -93,10 +99,12 @@ GoogleData <- R6::R6Class("GoogleData",
           total_hospitalized = as.numeric(.data$total_hospitalized)
         ) %>%
         rename(
-          level_1_region = .data$country_name,
           level_1_region_code = .data$`3166-1-alpha-3`,
+          level_1_region = .data$country_name,
           level_2_region_code = .data$subregion1_code,
           level_2_region = .data$subregion1_name,
+          level_3_region_code = .data$subregion2_code,
+          level_3_region = .data$subregion2_name,
           cases_new = .data$new_confirmed,
           cases_total = .data$total_confirmed,
           deaths_new = .data$new_deaths,
@@ -116,8 +124,8 @@ GoogleData <- R6::R6Class("GoogleData",
         )
     },
 
-    #' @description JHU specific country level data cleaning
-    #' @importFrom dplyr select summarise group_by
+    #' @description Google specific subregion level data cleaning
+    #' @importFrom dplyr select summarise group_by across
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
@@ -137,34 +145,26 @@ GoogleData <- R6::R6Class("GoogleData",
         summarise(across(where(is.double), sum))
     },
 
-    #' @description Specific return settings for the JHU dataset.
-    #' @importFrom dplyr group_by ungroup select arrange
-    #' @importFrom tidyr fill
-    return = function() {
-      self$data$return <- self$data$processed
-      if (!self$totals) {
-        if (self$level == "1") {
-          self$data$return <- self$data$return %>%
-            select(
-              .data$date, .data$iso_3166_1_alpha_3, .data$country,
-              .data$cases_new, .data$cases_total,
-              .data$deaths_new, .data$deaths_total, .data$recovered_new,
-              .data$recovered_total, .data$hosp_new, .data$hosp_total,
-              .data$tested_new, .data$tested_total
-            ) %>%
-            arrange(.data$date, .data$country)
-        } else if (self$level == "2") {
-          self$data$return <- self$data$return %>%
-            select(
-              .data$date, .data$iso_3166_1_alpha_3, .data$country,
-              .data$iso_code, .data$subregion, .data$cases_new,
-              .data$cases_total, .data$deaths_new, .data$deaths_total,
-              .data$recovered_new, .data$recovered_total, .data$hosp_new,
-              .data$hosp_total, .data$tested_new, .data$tested_total
-            ) %>%
-            arrange(.data$date, .data$country)
-        }
-      }
+    #' @description JHU specific subregion2 level data cleaning
+    #' @importFrom dplyr select summarise group_by across
+    #' @importFrom rlang .data
+    clean_level_2 = function() {
+      self$data$clean <- self$data$clean %>%
+        select(
+          .data$date,
+          .data$level_1_region_code, .data$level_1_region,
+          .data$level_2_region_code, .data$level_2_region,
+          .data$cases_new, .data$cases_total,
+          .data$deaths_new, .data$deaths_total,
+          .data$tested_new, .data$tested_total,
+          .data$recovered_new, .data$recovered_total,
+          .data$hosp_new, .data$hosp_total
+        ) %>%
+        group_by(
+          .data$date, .data$level_1_region_code, .data$level_1_region,
+          .data$level_2_region_code, .data$level_2_region
+        ) %>%
+        summarise(across(where(is.double), sum))
     }
   )
 )

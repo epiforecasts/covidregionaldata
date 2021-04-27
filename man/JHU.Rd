@@ -46,7 +46,6 @@ only entry, is be named main.}
 \item \href{#method-clean_common}{\code{JHU$clean_common()}}
 \item \href{#method-clean_level_1}{\code{JHU$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{JHU$clean_level_2()}}
-\item \href{#method-return}{\code{JHU$return()}}
 \item \href{#method-clone}{\code{JHU$clone()}}
 }
 }
@@ -58,6 +57,7 @@ only entry, is be named main.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
 }
@@ -100,16 +100,6 @@ JHU specific country level data cleaning
 JHU specific state level data cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$clean_level_2()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-return"></a>}}
-\if{latex}{\out{\hypertarget{method-return}{}}}
-\subsection{Method \code{return()}}{
-Specific return settings for the JHU dataset.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{JHU$return()}\if{html}{\out{</div>}}
 }
 
 }
