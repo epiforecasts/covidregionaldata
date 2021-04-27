@@ -76,6 +76,7 @@ Linelist
 linelists
 ltla
 magrittr
+md
 Meakin
 Meixco
 memoise
@@ -88,9 +89,11 @@ nhsregions
 Nikos
 occassionally
 ONS
+openjournals
 org
 Organisation
 OSP
+Pandoc
 paulcampbell
 PHE
 PRs
@@ -98,6 +101,7 @@ quickstart
 Rdev
 regioni
 reparameterise
+repo
 SARS
 savivaldybe
 SciELOPreprints
@@ -115,6 +119,7 @@ tibble
 tibbles
 toolset
 transcient
+ubuntu
 uk
 urls
 useMemoise
