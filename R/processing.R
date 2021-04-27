@@ -161,20 +161,30 @@ totalise_data <- function(data) {
   return(data)
 }
 
-#' Get totals data given the time series data.
+#' Runs through processing steps dynamically
 #'
-#' @description Get totals data given the time series data.
+#' @description Runs the processing steps in turn:
+#' calculate_columns_from_existing_data, add_extra_na_cols,
+#' set_negative_values_to_zero. The function constructs the pipe for these
+#' methods dynamically from the argument process_arguments.
 #' @param data A data table
 #' @param process_options list of options for processing
 #' @importFrom purrr walk
 run_process_steps <- function(data, process_options) {
   . <- NULL
   popt <- names(which(unlist(process_options)))
-  data <- data %>%
-    do(get(popt[1])(.)) %>%
-    get(popt[2])() %>%
-    get(popt[3])()
-  return(data)
+  if (length(popt) < 1) {
+    return(data)
+  } else {
+    popt <- paste0(popt, "()")
+    if ("calculate_columns_from_existing_data()" %in% popt) {
+      popt[1] <- paste0("do(", gsub("()", "(.)", popt[1], fixed = TRUE), ")")
+    }
+    expr <- paste(". %>%", paste(popt, collapse = " %>% "))
+    action <- eval(parse(text = expr))
+    data <- data %>% action()
+    return(data)
+  }
 }
 
 #' Internal Shared Regional Dataset Processing

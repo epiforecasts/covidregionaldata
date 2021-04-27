@@ -1,6 +1,51 @@
 # Load mock data functions
 source("custom_tests/mock_data.R")
 
+test_that("run_process_steps calles the correct functions", {
+  mockery::stub(
+    run_process_steps,
+    "calculate_columns_from_existing_data",
+    function(x) x + 1,
+  )
+  mockery::stub(
+    run_process_steps,
+    "add_extra_na_cols",
+    function(x) x + 2,
+  )
+  mockery::stub(
+    run_process_steps,
+    "set_negative_values_to_zero",
+    function(x) x + 3,
+  )
+  process_options <- list(
+    "calculate_columns_from_existing_data" = TRUE,
+    "add_extra_na_cols" = TRUE,
+    "set_negative_values_to_zero" = TRUE
+  )
+  x <- tibble::tibble("A" = c(1, 2, 3))
+  act <- tibble::tibble("A" = c(7, 8, 9))$A
+  expected <- run_process_steps(x, process_options)$A
+  expect_identical(expected, act)
+  process_options <- list(
+    "calculate_columns_from_existing_data" = TRUE,
+    "add_extra_na_cols" = TRUE,
+    "set_negative_values_to_zero" = FALSE
+  )
+  x <- tibble::tibble("A" = c(1, 2, 3))
+  act <- tibble::tibble("A" = c(4, 5, 6))$A
+  expected <- run_process_steps(x, process_options)$A
+  expect_identical(expected, act)
+  process_options <- list(
+    "calculate_columns_from_existing_data" = FALSE,
+    "add_extra_na_cols" = FALSE,
+    "set_negative_values_to_zero" = FALSE
+  )
+  x <- tibble::tibble("A" = c(1, 2, 3))
+  act <- tibble::tibble("A" = c(1, 2, 3))$A
+  expected <- run_process_steps(x, process_options)$A
+  expect_identical(expected, act)
+})
+
 test_that("calculate_columns_from_existing_data returns correct results", {
   input_data <- tibble::tibble(
     "date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),

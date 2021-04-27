@@ -2,7 +2,7 @@
 % Please edit documentation in R/processing.R
 \name{run_process_steps}
 \alias{run_process_steps}
-\title{Get totals data given the time series data.}
+\title{Runs through processing steps dynamically}
 \usage{
 run_process_steps(data, process_options)
 }
@@ -12,5 +12,8 @@ run_process_steps(data, process_options)
 \item{process_options}{list of options for processing}
 }
 \description{
-Get totals data given the time series data.
+Runs the processing steps in turn:
+calculate_columns_from_existing_data, add_extra_na_cols,
+set_negative_values_to_zero. The function constructs the pipe for these
+methods dynamically from the argument process_arguments.
 }
