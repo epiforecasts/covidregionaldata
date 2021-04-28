@@ -182,51 +182,51 @@ data is available for</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># see all available datasets</span>
 <span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 7</span><span>
+</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 7</span>
 #&gt;    origin  class  level_1_region level_2_region type  data_urls source_data_cols
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Belgium Belgi… region         province       regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Brazil  Brazil state          city           regi… https://… cases_total, de…
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Canada  Canada province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, case…
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Colomb… Colom… departamento   </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total     
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Cuba    Cuba   provincia      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new       
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Europe… ECDC   country        </span><span style='color: #BB0000;'>NA</span><span>             nati… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> France  France region         department     regi… https://… cases_new, test…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Germany Germa… bundesland     landkreis      regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> India   India  state          </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Italy   Italy  regioni        </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total, de…
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> Lithua… Lithu… county         municipality   regi… https://… cases_new, test…
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> Mexico  Mexico estado         municipio      regi… Download… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> South … South… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> United… UK     region         authority      regi… https://… newCasesBySpeci…
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span> United… USA    state          county         regi… https://… cases_total, de…
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span> World … WHO    country        </span><span style='color: #BB0000;'>NA</span><span>             nati… https://… cases_new, case…</div><div class='input'>
+#&gt;    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> Belgium Belgi… region         province       regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> Brazil  Brazil state          city           regi… https://… cases_total, de…</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> Canada  Canada province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, case…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> Colomb… Colom… departamento   </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total     </span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> Cuba    Cuba   provincia      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new       </span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> Europe… ECDC   country        </span><span style='color: #BB0000;'>NA</span><span>             nati… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> France  France region         department     regi… https://… cases_new, test…</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> Germany Germa… bundesland     landkreis      regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> India   India  state          </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> Italy   Italy  regioni        </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total, de…</span>
+#&gt; <span style='color: #BCBCBC;'>11</span><span> Lithua… Lithu… county         municipality   regi… https://… cases_new, test…</span>
+#&gt; <span style='color: #BCBCBC;'>12</span><span> Mexico  Mexico estado         municipio      regi… Download… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>13</span><span> South … South… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>14</span><span> United… UK     region         authority      regi… https://… newCasesBySpeci…</span>
+#&gt; <span style='color: #BCBCBC;'>15</span><span> United… USA    state          county         regi… https://… cases_total, de…</span>
+#&gt; <span style='color: #BCBCBC;'>16</span><span> World … WHO    country        </span><span style='color: #BB0000;'>NA</span><span>             nati… https://… cases_new, case…</span></div><div class='input'>
 <span class='co'># see only national level datasets</span>
 <span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='st'>"national"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 7</span><span>
+</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 7</span>
 #&gt;   origin  class level_1_region level_2_region type   data_urls  source_data_cols
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Europe… ECDC  country        </span><span style='color: #BB0000;'>NA</span><span>             natio… https://o… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> World … WHO   country        </span><span style='color: #BB0000;'>NA</span><span>             natio… https://c… cases_new, case…</div><div class='input'>
+#&gt;   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span>
+#&gt; <span style='color: #BCBCBC;'>1</span><span> Europe… ECDC  country        </span><span style='color: #BB0000;'>NA</span><span>             natio… https://o… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>2</span><span> World … WHO   country        </span><span style='color: #BB0000;'>NA</span><span>             natio… https://c… cases_new, case…</span></div><div class='input'>
 <span class='co'># see only regional level datasets</span>
 <span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='st'>"regional"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 14 x 7</span><span>
+</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 14 x 7</span>
 #&gt;    origin  class  level_1_region level_2_region type  data_urls source_data_cols
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Belgium Belgi… region         province       regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Brazil  Brazil state          city           regi… https://… cases_total, de…
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Canada  Canada province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, case…
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Colomb… Colom… departamento   </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total     
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Cuba    Cuba   provincia      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new       
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> France  France region         department     regi… https://… cases_new, test…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Germany Germa… bundesland     landkreis      regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> India   India  state          </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Italy   Italy  regioni        </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total, de…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Lithua… Lithu… county         municipality   regi… https://… cases_new, test…
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> Mexico  Mexico estado         municipio      regi… Download… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> South … South… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> United… UK     region         authority      regi… https://… newCasesBySpeci…
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> United… USA    state          county         regi… https://… cases_total, de…</div></span></pre>
+#&gt;    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span>
+#&gt; <span style='color: #BCBCBC;'> 1</span><span> Belgium Belgi… region         province       regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span><span> Brazil  Brazil state          city           regi… https://… cases_total, de…</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span><span> Canada  Canada province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, case…</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span><span> Colomb… Colom… departamento   </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total     </span>
+#&gt; <span style='color: #BCBCBC;'> 5</span><span> Cuba    Cuba   provincia      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new       </span>
+#&gt; <span style='color: #BCBCBC;'> 6</span><span> France  France region         department     regi… https://… cases_new, test…</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span><span> Germany Germa… bundesland     landkreis      regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span><span> India   India  state          </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span><span> Italy   Italy  regioni        </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_total, de…</span>
+#&gt; <span style='color: #BCBCBC;'>10</span><span> Lithua… Lithu… county         municipality   regi… https://… cases_new, test…</span>
+#&gt; <span style='color: #BCBCBC;'>11</span><span> Mexico  Mexico estado         municipio      regi… Download… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>12</span><span> South … South… province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://… cases_new, deat…</span>
+#&gt; <span style='color: #BCBCBC;'>13</span><span> United… UK     region         authority      regi… https://… newCasesBySpeci…</span>
+#&gt; <span style='color: #BCBCBC;'>14</span><span> United… USA    state          county         regi… https://… cases_total, de…</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

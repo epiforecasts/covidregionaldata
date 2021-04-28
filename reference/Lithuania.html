@@ -172,8 +172,8 @@ many data series in their table.</p>
 <p>The following describes the data provided by the OSP.</p><table class='table'>
 <tr><td>field</td><td>description</td></tr>
 <tr><td><code>date</code></td><td>the reporting day during which the events occurred or at the end of which the accounting was performed</td></tr>
-<tr><td><code>municipality_code</code> <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code></td><td>code of the municipality assigned to persons</td></tr>
-<tr><td><code>municipality_name</code> <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code></td><td>the name of the municipality assigned to the persons</td></tr>
+<tr><td><code>municipality_code</code> <code>*</code></td><td>code of the municipality assigned to persons</td></tr>
+<tr><td><code>municipality_name</code> <code>+</code></td><td>the name of the municipality assigned to the persons</td></tr>
 <tr><td><code>population</code></td><td>population size according to the data of the beginning of 2021, according to the declared place of residence</td></tr>
 <tr><td><code>ab_pos_day</code></td><td>Number of positive antibody test responses, days</td></tr>
 <tr><td><code>ab_neg_day</code></td><td>Number of negative antibody test responses, days</td></tr>
@@ -203,17 +203,17 @@ many data series in their table.</p>
 <tr><td><code>dead_cases</code></td><td>The number of dead persons who were ever diagnosed with COVID</td></tr>
 <tr><td><code>recovered_de_jure</code></td><td>Declared number of recovered live persons</td></tr>
 <tr><td><code>recovered_sttstcl</code></td><td>Statistical number of recovered live persons</td></tr>
-<tr><td><code>map_colors</code> <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code></td><td>The map colour-coding for the municipality, based on averages of test positivity and incidence per capita</td></tr>
+<tr><td><code>map_colors</code> <code>$</code></td><td>The map colour-coding for the municipality, based on averages of test positivity and incidence per capita</td></tr>
 </table>
 
 
 
-<p><code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> The <code>municipality_code</code> is discarded since it does not correspond
+<p><code>*</code> The <code>municipality_code</code> is discarded since it does not correspond
 to ISO-3166:2 codes used elsewhere in the package.</p>
-<p><code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> These fields are renamed but returned unmodified.</p>
+<p><code>+</code> These fields are renamed but returned unmodified.</p>
 <p><code>#</code> Lithuania offers counts according to three
 different definitions of whether a death is attributable to COVID-19.</p>
-<p><code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> This field is not recalculated for counties and is deleted.</p>
+<p><code>$</code> This field is not recalculated for counties and is deleted.</p>
     <h2 class="hasAnchor" id="criteria-for-attributing-deaths"><a class="anchor" href="#criteria-for-attributing-deaths"></a>Criteria for attributing deaths</h2>
 
     
