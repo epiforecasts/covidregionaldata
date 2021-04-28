@@ -2,8 +2,12 @@
 % Please edit documentation in R/JHU.R
 \name{JHU}
 \alias{JHU}
-\title{R6 Class containing specific attributes and methods for John Hopkins
-University data}
+\title{R6 Class containing specific attributes and methods for COVID-19 data
+provided by John Hopkins University.and used for the 2019 Novel Coronavirus
+Visual Dashboard opperated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Also,
+Supported by ESRI Living Atlas Team and the Johns Hopkins University
+Applied Physics Lab (JHU APL)}
 \source{
 \url{https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data}
 }
@@ -13,7 +17,9 @@ and processing covid-19 region data for John Hopkins University.
 }
 \examples{
 \dontrun{
-national <- JHU$new(verbose = TRUE, steps = TRUE, get = TRUE)
+national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+national$return()
+national <- JHU$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 }
@@ -76,7 +82,8 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-clean_common"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
-JHU specific data cleaning
+JHU specific data cleaning. Joins the raw data sets, checks
+column types and renames where needed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$clean_common()}\if{html}{\out{</div>}}
 }
@@ -86,7 +93,8 @@ JHU specific data cleaning
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-JHU specific country level data cleaning
+JHU specific country level data cleaning. Aggregates the
+data to the country (level 2) level.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$clean_level_1()}\if{html}{\out{</div>}}
 }

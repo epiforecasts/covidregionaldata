@@ -50,22 +50,12 @@ expect_columns_contain_data <- function(data_name, region) {
 
 test_regional_dataset <- function(source, level, download = FALSE) {
   data_name <- paste0(source, " at level ", level)
-
-  if (level == 3) {
-    region <- eval(parse(
-      text = paste0(
-        source, "$new(level = '", level,
-        "', verbose = FALSE, warn = FALSE)"
-      )
-    ))
-  } else {
-    region <- eval(parse(
-      text = paste0(
-        source, "$new(level = '", level,
-        "', verbose = FALSE)"
-      )
-    ))
-  }
+  region <- eval(parse(
+    text = paste0(
+      source, "$new(level = '", level,
+      "', verbose = FALSE)"
+    )
+  ))
 
   raw_path <- paste0("custom_data/", source, "_level_", level, ".rds")
   if (!file.exists(raw_path)) {

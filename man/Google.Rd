@@ -8,12 +8,26 @@
 }
 \description{
 Google specific information for downloading, cleaning
-and processing covid-19 region data for an example Country.
+and processing covid-19 region data for an example Country. The function
+works the same as other national data sources, however, data from
+Google supports three subregions (country, subregion and subregion2) which
+can be accessed using the 'level' argument. There is also more data
+available, such as hospitalisations data. The raw data comes as three
+seperate data sets, "epidemiology" which is comprised of cases, tests and
+deaths, "index", which holds information about countries linking the other
+data sets, and "hospitalizations" which holds data about number of people
+in hospital, ICU, etc.
 }
 \examples{
 \dontrun{
-region <- Google$new(verbose = TRUE, steps = TRUE, get = TRUE)
-region$return()
+# nolint start
+national <- Google$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+national$return()
+national <- Google$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+national$return()
+national <- Google$new(level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
+national$return()
+# nolint end
 }
 }
 \concept{dataset}
@@ -65,7 +79,9 @@ region$return()
 \if{html}{\out{<a id="method-clean_common"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
-GoogleData specific state level data cleaning
+GoogleData specific subregion2 level data cleaning. This
+takes all the raw data, puts into a single data frame, renames some
+columns and checks types.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Google$clean_common()}\if{html}{\out{</div>}}
 }
@@ -75,7 +91,9 @@ GoogleData specific state level data cleaning
 \if{html}{\out{<a id="method-clean_level_1"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
 \subsection{Method \code{clean_level_1()}}{
-Google specific subregion level data cleaning
+Google specific subregion level data cleaning. Takes the
+data cleaned by \code{clean_common} and aggregates it to the country level
+(level 1).
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Google$clean_level_1()}\if{html}{\out{</div>}}
 }
@@ -85,7 +103,9 @@ Google specific subregion level data cleaning
 \if{html}{\out{<a id="method-clean_level_2"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
 \subsection{Method \code{clean_level_2()}}{
-JHU specific subregion2 level data cleaning
+Google specific subregion2 level data cleaning. Takes the
+data cleaned by \code{clean_common} and aggregates it to the subregion level
+(level 2).
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Google$clean_level_2()}\if{html}{\out{</div>}}
 }
@@ -97,15 +117,12 @@ JHU specific subregion2 level data cleaning
 \subsection{Method \code{new()}}{
 custom initialize for Google
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Google$new(warn = TRUE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Google$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{warn}}{logical Whether or not to display a warning message for
-level 3 data with no regions to filter. Defaults to TRUE}
-
 \item{\code{...}}{arguments to be passed to \code{DataClass} and initialize Google}
 }
 \if{html}{\out{</div>}}

@@ -432,12 +432,12 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
     #' @description Process function for national data sources. Runs
     #' `DataClass` process first before filling `country_info`.
     process = function() {
-      super$process()
       if (!(is.na(self$supported_region_names[["1"]]))) {
         self$country_info <- unique(
           self$data$processed[[self$supported_region_names[["1"]]]]
         )
       }
+      super$process()
     }
   )
 )

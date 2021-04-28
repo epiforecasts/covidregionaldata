@@ -1,5 +1,9 @@
-#' R6 Class containing specific attributes and methods for John Hopkins
-#' University data
+#' R6 Class containing specific attributes and methods for COVID-19 data
+#' provided by John Hopkins University.and used for the 2019 Novel Coronavirus
+#' Visual Dashboard opperated by the Johns Hopkins University
+#' Center for Systems Science and Engineering (JHU CSSE). Also,
+#' Supported by ESRI Living Atlas Team and the Johns Hopkins University
+#' Applied Physics Lab (JHU APL)
 #'
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for John Hopkins University.
@@ -10,7 +14,9 @@
 #' @concept dataset
 #' @examples
 #' \dontrun{
-#' national <- JHU$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+#' national$return()
+#' national <- JHU$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
 #' national$return()
 #' }
 JHU <- R6::R6Class("JHU", # rename to country name
@@ -46,7 +52,8 @@ JHU <- R6::R6Class("JHU", # rename to country name
       self$codes_lookup$`1` <- JHU_codes
     },
 
-    #' @description JHU specific data cleaning
+    #' @description JHU specific data cleaning. Joins the raw data sets, checks
+    #' column types and renames where needed.
     #' @importFrom dplyr last_col bind_rows mutate rename select everything
     #' @importFrom tidyr pivot_longer pivot_wider replace_na
     #' @importFrom lubridate mdy
@@ -61,15 +68,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
       self$data$clean <- self$data$clean %>%
         bind_rows(.id = "variable") %>%
         pivot_wider(names_from = variable, values_from = value) %>%
-        select(
-          .data$Date,
-          .data$`Province/State`,
-          .data$`Country/Region`,
-          .data$daily_confirmed,
-          .data$daily_deaths,
-          .data$daily_recovered,
-          everything()
-        ) %>%
         mutate(
           Date = mdy(.data$Date),
           daily_confirmed = as.numeric(.data$daily_confirmed),
@@ -91,22 +89,18 @@ JHU <- R6::R6Class("JHU", # rename to country name
             level_2_region = "Unknown"
           )
         ) %>%
-        full_join(
+        left_join(
           self$codes_lookup$`1`,
           by = c("level_1_region" = "Country_Region")
         )
     },
 
-    #' @description JHU specific country level data cleaning
+    #' @description JHU specific country level data cleaning. Aggregates the
+    #' data to the country (level 2) level.
     #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
-        select(
-          .data$date, .data$level_1_region_code, .data$level_1_region,
-          .data$cases_total, .data$deaths_total, .data$recovered_total,
-          everything(), -.data$level_2_region_code
-        ) %>%
         group_by(
           .data$date, .data$level_1_region_code,
           .data$level_1_region

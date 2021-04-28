@@ -1,15 +1,29 @@
 #' R6 Class containing specific attributes and methods for Google data
 #'
 #' @description Google specific information for downloading, cleaning
-#'  and processing covid-19 region data for an example Country.
+#'  and processing covid-19 region data for an example Country. The function
+#'  works the same as other national data sources, however, data from
+#'  Google supports three subregions (country, subregion and subregion2) which
+#'  can be accessed using the 'level' argument. There is also more data
+#'  available, such as hospitalisations data. The raw data comes as three
+#'  seperate data sets, "epidemiology" which is comprised of cases, tests and
+#'  deaths, "index", which holds information about countries linking the other
+#'  data sets, and "hospitalizations" which holds data about number of people
+#'  in hospital, ICU, etc.
 #'
 #' @source \url{https://github.com/GoogleCloudPlatform/covid-19-open-data}
 #' @export
 #' @concept dataset
 #' @examples
 #' \dontrun{
-#' region <- Google$new(verbose = TRUE, steps = TRUE, get = TRUE)
-#' region$return()
+#' # nolint start
+#' national <- Google$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+#' national$return()
+#' national <- Google$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' national$return()
+#' national <- Google$new(level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
+#' national$return()
+#' # nolint end
 #' }
 Google <- R6::R6Class("Google",
   inherit = CountryDataClass,
@@ -50,14 +64,16 @@ Google <- R6::R6Class("Google",
     ),
 
 
-    #' @description GoogleData specific state level data cleaning
-    #' @importFrom dplyr full_join select mutate rename everything
+    #' @description GoogleData specific subregion2 level data cleaning. This
+    #' takes all the raw data, puts into a single data frame, renames some
+    #' columns and checks types.
+    #' @importFrom dplyr left_join select mutate rename everything
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
     clean_common = function() {
       self$data$clean <- self$data$raw$epidemiology %>%
-        full_join(
+        left_join(
           self$data$raw$index,
           by = "key"
         )
@@ -84,26 +100,6 @@ Google <- R6::R6Class("Google",
           hosp_new = .data$new_hospitalized,
           hosp_total = .data$total_hospitalized
         ) %>%
-        select(
-          .data$date,
-          .data$level_1_region_code,
-          .data$level_1_region,
-          .data$level_2_region_code,
-          .data$level_2_region,
-          .data$level_3_region_code,
-          .data$level_3_region,
-          .data$cases_new,
-          .data$cases_total,
-          .data$deaths_new,
-          .data$deaths_total,
-          .data$recovered_new,
-          .data$recovered_total,
-          .data$tested_new,
-          .data$tested_total,
-          .data$hosp_new,
-          .data$hosp_total,
-          everything()
-        ) %>%
         mutate(
           date = ymd(.data$date),
           cases_new = as.numeric(.data$cases_new),
@@ -125,21 +121,13 @@ Google <- R6::R6Class("Google",
         )
     },
 
-    #' @description Google specific subregion level data cleaning
+    #' @description Google specific subregion level data cleaning. Takes the
+    #' data cleaned by `clean_common` and aggregates it to the country level
+    #' (level 1).
     #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
-        select(
-          .data$date,
-          .data$level_1_region_code, .data$level_1_region,
-          .data$cases_new, .data$cases_total,
-          .data$deaths_new, .data$deaths_total,
-          .data$tested_new, .data$tested_total,
-          .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total,
-          everything()
-        ) %>%
         group_by(
           .data$date, .data$level_1_region_code,
           .data$level_1_region
@@ -147,22 +135,13 @@ Google <- R6::R6Class("Google",
         summarise(across(where(is.double), sum))
     },
 
-    #' @description JHU specific subregion2 level data cleaning
+    #' @description Google specific subregion2 level data cleaning. Takes the
+    #' data cleaned by `clean_common` and aggregates it to the subregion level
+    #' (level 2).
     #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
-        select(
-          .data$date,
-          .data$level_1_region_code, .data$level_1_region,
-          .data$level_2_region_code, .data$level_2_region,
-          .data$cases_new, .data$cases_total,
-          .data$deaths_new, .data$deaths_total,
-          .data$tested_new, .data$tested_total,
-          .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total,
-          everything()
-        ) %>%
         group_by(
           .data$date, .data$level_1_region_code, .data$level_1_region,
           .data$level_2_region_code, .data$level_2_region
@@ -170,21 +149,17 @@ Google <- R6::R6Class("Google",
         summarise(across(where(is.double), sum))
     },
     #' @description custom initialize for Google
-    #' @param warn logical Whether or not to display a warning message for
-    #' level 3 data with no regions to filter. Defaults to TRUE
     #' @param ... arguments to be passed to `DataClass` and initialize Google
-    initialize = function(warn = TRUE, ...) {
+    initialize = function(...) {
       super$initialize(...)
-      if (warn) {
-        if (self$level == "3" & is.null(self$target_regions)) {
-          msg <- paste(
-            "Processing google covid-19 data at level 3 with no target",
-            "regions will take a long time and contain data for multiple",
-            "countries. Consider not running the 'process' step or filtering",
-            "to a specific country using the 'regions' argument."
-          )
-          warning(msg)
-        }
+      if (self$level == "3" & is.null(self$target_regions)) {
+        msg <- paste(
+          "Processing google covid-19 data at level 3 with no target",
+          "regions will take a long time and contain data for multiple",
+          "countries. Consider not running the 'process' step or filtering",
+          "to a specific country using the 'regions' argument."
+        )
+        message_verbose(self$verbose, msg)
       }
     }
   )
