@@ -66,39 +66,6 @@ Google <- R6::R6Class("Google",
           self$data$raw$hospitalizations,
           by = c("key", "date")
         ) %>%
-        select(
-          .data$date,
-          .data$`3166-1-alpha-3`,
-          .data$country_name,
-          .data$subregion1_code,
-          .data$subregion1_name,
-          .data$subregion2_code,
-          .data$subregion2_name,
-          .data$new_confirmed,
-          .data$total_confirmed,
-          .data$new_deceased,
-          .data$total_deceased,
-          .data$new_recovered,
-          .data$total_recovered,
-          .data$new_tested,
-          .data$total_tested,
-          .data$new_hospitalized,
-          .data$total_hospitalized,
-          everything()
-        ) %>%
-        mutate(
-          date = ymd(.data$date),
-          new_confirmed = as.numeric(.data$new_confirmed),
-          total_confirmed = as.numeric(.data$total_confirmed),
-          new_deaths = as.numeric(.data$new_deceased),
-          total_deaths = as.numeric(.data$total_deceased),
-          new_recovered = as.numeric(.data$new_recovered),
-          total_recovered = as.numeric(.data$total_recovered),
-          new_tested = as.numeric(.data$new_tested),
-          total_tested = as.numeric(.data$total_tested),
-          new_hospitalized = as.numeric(.data$new_hospitalized),
-          total_hospitalized = as.numeric(.data$total_hospitalized)
-        ) %>%
         rename(
           level_1_region_code = .data$`3166-1-alpha-3`,
           level_1_region = .data$country_name,
@@ -108,14 +75,47 @@ Google <- R6::R6Class("Google",
           level_3_region = .data$subregion2_name,
           cases_new = .data$new_confirmed,
           cases_total = .data$total_confirmed,
-          deaths_new = .data$new_deaths,
-          deaths_total = .data$total_deaths,
+          deaths_new = .data$new_deceased,
+          deaths_total = .data$total_deceased,
           tested_new = .data$new_tested,
           tested_total = .data$total_tested,
           recovered_new = .data$new_recovered,
           recovered_total = .data$total_recovered,
           hosp_new = .data$new_hospitalized,
           hosp_total = .data$total_hospitalized
+        ) %>%
+        select(
+          .data$date,
+          .data$level_1_region_code,
+          .data$level_1_region,
+          .data$level_2_region_code,
+          .data$level_2_region,
+          .data$level_3_region_code,
+          .data$level_3_region,
+          .data$cases_new,
+          .data$cases_total,
+          .data$deaths_new,
+          .data$deaths_total,
+          .data$recovered_new,
+          .data$recovered_total,
+          .data$tested_new,
+          .data$tested_total,
+          .data$hosp_new,
+          .data$hosp_total,
+          everything()
+        ) %>%
+        mutate(
+          date = ymd(.data$date),
+          cases_new = as.numeric(.data$cases_new),
+          cases_total = as.numeric(.data$cases_total),
+          deaths_new = as.numeric(.data$deaths_new),
+          deaths_total = as.numeric(.data$deaths_total),
+          recovered_new = as.numeric(.data$recovered_new),
+          recovered_total = as.numeric(.data$recovered_total),
+          tested_new = as.numeric(.data$tested_new),
+          tested_total = as.numeric(.data$tested_total),
+          hosp_new = as.numeric(.data$hosp_new),
+          hosp_total = as.numeric(.data$hosp_total)
         ) %>%
         replace_na(
           list(
@@ -126,7 +126,7 @@ Google <- R6::R6Class("Google",
     },
 
     #' @description Google specific subregion level data cleaning
-    #' @importFrom dplyr select summarise group_by across
+    #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
@@ -137,7 +137,8 @@ Google <- R6::R6Class("Google",
           .data$deaths_new, .data$deaths_total,
           .data$tested_new, .data$tested_total,
           .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total
+          .data$hosp_new, .data$hosp_total,
+          everything()
         ) %>%
         group_by(
           .data$date, .data$level_1_region_code,
@@ -147,7 +148,7 @@ Google <- R6::R6Class("Google",
     },
 
     #' @description JHU specific subregion2 level data cleaning
-    #' @importFrom dplyr select summarise group_by across
+    #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_2 = function() {
       self$data$clean <- self$data$clean %>%
@@ -159,7 +160,8 @@ Google <- R6::R6Class("Google",
           .data$deaths_new, .data$deaths_total,
           .data$tested_new, .data$tested_total,
           .data$recovered_new, .data$recovered_total,
-          .data$hosp_new, .data$hosp_total
+          .data$hosp_new, .data$hosp_total,
+          everything()
         ) %>%
         group_by(
           .data$date, .data$level_1_region_code, .data$level_1_region,

@@ -98,31 +98,20 @@ JHU <- R6::R6Class("JHU", # rename to country name
     },
 
     #' @description JHU specific country level data cleaning
-    #' @importFrom dplyr select summarise group_by across
+    #' @importFrom dplyr select summarise group_by across everything
     #' @importFrom rlang .data
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
         select(
           .data$date, .data$level_1_region_code, .data$level_1_region,
-          .data$cases_total, .data$deaths_total, .data$recovered_total
+          .data$cases_total, .data$deaths_total, .data$recovered_total,
+          everything(), -.data$level_2_region_code
         ) %>%
         group_by(
           .data$date, .data$level_1_region_code,
           .data$level_1_region
         ) %>%
         summarise(across(where(is.double), sum))
-    },
-
-    #' @description JHU specific state level data cleaning
-    #' @importFrom dplyr select
-    #' @importFrom rlang .data
-    clean_level_2 = function() {
-      self$data$clean <- self$data$clean %>%
-        select(
-          .data$date, .data$level_1_region_code, .data$level_1_region,
-          .data$level_2_region_code, .data$level_2_region,
-          .data$cases_total, deaths_total, .data$recovered_total
-        )
     }
   )
 )
