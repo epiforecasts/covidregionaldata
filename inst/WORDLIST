@@ -79,6 +79,7 @@ Covid
 COVID
 covidregionaldata
 cre
+cron
 CSSE
 ctb
 cU
@@ -220,6 +221,7 @@ gR
 gr'SM
 Gruson
 Hamish
+hashFiles
 hellewell
 Hellewell
 hF
@@ -444,6 +446,7 @@ opperated
 ORCID
 org
 Organisation
+os
 OSP
 Ot
 oW
@@ -477,6 +480,7 @@ PRs
 purrr
 quickstart
 rboyes
+Rds
 README
 readmissions
 readxl
@@ -493,12 +497,14 @@ rlang
 rmarkdown
 Roxygen
 RoxygenNote
+Rscript
 rvest
 rworldmap
 sam
 samabbott
 São
 SARS
+saveRDS
 savivaldybe
 SciELOPreprints
 sebastian
@@ -552,6 +558,8 @@ tB
 td
 tėr
 tessella
+testDownload
+testSource
 testthat
 tibble
 tibbles
