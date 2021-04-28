@@ -405,8 +405,6 @@ DataClass <- R6::R6Class(
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(
-    #' @field country_info tibble of countries in the processed data
-    country_info = NULL,
     #' @description Filter method for country level data. Uses `countryname`
     #' to match input countries with known names.
     #' @param countries A character vector of target countries. Overrides the
@@ -427,17 +425,6 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
         }
       }
       super$filter()
-    },
-
-    #' @description Process function for national data sources. Runs
-    #' `DataClass` process first before filling `country_info`.
-    process = function() {
-      if (!(is.na(self$supported_region_names[["1"]]))) {
-        self$country_info <- unique(
-          self$data$processed[[self$supported_region_names[["1"]]]]
-        )
-      }
-      super$process()
     }
   )
 )

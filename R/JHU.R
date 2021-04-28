@@ -1,9 +1,14 @@
 #' R6 Class containing specific attributes and methods for COVID-19 data
 #' provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-#' Visual Dashboard opperated by the Johns Hopkins University
+#' Visual Dashboard operated by the Johns Hopkins University
 #' Center for Systems Science and Engineering (JHU CSSE). Also,
 #' Supported by ESRI Living Atlas Team and the Johns Hopkins University
 #' Applied Physics Lab (JHU APL)
+#'
+#' If using this data please cite:
+#' "Dong E, Du H, Gardner L. An interactive web-based dashboard to track
+#' COVID-19 in real time.
+#' Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
 #'
 #' @description Country specific information for downloading, cleaning
 #'  and processing covid-19 region data for John Hopkins University.
@@ -13,12 +18,18 @@
 #' @export
 #' @concept dataset
 #' @examples
+#' # nolint start
 #' \dontrun{
+#' # get all countries
 #' national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' national$return()
-#' national <- JHU$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
-#' national$return()
+#' # show available countries
+#' national$show_counties()
+#' # get all region data for the uk
+#' uk <- JHU$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk$return()
 #' }
+#' # nolint end
 JHU <- R6::R6Class("JHU", # rename to country name
   inherit = CountryDataClass,
   public = list(
@@ -34,6 +45,8 @@ JHU <- R6::R6Class("JHU", # rename to country name
     supported_region_codes = list(
       "1" = "iso_3166_1_alpha_3", "2" = "iso_code"
     ),
+    #' @field country_info tibble of countries in the processed data
+    country_info = NULL,
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
     # nolint start
@@ -50,6 +63,17 @@ JHU <- R6::R6Class("JHU", # rename to country name
     #' @importFrom tibble tibble
     set_region_codes = function() {
       self$codes_lookup$`1` <- JHU_codes
+    },
+
+    #' @description Google specific download, calls `DataClass` download but
+    #' also fills the country info field
+    download = function() {
+      super$download()
+      if (!(is.na(self$supported_region_names[["1"]]))) {
+        self$country_info <- unique(
+          self$data$raw$daily_confirmed[["Country/Region"]]
+        )
+      }
     },
 
     #' @description JHU specific data cleaning. Joins the raw data sets, checks
@@ -92,6 +116,17 @@ JHU <- R6::R6Class("JHU", # rename to country name
         left_join(
           self$codes_lookup$`1`,
           by = c("level_1_region" = "Country_Region")
+        ) %>%
+        select(
+          date,
+          level_1_region,
+          level_1_region_code,
+          level_2_region,
+          level_2_region_code,
+          cases_total,
+          deaths_total,
+          recovered_total,
+          everything()
         )
     },
 
@@ -106,6 +141,11 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$level_1_region
         ) %>%
         summarise(across(where(is.double), sum))
+    },
+
+    #' @description display the countries available with this data
+    show_countries = function() {
+      print(self$country_info)
     }
   )
 )

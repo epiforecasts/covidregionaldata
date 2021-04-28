@@ -33,8 +33,8 @@
 #' @return A tibble of region codes and related information.
 "france_codes"
 
-#' Region Codes for JHU Dataset.Taken from the region codes provided as part of
-#' the WHO dataset.
+#' Region Codes for JHU Dataset. Taken from the region codes provided as
+#' part of the WHO dataset.
 #'
 #' @description The region codes for JHU
 #' @return A tibble of region codes and related information.

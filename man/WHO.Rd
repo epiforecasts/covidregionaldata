@@ -53,10 +53,10 @@ only entry, is be named main.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="process">}\href{../../covidregionaldata/html/CountryDataClass.html#method-process}{\code{covidregionaldata::CountryDataClass$process()}}\out{</span>}
 }
 \out{</details>}
 }

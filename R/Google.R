@@ -15,16 +15,21 @@
 #' @export
 #' @concept dataset
 #' @examples
-#' \dontrun{
 #' # nolint start
+#' \dontrun{
+#' # get all countries
 #' national <- Google$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' national$return()
-#' national <- Google$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
-#' national$return()
-#' national <- Google$new(level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
-#' national$return()
-#' # nolint end
+#' # show available countries
+#' national$show_counties()
+#' # get all regional data for the UK
+#' uk <- Google$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk$return()
+#' # get all subregional data for the UK
+#' uk <- Google$new(regions = "uk", level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk$return()
 #' }
+#' # nolint end
 Google <- R6::R6Class("Google",
   inherit = CountryDataClass,
   public = list(
@@ -62,7 +67,20 @@ Google <- R6::R6Class("Google",
       "total_recovered",
       "total_tested"
     ),
+    #' @field country_info tibble of countries in the processed data
+    country_info = NULL,
 
+
+    #' @description Google specific download, calls `DataClass` download but
+    #' also fills the country info field
+    download = function() {
+      super$download()
+      if (!(is.na(self$supported_region_names[["1"]]))) {
+        self$country_info <- unique(
+          self$data$raw$index[["country_name"]]
+        )
+      }
+    },
 
     #' @description GoogleData specific subregion2 level data cleaning. This
     #' takes all the raw data, puts into a single data frame, renames some
@@ -118,6 +136,24 @@ Google <- R6::R6Class("Google",
             level_1_region = "Unknown",
             level_2_region = "Unknown"
           )
+        ) %>%
+        select(
+          date,
+          level_1_region,
+          level_1_region_code,
+          level_2_region,
+          level_2_region_code,
+          cases_new,
+          cases_total,
+          deaths_new,
+          deaths_total,
+          recovered_new,
+          recovered_total,
+          hosp_new,
+          hosp_total,
+          tested_new,
+          tested_total,
+          everything()
         )
     },
 
@@ -161,6 +197,11 @@ Google <- R6::R6Class("Google",
         )
         message_verbose(self$verbose, msg)
       }
+    },
+
+    #' @description display the countries available with this data
+    show_countries = function() {
+      print(self$country_info)
     }
   )
 )

@@ -19,16 +19,21 @@ data sets, and "hospitalizations" which holds data about number of people
 in hospital, ICU, etc.
 }
 \examples{
-\dontrun{
 # nolint start
+\dontrun{
+# get all countries
 national <- Google$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
-national <- Google$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
-national$return()
-national <- Google$new(level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
-national$return()
-# nolint end
+# show available countries
+national$show_counties()
+# get all regional data for the UK
+uk <- Google$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+uk$return()
+# get all subregional data for the UK
+uk <- Google$new(regions = "uk", level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
+uk$return()
 }
+# nolint end
 }
 \concept{dataset}
 \section{Super classes}{
@@ -48,16 +53,20 @@ national$return()
 \item{\code{common_data_urls}}{List of named links to raw data.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+
+\item{\code{country_info}}{tibble of countries in the processed data}
 }
 \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-download}{\code{Google$download()}}
 \item \href{#method-clean_common}{\code{Google$clean_common()}}
 \item \href{#method-clean_level_1}{\code{Google$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Google$clean_level_2()}}
 \item \href{#method-new}{\code{Google$new()}}
+\item \href{#method-show_countries}{\code{Google$show_countries()}}
 \item \href{#method-clone}{\code{Google$clone()}}
 }
 }
@@ -65,15 +74,25 @@ national$return()
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="process">}\href{../../covidregionaldata/html/CountryDataClass.html#method-process}{\code{covidregionaldata::CountryDataClass$process()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Google specific download, calls \code{DataClass} download but
+also fills the country info field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Google$download()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_common"></a>}}
@@ -127,6 +146,16 @@ custom initialize for Google
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-show_countries"></a>}}
+\if{latex}{\out{\hypertarget{method-show_countries}{}}}
+\subsection{Method \code{show_countries()}}{
+display the countries available with this data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Google$show_countries()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

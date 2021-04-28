@@ -3,8 +3,8 @@
 \docType{data}
 \name{JHU_codes}
 \alias{JHU_codes}
-\title{Region Codes for JHU Dataset.Taken from the region codes provided as part of
-the WHO dataset.}
+\title{Region Codes for JHU Dataset. Taken from the region codes provided as
+part of the WHO dataset.}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 4193 rows and 3 columns.
 }

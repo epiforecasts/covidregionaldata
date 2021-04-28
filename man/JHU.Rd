@@ -4,7 +4,7 @@
 \alias{JHU}
 \title{R6 Class containing specific attributes and methods for COVID-19 data
 provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-Visual Dashboard opperated by the Johns Hopkins University
+Visual Dashboard operated by the Johns Hopkins University
 Center for Systems Science and Engineering (JHU CSSE). Also,
 Supported by ESRI Living Atlas Team and the Johns Hopkins University
 Applied Physics Lab (JHU APL)}
@@ -15,13 +15,25 @@ Applied Physics Lab (JHU APL)}
 Country specific information for downloading, cleaning
 and processing covid-19 region data for John Hopkins University.
 }
+\details{
+If using this data please cite:
+"Dong E, Du H, Gardner L. An interactive web-based dashboard to track
+COVID-19 in real time.
+Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
+}
 \examples{
+# nolint start
 \dontrun{
+# get all countries
 national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
-national <- JHU$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
-national$return()
+# show available countries
+national$show_counties()
+# get all region data for the uk
+uk <- JHU$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+uk$return()
 }
+# nolint end
 }
 \concept{dataset}
 \section{Super classes}{
@@ -38,6 +50,8 @@ national$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
+\item{\code{country_info}}{tibble of countries in the processed data}
+
 \item{\code{common_data_urls}}{List of named links to raw data. The first, and
 only entry, is be named main.}
 
@@ -49,8 +63,10 @@ only entry, is be named main.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{JHU$set_region_codes()}}
+\item \href{#method-download}{\code{JHU$download()}}
 \item \href{#method-clean_common}{\code{JHU$clean_common()}}
 \item \href{#method-clean_level_1}{\code{JHU$clean_level_1()}}
+\item \href{#method-show_countries}{\code{JHU$show_countries()}}
 \item \href{#method-clone}{\code{JHU$clone()}}
 }
 }
@@ -58,13 +74,12 @@ only entry, is be named main.}
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="process">}\href{../../covidregionaldata/html/CountryDataClass.html#method-process}{\code{covidregionaldata::CountryDataClass$process()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -75,6 +90,17 @@ only entry, is be named main.}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$set_region_codes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Google specific download, calls \code{DataClass} download but
+also fills the country info field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{JHU$download()}\if{html}{\out{</div>}}
 }
 
 }
@@ -97,6 +123,16 @@ JHU specific country level data cleaning. Aggregates the
 data to the country (level 2) level.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$clean_level_1()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-show_countries"></a>}}
+\if{latex}{\out{\hypertarget{method-show_countries}{}}}
+\subsection{Method \code{show_countries()}}{
+display the countries available with this data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{JHU$show_countries()}\if{html}{\out{</div>}}
 }
 
 }
