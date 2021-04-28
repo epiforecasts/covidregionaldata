@@ -1,6 +1,11 @@
 # covidregionaldata 0.9.1
 
 In development release.
+
+## New features
+
+* Support for data provided by John Hopkins University
+* Support for data provided by Google, covid-19 open data
  
 # covidregionaldata 0.9.0
 
