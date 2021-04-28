@@ -62,7 +62,9 @@ initialise_dataclass <- function(class = character(), level = "1",
 
   if (nrow(target_class) == 0) {
     stop(
-      "No data available for ", class, " see get_available_datasets(type = c(", paste(type, collapse = ", "), ")) for supported datasets"
+      "No data available for ", class,
+      " see get_available_datasets(type = c(",
+      paste(type, collapse = ", "), ")) for supported datasets"
     )
   }
 
@@ -378,6 +380,9 @@ DataClass <- R6::R6Class(
         level_1_region = self$supported_region_names[["1"]],
         level_2_region = ifelse(is.null(self$supported_region_names[["2"]]),
           NA, self$supported_region_names[["2"]]
+        ),
+        level_3_region = ifelse(is.null(self$supported_region_names[["3"]]),
+          NA, self$supported_region_names[["3"]]
         ),
         type = ifelse(any(class(self) %in% "CountryDataClass"),
           "national", "regional"

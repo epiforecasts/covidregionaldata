@@ -165,6 +165,24 @@ Google <- R6::R6Class("Google",
           .data$level_2_region_code, .data$level_2_region
         ) %>%
         summarise(across(where(is.double), sum))
+    },
+    #' @description custom initialize for Google
+    #' @param warn logical Whether or not to display a warning message for
+    #' level 3 data with no regions to filter. Defaults to TRUE
+    #' @param ... arguments to be passed to `DataClass` and initialize Google
+    initialize = function(warn = TRUE, ...) {
+      super$initialize(...)
+      if (warn) {
+        if (self$level == "3" & is.null(self$target_regions)) {
+          msg <- paste(
+            "Processing google covid-19 data at level 3 with no target",
+            "regions will take a long time and contain data for multiple",
+            "countries. Consider not running the 'process' step or filtering",
+            "to a specific country using the 'regions' argument."
+          )
+          warning(msg)
+        }
+      }
     }
   )
 )
