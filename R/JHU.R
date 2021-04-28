@@ -47,7 +47,7 @@ JHU <- R6::R6Class("JHU", # rename to country name
     },
 
     #' @description JHU specific data cleaning
-    #' @importFrom dplyr last_col bind_rows mutate rename select
+    #' @importFrom dplyr last_col bind_rows mutate rename select everything
     #' @importFrom tidyr pivot_longer pivot_wider replace_na
     #' @importFrom lubridate mdy
     #' @importFrom rlang .data
@@ -67,7 +67,8 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$`Country/Region`,
           .data$daily_confirmed,
           .data$daily_deaths,
-          .data$daily_recovered
+          .data$daily_recovered,
+          everything()
         ) %>%
         mutate(
           Date = mdy(.data$Date),

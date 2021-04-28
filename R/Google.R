@@ -51,7 +51,7 @@ Google <- R6::R6Class("Google",
 
 
     #' @description GoogleData specific state level data cleaning
-    #' @importFrom dplyr full_join select mutate rename
+    #' @importFrom dplyr full_join select mutate rename everything
     #' @importFrom tidyr replace_na
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
@@ -83,7 +83,8 @@ Google <- R6::R6Class("Google",
           .data$new_tested,
           .data$total_tested,
           .data$new_hospitalized,
-          .data$total_hospitalized
+          .data$total_hospitalized,
+          everything()
         ) %>%
         mutate(
           date = ymd(.data$date),
