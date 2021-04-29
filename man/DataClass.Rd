@@ -79,6 +79,9 @@ by the \verb{filter method}.}
 
 \item{\code{process_fns}}{array, additional, user supplied functions to process
 the data.}
+
+\item{\code{filter_level}}{Character The level of the data to filter at.
+Defaults to the target level.}
 }
 \if{html}{\out{</div>}}
 }
@@ -215,15 +218,17 @@ defined in a child class specific \code{clean_common} method.
 Filter cleaned data for a specific region  To be called
 after \href{#method-clean}{\code{clean()}}
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions, level = "1")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{regions}}{A character vector of target regions. Overrides the
-current class setting for \code{target_regions}. By default filters at the
-current spatial level of interest.}
+current class setting for \code{target_regions}.}
+
+\item{\code{level}}{Character The level of the data to filter at. Defaults
+to "1"}
 }
 \if{html}{\out{</div>}}
 }
