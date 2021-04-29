@@ -77,9 +77,8 @@ in \verb{$new()}}
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
 
-\item{\code{process_options}}{A named list of string function names .giving a
-Bool of TRUE or FALSE which indicates if that processing function is
-called during processing.}
+\item{\code{process_fns}}{array, additional, user supplied functions to process
+the data.}
 }
 \if{html}{\out{</div>}}
 }
@@ -126,7 +125,7 @@ Should only be called by a \code{DataClass} class object.
   verbose = TRUE,
   steps = FALSE,
   get = FALSE,
-  process_options = list()
+  process_fns = c(set_negative_values_to_zero)
 )}\if{html}{\out{</div>}}
 }
 
@@ -156,13 +155,12 @@ cleaning steps be kept and output in a list.}
 \item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
 
-\item{\code{process_options}}{list, additional arguments to control what
-functions are called during processing. For some datasets setting these
-to FALSE may cause errors, but for others improve speed.
-Avaliable options are:
-"calculate_columns_from_existing_data" = TRUE,
-"add_extra_na_cols" = TRUE,
-"set_negative_values_to_zero" = TRUE}
+\item{\code{process_fns}}{array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is \code{set_negative_values_to_zero}.
+If you want to keep this when supplying your own processing functions
+remember to add it to your list also.}
 }
 \if{html}{\out{</div>}}
 }

@@ -1,48 +1,36 @@
 # Load mock data functions
 source("custom_tests/mock_data.R")
 
-test_that("run_process_steps calles the correct functions", {
+test_that("default functions are called", {
   mockery::stub(
-    run_process_steps,
+    run_default_processing_fns,
     "calculate_columns_from_existing_data",
     function(x) x + 1,
   )
   mockery::stub(
-    run_process_steps,
+    run_default_processing_fns,
     "add_extra_na_cols",
     function(x) x + 2,
   )
-  mockery::stub(
-    run_process_steps,
-    "set_negative_values_to_zero",
-    function(x) x + 3,
-  )
-  process_options <- list(
-    "calculate_columns_from_existing_data" = TRUE,
-    "add_extra_na_cols" = TRUE,
-    "set_negative_values_to_zero" = TRUE
-  )
   x <- tibble::tibble("A" = c(1, 2, 3))
-  act <- tibble::tibble("A" = c(7, 8, 9))$A
-  expected <- run_process_steps(x, process_options)$A
+  expected <- tibble::tibble("A" = c(4, 5, 6))$A
+  act <- run_default_processing_fns(x)$A
   expect_identical(expected, act)
-  process_options <- list(
-    "calculate_columns_from_existing_data" = TRUE,
-    "add_extra_na_cols" = TRUE,
-    "set_negative_values_to_zero" = FALSE
-  )
+})
+
+test_that("optional functions can be empty", {
   x <- tibble::tibble("A" = c(1, 2, 3))
-  act <- tibble::tibble("A" = c(4, 5, 6))$A
-  expected <- run_process_steps(x, process_options)$A
-  expect_identical(expected, act)
-  process_options <- list(
-    "calculate_columns_from_existing_data" = FALSE,
-    "add_extra_na_cols" = FALSE,
-    "set_negative_values_to_zero" = FALSE
-  )
+  act <- run_optional_processing_fns(x, c())$A
+  expect_identical(x$A, act)
+})
+
+test_that("optional functions run", {
   x <- tibble::tibble("A" = c(1, 2, 3))
-  act <- tibble::tibble("A" = c(1, 2, 3))$A
-  expected <- run_process_steps(x, process_options)$A
+  process_fns <- c(function(x) {
+    return(x^2)
+  })
+  act <- run_optional_processing_fns(x, process_fns)$A
+  expected <- tibble::tibble("A" = c(1, 4, 9))$A
   expect_identical(expected, act)
 })
 

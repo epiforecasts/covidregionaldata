@@ -161,30 +161,29 @@ totalise_data <- function(data) {
   return(data)
 }
 
-#' Runs through processing steps dynamically
-#'
-#' @description Runs the processing steps in turn:
-#' calculate_columns_from_existing_data, add_extra_na_cols,
-#' set_negative_values_to_zero. The function constructs the pipe for these
-#' methods dynamically from the argument process_arguments.
+#' Default processing steps to run
+#' @description The default processing steps to which are always run. Runs on
+#' clean data
 #' @param data A data table
-#' @param process_options list of options for processing
-#' @importFrom purrr walk
-run_process_steps <- function(data, process_options) {
+#' @concept utility
+run_default_processing_fns <- function(data) {
   . <- NULL
-  popt <- names(which(unlist(process_options)))
-  if (length(popt) < 1) {
-    return(data)
-  } else {
-    popt <- paste0(popt, "()")
-    if ("calculate_columns_from_existing_data()" %in% popt) {
-      popt[1] <- paste0("do(", gsub("()", "(.)", popt[1], fixed = TRUE), ")")
-    }
-    expr <- paste(". %>%", paste(popt, collapse = " %>% "))
-    action <- eval(parse(text = expr))
-    data <- data %>% action()
-    return(data)
+  data <- data %>%
+    do(calculate_columns_from_existing_data(.)) %>%
+    add_extra_na_cols()
+  return(data)
+}
+
+#' Optional processing steps to run
+#' @description user supplied processing steps which are run after default steps
+#' @param data A data table
+#' @inheritParams process_internal
+#' @concept utility
+run_optional_processing_fns <- function(data, process_fns) {
+  for (i in seq_along(process_fns)) {
+    data <- process_fns[[i]](data)
   }
+  return(data)
 }
 
 #' Internal Shared Regional Dataset Processing
@@ -204,9 +203,8 @@ run_process_steps <- function(data, process_options) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
-#' @param process_options list, additional arguments to control what
-#' functions are called during processing. For some datasets setting these
-#' to FALSE may cause errors, but for others improve speed.
+#' @param process_fns array, additional functions to be called after default
+#' processing steps
 #' @concept utility
 #' @importFrom dplyr do group_by_at across ungroup select everything arrange
 #' @importFrom dplyr rename
@@ -216,11 +214,7 @@ run_process_steps <- function(data, process_options) {
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE,
-                             process_options = list(
-                               "calculate_columns_from_existing_data" = TRUE,
-                               "add_extra_na_cols" = TRUE,
-                               "set_negative_values_to_zero" = TRUE
-                             )) {
+                             process_fns = c()) {
   if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
@@ -228,7 +222,8 @@ process_internal <- function(clean_data, level, group_vars,
 
   dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
-  dat <- run_process_steps(dat, process_options)
+  dat <- run_default_processing_fns(dat)
+  dat <- run_optional_processing_fns(dat, process_fns)
 
   if (totals) {
     dat <- totalise_data(dat)

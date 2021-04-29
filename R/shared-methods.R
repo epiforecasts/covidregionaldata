@@ -151,10 +151,9 @@ DataClass <- R6::R6Class(
     #' @field target_regions A character vector of regions to filter for. Used
     #' by the `filter method`.
     target_regions = NULL,
-    #' @field process_options A named list of string function names .giving a
-    #' Bool of TRUE or FALSE which indicates if that processing function is
-    #' called during processing.
-    process_options = list(),
+    #' @field process_fns array, additional, user supplied functions to process
+    #' the data.
+    process_fns = c(),
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
@@ -179,18 +178,17 @@ DataClass <- R6::R6Class(
     #' cleaning steps be kept and output in a list.
     #' @param get Logical, defaults to FALSE. Should the class `get` method be
     #' called (this will download, clean, and process data at initialisation).
-    #' @param process_options list, additional arguments to control what
-    #' functions are called during processing. For some datasets setting these
-    #' to FALSE may cause errors, but for others improve speed.
-    #' Avaliable options are:
-    #' "calculate_columns_from_existing_data" = TRUE,
-    #' "add_extra_na_cols" = TRUE,
-    #' "set_negative_values_to_zero" = TRUE
+    #' @param process_fns array, additional functions to process the data.
+    #' Users can supply their own functions here which would act on clean data
+    #' and they will be called alongside our default processing functions.
+    #' The default optional function added is `set_negative_values_to_zero`.
+    #' If you want to keep this when supplying your own processing functions
+    #' remember to add it to your list also.
     #' @export
     initialize = function(level = "1", regions,
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE, get = FALSE,
-                          process_options = list()) {
+                          process_fns = c(set_negative_values_to_zero)) {
       if (any(self$supported_levels %in% level)) {
         self$level <- level
       } else {
@@ -206,7 +204,7 @@ DataClass <- R6::R6Class(
       self$region_name <- self$supported_region_names[[self$level]]
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
-      self$process_options <- format_process_options(process_options)
+      self$process_fns <- append(self$proces_fns, process_fns)
 
       if (!missing(regions)) {
         self$target_regions <- regions
@@ -342,7 +340,7 @@ DataClass <- R6::R6Class(
         totals = self$totals,
         localise = self$localise,
         verbose = self$verbose,
-        process_options = self$process_options
+        process_fns = self$process_fns
       )
     },
 
