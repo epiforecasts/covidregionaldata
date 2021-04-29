@@ -66,13 +66,21 @@ test_that("DataClass can return data", {
   expect_error(d$return(), NA)
   expect_s3_class(d$return(), "data.frame")
   d$steps <- TRUE
-  expect_equal(names(d$return()), c("raw", "clean", "processed", "return"))
+  expect_equal(
+    names(d$return()), c(
+      "raw", "clean", "filtered", "processed", "return"
+    )
+  )
 })
 
 test_that("DataClass can use the get method", {
   expect_error(suppressMessages(d$get()), NA)
   d$steps <- TRUE
-  expect_equal(names(d$return()), c("raw", "clean", "processed", "return"))
+  expect_equal(
+    names(d$return()), c(
+      "raw", "clean", "filtered", "processed", "return"
+    )
+  )
 })
 
 test_that("DataClass returns a summary", {

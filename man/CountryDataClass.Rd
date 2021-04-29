@@ -18,6 +18,7 @@ Inherits from \code{DataClass}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-filter}{\code{CountryDataClass$filter()}}
+\item \href{#method-new}{\code{CountryDataClass$new()}}
 \item \href{#method-clone}{\code{CountryDataClass$clone()}}
 }
 }
@@ -28,7 +29,6 @@ Inherits from \code{DataClass}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
@@ -43,7 +43,7 @@ Inherits from \code{DataClass}
 Filter method for country level data. Uses \code{countryname}
 to match input countries with known names.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(countries)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(countries, level = self$filter_level)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -51,6 +51,30 @@ to match input countries with known names.
 \describe{
 \item{\code{countries}}{A character vector of target countries. Overrides the
 current class setting for \code{target_regions}.}
+
+\item{\code{level}}{character The level of the data to filter, defaults to the
+specified filter level. This will be the level of the data if not set at
+initialization.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+Custom initialize function for national data sources.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$new(filter_level = NULL, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filter_level}}{Character The level of the data to filter at.
+Defaults to the level used for the data..}
+
+\item{\code{...}}{additional arguments passed to \code{DataClass} initialize.}
 }
 \if{html}{\out{</div>}}
 }
