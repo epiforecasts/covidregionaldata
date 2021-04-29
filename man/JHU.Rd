@@ -27,8 +27,10 @@ Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
 # get all countries data
 jhu <- JHU$new(level = "1", get = TRUE)
 jhu$return()
+
 # show available regions with data at the level of interest
 jhu$show_regions()
+
 # get all region data for the uk
 uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
 uk$return()
@@ -61,7 +63,6 @@ only entry, is be named main.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{JHU$set_region_codes()}}
-\item \href{#method-download}{\code{JHU$download()}}
 \item \href{#method-clean_common}{\code{JHU$clean_common()}}
 \item \href{#method-clean_level_1}{\code{JHU$clean_level_1()}}
 \item \href{#method-clone}{\code{JHU$clone()}}
@@ -71,6 +72,7 @@ only entry, is be named main.}
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
@@ -88,17 +90,6 @@ only entry, is be named main.}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$set_region_codes()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-download"></a>}}
-\if{latex}{\out{\hypertarget{method-download}{}}}
-\subsection{Method \code{download()}}{
-Google specific download, calls \code{DataClass} download but
-also fills the country info field
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{JHU$download()}\if{html}{\out{</div>}}
 }
 
 }

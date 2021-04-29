@@ -263,13 +263,25 @@ DataClass <- R6::R6Class(
 
     #' @description Show regions that are available to be used for
     #' filtering operations. Can only be called once `clean()` has been
-    #' called.
-    show_regions = function() {
-      filter_level <- "1"
-      filter_level <- glue_level(filter_level)
+    #' called. Filtering level is determined by checking the `filter_level`
+    #' field.
+    #' @importFrom tidyselect all_of
+    show_regions = function(level) {
+      if (!missing(level)) {
+        self$filter_level <- level
+      }
+      filter_level <- glue_level(self$filter_level)
       target_level <- glue_level(self$level)
-    },
 
+      regions <- self$data$clean %>%
+        select(all_of(c(filter_level, target_level))) %>%
+        filter(!is.na(.data[[target_level]])) %>%
+        filter(!(.data[[target_level]] %in% "Unknown")) %>%
+        pull(.data[[filter_level]]) %>%
+        unique()
+      self$available_regions <- regions
+      return(regions)
+    },
     #' @description Filter cleaned data for a specific region  To be called
     #' after \href{#method-clean}{\code{clean()}}
     #' @param regions A character vector of target regions. Overrides the

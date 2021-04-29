@@ -18,15 +18,17 @@
 #' # nolint start
 #' \dontrun{
 #' # get all countries
-#' national <- Google$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+#' national <- Google$new(level = "1", get = TRUE)
 #' national$return()
+#'
 #' # show available countries
-#' national$show_counties()
+#' national$show_regions()
 #' # get all regional data for the UK
-#' uk <- Google$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk <- Google$new(regions = "uk", level = "2", get = TRUE)
 #' uk$return()
+#'
 #' # get all subregional data for the UK
-#' uk <- Google$new(regions = "uk", level = "3", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk <- Google$new(regions = "uk", level = "3", get = TRUE)
 #' uk$return()
 #' }
 #' # nolint end
@@ -116,12 +118,6 @@ Google <- R6::R6Class("Google",
           hosp_new = as.numeric(.data$hosp_new),
           hosp_total = as.numeric(.data$hosp_total)
         ) %>%
-        replace_na(
-          list(
-            level_1_region = "Unknown",
-            level_2_region = "Unknown"
-          )
-        ) %>%
         select(
           date,
           level_1_region,
@@ -182,11 +178,6 @@ Google <- R6::R6Class("Google",
         )
         message_verbose(self$verbose, msg)
       }
-    },
-
-    #' @description display the countries available with this data
-    show_countries = function() {
-      print(self$country_info)
     }
   )
 )

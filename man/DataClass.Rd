@@ -202,9 +202,10 @@ defined in a child class specific \code{clean_common} method.
 \subsection{Method \code{show_regions()}}{
 Show regions that are available to be used for
 filtering operations. Can only be called once \code{clean()} has been
-called.
+called. Filtering level is determined by checking the \code{filter_level}
+field.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$show_regions()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$show_regions(level)}\if{html}{\out{</div>}}
 }
 
 }

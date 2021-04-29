@@ -23,8 +23,10 @@
 #' # get all countries data
 #' jhu <- JHU$new(level = "1", get = TRUE)
 #' jhu$return()
+#'
 #' # show available regions with data at the level of interest
 #' jhu$show_regions()
+#'
 #' # get all region data for the uk
 #' uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
 #' uk$return()
@@ -93,12 +95,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
           cases_total = .data$daily_confirmed,
           deaths_total = .data$daily_deaths,
           recovered_total = .data$daily_recovered
-        ) %>%
-        replace_na(
-          list(
-            level_1_region = "Unknown",
-            level_2_region = "Unknown"
-          )
         ) %>%
         left_join(
           self$codes_lookup$`1`,
