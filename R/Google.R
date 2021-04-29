@@ -17,12 +17,15 @@
 #' @examples
 #' # nolint start
 #' \dontrun{
+#' # set up a data cache
+#' start_using_memoise()
+#'
 #' # get all countries
 #' national <- Google$new(level = "1", get = TRUE)
 #' national$return()
 #'
 #' # show available countries
-#' national$show_regions()
+#' national$available_regions()
 #' # get all regional data for the UK
 #' uk <- Google$new(regions = "uk", level = "2", get = TRUE)
 #' uk$return()

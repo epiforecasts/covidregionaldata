@@ -74,10 +74,11 @@ in \verb{$new()}}
 This field is filled at initialisation.using user inputs or defaults
 in \verb{$new()}}
 
-\item{\code{available_regions}}{Character vector of available level 1 regions}
-
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
+
+\item{\code{filter_level}}{Character The level of the data to filter at.
+Defaults to the target level.}
 }
 \if{html}{\out{</div>}}
 }
@@ -89,7 +90,7 @@ by the \verb{filter method}.}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-clean_common}{\code{DataClass$clean_common()}}
-\item \href{#method-show_regions}{\code{DataClass$show_regions()}}
+\item \href{#method-available_regions}{\code{DataClass$available_regions()}}
 \item \href{#method-filter}{\code{DataClass$filter()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-get}{\code{DataClass$get()}}
@@ -119,6 +120,7 @@ Should only be called by a \code{DataClass} class object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
   level = "1",
+  filter_level,
   regions,
   totals = FALSE,
   localise = TRUE,
@@ -133,7 +135,11 @@ Should only be called by a \code{DataClass} class object.
 \describe{
 \item{\code{level}}{A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
+options are level 1 ("1) and level 2 ("2").}
+
+\item{\code{filter_level}}{A character string indicating the level to filter at.
+Defaults to the level of the data if not specified and if not otherwise
+defined in the class.
 Use \code{get_available_datasets()} for supported options by dataset.}
 
 \item{\code{regions}}{A character vector of target regions to be assigned to
@@ -197,17 +203,25 @@ defined in a child class specific \code{clean_common} method.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-show_regions"></a>}}
-\if{latex}{\out{\hypertarget{method-show_regions}{}}}
-\subsection{Method \code{show_regions()}}{
+\if{html}{\out{<a id="method-available_regions"></a>}}
+\if{latex}{\out{\hypertarget{method-available_regions}{}}}
+\subsection{Method \code{available_regions()}}{
 Show regions that are available to be used for
 filtering operations. Can only be called once \code{clean()} has been
 called. Filtering level is determined by checking the \code{filter_level}
 field.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$show_regions(level)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$available_regions(level)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{level}}{A character string indicating the level to filter at.
+Defaults to using the \code{filter_level} field if not specified}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-filter"></a>}}
@@ -216,15 +230,17 @@ field.
 Filter cleaned data for a specific region  To be called
 after \href{#method-clean}{\code{clean()}}
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions, level)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{regions}}{A character vector of target regions. Overrides the
-current class setting for \code{target_regions}. By default filters at the
-current spatial level of interest.}
+current class setting for \code{target_regions}.}
+
+\item{\code{level}}{Character The level of the data to filter at. Defaults to
+the lowest level in the data.}
 }
 \if{html}{\out{</div>}}
 }

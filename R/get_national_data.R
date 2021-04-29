@@ -12,7 +12,7 @@
 #'  specifying a country to filter for.
 #' @param source A character string specifying the data source (not case
 #'  dependent). Defaults to WHO (the World Health Organisation). See
-#' `get_available_datasets("natioanl")` for all options.
+#' `get_available_datasets("national")` for all options.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
 #' @inheritParams get_regional_data
@@ -26,7 +26,7 @@
 #' # download data for Canada keeping all processing steps
 #' get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 #' }
-get_national_data <- function(countries, source = "who", totals = FALSE,
+get_national_data <- function(countries, source = "who", level = "1", totals = FALSE,
                               steps = FALSE, class = FALSE, verbose = TRUE,
                               country = deprecated(),
                               ...) {
@@ -41,7 +41,7 @@ get_national_data <- function(countries, source = "who", totals = FALSE,
 
   # check data availability and initiate country class if available
   nation_class <- initialise_dataclass(
-    class = source, level = "1",
+    class = source, level = level,
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
     regions = countries, get = TRUE,

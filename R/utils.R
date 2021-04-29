@@ -165,6 +165,22 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
 #'
 #' @inheritParams region_dispatch
 #' @return A string in the form "level_1_region".
+#' @concept utility
 glue_level <- function(level) {
   paste0("level_", level, "_region")
+}
+
+#' Checks a given level is supported
+#' @param supported_levels A character vector of supported levels
+#' @inheritParams region_dispatch
+#' @return NULL
+#' @concept utility
+check_level <- function(level, supported_levels) {
+  if (!any(supported_levels %in% level)) {
+    stop(
+      level,
+      " is not a supported level check supported_levels for options"
+    )
+  }
+  return(invisible(NULL))
 }

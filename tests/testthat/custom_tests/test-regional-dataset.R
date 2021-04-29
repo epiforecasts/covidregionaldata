@@ -75,6 +75,10 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       dplyr::slice_tail,
       n = 250
     )
+    region$data$raw <- purrr::map(
+      region$data$raw,
+      ~ .[, 1:min(100, ncol(.))]
+    )
     saveRDS(region$data$raw, raw_path)
   } else {
     region$data$raw <- readRDS(raw_path)

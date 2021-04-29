@@ -20,12 +20,15 @@
 #' @examples
 #' # nolint start
 #' \dontrun{
+#' # set up a data cache
+#' start_using_memoise()
+#'
 #' # get all countries data
 #' jhu <- JHU$new(level = "1", get = TRUE)
 #' jhu$return()
 #'
 #' # show available regions with data at the level of interest
-#' jhu$show_regions()
+#' jhu$available_regions()
 #'
 #' # get all region data for the uk
 #' uk <- JHU$new(regions = "uk", level = "2", get = TRUE)

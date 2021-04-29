@@ -15,3 +15,4 @@ A string in the form "level_1_region".
 \description{
 Glue the spatial level into a variable name
 }
+\concept{utility}
