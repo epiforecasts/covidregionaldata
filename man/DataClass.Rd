@@ -125,7 +125,7 @@ Should only be called by a \code{DataClass} class object.
   verbose = TRUE,
   steps = FALSE,
   get = FALSE,
-  process_fns = c(set_negative_values_to_zero)
+  process_fns
 )}\if{html}{\out{</div>}}
 }
 
@@ -159,6 +159,7 @@ called (this will download, clean, and process data at initialisation).}
 Users can supply their own functions here which would act on clean data
 and they will be called alongside our default processing functions.
 The default optional function added is \code{set_negative_values_to_zero}.
+if process_fns is not set.
 If you want to keep this when supplying your own processing functions
 remember to add it to your list also. If you feel you have created a
 cool processing function that others could benefit from please submit a

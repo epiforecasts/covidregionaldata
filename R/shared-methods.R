@@ -153,7 +153,7 @@ DataClass <- R6::R6Class(
     target_regions = NULL,
     #' @field process_fns array, additional, user supplied functions to process
     #' the data.
-    process_fns = c(),
+    process_fns = c(set_negative_values_to_zero),
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
@@ -182,6 +182,7 @@ DataClass <- R6::R6Class(
     #' Users can supply their own functions here which would act on clean data
     #' and they will be called alongside our default processing functions.
     #' The default optional function added is `set_negative_values_to_zero`.
+    #' if process_fns is not set.
     #' If you want to keep this when supplying your own processing functions
     #' remember to add it to your list also. If you feel you have created a
     #' cool processing function that others could benefit from please submit a
@@ -191,7 +192,7 @@ DataClass <- R6::R6Class(
     initialize = function(level = "1", regions,
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE, get = FALSE,
-                          process_fns = c(set_negative_values_to_zero)) {
+                          process_fns) {
       if (any(self$supported_levels %in% level)) {
         self$level <- level
       } else {
@@ -207,7 +208,9 @@ DataClass <- R6::R6Class(
       self$region_name <- self$supported_region_names[[self$level]]
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
-      self$process_fns <- append(self$process_fns, process_fns)
+      if (!missing(process_fns)) {
+        self$process_fns <- append(self$process_fns, process_fns)
+      }
 
       if (!missing(regions)) {
         self$target_regions <- regions
