@@ -183,7 +183,10 @@ DataClass <- R6::R6Class(
     #' and they will be called alongside our default processing functions.
     #' The default optional function added is `set_negative_values_to_zero`.
     #' If you want to keep this when supplying your own processing functions
-    #' remember to add it to your list also.
+    #' remember to add it to your list also. If you feel you have created a
+    #' cool processing function that others could benefit from please submit a
+    #' Pull Request to \link{https://github.com/epiforecasts/covidregionaldata}
+    #' and we will consider adding it to the package.
     #' @export
     initialize = function(level = "1", regions,
                           totals = FALSE, localise = TRUE,
@@ -204,7 +207,7 @@ DataClass <- R6::R6Class(
       self$region_name <- self$supported_region_names[[self$level]]
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
-      self$process_fns <- append(self$proces_fns, process_fns)
+      self$process_fns <- append(self$process_fns, process_fns)
 
       if (!missing(regions)) {
         self$target_regions <- regions

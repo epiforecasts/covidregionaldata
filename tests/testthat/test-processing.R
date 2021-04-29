@@ -5,12 +5,12 @@ test_that("default functions are called", {
   mockery::stub(
     run_default_processing_fns,
     "calculate_columns_from_existing_data",
-    function(x) x + 1,
+    function(x) dplyr::mutate(x, A = A + 1),
   )
   mockery::stub(
     run_default_processing_fns,
     "add_extra_na_cols",
-    function(x) x + 2,
+    function(x) dplyr::mutate(x, A = A + 2),
   )
   x <- tibble::tibble("A" = c(1, 2, 3))
   expected <- tibble::tibble("A" = c(4, 5, 6))$A

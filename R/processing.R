@@ -165,6 +165,7 @@ totalise_data <- function(data) {
 #' @description The default processing steps to which are always run. Runs on
 #' clean data
 #' @param data A data table
+#' @importFrom dplyr do
 #' @concept utility
 run_default_processing_fns <- function(data) {
   . <- NULL
