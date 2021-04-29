@@ -14,14 +14,6 @@ Inherits from \code{DataClass}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{CountryDataClass}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{filter_level}}{char The level of the data to filter at. Defaults
-to "1".}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -51,7 +43,7 @@ to "1".}
 Filter method for country level data. Uses \code{countryname}
 to match input countries with known names.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(countries)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$filter(countries, level = self$filter_level)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -59,6 +51,10 @@ to match input countries with known names.
 \describe{
 \item{\code{countries}}{A character vector of target countries. Overrides the
 current class setting for \code{target_regions}.}
+
+\item{\code{level}}{character The level of the data to filter, defaults to the
+specified filter level. This will be the level of the data if not set at
+initialization.}
 }
 \if{html}{\out{</div>}}
 }
@@ -69,14 +65,14 @@ current class setting for \code{target_regions}.}
 \subsection{Method \code{new()}}{
 Custom initialize function for national data sources.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$new(filter_level = "1", ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$new(filter_level = NULL, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{filter_level}}{char The level of the data to filter at. Defaults
-to "1".}
+\item{\code{filter_level}}{Character The level of the data to filter at.
+Defaults to the level used for the data..}
 
 \item{\code{...}}{additional arguments passed to \code{DataClass} initialize.}
 }
