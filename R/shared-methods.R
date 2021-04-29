@@ -62,7 +62,10 @@ initialise_dataclass <- function(class = character(), level = "1",
 
   if (nrow(target_class) == 0) {
     stop(
-      "No data available for ", class, " see get_available_datasets(type = c(", paste(type, collapse = ", "), ")) for supported datasets"
+      "No data available for ",
+      class,
+      " see get_available_datasets(type = c(",
+      paste(type, collapse = ", "), ")) for supported datasets"
     )
   }
 
@@ -153,6 +156,9 @@ DataClass <- R6::R6Class(
     #' region codes.
     set_region_codes = function() {
     },
+    #' @field filter_level Character The level of the data to filter at.
+    #' Defaults to the target level.
+    filter_level = NA,
 
     #' @description Initialize function used by all `DataClass` objects.
     #' Set up the `DataClass` class with attributes set to input parameters.
@@ -192,6 +198,7 @@ DataClass <- R6::R6Class(
       self$region_name <- self$supported_region_names[[self$level]]
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
+      self$filter_level <- level
 
       if (!missing(regions)) {
         self$target_regions <- regions
@@ -259,11 +266,12 @@ DataClass <- R6::R6Class(
     #' @description Filter cleaned data for a specific region  To be called
     #' after \href{#method-clean}{\code{clean()}}
     #' @param regions A character vector of target regions. Overrides the
-    #' current class setting for `target_regions`. By default filters at the
-    #' current spatial level of interest.
+    #' current class setting for `target_regions`.
+    #' @param level Character The level of the data to filter at. Defaults
+    #' to "1"
     #' @importFrom dplyr filter
     #' @importFrom rlang !!
-    filter = function(regions) {
+    filter = function(regions, level = "1") {
       if (is.null(self$data$clean)) {
         stop("Data must first be cleaned using the clean method")
       }
@@ -277,7 +285,7 @@ DataClass <- R6::R6Class(
           self$verbose,
           "Filtering data to: ", paste(self$target_regions, collapse = ", ")
         )
-        condition <- paste0("level_", self$level, "_region")
+        condition <- paste0("level_", level, "_region")
         dt <- self$data$clean %>%
           filter(
             eval(parse(text = condition)) %in% self$target_regions
@@ -285,7 +293,7 @@ DataClass <- R6::R6Class(
         if (nrow(dt) == 0) {
           stop("No data found for target regions")
         } else {
-          self$data$clean <- dt
+          self$data$filtered <- dt
         }
       }
     },
@@ -320,8 +328,10 @@ DataClass <- R6::R6Class(
         region_codes = self$supported_region_codes
       )
 
+      self$data$filtered <- self$data$clean
+
       self$data$processed <- process_internal(
-        clean_data = self$data$clean,
+        clean_data = self$data$filtered,
         level = paste0("level_", self$level, "_region"),
         group_vars = region_vars,
         totals = self$totals,
@@ -400,12 +410,16 @@ DataClass <- R6::R6Class(
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(
+
     #' @description Filter method for country level data. Uses `countryname`
     #' to match input countries with known names.
     #' @param countries A character vector of target countries. Overrides the
     #' current class setting for `target_regions`.
+    #' @param level character The level of the data to filter, defaults to the
+    #' specified filter level. This will be the level of the data if not set at
+    #' initialization.
     #' @importFrom countrycode countryname
-    filter = function(countries) {
+    filter = function(countries, level = self$filter_level) {
       if (!missing(countries)) {
         self$target_regions <- countries
       }
@@ -419,7 +433,18 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
           stop("No countries found with target names")
         }
       }
-      super$filter()
+      super$filter(level = level)
+    },
+
+    #' @description Custom initialize function for national data sources.
+    #' @param filter_level Character The level of the data to filter at.
+    #' Defaults to the level used for the data..
+    #' @param ... additional arguments passed to `DataClass` initialize.
+    initialize = function(filter_level = NULL, ...) {
+      super$initialize(...)
+      if (!(is.null(filter_level))) {
+        self$filter_level <- filter_level
+      }
     }
   )
 )
