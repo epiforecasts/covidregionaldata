@@ -129,7 +129,7 @@ return_data <- function(obj, class = FALSE) {
 #' `process_internal` based on the supported regions present in the
 #' class.
 #' @param level A character string indicating the current level.
-#' @param all_levels A characater vector indicating all the levels supported.
+#' @param all_levels A character vector indicating all the levels supported.
 #' @param region_names A named list of region names named after the levels
 #'  supported.
 #' @param region_codes A named list of region codes named after the levels

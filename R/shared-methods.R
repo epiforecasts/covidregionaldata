@@ -274,6 +274,7 @@ DataClass <- R6::R6Class(
     #' @param level A character string indicating the level to filter at.
     #' Defaults to using the `filter_level` field if not specified
     #' @importFrom tidyselect all_of
+    #' @importFrom dplyr select filter pull
     available_regions = function(level) {
       if (is.null(self$data$clean)) {
         stop("Data must first be cleaned using the clean method")

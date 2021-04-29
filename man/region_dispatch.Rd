@@ -9,7 +9,7 @@ region_dispatch(level, all_levels, region_names, region_codes)
 \arguments{
 \item{level}{A character string indicating the current level.}
 
-\item{all_levels}{A characater vector indicating all the levels supported.}
+\item{all_levels}{A character vector indicating all the levels supported.}
 
 \item{region_names}{A named list of region names named after the levels
 supported.}
