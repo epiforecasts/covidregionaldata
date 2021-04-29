@@ -88,7 +88,7 @@ allowing them to access general methods." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.1000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
       </span>
     </div>
 
@@ -240,6 +240,7 @@ Defaults to the target level.</p></dd>
 <li><p><a href='#method-download'><code>DataClass$download()</code></a></p></li>
 <li><p><a href='#method-clean'><code>DataClass$clean()</code></a></p></li>
 <li><p><a href='#method-clean_common'><code>DataClass$clean_common()</code></a></p></li>
+<li><p><a href='#method-available_regions'><code>DataClass$available_regions()</code></a></p></li>
 <li><p><a href='#method-filter'><code>DataClass$filter()</code></a></p></li>
 <li><p><a href='#method-process'><code>DataClass$process()</code></a></p></li>
 <li><p><a href='#method-get'><code>DataClass$get()</code></a></p></li>
@@ -265,6 +266,7 @@ Set up the <code>DataClass</code> class with attributes set to input parameters.
 Should only be called by a <code>DataClass</code> class object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   level <span class='op'>=</span> <span class='st'>"1"</span>,
+  <span class='va'>filter_level</span>,
   <span class='va'>regions</span>,
   totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
   localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -277,7 +279,11 @@ Should only be called by a <code>DataClass</code> class object.</p><h4 class='ha
 <p><div class="arguments"></p><dl>
 <dt><code>level</code></dt><dd><p>A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
+options are level 1 ("1) and level 2 ("2").</p></dd>
+
+<dt><code>filter_level</code></dt><dd><p>A character string indicating the level to filter at.
+Defaults to the level of the data if not specified and if not otherwise
+defined in the class.
 Use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code> for supported options by dataset.</p></dd>
 
 <dt><code>regions</code></dt><dd><p>A character vector of target regions to be assigned to
@@ -305,6 +311,7 @@ Set up the <code>DataClass</code> class with attributes set to input parameters.
 Should only be called by a <code>DataClass</code> class object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   level <span class='op'>=</span> <span class='st'>"1"</span>,
+  <span class='va'>filter_level</span>,
   <span class='va'>regions</span>,
   totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
   localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -317,7 +324,11 @@ Should only be called by a <code>DataClass</code> class object.</p><h4 class='ha
 <p><div class="arguments"></p><dl>
 <dt><code>level</code></dt><dd><p>A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
+options are level 1 ("1) and level 2 ("2").</p></dd>
+
+<dt><code>filter_level</code></dt><dd><p>A character string indicating the level to filter at.
+Defaults to the level of the data if not specified and if not otherwise
+defined in the class.
 Use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code> for supported options by dataset.</p></dd>
 
 <dt><code>regions</code></dt><dd><p>A character vector of target regions to be assigned to
@@ -385,32 +396,59 @@ defined in a child class specific <code>clean_common</code> method.</p><h4 class
 <p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
+<a id="method-available_regions"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>available_regions()</code></h3>
+<p>Show regions that are available to be used for
+filtering operations. Can only be called once <code>clean()</code> has been
+called. Filtering level is determined by checking the <code>filter_level</code>
+field.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span><span class='va'>level</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>level</code></dt><dd><p>A character string indicating the level to filter at.
+Defaults to using the <code>filter_level</code> field if not specified</p></dd>
+
+</dl><p></div></p>
+<h3 class='hasAnchor' id='list-available-regions-'><a class='anchor' aria-hidden='true' href='#list-available-regions-'></a>Method <code>available_regions()</code></h3>
+<p>Show regions that are available to be used for
+filtering operations. Can only be called once <code>clean()</code> has been
+called. Filtering level is determined by checking the <code>filter_level</code>
+field.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span><span class='va'>level</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>level</code></dt><dd><p>A character string indicating the level to filter at.
+Defaults to using the <code>filter_level</code> field if not specified</p></dd>
+
+</dl><p></div></p>
+<p><hr>
 <a id="method-filter"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter()</a></code></h3>
 <p>Filter cleaned data for a specific region  To be called
 after <a href='#method-clean'><code>clean()</code></a></p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='va'>regions</span>, level <span class='op'>=</span> <span class='st'>"1"</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='va'>regions</span>, <span class='va'>level</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>regions</code></dt><dd><p>A character vector of target regions. Overrides the
 current class setting for <code>target_regions</code>.</p></dd>
 
-<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults
-to "1"</p></dd>
+<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults to
+the lowest level in the data.</p></dd>
 
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-filter-'><a class='anchor' aria-hidden='true' href='#list-filter-'></a>Method <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter()</a></code></h3>
 <p>Filter cleaned data for a specific region  To be called
 after <a href='#method-clean'><code>clean()</code></a></p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='va'>regions</span>, level <span class='op'>=</span> <span class='st'>"1"</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='va'>regions</span>, <span class='va'>level</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>regions</code></dt><dd><p>A character vector of target regions. Overrides the
 current class setting for <code>target_regions</code>.</p></dd>
 
-<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults
-to "1"</p></dd>
+<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults to
+the lowest level in the data.</p></dd>
 
 </dl><p></div></p>
 <p><hr>

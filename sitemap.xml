@@ -34,10 +34,19 @@
     <loc>epiforecasts.io/covidregionaldata/reference/Germany.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/Google.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/India.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/Italy.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/JHU.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/JHU_codes.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/Lithuania.html</loc>
@@ -62,6 +71,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/calculate_columns_from_existing_data.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/check_level.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/colombia_codes.html</loc>
@@ -95,6 +107,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/get_regional_data.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/glue_level.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/initialise_dataclass.html</loc>

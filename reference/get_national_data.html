@@ -93,7 +93,7 @@ in a standard format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.1000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
       </span>
     </div>
 
@@ -164,6 +164,7 @@ in a standard format.</p>
     <pre class="usage"><span class='fu'>get_national_data</span><span class='op'>(</span>
   <span class='va'>countries</span>,
   source <span class='op'>=</span> <span class='st'>"who"</span>,
+  level <span class='op'>=</span> <span class='st'>"1"</span>,
   totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
   steps <span class='op'>=</span> <span class='cn'>FALSE</span>,
   class <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -184,7 +185,14 @@ Used to filter the data.</p></td>
       <th>source</th>
       <td><p>A character string specifying the data source (not case
 dependent). Defaults to WHO (the World Health Organisation). See
-<code>get_available_datasets("natioanl")</code> for all options.</p></td>
+<code>get_available_datasets("national")</code> for all options.</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>A character string indicating the target administrative level
+of the data with the default being "1". Currently supported options are
+level 1 ("1) and level 2 ("2"). Use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code> for supported
+options by dataset.</p></td>
     </tr>
     <tr>
       <th>totals</th>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add useMemoise to options — start_using_memoise • covidregionaldata</title>
+<title>Glue the spatial level into a variable name — glue_level • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="Add useMemoise to options — start_using_memoise" />
-<meta property="og:description" content="Adds useMemoise to options meaning memoise is
-used when reading data in." />
+<meta property="og:title" content="Glue the spatial level into a variable name — glue_level" />
+<meta property="og:description" content="Glue the spatial level into a variable name" />
 
 
 
@@ -143,32 +142,29 @@ used when reading data in." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add useMemoise to options</h1>
+    <h1>Glue the spatial level into a variable name</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>start_using_memoise.Rd</code></div>
+    <div class="hidden name"><code>glue_level.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Adds useMemoise to options meaning memoise is
-used when reading data in.</p>
+    <p>Glue the spatial level into a variable name</p>
     </div>
 
-    <pre class="usage"><span class='fu'>start_using_memoise</span><span class='op'>(</span>path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>glue_level</span><span class='op'>(</span><span class='va'>level</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Path to cache directory, defaults to a temporary directory.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
-messages and warnings be returned.</p></td>
+      <th>level</th>
+      <td><p>A character string indicating the current level.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A string in the form "level_1_region".</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

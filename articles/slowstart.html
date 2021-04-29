@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.1000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@
 <p>Both the World Health Organisation (WHO) and European Centre for Disease Control (ECDC) provide worldwide national data. Access national level data for any country using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documention (<code><a href="../reference/get_national_data.html">?get_national_data</a></code>) for details of optional arguments.</p>
+<p>This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documentation (<code><a href="../reference/get_national_data.html">?get_national_data</a></code>) for details of optional arguments.</p>
 <p>Data is returned with no gaps in the structure of the data by country over time, and NAs fill in where data are not available.</p>
 </div>
 </div>
@@ -127,7 +127,7 @@
 <h3 class="hasAnchor">
 <a href="#accessing-sub-national-data" class="anchor" aria-hidden="true"></a>Accessing sub-national data</h3>
 <p>Access sub-national level data for a specific country over time using <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>. Use <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> to explore the currently supported sub-national datasets and select the data set of interest using the <code>country</code> (selects the country of interest), and <code>level</code> (selects the spatial scale of the data) arguments of <code>get_regional_data</code>.</p>
-<p>This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documention (<code><a href="../reference/get_regional_data.html">?get_regional_data</a></code>) for details of optional arguments.</p>
+<p>This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documentation (<code><a href="../reference/get_regional_data.html">?get_regional_data</a></code>) for details of optional arguments.</p>
 <p>As for national level data any gaps in reported data are filled with NAs.</p>
 <p>For example, data for Belgium Level 1 regions over time can be accessed using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">

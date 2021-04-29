@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.1000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
       </span>
     </div>
 
@@ -256,6 +256,7 @@
 <code class="sourceCode R"><span class="va">usa_counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"USA"</span>, level <span class="op">=</span> <span class="st">"2"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>This returns data for each county on each day of reported data. As there are more than 3,000 counties in the US, with some reporting data since the 21st January, this makes for a very large download.</p>
 <p>The same method will work for different countries where data are available, returning relevant sub-national units for each country. For example, in Germany data are available for Bundesland (federated state) and Kreise (district) areas.</p>
+<p>Additional subnational data are supported via the <code><a href="../reference/JHU.html">JHU()</a></code> and <code><a href="../reference/Google.html">Google()</a></code> classes. Use the <code>available_regions()</code> method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.</p>
 </div>
 <div id="mapping-data" class="section level2">
 <h2 class="hasAnchor">

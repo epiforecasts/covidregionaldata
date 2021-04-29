@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.1000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /var/folders/yl/vwcpf66n49jc7shvv7p72jh80000gr/T//Rtmp0DJBfK</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpijhrVX</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -142,11 +142,11 @@
 <div id="national-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h3>
-<p>To get worldwide time-series data by country (sourced from the WHO), use:</p>
+<p>To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default by also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 113,523</span>
+<span class="co">#&gt; Rows: 114,471</span>
 <span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
@@ -158,7 +158,7 @@
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 113,523 x 15</span>
+<span class="co">#&gt; # A tibble: 114,471 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -171,7 +171,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 113,513 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 114,461 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -201,7 +201,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 5,876 x 26</span>
+<span class="co">#&gt; # A tibble: 5,928 x 26</span>
 <span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
@@ -214,7 +214,7 @@
 <span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
 <span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
 <span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 5,866 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 5,918 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
@@ -237,7 +237,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Region"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-uk_plot-1.png" width="100%"></p>
-<p>See <code><a href="reference/get_available_datasets.html">get_available_datasets()</a></code> for supported regions and subregional levels. For further examples see the <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd" class="external-link">quick start vignette</a>.</p>
+<p>See <code><a href="reference/get_available_datasets.html">get_available_datasets()</a></code> for supported regions and subregional levels. For further examples see the <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd" class="external-link">quick start vignette</a>. Additional subnational data are supported via the <code><a href="reference/JHU.html">JHU()</a></code> and <code><a href="reference/Google.html">Google()</a></code> classes. Use the <code>available_regions()</code> method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.</p>
 </div>
 </div>
 <div id="citation" class="section level2">

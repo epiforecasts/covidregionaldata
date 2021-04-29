@@ -6,7 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meixco Class for downloading, cleaning and processing notification data — Mexico • covidregionaldata</title>
+<title>R6 Class containing specific attributes and methods for COVID-19 data
+provided by John Hopkins University.and used for the 2019 Novel Coronavirus
+Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Also,
+Supported by ESRI Living Atlas Team and the Johns Hopkins University
+Applied Physics Lab (JHU APL) — JHU • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,15 +50,14 @@
 
 
 
-<meta property="og:title" content="Meixco Class for downloading, cleaning and processing notification data — Mexico" />
-<meta property="og:description" content="Information for downloading, cleaning
-and processing COVID-19 region data for Mexico.
-Notes on region codes:
-Level 1 codes = ISO-3166-2,
-source: https://en.wikipedia.org/wiki/ISO_3166-2:MX
-Level 2 codes = INEGI Mexican official statistics geocoding,
-source: raw data
-Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes" />
+<meta property="og:title" content="R6 Class containing specific attributes and methods for COVID-19 data
+provided by John Hopkins University.and used for the 2019 Novel Coronavirus
+Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Also,
+Supported by ESRI Living Atlas Team and the Johns Hopkins University
+Applied Physics Lab (JHU APL) — JHU" />
+<meta property="og:description" content="Country specific information for downloading, cleaning
+and processing covid-19 region data for John Hopkins University." />
 
 
 
@@ -151,34 +155,39 @@ Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Meixco Class for downloading, cleaning and processing notification data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Mexico.R'><code>R/Mexico.R</code></a></small>
-    <div class="hidden name"><code>Mexico.Rd</code></div>
+    <h1>R6 Class containing specific attributes and methods for COVID-19 data
+provided by John Hopkins University.and used for the 2019 Novel Coronavirus
+Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Also,
+Supported by ESRI Living Atlas Team and the Johns Hopkins University
+Applied Physics Lab (JHU APL)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/JHU.R'><code>R/JHU.R</code></a></small>
+    <div class="hidden name"><code>JHU.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Information for downloading, cleaning
-and processing COVID-19 region data for Mexico.</p>
-<p>Notes on region codes:</p>
-<p>Level 1 codes = ISO-3166-2,
-source: https://en.wikipedia.org/wiki/ISO_3166-2:MX</p>
-<p>Level 2 codes = INEGI Mexican official statistics geocoding,
-source: raw data</p>
-<p>Level 1 INEGI codes are the first 2 characters of Level 2 INEGI codes</p>
+    <p>Country specific information for downloading, cleaning
+and processing covid-19 region data for John Hopkins University.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://datos.covid-19.conacyt.mx/'>https://datos.covid-19.conacyt.mx/</a></p>
-    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
+    <p><a href='https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data'>https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data</a></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Mexico</code></p>
+    <p>If using this data please cite:
+"Dong E, Du H, Gardner L. An interactive web-based dashboard to track
+COVID-19 in real time.
+Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"</p>
+    <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
+
+    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code><a href='CountryDataClass.html'>covidregionaldata::CountryDataClass</a></code> -&gt; <code>JHU</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+<dt><code>origin</code></dt><dd><p>name of country to fetch data for</p></dd>
 
 <dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
@@ -186,10 +195,8 @@ source: raw data</p>
 
 <dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data.</p></dd>
-
-<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data that are level
-specific.</p></dd>
+<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data. The first, and
+only entry, is be named main.</p></dd>
 
 <dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
@@ -200,79 +207,60 @@ specific.</p></dd>
 <h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-set_region_codes'><code>Mexico$set_region_codes()</code></a></p></li>
-<li><p><a href='#method-download'><code>Mexico$download()</code></a></p></li>
-<li><p><a href='#method-clean_common'><code>Mexico$clean_common()</code></a></p></li>
-<li><p><a href='#method-clean_level_1'><code>Mexico$clean_level_1()</code></a></p></li>
-<li><p><a href='#method-clean_level_2'><code>Mexico$clean_level_2()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Mexico$clone()</code></a></p></li>
+<li><p><a href='#method-set_region_codes'><code>JHU$set_region_codes()</code></a></p></li>
+<li><p><a href='#method-clean_common'><code>JHU$clean_common()</code></a></p></li>
+<li><p><a href='#method-clean_level_1'><code>JHU$clean_level_1()</code></a></p></li>
+<li><p><a href='#method-clone'><code>JHU$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions"><a href='../../covidregionaldata/html/DataClass.html#method-available_regions'><code>covidregionaldata::DataClass$available_regions()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean"><a href='../../covidregionaldata/html/DataClass.html#method-clean'><code>covidregionaldata::DataClass$clean()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter"><a href='../../covidregionaldata/html/DataClass.html#method-filter'><code>covidregionaldata::DataClass$filter()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download"><a href='../../covidregionaldata/html/DataClass.html#method-download'><code>covidregionaldata::DataClass$download()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get"><a href='../../covidregionaldata/html/DataClass.html#method-get'><code>covidregionaldata::DataClass$get()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize"><a href='../../covidregionaldata/html/DataClass.html#method-initialize'><code>covidregionaldata::DataClass$initialize()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process"><a href='../../covidregionaldata/html/DataClass.html#method-process'><code>covidregionaldata::DataClass$process()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return"><a href='../../covidregionaldata/html/DataClass.html#method-return'><code>covidregionaldata::DataClass$return()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary"><a href='../../covidregionaldata/html/DataClass.html#method-summary'><code>covidregionaldata::DataClass$summary()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter"><a href='../../covidregionaldata/html/CountryDataClass.html#method-filter'><code>covidregionaldata::CountryDataClass$filter()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
 <a id="method-set_region_codes"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-set-region-codes-'><a class='anchor' aria-hidden='true' href='#list-set-region-codes-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
-<a id="method-download"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>download()</code></h3>
-<p>Data <code>download()</code> function for Mexico data. This replaces
-the generic download function in <code><a href='DataClass.html'>DataClass()</a></code>. To get the latest data
-use a PHP script from the website.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-download-'><a class='anchor' aria-hidden='true' href='#list-download-'></a>Method <code>download()</code></h3>
-<p>Data <code>download()</code> function for Mexico data. This replaces
-the generic download function in <code><a href='DataClass.html'>DataClass()</a></code>. To get the latest data
-use a PHP script from the website.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clean_common"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_common()</code></h3>
-<p>Common Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>JHU specific data cleaning. Joins the raw data sets, checks
+column types and renames where needed.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-clean-common-'><a class='anchor' aria-hidden='true' href='#list-clean-common-'></a>Method <code>clean_common()</code></h3>
-<p>Common Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>JHU specific data cleaning. Joins the raw data sets, checks
+column types and renames where needed.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clean_level_1"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_level_1()</code></h3>
-<p>Estados Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>JHU specific country level data cleaning. Aggregates the
+data to the country (level 2) level.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-clean-level-'><a class='anchor' aria-hidden='true' href='#list-clean-level-'></a>Method <code>clean_level_1()</code></h3>
-<p>Estados Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
-<a id="method-clean_level_2"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_level_2()</code></h3>
-<p>Municipality Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_level_2</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-clean-level-'><a class='anchor' aria-hidden='true' href='#list-clean-level-'></a>Method <code>clean_level_2()</code></h3>
-<p>Municipality Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clean_level_2</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>JHU specific country level data cleaning. Aggregates the
+data to the country (level 2) level.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -281,7 +269,7 @@ use a PHP script from the website.</p><h4 class='hasAnchor' id='usage'><a class=
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>JHU</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -292,10 +280,27 @@ use a PHP script from the website.</p><h4 class='hasAnchor' id='usage'><a class=
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Mexico</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>region</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># nolint start</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># set up a data cache</span>
+<span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># get all countries data</span>
+<span class='va'>jhu</span> <span class='op'>&lt;-</span> <span class='va'>JHU</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"1"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>jhu</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># show available regions with data at the second level of interest</span>
+<span class='va'>jhu_level_2</span> <span class='op'>&lt;-</span> <span class='va'>JHU</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"2"</span><span class='op'>)</span>
+<span class='va'>jhu_level_2</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>jhu_level_2</span><span class='op'>$</span><span class='fu'>clean</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>jhu</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># get all region data for the uk</span>
+<span class='va'>jhu_level_2</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='st'>"uk"</span><span class='op'>)</span>
+<span class='va'>jhu_level_2</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>jhu_level_2</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
+<span class='co'># nolint end</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
