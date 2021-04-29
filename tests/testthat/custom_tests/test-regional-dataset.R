@@ -92,6 +92,11 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     expect_clean_cols(region$data$clean, level = level)
   })
 
+  test_that(paste0(data_name, " can highlight available regions as expected"), {
+    expect_error(region$available_regions(), NA)
+    expect_true(class(region$available_regions()) %in% "character")
+  })
+
   test_that(paste0(data_name, " can be processed as expected"), {
     region$process()
     expect_s3_class(region$data$processed, "data.frame")
