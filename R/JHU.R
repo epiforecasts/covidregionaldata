@@ -63,17 +63,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
       self$codes_lookup$`1` <- JHU_codes
     },
 
-    #' @description Google specific download, calls `DataClass` download but
-    #' also fills the country info field
-    download = function() {
-      super$download()
-      if (!(is.na(self$supported_region_names[["1"]]))) {
-        self$country_info <- unique(
-          self$data$raw$daily_confirmed[["Country/Region"]]
-        )
-      }
-    },
-
     #' @description JHU specific data cleaning. Joins the raw data sets, checks
     #' column types and renames where needed.
     #' @importFrom dplyr last_col bind_rows mutate rename select everything
@@ -138,7 +127,7 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$date, .data$level_1_region_code,
           .data$level_1_region
         ) %>%
-        summarise(across(where(is.double), sum))
+        summarise(across(where(is.double), sum), .groups = "drop_last")
     }
   )
 )

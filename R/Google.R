@@ -67,17 +67,6 @@ Google <- R6::R6Class("Google",
       "total_recovered",
       "total_tested"
     ),
-    #' @description Google specific download, calls `DataClass` download but
-    #' also fills the country info field
-    download = function() {
-      super$download()
-      if (!(is.na(self$supported_region_names[["1"]]))) {
-        self$country_info <- unique(
-          self$data$raw$index[["country_name"]]
-        )
-      }
-    },
-
     #' @description GoogleData specific subregion2 level data cleaning. This
     #' takes all the raw data, puts into a single data frame, renames some
     #' columns and checks types.
@@ -164,7 +153,7 @@ Google <- R6::R6Class("Google",
           .data$date, .data$level_1_region_code,
           .data$level_1_region
         ) %>%
-        summarise(across(where(is.double), sum))
+        summarise(across(where(is.double), sum), .groups = "drop")
     },
 
     #' @description Google specific subregion2 level data cleaning. Takes the
@@ -178,7 +167,7 @@ Google <- R6::R6Class("Google",
           .data$date, .data$level_1_region_code, .data$level_1_region,
           .data$level_2_region_code, .data$level_2_region
         ) %>%
-        summarise(across(where(is.double), sum))
+        summarise(across(where(is.double), sum), .groups = "drop_last")
     },
     #' @description custom initialize for Google
     #' @param ... arguments to be passed to `DataClass` and initialize Google
