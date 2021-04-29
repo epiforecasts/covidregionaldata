@@ -27,12 +27,15 @@
 #' jhu <- JHU$new(level = "1", get = TRUE)
 #' jhu$return()
 #'
-#' # show available regions with data at the level of interest
+#' # show available regions with data at the second level of interest
+#' jhu_level_2 <- JHU$new(level = "2")
+#' jhu_level_2$download()
+#' jhu_level_2$clean()
 #' jhu$available_regions()
 #'
 #' # get all region data for the uk
-#' uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
-#' uk$return()
+#' jhu_level_2$filter("uk")
+#' jhu_level_2$return()
 #' }
 #' # nolint end
 JHU <- R6::R6Class("JHU", # rename to country name
@@ -126,7 +129,7 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$date, .data$level_1_region_code,
           .data$level_1_region
         ) %>%
-        summarise(across(where(is.double), sum), .groups = "drop_last")
+        summarise(across(where(is.double), sum), .groups = "drop")
     }
   )
 )

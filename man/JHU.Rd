@@ -31,12 +31,15 @@ start_using_memoise()
 jhu <- JHU$new(level = "1", get = TRUE)
 jhu$return()
 
-# show available regions with data at the level of interest
+# show available regions with data at the second level of interest
+jhu_level_2 <- JHU$new(level = "2")
+jhu_level_2$download()
+jhu_level_2$clean()
 jhu$available_regions()
 
 # get all region data for the uk
-uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
-uk$return()
+jhu_level_2$filter("uk")
+jhu_level_2$return()
 }
 # nolint end
 }

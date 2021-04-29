@@ -6,7 +6,7 @@ jhu_codes_link <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mas
 JHU_codes <- vroom(jhu_codes_link)
 JHU_codes <- JHU_codes %>%
   select(Country_Region, iso3) %>%
-  mutate(
+  rename(
     level_1_region_code = iso3
   )
 # update package region_codes

@@ -28,8 +28,16 @@ start_using_memoise()
 national <- Google$new(level = "1", get = TRUE)
 national$return()
 
-# show available countries
-national$available_regions()
+# show available regions with data at the second level of interest
+google_level_2 <- Google$new(level = "2")
+google_level_2$download()
+google_level_2$clean()
+google$available_regions()
+
+# get all region data for the uk
+google_level_2$filter("uk")
+google_level_2$return()
+
 # get all regional data for the UK
 uk <- Google$new(regions = "uk", level = "2", get = TRUE)
 uk$return()
