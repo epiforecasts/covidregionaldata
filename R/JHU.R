@@ -20,13 +20,13 @@
 #' @examples
 #' # nolint start
 #' \dontrun{
-#' # get all countries
-#' national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
-#' national$return()
-#' # show available countries
-#' national$show_counties()
+#' # get all countries data
+#' jhu <- JHU$new(level = "1", get = TRUE)
+#' jhu$return()
+#' # show available regions with data at the level of interest
+#' jhu$show_regions()
 #' # get all region data for the uk
-#' uk <- JHU$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
 #' uk$return()
 #' }
 #' # nolint end
@@ -45,8 +45,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
     supported_region_codes = list(
       "1" = "iso_3166_1_alpha_3", "2" = "iso_code"
     ),
-    #' @field country_info tibble of countries in the processed data
-    country_info = NULL,
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
     # nolint start
@@ -141,11 +139,6 @@ JHU <- R6::R6Class("JHU", # rename to country name
           .data$level_1_region
         ) %>%
         summarise(across(where(is.double), sum))
-    },
-
-    #' @description display the countries available with this data
-    show_countries = function() {
-      print(self$country_info)
     }
   )
 )

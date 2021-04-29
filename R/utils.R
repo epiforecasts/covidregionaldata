@@ -143,13 +143,13 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
     rn <- c()
     if (!is.null(region_names[[l]])) {
       rn <- c(region_names[[l]])
-      names(rn) <- paste0("level_", l, "_region")
+      names(rn) <- glue_level(l)
     }
 
     rc <- c()
     if (!is.null(region_codes[[l]])) {
       rc <- c(region_codes[[l]])
-      names(rc) <- paste0("level_", l, "_region_code")
+      names(rc) <- paste0(glue_level(l), "_code")
     }
     region_vars <- c(rn, rc)
     return(region_vars)
@@ -159,4 +159,12 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
   region_vars <- region_vars[!is.null(region_vars)]
   region_vars <- region_vars[!is.na(region_vars)]
   return(region_vars)
+}
+
+#' Glue the spatial level into a variable name
+#'
+#' @inheritParams region_dispatch
+#' @return A string in the form "level_1_region".
+glue_level <- function(level) {
+  paste0("level_", level, "_region")
 }

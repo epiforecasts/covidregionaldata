@@ -67,10 +67,6 @@ Google <- R6::R6Class("Google",
       "total_recovered",
       "total_tested"
     ),
-    #' @field country_info tibble of countries in the processed data
-    country_info = NULL,
-
-
     #' @description Google specific download, calls `DataClass` download but
     #' also fills the country info field
     download = function() {

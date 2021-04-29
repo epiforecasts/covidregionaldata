@@ -24,13 +24,13 @@ Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
 \examples{
 # nolint start
 \dontrun{
-# get all countries
-national <- JHU$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
-national$return()
-# show available countries
-national$show_counties()
+# get all countries data
+jhu <- JHU$new(level = "1", get = TRUE)
+jhu$return()
+# show available regions with data at the level of interest
+jhu$show_regions()
 # get all region data for the uk
-uk <- JHU$new(regions = "uk", level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+uk <- JHU$new(regions = "uk", level = "2", get = TRUE)
 uk$return()
 }
 # nolint end
@@ -50,8 +50,6 @@ uk$return()
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{country_info}}{tibble of countries in the processed data}
-
 \item{\code{common_data_urls}}{List of named links to raw data. The first, and
 only entry, is be named main.}
 
@@ -66,7 +64,6 @@ only entry, is be named main.}
 \item \href{#method-download}{\code{JHU$download()}}
 \item \href{#method-clean_common}{\code{JHU$clean_common()}}
 \item \href{#method-clean_level_1}{\code{JHU$clean_level_1()}}
-\item \href{#method-show_countries}{\code{JHU$show_countries()}}
 \item \href{#method-clone}{\code{JHU$clone()}}
 }
 }
@@ -78,6 +75,7 @@ only entry, is be named main.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="show_regions">}\href{../../covidregionaldata/html/DataClass.html#method-show_regions}{\code{covidregionaldata::DataClass$show_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
 }
@@ -123,16 +121,6 @@ JHU specific country level data cleaning. Aggregates the
 data to the country (level 2) level.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JHU$clean_level_1()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-show_countries"></a>}}
-\if{latex}{\out{\hypertarget{method-show_countries}{}}}
-\subsection{Method \code{show_countries()}}{
-display the countries available with this data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{JHU$show_countries()}\if{html}{\out{</div>}}
 }
 
 }

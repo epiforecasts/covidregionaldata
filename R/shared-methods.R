@@ -148,6 +148,9 @@ DataClass <- R6::R6Class(
     #' This field is filled at initialisation.using user inputs or defaults
     #' in `$new()`
     steps = NULL,
+    #' @field available_regions Character vector of available level 1 regions
+    # in the data. Stores the result of calling the `show_regions()` method.
+    available_regions = NULL,
     #' @field target_regions A character vector of regions to filter for. Used
     #' by the `filter method`.
     target_regions = NULL,
@@ -258,6 +261,15 @@ DataClass <- R6::R6Class(
 
     },
 
+    #' @description Show regions that are available to be used for
+    #' filtering operations. Can only be called once `clean()` has been
+    #' called.
+    show_regions = function() {
+      filter_level <- "1"
+      filter_level <- glue_level(filter_level)
+      target_level <- glue_level(self$level)
+    },
+
     #' @description Filter cleaned data for a specific region  To be called
     #' after \href{#method-clean}{\code{clean()}}
     #' @param regions A character vector of target regions. Overrides the
@@ -279,7 +291,7 @@ DataClass <- R6::R6Class(
           self$verbose,
           "Filtering data to: ", paste(self$target_regions, collapse = ", ")
         )
-        condition <- paste0("level_", self$level, "_region")
+        condition <- glue_level(self$level)
         dt <- self$data$clean %>%
           filter(
             eval(parse(text = condition)) %in% self$target_regions

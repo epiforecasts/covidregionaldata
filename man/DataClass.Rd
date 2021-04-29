@@ -74,6 +74,8 @@ in \verb{$new()}}
 This field is filled at initialisation.using user inputs or defaults
 in \verb{$new()}}
 
+\item{\code{available_regions}}{Character vector of available level 1 regions}
+
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
 }
@@ -87,6 +89,7 @@ by the \verb{filter method}.}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-clean_common}{\code{DataClass$clean_common()}}
+\item \href{#method-show_regions}{\code{DataClass$show_regions()}}
 \item \href{#method-filter}{\code{DataClass$filter()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-get}{\code{DataClass$get()}}
@@ -190,6 +193,18 @@ By default this method is empty as if any code is required it should be
 defined in a child class specific \code{clean_common} method.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-show_regions"></a>}}
+\if{latex}{\out{\hypertarget{method-show_regions}{}}}
+\subsection{Method \code{show_regions()}}{
+Show regions that are available to be used for
+filtering operations. Can only be called once \code{clean()} has been
+called.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$show_regions()}\if{html}{\out{</div>}}
 }
 
 }
