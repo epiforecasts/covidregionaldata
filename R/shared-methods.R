@@ -186,7 +186,9 @@ DataClass <- R6::R6Class(
     #' If you want to keep this when supplying your own processing functions
     #' remember to add it to your list also. If you feel you have created a
     #' cool processing function that others could benefit from please submit a
-    #' Pull Request to https://github.com/epiforecasts/covidregionaldata
+    # nolint start
+    #' Pull Request to our \href{https://github.com/epiforecasts/covidregionaldata}{github repository}
+    # nolint end
     #' and we will consider adding it to the package.
     #' @export
     initialize = function(level = "1", regions,
