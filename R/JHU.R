@@ -35,6 +35,7 @@
 #'
 #' # get all region data for the uk
 #' jhu_level_2$filter("uk")
+#' jhu_level_2$process()
 #' jhu_level_2$return()
 #' }
 #' # nolint end

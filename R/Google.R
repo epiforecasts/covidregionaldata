@@ -32,6 +32,7 @@
 #'
 #' # get all region data for the uk
 #' google_level_2$filter("uk")
+#' google_level_2$process()
 #' google_level_2$return()
 #'
 #' # get all regional data for the UK
