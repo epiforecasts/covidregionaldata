@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cumulative counts from daily counts or daily counts from cumulative,
-dependent on which columns already exist — calculate_columns_from_existing_data • covidregionaldata</title>
+<title>Download Excel Documents — download_excel • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -46,11 +45,8 @@ dependent on which columns already exist — calculate_columns_from_existing_dat
 
 
 
-<meta property="og:title" content="Cumulative counts from daily counts or daily counts from cumulative,
-dependent on which columns already exist — calculate_columns_from_existing_data" />
-<meta property="og:description" content="Checks which columns are missing (cumulative/daily counts) and
-if one is present and the other not then calculates the second from the
-first." />
+<meta property="og:title" content="Download Excel Documents — download_excel" />
+<meta property="og:description" content="Download Excel Documents" />
 
 
 
@@ -146,32 +142,47 @@ first." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cumulative counts from daily counts or daily counts from cumulative,
-dependent on which columns already exist</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/processing.R'><code>R/processing.R</code></a></small>
-    <div class="hidden name"><code>calculate_columns_from_existing_data.Rd</code></div>
+    <h1>Download Excel Documents</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>download_excel.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Checks which columns are missing (cumulative/daily counts) and
-if one is present and the other not then calculates the second from the
-first.</p>
+    <p>Download Excel Documents</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calculate_columns_from_existing_data</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>download_excel</span><span class='op'>(</span><span class='va'>url</span>, <span class='va'>archive</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, transpose <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>A data frame</p></td>
+      <th>url</th>
+      <td><p>Character string containing the full URL to the Excel document.</p></td>
+    </tr>
+    <tr>
+      <th>archive</th>
+      <td><p>Character string naming the file name to assign in the
+temporary directory.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
+messages and warnings be returned.</p></td>
+    </tr>
+    <tr>
+      <th>transpose</th>
+      <td><p>Logical, should the read in data be transposed</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional parameters to pass to <code>read_excel()</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with extra columns if required</p>
+    <p>A <code>data.frame</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

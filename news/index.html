@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1.3000</span>
       </span>
     </div>
 
@@ -160,13 +160,15 @@
 <li>Adds support for JHU or Google data to <code><a href="../reference/get_national_data.html">get_national_data()</a></code>. This may also now be used to access lower level data from these sources but it may be better to instead use the classes directly or via <code><a href="../reference/initialise_dataclass.html">initialise_dataclass()</a></code>.</li>
 </ul>
 </div>
-</div>
-    <div id="covidregionaldata-090" class="section level1">
-<h1 class="page-header" data-toc-text="0.9.0">
-<a href="#covidregionaldata-090" class="anchor" aria-hidden="true"></a>covidregionaldata 0.9.0<small> 2021-04-24 </small>
-</h1>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<ul>
+<li>The optional downloading of NHS region data in the <code><a href="../reference/UK.html">UK()</a></code> has been improved to include both the dynamic data previously supported and the archive document now produced (by <a href='https://github.com/kathsherratt'>@kathsherratt</a>). # covidregionaldata 0.9.0</li>
+</ul>
 <p>In this release <code>covidregionaldata</code> has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install <code>covidregionaldata@0.8.3</code> from GitHub.</p>
 <p>Thanks to <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>, <a href='https://github.com/RichardMN'>@RichardMN</a>, and <a href='https://github.com/kathsherratt'>@kathsherratt</a> for major contributions to this release. Thanks to <a href='https://github.com/RichardMN'>@RichardMN</a> for volunteering his time.</p>
+</div>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features-1" class="anchor" aria-hidden="true"></a>New features</h2>
@@ -250,9 +252,9 @@
 <li>Switched to using <code>vroom</code> for faster <code>csv</code> downloads.</li>
 </ul>
 </div>
-<div id="other-changes" class="section level2">
+<div id="other-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<a href="#other-changes-1" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul>
 <li>Replaced silently broken functions for converting cumulative data to daily and vice versa.</li>
 <li>Removed integration with Covid19R formatting.</li>
