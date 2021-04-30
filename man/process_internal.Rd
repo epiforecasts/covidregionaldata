@@ -11,7 +11,7 @@ process_internal(
   totals = FALSE,
   localise = TRUE,
   verbose = TRUE,
-  process_fns = c()
+  process_fns
 )
 }
 \arguments{

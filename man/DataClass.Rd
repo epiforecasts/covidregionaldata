@@ -164,7 +164,7 @@ cleaning steps be kept and output in a list.}
 \item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
 
-\item{\code{process_fns}}{List, additional functions to process the data.
+\item{\code{process_fns}}{Array, additional functions to process the data.
 Users can supply their own functions here which would act on clean data
 and they will be called alongside our default processing functions.
 The default optional function added is \code{set_negative_values_to_zero}.
@@ -287,7 +287,7 @@ which does the following:
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{process_fns}}{List, additional functions to process the data.
+\item{\code{process_fns}}{Array, additional functions to process the data.
 Users can supply their own functions here which would act on clean data
 and they will be called alongside our default processing functions.
 The default optional function added is \code{set_negative_values_to_zero}.
