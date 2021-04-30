@@ -145,6 +145,12 @@
     <loc>epiforecasts.io/covidregionaldata/reference/return_data.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/run_default_processing_fns.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/run_optional_processing_fns.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/set_negative_values_to_zero.html</loc>
   </url>
   <url>

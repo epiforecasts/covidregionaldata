@@ -225,6 +225,9 @@ in <code>$new()</code></p></dd>
 <dt><code>target_regions</code></dt><dd><p>A character vector of regions to filter for. Used
 by the <code>filter method</code>.</p></dd>
 
+<dt><code>process_fns</code></dt><dd><p>array, additional, user supplied functions to process
+the data.</p></dd>
+
 <dt><code>filter_level</code></dt><dd><p>Character The level of the data to filter at.
 Defaults to the target level.</p></dd>
 
@@ -272,7 +275,8 @@ Should only be called by a <code>DataClass</code> class object.</p><h4 class='ha
   localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   steps <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  get <span class='op'>=</span> <span class='cn'>FALSE</span>
+  get <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>process_fns</span>
 <span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
@@ -303,6 +307,17 @@ cleaning steps be kept and output in a list.</p></dd>
 
 <dt><code>get</code></dt><dd><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
 called (this will download, clean, and process data at initialisation).</p></dd>
+
+<dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is <code>set_negative_values_to_zero</code>.
+if process_fns is not set (see <code>process_fns</code> field for all defaults).
+If you want to keep this when supplying your own processing functions
+remember to add it to your list also. If you feel you have created a
+cool processing function that others could benefit from please submit a
+Pull Request to our <a href='https://github.com/epiforecasts/covidregionaldata'>github repository</a>
+and we will consider adding it to the package.</p></dd>
 
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-new-'><a class='anchor' aria-hidden='true' href='#list-new-'></a>Method <code>new()</code></h3>
@@ -317,7 +332,8 @@ Should only be called by a <code>DataClass</code> class object.</p><h4 class='ha
   localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   steps <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  get <span class='op'>=</span> <span class='cn'>FALSE</span>
+  get <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>process_fns</span>
 <span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
@@ -348,6 +364,17 @@ cleaning steps be kept and output in a list.</p></dd>
 
 <dt><code>get</code></dt><dd><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
 called (this will download, clean, and process data at initialisation).</p></dd>
+
+<dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is <code>set_negative_values_to_zero</code>.
+if process_fns is not set (see <code>process_fns</code> field for all defaults).
+If you want to keep this when supplying your own processing functions
+remember to add it to your list also. If you feel you have created a
+cool processing function that others could benefit from please submit a
+Pull Request to our <a href='https://github.com/epiforecasts/covidregionaldata'>github repository</a>
+and we will consider adding it to the package.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
@@ -467,9 +494,19 @@ which does the following:</p><ul>
 <li><p>Calculates cumulative data <code><a href='complete_cumulative_columns.html'>complete_cumulative_columns()</a></code></p></li>
 <li><p>Calculates missing columns from existing ones
 <code><a href='calculate_columns_from_existing_data.html'>calculate_columns_from_existing_data()</a></code></p></li>
-</ul><p>Dynamically works for level 1 and level 2 regions.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+</ul>
+<h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='va'>process_fns</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is <code>set_negative_values_to_zero</code>.
+if process_fns is not set (see <code>process_fns</code> field for all defaults).</p></dd>
+
+</dl><p></div></p>
 <h3 class='hasAnchor' id='list-process-'><a class='anchor' aria-hidden='true' href='#list-process-'></a>Method <code>process()</code></h3>
 <p>Processes data by adding and calculating absent columns.
 Called on clean data (after <a href='#method-clean'><code>clean()</code></a>).
@@ -485,9 +522,19 @@ which does the following:</p><ul>
 <li><p>Calculates cumulative data <code><a href='complete_cumulative_columns.html'>complete_cumulative_columns()</a></code></p></li>
 <li><p>Calculates missing columns from existing ones
 <code><a href='calculate_columns_from_existing_data.html'>calculate_columns_from_existing_data()</a></code></p></li>
-</ul><p>Dynamically works for level 1 and level 2 regions.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+</ul>
+<h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='va'>process_fns</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is <code>set_negative_values_to_zero</code>.
+if process_fns is not set (see <code>process_fns</code> field for all defaults).</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-get"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/get.html'>get()</a></code></h3>
 <p>Get data related to the data class. This runs each distinct

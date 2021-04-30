@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal Shared Regional Dataset Processing — process_internal • covidregionaldata</title>
+<title>Default processing steps to run — run_default_processing_fns • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,9 @@
 
 
 
-<meta property="og:title" content="Internal Shared Regional Dataset Processing — process_internal" />
-<meta property="og:description" content="Internal shared regional data cleaning designed to be called
-by process." />
+<meta property="og:title" content="Default processing steps to run — run_default_processing_fns" />
+<meta property="og:description" content="The default processing steps to which are always run. Runs on
+clean data" />
 
 
 
@@ -143,64 +143,24 @@ by process." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal Shared Regional Dataset Processing</h1>
+    <h1>Default processing steps to run</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/processing.R'><code>R/processing.R</code></a></small>
-    <div class="hidden name"><code>process_internal.Rd</code></div>
+    <div class="hidden name"><code>run_default_processing_fns.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal shared regional data cleaning designed to be called
-by <code>process</code>.</p>
+    <p>The default processing steps to which are always run. Runs on
+clean data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>process_internal</span><span class='op'>(</span>
-  <span class='va'>clean_data</span>,
-  <span class='va'>level</span>,
-  <span class='va'>group_vars</span>,
-  totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  localise <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>process_fns</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>run_default_processing_fns</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>clean_data</th>
-      <td><p>The clean data for a class, e.g. <code>Italy$data$clean</code></p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>The level of the data, e.g. 'level_1_region'</p></td>
-    </tr>
-    <tr>
-      <th>group_vars</th>
-      <td><p>Grouping variables, used to
-for grouping and to localise names. It is assumed that the first entry
-indicates the main region variable and the second indicates the geocode for
-this variable.</p></td>
-    </tr>
-    <tr>
-      <th>totals</th>
-      <td><p>Logical, defaults to <code>FALSE</code>. If `TRUE``, returns totalled
-data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.</p></td>
-    </tr>
-    <tr>
-      <th>localise</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should region names be
-localised.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
-messages and warnings be returned.</p></td>
-    </tr>
-    <tr>
-      <th>process_fns</th>
-      <td><p>array, additional functions to be called after default
-processing steps</p></td>
+      <th>data</th>
+      <td><p>A data table</p></td>
     </tr>
     </table>
 
