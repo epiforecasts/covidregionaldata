@@ -45,8 +45,9 @@ UK <- R6::R6Class("UK",
         "nhs_recent_url" = "https://www.england.nhs.uk/statistics",
         # A stable URL for data from August 2020 - April 06 2021
         # nolint start
-        "nhs_archive_url" = "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2021/04/COVID-19-daily-admissions-and-beds-20210406-1.xlsx")
-        # nolint end
+        "nhs_archive_url" = "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2021/04/COVID-19-daily-admissions-and-beds-20210406-1.xlsx"
+      )
+      # nolint end
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = list(
@@ -325,10 +326,10 @@ UK <- R6::R6Class("UK",
     #' @source \url{https://coronavirus.data.gov.uk/details/download}
     # nolint end
     #' @importFrom lubridate year month
-    #' @importFrom readxl read_excel cell_limits
+    #' @importFrom readxl cell_limits
     #' @importFrom dplyr %>%
     download_nhs_regions = function() {
-      
+
       # Some general set up
       if (is.null(self$release_date)) {
         self$release_date <- Sys.Date() - 1
@@ -344,9 +345,8 @@ UK <- R6::R6Class("UK",
         admissions, which excludes readmissions. This is available for
         England and English regions only."
       )
-      
-      # 1. Data from 7 April 2021 to now: 
-      # - Create the dynamic URL
+
+      # 1. Data from 7 April 2021 to now:
       nhs_recent_url <- paste0(
         self$data_urls[["nhs_recent_url"]],
         "/wp-content/uploads/sites/2/",
@@ -359,44 +359,30 @@ UK <- R6::R6Class("UK",
         gsub("-", "", as.character(self$release_date)),
         ".xlsx"
       )
-      # - Download as a temp file
-      tmp_recent <- file.path(tempdir(), "nhs_recent.xlsx")
-      download.file(nhs_recent_url,
-        destfile = tmp_recent,
-        mode = "wb", quiet = !(self$verbose)
+
+      recent <- download_excel(nhs_recent_url,
+        "nhs_recent.xlsx",
+        verbose = self$verbose,
+        transpose = TRUE,
+        sheet = 1,
+        range = cell_limits(c(28, 2), c(36, NA))
       )
-      # - Read in raw data
-      nhs_recent <- suppressMessages(
-        read_excel(tmp_recent,
-          sheet = 1,
-          range = cell_limits(c(28, 2), c(36, NA))
-        ) %>%
-          t()
-      )
-      nhs_recent <- as.data.frame(nhs_recent)
-      
+
       # 2. Data for August 2020 to 7 April 2021
-      # - Download as a temp file
-      tmp_archive <- file.path(tempdir(), "nhs_archive.xlsx")
-      download.file(url = self$data_urls[["nhs_archive_url"]],
-                    destfile = tmp_archive,
-                    mode = "wb", quiet = !(self$verbose)
+      archive <- download_excel(self$data_urls[["nhs_archive_url"]],
+        "nhs_archive.xlsx",
+        verbose = self$verbose,
+        transpose = TRUE,
+        sheet = 1,
+        range = cell_limits(c(28, 2), c(36, NA))
       )
-      # - Read in raw data
-      nhs_archive <- suppressMessages(
-        read_excel(tmp_archive,
-                   sheet = 1,
-                   range = cell_limits(c(28, 2), c(36, NA))
-        ) %>%
-          t()
-      )
-      nhs_archive <- as.data.frame(nhs_archive)
-      
+
+
       # 3. Join archive and recent data, still in raw format
-      nhs <- rbind(nhs_archive, nhs_recent)
-      nhs <- nhs[which(!rownames(nhs) == "Name1"),]
-      
-      return(nhs)
+      dt <- rbind(archive, recent)
+      dt <- dt[which(!rownames(dt) == "Name1"), ]
+
+      return(dt)
     },
 
     #' @description Add NHS data for level 1 regions
