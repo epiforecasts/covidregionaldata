@@ -19,9 +19,12 @@ journal: JOSS
 link-citations: yes
 ---
 
+# To do
+
+- [ ] Cite JHU, Google, WHO, and ECDC as citations not as web links (or also as web links). 
 # Summary 
 
-`covidregionaldata` is an R [@Rdev:2013] package to interface sub-national and national level COVID-19 data, providing cleaned and checked COVID-19 case and, where available, deaths, recoveries and hospitalisation data for all countries supported. All package code is archived on Zenodo [@covidregionaldata2020] and [Github](https://github.com/epiforecasts/covidregionaldata) Currently `covidregionaldata` provides subnational data collated by official government bodies or by credible non-governmental efforts for 14 countries including the UK, India, USA, and Brazil. In addition, national level data is provided from the World Health Organisation (WHO) and European Centre for Disease Prevention and Control (ECDC). In addition, we also provide an interface to data curated by John Hopkins University (JHU), used for their [2019 Novel Coronavirus Visual Dashboard](https://github.com/CSSEGISandData/COVID-19), and Google's [covid-19-open-data](https://github.com/GoogleCloudPlatform/covid-19-open-data). The package reduces the burden of having to process data from different sources, allowing researchers to focus their efforts on research. 
+`covidregionaldata` is an R [@Rdev:2013] package that provides an interface sub-national and national level COVID-19 data, providing cleaned and checked COVID-19 case and, where available, deaths, recoveries and hospitalisation data for countries supported. All package code is archived on Zenodo [@covidregionaldata2020] and [Github](https://github.com/epiforecasts/covidregionaldata) Currently `covidregionaldata` provides subnational data collated by official government bodies or by credible non-governmental efforts for 14 countries including the UK, India, USA, and Brazil. In addition, national level data is provided from the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), and the Google COVID-19 open data project. In addition, we also provide an interface to subnational data curated by JHU, used for their [2019 Novel Coronavirus Visual Dashboard](https://github.com/CSSEGISandData/COVID-19), and the Google COVID-19 [open data project](https://github.com/GoogleCloudPlatform/covid-19-open-data). The package reduces the burden of having to process data from different sources, allowing researchers to focus their efforts on research. 
 
 # Statement of need 
 
