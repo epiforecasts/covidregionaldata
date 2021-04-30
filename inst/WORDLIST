@@ -1,12 +1,17 @@
 abbott
+aboutus
+acf
+af
 afghanistan
 Antwerpen
 api
 APL
 aut
+bd
 behaviour
 belgium
 Bool
+bootswatch
 BRU
 BugReports
 Bundesland
@@ -22,6 +27,7 @@ conuntry
 coronavirus
 Cota
 countrycode
+CountryDataClass
 CoV
 covid
 COVID
@@ -29,11 +35,14 @@ covidregionaldata
 CSSE
 ctb
 cyclocomp
+dataclass
 DataClass
 dd
 DD
 de
 De
+desc
+docsearch
 documentionr
 doi
 DOI
@@ -57,6 +66,7 @@ Hamish
 hellewell
 Hellewell
 hospitalisations
+href
 https
 httr
 ICD
@@ -65,6 +75,7 @@ INEGI
 initalize
 Initalize
 initialisation
+initialise
 initialised
 io
 IPC
@@ -102,6 +113,7 @@ metacran
 msf
 MX
 na
+navbar
 nhs
 NHS
 nhsregions
@@ -111,6 +123,7 @@ ONS
 ORCID
 Organisation
 OSP
+params
 patrick
 paul
 PHE
@@ -133,12 +146,14 @@ RoxygenNote
 rvest
 rworldmap
 sam
+samabbott
 sanitises
 SciELOPreprints
 sebastian
 seperate
 sherratt
 Sherratt
+slowstart
 sophie
 SouthAfrica
 standardise
@@ -166,4 +181,5 @@ WAL
 Wallonia
 wikipedia
 withr
+www
 yyyy
