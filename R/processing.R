@@ -181,9 +181,16 @@ run_default_processing_fns <- function(data) {
 #' @inheritParams process_internal
 #' @concept utility
 run_optional_processing_fns <- function(data, process_fns) {
-  for (i in seq_along(process_fns)) {
-    data <- process_fns[[i]](data)
+  if (!missing(process_fns)) {
+    if (!is.null(process_fns)) {
+      if (!is.na(process_fns)) {
+        for (i in seq_along(process_fns)) {
+          data <- process_fns[[i]](data)
+        }
+      }
+    }
   }
+
   return(data)
 }
 
@@ -215,7 +222,7 @@ run_optional_processing_fns <- function(data, process_fns) {
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
                              verbose = TRUE,
-                             process_fns = c()) {
+                             process_fns) {
   if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }

@@ -184,11 +184,11 @@ DataClass <- R6::R6Class(
     #' cleaning steps be kept and output in a list.
     #' @param get Logical, defaults to FALSE. Should the class `get` method be
     #' called (this will download, clean, and process data at initialisation).
-    #' @param process_fns array, additional functions to process the data.
+    #' @param process_fns Array, additional functions to process the data.
     #' Users can supply their own functions here which would act on clean data
     #' and they will be called alongside our default processing functions.
     #' The default optional function added is `set_negative_values_to_zero`.
-    #' if process_fns is not set.
+    #' if process_fns is not set (see `process_fns` field for all defaults).
     #' If you want to keep this when supplying your own processing functions
     #' remember to add it to your list also. If you feel you have created a
     #' cool processing function that others could benefit from please submit a
@@ -201,14 +201,6 @@ DataClass <- R6::R6Class(
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE, get = FALSE,
                           process_fns) {
-      if (any(self$supported_levels %in% level)) {
-        self$level <- level
-      } else {
-        stop(
-          level,
-          " is not a supported level check supported_levels for options"
-        )
-      }
       self$level <- level
       if (is.na(self$filter_level)) {
         self$filter_level <- level
@@ -227,9 +219,8 @@ DataClass <- R6::R6Class(
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
       if (!missing(process_fns)) {
-        self$process_fns <- append(self$process_fns, process_fns)
+        self$process_fns <- process_fns
       }
-      self$filter_level <- level
 
       if (!missing(regions)) {
         self$target_regions <- regions
@@ -381,14 +372,22 @@ DataClass <- R6::R6Class(
     #' \item{Calculates missing columns from existing ones
     #' `calculate_columns_from_existing_data()`}
     #' }
-    #' Dynamically works for level 1 and level 2 regions.
-    process = function() {
+    #' @param process_fns Array, additional functions to process the data.
+    #' Users can supply their own functions here which would act on clean data
+    #' and they will be called alongside our default processing functions.
+    #' The default optional function added is `set_negative_values_to_zero`.
+    #' if process_fns is not set (see `process_fns` field for all defaults).
+    process = function(process_fns) {
       if (is.null(self$data$clean)) {
         stop("Data must first be cleaned using the clean method")
       }
 
       if (is.null(self$data$filtered)) {
         self$data$filtered <- self$data$clean
+      }
+
+      if (!missing(process_fns)) {
+        self$process_fns <- process_fns
       }
 
       message_verbose(self$verbose, "Processing data")
