@@ -8,6 +8,7 @@ test_that("DataClass methods cannot be called when the previous method have not
   expect_error(a$get())
   expect_error(a$download())
   expect_error(a$clean())
+  expect_error(a$available_regions())
   expect_error(a$filter())
   expect_error(a$process())
   expect_error(a$return())
@@ -46,12 +47,18 @@ test_that("DataClass can clean data", {
 })
 d$clean()
 
+test_that("DataClass can report available regions", {
+  expect_error(d$available_regions(), NA)
+  expect_equal(d$available_regions(), "Zimbabwe")
+})
+
 test_that("DataClass can filter data", {
   expect_error(d$filter("MadeUpLand"))
   expect_error(d$filter("Zimbabwe"), NA)
-  expect_s3_class(d$data$clean, "data.frame")
-  expect_equal(unique(d$data$clean$level_1_region), "Zimbabwe")
-  expect_true(nrow(d$data$clean) != 0)
+  expect_error(d$filter("Zimbabwe", level = "2"))
+  expect_s3_class(d$data$filtered, "data.frame")
+  expect_equal(unique(d$data$filtered$level_1_region), "Zimbabwe")
+  expect_true(nrow(d$data$filtered) != 0)
 })
 d$filter()
 
@@ -91,7 +98,7 @@ test_that("DataClass returns a summary", {
   expect_equal(
     names(sum),
     c(
-      "origin", "class", "level_1_region", "level_2_region",
+      "origin", "class", "level_1_region", "level_2_region", "level_3_region",
       "type", "data_urls", "source_data_cols"
     )
   )

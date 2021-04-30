@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transcient issues may affect our testing of datasets and so our checks may occassionally show a spurious failure. 
+Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transient issues may affect our testing of datasets and so our checks may occasionally show a spurious failure. 
 
 ```{r, include = FALSE}
 library(covidregionaldata)

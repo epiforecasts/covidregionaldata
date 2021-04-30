@@ -76,7 +76,7 @@ reset_cache()
 
 ### National data  
 
-To get worldwide time-series data by country (sourced from the WHO), use:
+To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default by also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:
 
 ```{r}
 nots <- get_national_data()
@@ -131,7 +131,7 @@ uk_nots %>%
   guides(col = guide_legend(title = "Region"))
 ```
 
- See `get_available_datasets()` for supported regions and subregional levels. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
+ See `get_available_datasets()` for supported regions and subregional levels. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd). Additional subnational data are supported via the `JHU()` and `Google()` classes. Use the `available_regions()` method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.
 
 ## Citation
 

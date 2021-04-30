@@ -50,7 +50,6 @@ expect_columns_contain_data <- function(data_name, region) {
 
 test_regional_dataset <- function(source, level, download = FALSE) {
   data_name <- paste0(source, " at level ", level)
-
   region <- eval(parse(
     text = paste0(
       source, "$new(level = '", level,
@@ -76,6 +75,10 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       dplyr::slice_tail,
       n = 250
     )
+    region$data$raw <- purrr::map(
+      region$data$raw,
+      ~ .[, 1:min(100, ncol(.))]
+    )
     saveRDS(region$data$raw, raw_path)
   } else {
     region$data$raw <- readRDS(raw_path)
@@ -87,6 +90,11 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     expect_true(nrow(region$data$clean) > 0)
     expect_true(ncol(region$data$clean) >= 2)
     expect_clean_cols(region$data$clean, level = level)
+  })
+
+  test_that(paste0(data_name, " can highlight available regions as expected"), {
+    expect_error(region$available_regions(), NA)
+    expect_true(class(region$available_regions()) %in% "character")
   })
 
   test_that(paste0(data_name, " can be processed as expected"), {
