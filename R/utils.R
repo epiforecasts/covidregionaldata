@@ -184,3 +184,35 @@ check_level <- function(level, supported_levels) {
   }
   return(invisible(NULL))
 }
+
+#' Download Excel Documents
+#'
+#' @param url Character string containing the full URL to the Excel document.
+#' @param archive Character string naming the file name to assign in the
+#' temporary directory.
+#' @param transpose Logical, should the read in data be transposed
+#' @param ... Additional parameters to pass to `read_excel()`.
+#' @inheritParams message_verbose
+#' @importFrom readxl read_excel
+#' @return A `data.frame`.
+#' @concept utility
+download_excel <- function(url, archive, verbose = FALSE,
+                           transpose = TRUE, ...) {
+  # download
+  archive <- file.path(tempdir(), archive)
+  download.file(
+    url = url,
+    destfile = archive,
+    mode = "wb", quiet = !(TRUE)
+  )
+  # read in
+  dt <- suppressMessages(
+    read_excel(archive, ...)
+  )
+
+  if (transpose) {
+    dt <- t(dt)
+  }
+  dt <- as.data.frame(dt)
+  return(dt)
+}

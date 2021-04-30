@@ -151,6 +151,9 @@ DataClass <- R6::R6Class(
     #' @field target_regions A character vector of regions to filter for. Used
     #' by the `filter method`.
     target_regions = NULL,
+    #' @field process_fns array, additional, user supplied functions to process
+    #' the data.
+    process_fns = c(set_negative_values_to_zero),
     #' @description Place holder for custom country specific function to load
     #' region codes.
     set_region_codes = function() {
@@ -181,10 +184,23 @@ DataClass <- R6::R6Class(
     #' cleaning steps be kept and output in a list.
     #' @param get Logical, defaults to FALSE. Should the class `get` method be
     #' called (this will download, clean, and process data at initialisation).
+    #' @param process_fns Array, additional functions to process the data.
+    #' Users can supply their own functions here which would act on clean data
+    #' and they will be called alongside our default processing functions.
+    #' The default optional function added is `set_negative_values_to_zero`.
+    #' if process_fns is not set (see `process_fns` field for all defaults).
+    #' If you want to keep this when supplying your own processing functions
+    #' remember to add it to your list also. If you feel you have created a
+    #' cool processing function that others could benefit from please submit a
+    # nolint start
+    #' Pull Request to our \href{https://github.com/epiforecasts/covidregionaldata}{github repository}
+    # nolint end
+    #' and we will consider adding it to the package.
     #' @export
     initialize = function(level = "1", filter_level, regions,
                           totals = FALSE, localise = TRUE,
-                          verbose = TRUE, steps = FALSE, get = FALSE) {
+                          verbose = TRUE, steps = FALSE, get = FALSE,
+                          process_fns) {
       self$level <- level
       if (is.na(self$filter_level)) {
         self$filter_level <- level
@@ -202,6 +218,9 @@ DataClass <- R6::R6Class(
       self$region_name <- self$supported_region_names[[self$level]]
       self$code_name <- self$supported_region_codes[[self$level]]
       self$set_region_codes()
+      if (!missing(process_fns)) {
+        self$process_fns <- process_fns
+      }
 
       if (!missing(regions)) {
         self$target_regions <- regions
@@ -353,14 +372,22 @@ DataClass <- R6::R6Class(
     #' \item{Calculates missing columns from existing ones
     #' `calculate_columns_from_existing_data()`}
     #' }
-    #' Dynamically works for level 1 and level 2 regions.
-    process = function() {
+    #' @param process_fns Array, additional functions to process the data.
+    #' Users can supply their own functions here which would act on clean data
+    #' and they will be called alongside our default processing functions.
+    #' The default optional function added is `set_negative_values_to_zero`.
+    #' if process_fns is not set (see `process_fns` field for all defaults).
+    process = function(process_fns) {
       if (is.null(self$data$clean)) {
         stop("Data must first be cleaned using the clean method")
       }
 
       if (is.null(self$data$filtered)) {
         self$data$filtered <- self$data$clean
+      }
+
+      if (!missing(process_fns)) {
+        self$process_fns <- process_fns
       }
 
       message_verbose(self$verbose, "Processing data")
@@ -377,7 +404,8 @@ DataClass <- R6::R6Class(
         group_vars = region_vars,
         totals = self$totals,
         localise = self$localise,
-        verbose = self$verbose
+        verbose = self$verbose,
+        process_fns = self$process_fns
       )
     },
 

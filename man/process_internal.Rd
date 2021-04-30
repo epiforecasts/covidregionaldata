@@ -10,7 +10,8 @@ process_internal(
   group_vars,
   totals = FALSE,
   localise = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  process_fns
 )
 }
 \arguments{
@@ -32,6 +33,9 @@ localised.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{process_fns}{array, additional functions to be called after default
+processing steps}
 }
 \description{
 Internal shared regional data cleaning designed to be called

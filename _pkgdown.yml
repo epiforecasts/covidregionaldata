@@ -31,9 +31,6 @@ navbar:
     - icon: fa-file-code-o
       text: "Functions"
       href: reference/index.html
-  right:
-    - icon: fa-github
-      href: https://github.com/epiforecasts/covidregionaldata
 
 reference:
   - title: Get Covid-19 Data
