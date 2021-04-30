@@ -77,6 +77,9 @@ in \verb{$new()}}
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
 
+\item{\code{process_fns}}{array, additional, user supplied functions to process
+the data.}
+
 \item{\code{filter_level}}{Character The level of the data to filter at.
 Defaults to the target level.}
 }
@@ -126,7 +129,8 @@ Should only be called by a \code{DataClass} class object.
   localise = TRUE,
   verbose = TRUE,
   steps = FALSE,
-  get = FALSE
+  get = FALSE,
+  process_fns
 )}\if{html}{\out{</div>}}
 }
 
@@ -159,6 +163,17 @@ cleaning steps be kept and output in a list.}
 
 \item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
+
+\item{\code{process_fns}}{Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is \code{set_negative_values_to_zero}.
+if process_fns is not set (see \code{process_fns} field for all defaults).
+If you want to keep this when supplying your own processing functions
+remember to add it to your list also. If you feel you have created a
+cool processing function that others could benefit from please submit a
+Pull Request to our \href{https://github.com/epiforecasts/covidregionaldata}{github repository}
+and we will consider adding it to the package.}
 }
 \if{html}{\out{</div>}}
 }
@@ -265,11 +280,21 @@ which does the following:
 \item{Calculates missing columns from existing ones
 \code{calculate_columns_from_existing_data()}}
 }
-Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$process(process_fns)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{process_fns}}{Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is \code{set_negative_values_to_zero}.
+if process_fns is not set (see \code{process_fns} field for all defaults).}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get"></a>}}
