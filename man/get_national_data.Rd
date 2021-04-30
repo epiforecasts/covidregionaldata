@@ -7,6 +7,7 @@
 get_national_data(
   countries,
   source = "who",
+  level = "1",
   totals = FALSE,
   steps = FALSE,
   class = FALSE,
@@ -21,7 +22,12 @@ Used to filter the data.}
 
 \item{source}{A character string specifying the data source (not case
 dependent). Defaults to WHO (the World Health Organisation). See
-\code{get_available_datasets("natioanl")} for all options.}
+\code{get_available_datasets("national")} for all options.}
+
+\item{level}{A character string indicating the target administrative level
+of the data with the default being "1". Currently supported options are
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets()} for supported
+options by dataset.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset

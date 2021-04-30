@@ -78,7 +78,7 @@ test_process_regional <- function(level = "1") {
     mexico$localise <- FALSE
     mexico$process()
     reproc_local <- mexico$data$processed
-    expect_true(any(colnames(reproc_local) %in% paste0("level_", level, "_region")))
+    expect_true(any(colnames(reproc_local) %in% glue_level(level)))
   })
 }
 
