@@ -35,6 +35,6 @@ So far `covidregionaldata` has been used by researchers as part of data cleansin
 
 # Acknowledgements
 
-This package provides an interface to data sources which are often collected and maintained by individuals or small teams. Our work, both in this package and more generally, would not be possible without their efforts. Thanks to all contributors and package users who have otherwise provided feedback. Thanks to Tim Talyor for useful design discussions.
+This package provides an interface to data sources which are often collected and maintained by individuals or small teams. Our work, both in this package and more generally, would not be possible without their efforts. Thanks to all contributors and package users who have otherwise provided feedback. Thanks to Tim Taylor for useful design discussions.
 
 # References
