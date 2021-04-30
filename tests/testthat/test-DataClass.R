@@ -69,6 +69,21 @@ test_that("DataClass can process data", {
 })
 suppressMessages(d$process())
 
+test_that("DataClass can handle custom processing", {
+  e <- d$clone()
+  expect_error(
+    suppressMessages(e$process(process_fns = c(function(data) {
+      stop()
+    })))
+  )
+  suppressMessages(e$process(process_fns = c(function(data) {
+    dplyr::mutate(data, cases_new = NA)
+  })))
+  expect_true(
+    all(is.na(e$data$process$cases_new))
+  )
+})
+
 test_that("DataClass can return data", {
   expect_error(d$return(), NA)
   expect_s3_class(d$return(), "data.frame")

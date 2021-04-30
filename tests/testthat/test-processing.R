@@ -12,26 +12,27 @@ test_that("default functions are called", {
     "add_extra_na_cols",
     function(x) dplyr::mutate(x, A = A + 2),
   )
-  x <- tibble::tibble("A" = c(1, 2, 3))
-  expected <- tibble::tibble("A" = c(4, 5, 6))$A
-  act <- run_default_processing_fns(x)$A
-  expect_identical(expected, act)
+  x <- tibble::tibble(A = c(1, 2, 3))
+  expected <- tibble::tibble("A" = c(4, 5, 6))
+  expect_identical(expected, run_default_processing_fns(x))
 })
 
 test_that("optional functions can be empty", {
-  x <- tibble::tibble("A" = c(1, 2, 3))
-  act <- run_optional_processing_fns(x, c())$A
-  expect_identical(x$A, act)
+  x <- tibble::tibble(A = c(1, 2, 3))
+  expect_identical(x, run_optional_processing_fns(x, c()))
+  expect_identical(x, run_optional_processing_fns(x))
+  expect_identical(x, run_optional_processing_fns(x, NULL))
 })
 
 test_that("optional functions run", {
-  x <- tibble::tibble("A" = c(1, 2, 3))
+  x <- tibble::tibble(A = c(1, 2, 3))
   process_fns <- c(function(x) {
-    return(x^2)
+    return(dplyr::mutate(x, A = A^2))
   })
-  act <- run_optional_processing_fns(x, process_fns)$A
-  expected <- tibble::tibble("A" = c(1, 4, 9))$A
-  expect_identical(expected, act)
+  expect_identical(
+    tibble::tibble(A = c(1, 4, 9)),
+    run_optional_processing_fns(x, process_fns)
+  )
 })
 
 test_that("calculate_columns_from_existing_data returns correct results", {
