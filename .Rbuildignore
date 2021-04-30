@@ -26,3 +26,4 @@ SMG.md
 ^README\.Rmd$
 ^.*.pdf$
 ^inst/CountryTemplate\.R$
+^inst/paper$
