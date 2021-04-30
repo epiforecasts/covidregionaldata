@@ -214,6 +214,8 @@ Set filters for UK data api query.
 Download NHS data for level 1 regions
 Separate NHS data is available for "first" admissions, excluding
 readmissions. This is available for England + English regions only.
+Data are available separately for the periods 2020-08-01 to 2021-04-06,
+and 2021-04-07 - present.
 See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{
