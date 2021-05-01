@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>epiforecasts.io/covidregionaldata/404.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/articles/dataset-status.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/articles/quickstart.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/articles/slowstart.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/authors.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/index.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/news/index.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/Belgium.html</loc>
@@ -115,6 +145,9 @@
     <loc>epiforecasts.io/covidregionaldata/reference/glue_level.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/index.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/initialise_dataclass.html</loc>
   </url>
   <url>
@@ -164,14 +197,5 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/uk_codes.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/dataset-status.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/quickstart.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/slowstart.html</loc>
   </url>
 </urlset>
