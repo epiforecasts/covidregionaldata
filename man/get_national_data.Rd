@@ -7,6 +7,7 @@
 get_national_data(
   countries,
   source = "who",
+  level = "1",
   totals = FALSE,
   steps = FALSE,
   class = FALSE,
@@ -19,8 +20,14 @@ get_national_data(
 \item{countries}{A character vector specifying country names of interest.
 Used to filter the data.}
 
-\item{source}{A character string specifying the data source: "WHO", or
-"ECDC". Not case dependent. Defaults to WHO.}
+\item{source}{A character string specifying the data source (not case
+dependent). Defaults to WHO (the World Health Organisation). See
+\code{get_available_datasets("national")} for all options.}
+
+\item{level}{A character string indicating the target administrative level
+of the data with the default being "1". Currently supported options are
+level 1 ("1) and level 2 ("2"). Use \code{get_available_datasets()} for supported
+options by dataset.}
 
 \item{totals}{Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
@@ -30,16 +37,16 @@ stratified by date and region.}
 steps be kept and output in a list.}
 
 \item{class}{Logical, defaults to FALSE. If TRUE returns the
-\code{Country} class object rather than a tibble or a list of tibbles.
+\code{DataClass} object rather than a tibble or a list of tibbles.
 Overrides \code{steps}.}
 
-\item{verbose}{Logical, defaults to TRUE. Should verbose processing
+\item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
 
 \item{country}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A character string
 specifying a country to filter for.}
 
-\item{...}{additional arguments to pass to Country classes.}
+\item{...}{Additional arguments to pass to class specific functionality.}
 }
 \value{
 A tibble with data related to cases, deaths, hospitalisations,

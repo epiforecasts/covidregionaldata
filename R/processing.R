@@ -161,11 +161,44 @@ totalise_data <- function(data) {
   return(data)
 }
 
+#' Default processing steps to run
+#' @description The default processing steps to which are always run. Runs on
+#' clean data
+#' @param data A data table
+#' @importFrom dplyr do
+#' @concept utility
+run_default_processing_fns <- function(data) {
+  . <- NULL
+  data <- data %>%
+    do(calculate_columns_from_existing_data(.)) %>%
+    add_extra_na_cols()
+  return(data)
+}
+
+#' Optional processing steps to run
+#' @description user supplied processing steps which are run after default steps
+#' @param data A data table
+#' @inheritParams process_internal
+#' @concept utility
+run_optional_processing_fns <- function(data, process_fns) {
+  if (!missing(process_fns)) {
+    if (!is.null(process_fns)) {
+      if (!is.na(process_fns)) {
+        for (i in seq_along(process_fns)) {
+          data <- process_fns[[i]](data)
+        }
+      }
+    }
+  }
+
+  return(data)
+}
+
 #' Internal Shared Regional Dataset Processing
 #'
 #' @description Internal shared regional data cleaning designed to be called
 #' by `process`.
-#' @param clean_data The clean data for a country, e.g. `Italy$data$clean`
+#' @param clean_data The clean data for a class, e.g. `Italy$data$clean`
 #' @param level The level of the data, e.g. 'level_1_region'
 #' @param group_vars Grouping variables, used to
 #' for grouping and to localise names. It is assumed that the first entry
@@ -178,6 +211,8 @@ totalise_data <- function(data) {
 #' localised.
 #' @param verbose Logical, defaults to `TRUE`. Should verbose processing
 #' messages and warnings be returned.
+#' @param process_fns array, additional functions to be called after default
+#' processing steps
 #' @concept utility
 #' @importFrom dplyr do group_by_at across ungroup select everything arrange
 #' @importFrom dplyr rename
@@ -186,7 +221,8 @@ totalise_data <- function(data) {
 #' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,
-                             verbose = TRUE) {
+                             verbose = TRUE,
+                             process_fns) {
   if (!any(class(clean_data) %in% "data.frame")) {
     stop("No regional data found to process")
   }
@@ -194,11 +230,8 @@ process_internal <- function(clean_data, level, group_vars,
 
   dat <- group_by(clean_data, across(.cols = all_of(group_vars_standard)))
 
-  . <- NULL
-  dat <- dat %>%
-    do(calculate_columns_from_existing_data(.)) %>%
-    add_extra_na_cols() %>%
-    set_negative_values_to_zero()
+  dat <- run_default_processing_fns(dat)
+  dat <- run_optional_processing_fns(dat, process_fns)
 
   if (totals) {
     dat <- totalise_data(dat)

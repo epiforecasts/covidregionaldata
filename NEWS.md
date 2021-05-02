@@ -1,14 +1,29 @@
+# covidregionaldata 0.9.1
+
+This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels.
+
+## New features
+
+* Support for data provided by John Hopkins University.
+* Support for data provided by Google COVID-19 open data project.
+* Added a `available_regions` method for all classes that shows level 1 regions with data available for the region of interest. This is of particular use when combined with the JHU or Google datasets where processing a large number of regions that are not required can take some time. 
+* Adds support for JHU or Google data to `get_national_data()`. This may also now be used to access lower level data from these sources  but it may be better to instead use the classes directly or via `initialise_dataclass()`.
+
+## Other changes
+
+* The optional downloading of NHS region data in the `UK()` has been improved to include both the dynamic data previously supported and the archive document now produced (by @kathsherratt).
+
 # covidregionaldata 0.9.0
 
-In this major release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
+In this release `covidregionaldata` has been substantially retooled to be more robust, and to handle data in a more transparent way. Adding new data sets and functionality has also been made more streamlined. As this update is a substantial package refactor some breaking changes may be been inadvertently introduced. If requiring the old behaviour please install `covidregionaldata@0.8.3` from GitHub.
 
-Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions to this release.
+Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions to this release. Thanks to @RichardMN for volunteering his time.
 
 ## New features
 
 * Track data processing from raw to clean using the `step = TRUE` argument in `get_regional_data()`.
 * Filter datasets for regions and countries of interest. 
-* Access the underlying methods for data sets.
+* Access the underlying methods for data sets and all steps in the data processing pipeline.
 
 ## Documentation
 
@@ -16,7 +31,8 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions 
 * A quickstart has been added to the package README.
 
 ## Technical improvements
-* `get_regional_data()` and `get_national_data()` now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the `get_` functions. However, all datasets are now available to be used as R6 methods (see `get_available_datasets`) which may allow for more modular use cases.
+
+* `get_regional_data()` and `get_national_data()` now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the `get_` functions. However, all datasets are now available to be used as R6 methods (see `get_available_datasets`) which may allow for more modular use cases. These classes can also be initialised using `initialise_dataclass()` which is used internally by both `get_regional_data()` and `get_national_data()`.
 * Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: https://github.com/epiforecasts/covidregionaldata#readme).
 
 ## Deprecated functions
@@ -24,6 +40,18 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions 
 * `get_available_datasets()` replaces `get_info_covidregionaldata()` to view available data. `get_info_covidregionaldata()` is deprecated.
 * `get_interventions_data()` is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/
 * `get_linelist` is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with `covidregionaldata`.
+
+## Data changes since 0.8.3
+
+* Colombia now has capitalized region names.
+* Germany level 2 region codes have been removed (previously was all NAs).
+* India uses NA for unknown region codes, a change from IN-UN previously.
+* Italy column region is now regioni.
+* Mexico codes 'inegi_code' has been changed to 'inegi'.
+* UK Level 1 'ons_region_code' is now 'region_code'.
+* UK level 2 "ltla_code" is now "local_authority_code".
+* `get_available_datasets()` now return an origin column rather than a country column and a type column rather than a get_data_function to better reflect the types of data supported.
+
 
 # covidregionaldata 0.8.3
 

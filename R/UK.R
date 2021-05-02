@@ -2,10 +2,10 @@
 #' data.
 #'
 #' @description Extracts daily COVID-19 data for the UK, stratified by region
-#' and nation. Contains additional options to other country class objects,
-#' including options to return subnational English regions using NHS region
-#' boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
-#' download from (release_date) and a geographical resolution (resolution).
+#' and nation. Additional options for this class are: to return subnational
+#' English regions using NHS region boundaries instead of PHE boundaries
+#' (nhsregions = TRUE), a release date to download from (release_date) and a
+#' geographical resolution (resolution).
 #'
 # nolint start
 #' @source \url{https://coronavirus.data.gov.uk/details/download}
@@ -17,18 +17,21 @@
 #' region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-UK <- R6::R6Class("UK", # rename to country name
+UK <- R6::R6Class("UK",
   inherit = DataClass,
   public = list(
-    # Core Attributes (amend each paramater for country specific infomation)
-    #' @field country name of country to fetch data for
-    country = "United Kingdom (UK)",
+    # Core Attributes (amend each paramater for origin specific infomation)
+    #' @field origin name of origin to fetch data for
+    origin = "United Kingdom (UK)",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1", "2"),
     #' @field supported_region_names A list of region names in order of level.
     supported_region_names = list("1" = "region", "2" = "authority"),
     #' @field supported_region_codes A list of region codes in order of level.
-    supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
+    supported_region_codes = list(
+      "1" = "region_code",
+      "2" = "local_authority_code"
+    ),
     #' @field common_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
     common_data_urls = list(
@@ -37,7 +40,14 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
     level_data_urls = list(
-      "1" = list("nhs_base_url" = "https://www.england.nhs.uk/statistics")
+      "1" = list(
+        # A dynamic URL for NHS data from 7 April 2021 to now
+        "nhs_recent_url" = "https://www.england.nhs.uk/statistics",
+        # A stable URL for data from August 2020 - April 06 2021
+        # nolint start
+        "nhs_archive_url" = "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2021/04/COVID-19-daily-admissions-and-beds-20210406-1.xlsx"
+      )
+      # nolint end
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = list(
@@ -118,7 +128,7 @@ UK <- R6::R6Class("UK", # rename to country name
       if (!is.null(self$release_date)) {
         self$data$clean <- mutate(
           self$data$clean,
-          release_date <- self$release_date
+          release_date = self$release_date
         )
       }
       # get NHS data if requested
@@ -305,6 +315,8 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @description Download NHS data for level 1 regions
     #' Separate NHS data is available for "first" admissions, excluding
     #' readmissions. This is available for England + English regions only.
+    #' Data are available separately for the periods 2020-08-01 to 2021-04-06,
+    #' and 2021-04-07 - present.
     # nolint start
     #'   See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
     # nolint end
@@ -314,9 +326,11 @@ UK <- R6::R6Class("UK", # rename to country name
     #' @source \url{https://coronavirus.data.gov.uk/details/download}
     # nolint end
     #' @importFrom lubridate year month
-    #' @importFrom readxl read_excel cell_limits
+    #' @importFrom readxl cell_limits
     #' @importFrom dplyr %>%
     download_nhs_regions = function() {
+
+      # Some general set up
       if (is.null(self$release_date)) {
         self$release_date <- Sys.Date() - 1
       }
@@ -331,8 +345,10 @@ UK <- R6::R6Class("UK", # rename to country name
         admissions, which excludes readmissions. This is available for
         England and English regions only."
       )
-      nhs_url <- paste0(
-        self$data_urls[["nhs_base_url"]],
+
+      # 1. Data from 7 April 2021 to now:
+      nhs_recent_url <- paste0(
+        self$data_urls[["nhs_recent_url"]],
         "/wp-content/uploads/sites/2/",
         year(self$release_date), "/",
         ifelse(month(self$release_date) < 10,
@@ -343,19 +359,30 @@ UK <- R6::R6Class("UK", # rename to country name
         gsub("-", "", as.character(self$release_date)),
         ".xlsx"
       )
-      tmp <- file.path(tempdir(), "nhs.xlsx")
-      download.file(nhs_url,
-        destfile = tmp,
-        mode = "wb", quiet = !(self$verbose)
+
+      recent <- download_excel(nhs_recent_url,
+        "nhs_recent.xlsx",
+        verbose = self$verbose,
+        transpose = TRUE,
+        sheet = 1,
+        range = cell_limits(c(28, 2), c(36, NA))
       )
-      nhs <- suppressMessages(
-        read_excel(tmp,
-          sheet = 1,
-          range = cell_limits(c(28, 2), c(36, NA))
-        ) %>%
-          t()
+
+      # 2. Data for August 2020 to 7 April 2021
+      archive <- download_excel(self$data_urls[["nhs_archive_url"]],
+        "nhs_archive.xlsx",
+        verbose = self$verbose,
+        transpose = TRUE,
+        sheet = 1,
+        range = cell_limits(c(28, 2), c(36, NA))
       )
-      return(as.data.frame(nhs))
+
+
+      # 3. Join archive and recent data, still in raw format
+      dt <- rbind(archive, recent)
+      dt <- dt[which(!rownames(dt) == "Name1"), ]
+
+      return(dt)
     },
 
     #' @description Add NHS data for level 1 regions

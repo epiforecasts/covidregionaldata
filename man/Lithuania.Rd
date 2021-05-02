@@ -4,7 +4,7 @@
 \alias{Lithuania}
 \title{Lithuania Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://opendata.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
+\url{https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0}
 }
 \description{
 Information for downloading, cleaning
@@ -137,7 +137,7 @@ region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
@@ -176,6 +176,7 @@ by OSP}
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}

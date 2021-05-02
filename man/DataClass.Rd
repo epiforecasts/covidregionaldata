@@ -2,9 +2,9 @@
 % Please edit documentation in R/shared-methods.R
 \name{DataClass}
 \alias{DataClass}
-\title{R6 Class containing non-country specific methods}
+\title{R6 Class containing non-origin specific methods}
 \description{
-Acts as parent class for individual country objects,
+Acts as parent class for individual origin objects,
 allowing them to access general methods.
 }
 \details{
@@ -17,7 +17,8 @@ fields providing they define a method with the same name.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{the origin of the data source. For regional data sources
+this will usually be the name of the country.}
 
 \item{\code{data}}{Once initialised, a list of named data frames: raw
 (list of named raw data frames) clean (cleaned data) and processed
@@ -37,8 +38,8 @@ specified level (supported_region_names$level).}
 Filled at initialisation with the code name associated with the
 requested level (supported_region_codes$level).}
 
-\item{\code{codes_lookup}}{string or tibble Region codes for the target country
-filled by country specific codes in
+\item{\code{codes_lookup}}{string or tibble Region codes for the target origin
+filled by origin specific codes in
 \href{#method-set_region_codes}{\code{set_region_codes()}}}
 
 \item{\code{data_urls}}{List of named common and shared url links to raw data.
@@ -75,6 +76,12 @@ in \verb{$new()}}
 
 \item{\code{target_regions}}{A character vector of regions to filter for. Used
 by the \verb{filter method}.}
+
+\item{\code{process_fns}}{array, additional, user supplied functions to process
+the data.}
+
+\item{\code{filter_level}}{Character The level of the data to filter at.
+Defaults to the target level.}
 }
 \if{html}{\out{</div>}}
 }
@@ -86,6 +93,7 @@ by the \verb{filter method}.}
 \item \href{#method-download}{\code{DataClass$download()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-clean_common}{\code{DataClass$clean_common()}}
+\item \href{#method-available_regions}{\code{DataClass$available_regions()}}
 \item \href{#method-filter}{\code{DataClass$filter()}}
 \item \href{#method-process}{\code{DataClass$process()}}
 \item \href{#method-get}{\code{DataClass$get()}}
@@ -109,18 +117,20 @@ region codes.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-initialize function used by all \code{Country} class objects.
-Set up the country class with attributes set to input parameters.
-Should only be called by a \code{Country} class object.
+Initialize function used by all \code{DataClass} objects.
+Set up the \code{DataClass} class with attributes set to input parameters.
+Should only be called by a \code{DataClass} class object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$new(
   level = "1",
+  filter_level,
   regions,
   totals = FALSE,
   localise = TRUE,
   verbose = TRUE,
   steps = FALSE,
-  get = FALSE
+  get = FALSE,
+  process_fns
 )}\if{html}{\out{</div>}}
 }
 
@@ -129,7 +139,11 @@ Should only be called by a \code{Country} class object.
 \describe{
 \item{\code{level}}{A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
-options are level 1 ("1) and level 2 ("2").
+options are level 1 ("1) and level 2 ("2").}
+
+\item{\code{filter_level}}{A character string indicating the level to filter at.
+Defaults to the level of the data if not specified and if not otherwise
+defined in the class.
 Use \code{get_available_datasets()} for supported options by dataset.}
 
 \item{\code{regions}}{A character vector of target regions to be assigned to
@@ -149,6 +163,17 @@ cleaning steps be kept and output in a list.}
 
 \item{\code{get}}{Logical, defaults to FALSE. Should the class \code{get} method be
 called (this will download, clean, and process data at initialisation).}
+
+\item{\code{process_fns}}{Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is \code{set_negative_values_to_zero}.
+if process_fns is not set (see \code{process_fns} field for all defaults).
+If you want to keep this when supplying your own processing functions
+remember to add it to your list also. If you feel you have created a
+cool processing function that others could benefit from please submit a
+Pull Request to our \href{https://github.com/epiforecasts/covidregionaldata}{github repository}
+and we will consider adding it to the package.}
 }
 \if{html}{\out{</div>}}
 }
@@ -172,8 +197,8 @@ of the \code{data_url} name and the corresponding raw data table in
 Cleans raw data (corrects format, converts column types,
 etc). Works on raw data and so should be called after
 \href{#method-download}{\code{download()}}
-Calls the specific country cleaning method (\code{clean_common}) followed by
-level specific cleaning.methods which are defined in said country.
+Calls the specific class specific cleaning method (\code{clean_common})
+followed by level specific cleaning methods.
 \code{clean_level_[1/2]}. Cleaned data is stored in \code{data$clean}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean()}\if{html}{\out{</div>}}
@@ -186,11 +211,32 @@ level specific cleaning.methods which are defined in said country.
 \subsection{Method \code{clean_common()}}{
 Cleaning methods that are common across a class.
 By default this method is empty as if any code is required it should be
-defined in a country specific \code{clean_common} method.
+defined in a child class specific \code{clean_common} method.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$clean_common()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-available_regions"></a>}}
+\if{latex}{\out{\hypertarget{method-available_regions}{}}}
+\subsection{Method \code{available_regions()}}{
+Show regions that are available to be used for
+filtering operations. Can only be called once \code{clean()} has been
+called. Filtering level is determined by checking the \code{filter_level}
+field.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$available_regions(level)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{level}}{A character string indicating the level to filter at.
+Defaults to using the \code{filter_level} field if not specified}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-filter"></a>}}
@@ -199,15 +245,17 @@ defined in a country specific \code{clean_common} method.
 Filter cleaned data for a specific region  To be called
 after \href{#method-clean}{\code{clean()}}
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$filter(regions, level)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{regions}}{A character vector of target regions. Overrides the
-current class setting for \code{target_regions}. By default filters at the
-current spatial level of interest.}
+current class setting for \code{target_regions}.}
+
+\item{\code{level}}{Character The level of the data to filter at. Defaults to
+the lowest level in the data.}
 }
 \if{html}{\out{</div>}}
 }
@@ -232,11 +280,21 @@ which does the following:
 \item{Calculates missing columns from existing ones
 \code{calculate_columns_from_existing_data()}}
 }
-Dynamically works for level 1 and level 2 regions.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$process()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$process(process_fns)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{process_fns}}{Array, additional functions to process the data.
+Users can supply their own functions here which would act on clean data
+and they will be called alongside our default processing functions.
+The default optional function added is \code{set_negative_values_to_zero}.
+if process_fns is not set (see \code{process_fns} field for all defaults).}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get"></a>}}
@@ -272,17 +330,16 @@ For most datasets a custom method should not be needed.
 \if{html}{\out{<a id="method-summary"></a>}}
 \if{latex}{\out{\hypertarget{method-summary}{}}}
 \subsection{Method \code{summary()}}{
-Create a table of summary information for the country
+Create a table of summary information for the data set
 being processed.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-Returns a single row summary tibble containing the country name,
-class, level 1 and 2 region names, the function calling it
-(\code{get_regional_data()} or \code{get_national_data()}) the url of the raw data
-and the columns present in the raw data.
+Returns a single row summary tibble containing the origin of the
+data source, class, level 1 and 2 region names, the type of data,
+the urls of the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}

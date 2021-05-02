@@ -4,7 +4,14 @@
 \alias{get_available_datasets}
 \title{Get the countries data is available for}
 \usage{
-get_available_datasets()
+get_available_datasets(type)
+}
+\arguments{
+\item{type}{A character vector indicating the types of data to
+return. Current options include "national" (which are datasets at the
+national level which inherit from \code{CountryDataClass}) and
+"regional" (which are datasets at the regional level which inherit
+directly from \code{DataClass}).}
 }
 \value{
 A list of available countries and the region level
@@ -13,8 +20,16 @@ data is available for
 \description{
 Show what countries have what level data available.
 The function searches the environment for R6 class objects and
-extracts the country name and what level it has from the object.
+extracts the summary information from the available classes using
+their \code{summary} methods.
 }
 \examples{
+# see all available datasets
 get_available_datasets()
+
+# see only national level datasets
+get_available_datasets("national")
+
+# see only regional level datasets
+get_available_datasets("regional")
 }

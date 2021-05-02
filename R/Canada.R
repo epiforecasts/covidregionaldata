@@ -1,4 +1,4 @@
-#' Canada Class containing country specific attributes and methods
+#' Canada Class containing origin specific attributes and methods
 #'
 #' @description Information for downloading, cleaning
 #'  and processing COVID-19 region data for Canada.
@@ -15,9 +15,9 @@ Canada <- R6::R6Class("Canada",
   inherit = DataClass,
   public = list(
 
-    # Core Attributes (amend each parameter for country specific information)
-    #' @field country name of country to fetch data for
-    country = "Canada",
+    # Core Attributes (amend each parameter for origin specific information)
+    #' @field origin name of origin to fetch data for
+    origin = "Canada",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
     #' @field supported_region_names A list of region names in order of level.

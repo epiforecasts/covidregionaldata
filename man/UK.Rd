@@ -11,10 +11,10 @@ data.}
 }
 \description{
 Extracts daily COVID-19 data for the UK, stratified by region
-and nation. Contains additional options to other country class objects,
-including options to return subnational English regions using NHS region
-boundaries instead of PHE boundaries (nhsregions = TRUE), a release date to
-download from (release_date) and a geographical resolution (resolution).
+and nation. Additional options for this class are: to return subnational
+English regions using NHS region boundaries instead of PHE boundaries
+(nhsregions = TRUE), a release date to download from (release_date) and a
+geographical resolution (resolution).
 }
 \examples{
 \dontrun{
@@ -42,7 +42,7 @@ UK$new(
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{country}}{name of country to fetch data for}
+\item{\code{origin}}{name of origin to fetch data for}
 
 \item{\code{supported_levels}}{A list of supported levels.}
 
@@ -88,6 +88,7 @@ specific.}
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
@@ -213,6 +214,8 @@ Set filters for UK data api query.
 Download NHS data for level 1 regions
 Separate NHS data is available for "first" admissions, excluding
 readmissions. This is available for England + English regions only.
+Data are available separately for the periods 2020-08-01 to 2021-04-06,
+and 2021-04-07 - present.
 See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{

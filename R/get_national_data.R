@@ -10,13 +10,11 @@
 #' Used to filter the data.
 #' @param country `r lifecycle::badge("deprecated")` A character string
 #'  specifying a country to filter for.
-#' @param source A character string specifying the data source: "WHO", or
-#'  "ECDC". Not case dependent. Defaults to WHO.
-#' @inheritParams get_regional_data
-#' @param ... additional arguments to pass to Country classes.
+#' @param source A character string specifying the data source (not case
+#'  dependent). Defaults to WHO (the World Health Organisation). See
+#' `get_available_datasets("national")` for all options.
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
-#' @inheritParams return_data
 #' @inheritParams get_regional_data
 #' @importFrom lifecycle deprecated is_present deprecate_warn
 #' @export
@@ -28,29 +26,29 @@
 #' # download data for Canada keeping all processing steps
 #' get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
 #' }
-get_national_data <- function(countries, source = "who", totals = FALSE,
+get_national_data <- function(countries, source = "who", level = "1", totals = FALSE,
                               steps = FALSE, class = FALSE, verbose = TRUE,
                               country = deprecated(),
                               ...) {
   if (is_present(country)) {
     deprecate_warn(
       "0.9.0",
-      "covidregionaldata::get_national_data(country = )", "covidregionaldata::get_national_data(countries = )"
+      "covidregionaldata::get_national_data(country = )",
+      "covidregionaldata::get_national_data(countries = )"
     )
     countries <- country
   }
 
   # check data availability and initiate country class if available
   nation_class <- initialise_dataclass(
-    class = source, level = "1",
+    class = source, level = level,
     totals = totals, localise = TRUE,
     verbose = verbose, steps = steps,
-    regions = countries, ...
+    regions = countries, get = TRUE,
+    type = "national", ...
   )
 
-  nation_class$get()
-
-  return(return_data(nation_class,
-    class = class
-  ))
+  return(
+    return_data(nation_class, class = class)
+  )
 }

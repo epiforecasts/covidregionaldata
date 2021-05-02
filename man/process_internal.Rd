@@ -10,11 +10,12 @@ process_internal(
   group_vars,
   totals = FALSE,
   localise = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  process_fns
 )
 }
 \arguments{
-\item{clean_data}{The clean data for a country, e.g. \code{Italy$data$clean}}
+\item{clean_data}{The clean data for a class, e.g. \code{Italy$data$clean}}
 
 \item{level}{The level of the data, e.g. 'level_1_region'}
 
@@ -32,6 +33,9 @@ localised.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
+
+\item{process_fns}{array, additional functions to be called after default
+processing steps}
 }
 \description{
 Internal shared regional data cleaning designed to be called

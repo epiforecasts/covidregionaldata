@@ -17,8 +17,8 @@ Italy <- R6::R6Class("Italy",
   public = list(
 
     # Core Attributes
-    #' @field country name of country to fetch data for
-    country = "Italy",
+    #' @field origin name of origin to fetch data for
+    origin = "Italy",
     #' @field supported_levels A list of supported levels.
     supported_levels = list("1"),
     #' @field supported_region_names A list of region names in order of level.
@@ -76,8 +76,8 @@ Italy <- R6::R6Class("Italy",
         group_by(.data$date, .data$level_1_region) %>%
         summarise(
           cases_total = sum(.data$cases_total, na.rm = TRUE),
-          deaths_total = sum(.data$cases_total, na.rm = TRUE),
-          tested_total = sum(.data$cases_total, na.rm = TRUE),
+          deaths_total = sum(.data$deaths_total, na.rm = TRUE),
+          tested_total = sum(.data$tested_total, na.rm = TRUE),
         ) %>%
         ungroup() %>%
         full_join(self$codes_lookup[["1"]],

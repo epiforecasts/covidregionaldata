@@ -5,32 +5,13 @@
 #' @param country A character string specifying the country to get data from.
 #' Not case dependent. Name should be the English name. For a list of
 #' options use `get_available_datasets`.
-#' @param level A character string indicating the target administrative level
-#' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
-#' options by dataset.
-#' @param steps Logical, defaults to FALSE. Should all processing and cleaning
-#' steps be kept and output in a list.
 #' @param include_level_2_regions `r lifecycle::badge("deprecated")` Boolean. If TRUE, returns data stratified by
 #'  level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
 #'  data is not always available. In these cases the user will get a warning
 #'  and the Level 1 data will be returned.
 #' @param localise_regions `r lifecycle::badge("deprecated")` Logical, defaults to TRUE. Should region names be localised.
-#' @param level A character string indicating the target administrative level
-#' of the data with the default being "1". Currently supported options are
-#' level 1 ("1) and level 2 ("2"). Use `get_available_datasets` for supported
-#' options by dataset.
-#' @param regions A character vector of target regions to be assigned to the
-#' `target_regions` field if present.
-#' @param totals Logical, defaults to FALSE. If TRUE, returns totalled
-#'  data per region up to today's date. If FALSE, returns the full dataset
-#'  stratified by date and region.
-#' @param localise Logical, defaults to TRUE. Should region names be localised.
-#' @param verbose Logical, defaults to TRUE. Should verbose processing
-#' messages and warnings be returned.
 #' @inheritParams return_data
-#' @inheritParams message_verbose
-#' @param ... additional arguments to pass to country specific functionality.
+#' @inheritParams initialise_dataclass
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @importFrom lifecycle deprecated is_present deprecate_warn
@@ -73,11 +54,11 @@ get_regional_data <- function(country, level = "1", totals = FALSE,
   region_class <- initialise_dataclass(
     class = country, level = level, regions = regions,
     totals = totals, localise = localise,
-    verbose = verbose, steps = steps, ...
+    verbose = verbose, steps = steps, get = TRUE,
+    type = "regional", ...
   )
 
-  region_class$get()
-  return(return_data(region_class,
-    class = class
-  ))
+  return(
+    return_data(region_class, class = class)
+  )
 }
