@@ -18,8 +18,36 @@ geographical resolution (resolution).
 }
 \examples{
 \dontrun{
-region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+# Setup a data cache
+start_using_memoise()
+
+# Download, clean and process level 1 UK data with hospital admissions
+region <- UK$new(level = "1", nhsregions = TRUE)
 region$return()
+
+# Initialise level 2 data
+utla <- UK$new(level = "2")
+
+# Download UTLA
+utla$download()
+
+# Clean UTLA data
+utla$clean()
+
+# Inspect available level 1 regions
+utla$available_regions(level = "1")
+
+# Filter data to the East of England
+utla$filter("East of England")
+
+# Process UTLA data
+utla$process()
+
+# Return processed and filtered data
+utla$return()
+
+# Inspect all data steps
+utla$data
 }
 
 ## ------------------------------------------------
