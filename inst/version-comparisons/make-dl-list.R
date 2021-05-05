@@ -45,28 +45,10 @@ if (!is.null(getOption("save_comparison"))) {
 }
 
 library(switchr)
-#switchrBaseDir(file.path(tempdir(), ".switchr"))
 
 if(initial_setup) {
-  removeLib("oldcovidregionaldata")
-  removeLib("newcovidregionaldata")
-
-  # switchr cannot correctly pull releases from github, so
-  # we have stashed a version of the 0.8.3 release in a branch
-  # on a separate account
-  #
-  crd_new <- GithubManifest("epiforecasts/covidregionaldata@master")
-  crd_old <- GithubManifest("richardmn/covidregionaldata@old-0_8_3")
-
-  switchTo("oldcovidregionaldata", seed = crd_old)
-  #ip_list_old <- installed.packages()
-  switchBack()
-  switchTo("newcovidregionaldata", seed = crd_new)
-  #ip_list_new <- installed.packages()
-  switchBack()
-#  waldo::compare(ip_list_old, ip_list_new)
+  source("initialise-switchr.R")
 }
-
 
 ## Working from new version of covidregionaldata
 #
