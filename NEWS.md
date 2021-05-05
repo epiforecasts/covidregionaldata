@@ -1,6 +1,6 @@
 # covidregionaldata 0.9.1
 
-This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels.
+This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation.
 
 ## New features
 
@@ -12,6 +12,7 @@ This release adds support for data sets from John Hopkins University and the Goo
 ## Other changes
 
 * The optional downloading of NHS region data in the `UK()` has been improved to include both the dynamic data previously supported and the archive document now produced (by @kathsherratt).
+* The examples for the `UK()` class have been expanded to better showcase the package functionality.
 
 # covidregionaldata 0.9.0
 
