@@ -19,6 +19,7 @@ contributors](https://img.shields.io/github/contributors/epiforecasts/covidregio
 Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
 [![GitHub
 commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
 An interface to subnational and national level COVID-19 data. For all
 countries supported, this includes a daily time-series of cases.
@@ -65,12 +66,12 @@ library(scales)
 ### Setup data caching
 
 This package can optionally use a data cache from `memoise` to locally
-cache downloads. This can be enabled using the following (this will the
-temporary directory by default),
+cache downloads. This can be enabled using the following (this will use
+the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /var/folders/yl/vwcpf66n49jc7shvv7p72jh80000gr/T//Rtmpe8Mric
+#> Using a cache at: /tmp/RtmpijhrVX
 ```
 
 To stop using `memoise` use,
@@ -87,13 +88,15 @@ reset_cache()
 
 ### National data
 
-To get worldwide time-series data by country (sourced from the WHO),
-use:
+To get worldwide time-series data by country (sourced from the World
+Health Organisation (WHO) by default by also optionally from the
+European Centre for Disease Control (ECDC), John Hopkins University, or
+the Google COVID-19 open data project), use:
 
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 112,937
+#> Rows: 114,471
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -105,7 +108,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 113,048 x 15
+#> # A tibble: 114,471 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -118,7 +121,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 113,038 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 114,461 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -159,7 +162,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 5,850 x 26
+#> # A tibble: 5,928 x 26
 #>    date       region   region_code cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
@@ -172,7 +175,7 @@ uk_nots
 #>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
 #>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
 #> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 5,840 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 5,918 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
@@ -205,6 +208,10 @@ uk_nots %>%
 See `get_available_datasets()` for supported regions and subregional
 levels. For further examples see the [quick start
 vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
+Additional subnational data are supported via the `JHU()` and `Google()`
+classes. Use the `available_regions()` method once these data have been
+downloaded and cleaned (see their examples) for subnational data they
+internally support.
 
 ## Citation
 
@@ -236,7 +243,7 @@ using the following,
 
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
 
-We welcome contributions and new contributors! We particularly
+We welcome contributions and new contributors\! We particularly
 appreciate help adding new data sources for countries at sub-national
 level, or work on priority problems in the
 [issues](https://github.com/epiforecasts/covidregionaldata/issues).

@@ -1,6 +1,40 @@
 # Load mock data functions
 source("custom_tests/mock_data.R")
 
+test_that("default functions are called", {
+  mockery::stub(
+    run_default_processing_fns,
+    "calculate_columns_from_existing_data",
+    function(x) dplyr::mutate(x, A = A + 1),
+  )
+  mockery::stub(
+    run_default_processing_fns,
+    "add_extra_na_cols",
+    function(x) dplyr::mutate(x, A = A + 2),
+  )
+  x <- tibble::tibble(A = c(1, 2, 3))
+  expected <- tibble::tibble("A" = c(4, 5, 6))
+  expect_identical(expected, run_default_processing_fns(x))
+})
+
+test_that("optional functions can be empty", {
+  x <- tibble::tibble(A = c(1, 2, 3))
+  expect_identical(x, run_optional_processing_fns(x, c()))
+  expect_identical(x, run_optional_processing_fns(x))
+  expect_identical(x, run_optional_processing_fns(x, NULL))
+})
+
+test_that("optional functions run", {
+  x <- tibble::tibble(A = c(1, 2, 3))
+  process_fns <- c(function(x) {
+    return(dplyr::mutate(x, A = A^2))
+  })
+  expect_identical(
+    tibble::tibble(A = c(1, 4, 9)),
+    run_optional_processing_fns(x, process_fns)
+  )
+})
+
 test_that("calculate_columns_from_existing_data returns correct results", {
   input_data <- tibble::tibble(
     "date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
@@ -78,7 +112,7 @@ test_process_regional <- function(level = "1") {
     mexico$localise <- FALSE
     mexico$process()
     reproc_local <- mexico$data$processed
-    expect_true(any(colnames(reproc_local) %in% paste0("level_", level, "_region")))
+    expect_true(any(colnames(reproc_local) %in% glue_level(level)))
   })
 }
 

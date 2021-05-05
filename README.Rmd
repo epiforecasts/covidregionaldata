@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions) [![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master) [![Data status](https://img.shields.io/badge/Data-status-lightblue.svg?style=flat)](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) [![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
 
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/)   [![GitHub contributors](https://img.shields.io/github/contributors/epiforecasts/covidregionaldata)](https://github.com/epiforecasts/covidregionaldata/graphs/contributors)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/) [![GitHub commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/)   [![GitHub contributors](https://img.shields.io/github/contributors/epiforecasts/covidregionaldata)](https://github.com/epiforecasts/covidregionaldata/graphs/contributors)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/) [![GitHub commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.0.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/) [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
 An interface to subnational and national level COVID-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.
 
@@ -56,7 +56,7 @@ library(scales)
 
 ### Setup data caching
 
-This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will the temporary directory by default),
+This package can optionally use a data cache from `memoise` to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),
 
 ```{r}
 start_using_memoise()
@@ -76,7 +76,7 @@ reset_cache()
 
 ### National data  
 
-To get worldwide time-series data by country (sourced from the WHO), use:
+To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default by also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:
 
 ```{r}
 nots <- get_national_data()
@@ -131,7 +131,7 @@ uk_nots %>%
   guides(col = guide_legend(title = "Region"))
 ```
 
- See `get_available_datasets()` for supported regions and subregional levels. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
+ See `get_available_datasets()` for supported regions and subregional levels. For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd). Additional subnational data are supported via the `JHU()` and `Google()` classes. Use the `available_regions()` method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.
 
 ## Citation
 

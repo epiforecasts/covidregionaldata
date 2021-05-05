@@ -33,7 +33,7 @@ Both the World Health Organisation (WHO) and European Centre for Disease Control
 get_national_data()
 ```
 
-This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documention (`?get_national_data`) for details of optional arguments.
+This returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documentation (`?get_national_data`) for details of optional arguments.
 
 Data is returned with no gaps in the structure of the data by country over time, and NAs fill in where data are not available.
 
@@ -43,7 +43,7 @@ Data is returned with no gaps in the structure of the data by country over time,
 
 Access sub-national level data for a specific country over time using `get_regional_data()`. Use `get_available_datasets()` to explore the currently supported sub-national datasets and select the data set of interest using the `country` (selects the country of interest), and `level` (selects the spatial scale of the data) arguments of `get_regional_data`.
 
-This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documention (`?get_regional_data`) for details of optional arguments.
+This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, "Data glossary" below. See the documentation (`?get_regional_data`) for details of optional arguments.
 
 As for national level data any gaps in reported data are filled with NAs.
 

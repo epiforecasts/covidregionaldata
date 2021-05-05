@@ -142,6 +142,8 @@ This returns data for each county on each day of reported data. As there are mor
 
 The same method will work for different countries where data are available, returning relevant sub-national units for each country. For example, in Germany data are available for Bundesland (federated state) and Kreise (district) areas.
 
+Additional subnational data are supported via the `JHU()` and `Google()` classes. Use the `available_regions()` method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.
+
 ## Mapping data
 
 We provide the relevant national and subnational ISO codes, or local alternatives, to enable mapping.  We can map Covid-19 data at national or subnational level, using any standard shapefile. In R, the `rnaturalearth` package already provides shapefiles for all country borders, and the largest (administrative level 1) subnational units for most countries.
