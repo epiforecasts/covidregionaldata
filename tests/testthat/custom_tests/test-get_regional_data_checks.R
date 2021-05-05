@@ -8,8 +8,8 @@ test_get_regional_data_region_checks <- function(source, max_level) {
     nrow(
       unique(
         data_level_1 %>%
-          select(level_1_region, level_1_region_code) %>%
-          filter(is.na(level_1_region_code))
+          dplyr::select(level_1_region, level_1_region_code) %>%
+          dplyr::filter(is.na(level_1_region_code))
         )), 1)
   if (max_level >= 2) {
     expect_equal(
@@ -22,15 +22,15 @@ test_get_regional_data_region_checks <- function(source, max_level) {
       nrow(
         unique(
           data_level_2 %>%
-            select(level_1_region, level_1_region_code) %>%
-            filter(is.na(level_1_region_code)))), 1)
+            dplyr::select(level_1_region, level_1_region_code) %>%
+            dplyr::filter(is.na(level_1_region_code)))), 1)
     if (!is.null(data_level_2$level_2_region_code)) {
       expect_lte(
         nrow(
           unique(
             data_level_2 %>%
-              select(level_2_region, level_2_region_code) %>%
-              filter(is.na(level_2_region_code)))), 1)
+              dplyr::select(level_2_region, level_2_region_code) %>%
+              dplyr::filter(is.na(level_2_region_code)))), 1)
     }
   }
 }
