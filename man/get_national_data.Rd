@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_national_data.R
 \name{get_national_data}
 \alias{get_national_data}
-\title{Get national-level data for countries globally, sourced from the ECDC or WHO.}
+\title{Get national-level data for countries globally from a range of sources}
 \usage{
 get_national_data(
   countries,
@@ -53,18 +53,46 @@ A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing.
 }
 \description{
-Gets raw data using the source-specific function. Includes ISO
-country codes. Then adds columns which were missing from the raw data
-(calculating cumulative counts from new dailies and vice versa), cleans
-and sanitises further. Adds rows and columns of NA values so that data is
-in a standard format.
+Provides an interface to source specific classes which
+support national level data. For simple use cases this allows downloading
+clean, standardised, national-level COVID-19 data sets. Internally this uses
+the \code{CountryDataClass()} parent class which allows documented downloading,
+cleaning, and processing. Optionally all steps of data processing can be
+returned along with the functions used for processing but by default just
+the finalised processed data is returned. See the examples for some
+potential use cases and the links to lower level functions for more details
+and options.
 }
 \examples{
 \dontrun{
 # set up a data cache
 start_using_memoise()
 
+# download all natioanl data from the WHO
+get_national_data(source = "who")
+
 # download data for Canada keeping all processing steps
-get_national_data(countries = "canada", source = "ecdc", steps = TRUE)
+get_national_data(countries = "canada", source = "ecdc")
+
+# download data for Canada from the JHU and return the full class
+jhu <- get_national_data(countries = "canada", source = "jhu", class = TRUE)
+jhu
+
+# return the JHU data for canada
+jhu$return()
+
+# check which regions the JHU supports national data for
+jhu$available_regions()
+
+# filter instead for France (and then reprocess)
+jhu$filter("France")
+jhu$process()
+
+# explore the structure of the stored JHU data
+jhu$data
 }
+}
+\seealso{
+\code{\link[=initialise_dataclass]{initialise_dataclass()}}, \code{\link[=DataClass]{DataClass()}}, \code{\link[=CountryDataClass]{CountryDataClass()}},
+\code{\link[=get_regional_data]{get_regional_data()}}, \code{\link[=WHO]{WHO()}}, \code{\link[=ECDC]{ECDC()}}, \code{\link[=JHU]{JHU()}}, \code{\link[=Google]{Google()}}
 }

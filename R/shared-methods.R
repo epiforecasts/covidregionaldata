@@ -1,7 +1,11 @@
 #' Initialise a child class of DataClass if it exists
 #'
-#' @description Initialise a child class of DataClass if it exists.
-#' @param class A character string specifying the `DataClass` to initialise.
+#' @description This function initialises classes based on the `DataClass()`
+#'  which allows documented downloading, cleaning, and processing. See the
+#'  examples for some potential use cases and the `DataClass()` documentation
+#'  for more details.
+#'
+#' @param class A character string specifying the `DataClass()` to initialise.
 #' Not case dependent and matching is based on either the class name or the its
 #' country definition. For a list of options use `get_available_datasets()`.
 #' @param level A character string indicating the target administrative level
@@ -21,6 +25,8 @@
 #' @param ... Additional arguments to pass to class specific functionality.
 #' @return An initialised version of the target class if available,
 #' e.g. `Italy()`
+#' @seealso [DataClass()], [CountryDataClass()], [get_regional_data()],
+#'  [get_national_data()]
 #' @inheritParams message_verbose
 #' @inheritParams get_available_datasets
 #' @rdname initialise_dataclass
@@ -29,14 +35,44 @@
 #' @importFrom purrr map_lgl
 #' @export
 #' @examples
-#' # Initialise Italian data
-#' italy <- initialise_dataclass("Italy")
+#' # set up a cache to store data to avoid downloading repeatedly
+#' start_using_memoise()
 #'
-#' # Initialise UK data with a partial name match
-#' uk <- initialise_dataclass("United Kingdom")
+#' # check currently available datasets
+#' get_available_datasets()
 #'
-#' # Initialise ECDC data
-#' ecdc <- initialise_dataclass("ecdc")
+#' # initialise a data set in the United Kingdom
+#' # at the UTLA level
+#' utla <- UK$new(level = "2")
+#'
+#' # download UTLA data
+#' utla$download()
+#'
+#' # clean UTLA data
+#' utla$clean()
+#'
+#' # inspect available level 1 regions
+#' utla$available_regions(level = "1")
+#'
+#' # filter data to the East of England
+#' utla$filter("East of England")
+#'
+#' # process UTLA data
+#' utla$process()
+#'
+#' # return processed and filtered data
+#' utla$return()
+#'
+#' # inspect all data steps
+#' utla$data
+#'
+#' # initialise Italian data, download, clean and process it
+#' italy <- initialise_dataclass("Italy", get = TRUE)
+#' italy$return()
+#'
+#' # initialise ECDC data, fully process it, and return totals
+#' ecdc <- initialise_dataclass("ecdc", get = TRUE, totals = TRUE)
+#' ecdc$return()
 initialise_dataclass <- function(class = character(), level = "1",
                                  totals = FALSE, localise = TRUE,
                                  regions, verbose = TRUE, steps = FALSE,
@@ -78,16 +114,19 @@ initialise_dataclass <- function(class = character(), level = "1",
   return(region_class)
 }
 
-#' R6 Class containing non-origin specific methods
+#' R6 Class containing non-dataset specific methods
 #'
-#' @description Acts as parent class for individual origin objects,
-#' allowing them to access general methods.
+#' @description A parent class containing non-dataset specific methods.
 #'
-#' @details All countries have shared methods for extracting region codes,
+#' @details All data sets have shared methods for extracting geographic codes,
 #' downloading, processing, and returning data. These functions are contained
-#' within this parent class and so are accessible by all countries which
-#' inherit from here. Individual countries can overwrite any functions or
-#' fields providing they define a method with the same name.
+#' within this parent class and so are accessible by all data sets which
+#' inherit from here. Individual data sets can overwrite any functions or
+#' fields providing they define a method with the same name, and can be
+#' extended with additinal functionality. See the individual method documentaion
+#' for further details.
+#' @seealso [CountryDataClass()], [initialise_dataclass()],
+#' [get_available_datasets()]
 DataClass <- R6::R6Class(
   "DataClass",
   public = list(
@@ -472,13 +511,16 @@ DataClass <- R6::R6Class(
   )
 )
 
-#' R6 Class containing  national level methods
-#' @description Acts as parent class for national data classes, (`WHO()` and
-#' `ECDC()`) allowing them to access general methods defined in [DataClass()].
-#' Adds filters to get the target country from national data sources.
+#' R6 Class containing national level methods
 #'
-#' @details Inherits from `DataClass`
+#' @description Acts as parent class for national data classes, allowing them
+#'  to access general methods defined in [DataClass()] but with additional
+#   features tuned to national level functionality.
+#' @details On top of the methods documented in [DataClass()], this class
+#' implements a custom filter function that supports partial matching to
+#' English country names using the `countrycode` package.
 #' @export
+#' @seealso [DataClass()], [initialise_dataclass()], [get_available_datasets()]
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(
