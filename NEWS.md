@@ -2,10 +2,12 @@
 
 This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation.
 
+Thanks to @joseph-palmer, and @kathsherratt for contributions towards this release.
+
 ## New features
 
-* Support for data provided by John Hopkins University.
-* Support for data provided by Google COVID-19 open data project.
+* Support for data provided by John Hopkins University (by @joseph-palmer).
+* Support for data provided by Google COVID-19 open data project (by @joseph-palmer).
 * Added a `available_regions` method for all classes that shows level 1 regions with data available for the region of interest. This is of particular use when combined with the JHU or Google datasets where processing a large number of regions that are not required can take some time. 
 * Adds support for JHU or Google data to `get_national_data()`. This may also now be used to access lower level data from these sources  but it may be better to instead use the classes directly or via `initialise_dataclass()`.
 
@@ -13,6 +15,8 @@ This release adds support for data sets from John Hopkins University and the Goo
 
 * The optional downloading of NHS region data in the `UK()` has been improved to include both the dynamic data previously supported and the archive document now produced (by @kathsherratt).
 * The examples for the `UK()` class have been expanded to better showcase the package functionality.
+* The documentation and examples for `get_regional_data()`, `get_national_data()`, and `get_available_datasets()` has been expanded with a focus on increasing the visibility of the underlying package structure.
+* The documentation and examples for `initialise_dataclass()`, `DataClass()`, and `CountryDataClass()` has been expanded and improved.
 
 # covidregionaldata 0.9.0
 
