@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R6 Class containing non-origin specific methods — DataClass • covidregionaldata</title>
+<title>R6 Class containing non-dataset specific methods — DataClass • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="R6 Class containing non-origin specific methods — DataClass" />
-<meta property="og:description" content="Acts as parent class for individual origin objects,
-allowing them to access general methods." />
+<meta property="og:title" content="R6 Class containing non-dataset specific methods — DataClass" />
+<meta property="og:description" content="A parent class containing non-dataset specific methods." />
 
 
 
@@ -143,25 +142,30 @@ allowing them to access general methods." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R6 Class containing non-origin specific methods</h1>
+    <h1>R6 Class containing non-dataset specific methods</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R'><code>R/shared-methods.R</code></a></small>
     <div class="hidden name"><code>DataClass.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Acts as parent class for individual origin objects,
-allowing them to access general methods.</p>
+    <p>A parent class containing non-dataset specific methods.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>All countries have shared methods for extracting region codes,
+    <p>All data sets have shared methods for extracting geographic codes,
 downloading, processing, and returning data. These functions are contained
-within this parent class and so are accessible by all countries which
-inherit from here. Individual countries can overwrite any functions or
-fields providing they define a method with the same name.</p>
+within this parent class and so are accessible by all data sets which
+inherit from here. Individual data sets can overwrite any functions or
+fields providing they define a method with the same name, and can be
+extended with additinal functionality. See the individual method documentaion
+for further details.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='CountryDataClass.html'>CountryDataClass()</a></code>, <code><a href='initialise_dataclass.html'>initialise_dataclass()</a></code>,
+<code><a href='get_available_datasets.html'>get_available_datasets()</a></code></p></div>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>

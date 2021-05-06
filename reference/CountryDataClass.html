@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R6 Class containing  national level methods — CountryDataClass • covidregionaldata</title>
+<title>R6 Class containing national level methods — CountryDataClass • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,9 @@
 
 
 
-<meta property="og:title" content="R6 Class containing  national level methods — CountryDataClass" />
-<meta property="og:description" content="Acts as parent class for national data classes, (WHO() and
-ECDC()) allowing them to access general methods defined in DataClass().
-Adds filters to get the target country from national data sources." />
+<meta property="og:title" content="R6 Class containing national level methods — CountryDataClass" />
+<meta property="og:description" content="Acts as parent class for national data classes, allowing them
+to access general methods defined in DataClass() but with additional" />
 
 
 
@@ -144,22 +143,26 @@ Adds filters to get the target country from national data sources." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R6 Class containing  national level methods</h1>
+    <h1>R6 Class containing national level methods</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R'><code>R/shared-methods.R</code></a></small>
     <div class="hidden name"><code>CountryDataClass.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Acts as parent class for national data classes, (<code><a href='WHO.html'>WHO()</a></code> and
-<code><a href='ECDC.html'>ECDC()</a></code>) allowing them to access general methods defined in <code><a href='DataClass.html'>DataClass()</a></code>.
-Adds filters to get the target country from national data sources.</p>
+    <p>Acts as parent class for national data classes, allowing them
+to access general methods defined in <code><a href='DataClass.html'>DataClass()</a></code> but with additional</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Inherits from <code>DataClass</code></p>
+    <p>On top of the methods documented in <code><a href='DataClass.html'>DataClass()</a></code>, this class
+implements a custom filter function that supports partial matching to
+English country names using the <code>countrycode</code> package.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='DataClass.html'>DataClass()</a></code>, <code><a href='initialise_dataclass.html'>initialise_dataclass()</a></code>, <code><a href='get_available_datasets.html'>get_available_datasets()</a></code></p></div>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>CountryDataClass</code></p>

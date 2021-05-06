@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fetch standardised sub-national COVID-19 data — get_regional_data • covidregionaldata</title>
+<title>Get regional-level data — get_regional_data • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,16 @@
 
 
 
-<meta property="og:title" content="Fetch standardised sub-national COVID-19 data — get_regional_data" />
-<meta property="og:description" content="Downloads, cleans and processes regional data
-for COVID-19." />
+<meta property="og:title" content="Get regional-level data — get_regional_data" />
+<meta property="og:description" content="Provides an interface to source specific classes which
+support regional level data. For simple use cases this allows downloading
+clean, standardised, regional-level COVID-19 data sets. Internally this uses
+the DataClass() parent class which allows documented downloading, cleaning,
+and processing. Optionally all steps of data processing can be returned
+along with the functions used for processing but by default just the
+finalised processed data is returned. See the examples for some potential
+use cases and the links to lower level functions for more details and
+options." />
 
 
 
@@ -145,14 +152,21 @@ for COVID-19." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fetch standardised sub-national COVID-19 data</h1>
+    <h1>Get regional-level data</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_regional_data.R'><code>R/get_regional_data.R</code></a></small>
     <div class="hidden name"><code>get_regional_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Downloads, cleans and processes regional data
-for COVID-19.</p>
+    <p>Provides an interface to source specific classes which
+support regional level data. For simple use cases this allows downloading
+clean, standardised, regional-level COVID-19 data sets. Internally this uses
+the <code><a href='DataClass.html'>DataClass()</a></code> parent class which allows documented downloading, cleaning,
+and processing. Optionally all steps of data processing can be returned
+along with the functions used for processing but by default just the
+finalised processed data is returned. See the examples for some potential
+use cases and the links to lower level functions for more details and
+options.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_regional_data</span><span class='op'>(</span>
@@ -176,7 +190,7 @@ for COVID-19.</p>
       <th>country</th>
       <td><p>A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
-options use <code>get_available_datasets</code>.</p></td>
+options use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code>.</p></td>
     </tr>
     <tr>
       <th>level</th>
@@ -237,14 +251,28 @@ and the Level 1 data will be returned.</p></td>
 
     <p>A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing stratified by regions within the given country.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='initialise_dataclass.html'>initialise_dataclass()</a></code>, <code><a href='DataClass.html'>DataClass()</a></code>, <code><a href='CountryDataClass.html'>CountryDataClass()</a></code>,
+<code><a href='get_national_data.html'>get_national_data()</a></code>, <code><a href='Italy.html'>Italy()</a></code>, <code><a href='UK.html'>UK()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='co'># set up a data cache</span></span>
 <span class='r-in'><span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># download data for Italy keeping all processing steps</span></span>
-<span class='r-in'><span class='fu'><a href='get_national_data.html'>get_national_data</a></span><span class='op'>(</span>country <span class='op'>=</span> <span class='st'>"italy"</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># download data for Italy</span></span>
+<span class='r-in'><span class='fu'>get_regional_data</span><span class='op'>(</span><span class='st'>"italy"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># return totals for Italy with no localisation</span></span>
+<span class='r-in'><span class='fu'>get_regional_data</span><span class='op'>(</span><span class='st'>"italy"</span>, localise <span class='op'>=</span> <span class='cn'>FALSE</span>, totals <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># download data for the UK but return the class</span></span>
+<span class='r-in'><span class='va'>uk</span> <span class='op'>&lt;-</span> <span class='fu'>get_regional_data</span><span class='op'>(</span><span class='st'>"United Kingdom"</span>, class <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>uk</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># return UK data from the class object]</span></span>
+<span class='r-in'><span class='va'>uk</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>

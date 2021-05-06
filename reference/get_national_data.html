@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get national-level data for countries globally, sourced from the ECDC or WHO. — get_national_data • covidregionaldata</title>
+<title>Get national-level data for countries globally from a range of sources — get_national_data • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,12 +45,16 @@
 
 
 
-<meta property="og:title" content="Get national-level data for countries globally, sourced from the ECDC or WHO. — get_national_data" />
-<meta property="og:description" content="Gets raw data using the source-specific function. Includes ISO
-country codes. Then adds columns which were missing from the raw data
-(calculating cumulative counts from new dailies and vice versa), cleans
-and sanitises further. Adds rows and columns of NA values so that data is
-in a standard format." />
+<meta property="og:title" content="Get national-level data for countries globally from a range of sources — get_national_data" />
+<meta property="og:description" content="Provides an interface to source specific classes which
+support national level data. For simple use cases this allows downloading
+clean, standardised, national-level COVID-19 data sets. Internally this uses
+the CountryDataClass() parent class which allows documented downloading,
+cleaning, and processing. Optionally all steps of data processing can be
+returned along with the functions used for processing but by default just
+the finalised processed data is returned. See the examples for some
+potential use cases and the links to lower level functions for more details
+and options." />
 
 
 
@@ -148,17 +152,21 @@ in a standard format." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get national-level data for countries globally, sourced from the ECDC or WHO.</h1>
+    <h1>Get national-level data for countries globally from a range of sources</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_national_data.R'><code>R/get_national_data.R</code></a></small>
     <div class="hidden name"><code>get_national_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Gets raw data using the source-specific function. Includes ISO
-country codes. Then adds columns which were missing from the raw data
-(calculating cumulative counts from new dailies and vice versa), cleans
-and sanitises further. Adds rows and columns of NA values so that data is
-in a standard format.</p>
+    <p>Provides an interface to source specific classes which
+support national level data. For simple use cases this allows downloading
+clean, standardised, national-level COVID-19 data sets. Internally this uses
+the <code><a href='CountryDataClass.html'>CountryDataClass()</a></code> parent class which allows documented downloading,
+cleaning, and processing. Optionally all steps of data processing can be
+returned along with the functions used for processing but by default just
+the finalised processed data is returned. See the examples for some
+potential use cases and the links to lower level functions for more details
+and options.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_national_data</span><span class='op'>(</span>
@@ -231,14 +239,38 @@ specifying a country to filter for.</p></td>
 
     <p>A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='initialise_dataclass.html'>initialise_dataclass()</a></code>, <code><a href='DataClass.html'>DataClass()</a></code>, <code><a href='CountryDataClass.html'>CountryDataClass()</a></code>,
+<code><a href='get_regional_data.html'>get_regional_data()</a></code>, <code><a href='WHO.html'>WHO()</a></code>, <code><a href='ECDC.html'>ECDC()</a></code>, <code><a href='JHU.html'>JHU()</a></code>, <code><a href='Google.html'>Google()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='co'># set up a data cache</span></span>
 <span class='r-in'><span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'></span>
+<span class='r-in'><span class='co'># download all national data from the WHO</span></span>
+<span class='r-in'><span class='fu'>get_national_data</span><span class='op'>(</span>source <span class='op'>=</span> <span class='st'>"who"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
 <span class='r-in'><span class='co'># download data for Canada keeping all processing steps</span></span>
-<span class='r-in'><span class='fu'>get_national_data</span><span class='op'>(</span>countries <span class='op'>=</span> <span class='st'>"canada"</span>, source <span class='op'>=</span> <span class='st'>"ecdc"</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_national_data</span><span class='op'>(</span>countries <span class='op'>=</span> <span class='st'>"canada"</span>, source <span class='op'>=</span> <span class='st'>"ecdc"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># download data for Canada from the JHU and return the full class</span></span>
+<span class='r-in'><span class='va'>jhu</span> <span class='op'>&lt;-</span> <span class='fu'>get_national_data</span><span class='op'>(</span>countries <span class='op'>=</span> <span class='st'>"canada"</span>, source <span class='op'>=</span> <span class='st'>"jhu"</span>, class <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>jhu</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># return the JHU data for canada</span></span>
+<span class='r-in'><span class='va'>jhu</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># check which regions the JHU supports national data for</span></span>
+<span class='r-in'><span class='va'>jhu</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># filter instead for France (and then reprocess)</span></span>
+<span class='r-in'><span class='va'>jhu</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='st'>"France"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>jhu</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># explore the structure of the stored JHU data</span></span>
+<span class='r-in'><span class='va'>jhu</span><span class='op'>$</span><span class='va'>data</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>

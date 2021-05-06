@@ -46,7 +46,10 @@
 
 
 <meta property="og:title" content="Initialise a child class of DataClass if it exists — initialise_dataclass" />
-<meta property="og:description" content="Initialise a child class of DataClass if it exists." />
+<meta property="og:description" content="This function initialises classes based on the DataClass()
+which allows documented downloading, cleaning, and processing. See the
+examples for some potential use cases and the DataClass() documentation
+for more details." />
 
 
 
@@ -150,7 +153,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Initialise a child class of DataClass if it exists.</p>
+    <p>This function initialises classes based on the <code><a href='DataClass.html'>DataClass()</a></code>
+which allows documented downloading, cleaning, and processing. See the
+examples for some potential use cases and the <code><a href='DataClass.html'>DataClass()</a></code> documentation
+for more details.</p>
     </div>
 
     <pre class="usage"><span class='fu'>initialise_dataclass</span><span class='op'>(</span>
@@ -171,7 +177,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>class</th>
-      <td><p>A character string specifying the <code>DataClass</code> to initialise.
+      <td><p>A character string specifying the <code><a href='DataClass.html'>DataClass()</a></code> to initialise.
 Not case dependent and matching is based on either the class name or the its
 country definition. For a list of options use <code><a href='get_available_datasets.html'>get_available_datasets()</a></code>.</p></td>
     </tr>
@@ -218,7 +224,7 @@ called (this will download, clean, and process data at initialisation).</p></td>
 return. Current options include "national" (which are datasets at the
 national level which inherit from <code>CountryDataClass</code>) and
 "regional" (which are datasets at the regional level which inherit
-directly from <code>DataClass</code>).</p></td>
+directly from <code><a href='DataClass.html'>DataClass()</a></code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -230,16 +236,269 @@ directly from <code>DataClass</code>).</p></td>
 
     <p>An initialised version of the target class if available,
 e.g. <code><a href='Italy.html'>Italy()</a></code></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='DataClass.html'>DataClass()</a></code>, <code><a href='CountryDataClass.html'>CountryDataClass()</a></code>, <code><a href='get_regional_data.html'>get_regional_data()</a></code>,
+<code><a href='get_national_data.html'>get_national_data()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># Initialise Italian data</span></span>
-<span class='r-in'><span class='va'>italy</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"Italy"</span><span class='op'>)</span></span>
+    <pre class="examples"><span class='r-in'><span class='co'># set up a cache to store data to avoid downloading repeatedly</span></span>
+<span class='r-in'><span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Using a cache at: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpWTtaBn</span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Initialise UK data with a partial name match</span></span>
-<span class='r-in'><span class='va'>uk</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"United Kingdom"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># check currently available datasets</span></span>
+<span class='r-in'><span class='fu'><a href='get_available_datasets.html'>get_available_datasets</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 x 8</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    origin   class level_1_region level_2_region level_3_region type  data_urls  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> Belgium  Belg… region         province       </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ep…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> Brazil   Braz… state          city           </span><span style='color: #BB0000;'>NA</span><span>             regi… https://gi…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> Canada   Cana… province       </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://he…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> Colombia Colo… departamento   </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ra…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> Cuba     Cuba  provincia      </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://co…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> Europea… ECDC  country        </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             nati… https://op…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> France   Fran… region         department     </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ww…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> Germany  Germ… bundesland     landkreis      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://op…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> Google   Goog… country        subregion      subregion2     nati… https://st…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> India    India state          </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ap…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span><span> Italy    Italy regioni        </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ra…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span><span> John Ho… JHU   country        region         </span><span style='color: #BB0000;'>NA</span><span>             nati… https://ra…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span><span> Lithuan… Lith… county         municipality   </span><span style='color: #BB0000;'>NA</span><span>             regi… https://op…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span><span> Mexico   Mexi… estado         municipio      </span><span style='color: #BB0000;'>NA</span><span>             regi… Downloads/…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span><span> South A… Sout… province       </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ra…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span><span> United … UK    region         authority      </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ww…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span><span> United … USA   state          county         </span><span style='color: #BB0000;'>NA</span><span>             regi… https://ra…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span><span> World H… WHO   country        </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>             nati… https://co…</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 1 more variable: source_data_cols &lt;chr&gt;</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Initialise ECDC data</span></span>
-<span class='r-in'><span class='va'>ecdc</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"ecdc"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># initialise a data set in the United Kingdom</span></span>
+<span class='r-in'><span class='co'># at the UTLA level</span></span>
+<span class='r-in'><span class='va'>utla</span> <span class='op'>&lt;-</span> <span class='va'><a href='UK.html'>UK</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"2"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># download UTLA data</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading UK data.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://api.coronavirus.data.gov.uk/v2/data?areaType=utla&amp;metric=newCasesBySpecimenDate&amp;metric=cumCasesBySpecimenDate&amp;metric=newCasesByPublishDate&amp;metric=cumCasesByPublishDate&amp;format=csv</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Rows:</span><span> 91,426</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Columns:</span><span> 8</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Delimiter:</span><span> ","</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BB0000;'>chr</span><span>  [3]: areaCode, areaName, areaType</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>dbl</span><span>  [4]: cumCasesByPublishDate, cumCasesBySpecimenDate, newCasesByPublishDate, newCases...</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>date</span><span> [1]: date</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Use `spec()` to retrieve the guessed column specification</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Pass a specification to the `col_types` argument to quiet this message</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://api.coronavirus.data.gov.uk/v2/data?areaType=utla&amp;metric=newDeaths28DaysByPublishDate&amp;metric=cumDeaths28DaysByPublishDate&amp;metric=newDeaths28DaysByDeathDate&amp;metric=cumDeaths28DaysByDeathDate&amp;format=csv</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Rows:</span><span> 79,297</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Columns:</span><span> 8</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Delimiter:</span><span> ","</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BB0000;'>chr</span><span>  [3]: areaCode, areaName, areaType</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>dbl</span><span>  [4]: cumDeaths28DaysByDeathDate, cumDeaths28DaysByPublishDate, newDeaths28DaysByDea...</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>date</span><span> [1]: date</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Use `spec()` to retrieve the guessed column specification</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Pass a specification to the `col_types` argument to quiet this message</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://api.coronavirus.data.gov.uk/v2/data?areaType=utla&amp;metric=newTestsByPublishDate&amp;metric=cumTestsByPublishDate&amp;metric=newAdmissions&amp;metric=cumAdmissions&amp;format=csv</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://api.coronavirus.data.gov.uk/v2/data?areaType=utla&amp;metric=newPillarOneTestsByPublishDate&amp;metric=newPillarTwoTestsByPublishDate&amp;metric=newPillarThreeTestsByPublishDate&amp;metric=newPillarFourTestsByPublishDate&amp;format=csv</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># clean UTLA data</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='fu'>clean</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Cleaning data</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># inspect available level 1 regions</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"1"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "North East"               "Yorkshire and The Humber"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3] "North West"               "West Midlands"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "London"                   "Scotland"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "Wales"                    "South West"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "East of England"          "East Midlands"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] "South East"               "Northern Ireland"        </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># filter data to the East of England</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='st'>"East of England"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Filtering data to: East of England</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># process UTLA data</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Processing data</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># return processed and filtered data</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4,796 x 24</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    date       region      region_code authority      local_authority_… cases_new</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> 2020-02-26 East of En… E12000006   Bedford        E06000055                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> 2020-02-26 East of En… E12000006   Cambridgeshire E10000003                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> 2020-02-26 East of En… E12000006   Central Bedfo… E06000056                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> 2020-02-26 East of En… E12000006   Essex          E10000012                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> 2020-02-26 East of En… E12000006   Hertfordshire  E10000015                 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> 2020-02-26 East of En… E12000006   Luton          E06000032                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> 2020-02-26 East of En… E12000006   Norfolk        E10000020                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> 2020-02-26 East of En… E12000006   Peterborough   E06000031                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> 2020-02-26 East of En… E12000006   Southend-on-S… E06000033                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> 2020-02-26 East of En… E12000006   Suffolk        E10000029                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 4,786 more rows, and 18 more variables: cases_total &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   deaths_new &lt;dbl&gt;, deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newDeaths28DaysByPublishDate &lt;dbl&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># inspect all data steps</span></span>
+<span class='r-in'><span class='va'>utla</span><span class='op'>$</span><span class='va'>data</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $raw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $raw$utla</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 91,426 x 12</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    areaCode  areaName    areaType date       cumCasesByPublis… cumCasesBySpecim…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> E06000003 Redcar and… utla     2021-05-06              </span><span style='text-decoration: underline;'>9</span><span>341                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> E06000014 York        utla     2021-05-06             </span><span style='text-decoration: underline;'>12</span><span>297                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> E06000050 Cheshire W… utla     2021-05-06             </span><span style='text-decoration: underline;'>21</span><span>768                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> E08000001 Bolton      utla     2021-05-06             </span><span style='text-decoration: underline;'>26</span><span>517                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> E08000016 Barnsley    utla     2021-05-06             </span><span style='text-decoration: underline;'>19</span><span>607                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> E08000031 Wolverhamp… utla     2021-05-06             </span><span style='text-decoration: underline;'>24</span><span>864                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> E08000032 Bradford    utla     2021-05-06             </span><span style='text-decoration: underline;'>49</span><span>709                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> E09000018 Hounslow    utla     2021-05-06             </span><span style='text-decoration: underline;'>25</span><span>008                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> E09000032 Wandsworth  utla     2021-05-06             </span><span style='text-decoration: underline;'>22</span><span>269                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> E09000033 Westminster utla     2021-05-06             </span><span style='text-decoration: underline;'>14</span><span>276                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 91,416 more rows, and 6 more variables: newCasesByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newDeaths28DaysByPublishDate &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $clean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 91,426 x 18</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    level_2_region_co… level_2_region      areaType date       cumCasesByPublish…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> E06000003          Redcar and Clevela… utla     2021-05-06               </span><span style='text-decoration: underline;'>9</span><span>341</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> E06000014          York                utla     2021-05-06              </span><span style='text-decoration: underline;'>12</span><span>297</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> E06000050          Cheshire West and … utla     2021-05-06              </span><span style='text-decoration: underline;'>21</span><span>768</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> E08000001          Bolton              utla     2021-05-06              </span><span style='text-decoration: underline;'>26</span><span>517</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> E08000016          Barnsley            utla     2021-05-06              </span><span style='text-decoration: underline;'>19</span><span>607</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> E08000031          Wolverhampton       utla     2021-05-06              </span><span style='text-decoration: underline;'>24</span><span>864</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> E08000032          Bradford            utla     2021-05-06              </span><span style='text-decoration: underline;'>49</span><span>709</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> E09000018          Hounslow            utla     2021-05-06              </span><span style='text-decoration: underline;'>25</span><span>008</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> E09000032          Wandsworth          utla     2021-05-06              </span><span style='text-decoration: underline;'>22</span><span>269</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> E09000033          Westminster         utla     2021-05-06              </span><span style='text-decoration: underline;'>14</span><span>276</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 91,416 more rows, and 13 more variables: cumCasesBySpecimenDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newCasesByPublishDate &lt;dbl&gt;, newCasesBySpecimenDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumDeaths28DaysByDeathDate &lt;dbl&gt;, cumDeaths28DaysByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newDeaths28DaysByDeathDate &lt;dbl&gt;, newDeaths28DaysByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cases_new &lt;dbl&gt;, cases_total &lt;dbl&gt;, deaths_new &lt;dbl&gt;, deaths_total &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   level_1_region_code &lt;chr&gt;, level_1_region &lt;chr&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $filtered</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4,692 x 18</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    level_2_region_code level_2_region areaType date       cumCasesByPublishDate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> E10000015           Hertfordshire  utla     2021-05-06                 </span><span style='text-decoration: underline;'>77</span><span>033</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> E10000015           Hertfordshire  utla     2021-05-05                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> E10000015           Hertfordshire  utla     2021-05-04                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> E10000015           Hertfordshire  utla     2021-05-03                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> E10000015           Hertfordshire  utla     2021-05-02                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> E10000015           Hertfordshire  utla     2021-05-01                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> E10000015           Hertfordshire  utla     2021-04-30                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> E10000015           Hertfordshire  utla     2021-04-29                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> E10000015           Hertfordshire  utla     2021-04-28                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> E10000015           Hertfordshire  utla     2021-04-27                    </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 4,682 more rows, and 13 more variables: cumCasesBySpecimenDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newCasesByPublishDate &lt;dbl&gt;, newCasesBySpecimenDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumDeaths28DaysByDeathDate &lt;dbl&gt;, cumDeaths28DaysByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newDeaths28DaysByDeathDate &lt;dbl&gt;, newDeaths28DaysByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cases_new &lt;dbl&gt;, cases_total &lt;dbl&gt;, deaths_new &lt;dbl&gt;, deaths_total &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   level_1_region_code &lt;chr&gt;, level_1_region &lt;chr&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $processed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4,796 x 24</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    date       region      region_code authority      local_authority_… cases_new</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> 2020-02-26 East of En… E12000006   Bedford        E06000055                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> 2020-02-26 East of En… E12000006   Cambridgeshire E10000003                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> 2020-02-26 East of En… E12000006   Central Bedfo… E06000056                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> 2020-02-26 East of En… E12000006   Essex          E10000012                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> 2020-02-26 East of En… E12000006   Hertfordshire  E10000015                 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> 2020-02-26 East of En… E12000006   Luton          E06000032                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> 2020-02-26 East of En… E12000006   Norfolk        E10000020                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> 2020-02-26 East of En… E12000006   Peterborough   E06000031                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> 2020-02-26 East of En… E12000006   Southend-on-S… E06000033                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> 2020-02-26 East of En… E12000006   Suffolk        E10000029                </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 4,786 more rows, and 18 more variables: cases_total &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   deaths_new &lt;dbl&gt;, deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   newDeaths28DaysByPublishDate &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $return</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># initialise Italian data, download, clean and process it</span></span>
+<span class='r-in'><span class='va'>italy</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"Italy"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Rows:</span><span> 9,198</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Columns:</span><span> 30</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Delimiter:</span><span> ","</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BB0000;'>chr</span><span>  [ 7]: stato, denominazione_regione, note, note_test, note_casi, codice_nuts_1, codice...</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>dbl</span><span>  [22]: codice_regione, lat, long, ricoverati_con_sintomi, terapia_intensiva, totale_os...</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>dttm</span><span> [ 1]: data</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Use `spec()` to retrieve the guessed column specification</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Pass a specification to the `col_types` argument to quiet this message</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>One or more parsing issues, see `problems()` for details</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Cleaning data</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Processing data</span>
+<span class='r-in'><span class='va'>italy</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 8,760 x 13</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    date       regioni   iso_3166_2 cases_new cases_total deaths_new deaths_total</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> 2020-02-24 Abruzzo   IT-65              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> 2020-02-24 Basilica… IT-77              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> 2020-02-24 Calabria  IT-78              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> 2020-02-24 Campania  IT-72              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> 2020-02-24 Emilia-R… IT-45             18          18          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> 2020-02-24 Friuli V… IT-36              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> 2020-02-24 Lazio     IT-62              3           3          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> 2020-02-24 Liguria   IT-42              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> 2020-02-24 Lombardia IT-25            172         172          6            6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> 2020-02-24 Marche    IT-57              0           0          0            0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 8,750 more rows, and 6 more variables: recovered_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   tested_total &lt;dbl&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># initialise ECDC data, fully process it, and return totals</span></span>
+<span class='r-in'><span class='va'>ecdc</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"ecdc"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span>, totals <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Downloading data from https://opendata.ecdc.europa.eu/covid19/casedistribution/csv</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Rows:</span><span> 61,900</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Columns:</span><span> 12</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Delimiter:</span><span> ","</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BB0000;'>chr</span><span> [5]: dateRep, countriesAndTerritories, geoId, countryterritoryCode, continentExp</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>dbl</span><span> [7]: day, month, year, cases, deaths, popData2019, Cumulative_number_for_14_days_of_...</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Use `spec()` to retrieve the guessed column specification</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Pass a specification to the `col_types` argument to quiet this message</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Cleaning data</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Processing data</span>
+<span class='r-in'><span class='va'>ecdc</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 213 x 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> United States  US          16</span><span style='text-decoration: underline;'>256</span><span>754       </span><span style='text-decoration: underline;'>299</span><span>177               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> India          IN           9</span><span style='text-decoration: underline;'>884</span><span>100       </span><span style='text-decoration: underline;'>143</span><span>355               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> Brazil         BR           6</span><span style='text-decoration: underline;'>901</span><span>952       </span><span style='text-decoration: underline;'>181</span><span>402               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> Russia         RU           2</span><span style='text-decoration: underline;'>653</span><span>928        </span><span style='text-decoration: underline;'>46</span><span>941               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> France         FR           2</span><span style='text-decoration: underline;'>377</span><span>618        </span><span style='text-decoration: underline;'>57</span><span>911               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> United Kingdom UK           1</span><span style='text-decoration: underline;'>849</span><span>403        </span><span style='text-decoration: underline;'>64</span><span>170               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> Italy          IT           1</span><span style='text-decoration: underline;'>843</span><span>860        </span><span style='text-decoration: underline;'>64</span><span>551               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> Spain          ES           1</span><span style='text-decoration: underline;'>731</span><span>660        </span><span style='text-decoration: underline;'>49</span><span>544               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> Argentina      AR           1</span><span style='text-decoration: underline;'>498</span><span>160        </span><span style='text-decoration: underline;'>40</span><span>766               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> Colombia       CO           1</span><span style='text-decoration: underline;'>425</span><span>774        </span><span style='text-decoration: underline;'>39</span><span>053               0          0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 203 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
