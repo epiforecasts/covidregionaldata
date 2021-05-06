@@ -14,35 +14,35 @@
 #' @concept dataset
 #' @examples
 #' \dontrun{
-#' # Setup a data cache
+#' # setup a data cache
 #' start_using_memoise()
 #'
-#' # Download, clean and process level 1 UK data with hospital admissions
+#' # download, clean and process level 1 UK data with hospital admissions
 #' region <- UK$new(level = "1", nhsregions = TRUE)
 #' region$return()
 #'
-#' # Initialise level 2 data
+#' # initialise level 2 data
 #' utla <- UK$new(level = "2")
 #'
-#' # Download UTLA
+#' # download UTLA data
 #' utla$download()
 #'
-#' # Clean UTLA data
+#' # clean UTLA data
 #' utla$clean()
 #'
-#' # Inspect available level 1 regions
+#' # inspect available level 1 regions
 #' utla$available_regions(level = "1")
 #'
-#' # Filter data to the East of England
+#' # filter data to the East of England
 #' utla$filter("East of England")
 #'
-#' # Process UTLA data
+#' # process UTLA data
 #' utla$process()
 #'
-#' # Return processed and filtered data
+#' # return processed and filtered data
 #' utla$return()
 #'
-#' # Inspect all data steps
+#' # inspect all data steps
 #' utla$data
 #' }
 UK <- R6::R6Class("UK",
