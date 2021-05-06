@@ -29,7 +29,7 @@
 #' # set up a data cache
 #' start_using_memoise()
 #'
-#' # download all natioanl data from the WHO
+#' # download all national data from the WHO
 #' get_national_data(source = "who")
 #'
 #' # download data for Canada keeping all processing steps

@@ -240,6 +240,7 @@ DataClass <- R6::R6Class(
                           totals = FALSE, localise = TRUE,
                           verbose = TRUE, steps = FALSE, get = FALSE,
                           process_fns) {
+      level <- as.character(level)
       self$level <- level
       if (is.na(self$filter_level)) {
         self$filter_level <- level
