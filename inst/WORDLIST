@@ -6,6 +6,7 @@ Antwerpen
 api
 APL
 apskritis
+behaviour
 belgium
 BRU
 Bundesland
@@ -18,6 +19,7 @@ CoV
 covid
 Covid
 COVID
+covidregionaldata
 CSSE
 DataClass
 dd
@@ -42,6 +44,7 @@ INEGI
 Inf
 initalize
 Initalize
+initialised
 IPC
 iso
 JHU
@@ -53,6 +56,7 @@ Limburg
 linelist
 Linelist
 linelists
+localisation
 ltla
 magrittr
 Meixco
@@ -61,6 +65,8 @@ metacran
 MX
 nhs
 nhsregions
+ons
+ONS
 org
 Organisation
 OSP
@@ -68,6 +74,8 @@ paulcampbell
 PHE
 PRs
 quickstart
+README
+readmissions
 regioni
 reparameterise
 SARS
@@ -79,6 +87,8 @@ SouthAfrica
 spi
 st
 standardised
+subnational
+summarise
 supertracker
 tibble
 tibbles
