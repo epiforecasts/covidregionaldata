@@ -48,6 +48,7 @@ run_new <- TRUE
 run_old <- TRUE
 
 library(switchr)
+library(magrittr)
 #switchrBaseDir(file.path(tempdir(), ".switchr"))
 
 if(initial_setup) {

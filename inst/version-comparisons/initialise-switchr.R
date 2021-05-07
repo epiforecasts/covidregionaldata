@@ -1,7 +1,7 @@
-if (nrow(switchrManifest() %>% filter(name == "newcovidregionaldata"))==1) {
+if (nrow(switchrManifest() > 0 ) && nrow(switchrManifest() %>% filter(name == "newcovidregionaldata"))==1) {
   removeLib("newcovidregionaldata")
 }
-if (nrow(switchrManifest() %>% filter(name == "oldcovidregionaldata"))==1) {
+if (nrow(switchrManifest() > 0 ) && nrow(switchrManifest() %>% filter(name == "oldcovidregionaldata"))==1) {
   removeLib("oldcovidregionaldata")
 }
 
