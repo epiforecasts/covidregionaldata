@@ -18,4 +18,10 @@ where data was not collected for all regions. This function finds dates
 which have data for some regions, but not all, and adds rows of NAs for the
 missing regions. This is mainly for reasons of completeness.
 }
-\concept{utility}
+\seealso{
+Compulsory processing functions
+\code{\link{add_extra_na_cols}()},
+\code{\link{calculate_columns_from_existing_data}()},
+\code{\link{complete_cumulative_columns}()}
+}
+\concept{compulsory_processing}

@@ -41,4 +41,10 @@ processing steps}
 Internal shared regional data cleaning designed to be called
 by \code{process}.
 }
+\seealso{
+Functions used in the processing pipeline
+\code{\link{run_default_processing_fns}()},
+\code{\link{run_optional_processing_fns}()}
+}
+\concept{processing}
 \concept{utility}

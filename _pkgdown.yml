@@ -5,6 +5,9 @@ template:
     docsearch:
       api_key: 721a43acf6af66699c04bd8b2af75ff1
       index_name: epiforecasts
+  twitter:
+    creator: "@seabbs"
+    card: summary_large_image
 
 development:
   mode: release
@@ -34,21 +37,29 @@ navbar:
 
 reference:
   - title: Get Covid-19 Data
-    desc: Functions that provide interfaces to download cleaned and processed datasets. Internally these functions call the classes documented below and so optional class specific arguments can also be used.
+    desc: Functions that provide interfaces to download cleaned and processed datasets. Internally many of these functions call the classes documented below and so optional class specific arguments can also be used.
     contents:
+      - get_available_datasets
       - get_national_data
       - get_regional_data
       - initialise_dataclass
+      - DataClass
+      - CountryDataClass
   - title: Dataset Classes
     desc: Classes that define individual datasets and contain all the methods needed to download, process, and clean them.
     contents:
       - has_concept("dataset")
+  - title: Dataset processing
+    desc: Functions used to process data once it has been cleaned into a standardised format. These functions are split into compulsory processing options, which are always used, and optional processing functions which may be added/removed by the user.
+  - subtitle: Compulsory processing
+    contents:
+      - has_concept("compulsory_processing")
+  - subtitle: Optional processing
+    contents:
+      - has_concept("optional_processing")
   - title: Utilities
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
-      - get_available_datasets
-      - DataClass
-      - CountryDataClass
       - has_concept("utility")
   - title: Datasets
     desc: Package datasets
