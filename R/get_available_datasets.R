@@ -11,8 +11,7 @@
 #' directly from `DataClass()`).
 #' @return A list of available data sets and the spatial aggregation data is
 #' available for.
-#' @seealso [initialise_dataclass()], [DataClass()], [CountryDataClass()],
-#'  [get_national_data()], [get_regional_data()]
+#' @family interface
 #' @importFrom rlang .data
 #' @importFrom dplyr select bind_rows filter
 #' @importFrom tibble as_tibble

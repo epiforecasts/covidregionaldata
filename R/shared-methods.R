@@ -25,8 +25,7 @@
 #' @param ... Additional arguments to pass to class specific functionality.
 #' @return An initialised version of the target class if available,
 #' e.g. `Italy()`
-#' @seealso [DataClass()], [CountryDataClass()], [get_regional_data()],
-#'  [get_national_data()]
+#' @family interface
 #' @inheritParams message_verbose
 #' @inheritParams get_available_datasets
 #' @rdname initialise_dataclass
@@ -125,8 +124,7 @@ initialise_dataclass <- function(class = character(), level = "1",
 #' fields providing they define a method with the same name, and can be
 #' extended with additinal functionality. See the individual method documentaion
 #' for further details.
-#' @seealso [CountryDataClass()], [initialise_dataclass()],
-#' [get_available_datasets()]
+#' @family interface
 DataClass <- R6::R6Class(
   "DataClass",
   public = list(
@@ -521,7 +519,7 @@ DataClass <- R6::R6Class(
 #' implements a custom filter function that supports partial matching to
 #' English country names using the `countrycode` package.
 #' @export
-#' @seealso [DataClass()], [initialise_dataclass()], [get_available_datasets()]
+#' @family interface
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(

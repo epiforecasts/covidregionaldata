@@ -12,6 +12,7 @@
 # nolint end
 #' @export
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' # setup a data cache

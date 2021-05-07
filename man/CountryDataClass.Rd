@@ -13,8 +13,14 @@ implements a custom filter function that supports partial matching to
 English country names using the \code{countrycode} package.
 }
 \seealso{
-\code{\link[=DataClass]{DataClass()}}, \code{\link[=initialise_dataclass]{initialise_dataclass()}}, \code{\link[=get_available_datasets]{get_available_datasets()}}
+Data interface functions
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()},
+\code{\link{initialise_dataclass}()}
 }
+\concept{interface}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{CountryDataClass}
 }

@@ -5,6 +5,7 @@
 #' @source \url{https://www.covid19india.org}
 #' @export
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- India$new(verbose = TRUE, steps = TRUE, get = TRUE)

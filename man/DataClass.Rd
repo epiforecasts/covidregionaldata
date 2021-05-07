@@ -16,9 +16,14 @@ extended with additinal functionality. See the individual method documentaion
 for further details.
 }
 \seealso{
-\code{\link[=CountryDataClass]{CountryDataClass()}}, \code{\link[=initialise_dataclass]{initialise_dataclass()}},
-\code{\link[=get_available_datasets]{get_available_datasets()}}
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()},
+\code{\link{initialise_dataclass}()}
 }
+\concept{interface}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

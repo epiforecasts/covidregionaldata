@@ -8,6 +8,7 @@
 #'
 #' @source \url{https://github.com/wcota/covid19br}
 #' @concept dataset
+#' @family subnational
 #' @export
 #' @examples
 #' \dontrun{

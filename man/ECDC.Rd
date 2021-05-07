@@ -2,7 +2,8 @@
 % Please edit documentation in R/ECDC.R
 \name{ECDC}
 \alias{ECDC}
-\title{R6 Class containing specific attributes and methods for the ECDC dataset}
+\title{R6 Class containing specific attributes and methods for the European Centre
+for Disease Prevention and Control dataset}
 \source{
 \url{https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide}
 }
@@ -18,7 +19,14 @@ national$return()
 }
 
 }
+\seealso{
+National data sources
+\code{\link{Google}},
+\code{\link{JHU}},
+\code{\link{WHO}}
+}
 \concept{dataset}
+\concept{national}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{ECDC}
 }

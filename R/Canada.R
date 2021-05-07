@@ -6,6 +6,7 @@
 #' @concept dataset
 #' @source \url{https://health-infobase.canada.ca}
 #' @export
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- Canada$new(verbose = TRUE, steps = TRUE, get = TRUE)

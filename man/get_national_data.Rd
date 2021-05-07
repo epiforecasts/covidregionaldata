@@ -93,6 +93,13 @@ jhu$data
 }
 }
 \seealso{
-\code{\link[=initialise_dataclass]{initialise_dataclass()}}, \code{\link[=DataClass]{DataClass()}}, \code{\link[=CountryDataClass]{CountryDataClass()}},
-\code{\link[=get_regional_data]{get_regional_data()}}, \code{\link[=WHO]{WHO()}}, \code{\link[=ECDC]{ECDC()}}, \code{\link[=JHU]{JHU()}}, \code{\link[=Google]{Google()}}
+\code{\link[=WHO]{WHO()}}, \code{\link[=ECDC]{ECDC()}}, \code{\link[=JHU]{JHU()}}, \code{\link[=Google]{Google()}}
+
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_regional_data}()},
+\code{\link{initialise_dataclass}()}
 }
+\concept{interface}

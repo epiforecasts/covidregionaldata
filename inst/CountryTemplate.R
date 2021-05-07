@@ -5,6 +5,7 @@
 #'  and processing covid-19 region data for CountryTemplate.
 #'
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- CountryTemplate$new(verbose = TRUE, steps = TRUE, get = TRUE)

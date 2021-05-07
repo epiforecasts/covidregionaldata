@@ -49,7 +49,36 @@ uk$return()
 }
 # nolint end
 }
+\seealso{
+Aggregated data sources
+\code{\link{JHU}}
+
+National data sources
+\code{\link{ECDC}},
+\code{\link{JHU}},
+\code{\link{WHO}}
+
+Subnational data sources
+\code{\link{Belgium}},
+\code{\link{Brazil}},
+\code{\link{Canada}},
+\code{\link{Colombia}},
+\code{\link{Cuba}},
+\code{\link{France}},
+\code{\link{Germany}},
+\code{\link{India}},
+\code{\link{Italy}},
+\code{\link{JHU}},
+\code{\link{Lithuania}},
+\code{\link{Mexico}},
+\code{\link{SouthAfrica}},
+\code{\link{UK}},
+\code{\link{USA}}
+}
+\concept{aggregations}
 \concept{dataset}
+\concept{national}
+\concept{subnational}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{Google}
 }

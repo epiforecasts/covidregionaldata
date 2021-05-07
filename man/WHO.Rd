@@ -2,13 +2,14 @@
 % Please edit documentation in R/WHO.R
 \name{WHO}
 \alias{WHO}
-\title{R6 Class containing specific attributes and methods for WHO data}
+\title{R6 Class containing specific attributes and methods for World Health
+Organisation data}
 \source{
 \url{https://covid19.who.int/}
 }
 \description{
-Information for downloading, cleaning
-and processing COVID-19 region data from the World Health Organisation
+Information for downloading, cleaning and processing COVID-19
+region data from the World Health Organisation
 }
 \examples{
 \dontrun{
@@ -16,7 +17,14 @@ national <- WHO$new(verbose = TRUE, steps = TRUE, get = TRUE)
 national$return()
 }
 }
+\seealso{
+National data sources
+\code{\link{ECDC}},
+\code{\link{Google}},
+\code{\link{JHU}}
+}
 \concept{dataset}
+\concept{national}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{WHO}
 }

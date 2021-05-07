@@ -23,8 +23,8 @@
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #' recoveries and testing stratified by regions within the given country.
 #' @importFrom lifecycle deprecated is_present deprecate_warn
-#' @seealso [initialise_dataclass()], [DataClass()], [CountryDataClass()],
-#'  [get_national_data()], [Italy()], [UK()]
+#' @family interface
+#' @seealso [Italy()], [UK()]
 #' @export
 #' @examples
 #' \dontrun{

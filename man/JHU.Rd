@@ -2,20 +2,29 @@
 % Please edit documentation in R/JHU.R
 \name{JHU}
 \alias{JHU}
-\title{R6 Class containing specific attributes and methods for COVID-19 data
-provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-Visual Dashboard operated by the Johns Hopkins University
-Center for Systems Science and Engineering (JHU CSSE). Also,
-Supported by ESRI Living Atlas Team and the Johns Hopkins University
-Applied Physics Lab (JHU APL)}
+\title{R6 Class containing specific attributes and methods for John Hopkins
+University data}
 \source{
 \url{https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data}
 }
 \description{
-Country specific information for downloading, cleaning
-and processing covid-19 region data for John Hopkins University.
+Attributes and methods for COVID-19 data used for the 2019
+Novel Coronavirus Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Supported by ESRI
+Living Atlas Team and the Johns Hopkins University Applied Physics Lab
+(JHU APL)
 }
 \details{
+This dataset support both national and subnational data sources
+with national level data returned by default. Subnational data is supported
+for a subset of countries which can be found after cleaning using the
+\code{available_regions()} method, see the examples for more details. These data
+sets are sourced, cleaned, standardised by the JHU team so please see the
+source repository for further details. Note that unlike many other data sets
+this means methods applied to this source are not being applied to raw
+surveillance data but instead to already cleaned data. If using for
+analysis checking the JHU source for further details is advisable.
+
 If using this data please cite:
 "Dong E, Du H, Gardner L. An interactive web-based dashboard to track
 COVID-19 in real time.
@@ -44,7 +53,36 @@ jhu_level_2$return()
 }
 # nolint end
 }
+\seealso{
+Aggregated data sources
+\code{\link{Google}}
+
+National data sources
+\code{\link{ECDC}},
+\code{\link{Google}},
+\code{\link{WHO}}
+
+Subnational data sources
+\code{\link{Belgium}},
+\code{\link{Brazil}},
+\code{\link{Canada}},
+\code{\link{Colombia}},
+\code{\link{Cuba}},
+\code{\link{France}},
+\code{\link{Germany}},
+\code{\link{Google}},
+\code{\link{India}},
+\code{\link{Italy}},
+\code{\link{Lithuania}},
+\code{\link{Mexico}},
+\code{\link{SouthAfrica}},
+\code{\link{UK}},
+\code{\link{USA}}
+}
+\concept{aggregations}
 \concept{dataset}
+\concept{national}
+\concept{subnational}
 \section{Super classes}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{\link[covidregionaldata:CountryDataClass]{covidregionaldata::CountryDataClass}} -> \code{JHU}
 }

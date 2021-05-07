@@ -21,8 +21,8 @@
 #'  recoveries and testing.
 #' @inheritParams get_regional_data
 #' @importFrom lifecycle deprecated is_present deprecate_warn
-#' @seealso [initialise_dataclass()], [DataClass()], [CountryDataClass()],
-#'  [get_regional_data()], [WHO()], [ECDC()], [JHU()], [Google()]
+#' @family interface
+#' @seealso [WHO()], [ECDC()], [JHU()], [Google()]
 #' @export
 #' @examples
 #' \dontrun{

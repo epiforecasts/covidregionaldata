@@ -91,6 +91,13 @@ uk$return()
 }
 }
 \seealso{
-\code{\link[=initialise_dataclass]{initialise_dataclass()}}, \code{\link[=DataClass]{DataClass()}}, \code{\link[=CountryDataClass]{CountryDataClass()}},
-\code{\link[=get_national_data]{get_national_data()}}, \code{\link[=Italy]{Italy()}}, \code{\link[=UK]{UK()}}
+\code{\link[=Italy]{Italy()}}, \code{\link[=UK]{UK()}}
+
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{initialise_dataclass}()}
 }
+\concept{interface}

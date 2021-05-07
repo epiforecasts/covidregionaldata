@@ -104,6 +104,11 @@ ecdc <- initialise_dataclass("ecdc", get = TRUE, totals = TRUE)
 ecdc$return()
 }
 \seealso{
-\code{\link[=DataClass]{DataClass()}}, \code{\link[=CountryDataClass]{CountryDataClass()}}, \code{\link[=get_regional_data]{get_regional_data()}},
-\code{\link[=get_national_data]{get_national_data()}}
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()}
 }
+\concept{interface}
