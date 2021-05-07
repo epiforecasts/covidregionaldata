@@ -1,6 +1,6 @@
 # covidregionaldata 0.9.1
 
-This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation. Finally, this release adds optional data processing which will be extended in future releases.
+This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation. Finally, this release adds optional data processing which will be extended in future releases (contributions warmly welcomed).
 
 Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for contributions towards this release.
 
@@ -19,6 +19,7 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for contributions toward
 * The documentation and examples for `initialise_dataclass()`, `DataClass()`, and `CountryDataClass()` has been expanded and improved.
 * Improvements to the linking of documentation for related functions and classes.
 * Improvements to the documentation for contributors (by @RichardMN).
+* Improvements to the `pkgdown` documentation to organise packages into appropriate subcategories.
 
 # covidregionaldata 0.9.0
 
