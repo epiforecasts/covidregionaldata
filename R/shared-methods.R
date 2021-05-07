@@ -34,6 +34,7 @@
 #' @importFrom purrr map_lgl
 #' @export
 #' @examples
+#' \dontrun{
 #' # set up a cache to store data to avoid downloading repeatedly
 #' start_using_memoise()
 #'
@@ -72,6 +73,7 @@
 #' # initialise ECDC data, fully process it, and return totals
 #' ecdc <- initialise_dataclass("ecdc", get = TRUE, totals = TRUE)
 #' ecdc$return()
+#' }
 initialise_dataclass <- function(class = character(), level = "1",
                                  totals = FALSE, localise = TRUE,
                                  regions, verbose = TRUE, steps = FALSE,

@@ -64,6 +64,7 @@ examples for some potential use cases and the \code{DataClass()} documentation
 for more details.
 }
 \examples{
+\dontrun{
 # set up a cache to store data to avoid downloading repeatedly
 start_using_memoise()
 
@@ -102,6 +103,7 @@ italy$return()
 # initialise ECDC data, fully process it, and return totals
 ecdc <- initialise_dataclass("ecdc", get = TRUE, totals = TRUE)
 ecdc$return()
+}
 }
 \seealso{
 Data interface functions

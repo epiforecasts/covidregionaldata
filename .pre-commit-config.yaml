@@ -11,6 +11,7 @@ repos:
     # -   id: codemeta-description-updated
     -   id: use-tidy-description
     -   id: spell-check
+        args: [--lang=en-gb]
         exclude: >
           (?x)^(
           data/.*| 
