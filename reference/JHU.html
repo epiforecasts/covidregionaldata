@@ -6,12 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R6 Class containing specific attributes and methods for COVID-19 data
-provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-Visual Dashboard operated by the Johns Hopkins University
-Center for Systems Science and Engineering (JHU CSSE). Also,
-Supported by ESRI Living Atlas Team and the Johns Hopkins University
-Applied Physics Lab (JHU APL) — JHU • covidregionaldata</title>
+<title>R6 Class containing specific attributes and methods for John Hopkins
+University data — JHU • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -50,14 +46,13 @@ Applied Physics Lab (JHU APL) — JHU • covidregionaldata</title>
 
 
 
-<meta property="og:title" content="R6 Class containing specific attributes and methods for COVID-19 data
-provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-Visual Dashboard operated by the Johns Hopkins University
-Center for Systems Science and Engineering (JHU CSSE). Also,
-Supported by ESRI Living Atlas Team and the Johns Hopkins University
-Applied Physics Lab (JHU APL) — JHU" />
-<meta property="og:description" content="Country specific information for downloading, cleaning
-and processing covid-19 region data for John Hopkins University." />
+<meta property="og:title" content="R6 Class containing specific attributes and methods for John Hopkins
+University data — JHU" />
+<meta property="og:description" content="Attributes and methods for COVID-19 data used for the 2019
+Novel Coronavirus Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Supported by ESRI
+Living Atlas Team and the Johns Hopkins University Applied Physics Lab
+(JHU APL)" />
 
 
 
@@ -155,19 +150,18 @@ and processing covid-19 region data for John Hopkins University." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R6 Class containing specific attributes and methods for COVID-19 data
-provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-Visual Dashboard operated by the Johns Hopkins University
-Center for Systems Science and Engineering (JHU CSSE). Also,
-Supported by ESRI Living Atlas Team and the Johns Hopkins University
-Applied Physics Lab (JHU APL)</h1>
+    <h1>R6 Class containing specific attributes and methods for John Hopkins
+University data</h1>
     <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/JHU.R'><code>R/JHU.R</code></a></small>
     <div class="hidden name"><code>JHU.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Country specific information for downloading, cleaning
-and processing covid-19 region data for John Hopkins University.</p>
+    <p>Attributes and methods for COVID-19 data used for the 2019
+Novel Coronavirus Visual Dashboard operated by the Johns Hopkins University
+Center for Systems Science and Engineering (JHU CSSE). Supported by ESRI
+Living Atlas Team and the Johns Hopkins University Applied Physics Lab
+(JHU APL)</p>
     </div>
 
 
@@ -177,10 +171,43 @@ and processing covid-19 region data for John Hopkins University.</p>
     <p><a href='https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data'>https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data</a></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If using this data please cite:
+    <p>This dataset support both national and subnational data sources
+with national level data returned by default. Subnational data is supported
+for a subset of countries which can be found after cleaning using the
+<code>available_regions()</code> method, see the examples for more details. These data
+sets are sourced, cleaned, standardised by the JHU team so please see the
+source repository for further details. Note that unlike many other data sets
+this means methods applied to this source are not being applied to raw
+surveillance data but instead to already cleaned data. If using for
+analysis checking the JHU source for further details is advisable.</p>
+<p>If using this data please cite:
 "Dong E, Du H, Gardner L. An interactive web-based dashboard to track
 COVID-19 in real time.
 Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Aggregated data sources
+<code><a href='Google.html'>Google</a></code></p>
+<p>National data sources
+<code><a href='ECDC.html'>ECDC</a></code>,
+<code><a href='Google.html'>Google</a></code>,
+<code><a href='WHO.html'>WHO</a></code></p>
+<p>Subnational data sources
+<code><a href='Belgium.html'>Belgium</a></code>,
+<code><a href='Brazil.html'>Brazil</a></code>,
+<code><a href='Canada.html'>Canada</a></code>,
+<code><a href='Colombia.html'>Colombia</a></code>,
+<code><a href='Cuba.html'>Cuba</a></code>,
+<code><a href='France.html'>France</a></code>,
+<code><a href='Germany.html'>Germany</a></code>,
+<code><a href='Google.html'>Google</a></code>,
+<code><a href='India.html'>India</a></code>,
+<code><a href='Italy.html'>Italy</a></code>,
+<code><a href='Lithuania.html'>Lithuania</a></code>,
+<code><a href='Mexico.html'>Mexico</a></code>,
+<code><a href='SouthAfrica.html'>SouthAfrica</a></code>,
+<code><a href='UK.html'>UK</a></code>,
+<code><a href='USA.html'>USA</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
     <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code><a href='CountryDataClass.html'>covidregionaldata::CountryDataClass</a></code> -&gt; <code>JHU</code></p>

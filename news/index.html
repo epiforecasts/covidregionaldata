@@ -187,7 +187,7 @@
 <a href="#technical-improvements" class="anchor" aria-hidden="true"></a>Technical improvements</h2>
 <ul><li>
 <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code> now use R6 method dispatch. This is an internal change and so should have minimal user impact for users of the <code>get_</code> functions. However, all datasets are now available to be used as R6 methods (see <code>get_available_datasets</code>) which may allow for more modular use cases. These classes can also be initialised using <code><a href="../reference/initialise_dataclass.html">initialise_dataclass()</a></code> which is used internally by both <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> and <code><a href="../reference/get_national_data.html">get_national_data()</a></code>.</li>
-<li>Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: https://github.com/epiforecasts/covidregionaldata#readme).</li>
+<li>Unit testing has been separated from data downloading which is now tested individually by data set. This allows for contributors to more easily assess the impact of their additions and also allows us to publish data status updates for each data sets (see the README: <a href="https://github.com/epiforecasts/covidregionaldata#readme" class="external-link uri">https://github.com/epiforecasts/covidregionaldata#readme</a>).</li>
 </ul></div>
 <div id="deprecated-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -195,9 +195,10 @@
 <ul><li>
 <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> replaces <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> to view available data. <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> is deprecated.</li>
 <li>
-<code><a href="../reference/get_interventions_data.html">get_interventions_data()</a></code> is deprecated. These data no longer update as of December 2020. Check for alternatives at https://supertracker.spi.ox.ac.uk/policy-trackers/</li>
+<code><a href="../reference/get_interventions_data.html">get_interventions_data()</a></code> is deprecated. These data no longer update as of December 2020. Check for alternatives at <a href="https://supertracker.spi.ox.ac.uk/policy-trackers/" class="external-link uri">https://supertracker.spi.ox.ac.uk/policy-trackers/</a>
+</li>
 <li>
-<code>get_linelist</code> is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at https://global.health/. We are working on a solution for accessing with <code>covidregionaldata</code>.</li>
+<code>get_linelist</code> is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at <a href="https://global.health/" class="external-link uri">https://global.health/</a>. We are working on a solution for accessing with <code>covidregionaldata</code>.</li>
 </ul></div>
 <div id="data-changes-since-083" class="section level2">
 <h2 class="hasAnchor">
