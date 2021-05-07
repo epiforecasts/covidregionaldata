@@ -135,7 +135,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 116,530 x 15</span>
+<span class="co">#&gt; # A tibble: 116,130 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -148,7 +148,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 116,520 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 116,120 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
