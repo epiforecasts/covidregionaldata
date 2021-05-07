@@ -127,6 +127,7 @@ initialise_dataclass <- function(class = character(), level = "1",
 #' extended with additinal functionality. See the individual method documentaion
 #' for further details.
 #' @family interface
+#' @importFrom R6 R6Class
 DataClass <- R6::R6Class(
   "DataClass",
   public = list(
@@ -522,6 +523,7 @@ DataClass <- R6::R6Class(
 #' English country names using the `countrycode` package.
 #' @export
 #' @family interface
+#' @importFrom R6 R6Class
 CountryDataClass <- R6::R6Class("CountryDataClass",
   inherit = DataClass,
   public = list(
