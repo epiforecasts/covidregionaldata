@@ -1,11 +1,11 @@
 pandoc: 2.7.3
 pkgdown: 1.6.1.9001
-pkgdown_sha: aae5ce1adce646d180f29ede23210ef13527ac7c
+pkgdown_sha: 150610c5bcbc00b81340925bec97e164301d3502
 articles:
   dataset-status: dataset-status.html
   quickstart: quickstart.html
   slowstart: slowstart.html
-last_built: 2021-05-10T00:39Z
+last_built: 2021-05-11T01:15Z
 urls:
   reference: epiforecasts.io/covidregionaldata/reference
   article: epiforecasts.io/covidregionaldata/articles
