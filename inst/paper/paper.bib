@@ -1,73 +1,27 @@
-  @Manual{Rdev:2013,
-    title = {R: A Language and Environment for Statistical Computing},
-    author = {{R Core Team}},
-    organization = {R Foundation for Statistical Computing},
-    address = {Vienna, Austria},
-    year = {2013},
-    url = {http://www.R-project.org/},
-  }
-
-  @Article{covid19datahub:2020,
-  title = {COVID-19 Data Hub},
-  year = {2020},
-  doi = {10.21105/joss.02376},
-  author = {Emanuele Guidotti and David Ardia},
-  journal = {Journal of Open Source Software},
-  volume = {5},
-  number = {51},
-  pages = {2376},
-}
-
-@article{AbbottSam2020Ettr,
-abstract = {Background: Interventions are now in place worldwide to reduce transmission of the novel coronavirus. Assessing temporal variations in transmission in different countries is essential for evaluating the effectiveness of public health interventions and the impact of changes in policy. Methods: We use case notification data to generate daily estimates of the time-dependent reproduction number in different regions and countries. Our modelling framework, based on open source tooling, accounts for reporting delays, so that temporal variations in reproduction number estimates can be compared directly with the times at which interventions are implemented. Results: We provide three example uses of our framework. First, we demonstrate how the toolset displays temporal changes in the reproduction number. Second, we show how the framework can be used to reconstruct case counts by date of infection from case counts by date of notification, as well as to estimate the reproduction number. Third, we show how maps can be generated to clearly show if case numbers are likely to decrease or increase in different regions. Results are shown for regions and countries worldwide on our website (https://epiforecasts.io/covid/) and are updated daily. Our tooling is provided as an open-source R package to allow replication by others. Conclusions: This decision-support tool can be used to assess changes in virus transmission in different regions and countries worldwide. This allows policymakers to assess the effectiveness of current interventions, and will be useful for inferring whether or not transmission will increase when interventions are lifted. As well as providing daily updates on our website, we also provide adaptable computing code so that our approach can be used directly by researchers and policymakers on confidential datasets. We hope that our tool will be used to support decisions in countries worldwide throughout the ongoing COVID-19 pandemic.},
-address = {London},
-author = {Abbott, Sam and Hellewell, Joel and Thompson, Robin N and Sherratt, Katharine and Gibbs, Hamish P and Bosse, Nikos I and Munday, James D and Meakin, Sophie and Doughty, Emma L and Chun, June Young and Chan, Yung-Wai Desmond and Finger, Flavio and Campbell, Paul and Endo, Akira and Pearson, Carl A B and Gimma, Amy and Russell, Tim and Flasche, Stefan and Kucharski, Adam J and Eggo, Rosalind M and Funk, Sebastian},
-institution = {CMMID COVID modelling group},
+@article{Abbott2020,
+abstract = { Background: Assessing temporal variations in transmission in different countries is essential for monitoring the epidemic, evaluating the effectiveness of public health interventions and estimating the impact of changes in policy.  Methods: We use case and death notification data to generate daily estimates of the time-varying reproduction number globally, regionally, nationally, and subnationally over a 12-week rolling window. Our modelling framework, based on open source tooling, accounts for uncertainty in reporting delays, so that the reproduction number is estimated based on underlying latent infections.  Results: Estimates of the reproduction number, trajectories of infections, and forecasts are displayed on a dedicated website as both maps and time series, and made available to download in tabular form.  Conclusions:  This decision-support tool can be used to assess changes in virus transmission both globally, regionally, nationally, and subnationally. This allows public health officials and policymakers to track the progress of the outbreak in near real-time using an epidemiologically valid measure. As well as providing regular updates on our website, we also provide an open source tool-set so that our approach can be used directly by researchers and policymakers on confidential data-sets. We hope that our tool will be used to support decisions in countries worldwide throughout the ongoing COVID-19 pandemic. },
+author = {Abbott, Sam and Hellewell, Joel and Thompson, Robin N. and Sherratt, Katharine and Gibbs, Hamish P. and Bosse, Nikos I. and Munday, James D. and Meakin, Sophie and Doughty, Emma L. and Chun, June Young and Chan, Yung-Wai Desmond and Finger, Flavio and Campbell, Paul and Endo, Akira and Pearson, Carl A. B. and Gimma, Amy and Russell, Tim and Flasche, Stefan and Kucharski, Adam J. and Eggo, Rosalind M. and Funk, Sebastian},
+doi = {10.12688/wellcomeopenres.16006.2},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Abbott et al. - 2020 - Estimating the time-varying reproduction number of SARS-CoV-2 using national and subnational case counts.pdf:pdf},
 issn = {2398-502X},
-journal = {Wellcome open research},
-keywords = {Severe acute respiratory syndrome coronavirus 2 ; },
-pages = {112--},
-publisher = {Wellcome Trust Limited},
+journal = {Wellcome Open Research},
+keywords = {SARS-CoV-2,covid-19,forecasting,surveillance,time-varying reproduction number},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {dec},
+pages = {112},
+publisher = {F1000 Research Ltd},
 title = {{Estimating the time-varying reproduction number of SARS-CoV-2 using national and subnational case counts}},
+url = {https://doi.org/10.12688/wellcomeopenres.16006.1},
 volume = {5},
 year = {2020}
 }
 
-@Article{covidregionaldata2020,
-  title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},
-  author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},
-  journal = {-},
-  year = {2020},
-  volume = {-},
-  number = {-},
-  pages = {-},
-  doi = {10.5281/zenodo.3957539},
-}
-
-@article{Wahltinez2020,
-  author = "O. Wahltinez and others",
-  year = 2020,
-  title = "COVID-19 Open-Data: curating a fine-grained, global-scale data repository for SARS-CoV-2",
-  note = "Work in progress",
-  url = {https://goo.gle/covid-19-open-data},
-}
-
-@misc{Dong2020,
-author = {Dong, Ensheng and Du, Hongru and Gardner, Lauren},
-booktitle = {The Lancet Infectious Diseases},
-doi = {10.1016/S1473-3099(20)30120-1},
-file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Dong, Du, Gardner - 2020 - An interactive web-based dashboard to track COVID-19 in real time.pdf:pdf},
-issn = {14744457},
-keywords = {Betacoronavirus,COVID-19,Coronavirus Infections / epidemiology*,Ensheng Dong,Hongru Du,Humans,Lauren Gardner,Letter,MEDLINE,NCBI,NIH,NLM,National Center for Biotechnology Information,National Institutes of Health,National Library of Medicine,PMC7159018,Pandemics,Patient Identification Systems,Pneumonia,PubMed Abstract,SARS-CoV-2,Time Factors,Viral / epidemiology*,Web Browser,doi:10.1016/S1473-3099(20)30120-1,pmid:32087114},
-month = {may},
-number = {5},
-pages = {533--534},
-pmid = {32087114},
-publisher = {Lancet Publishing Group},
-title = {{An interactive web-based dashboard to track COVID-19 in real time}},
-url = {https://pubmed.ncbi.nlm.nih.gov/32087114/},
-volume = {20},
-year = {2020}
+@misc{Apple,
+author = {Apple},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{COVID‑19 – Mobility Trends Reports – Apple}},
+url = {https://covid19.apple.com/mobility},
+urldate = {2021-05-11}
 }
 
 @Manual{covdata,
@@ -78,42 +32,198 @@ year = {2020}
   url = {http://kjhealy.github.io/covdata},
 }
 
-@misc{sars2pack,
-author = {nCoV-2019 Data Working Group},
-title = {{Epidemiological Data from the nCoV-2019 Outbreak: Early Descriptions from Publicly Available Data - SARS-CoV-2 coronavirus / nCoV-2019 Genomic Epidemiology - Virological}},
-url = {https://virological.org/t/epidemiological-data-from-the-ncov-2019-outbreak-early-descriptions-from-publicly-available-data/337},
-urldate = {2021-04-30}
+@Article{covidregionaldata,
+  title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},
+  author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},
+  journal = {-},
+  year = {2020},
+  volume = {-},
+  number = {-},
+  pages = {-},
+  doi = {10.5281/zenodo.3957539},
 }
 
-@misc{who,
-author = {World Health Organization},
-title = {{WHO COVID-19 Dashboard}},
-year = {2020},
-url = {https://covid19.who.int/},
-urldate = {2021-04-30}
+@Article{covid19datahub:2020,
+  title = {COVID-19 Data Hub},
+  year = {2020},
+  doi = {10.21105/joss.02376},
+  author = {Emanuele Guidotti and David Ardia},
+  journal = {Journal of Open Source Software},
+  volume = {5},
+  number = {51},
+  pages = {2376},
 }
 
-@article{Sherratt2020,
-abstract = {The time-varying reproduction number (Rt: the average number secondary infections caused by each infected person) may be used to assess changes in transmission potential during an epidemic. While new infections are not usually observed directly, they can be estimated from data. However, data may be delayed and potentially biased. We investigated the sensitivity of Rt estimates to different data sources representing Covid-19 in England, and we explored how this sensitivity could track epidemic dynamics in population sub-groups.We sourced public data on test-positive cases, hospital admissions, and deaths with confirmed Covid-19 in seven regions of England over March through August 2020. We estimated Rt using a model that mapped unobserved infections to each data source. We then compared differences in Rt with the demographic and social context of surveillance data over time.Our estimates of transmission potential varied for each data source, with the relative inconsistency of estimates varying across regions and over time. Rt estimates based on hospital admissions and deaths were more spatio-temporally synchronous than when compared to estimates from all test-positives. We found these differences may be linked to biased representations of subpopulations in each data source. These included spatially clustered testing, and where outbreaks in hospitals, care homes, and young age groups reflected the link between age and severity of disease.We highlight that policy makers could better target interventions by considering the source populations of Rt estimates. Further work should clarify the best way to combine and interpret Rt estimates from different data sources based on the desired use.Competing Interest StatementThe authors have declared no competing interest.Funding StatementThe following funding sources are acknowledged as providing funding for the named authors. Wellcome Trust (210758/Z/18/Z: JDM, JH, KS, NIB, SA, SFunk, SRM). This research was partly funded by the Bill {\&} Melinda Gates Foundation (INV-003174: MJ). This project has received funding from the European Union{\{}$\backslash$textquoteright{\}}s Horizon 2020 research and innovation programme - project EpiPose (101003688: MJ). The following funding sources are acknowledged as providing funding for the working group authors. Alan Turing Institute (AE). BBSRC LIDP (BB/M009513/1: DS). This research was partly funded by the Bill {\&} Melinda Gates Foundation (INV-001754: MQ; INV-003174: KP, MJ, YL; NTD Modelling Consortium OPP1184344: CABP, GFM; OPP1180644: SRP; OPP1183986: ESN; OPP1191821: KO{\{}$\backslash$textquoteright{\}}R, MA). BMGF (OPP1157270: KA). DFID/Wellcome Trust (Epidemic Preparedness Coronavirus research programme 221303/Z/20/Z: CABP, KvZ). DTRA (HDTRA1-18-1-0051: JWR). Elrha R2HC/UK DFID/Wellcome Trust/This research was partly funded by the National Institute for Health Research (NIHR) using UK aid from the UK Government to support global health research. The views expressed in this publication are those of the author(s) and not necessarily those of the NIHR or the UK Department of Health and Social Care (KvZ). ERC Starting Grant ({\$}{\#}{\$}757699: JCE, MQ, RMGJH). This project has received funding from the European Union{\{}$\backslash$textquoteright{\}}s Horizon 2020 research and innovation programme - project EpiPose (101003688: KP, MJ, PK, RCB, WJE, YL). This research was partly funded by the Global Challenges Research Fund (GCRF) project {\{}$\backslash$textquoteright{\}}RECAP{\{}$\backslash$textquoteright{\}} managed through RCUK and ESRC (ES/P010873/1: AG, CIJ, TJ). HDR UK (MR/S003975/1: RME). MRC (MR/N013638/1: NRW). Nakajima Foundation (AE). NIHR (16/136/46: BJQ; 16/137/109: BJQ, CD, FYS, MJ, YL; Health Protection Research Unit for Immunisation NIHR200929: NGD; Health Protection Research Unit for Modelling Methodology HPRU-2012-10096: TJ; NIHR200929: FGS, MJ; PR-OD-1017-20002: AR, WJE). Royal Society (Dorothy Hodgkin Fellowship: RL; RP$\backslash$EA$\backslash$180004: PK). UK DHSC/UK Aid/NIHR (ITCRZ 03010: HPG). UK MRC (LID DTP MR/N013638/1: GRGL, QJL; MC{\_}PC{\_}19065: AG, NGD, RME, SC, TJ, WJE, YL; MR/P014658/1: GMK). Authors of this research receive funding from UK Public Health Rapid Support Team funded by the United Kingdom Department of Health and Social Care (TJ). Wellcome Trust (206250/Z/17/Z: AJK, TWR; 206471/Z/17/Z: OJB; 208812/Z/17/Z: SC; 208812/Z/17/Z: SFlasche). No funding (AKD, AMF, AS, CJVA, DCT, JW, KEA, SH, YJ, YWDC)Author DeclarationsI confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.YesThe details of the IRB/oversight body that provided approval or exemption for the research described are given below:Ethical approval was not required for this study, which used anonymised public secondary data sources only.All necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived.YesI understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).YesI have followed all appropriate research reporting guidelines and uploaded the relevant EQUATOR Network research reporting checklist(s) and other pertinent material as supplementary files, if applicable.YesThe code that supports the findings of this study is available on Github, DOI: 10.5281/zenodo.4029075. Other sources of data were derived from the linked resources available in the public domain. https://github.com/epiforecasts/rt-comparison-uk-public https://github.com/beoutbreakprepared/nCoV2019/tree/master/latest{\_}data https://www.health.org.uk/news-and-comment/charts-and-infographics/covid-19-policy-tracker https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland https://www.gov.uk/government/publications/national-covid-19-surveillance-reports. https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland},
-author = {Sherratt, Katharine and Abbott, Sam and Meakin, Sophie R and Hellewell, Joel and Munday, James D and Bosse, Nikos and Jit, Mark and Funk, Sebastian},
-doi = {10.1101/2020.10.18.20214585},
-journal = {medRxiv},
-publisher = {Cold Spring Harbor Laboratory Press},
-title = {{Exploring surveillance data biases when estimating the reproduction number: with insights into subpopulation transmission of Covid-19 in England}},
-url = {https://www.medrxiv.org/content/early/2021/03/18/2020.10.18.20214585},
-year = {2021}
-}
-
-@article{Davieseabg3055,
-abstract = {Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) has the capacity to generate variants with major genomic changes. The UK variant B.1.1.7 (also known as VOC 202012/01) has many mutations that alter virus attachment and entry into human cells. Using a variety of statistical and dynamic modeling approaches, Davies et al. characterized the spread of the B.1.1.7 variant in the United Kingdom. The authors found that the variant is 43 to 90{\%} more transmissible than the predecessor lineage but saw no clear evidence for a change in disease severity, although enhanced transmission will lead to higher incidence and more hospital admissions. Large resurgences of the virus are likely to occur after the easing of control measures, and it may be necessary to greatly accelerate vaccine roll-out to control the epidemic.Science, this issue p. eabg3055INTRODUCTIONSeveral novel variants of severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), the virus that causes COVID-19, emerged in late 2020. One of these, Variant of Concern (VOC) 202012/01 (lineage B.1.1.7), was first detected in southeast England in September 2020 and spread to become the dominant lineage in the United Kingdom in just a few months. B.1.1.7 has since spread to at least 114 countries worldwide.RATIONALEThe rapid spread of VOC 202012/01 suggests that it transmits more efficiently from person to person than preexisting variants of SARS-CoV-2. This could lead to global surges in COVID-19 hospitalizations and deaths, so there is an urgent need to estimate how much more quickly VOC 202012/01 spreads, whether it is associated with greater or lesser severity of disease, and what control measures might be effective in mitigating its impact. We used social contact and mobility data, as well as demographic indicators linked to SARS-CoV-2 community testing data in England, to assess whether the spread of the new variant may be an artifact of higher baseline transmission rates in certain geographical areas or among specific demographic subpopulations. We then used a series of complementary statistical analyses and mathematical models to estimate the transmissibility of VOC 202012/01 across multiple datasets from the UK, Denmark, Switzerland, and the United States. Finally, we extended a mathematical model that has been extensively used to forecast COVID-19 dynamics in the UK to consider two competing SARS-CoV-2 lineages: VOC 202012/01 and preexisting variants. By fitting this model to a variety of data sources on infections, hospitalizations, and deaths across seven regions of England, we assessed different hypotheses for why the new variant appears to be spreading more quickly, estimated the severity of disease associated with the new variant, and evaluated control measures including vaccination and nonpharmaceutical interventions. Combining multiple lines of evidence allowed us to draw robust inferences.RESULTSThe rapid spread of VOC 202012/01 is not an artifact of geographical differences in contact behavior and does not substantially differ by age, sex, or socioeconomic stratum. We estimate that the new variant has a 43 to 90{\%} higher reproduction number (range of 95{\%} credible intervals, 38 to 130{\%}) than preexisting variants. Similar increases are observed in Denmark, Switzerland, and the United States. The most parsimonious explanation for this increase in the reproduction number is that people infected with VOC 202012/01 are more infectious than people infected with a preexisting variant, although there is also reasonable support for a longer infectious period and multiple mechanisms may be operating. Our estimates of severity are uncertain and are consistent with anything from a moderate decrease to a moderate increase in severity (e.g., 32{\%} lower to 20{\%} higher odds of death given infection). Nonetheless, our mathematical model, fitted to data up to 24 December 2020, predicted a large surge in COVID-19 cases and deaths in 2021, which has been borne out so far by the observed burden in England up to the end of March 2021. In the absence of stringent nonpharmaceutical interventions and an accelerated vaccine rollout, COVID-19 deaths in the first 6 months of 2021 were projected to exceed those in 2020 in England.CONCLUSIONMore than 98{\%} of positive SARS-CoV-2 infections in England are now due to VOC 202012/01, and the spread of this new variant has led to a surge in COVID-19 cases and deaths. Other countries should prepare for potentially similar outcomes.Impact of SARS-CoV-2 Variant of Concern 202012/01.(A) Spread of VOC 202012/01 (lineage B.1.1.7) in England. (B) The estimated relative transmissibility of VOC 202012/01 (mean and 95{\%} confidence interval) is similar across the United Kingdom as a whole, England, Denmark, Switzerland, and the United States. (C) Projected COVID-19 deaths (median and 95{\%} confidence interval) in England, 15 December 2020 to 30 June 2021. Vaccine rollout and control measures help to mitigate the burden of VOC 202012/01.A severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) variant, VOC 202012/01 (lineage B.1.1.7), emerged in southeast England in September 2020 and is rapidly spreading toward fixation. Using a variety of statistical and dynamic modeling approaches, we estimate that this variant has a 43 to 90{\%} (range of 95{\%} credible intervals, 38 to 130{\%}) higher reproduction number than preexisting variants. A fitted two-strain dynamic transmission model shows that VOC 202012/01 will lead to large resurgences of COVID-19 cases. Without stringent control measures, including limited closure of educational institutions and a greatly accelerated vaccine rollout, COVID-19 hospitalizations and deaths across England in the first 6 months of 2021 were projected to exceed those in 2020. VOC 202012/01 has spread globally and exhibits a similar transmission increase (59 to 74{\%}) in Denmark, Switzerland, and the United States.},
-author = {Davies, Nicholas G and Abbott, Sam and Barnard, Rosanna C and Jarvis, Christopher I and Kucharski, Adam J and Munday, James D and Pearson, Carl A B and Russell, Timothy W and Tully, Damien C and Washburne, Alex D and Wenseleers, Tom and Gimma, Amy and Waites, William and Wong, Kerry L M and van Zandvoort, Kevin and Silverman, Justin D and  and  and Diaz-Ordaz, Karla and Keogh, Ruth and Eggo, Rosalind M and Funk, Sebastian and Jit, Mark and Atkins, Katherine E and Edmunds, W John},
+@article{Davies2021,
+abstract = {A severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) variant, VOC 202012/01 (lineage B.1.1.7), emerged in southeast England in September 2020 and is rapidly spreading toward fixation. Using a variety of statistical and dynamic modeling approaches, we estimate that this variant has a 43 to 90{\%} (range of 95{\%} credible intervals, 38 to 130{\%}) higher reproduction number than preexisting variants. A fitted two-strain dynamic transmission model shows that VOC 202012/01 will lead to large resurgences of COVID-19 cases. Without stringent control measures, including limited closure of educational institutions and a greatly accelerated vaccine rollout, COVID-19 hospitalizations and deaths across England in the first 6 months of 2021 were projected to exceed those in 2020. VOC 202012/01 has spread globally and exhibits a similar transmission increase (59 to 74{\%}) in Denmark, Switzerland, and the United States.},
+author = {Davies, Nicholas G. and Abbott, Sam and Barnard, Rosanna C. and Jarvis, Christopher I. and Kucharski, Adam J. and Munday, James D. and Pearson, Carl A. B. and Russell, Timothy W. and Tully, Damien C. and Washburne, Alex D. and Wenseleers, Tom and Gimma, Amy and Waites, William and Wong, Kerry L. M. and van Zandvoort, Kevin and Silverman, Justin D. and Diaz-Ordaz, Karla and Keogh, Ruth and Eggo, Rosalind M. and Funk, Sebastian and Jit, Mark and Atkins, Katherine E. and Edmunds, W. John},
 doi = {10.1126/science.abg3055},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Davies et al. - 2021 - Estimated transmissibility and impact of SARS-CoV-2 lineage B.1.1.7 in England.pdf:pdf},
 issn = {0036-8075},
 journal = {Science},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {apr},
 number = {6538},
-publisher = {American Association for the Advancement of Science},
+pages = {eabg3055},
+pmid = {33658326},
+publisher = {American Association for the Advancement of Science (AAAS)},
 title = {{Estimated transmissibility and impact of SARS-CoV-2 lineage B.1.1.7 in England}},
-url = {https://science.sciencemag.org/content/372/6538/eabg3055},
 volume = {372},
 year = {2021}
+}
+
+@misc{Dong2020,
+author = {Dong, Ensheng and Du, Hongru and Gardner, Lauren},
+booktitle = {The Lancet Infectious Diseases},
+doi = {10.1016/S1473-3099(20)30120-1},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Dong, Du, Gardner - 2020 - An interactive web-based dashboard to track COVID-19 in real time(2).pdf:pdf},
+issn = {14744457},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {may},
+number = {5},
+pages = {533--534},
+pmid = {32087114},
+publisher = {Lancet Publishing Group},
+title = {{An interactive web-based dashboard to track COVID-19 in real time}},
+volume = {20},
+year = {2020}
+}
+
+@article{Endo2020,
+abstract = { Background: A novel coronavirus disease (COVID-19) outbreak has now spread to a number of countries worldwide. While sustained transmission chains of human-to-human transmission suggest high basic reproduction number R 0 , variation in the number of secondary transmissions (often characterised by so-called superspreading events) may be large as some countries have observed fewer local transmissions than others.  Methods: We quantified individual-level variation in COVID-19 transmission by applying a mathematical model to observed outbreak sizes in affected countries. We extracted the number of imported and local cases in the affected countries from the World Health Organization situation report and applied a branching process model where the number of secondary transmissions was assumed to follow a negative-binomial distribution.  Results: Our model suggested a high degree of individual-level variation in the transmission of COVID-19. Within the current consensus range of R 0 (2-3), the overdispersion parameter k of a negative-binomial distribution was estimated to be around 0.1 (median estimate 0.1; 95{\%} CrI: 0.05-0.2 for R0 = 2.5), suggesting that 80{\%} of secondary transmissions may have been caused by a small fraction of infectious individuals ({\~{}}10{\%}). A joint estimation yielded likely ranges for R 0 and k (95{\%} CrIs: R 0 1.4-12; k 0.04-0.2); however, the upper bound of R 0 was not well informed by the model and data, which did not notably differ from that of the prior distribution.  Conclusions: Our finding of a highly-overdispersed offspring distribution highlights a potential benefit to focusing intervention efforts on superspreading. As most infected individuals do not contribute to the expansion of an epidemic, the effective reproduction number could be drastically reduced by preventing relatively rare superspreading events. },
+author = {Endo, Akira and Abbott, Sam and Kucharski, Adam J. and Funk, Sebastian},
+doi = {10.12688/wellcomeopenres.15842.3},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Endo et al. - 2020 - Estimating the overdispersion in COVID-19 transmission using outbreak sizes outside China.pdf:pdf},
+issn = {2398-502X},
+journal = {Wellcome Open Research},
+keywords = {Abbott S: Validation, Writing-Review {\&} Editing,Corresponding author: Akira Endo (akiraendo@lshtmacuk) Author roles: Endo A: Conceptualization, Data Curation, Formal Analysis, Investigation, Methodology, Software, Visualization, Writing-Original Draft Preparation,Funk S: Methodology, Supervision, Writing-Review {\&} Editing Keywords COVID-19, SARS-CoV-2, novel coronavirus, overdispersion, superspreading, branching process,Kucharski AJ: Supervision, Writing-Review {\&} Editing},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {jul},
+pages = {67},
+pmid = {32685698},
+publisher = {F1000 Research Ltd},
+title = {{Estimating the overdispersion in COVID-19 transmission using outbreak sizes outside China}},
+url = {https://doi.org/10.12688/wellcomeopenres.15842.1},
+volume = {5},
+year = {2020}
+}
+
+@misc{EuropeanCentreforDiseasePreventionandControl,
+author = {{European Centre for Disease Prevention and Control}},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{Download historical data (to 14 December 2020) on the daily number of new reported COVID-19 cases and deaths worldwide}},
+url = {https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide},
+urldate = {2021-05-11}
+}
+
+@misc{Google,
+author = {Google},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{COVID-19 Community Mobility Reports}},
+url = {https://www.google.com/covid19/mobility/?hl=en},
+urldate = {2021-05-11}
+}
+
+@article{Guidotti2020,
+archivePrefix = {arXiv},
+arxivId = {2004.10706},
+author = {Guidotti, Emanuele and Ardia, David},
+doi = {10.21105/joss.02376},
+eprint = {2004.10706},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Guidotti, Ardia - 2020 - COVID-19 Data Hub.pdf:pdf},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{COVID-19 Data Hub}},
+url = {https://doi.org/10.21105/joss.02376},
+year = {2020}
+}
+
+@article{Hale2021,
+abstract = {COVID-19 has prompted unprecedented government action around the world. We introduce the Oxford COVID-19 Government Response Tracker (OxCGRT), a dataset that addresses the need for continuously updated, readily usable and comparable information on policy measures. From 1 January 2020, the data capture government policies related to closure and containment, health and economic policy for more than 180 countries, plus several countries' subnational jurisdictions. Policy responses are recorded on ordinal or continuous scales for 19 policy areas, capturing variation in degree of response. We present two motivating applications of the data, highlighting patterns in the timing of policy adoption and subsequent policy easing and reimposition, and illustrating how the data can be combined with behavioural and epidemiological indicators. This database enables researchers and policymakers to explore the empirical effects of policy responses on the spread of COVID-19 cases and deaths, as well as on economic and social welfare.},
+author = {Hale, Thomas and Angrist, Noam and Goldszmidt, Rafael and Kira, Beatriz and Petherick, Anna and Phillips, Toby and Webster, Samuel and Cameron-Blake, Emily and Hallas, Laura and Majumdar, Saptarshi and Tatlow, Helen},
+doi = {10.1038/s41562-021-01079-8},
+file = {:home/joe/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Hale et al. - 2021 - A global panel database of pandemic policies (Oxford COVID-19 Government Response Tracker).pdf:pdf},
+issn = {23973374},
+journal = {Nature Human Behaviour},
+keywords = {Infectious diseases,Politics and international relations,Social policy},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {apr},
+number = {4},
+pages = {529--538},
+publisher = {Nature Research},
+title = {{A global panel database of pandemic policies (Oxford COVID-19 Government Response Tracker)}},
+url = {https://doi.org/10.1038/s41562-021-01079-8},
+volume = {5},
+year = {2021}
+}
+
+@article{Liu2021,
+abstract = {The study adopted the multi-level governance theory for a comparative analysis of how the structure and modes of policy coordination shaped subnational policy responses to COVID-19 in Hubei Province, China, and New York State, USA. It was found that both countries showed a hybrid form of vertical and horizontal coordination in COVID-19 responses despite different political systems. Hubei depended more on vertical steering and horizontal support whereas New York took the primary coordinating role while a nationwide strategy was missing. Contingent upon each country's political legacy, effective multi-level governance in crisis responses should balance national leadership with local autonomy and societal engagement.},
+author = {Liu, Zhilin and Guo, Jing and Zhong, Wei and Gui, Tianhan},
+doi = {10.1080/13876988.2021.1873703},
+issn = {15725448},
+journal = {Journal of Comparative Policy Analysis: Research and Practice},
+keywords = {COVID-19,comparative policy analysis,multi-level governance,policy coordination,subnational government},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+number = {2},
+pages = {204--218},
+publisher = {Routledge},
+title = {{Multi-Level Governance, Policy Coordination and Subnational Responses to COVID-19: Comparing China and the US}},
+url = {https://www.tandfonline.com/action/journalInformation?journalCode=fcpa20},
+volume = {23},
+year = {2021}
+}
+
+@misc{PublicHealthEngland,
+author = {{Public Health England}},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{About the data | Coronavirus in the UK}},
+url = {https://coronavirus.data.gov.uk/details/about-data},
+urldate = {2021-05-11}
+}
+
+@misc{Sherratt2020,
+abstract = {The time-varying reproduction number (Rt: the average number secondary infections caused by each infected person) may be used to assess changes in transmission potential during an epidemic. Since new infections usually are not observed directly, it can only be estimated from delayed and potentially biased data. We estimated Rt using a model that mapped unobserved infections to observed test-positive cases, hospital admissions, and deaths with confirmed Covid-19, in seven regions of England over March through August 2020. We explored the sensitivity of Rt estimates of Covid-19 in England to different data sources, and investigated the potential of using differences in the estimates to track epidemic dynamics in population sub-groups. Our estimates of transmission potential varied for each data source. The divergence between estimates from each source was not consistent within or across regions over time, although estimates based on hospital admissions and deaths were more spatio-temporally synchronous than compared to estimates from all test-positives. We compared differences in Rt with the demographic and social context of transmission, and found the differences between Rt may be linked to biased representations of sub-populations in each data source: from uneven testing rates, or increasing severity of disease with age, seen via outbreaks in care home populations and changing age distributions of cases. We highlight that policy makers should consider the source populations of Rt estimates. Further work should clarify the best way to combine and interpret Rt estimates from different data sources based on the desired use.},
+author = {Sherratt, Katharine and Abbott, Sam and Meakin, Sophie R. and Hellewell, Joel and Munday, James D. and Bosse, Nikos and Jit, Mark and Funk, Sebastian},
+booktitle = {medRxiv},
+doi = {10.1101/2020.10.18.20214585},
+keywords = {Covid-19,SARS-CoV-2,Surveillance,Time-varying reproduction number},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+month = {oct},
+pages = {2020.10.18.20214585},
+publisher = {medRxiv},
+title = {{Evaluating the use of the reproduction number as an epidemiological tool, using spatio-temporal trends of the Covid-19 outbreak in England}},
+url = {https://doi.org/10.1101/2020.10.18.20214585},
+year = {2020}
+}
+
+@Manual{Rdev:2013,
+  title = {R: A Language and Environment for Statistical Computing},
+  author = {{R Core Team}},
+  organization = {R Foundation for Statistical Computing},
+  address = {Vienna, Austria},
+  year = {2013},
+  url = {http://www.R-project.org/},
+}
+
+@Manual{sars2pack,
+  title = {sars2pack: COVID-19 data resources and analysis tools},
+  author = {Sean Davis and VJ Carey},
+  year = {2021},
+  note = {R package version 0.99.2},
+}
+
+@article{Wahltinez2020,
+  author = "O. Wahltinez and others",
+  year = 2020,
+  title = "COVID-19 Open-Data: curating a fine-grained, global-scale data repository for SARS-CoV-2",
+  note = "Work in progress",
+  url = {https://goo.gle/covid-19-open-data},
+}
+
+@misc{WorldHealthOrganisation,
+author = {{World Health Organisation}},
+mendeley-groups = {JOSS{\_}covidregionaldata},
+title = {{WHO Coronavirus (COVID-19) Dashboard | WHO Coronavirus (COVID-19) Dashboard With Vaccination Data}},
+url = {https://covid19.who.int/},
+urldate = {2021-05-11}
 }
