@@ -51,9 +51,11 @@ uk$return()
 }
 \seealso{
 Aggregated data sources
+\code{\link{Covid19DataHub}},
 \code{\link{JHU}}
 
 National data sources
+\code{\link{Covid19DataHub}},
 \code{\link{ECDC}},
 \code{\link{JHU}},
 \code{\link{WHO}}
@@ -63,6 +65,7 @@ Subnational data sources
 \code{\link{Brazil}},
 \code{\link{Canada}},
 \code{\link{Colombia}},
+\code{\link{Covid19DataHub}},
 \code{\link{Cuba}},
 \code{\link{France}},
 \code{\link{Germany}},

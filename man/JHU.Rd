@@ -55,9 +55,11 @@ jhu_level_2$return()
 }
 \seealso{
 Aggregated data sources
+\code{\link{Covid19DataHub}},
 \code{\link{Google}}
 
 National data sources
+\code{\link{Covid19DataHub}},
 \code{\link{ECDC}},
 \code{\link{Google}},
 \code{\link{WHO}}
@@ -67,6 +69,7 @@ Subnational data sources
 \code{\link{Brazil}},
 \code{\link{Canada}},
 \code{\link{Colombia}},
+\code{\link{Covid19DataHub}},
 \code{\link{Cuba}},
 \code{\link{France}},
 \code{\link{Germany}},
