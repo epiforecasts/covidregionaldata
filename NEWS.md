@@ -1,3 +1,7 @@
+# covidregionaldata 0.9.2
+
+This release adds support for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google.
+
 # covidregionaldata 0.9.1
 
 This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation. Finally, this release adds optional data processing which will be extended in future releases (contributions warmly welcomed).
@@ -8,7 +12,7 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for contributions toward
 
 * Support for data provided by John Hopkins University (by @joseph-palmer).
 * Support for data provided by Google COVID-19 open data project (by @joseph-palmer).
-* Added a `available_regions` method for all classes that shows level 1 regions with data available for the region of interest. This is of particular use when combined with the JHU or Google datasets where processing a large number of regions that are not required can take some time. 
+* Added a `available_regions` method for all classes that shows level 1 regions with data available for the region of interest. This is of particular use when combined with the JHU or Google datasets where processing a large number of regions that are not required can take some time.
 * Adds support for JHU or Google data to `get_national_data()`. This may also now be used to access lower level data from these sources  but it may be better to instead use the classes directly or via `initialise_dataclass()`.
 
 ## Other changes
@@ -30,7 +34,7 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for major contributions 
 ## New features
 
 * Track data processing from raw to clean using the `step = TRUE` argument in `get_regional_data()`.
-* Filter datasets for regions and countries of interest. 
+* Filter datasets for regions and countries of interest.
 * Access the underlying methods for data sets and all steps in the data processing pipeline.
 
 ## Documentation

@@ -19,6 +19,7 @@ national$return()
 }
 \seealso{
 National data sources
+\code{\link{Covid19DataHub}},
 \code{\link{ECDC}},
 \code{\link{Google}},
 \code{\link{JHU}}

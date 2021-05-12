@@ -24,6 +24,7 @@ Subnational data sources
 \code{\link{Belgium}},
 \code{\link{Canada}},
 \code{\link{Colombia}},
+\code{\link{Covid19DataHub}},
 \code{\link{Cuba}},
 \code{\link{France}},
 \code{\link{Germany}},
