@@ -8,7 +8,7 @@ This release is in development and therefore new features may change without war
 
 ## Other changes
 
-* Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field.
+* Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field (by @joseph-palmer).
 
 # covidregionaldata 0.9.1
 
