@@ -2,7 +2,7 @@
 ---
 title: "covidregionaldata: Subnational data for COVID-19 epidemiology"
 authors:
-  - name: Joseph Palmer^[co-first author]
+  - name: Joseph Palmer$^{\star}$
     affiliation: 1
   - name: Katharine Sherratt$^{\star}$
     affiliation: 2
@@ -41,6 +41,9 @@ csl: apa.csl
 journal: JOSS
 link-citations: yes
 ---
+
+$^{\star}$ co-first author
+
 # Summary
 
 `covidregionaldata` is an R [@Rdev:2013] package that provides an interface to subnational and national level COVID-19 data. The package provides cleaned and verified COVID-19 test-positive case counts and, where available, counts of deaths, recoveries, and hospitalisations in a consistent and fully transparent framework. The package automates common processing steps while allowing researchers to easily and transparently trace the origin of the underlying data sources. It has been designed to be readily extensible, allowing users to easily extend the packages' capabilities and contribute to shared data handling. All package code is archived on [Zenodo](https://zenodo.org/record/4718466) [@covidregionaldata] and [Github](https://github.com/epiforecasts/covidregionaldata).
