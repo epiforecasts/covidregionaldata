@@ -13,7 +13,7 @@
 #' source repository for further details
 #' (https://github.com/covid19datahub/COVID19/#data-sources)
 #' If using for analysis checking the source for further details is
-#' strongly advisable.
+#' strongly advised.
 #'
 #' If using this class please cite:
 #' "Guidotti et al., (2020). COVID-19 Data Hub
