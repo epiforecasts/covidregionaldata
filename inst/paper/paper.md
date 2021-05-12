@@ -34,7 +34,7 @@ tags:
   - COVID-19
   - Open data
   - rstats
-  - Sars-Cov
+  - Sars-Cov-2
 
 output: articles::joss_article
 csl: apa.csl
