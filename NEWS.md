@@ -1,6 +1,6 @@
 # covidregionaldata 0.9.2
 
-This release adds support for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google.
+This release adds support for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google. Testing has also been updated to require classes to have either `common_data_urls` or `level_data_urls`.
 
 # covidregionaldata 0.9.1
 
