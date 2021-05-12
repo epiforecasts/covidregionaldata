@@ -1,22 +1,34 @@
-#' R6 Class containing specific attributes and methods for COVID-19 data
-#' provided by John Hopkins University.and used for the 2019 Novel Coronavirus
-#' Visual Dashboard operated by the Johns Hopkins University
-#' Center for Systems Science and Engineering (JHU CSSE). Also,
-#' Supported by ESRI Living Atlas Team and the Johns Hopkins University
-#' Applied Physics Lab (JHU APL)
+#' R6 Class containing specific attributes and methods for John Hopkins
+#' University data
+#'
+#' @description Attributes and methods for COVID-19 data used for the 2019
+#' Novel Coronavirus Visual Dashboard operated by the Johns Hopkins University
+#' Center for Systems Science and Engineering (JHU CSSE). Supported by ESRI
+#' Living Atlas Team and the Johns Hopkins University Applied Physics Lab
+#' (JHU APL)
+#'
+#' @details This dataset support both national and subnational data sources
+#' with national level data returned by default. Subnational data is supported
+#' for a subset of countries which can be found after cleaning using the
+#' `available_regions()` method, see the examples for more details. These data
+#' sets are sourced, cleaned, standardised by the JHU team so please see the
+#' source repository for further details. Note that unlike many other data sets
+#' this means methods applied to this source are not being applied to raw
+#' surveillance data but instead to already cleaned data. If using for
+#' analysis checking the JHU source for further details is advisable.
 #'
 #' If using this data please cite:
 #' "Dong E, Du H, Gardner L. An interactive web-based dashboard to track
 #' COVID-19 in real time.
 #' Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
-#'
-#' @description Country specific information for downloading, cleaning
-#'  and processing covid-19 region data for John Hopkins University.
 # nolint start
 #' @source \url{https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data}
 # nolint end
 #' @export
 #' @concept dataset
+#' @family aggregations
+#' @family national
+#' @family subnational
 #' @examples
 #' # nolint start
 #' \dontrun{

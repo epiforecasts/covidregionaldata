@@ -8,6 +8,7 @@
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @source \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 #' @export
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- Belgium$new(verbose = TRUE, steps = TRUE, get = TRUE, level = "2")

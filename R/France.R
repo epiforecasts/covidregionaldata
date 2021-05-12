@@ -10,6 +10,7 @@
 # nolint end
 #' @export
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- France$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)

@@ -15,4 +15,8 @@ A data table, totalled up
 \description{
 Get totals data given the time series data.
 }
-\concept{utility}
+\seealso{
+Optional processing function
+\code{\link{set_negative_values_to_zero}()}
+}
+\concept{optional_processing}

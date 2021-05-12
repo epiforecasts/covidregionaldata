@@ -18,8 +18,36 @@ geographical resolution (resolution).
 }
 \examples{
 \dontrun{
-region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+# setup a data cache
+start_using_memoise()
+
+# download, clean and process level 1 UK data with hospital admissions
+region <- UK$new(level = "1", nhsregions = TRUE)
 region$return()
+
+# initialise level 2 data
+utla <- UK$new(level = "2")
+
+# download UTLA data
+utla$download()
+
+# clean UTLA data
+utla$clean()
+
+# inspect available level 1 regions
+utla$available_regions(level = "1")
+
+# filter data to the East of England
+utla$filter("East of England")
+
+# process UTLA data
+utla$process()
+
+# return processed and filtered data
+utla$return()
+
+# inspect all data steps
+utla$data
 }
 
 ## ------------------------------------------------
@@ -35,7 +63,27 @@ UK$new(
 )
 }
 }
+\seealso{
+Subnational data sources
+\code{\link{Belgium}},
+\code{\link{Brazil}},
+\code{\link{Canada}},
+\code{\link{Colombia}},
+\code{\link{Covid19DataHub}},
+\code{\link{Cuba}},
+\code{\link{France}},
+\code{\link{Germany}},
+\code{\link{Google}},
+\code{\link{India}},
+\code{\link{Italy}},
+\code{\link{JHU}},
+\code{\link{Lithuania}},
+\code{\link{Mexico}},
+\code{\link{SouthAfrica}},
+\code{\link{USA}}
+}
 \concept{dataset}
+\concept{subnational}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{UK}
 }

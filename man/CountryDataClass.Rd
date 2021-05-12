@@ -2,15 +2,25 @@
 % Please edit documentation in R/shared-methods.R
 \name{CountryDataClass}
 \alias{CountryDataClass}
-\title{R6 Class containing  national level methods}
+\title{R6 Class containing national level methods}
 \description{
-Acts as parent class for national data classes, (\code{WHO()} and
-\code{ECDC()}) allowing them to access general methods defined in \code{\link[=DataClass]{DataClass()}}.
-Adds filters to get the target country from national data sources.
+Acts as parent class for national data classes, allowing them
+to access general methods defined in \code{\link[=DataClass]{DataClass()}} but with additional
 }
 \details{
-Inherits from \code{DataClass}
+On top of the methods documented in \code{\link[=DataClass]{DataClass()}}, this class
+implements a custom filter function that supports partial matching to
+English country names using the \code{countrycode} package.
 }
+\seealso{
+Data interface functions
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()},
+\code{\link{initialise_dataclass}()}
+}
+\concept{interface}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{CountryDataClass}
 }

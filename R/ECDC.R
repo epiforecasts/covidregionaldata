@@ -1,4 +1,5 @@
-#' R6 Class containing specific attributes and methods for the ECDC dataset
+#' R6 Class containing specific attributes and methods for the European Centre
+#' for Disease Prevention and Control dataset
 #'
 #' @description Information for downloading, cleaning
 #'  and processing the European Centre for
@@ -8,6 +9,7 @@
 #' @source \url{https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide}
 # nolint end
 #' @export
+#' @family national
 #' @concept dataset
 #' @examples
 #' \dontrun{

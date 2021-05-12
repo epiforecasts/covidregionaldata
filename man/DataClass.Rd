@@ -2,18 +2,28 @@
 % Please edit documentation in R/shared-methods.R
 \name{DataClass}
 \alias{DataClass}
-\title{R6 Class containing non-origin specific methods}
+\title{R6 Class containing non-dataset specific methods}
 \description{
-Acts as parent class for individual origin objects,
-allowing them to access general methods.
+A parent class containing non-dataset specific methods.
 }
 \details{
-All countries have shared methods for extracting region codes,
+All data sets have shared methods for extracting geographic codes,
 downloading, processing, and returning data. These functions are contained
-within this parent class and so are accessible by all countries which
-inherit from here. Individual countries can overwrite any functions or
-fields providing they define a method with the same name.
+within this parent class and so are accessible by all data sets which
+inherit from here. Individual data sets can overwrite any functions or
+fields providing they define a method with the same name, and can be
+extended with additinal functionality. See the individual method documentaion
+for further details.
 }
+\seealso{
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()},
+\code{\link{initialise_dataclass}()}
+}
+\concept{interface}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

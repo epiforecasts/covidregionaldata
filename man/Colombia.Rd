@@ -16,7 +16,27 @@ region <- Colombia$new(verbose = TRUE, steps = TRUE, get = TRUE)
 region$return()
 }
 }
+\seealso{
+Subnational data sources
+\code{\link{Belgium}},
+\code{\link{Brazil}},
+\code{\link{Canada}},
+\code{\link{Covid19DataHub}},
+\code{\link{Cuba}},
+\code{\link{France}},
+\code{\link{Germany}},
+\code{\link{Google}},
+\code{\link{India}},
+\code{\link{Italy}},
+\code{\link{JHU}},
+\code{\link{Lithuania}},
+\code{\link{Mexico}},
+\code{\link{SouthAfrica}},
+\code{\link{UK}},
+\code{\link{USA}}
+}
 \concept{dataset}
+\concept{subnational}
 \section{Super class}{
 \code{\link[covidregionaldata:DataClass]{covidregionaldata::DataClass}} -> \code{Colombia}
 }

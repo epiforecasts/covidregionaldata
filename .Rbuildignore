@@ -27,3 +27,4 @@ SMG.md
 ^.*.pdf$
 ^inst/CountryTemplate\.R$
 ^inst/paper$
+^inst/examples$

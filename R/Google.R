@@ -13,6 +13,9 @@
 #'
 #' @source \url{https://github.com/GoogleCloudPlatform/covid-19-open-data}
 #' @export
+#' @family aggregations
+#' @family national
+#' @family subnational
 #' @concept dataset
 #' @examples
 #' # nolint start

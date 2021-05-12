@@ -15,4 +15,10 @@ processing steps}
 \description{
 user supplied processing steps which are run after default steps
 }
+\seealso{
+Functions used in the processing pipeline
+\code{\link{process_internal}()},
+\code{\link{run_default_processing_fns}()}
+}
+\concept{processing}
 \concept{utility}

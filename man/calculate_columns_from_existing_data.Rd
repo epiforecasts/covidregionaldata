@@ -18,4 +18,10 @@ Checks which columns are missing (cumulative/daily counts) and
 if one is present and the other not then calculates the second from the
 first.
 }
-\concept{utility}
+\seealso{
+Compulsory processing functions
+\code{\link{add_extra_na_cols}()},
+\code{\link{complete_cumulative_columns}()},
+\code{\link{fill_empty_dates_with_na}()}
+}
+\concept{compulsory_processing}

@@ -7,6 +7,7 @@
 # nolint end
 #' @export
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- SouthAfrica$new(verbose = TRUE, steps = TRUE, get = TRUE)

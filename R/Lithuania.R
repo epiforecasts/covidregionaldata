@@ -122,6 +122,7 @@
 #' region <- Lithuania$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' }
 #' @export
+#' @family subnational
 #' @concept dataset
 Lithuania <- R6::R6Class("Lithuania",
   inherit = DataClass,

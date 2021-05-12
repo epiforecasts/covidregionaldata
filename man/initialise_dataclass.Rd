@@ -18,7 +18,7 @@ initialise_dataclass(
 )
 }
 \arguments{
-\item{class}{A character string specifying the \code{DataClass} to initialise.
+\item{class}{A character string specifying the \code{DataClass()} to initialise.
 Not case dependent and matching is based on either the class name or the its
 country definition. For a list of options use \code{get_available_datasets()}.}
 
@@ -49,7 +49,7 @@ called (this will download, clean, and process data at initialisation).}
 return. Current options include "national" (which are datasets at the
 national level which inherit from \code{CountryDataClass}) and
 "regional" (which are datasets at the regional level which inherit
-directly from \code{DataClass}).}
+directly from \code{DataClass()}).}
 
 \item{...}{Additional arguments to pass to class specific functionality.}
 }
@@ -58,15 +58,59 @@ An initialised version of the target class if available,
 e.g. \code{Italy()}
 }
 \description{
-Initialise a child class of DataClass if it exists.
+This function initialises classes based on the \code{DataClass()}
+which allows documented downloading, cleaning, and processing. See the
+examples for some potential use cases and the \code{DataClass()} documentation
+for more details.
 }
 \examples{
-# Initialise Italian data
-italy <- initialise_dataclass("Italy")
+\dontrun{
+# set up a cache to store data to avoid downloading repeatedly
+start_using_memoise()
 
-# Initialise UK data with a partial name match
-uk <- initialise_dataclass("United Kingdom")
+# check currently available datasets
+get_available_datasets()
 
-# Initialise ECDC data
-ecdc <- initialise_dataclass("ecdc")
+# initialise a data set in the United Kingdom
+# at the UTLA level
+utla <- UK$new(level = "2")
+
+# download UTLA data
+utla$download()
+
+# clean UTLA data
+utla$clean()
+
+# inspect available level 1 regions
+utla$available_regions(level = "1")
+
+# filter data to the East of England
+utla$filter("East of England")
+
+# process UTLA data
+utla$process()
+
+# return processed and filtered data
+utla$return()
+
+# inspect all data steps
+utla$data
+
+# initialise Italian data, download, clean and process it
+italy <- initialise_dataclass("Italy", get = TRUE)
+italy$return()
+
+# initialise ECDC data, fully process it, and return totals
+ecdc <- initialise_dataclass("ecdc", get = TRUE, totals = TRUE)
+ecdc$return()
 }
+}
+\seealso{
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{get_regional_data}()}
+}
+\concept{interface}

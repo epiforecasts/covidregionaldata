@@ -17,4 +17,10 @@ Adds extra columns filled with NAs to a dataset.
 This ensures that all datasets from the covidregionaldata package return
 datasets of the same underlying structure (i.e. same columns).
 }
-\concept{utility}
+\seealso{
+Compulsory processing functions
+\code{\link{calculate_columns_from_existing_data}()},
+\code{\link{complete_cumulative_columns}()},
+\code{\link{fill_empty_dates_with_na}()}
+}
+\concept{compulsory_processing}

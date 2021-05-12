@@ -13,4 +13,10 @@ run_default_processing_fns(data)
 The default processing steps to which are always run. Runs on
 clean data
 }
+\seealso{
+Functions used in the processing pipeline
+\code{\link{process_internal}()},
+\code{\link{run_optional_processing_fns}()}
+}
+\concept{processing}
 \concept{utility}

@@ -18,4 +18,10 @@ fill_empty_dates_with_na) then cumulative data columns will have NAs which
 can cause issues later. This function fills these values with the previous
 non-NA value.
 }
-\concept{utility}
+\seealso{
+Compulsory processing functions
+\code{\link{add_extra_na_cols}()},
+\code{\link{calculate_columns_from_existing_data}()},
+\code{\link{fill_empty_dates_with_na}()}
+}
+\concept{compulsory_processing}

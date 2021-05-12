@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_regional_data.R
 \name{get_regional_data}
 \alias{get_regional_data}
-\title{Fetch standardised sub-national COVID-19 data}
+\title{Get regional-level data}
 \usage{
 get_regional_data(
   country,
@@ -21,7 +21,7 @@ get_regional_data(
 \arguments{
 \item{country}{A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
-options use \code{get_available_datasets}.}
+options use \code{get_available_datasets()}.}
 
 \item{level}{A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
@@ -61,15 +61,43 @@ A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing stratified by regions within the given country.
 }
 \description{
-Downloads, cleans and processes regional data
-for COVID-19.
+Provides an interface to source specific classes which
+support regional level data. For simple use cases this allows downloading
+clean, standardised, regional-level COVID-19 data sets. Internally this uses
+the \code{DataClass()} parent class which allows documented downloading, cleaning,
+and processing. Optionally all steps of data processing can be returned
+along with the functions used for processing but by default just the
+finalised processed data is returned. See the examples for some potential
+use cases and the links to lower level functions for more details and
+options.
 }
 \examples{
 \dontrun{
 # set up a data cache
 start_using_memoise()
 
-# download data for Italy keeping all processing steps
-get_national_data(country = "italy", verbose = TRUE, steps = TRUE)
+# download data for Italy
+get_regional_data("italy")
+
+# return totals for Italy with no localisation
+get_regional_data("italy", localise = FALSE, totals = TRUE)
+
+# download data for the UK but return the class
+uk <- get_regional_data("United Kingdom", class = TRUE)
+uk
+
+# return UK data from the class object]
+uk$return()
 }
 }
+\seealso{
+\code{\link[=Italy]{Italy()}}, \code{\link[=UK]{UK()}}
+
+Data interface functions
+\code{\link{CountryDataClass}},
+\code{\link{DataClass}},
+\code{\link{get_available_datasets}()},
+\code{\link{get_national_data}()},
+\code{\link{initialise_dataclass}()}
+}
+\concept{interface}

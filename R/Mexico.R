@@ -16,6 +16,7 @@
 #' @source \url{https://datos.covid-19.conacyt.mx/}
 #' @export
 #' @concept dataset
+#' @family subnational
 #' @examples
 #' \dontrun{
 #' region <- Mexico$new(verbose = TRUE, steps = TRUE, get = TRUE)

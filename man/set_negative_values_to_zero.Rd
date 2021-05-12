@@ -16,4 +16,8 @@ A data frame with all relevant data > 0.
 Set data values to 0 if they are negative in a dataset. Data in
 the datasets should always be > 0.
 }
-\concept{utility}
+\seealso{
+Optional processing function
+\code{\link{totalise_data}()}
+}
+\concept{optional_processing}

@@ -1,16 +1,17 @@
-#' Get the countries data is available for
+#' Get supported data sets
 #'
-#' @description Show what countries have what level data available.
-#' The function searches the environment for R6 class objects and
+#' @description The function searches the environment for R6 class objects and
 #' extracts the summary information from the available classes using
-#' their `summary` methods.
+#' their `summary` methods. In practice this means that it can be used
+#' to indicate supported data sets.
 #' @param type A character vector indicating the types of data to
 #' return. Current options include "national" (which are datasets at the
 #' national level which inherit from `CountryDataClass`) and
 #' "regional" (which are datasets at the regional level which inherit
-#' directly from `DataClass`).
-#' @return A list of available countries and the region level
-#' data is available for
+#' directly from `DataClass()`).
+#' @return A list of available data sets and the spatial aggregation data is
+#' available for.
+#' @family interface
 #' @importFrom rlang .data
 #' @importFrom dplyr select bind_rows filter
 #' @importFrom tibble as_tibble
