@@ -55,9 +55,6 @@ Subnational data sources
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{common_data_urls}}{List of named links to raw data. This is empty
-as for France data is divided into cases by level}
-
 \item{\code{level_data_urls}}{List of named links to raw data that are level
 specific.}
 

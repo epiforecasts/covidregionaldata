@@ -29,9 +29,6 @@ France <- R6::R6Class("France",
     supported_region_names = list("1" = "region", "2" = "department"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2", "2" = "ons_region_code"),
-    #' @field common_data_urls List of named links to raw data. This is empty
-    #' as for France data is divided into cases by level
-    common_data_urls = list(),
     # nolint start
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.

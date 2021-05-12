@@ -76,9 +76,6 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
     supported_region_codes = list(
       "1" = "iso_3166_1_alpha_3", "2" = "iso_code", "3" = "subregion_code"
     ),
-    #' @field common_data_urls List of named links to raw data. Since there are
-    #'  no common data sources for level 1 and 2, this list is empty.
-    common_data_urls = list(),
     #' @field level_data_urls List of named links to raw data. The first, and
     #' only entry, is be named main.
     # nolint start
