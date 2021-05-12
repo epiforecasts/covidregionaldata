@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Brazil Class for downloading, cleaning and processing notification data — Brazil • covidregionaldata</title>
+<title>R6 Class containing specific attributes and methods for Covid19 Data Hub — Covid19DataHub • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,11 +45,9 @@
 
 
 
-<meta property="og:title" content="Brazil Class for downloading, cleaning and processing notification data — Brazil" />
-<meta property="og:description" content="Information for downloading, cleaning
-and processing COVID-19 region data for Brazil.
-Data available on Github, curated by Wesley Cota:
-DOI 10.1590/SciELOPreprints.362" />
+<meta property="og:title" content="R6 Class containing specific attributes and methods for Covid19 Data Hub — Covid19DataHub" />
+<meta property="og:description" content="Attributes and methods for COVID-19 data provided by the
+Covid19 Data Hub" />
 
 
 
@@ -147,30 +145,53 @@ DOI 10.1590/SciELOPreprints.362" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Brazil Class for downloading, cleaning and processing notification data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Brazil.R'><code>R/Brazil.R</code></a></small>
-    <div class="hidden name"><code>Brazil.Rd</code></div>
+    <h1>R6 Class containing specific attributes and methods for Covid19 Data Hub</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Covid19DataHub.R'><code>R/Covid19DataHub.R</code></a></small>
+    <div class="hidden name"><code>Covid19DataHub.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Information for downloading, cleaning
-and processing COVID-19 region data for Brazil.</p>
-<p>Data available on Github, curated by Wesley Cota:
-DOI 10.1590/SciELOPreprints.362</p>
+    <p>Attributes and methods for COVID-19 data provided by the
+Covid19 Data Hub</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://github.com/wcota/covid19br'>https://github.com/wcota/covid19br</a></p>
+    <p><a href='https://covid19datahub.io/articles/data.html'>https://covid19datahub.io/articles/data.html</a></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This dataset supports both national and subnational data sources
+with national level data returned by default. National data is sourced from
+John Hopkins University and so we recommend using the JHU class included in
+this package. Subnational data is supported for a subset of countries which
+can be found after cleaning using the <code>available_regions()</code> method,
+see the examples for more details. These data sets are minimally cleaned
+data files hosted by the team at COVID19 Data Hub so please see their
+source repository for further details
+(https://github.com/covid19datahub/COVID19/#data-sources)
+If using for analysis checking the source for further details is
+strongly advised.</p>
+<p>If using this class please cite:
+"Guidotti et al., (2020). COVID-19 Data Hub
+Journal of Open Source Software, 5(51),
+2376, https://doi.org/10.21105/joss.02376"</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Subnational data sources
+    <div class='dont-index'><p>Aggregated data sources
+<code><a href='Google.html'>Google</a></code>,
+<code><a href='JHU.html'>JHU</a></code></p>
+<p>National data sources
+<code><a href='ECDC.html'>ECDC</a></code>,
+<code><a href='Google.html'>Google</a></code>,
+<code><a href='JHU.html'>JHU</a></code>,
+<code><a href='WHO.html'>WHO</a></code></p>
+<p>Subnational data sources
 <code><a href='Belgium.html'>Belgium</a></code>,
+<code><a href='Brazil.html'>Brazil</a></code>,
 <code><a href='Canada.html'>Canada</a></code>,
 <code><a href='Colombia.html'>Colombia</a></code>,
-<code><a href='Covid19DataHub.html'>Covid19DataHub</a></code>,
 <code><a href='Cuba.html'>Cuba</a></code>,
 <code><a href='France.html'>France</a></code>,
 <code><a href='Germany.html'>Germany</a></code>,
@@ -183,13 +204,13 @@ DOI 10.1590/SciELOPreprints.362</p>
 <code><a href='SouthAfrica.html'>SouthAfrica</a></code>,
 <code><a href='UK.html'>UK</a></code>,
 <code><a href='USA.html'>USA</a></code></p></div>
-    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
+    <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
-    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Brazil</code></p>
+    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code><a href='CountryDataClass.html'>covidregionaldata::CountryDataClass</a></code> -&gt; <code>Covid19DataHub</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+<dt><code>origin</code></dt><dd><p>name of country to fetch data for</p></dd>
 
 <dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
@@ -197,8 +218,11 @@ DOI 10.1590/SciELOPreprints.362</p>
 
 <dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data. Data is
-available at the city level and is aggregated to provide state data.</p></dd>
+<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data. Since there are
+no common data sources for level 1 and 2, this list is empty.</p></dd>
+
+<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data. The first, and
+only entry, is be named main.</p></dd>
 
 <dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
@@ -209,66 +233,39 @@ available at the city level and is aggregated to provide state data.</p></dd>
 <h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-set_region_codes'><code>Brazil$set_region_codes()</code></a></p></li>
-<li><p><a href='#method-clean_common'><code>Brazil$clean_common()</code></a></p></li>
-<li><p><a href='#method-clean_level_1'><code>Brazil$clean_level_1()</code></a></p></li>
-<li><p><a href='#method-clean_level_2'><code>Brazil$clean_level_2()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Brazil$clone()</code></a></p></li>
+<li><p><a href='#method-clean_common'><code>Covid19DataHub$clean_common()</code></a></p></li>
+<li><p><a href='#method-clone'><code>Covid19DataHub$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions"><a href='../../covidregionaldata/html/DataClass.html#method-available_regions'><code>covidregionaldata::DataClass$available_regions()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean"><a href='../../covidregionaldata/html/DataClass.html#method-clean'><code>covidregionaldata::DataClass$clean()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download"><a href='../../covidregionaldata/html/DataClass.html#method-download'><code>covidregionaldata::DataClass$download()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter"><a href='../../covidregionaldata/html/DataClass.html#method-filter'><code>covidregionaldata::DataClass$filter()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get"><a href='../../covidregionaldata/html/DataClass.html#method-get'><code>covidregionaldata::DataClass$get()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize"><a href='../../covidregionaldata/html/DataClass.html#method-initialize'><code>covidregionaldata::DataClass$initialize()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process"><a href='../../covidregionaldata/html/DataClass.html#method-process'><code>covidregionaldata::DataClass$process()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return"><a href='../../covidregionaldata/html/DataClass.html#method-return'><code>covidregionaldata::DataClass$return()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes"><a href='../../covidregionaldata/html/DataClass.html#method-set_region_codes'><code>covidregionaldata::DataClass$set_region_codes()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary"><a href='../../covidregionaldata/html/DataClass.html#method-summary'><code>covidregionaldata::DataClass$summary()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter"><a href='../../covidregionaldata/html/CountryDataClass.html#method-filter'><code>covidregionaldata::CountryDataClass$filter()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
-<a id="method-set_region_codes"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>set_region_codes()</code></h3>
-<p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-set-region-codes-'><a class='anchor' aria-hidden='true' href='#list-set-region-codes-'></a>Method <code>set_region_codes()</code></h3>
-<p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
 <a id="method-clean_common"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_common()</code></h3>
-<p>Common data cleaning for both levels</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>Covid19 Data Hub specific data cleaning.
+This takes all the raw data, renames some columns and checks types.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-clean-common-'><a class='anchor' aria-hidden='true' href='#list-clean-common-'></a>Method <code>clean_common()</code></h3>
-<p>Common data cleaning for both levels</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
-<a id="method-clean_level_1"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_level_1()</code></h3>
-<p>State Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-clean-level-'><a class='anchor' aria-hidden='true' href='#list-clean-level-'></a>Method <code>clean_level_1()</code></h3>
-<p>State Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_level_1</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
-<a id="method-clean_level_2"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_level_2()</code></h3>
-<p>City Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_level_2</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-clean-level-'><a class='anchor' aria-hidden='true' href='#list-clean-level-'></a>Method <code>clean_level_2()</code></h3>
-<p>City Level Data Cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clean_level_2</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p>Covid19 Data Hub specific data cleaning.
+This takes all the raw data, renames some columns and checks types.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -277,7 +274,7 @@ available at the city level and is aggregated to provide state data.</p></dd>
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -288,10 +285,35 @@ available at the city level and is aggregated to provide state data.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Brazil</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>region</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+    <pre class="examples"><span class='r-in'><span class='co'># nolint start</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># set up a data cache</span></span>
+<span class='r-in'><span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get all countries data</span></span>
+<span class='r-in'><span class='va'>cv19dh</span> <span class='op'>&lt;-</span> <span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"1"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># show available regions with data at the second level of interest</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span> <span class='op'>&lt;-</span> <span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>level <span class='op'>=</span> <span class='st'>"2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span><span class='op'>$</span><span class='fu'>clean</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh</span><span class='op'>$</span><span class='fu'>available_regions</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get all region data for the uk</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span><span class='op'>$</span><span class='fu'>filter</span><span class='op'>(</span><span class='st'>"uk"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span><span class='op'>$</span><span class='fu'>process</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cv19dh_level_2</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get all regional data for the UK</span></span>
+<span class='r-in'><span class='va'>uk</span> <span class='op'>&lt;-</span> <span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>regions <span class='op'>=</span> <span class='st'>"uk"</span>, level <span class='op'>=</span> <span class='st'>"2"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>uk</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get all subregional data for the UK</span></span>
+<span class='r-in'><span class='va'>uk</span> <span class='op'>&lt;-</span> <span class='va'>Covid19DataHub</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>regions <span class='op'>=</span> <span class='st'>"uk"</span>, level <span class='op'>=</span> <span class='st'>"3"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>uk</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='co'># nolint end</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
