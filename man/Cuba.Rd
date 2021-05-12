@@ -22,6 +22,7 @@ Subnational data sources
 \code{\link{Brazil}},
 \code{\link{Canada}},
 \code{\link{Colombia}},
+\code{\link{Covid19DataHub}},
 \code{\link{France}},
 \code{\link{Germany}},
 \code{\link{Google}},
