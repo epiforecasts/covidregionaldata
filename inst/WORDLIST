@@ -31,6 +31,8 @@ Ardia
 arXiv
 arxivId
 aut
+Averick
+Bache
 BBSRC
 bd
 behaviour
@@ -106,6 +108,7 @@ documention
 documentionr
 doi
 DOI
+Dowle
 dplyr
 DS
 DTRA
@@ -139,6 +142,7 @@ Flasche
 flavio
 Flavio
 fns
+focussed
 FYS
 gb
 GCRF
@@ -154,10 +158,12 @@ GMK
 Goldszmidt
 GoogleData
 GRGL
+Grolemund
 Gruson
 Gui
 Guidotti
 Guo
+Hadley
 Hallas
 Hamish
 HC
@@ -166,6 +172,7 @@ HDTRA
 Healy
 hellewell
 Hellewell
+Hiroaki
 hl
 Hongru
 hospitalisation
@@ -199,6 +206,7 @@ issn
 ITCRZ
 JCE
 JDM
+Jeroen
 JH
 JHU
 Jing
@@ -220,8 +228,10 @@ katharine
 KEA
 Kieran
 Kira
+Kirill
 kjhealy
 knitr
+Kohske
 Kreise
 Kucharski
 KvZ
@@ -237,6 +247,7 @@ linelists
 linter
 linters
 Liu
+ller
 localisation
 localise
 localised
@@ -282,14 +293,17 @@ NLM
 Noam
 nolint
 nonpharmaceutical
+nov
 NRW
 NTD
 numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland
 occassionally
 oct
+ois
 OJB
 ons
 ONS
+Ooms
 openjournals
 ORCID
 Ordaz
@@ -304,6 +318,7 @@ params
 patrick
 paul
 paulcampbell
+Pedersen
 peoplepopulationandcommunity
 Petherick
 PHE
@@ -315,6 +330,7 @@ populationandmigration
 populationestimates
 populationestimatesforukenglandandwalesscotlandandnorthernireland
 positivity
+prioritises
 programme
 PRs
 PublicHealthEngland
@@ -330,6 +346,7 @@ RCUK
 Rdev
 README
 readmissions
+readr
 readxl
 regioni
 reimposition
@@ -344,6 +361,7 @@ rmarkdown
 RME
 RMGJH
 rollout
+Romain
 Routledge
 Roxygen
 RoxygenNote
@@ -359,6 +377,7 @@ savivaldybe
 SciELOPreprints
 sciencemag
 sebastian
+Seidel
 seperate
 SFlasche
 SFunk
@@ -371,6 +390,8 @@ sophie
 SouthAfrica
 spatio
 spi
+Spinu
+Srinivasan
 SRM
 SRP
 st
@@ -388,19 +409,25 @@ subregions
 summarise
 superspreading
 supertracker
+tableThis
+Takahashi
 Talyor
 tandfonline
 Tatlow
 tessella
 testthat
 textquoteright
+theoj
 Tianhan
 tibble
 tibbles
 tidyr
 tidyselect
+tidyverse
+Tidyverse
 TJ
 todays
+toolkits
 toolset
 totalled
 trands
@@ -420,6 +447,7 @@ virological
 Virological
 visualisation
 visualise
+Vitalie
 VLG
 VLI
 VOC
@@ -433,7 +461,9 @@ Washburne
 Wellcome
 wellcomeopenres
 Wenseleers
+Wickham
 wikipedia
+Wilke
 withr
 WJE
 WorldHealthOrganisation
@@ -443,6 +473,7 @@ YesThe
 YJ
 YL
 Yung
+Yutani
 YWDC
 yyyy
 YYYY
