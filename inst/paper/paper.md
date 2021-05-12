@@ -2,9 +2,9 @@
 ---
 title: "covidregionaldata: Subnational data for COVID-19 epidemiology"
 authors:
-  - name: Joseph Palmer^[co-first author]
+  - name: Joseph Palmer
     affiliation: 1
-  - name: Katharine Sherratt^[co-first author]
+  - name: Katharine Sherratt
     affiliation: 2
   - name: Richard Martin-Nielson
 -   affiliation: 3
