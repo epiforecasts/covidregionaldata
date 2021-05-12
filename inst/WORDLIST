@@ -31,6 +31,8 @@ Ardia
 arXiv
 arxivId
 aut
+Averick
+Bache
 BBSRC
 bd
 behaviour
@@ -85,6 +87,7 @@ ctb
 curation
 customised
 cyclocomp
+D'Agostino
 dataclass
 DataClass
 datahub
@@ -139,6 +142,7 @@ Flasche
 flavio
 Flavio
 fns
+François
 FYS
 gb
 GCRF
@@ -154,10 +158,12 @@ GMK
 Goldszmidt
 GoogleData
 GRGL
+Grolemund
 Gruson
 Gui
 Guidotti
 Guo
+Hadley
 Hallas
 Hamish
 HC
@@ -166,6 +172,7 @@ HDTRA
 Healy
 hellewell
 Hellewell
+Hiroaki
 hl
 Hongru
 hospitalisation
@@ -199,6 +206,7 @@ issn
 ITCRZ
 JCE
 JDM
+Jeroen
 JH
 JHU
 Jing
@@ -220,8 +228,10 @@ katharine
 KEA
 Kieran
 Kira
+Kirill
 kjhealy
 knitr
+Kohske
 Kreise
 Kucharski
 KvZ
@@ -262,6 +272,7 @@ modelling
 MQ
 MRC
 msf
+Müller
 Munday
 MX
 na
@@ -290,6 +301,7 @@ oct
 OJB
 ons
 ONS
+Ooms
 openjournals
 ORCID
 Ordaz
@@ -304,6 +316,7 @@ params
 patrick
 paul
 paulcampbell
+Pedersen
 peoplepopulationandcommunity
 Petherick
 PHE
@@ -344,6 +357,7 @@ rmarkdown
 RME
 RMGJH
 rollout
+Romain
 Routledge
 Roxygen
 RoxygenNote
@@ -359,6 +373,7 @@ savivaldybe
 SciELOPreprints
 sciencemag
 sebastian
+Seidel
 seperate
 SFlasche
 SFunk
@@ -371,6 +386,7 @@ sophie
 SouthAfrica
 spatio
 spi
+Spinu
 SRM
 SRP
 st
@@ -388,6 +404,7 @@ subregions
 summarise
 superspreading
 supertracker
+Takahashi
 Talyor
 tandfonline
 Tatlow
@@ -399,6 +416,7 @@ tibble
 tibbles
 tidyr
 tidyselect
+tidyverse
 TJ
 todays
 toolset
@@ -420,6 +438,7 @@ virological
 Virological
 visualisation
 visualise
+Vitalie
 VLG
 VLI
 VOC
@@ -433,7 +452,9 @@ Washburne
 Wellcome
 wellcomeopenres
 Wenseleers
+Wickham
 wikipedia
+Wilke
 withr
 WJE
 WorldHealthOrganisation
@@ -443,6 +464,7 @@ YesThe
 YJ
 YL
 Yung
+Yutani
 YWDC
 yyyy
 YYYY
