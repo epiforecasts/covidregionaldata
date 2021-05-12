@@ -1,7 +1,7 @@
 Package: covidregionaldata
 Title: Subnational Data for the COVID-19 Outbreak
 Version: 0.9.1.3000
-Authors@R: 
+Authors@R:
     c(person(given = "Sam Abbott",
              role = c("aut", "cre"),
              email = "sam.abbott@lshtm.ac.uk",
@@ -13,7 +13,9 @@ Authors@R:
              comment = c(ORCID = "0000-0003-2049-3423")),
       person(given = "Joe",
              family = "Palmer",
-             role = "aut"),
+             role = "aut",
+             email = "joe.palmer.2019@live.rhul.ac.uk",
+             comment = c(ORCID = "0000-0002-5593-9352")),
       person(given = "Richard",
              family = "Martin-Nielsen",
              role = "aut",
@@ -103,7 +105,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     usethis
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8

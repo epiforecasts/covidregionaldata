@@ -3,14 +3,17 @@
 title: "covidregionaldata: Subnational data for COVID-19 epidemiology"
 authors:
   - name: Joseph Palmer$^{\star}$
+    orcid: 0000-0002-5593-9352
     affiliation: 1
   - name: Katharine Sherratt$^{\star}$
+    orcid: 0000-0003-2049-3423
     affiliation: 2
   - name: Richard Martin-Nielson
     affiliation: 3
   - name: Jonnie Bevan
     affiliation: 4
   - name: Hamish Gibbs
+    orcid: 0000-0003-4413-453X
     affiliation: 2
   - name: CMMID COVID-19 Working Group
     affiliation: 2
@@ -18,6 +21,7 @@ authors:
     affiliation: 2
   - name: Sam Abbott$^{\dagger}$
     affiliation: 2
+    orcid: 0000-0001-8057-8037
 affiliations:
  - name: Department of Biological Sciences, Royal Holloway University of London
    index: 1
