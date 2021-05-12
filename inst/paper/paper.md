@@ -43,7 +43,7 @@ link-citations: yes
 ---
 # Summary
 
-`covidregionaldata` is an R [@Rdev:2013] package that provides an interface to subnational and national level COVID-19 data. The package provides cleaned and checked COVID-19 test-positive case counts and, where available, counts of deaths, recoveries, and hospitalisations in a consistent and fully transparent framework. The package automates common processing steps while allowing researchers to easily and transparently trace the origin of the underlying data sources. It has been designed to be readily extensible, allowing users to easily extend the packages' capabilities and contribute to shared data handling. All package code is archived on [Zenodo](https://zenodo.org/record/4718466) [@covidregionaldata] and [Github](https://github.com/epiforecasts/covidregionaldata).
+`covidregionaldata` is an R [@Rdev:2013] package that provides an interface to subnational and national level COVID-19 data. The package provides cleaned and verified COVID-19 test-positive case counts and, where available, counts of deaths, recoveries, and hospitalisations in a consistent and fully transparent framework. The package automates common processing steps while allowing researchers to easily and transparently trace the origin of the underlying data sources. It has been designed to be readily extensible, allowing users to easily extend the packages' capabilities and contribute to shared data handling. All package code is archived on [Zenodo](https://zenodo.org/record/4718466) [@covidregionaldata] and [Github](https://github.com/epiforecasts/covidregionaldata).
 
 # Statement of need
 
@@ -65,5 +65,12 @@ Other interfaces to COVID-19 data are available in R, though there are fewer tha
 
 `covidregionaldata` has been used by researchers to source standardised data for estimating the effective reproductive number of COVID-19 in real-time both nationally and subnationally [@Abbott2020]. It has also been used in analyses comparing effective reproduction numbers from different subnational data sources in the United Kingdom [@Sherratt2020], and estimating the increase in transmission related to the B.1.1.7 variant [@Davies2021]. As well as its use in research it has also been used to visualise and explore current trends in COVID-19 case, deaths, and hospitalisations.
 
+# Acknowledgements
+
+This package provides an interface to data sources which are often collected and maintained by individuals or small teams. Our work, both in this package and more generally, would not be possible without their efforts. Thanks to all contributors and package users who have otherwise provided feedback. Thanks to Tim Taylor for useful design discussions.
+
+# Funding statement
+
+This work was supported by a studentship to J.P. funded by the Biotechnology and Biological Sciences Research Council (BBSRC) grant nr. (BB/M011178/1). SEA, KS, and SF were funded by a Wellcome Trust Senior Research Fellowship to Sebastian Funk (210758/Z/18/Z).
 
 # References
