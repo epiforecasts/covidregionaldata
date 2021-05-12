@@ -1,6 +1,6 @@
 
 ---
-title: "covidregionaldata: Subnational data for COVID-19 epidemiology"
+title: "covidregionaldata: Subnational Data for COVID-19 epidemiology"
 authors:
   - name: Joseph Palmer^[co-first author]
     affiliation: 1
