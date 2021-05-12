@@ -42,8 +42,7 @@ journal: JOSS
 link-citations: yes
 ---
 
-#### $^{\star}$ co-first author
-#### $^{\dagger}$ corresponding author
+#### $^{\star}$ co-first author $^{\dagger}$ corresponding author
 
 # Summary
 
