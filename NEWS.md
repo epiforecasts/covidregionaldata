@@ -1,6 +1,14 @@
 # covidregionaldata 0.9.2
 
-This release adds support for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google. Testing has also been updated to require classes to have either `common_data_urls` or `level_data_urls`.
+This release is in development and therefore new features may change without warning (though we will seek to keep this to a minimum).
+
+## New features
+
+* Support added fo data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by @joseph-palmer).
+
+## Other changes
+
+* Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field.
 
 # covidregionaldata 0.9.1
 
