@@ -12,15 +12,18 @@ Covid19 Data Hub
 }
 \details{
 This dataset supports both national and subnational data sources
-with national level data returned by default. Subnational data is supported
-for a subset of countries which can be found after cleaning using the
-\code{available_regions()} method, see the examples for more details. These data
-sets are raw (presumably unprocessed?) data files hosted by the team at
-COVID19 Data Hub so please see their source repository for further details.
+with national level data returned by default. National data is sourced from
+John Hopkins University and so we recommend using the JHU class included in
+this package. Subnational data is supported for a subset of countries which
+can be found after cleaning using the \code{available_regions()} method,
+see the examples for more details. These data sets are minimally cleaned
+data files hosted by the team at COVID19 Data Hub so please see their
+source repository for further details
+(https://github.com/covid19datahub/COVID19/#data-sources)
 If using for analysis checking the source for further details is
 strongly advisable.
 
-If using this data please cite:
+If using this class please cite:
 "Guidotti et al., (2020). COVID-19 Data Hub
 Journal of Open Source Software, 5(51),
 2376, https://doi.org/10.21105/joss.02376"
@@ -117,9 +120,6 @@ only entry, is be named main.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-clean_common}{\code{Covid19DataHub$clean_common()}}
-\item \href{#method-clean_level_1}{\code{Covid19DataHub$clean_level_1()}}
-\item \href{#method-clean_level_2}{\code{Covid19DataHub$clean_level_2()}}
-\item \href{#method-clean_level_3}{\code{Covid19DataHub$clean_level_3()}}
 \item \href{#method-clone}{\code{Covid19DataHub$clone()}}
 }
 }
@@ -147,42 +147,6 @@ Covid19 Data Hub specific data cleaning.
 This takes all the raw data, renames some columns and checks types.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Covid19DataHub$clean_common()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_level_1"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
-\subsection{Method \code{clean_level_1()}}{
-Covid19 Data Hub specific subregion level data cleaning.
-Takes the data cleaned by \code{clean_common} and aggregates it to the
-country level (level 1).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Covid19DataHub$clean_level_1()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_level_2"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_level_2}{}}}
-\subsection{Method \code{clean_level_2()}}{
-Covid19 Data Hub specific subregion level data cleaning.
-Takes the data cleaned by \code{clean_common} and aggregates it to the
-region level (level 2).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Covid19DataHub$clean_level_2()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clean_level_3"></a>}}
-\if{latex}{\out{\hypertarget{method-clean_level_3}{}}}
-\subsection{Method \code{clean_level_3()}}{
-Covid19 Data Hub specific subregion level data cleaning.
-Takes the data cleaned by \code{clean_common} and aggregates it to the
-subregion level (level 3).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Covid19DataHub$clean_level_3()}\if{html}{\out{</div>}}
 }
 
 }

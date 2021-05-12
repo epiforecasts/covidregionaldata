@@ -4,15 +4,18 @@
 #' Covid19 Data Hub
 #'
 #' @details This dataset supports both national and subnational data sources
-#' with national level data returned by default. Subnational data is supported
-#' for a subset of countries which can be found after cleaning using the
-#' `available_regions()` method, see the examples for more details. These data
-#' sets are raw (presumably unprocessed?) data files hosted by the team at
-#' COVID19 Data Hub so please see their source repository for further details.
+#' with national level data returned by default. National data is sourced from
+#' John Hopkins University and so we recommend using the JHU class included in
+#' this package. Subnational data is supported for a subset of countries which
+#' can be found after cleaning using the `available_regions()` method,
+#' see the examples for more details. These data sets are minimally cleaned
+#' data files hosted by the team at COVID19 Data Hub so please see their
+#' source repository for further details
+#' (https://github.com/covid19datahub/COVID19/#data-sources)
 #' If using for analysis checking the source for further details is
 #' strongly advisable.
 #'
-#' If using this data please cite:
+#' If using this class please cite:
 #' "Guidotti et al., (2020). COVID-19 Data Hub
 #' Journal of Open Source Software, 5(51),
 #' 2376, https://doi.org/10.21105/joss.02376"
@@ -92,7 +95,7 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("confirmed", "deaths", "recovered"),
+    source_data_cols = c("confirmed", "deaths", "recovered", "tested", "hosp"),
 
     #' @description Covid19 Data Hub specific data cleaning.
     #' This takes all the raw data, renames some columns and checks types.
@@ -125,73 +128,9 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
           hosp_new = as.numeric(.data$hosp_new)
         ) %>%
         select(
-          cases_new,
-          deaths_new,
-          recovered_new,
-          hosp_new,
-          tested_new,
-          everything()
-        )
-    },
-
-    #' @description Covid19 Data Hub specific subregion level data cleaning.
-    #' Takes the data cleaned by `clean_common` and aggregates it to the
-    #' country level (level 1).
-    #' @importFrom dplyr select everything
-    #' @importFrom rlang .data
-    clean_level_1 = function() {
-      self$data$clean <- self$data$clean %>%
-        select(
-          date,
-          level_1_region,
-          level_1_region_code,
-          everything(),
-          -c(
-            level_2_region,
-            level_2_region_code,
-            level_3_region,
-            level_3_region_code
+          where(
+            ~ !all(is.na(.x))
           )
-        )
-    },
-
-    #' @description Covid19 Data Hub specific subregion level data cleaning.
-    #' Takes the data cleaned by `clean_common` and aggregates it to the
-    #' region level (level 2).
-    #' @importFrom dplyr select everything
-    #' @importFrom rlang .data
-    clean_level_2 = function() {
-      self$data$clean <- self$data$clean %>%
-        select(
-          date,
-          level_1_region,
-          level_1_region_code,
-          level_2_region,
-          level_2_region_code,
-          everything(),
-          -c(
-            level_3_region,
-            level_3_region_code
-          )
-        )
-    },
-
-    #' @description Covid19 Data Hub specific subregion level data cleaning.
-    #' Takes the data cleaned by `clean_common` and aggregates it to the
-    #' subregion level (level 3).
-    #' @importFrom dplyr select everything
-    #' @importFrom rlang .data
-    clean_level_3 = function() {
-      self$data$clean <- self$data$clean %>%
-        select(
-          date,
-          level_1_region,
-          level_1_region_code,
-          level_2_region,
-          level_2_region_code,
-          level_3_region,
-          level_3_region_code,
-          everything()
         )
     }
   )
