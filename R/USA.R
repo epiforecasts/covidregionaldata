@@ -32,9 +32,6 @@ USA <- R6::R6Class("USA",
       "1" = "iso_3166_2",
       "2" = "fips"
     ),
-    #' @field common_data_urls List of named links to raw data. Since there are
-    #'  no common data sources for level 1 and 2, this list is empty.
-    common_data_urls = list(),
     #' @field level_data_urls List of named links to raw data that are level
     #' specific.
     # nolint start

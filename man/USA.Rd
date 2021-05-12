@@ -51,9 +51,6 @@ Subnational data sources
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{common_data_urls}}{List of named links to raw data. Since there are
-no common data sources for level 1 and 2, this list is empty.}
-
 \item{\code{level_data_urls}}{List of named links to raw data that are level
 specific.}
 
