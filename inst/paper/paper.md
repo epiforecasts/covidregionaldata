@@ -16,7 +16,7 @@ authors:
     affiliation: 2
   - name: Sebastian Funk
     affiliation: 2
-  - name: Sam Abbott
+  - name: Sam Abbott$^{\dagger}$
     affiliation: 2
 affiliations:
  - name: Department of Biological Sciences, Royal Holloway University of London
@@ -43,6 +43,7 @@ link-citations: yes
 ---
 
 #### $^{\star}$ co-first author
+#### $^{\dagger}$ corresponding author
 
 # Summary
 
