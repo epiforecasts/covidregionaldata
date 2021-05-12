@@ -15,12 +15,11 @@ check_either_or_fields <- function(region_class, country) {
     paste(
       "Expect",
       country,
-      "has one of common_data_urls, shared_data_urls or level_data_urls"
+      "has one of common_data_urls or level_data_urls"
     ),
     {
       expect_true(
         "common_data_urls" %in% names(region_class$public_fields) |
-          "shared_data_urls" %in% names(region_class$public_fields) |
           "level_data_urls" %in% names(region_class$public_fields)
       )
     }
