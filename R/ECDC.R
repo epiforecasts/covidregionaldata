@@ -119,6 +119,27 @@ ECDC <- R6::R6Class("ECDC",
       } else {
         return(self$data$return)
       }
+    },
+
+    #' @description Run tests on ECDC class.
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @importFrom testthat test_that expect_true
+    #' @importFrom dplyr filter group_by tally
+    test = function(download = FALSE) {
+      super$test(download)
+      test_that("ecdc data has expected format", {
+        necessary_cols <- c(
+          "geoId", "countriesAndTerritories",
+          "cases", "deaths", "popData2019"
+        )
+        expect_true(all(necessary_cols %in% colnames(self$data$raw$main)))
+        all_countries <- self$data$return %>%
+          filter(is.na(un_region)) %>%
+          group_by(country) %>%
+          tally()
+        expect_true(nrow(all_countries) == 0)
+      })
     }
   )
 )

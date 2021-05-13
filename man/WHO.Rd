@@ -52,6 +52,7 @@ only entry, is be named main.}
 \itemize{
 \item \href{#method-clean_common}{\code{WHO$clean_common()}}
 \item \href{#method-return}{\code{WHO$return()}}
+\item \href{#method-test}{\code{WHO$test()}}
 \item \href{#method-clone}{\code{WHO$clone()}}
 }
 }
@@ -61,6 +62,9 @@ only entry, is be named main.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_clean_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_clean_cols}{\code{covidregionaldata::DataClass$expect_clean_cols()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_columns_contain_data">}\href{../../covidregionaldata/html/DataClass.html#method-expect_columns_contain_data}{\code{covidregionaldata::DataClass$expect_columns_contain_data()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_processed_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_processed_cols}{\code{covidregionaldata::DataClass$expect_processed_cols()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
@@ -89,6 +93,24 @@ Specific return settings for the WHO dataset.
 \if{html}{\out{<div class="r">}}\preformatted{WHO$return()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-test"></a>}}
+\if{latex}{\out{\hypertarget{method-test}{}}}
+\subsection{Method \code{test()}}{
+Run tests on WHO class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{WHO$test(download = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

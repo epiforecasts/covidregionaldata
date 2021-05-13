@@ -12,8 +12,8 @@ downloading, processing, and returning data. These functions are contained
 within this parent class and so are accessible by all data sets which
 inherit from here. Individual data sets can overwrite any functions or
 fields providing they define a method with the same name, and can be
-extended with additinal functionality. See the individual method documentaion
-for further details.
+extended with additional functionality. See the individual method
+documentaion for further details.
 }
 \seealso{
 Data interface functions
@@ -109,6 +109,10 @@ Defaults to the target level.}
 \item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-summary}{\code{DataClass$summary()}}
+\item \href{#method-test}{\code{DataClass$test()}}
+\item \href{#method-expect_clean_cols}{\code{DataClass$expect_clean_cols()}}
+\item \href{#method-expect_processed_cols}{\code{DataClass$expect_processed_cols()}}
+\item \href{#method-expect_columns_contain_data}{\code{DataClass$expect_columns_contain_data()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
 }
@@ -350,6 +354,83 @@ being processed.
 Returns a single row summary tibble containing the origin of the
 data source, class, level 1 and 2 region names, the type of data,
 the urls of the raw data and the columns present in the raw data.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-test"></a>}}
+\if{latex}{\out{\hypertarget{method-test}{}}}
+\subsection{Method \code{test()}}{
+Run tests on data class. Inherited by child classes so test
+run through each class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-expect_clean_cols"></a>}}
+\if{latex}{\out{\hypertarget{method-expect_clean_cols}{}}}
+\subsection{Method \code{expect_clean_cols()}}{
+Expect data has cleaned columns. Inherited by child
+classes so tests run through each class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_clean_cols(data)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data}}{The data to check}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-expect_processed_cols"></a>}}
+\if{latex}{\out{\hypertarget{method-expect_processed_cols}{}}}
+\subsection{Method \code{expect_processed_cols()}}{
+Expect data has processed columns. Inherited by child
+classes so tests run through each class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_processed_cols(data, localised = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data}}{The data to check}
+
+\item{\code{localised}}{logical to check localised data or not, defaults to
+TRUE.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-expect_columns_contain_data"></a>}}
+\if{latex}{\out{\hypertarget{method-expect_columns_contain_data}{}}}
+\subsection{Method \code{expect_columns_contain_data()}}{
+Expect data has cleaned columns. Inherited by child
+classes so tests run through each class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_columns_contain_data(data_name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data_name}}{character_array The name of the class and level to
+check}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

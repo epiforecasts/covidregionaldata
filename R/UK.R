@@ -495,6 +495,61 @@ UK <- R6::R6Class("UK",
           release_date = self$release_date
         )
       return(clean_data)
+    },
+
+    #' @description Run tests on UK class.
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @importFrom testthat test_that expect_true expect_s3_class
+    #' @importFrom dplyr slice_tail
+    test = function(download = FALSE) {
+      super$test(download)
+      if (self$level == "1") {
+        data_name <- "UK level 1 with 'nhsregions=TRUE'"
+        self$nhsregions <- TRUE
+        source <- class(self)[1]
+        nhs_included_path <- paste0(
+          "custom_data/", source,
+          "_level_", self$level, "_nhs", ".rds"
+        )
+        if (!file.exists(nhs_included_path)) {
+          download <- TRUE
+        }
+        if (download) {
+          test_that(paste(data_name, " downloads sucessfully"), { # nolint
+            self$download()
+            expect_s3_class(self$data$raw$nhs, "data.frame")
+            expect_true(nrow(self$data$raw$nhs) > 0)
+            expect_true(ncol(self$data$raw$nhs) >= 2)
+          })
+          self$nhs_raw <- slice_tail(self$data$raw$nhs, n = 1000)
+          saveRDS(self$data$raw$nhs, nhs_included_path)
+        } else {
+          self$data$raw$nhs <- readRDS(nhs_included_path)
+        }
+        test_that(paste(data_name, "can be cleaned as expected"), {
+          self$clean()
+          expect_s3_class(self$data$clean, "data.frame")
+          expect_true(nrow(self$data$clean) > 0)
+          expect_true(ncol(self$data$clean) >= 2)
+          self$expect_clean_cols(self$data$clean)
+        })
+        test_that(paste(data_name, "can be processed as expected"), {
+          self$process()
+          expect_s3_class(self$data$processed, "data.frame")
+          expect_true(nrow(self$data$processed) > 0)
+          expect_true(ncol(self$data$processed) >= 2)
+          self$expect_processed_cols(self$data$processed)
+        })
+        test_that(paste(data_name, "can be returned as expected"), {
+          returned <- self$return()
+          if (any(class(returned) %in% "data.frame")) {
+            expect_s3_class(returned, "data.frame")
+            expect_true(nrow(returned) > 0)
+            expect_true(ncol(returned) >= 2)
+          }
+        })
+      }
     }
   )
 )

@@ -124,8 +124,8 @@ initialise_dataclass <- function(class = character(), level = "1",
 #' within this parent class and so are accessible by all data sets which
 #' inherit from here. Individual data sets can overwrite any functions or
 #' fields providing they define a method with the same name, and can be
-#' extended with additinal functionality. See the individual method documentaion
-#' for further details.
+#' extended with additional functionality. See the individual method
+#' documentaion for further details.
 #' @family interface
 #' @importFrom R6 R6Class
 DataClass <- R6::R6Class(
@@ -509,6 +509,147 @@ DataClass <- R6::R6Class(
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
       )
       return(sum_df)
+    },
+
+    #' @description Run tests on data class. Inherited by child classes so test
+    #' run through each class.
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @importFrom purrr walk map
+    #' @importFrom dplyr slice_tail
+    #' @importFrom testthat test_that expect_s3_class expect_true expect_error
+    test = function(download = FALSE) {
+      data_name <- paste0(class(self)[1], " at level ", self$level)
+      raw_path <- paste0(
+        "custom_data/", class(self)[1],
+        "_level_", self$level, ".rds"
+      )
+      if (!file.exists(raw_path)) {
+        download <- TRUE
+      }
+      if (download) {
+        test_that(paste0(data_name, " downloads sucessfully"), {
+          self$download()
+          walk(self$data$raw, function(data) {
+            expect_s3_class(data, "data.frame")
+            expect_true(nrow(data) > 0)
+            expect_true(ncol(data) >= 2)
+          })
+        })
+        self$data$raw <- map(self$data$raw,
+          slice_tail,
+          n = 250
+        )
+        self$data$raw <- map(
+          self$data$raw,
+          ~ .[, 1:min(100, ncol(.))]
+        )
+        saveRDS(self$data$raw, raw_path)
+      } else {
+        self$data$raw <- readRDS(raw_path)
+      }
+      test_that(paste0(data_name, " can be cleaned as expected"), {
+        self$clean()
+        expect_s3_class(self$data$clean, "data.frame")
+        expect_true(nrow(self$data$clean) > 0)
+        expect_true(ncol(self$data$clean) >= 2)
+        self$expect_clean_cols(self$data$clean)
+      })
+
+      test_that(
+        paste0(data_name, " can highlight available regions as expected"),
+        {
+          expect_error(self$available_regions(), NA)
+          expect_true(class(self$available_regions()) %in% "character")
+        }
+      )
+
+      test_that(paste0(data_name, " can be processed as expected"), {
+        self$process()
+        expect_s3_class(self$data$processed, "data.frame")
+        expect_true(nrow(self$data$processed) > 0)
+        expect_true(ncol(self$data$processed) >= 2)
+        expect_processed_cols(self$data$processed)
+      })
+
+      test_that(paste0(data_name, " can be returned as expected"), {
+        returned <- self$return()
+        if (any(class(returned) %in% "data.frame")) {
+          expect_s3_class(returned, "data.frame")
+          expect_true(nrow(returned) > 0)
+          expect_true(ncol(returned) >= 2)
+        }
+      })
+
+      self$expect_columns_contain_data(data_name)
+    },
+
+    #' @description Expect data has cleaned columns. Inherited by child
+    #' classes so tests run through each class.
+    #' @param data The data to check
+    #' @importFrom testthat expect_s3_class expect_type
+    expect_clean_cols = function(data) {
+      expect_s3_class(data[["date"]], "Date")
+      expect_type(data[["level_1_region"]], "character")
+      if (self$level == "2") {
+        expect_type(data[["level_2_region"]], "character")
+      }
+    },
+
+    #' @description Expect data has processed columns. Inherited by child
+    #' classes so tests run through each class.
+    #' @param data The data to check
+    #' @param localised logical to check localised data or not, defaults to
+    #' TRUE.
+    #' @importFrom testthat expect_s3_class expect_type
+    expect_processed_cols = function(data, localised = TRUE) {
+      expect_s3_class(data[["date"]], "Date")
+      expect_type(data[["cases_new"]], "double")
+      expect_type(data[["cases_total"]], "double")
+      expect_type(data[["deaths_new"]], "double")
+      expect_type(data[["deaths_total"]], "double")
+      if (!localised) {
+        expect_type(data[["level_1_region"]], "character")
+        if (self$level == "2") {
+          expect_type(data[["level_2_region"]], "character")
+        }
+      }
+    },
+
+    #' @description Expect data has cleaned columns. Inherited by child
+    #' classes so tests run through each class.
+    #' @param data_name character_array The name of the class and level to
+    #' check
+    #' @importFrom testthat test_that expect_true
+    #' @importFrom purrr map walk
+    #' @importFrom dplyr filter
+    #' @importFrom rlang !!
+    expect_columns_contain_data = function(data_name) {
+      cols_present <- function(col) {
+        if (length(self$source_data_cols[grep(
+          col, tolower(self$source_data_cols)
+        )]) > 0) {
+          return(paste0(col, c("_new", "_total")))
+        } else {
+          return(NULL)
+        }
+      }
+      cols <- c("cases", "deaths", "recovered", "test")
+      cols2check <- map(cols, cols_present)
+      cols2check <- unlist(cols2check)
+      walk(
+        cols2check,
+        ~ {
+          test_that(
+            paste0(data_name, "column '", .x, "' is not just composed of NA"),
+            {
+              expect_true(
+                nrow(self$data$processed %>% filter(!is.na(!!.x))) > 0
+              )
+            }
+          )
+        }
+      )
     }
   )
 )
@@ -561,6 +702,25 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
         }
       }
       super$filter()
+    },
+
+    #' @description Run tests on national data classes.
+    #' Inherited by child classes so tests run through each class.
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @importFrom testthat test_that
+    test = function(download = FALSE) {
+      super$test(download)
+      data_name <- paste0(class(self)[1], " at level ", self$level)
+      test_that(paste0(data_name, " can be processed as expected"), {
+        local_region <- self$clone()
+        local_region$localise <- FALSE
+        local_region$process()
+        self$expect_processed_cols(
+          local_region$data$processed,
+          localised = FALSE
+        )
+      })
     }
   )
 )
