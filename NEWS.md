@@ -10,6 +10,10 @@ This release is in development and therefore new features may change without war
 
 * Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field (by @joseph-palmer).
 
+## Bug fixes
+
+* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN). 
+
 # covidregionaldata 0.9.1
 
 This release adds support for data sets from John Hopkins University and the Google open data project. Both of these sources aggregate a range of data at national and subnational levels. It also contains a range of small fixes and improvements to documentation. Finally, this release adds optional data processing which will be extended in future releases (contributions warmly welcomed).

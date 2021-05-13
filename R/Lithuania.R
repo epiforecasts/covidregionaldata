@@ -408,11 +408,11 @@ Lithuania <- R6::R6Class("Lithuania",
                           recovered_definition = "official",
                           all_osp_fields = FALSE,
                           national_data = FALSE, ...) {
-      super$initialize(...)
       self$death_definition <- death_definition
       self$recovered_definition <- recovered_definition
       self$all_osp_fields <- all_osp_fields
       self$national_data <- national_data
+      super$initialize(...)
     }
   )
 )
