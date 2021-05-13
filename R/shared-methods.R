@@ -569,7 +569,17 @@ DataClass <- R6::R6Class(
         expect_s3_class(self$data$processed, "data.frame")
         expect_true(nrow(self$data$processed) > 0)
         expect_true(ncol(self$data$processed) >= 2)
-        expect_processed_cols(self$data$processed)
+        expect_processed_cols(self$data$processed, level = self$level)
+        if (!class(self)[1] %in% c("ECDC", "WHO")) {
+          local_region <- self$clone()
+          local_region$localise <- FALSE
+          local_region$process()
+          expect_processed_cols(
+            local_region$data$processed,
+            level = self$level,
+            localised = FALSE
+          )
+        }
       })
 
       test_that(paste0(data_name, " can be returned as expected"), {
@@ -599,10 +609,11 @@ DataClass <- R6::R6Class(
     #' @description Expect data has processed columns. Inherited by child
     #' classes so tests run through each class.
     #' @param data The data to check
+    #' @param level character_array the level of the data to check
     #' @param localised logical to check localised data or not, defaults to
     #' TRUE.
     #' @importFrom testthat expect_s3_class expect_type
-    expect_processed_cols = function(data, localised = TRUE) {
+    expect_processed_cols = function(data, level = "1", localised = TRUE) {
       expect_s3_class(data[["date"]], "Date")
       expect_type(data[["cases_new"]], "double")
       expect_type(data[["cases_total"]], "double")
@@ -610,7 +621,7 @@ DataClass <- R6::R6Class(
       expect_type(data[["deaths_total"]], "double")
       if (!localised) {
         expect_type(data[["level_1_region"]], "character")
-        if (self$level == "2") {
+        if (level == "2") {
           expect_type(data[["level_2_region"]], "character")
         }
       }
@@ -702,25 +713,6 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
         }
       }
       super$filter()
-    },
-
-    #' @description Run tests on national data classes.
-    #' Inherited by child classes so tests run through each class.
-    #' @param download logical. To download the data (TRUE) or use a snapshot
-    #' (FALSE). Defaults to FALSE.
-    #' @importFrom testthat test_that
-    test = function(download = FALSE) {
-      super$test(download)
-      data_name <- paste0(class(self)[1], " at level ", self$level)
-      test_that(paste0(data_name, " can be processed as expected"), {
-        local_region <- self$clone()
-        local_region$localise <- FALSE
-        local_region$process()
-        self$expect_processed_cols(
-          local_region$data$processed,
-          localised = FALSE
-        )
-      })
     }
   )
 )

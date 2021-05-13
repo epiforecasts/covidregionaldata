@@ -539,7 +539,7 @@ UK <- R6::R6Class("UK",
           expect_s3_class(self$data$processed, "data.frame")
           expect_true(nrow(self$data$processed) > 0)
           expect_true(ncol(self$data$processed) >= 2)
-          self$expect_processed_cols(self$data$processed)
+          self$expect_processed_cols(self$data$processed, level = self$level)
         })
         test_that(paste(data_name, "can be returned as expected"), {
           returned <- self$return()

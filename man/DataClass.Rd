@@ -400,13 +400,15 @@ classes so tests run through each class.
 Expect data has processed columns. Inherited by child
 classes so tests run through each class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_processed_cols(data, localised = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_processed_cols(data, level = "1", localised = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{data}}{The data to check}
+
+\item{\code{level}}{character_array the level of the data to check}
 
 \item{\code{localised}}{logical to check localised data or not, defaults to
 TRUE.}

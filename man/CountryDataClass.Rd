@@ -36,7 +36,6 @@ Defaults to the country level of the data.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-filter}{\code{CountryDataClass$filter()}}
-\item \href{#method-test}{\code{CountryDataClass$test()}}
 \item \href{#method-clone}{\code{CountryDataClass$clone()}}
 }
 }
@@ -56,6 +55,7 @@ Defaults to the country level of the data.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test">}\href{../../covidregionaldata/html/DataClass.html#method-test}{\code{covidregionaldata::DataClass$test()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -80,25 +80,6 @@ alteration.}
 
 \item{\code{level}}{Character The level of the data to filter at. Defaults to
 the conuntry level if not specified.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-test"></a>}}
-\if{latex}{\out{\hypertarget{method-test}{}}}
-\subsection{Method \code{test()}}{
-Run tests on national data classes.
-Inherited by child classes so tests run through each class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CountryDataClass$test(download = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
-(FALSE). Defaults to FALSE.}
 }
 \if{html}{\out{</div>}}
 }
