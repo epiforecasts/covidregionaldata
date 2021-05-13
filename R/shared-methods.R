@@ -569,7 +569,7 @@ DataClass <- R6::R6Class(
         expect_s3_class(self$data$processed, "data.frame")
         expect_true(nrow(self$data$processed) > 0)
         expect_true(ncol(self$data$processed) >= 2)
-        expect_processed_cols(self$data$processed, level = self$level)
+        self$expect_processed_cols(self$data$processed, level = self$level)
         if (!class(self)[1] %in% c("ECDC", "WHO")) {
           local_region <- self$clone()
           local_region$localise <- FALSE
