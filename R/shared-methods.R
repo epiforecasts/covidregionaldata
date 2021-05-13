@@ -574,7 +574,7 @@ DataClass <- R6::R6Class(
           local_region <- self$clone()
           local_region$localise <- FALSE
           local_region$process()
-          expect_processed_cols(
+          self$expect_processed_cols(
             local_region$data$processed,
             level = self$level,
             localised = FALSE
