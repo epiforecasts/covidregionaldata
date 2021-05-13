@@ -4,15 +4,16 @@ This release is in development and therefore new features may change without war
 
 ## New features
 
-* Support added fo data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by @joseph-palmer).
+* Support added for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by @joseph-palmer).
 
 ## Other changes
 
 * Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field (by @joseph-palmer).
+* Tests on data sets are now included as a method in `DataClass`. `test_regional-datasets` now calls the test function for all classes at each level. Data set specific tests (such as for NHS regions in the UK) are included as a test function within the country class, which calls the parent (DataClass) test before running through specific tests. This allows all the code about a country to be defined in its own class. (by @joseph-palmer)
 
 ## Bug fixes
 
-* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN). 
+* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN).
 
 # covidregionaldata 0.9.1
 
