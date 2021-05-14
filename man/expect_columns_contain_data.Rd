@@ -7,6 +7,8 @@
 expect_columns_contain_data(self, data_name)
 }
 \arguments{
+\item{self}{The R6Class country class object to perform checks}
+
 \item{data_name}{character_array The name of the class and level to
 check}
 }

@@ -11,6 +11,9 @@ test_processing(self, data_name, localise = TRUE)
 
 \item{data_name}{character_array The name of the class and level to
 check}
+
+\item{localise}{Logical, defaults to TRUE. Should region names be
+localised for tests.}
 }
 \description{
 Test data can be processed

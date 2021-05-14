@@ -2,6 +2,7 @@
 #' @description Expect data has cleaned columns. Inherited by child
 #' classes so tests run through each class.
 #' @param data The data to check
+#' @param level character_array the level of the data to check
 #' @export
 expect_clean_cols <- function(data, level) {
   testthat::expect_s3_class(data[["date"]], "Date")
@@ -36,6 +37,7 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
 #' Expect that columns contain data
 #' @description Expect data has cleaned columns. Inherited by child
 #' classes so tests run through each class.
+#' @param self The R6Class country class object to perform checks
 #' @param data_name character_array The name of the class and level to
 #' check
 #' @importFrom purrr map walk
@@ -129,11 +131,11 @@ test_cleaning <- function(self, data_name) {
     testthat::expect_true(ncol(self$data$clean) >= 2)
     expect_clean_cols(self$data$clean, self$level)
   })
-  test_that(
+  testthat::test_that(
     paste0(data_name, " can highlight available regions as expected"),
     {
-      expect_error(self$available_regions(), NA)
-      expect_true(class(self$available_regions()) %in% "character")
+      testthat::expect_error(self$available_regions(), NA)
+      testthat::expect_true(class(self$available_regions()) %in% "character")
     }
   )
 }
@@ -141,24 +143,25 @@ test_cleaning <- function(self, data_name) {
 #' Expect processing runs ok
 #' @description Test data can be processed
 #' @inheritParams test_download
+#' @param localise Logical, defaults to TRUE. Should region names be
+#' localised for tests.
 #' @export
 test_processing <- function(self, data_name, localise = TRUE) {
-  test_that(paste0(data_name, " can be processed as expected"), {
+  testthat::test_that(paste0(data_name, " can be processed as expected"), {
     self$process()
     testthat::expect_s3_class(self$data$processed, "data.frame")
     testthat::expect_true(nrow(self$data$processed) > 0)
     testthat::expect_true(ncol(self$data$processed) >= 2)
     expect_processed_cols(self$data$processed, level = self$level)
-    if (!class(self)[1] %in% c("ECDC", "WHO")) {
-      local_region <- self$clone()
-      local_region$localise <- FALSE
-      local_region$process()
-      expect_processed_cols(
-        local_region$data$processed,
-        level = self$level,
-        localised = FALSE
-      )
-    }
+
+    local_region <- self$clone()
+    local_region$localise <- FALSE
+    local_region$process()
+    expect_processed_cols(
+      local_region$data$processed,
+      level = self$level,
+      localised = FALSE
+    )
   })
 }
 

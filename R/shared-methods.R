@@ -529,14 +529,6 @@ DataClass <- R6::R6Class(
     #' @param copy logical To work on a copy of the class or the actual class
     #' @param ... Additional parameters to pass to `specific_tests`
     #' snapshot to. Defaults to TRUE.
-    #' examples
-    #' \dontrun{
-    #'  # set up a countries class, e.g. Italy
-    #'  a <- Italy$new(level = "1")
-    #'  # assuming you run this from the main covidregionaldata repo
-    #'  snapshot_path <- "tests/testthat/custom_data/Italy_level_1.rds"
-    #'  a$test(snapshot_path = snapshot_path)
-    #' }
     test = function(download = FALSE, snapshot_path = "",
                     copy = TRUE, ...) {
       data_name <- paste0(class(self)[1], " at level ", self$level)

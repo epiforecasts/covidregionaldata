@@ -8,6 +8,8 @@ expect_clean_cols(data, level)
 }
 \arguments{
 \item{data}{The data to check}
+
+\item{level}{character_array the level of the data to check}
 }
 \description{
 Expect data has cleaned columns. Inherited by child
