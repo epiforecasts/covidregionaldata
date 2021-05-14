@@ -43,7 +43,7 @@ test_UK_level_1 <- function(region) {
       expect_true(nrow(region$data$raw$nhs) > 0)
       expect_true(ncol(region$data$raw$nhs) >= 2)
     })
-    region$nhs_raw <- dplyr::slice_tail(region$data$raw$nhs, n = 1000)
+    region$data$raw$nhs <- dplyr::slice_tail(region$data$raw$nhs, n = 1000)
     saveRDS(region$data$raw$nhs, nhs_included_path)
   } else {
     region$data$raw$nhs <- readRDS(nhs_included_path)

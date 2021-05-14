@@ -269,10 +269,10 @@ DataClass <- R6::R6Class(
 
       if (!is.null(self$level_data_urls[[self$level]])) {
         if (length(self$common_data_urls) > 0) {
-          self$data_urls <- unlist(merge(
+          self$data_urls <- c(
             self$level_data_urls[[self$level]],
             self$common_data_urls
-          ))
+          )
         } else {
           self$data_urls <- self$level_data_urls[[self$level]]
         }
