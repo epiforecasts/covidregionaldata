@@ -398,7 +398,8 @@ UK <- R6::R6Class("UK",
       )
 
       # 2. Data for August 2020 to 7 April 2021
-      archive <- download_excel(self$data_urls[["nhs_archive_url"]],
+      archive <- download_excel(
+        as.character(self$data_urls[["nhs_archive_url"]]),
         "nhs_archive.xlsx",
         verbose = self$verbose,
         transpose = TRUE,
