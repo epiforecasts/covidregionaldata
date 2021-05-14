@@ -109,10 +109,8 @@ Defaults to the target level.}
 \item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-summary}{\code{DataClass$summary()}}
+\item \href{#method-specific_tests}{\code{DataClass$specific_tests()}}
 \item \href{#method-test}{\code{DataClass$test()}}
-\item \href{#method-expect_clean_cols}{\code{DataClass$expect_clean_cols()}}
-\item \href{#method-expect_processed_cols}{\code{DataClass$expect_processed_cols()}}
-\item \href{#method-expect_columns_contain_data}{\code{DataClass$expect_columns_contain_data()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
 }
@@ -357,13 +355,34 @@ the urls of the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-specific_tests"></a>}}
+\if{latex}{\out{\hypertarget{method-specific_tests}{}}}
+\subsection{Method \code{specific_tests()}}{
+Specific test for a specific class.
+By default this method is empty as if any code is required it should be
+defined in a child class specific \code{specific_tests} method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$specific_tests(self_copy)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{self_copy}}{R6class the object to test}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-test"></a>}}
 \if{latex}{\out{\hypertarget{method-test}{}}}
 \subsection{Method \code{test()}}{
 Run tests on data class. Inherited by child classes so test
-run through each class.
+run through each class. Tests data can be downloaded (if requested),
+cleaned, processed and returned. Tests run on a cloned copy of the target
+class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", copy = TRUE, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -371,66 +390,21 @@ run through each class.
 \describe{
 \item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expect_clean_cols"></a>}}
-\if{latex}{\out{\hypertarget{method-expect_clean_cols}{}}}
-\subsection{Method \code{expect_clean_cols()}}{
-Expect data has cleaned columns. Inherited by child
-classes so tests run through each class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_clean_cols(data)}\if{html}{\out{</div>}}
-}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data}}{The data to check}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expect_processed_cols"></a>}}
-\if{latex}{\out{\hypertarget{method-expect_processed_cols}{}}}
-\subsection{Method \code{expect_processed_cols()}}{
-Expect data has processed columns. Inherited by child
-classes so tests run through each class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_processed_cols(data, level = "1", localised = TRUE)}\if{html}{\out{</div>}}
-}
+\item{\code{snapshot_path}}{character_array the path to save the downloaded}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data}}{The data to check}
+\item{\code{copy}}{logical To work on a copy of the class or the actual class}
 
-\item{\code{level}}{character_array the level of the data to check}
-
-\item{\code{localised}}{logical to check localised data or not, defaults to
-TRUE.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expect_columns_contain_data"></a>}}
-\if{latex}{\out{\hypertarget{method-expect_columns_contain_data}{}}}
-\subsection{Method \code{expect_columns_contain_data()}}{
-Expect data has cleaned columns. Inherited by child
-classes so tests run through each class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$expect_columns_contain_data(data_name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data_name}}{character_array The name of the class and level to
-check}
+\item{\code{...}}{Additional parameters to pass to \code{specific_tests}
+snapshot to. Defaults to TRUE.
+examples
+\dontrun{
+ # set up a countries class, e.g. Italy
+ a <- Italy$new(level = "1")
+ # assuming you run this from the main covidregionaldata repo
+ snapshot_path <- "tests/testthat/custom_data/Italy_level_1.rds"
+ a$test(snapshot_path = snapshot_path)
+}}
 }
 \if{html}{\out{</div>}}
 }

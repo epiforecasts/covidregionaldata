@@ -53,7 +53,7 @@ National data sources
 \itemize{
 \item \href{#method-clean_common}{\code{ECDC$clean_common()}}
 \item \href{#method-return}{\code{ECDC$return()}}
-\item \href{#method-test}{\code{ECDC$test()}}
+\item \href{#method-specific_tests}{\code{ECDC$specific_tests()}}
 \item \href{#method-clone}{\code{ECDC$clone()}}
 }
 }
@@ -63,14 +63,12 @@ National data sources
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_clean_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_clean_cols}{\code{covidregionaldata::DataClass$expect_clean_cols()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_columns_contain_data">}\href{../../covidregionaldata/html/DataClass.html#method-expect_columns_contain_data}{\code{covidregionaldata::DataClass$expect_columns_contain_data()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_processed_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_processed_cols}{\code{covidregionaldata::DataClass$expect_processed_cols()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes">}\href{../../covidregionaldata/html/DataClass.html#method-set_region_codes}{\code{covidregionaldata::DataClass$set_region_codes()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test">}\href{../../covidregionaldata/html/DataClass.html#method-test}{\code{covidregionaldata::DataClass$test()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter">}\href{../../covidregionaldata/html/CountryDataClass.html#method-filter}{\code{covidregionaldata::CountryDataClass$filter()}}\out{</span>}
 }
 \out{</details>}
@@ -96,19 +94,18 @@ Specific return settings for the ECDC dataset.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-test"></a>}}
-\if{latex}{\out{\hypertarget{method-test}{}}}
-\subsection{Method \code{test()}}{
+\if{html}{\out{<a id="method-specific_tests"></a>}}
+\if{latex}{\out{\hypertarget{method-specific_tests}{}}}
+\subsection{Method \code{specific_tests()}}{
 Run tests on ECDC class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDC$test(download = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ECDC$specific_tests(self_copy)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
-(FALSE). Defaults to FALSE.}
+\item{\code{self_copy}}{R6class the object to test}
 }
 \if{html}{\out{</div>}}
 }

@@ -497,58 +497,47 @@ UK <- R6::R6Class("UK",
       return(clean_data)
     },
 
-    #' @description Run tests on UK class.
+    #' @description Run tests on UK class. Test data can be downloaded if
+    #' download = TRUE, or a requested snapshot file is not found, and store a
+    #' snap shot at the path provided. If an existing snapshot file is found
+    #' then just load this data to use in the next tests. Tests data can be
+    #' downloaded (if requested), cleaned, processed and returned.
+    #' @param self_copy R6class the object to test
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
-    #' @importFrom testthat test_that expect_true expect_s3_class
-    #' @importFrom dplyr slice_tail
-    test = function(download = FALSE) {
-      super$test(download)
-      if (self$level == "1") {
+    #' @param nhs_included_path character_array the path to save the downloaded
+    #' nhs data
+    #' snapshot to.
+    specific_tests = function(self_copy, download = FALSE,
+                              nhs_included_path = "") {
+      if (self_copy$level == "1") {
         data_name <- "UK level 1 with 'nhsregions=TRUE'"
-        self$nhsregions <- TRUE
-        source <- class(self)[1]
-        nhs_included_path <- paste0(
-          "custom_data/", source,
-          "_level_", self$level, "_nhs", ".rds"
-        )
+        self_copy$nhsregions <- TRUE
+        source <- class(self_copy)[1]
+        if (!(nchar(nhs_included_path))) {
+          nhs_included_path <- paste0(
+            "custom_data/", source,
+            "_level_", self_copy$level, "_nhs", ".rds"
+          )
+        }
         if (!file.exists(nhs_included_path)) {
           download <- TRUE
         }
         if (download) {
           test_that(paste(data_name, " downloads sucessfully"), { # nolint
-            self$download()
-            expect_s3_class(self$data$raw$nhs, "data.frame")
-            expect_true(nrow(self$data$raw$nhs) > 0)
-            expect_true(ncol(self$data$raw$nhs) >= 2)
+            self_copy$download()
+            expect_s3_class(self_copy$data$raw$nhs, "data.frame")
+            expect_true(nrow(self_copy$data$raw$nhs) > 0)
+            expect_true(ncol(self_copy$data$raw$nhs) >= 2)
           })
-          self$data$raw$nhs <- slice_tail(self$data$raw$nhs, n = 1000)
-          saveRDS(self$data$raw$nhs, nhs_included_path)
+          self_copy$data$raw$nhs <- slice_tail(self_copy$data$raw$nhs, n = 1000)
+          saveRDS(self_copy$data$raw$nhs, nhs_included_path)
         } else {
-          self$data$raw$nhs <- readRDS(nhs_included_path)
+          self_copy$data$raw$nhs <- readRDS(nhs_included_path)
         }
-        test_that(paste(data_name, "can be cleaned as expected"), {
-          self$clean()
-          expect_s3_class(self$data$clean, "data.frame")
-          expect_true(nrow(self$data$clean) > 0)
-          expect_true(ncol(self$data$clean) >= 2)
-          self$expect_clean_cols(self$data$clean)
-        })
-        test_that(paste(data_name, "can be processed as expected"), {
-          self$process()
-          expect_s3_class(self$data$processed, "data.frame")
-          expect_true(nrow(self$data$processed) > 0)
-          expect_true(ncol(self$data$processed) >= 2)
-          self$expect_processed_cols(self$data$processed, level = self$level)
-        })
-        test_that(paste(data_name, "can be returned as expected"), {
-          returned <- self$return()
-          if (any(class(returned) %in% "data.frame")) {
-            expect_s3_class(returned, "data.frame")
-            expect_true(nrow(returned) > 0)
-            expect_true(ncol(returned) >= 2)
-          }
-        })
+        test_cleaning(self = self_copy, data_name = data_name)
+        test_processing(self = self_copy, data_name = data_name)
+        test_return(self = self_copy, data_name = data_name)
       }
     }
   )

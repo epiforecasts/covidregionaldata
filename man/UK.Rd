@@ -130,7 +130,7 @@ specific.}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
 \item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
-\item \href{#method-test}{\code{UK$test()}}
+\item \href{#method-specific_tests}{\code{UK$specific_tests()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
 }
@@ -140,14 +140,12 @@ specific.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_clean_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_clean_cols}{\code{covidregionaldata::DataClass$expect_clean_cols()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_columns_contain_data">}\href{../../covidregionaldata/html/DataClass.html#method-expect_columns_contain_data}{\code{covidregionaldata::DataClass$expect_columns_contain_data()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="expect_processed_cols">}\href{../../covidregionaldata/html/DataClass.html#method-expect_processed_cols}{\code{covidregionaldata::DataClass$expect_processed_cols()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test">}\href{../../covidregionaldata/html/DataClass.html#method-test}{\code{covidregionaldata::DataClass$test()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -302,19 +300,29 @@ Section 2, "2. Estimated new hospital cases"
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-test"></a>}}
-\if{latex}{\out{\hypertarget{method-test}{}}}
-\subsection{Method \code{test()}}{
-Run tests on UK class.
+\if{html}{\out{<a id="method-specific_tests"></a>}}
+\if{latex}{\out{\hypertarget{method-specific_tests}{}}}
+\subsection{Method \code{specific_tests()}}{
+Run tests on UK class. Test data can be downloaded if
+download = TRUE, or a requested snapshot file is not found, and store a
+snap shot at the path provided. If an existing snapshot file is found
+then just load this data to use in the next tests. Tests data can be
+downloaded (if requested), cleaned, processed and returned.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$test(download = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(self_copy, download = FALSE, nhs_included_path = "")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{self_copy}}{R6class the object to test}
+
 \item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.}
+
+\item{\code{nhs_included_path}}{character_array the path to save the downloaded
+nhs data
+snapshot to.}
 }
 \if{html}{\out{</div>}}
 }

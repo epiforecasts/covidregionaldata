@@ -96,18 +96,15 @@ WHO <- R6::R6Class("WHO",
     },
 
     #' @description Run tests on WHO class.
-    #' @param download logical. To download the data (TRUE) or use a snapshot
-    #' (FALSE). Defaults to FALSE.
-    #' @importFrom testthat test_that expect_true
+    #' @param self_copy R6class the object to test
     #' @importFrom dplyr filter group_by tally
-    test = function(download = FALSE) {
-      super$test(download)
-      test_that("who data has expected format", {
-        all_countries <- self$data$return %>%
+    specific_tests = function(self_copy) {
+      testthat::test_that("who data has expected format", {
+        all_countries <- self_copy$data$return %>%
           filter(is.na(un_region)) %>%
           group_by(country) %>%
           tally()
-        expect_true(nrow(all_countries) == 0)
+        testthat::expect_true(nrow(all_countries) == 0)
       })
     }
   )

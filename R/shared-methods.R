@@ -511,156 +511,59 @@ DataClass <- R6::R6Class(
       return(sum_df)
     },
 
+    #' @description Specific test for a specific class.
+    #' By default this method is empty as if any code is required it should be
+    #' defined in a child class specific `specific_tests` method.
+    #' @param self_copy R6class the object to test
+    specific_tests = function(self_copy) {
+
+    },
+
     #' @description Run tests on data class. Inherited by child classes so test
-    #' run through each class.
+    #' run through each class. Tests data can be downloaded (if requested),
+    #' cleaned, processed and returned. Tests run on a cloned copy of the target
+    #' class.
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
-    #' @importFrom purrr walk map
-    #' @importFrom dplyr slice_tail
-    #' @importFrom testthat test_that expect_s3_class expect_true expect_error
-    test = function(download = FALSE) {
+    #' @param snapshot_path character_array the path to save the downloaded
+    #' @param copy logical To work on a copy of the class or the actual class
+    #' @param ... Additional parameters to pass to `specific_tests`
+    #' snapshot to. Defaults to TRUE.
+    #' examples
+    #' \dontrun{
+    #'  # set up a countries class, e.g. Italy
+    #'  a <- Italy$new(level = "1")
+    #'  # assuming you run this from the main covidregionaldata repo
+    #'  snapshot_path <- "tests/testthat/custom_data/Italy_level_1.rds"
+    #'  a$test(snapshot_path = snapshot_path)
+    #' }
+    test = function(download = FALSE, snapshot_path = "",
+                    copy = TRUE, ...) {
       data_name <- paste0(class(self)[1], " at level ", self$level)
-      raw_path <- paste0(
-        "custom_data/", class(self)[1],
-        "_level_", self$level, ".rds"
-      )
-      if (!file.exists(raw_path)) {
-        download <- TRUE
-      }
-      if (download) {
-        test_that(paste0(data_name, " downloads sucessfully"), {
-          self$download()
-          walk(self$data$raw, function(data) {
-            expect_s3_class(data, "data.frame")
-            expect_true(nrow(data) > 0)
-            expect_true(ncol(data) >= 2)
-          })
-        })
-        self$data$raw <- map(self$data$raw,
-          slice_tail,
-          n = 250
-        )
-        self$data$raw <- map(
-          self$data$raw,
-          ~ .[, 1:min(100, ncol(.))]
-        )
-        saveRDS(self$data$raw, raw_path)
+      if (copy) {
+        test_class <- self$clone()
       } else {
-        self$data$raw <- readRDS(raw_path)
+        test_class <- self
       }
-      test_that(paste0(data_name, " can be cleaned as expected"), {
-        self$clean()
-        expect_s3_class(self$data$clean, "data.frame")
-        expect_true(nrow(self$data$clean) > 0)
-        expect_true(ncol(self$data$clean) >= 2)
-        self$expect_clean_cols(self$data$clean)
-      })
-
-      test_that(
-        paste0(data_name, " can highlight available regions as expected"),
-        {
-          expect_error(self$available_regions(), NA)
-          expect_true(class(self$available_regions()) %in% "character")
-        }
+      test_download(
+        self = test_class,
+        download = download,
+        data_name = data_name,
+        snapshot_path = snapshot_path
       )
-
-      test_that(paste0(data_name, " can be processed as expected"), {
-        self$process()
-        expect_s3_class(self$data$processed, "data.frame")
-        expect_true(nrow(self$data$processed) > 0)
-        expect_true(ncol(self$data$processed) >= 2)
-        self$expect_processed_cols(self$data$processed, level = self$level)
-        if (!class(self)[1] %in% c("ECDC", "WHO")) {
-          local_region <- self$clone()
-          local_region$localise <- FALSE
-          local_region$process()
-          self$expect_processed_cols(
-            local_region$data$processed,
-            level = self$level,
-            localised = FALSE
-          )
-        }
-      })
-
-      test_that(paste0(data_name, " can be returned as expected"), {
-        returned <- self$return()
-        if (any(class(returned) %in% "data.frame")) {
-          expect_s3_class(returned, "data.frame")
-          expect_true(nrow(returned) > 0)
-          expect_true(ncol(returned) >= 2)
-        }
-      })
-
-      self$expect_columns_contain_data(data_name)
-    },
-
-    #' @description Expect data has cleaned columns. Inherited by child
-    #' classes so tests run through each class.
-    #' @param data The data to check
-    #' @importFrom testthat expect_s3_class expect_type
-    expect_clean_cols = function(data) {
-      expect_s3_class(data[["date"]], "Date")
-      expect_type(data[["level_1_region"]], "character")
-      if (self$level == "2") {
-        expect_type(data[["level_2_region"]], "character")
-      }
-    },
-
-    #' @description Expect data has processed columns. Inherited by child
-    #' classes so tests run through each class.
-    #' @param data The data to check
-    #' @param level character_array the level of the data to check
-    #' @param localised logical to check localised data or not, defaults to
-    #' TRUE.
-    #' @importFrom testthat expect_s3_class expect_type
-    expect_processed_cols = function(data, level = "1", localised = TRUE) {
-      expect_s3_class(data[["date"]], "Date")
-      expect_type(data[["cases_new"]], "double")
-      expect_type(data[["cases_total"]], "double")
-      expect_type(data[["deaths_new"]], "double")
-      expect_type(data[["deaths_total"]], "double")
-      if (!localised) {
-        expect_type(data[["level_1_region"]], "character")
-        if (level == "2") {
-          expect_type(data[["level_2_region"]], "character")
-        }
-      }
-    },
-
-    #' @description Expect data has cleaned columns. Inherited by child
-    #' classes so tests run through each class.
-    #' @param data_name character_array The name of the class and level to
-    #' check
-    #' @importFrom testthat test_that expect_true
-    #' @importFrom purrr map walk
-    #' @importFrom dplyr filter
-    #' @importFrom rlang !!
-    expect_columns_contain_data = function(data_name) {
-      cols_present <- function(col) {
-        if (length(self$source_data_cols[grep(
-          col, tolower(self$source_data_cols)
-        )]) > 0) {
-          return(paste0(col, c("_new", "_total")))
-        } else {
-          return(NULL)
-        }
-      }
-      cols <- c("cases", "deaths", "recovered", "test")
-      cols2check <- map(cols, cols_present)
-      cols2check <- unlist(cols2check)
-      walk(
-        cols2check,
-        ~ {
-          test_that(
-            paste0(data_name, "column '", .x, "' is not just composed of NA"),
-            {
-              expect_true(
-                nrow(self$data$processed %>% filter(!is.na(!!.x))) > 0
-              )
-            }
-          )
-        }
+      test_cleaning(
+        self = test_class,
+        data_name = data_name
       )
+      test_processing(
+        self = test_class,
+        data_name = data_name
+      )
+      test_return(
+        self = test_class,
+        data_name = data_name
+      )
+      self$specific_tests(self_copy = test_class, ...)
     }
   )
 )
