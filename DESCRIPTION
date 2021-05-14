@@ -88,7 +88,6 @@ Imports:
     readxl,
     rlang,
     stringr,
-    testthat (>= 3.0.0),
     tibble,
     tidyr (>= 1.0.0),
     tidyselect,
@@ -104,6 +103,7 @@ Suggests:
     rvest,
     rworldmap,
     spelling,
+    testthat (>= 3.0.0),
     usethis
 VignetteBuilder:
     knitr
