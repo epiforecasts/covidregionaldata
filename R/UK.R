@@ -522,7 +522,7 @@ UK <- R6::R6Class("UK",
             expect_true(nrow(self$data$raw$nhs) > 0)
             expect_true(ncol(self$data$raw$nhs) >= 2)
           })
-          self$nhs_raw <- slice_tail(self$data$raw$nhs, n = 1000)
+          self$data$raw$nhs <- slice_tail(self$data$raw$nhs, n = 1000)
           saveRDS(self$data$raw$nhs, nhs_included_path)
         } else {
           self$data$raw$nhs <- readRDS(nhs_included_path)
