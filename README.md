@@ -72,7 +72,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /var/folders/ss/817x_f3x2gnfr2gn2jrv_m3c0000gn/T//Rtmpguk1qO
+#> Using a cache at: /var/folders/ss/817x_f3x2gnfr2gn2jrv_m3c0000gn/T//RtmpBAYQeN
 ```
 
 To stop using `memoise` use,
@@ -209,7 +209,7 @@ uk_nots %>%
 See `get_available_datasets()` for supported regions and subregional
 levels. For an updated view of dataset status check the [hosted
 page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html)
-or build the [dataset status vignette](vignettes)
+or build the [dataset status vignette](vignettes/dataset-status.Rmd).
 
 For further examples see the [quick start
 vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
