@@ -203,7 +203,7 @@ download_excel <- function(url, archive, verbose = FALSE,
   download.file(
     url = url,
     destfile = archive,
-    mode = "wb", quiet = !(TRUE)
+    mode = "wb", quiet = !(verbose)
   )
   # read in
   dt <- suppressMessages(
