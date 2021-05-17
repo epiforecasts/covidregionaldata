@@ -135,7 +135,7 @@ See `get_available_datasets()` for supported regions and subregional levels.
 For an updated view of dataset status check the
 [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html)
 or build the [dataset status vignette](vignettes/dataset-status.Rmd).
- 
+
 For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd). Additional subnational data are supported via the `JHU()` and `Google()` classes. Use the `available_regions()` method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.
 
 ## Citation
