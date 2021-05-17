@@ -97,8 +97,9 @@ WHO <- R6::R6Class("WHO",
 
     #' @description Run tests on WHO class.
     #' @param self_copy R6class the object to test
+    #' @param ... Extra params passed to specific download functions
     #' @importFrom dplyr filter group_by tally
-    specific_tests = function(self_copy) {
+    specific_tests = function(self_copy, ...) {
       testthat::test_that("who data has expected format", {
         all_countries <- self_copy$data$return %>%
           filter(is.na(un_region)) %>%

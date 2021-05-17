@@ -98,13 +98,15 @@ Specific return settings for the WHO dataset.
 \subsection{Method \code{specific_tests()}}{
 Run tests on WHO class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{WHO$specific_tests(self_copy)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{WHO$specific_tests(self_copy, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{self_copy}}{R6class the object to test}
+
+\item{\code{...}}{Extra params passed to specific download functions}
 }
 \if{html}{\out{</div>}}
 }

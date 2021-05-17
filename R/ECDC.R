@@ -123,8 +123,9 @@ ECDC <- R6::R6Class("ECDC",
 
     #' @description Run tests on ECDC class.
     #' @param self_copy R6class the object to test
+    #' @param ... Extra params passed to specific download functions
     #' @importFrom dplyr filter group_by tally
-    specific_tests = function(self_copy) {
+    specific_tests = function(self_copy, ...) {
       testthat::test_that("ecdc data has expected format", {
         necessary_cols <- c(
           "geoId", "countriesAndTerritories",

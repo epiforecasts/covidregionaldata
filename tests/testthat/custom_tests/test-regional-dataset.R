@@ -9,6 +9,8 @@ test_regional_dataset <- function(source, level, download = FALSE) {
     "custom_data/", source,
     "_level_", level, ".rds"
   )
+
+  # UK nhs data snapshot
   nhs_snapshot_path <- paste0(
     "custom_data/", source,
     "_level_", level, "_nhs", ".rds"
