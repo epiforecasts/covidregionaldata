@@ -1,9 +1,8 @@
-#' Expect clean columns
+#' Test clean columns contain the correct data and types
 #' @description Expect data has cleaned columns. Inherited by child
 #' classes so tests run through each class.
 #' @param data The data to check
 #' @param level character_array the level of the data to check
-#' @export
 expect_clean_cols <- function(data, level) {
   testthat::expect_s3_class(data[["date"]], "Date")
   testthat::expect_type(data[["level_1_region"]], "character")
@@ -12,14 +11,13 @@ expect_clean_cols <- function(data, level) {
   }
 }
 
-#' Expect processed columns
+#' Test that processed columns contain the correct data types
 #' @description Expect data has processed columns. Inherited by child
 #' classes so tests run through each class.
 #' @param data The data to check
 #' @param level character_array the level of the data to check
 #' @param localised logical to check localised data or not, defaults to
 #' TRUE.
-#' @export
 expect_processed_cols <- function(data, level = "1", localised = TRUE) {
   testthat::expect_s3_class(data[["date"]], "Date")
   testthat::expect_type(data[["cases_new"]], "double")
@@ -34,16 +32,15 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
   }
 }
 
-#' Expect that columns contain data
+#' Test that cleaned columns contain data and are the correct types
 #' @description Expect data has cleaned columns. Inherited by child
 #' classes so tests run through each class.
-#' @param self The R6Class country class object to perform checks
+#' @param self The DataClass object (R6Class) object to perform checks on.
 #' @param data_name character_array The name of the class and level to
 #' check
 #' @importFrom purrr map walk
 #' @importFrom dplyr filter
 #' @importFrom rlang !!
-#' @export
 expect_columns_contain_data <- function(self, data_name) {
   cols_present <- function(col) {
     if (length(self$source_data_cols[grep(
@@ -72,12 +69,12 @@ expect_columns_contain_data <- function(self, data_name) {
   )
 }
 
-#' Expect download runs ok
+#' Test download method works correctly
 #' @description Test data can be downloaded if download = TRUE, or a requested
 #' snapshot file is not found, and store a snap shot at the snapshot_path. If an
 #' existing snapshot file is found then just load this data to use in future
 #' tests.
-#' @param self The R6Class country class object to perform checks
+#' @param self The DataClass object (R6Class) object to perform checks on.
 #' @param download logical check to download or use a snapshot of the data
 #' @param data_name character_array The name of the class and level to
 #' check
@@ -85,7 +82,6 @@ expect_columns_contain_data <- function(self, data_name) {
 #' snapshot to.
 #' @importFrom purrr map walk
 #' @importFrom dplyr slice_tail
-#' @export
 test_download <- function(self, download, data_name, snapshot_path) {
   if (!(nchar(snapshot_path))) {
     snapshot_path <- paste0(
@@ -119,10 +115,9 @@ test_download <- function(self, download, data_name, snapshot_path) {
   }
 }
 
-#' Expect cleaning runs ok
-#' @description Test data can be cleaned
+#' Test clean method works correctly
+#' @description Test data can be cleaned correctly using the clean method
 #' @inheritParams test_download
-#' @export
 test_cleaning <- function(self, data_name) {
   testthat::test_that(paste0(data_name, " can be cleaned as expected"), {
     self$clean()
@@ -140,12 +135,11 @@ test_cleaning <- function(self, data_name) {
   )
 }
 
-#' Expect processing runs ok
-#' @description Test data can be processed
+#' Test process method works correctly
+#' @description Test data can be processed correctly using the process method
 #' @inheritParams test_download
 #' @param localise Logical, defaults to TRUE. Should region names be
 #' localised for tests.
-#' @export
 test_processing <- function(self, data_name, localise = TRUE) {
   testthat::test_that(paste0(data_name, " can be processed as expected"), {
     self$process()
@@ -165,10 +159,9 @@ test_processing <- function(self, data_name, localise = TRUE) {
   })
 }
 
-#' Expect returning runs ok
-#' @description Test data can be returned
+#' Test return method works correctly
+#' @description Test data can be returned correctly using the return method
 #' @inheritParams test_download
-#' @export
 test_return <- function(self, data_name) {
   testthat::test_that(paste0(data_name, " can be returned as expected"), {
     returned <- self$return()

@@ -511,32 +511,22 @@ DataClass <- R6::R6Class(
       return(sum_df)
     },
 
-    #' @description Specific test for a specific class.
-    #' By default this method is empty as if any code is required it should be
-    #' defined in a child class specific `specific_tests` method.
-    #' @param self_copy R6class the object to test
-    specific_tests = function(self_copy) {
-
-    },
-
     #' @description Run tests on data class. Inherited by child classes so test
     #' run through each class. Tests data can be downloaded (if requested),
     #' cleaned, processed and returned. Tests run on a cloned copy of the target
     #' class.
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
-    #' @param snapshot_path character_array the path to save the downloaded
-    #' @param copy logical To work on a copy of the class or the actual class
+    #' @param snapshot_path character_array the path to save the downloaded data
+    #' or read from. Must be a path to an rds file.
     #' @param ... Additional parameters to pass to `specific_tests`
-    #' snapshot to. Defaults to TRUE.
-    test = function(download = FALSE, snapshot_path = "",
-                    copy = TRUE, ...) {
-      data_name <- paste0(class(self)[1], " at level ", self$level)
-      if (copy) {
-        test_class <- self$clone()
-      } else {
-        test_class <- self
+    #' snapshot to.
+    test = function(download = FALSE, snapshot_path = "", ...) {
+      if (!grepl(".rds$", snapshot_path)) {
+        stop("snapshot_path must be to an rds file")
       }
+      data_name <- paste0(class(self)[1], " at level ", self$level)
+      test_class <- self$clone()
       test_download(
         self = test_class,
         download = download,
@@ -555,7 +545,13 @@ DataClass <- R6::R6Class(
         self = test_class,
         data_name = data_name
       )
-      self$specific_tests(self_copy = test_class, ...)
+
+      if ("specific_tests" %in% names(self)) {
+        specific <- paste0(
+          "self$specific_tests(self_copy=test_class, download=download, ...)"
+        )
+        eval(parse(text = specific))
+      }
     }
   )
 )

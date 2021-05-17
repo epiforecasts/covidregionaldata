@@ -2,12 +2,12 @@
 % Please edit documentation in R/testing_functions.R
 \name{expect_columns_contain_data}
 \alias{expect_columns_contain_data}
-\title{Expect that columns contain data}
+\title{Test that cleaned columns contain data and are the correct types}
 \usage{
 expect_columns_contain_data(self, data_name)
 }
 \arguments{
-\item{self}{The R6Class country class object to perform checks}
+\item{self}{The DataClass object (R6Class) object to perform checks on.}
 
 \item{data_name}{character_array The name of the class and level to
 check}

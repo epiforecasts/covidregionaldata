@@ -2,16 +2,16 @@
 % Please edit documentation in R/testing_functions.R
 \name{test_return}
 \alias{test_return}
-\title{Expect returning runs ok}
+\title{Test return method works correctly}
 \usage{
 test_return(self, data_name)
 }
 \arguments{
-\item{self}{The R6Class country class object to perform checks}
+\item{self}{The DataClass object (R6Class) object to perform checks on.}
 
 \item{data_name}{character_array The name of the class and level to
 check}
 }
 \description{
-Test data can be returned
+Test data can be returned correctly using the return method
 }

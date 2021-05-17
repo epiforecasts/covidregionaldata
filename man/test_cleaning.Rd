@@ -2,16 +2,16 @@
 % Please edit documentation in R/testing_functions.R
 \name{test_cleaning}
 \alias{test_cleaning}
-\title{Expect cleaning runs ok}
+\title{Test clean method works correctly}
 \usage{
 test_cleaning(self, data_name)
 }
 \arguments{
-\item{self}{The R6Class country class object to perform checks}
+\item{self}{The DataClass object (R6Class) object to perform checks on.}
 
 \item{data_name}{character_array The name of the class and level to
 check}
 }
 \description{
-Test data can be cleaned
+Test data can be cleaned correctly using the clean method
 }

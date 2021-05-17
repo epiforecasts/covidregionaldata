@@ -509,17 +509,18 @@ UK <- R6::R6Class("UK",
     #' nhs data
     #' snapshot to.
     specific_tests = function(self_copy, download = FALSE,
-                              nhs_included_path = "") {
+                              nhs_included_path) {
+      if (missing(nhs_included_path)) {
+        message_verbose(
+          verbose = self_copy$verbose,
+          "nhs_included_path not provided, skipping test."
+        )
+        return(invisible(NULL))
+      }
       if (self_copy$level == "1") {
         data_name <- "UK level 1 with 'nhsregions=TRUE'"
         self_copy$nhsregions <- TRUE
         source <- class(self_copy)[1]
-        if (!(nchar(nhs_included_path))) {
-          nhs_included_path <- paste0(
-            "custom_data/", source,
-            "_level_", self_copy$level, "_nhs", ".rds"
-          )
-        }
         if (!file.exists(nhs_included_path)) {
           download <- TRUE
         }
@@ -530,6 +531,7 @@ UK <- R6::R6Class("UK",
             expect_true(nrow(self_copy$data$raw$nhs) > 0)
             expect_true(ncol(self_copy$data$raw$nhs) >= 2)
           })
+          print(self_copy$data)
           self_copy$data$raw$nhs <- slice_tail(self_copy$data$raw$nhs, n = 1000)
           saveRDS(self_copy$data$raw$nhs, nhs_included_path)
         } else {

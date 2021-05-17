@@ -2,7 +2,7 @@
 % Please edit documentation in R/testing_functions.R
 \name{expect_clean_cols}
 \alias{expect_clean_cols}
-\title{Expect clean columns}
+\title{Test clean columns contain the correct data and types}
 \usage{
 expect_clean_cols(data, level)
 }

@@ -309,7 +309,7 @@ snap shot at the path provided. If an existing snapshot file is found
 then just load this data to use in the next tests. Tests data can be
 downloaded (if requested), cleaned, processed and returned.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(self_copy, download = FALSE, nhs_included_path = "")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(self_copy, download = FALSE, nhs_included_path)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

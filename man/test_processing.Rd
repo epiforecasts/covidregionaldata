@@ -2,12 +2,12 @@
 % Please edit documentation in R/testing_functions.R
 \name{test_processing}
 \alias{test_processing}
-\title{Expect processing runs ok}
+\title{Test process method works correctly}
 \usage{
 test_processing(self, data_name, localise = TRUE)
 }
 \arguments{
-\item{self}{The R6Class country class object to perform checks}
+\item{self}{The DataClass object (R6Class) object to perform checks on.}
 
 \item{data_name}{character_array The name of the class and level to
 check}
@@ -16,5 +16,5 @@ check}
 localised for tests.}
 }
 \description{
-Test data can be processed
+Test data can be processed correctly using the process method
 }

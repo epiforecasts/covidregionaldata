@@ -2,12 +2,12 @@
 % Please edit documentation in R/testing_functions.R
 \name{test_download}
 \alias{test_download}
-\title{Expect download runs ok}
+\title{Test download method works correctly}
 \usage{
 test_download(self, download, data_name, snapshot_path)
 }
 \arguments{
-\item{self}{The R6Class country class object to perform checks}
+\item{self}{The DataClass object (R6Class) object to perform checks on.}
 
 \item{download}{logical check to download or use a snapshot of the data}
 

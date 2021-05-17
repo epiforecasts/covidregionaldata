@@ -109,7 +109,6 @@ Defaults to the target level.}
 \item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-summary}{\code{DataClass$summary()}}
-\item \href{#method-specific_tests}{\code{DataClass$specific_tests()}}
 \item \href{#method-test}{\code{DataClass$test()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
@@ -355,25 +354,6 @@ the urls of the raw data and the columns present in the raw data.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-specific_tests"></a>}}
-\if{latex}{\out{\hypertarget{method-specific_tests}{}}}
-\subsection{Method \code{specific_tests()}}{
-Specific test for a specific class.
-By default this method is empty as if any code is required it should be
-defined in a child class specific \code{specific_tests} method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$specific_tests(self_copy)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{self_copy}}{R6class the object to test}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-test"></a>}}
 \if{latex}{\out{\hypertarget{method-test}{}}}
 \subsection{Method \code{test()}}{
@@ -382,7 +362,7 @@ run through each class. Tests data can be downloaded (if requested),
 cleaned, processed and returned. Tests run on a cloned copy of the target
 class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", copy = TRUE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -391,12 +371,11 @@ class.
 \item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.}
 
-\item{\code{snapshot_path}}{character_array the path to save the downloaded}
-
-\item{\code{copy}}{logical To work on a copy of the class or the actual class}
+\item{\code{snapshot_path}}{character_array the path to save the downloaded data
+or read from. Must be a path to an rds file.}
 
 \item{\code{...}}{Additional parameters to pass to \code{specific_tests}
-snapshot to. Defaults to TRUE.}
+snapshot to.}
 }
 \if{html}{\out{</div>}}
 }

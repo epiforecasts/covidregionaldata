@@ -2,7 +2,7 @@
 % Please edit documentation in R/testing_functions.R
 \name{expect_processed_cols}
 \alias{expect_processed_cols}
-\title{Expect processed columns}
+\title{Test that processed columns contain the correct data types}
 \usage{
 expect_processed_cols(data, level = "1", localised = TRUE)
 }
