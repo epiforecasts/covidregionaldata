@@ -96,7 +96,8 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
 
     #' @description Covid19 Data Hub specific data cleaning.
     #' This takes all the raw data, renames some columns and checks types.
-    #' @importFrom dplyr select mutate rename everything
+    #' @importFrom dplyr select mutate rename
+    #' @importFrom purrr map
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
     clean_common = function() {
@@ -123,11 +124,20 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
           recovered_new = as.numeric(.data$recovered_new),
           tested_new = as.numeric(.data$tested_new),
           hosp_new = as.numeric(.data$hosp_new)
-        ) %>%
+        )
+
+      # remove levels not requested
+      all_levels <- paste0("^level_", self$supported_levels, "_*")
+      keep_levels <- paste0("^level_", seq_len(as.integer(self$level)), "_*")
+      remove_levels <- unlist(map(
+        setdiff(all_levels, keep_levels),
+        ~ {
+          grep(.x, colnames(self$data$clean), value = TRUE)
+        }
+      ))
+      self$data$clean <- self$data$clean %>%
         select(
-          where(
-            ~ !all(is.na(.x))
-          )
+          -all_of(remove_levels)
         )
     }
   )
