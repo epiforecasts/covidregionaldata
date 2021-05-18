@@ -68,6 +68,7 @@ National data sources
 \code{\link{ECDC}},
 \code{\link{Google}},
 \code{\link{JHU}},
+\code{\link{JRC}},
 \code{\link{WHO}}
 
 Subnational data sources
