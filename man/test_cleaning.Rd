@@ -10,5 +10,9 @@ test_cleaning(cntry_obj)
 \item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
 }
 \description{
-Test data can be cleaned correctly using the clean method
+Test data can be cleaned properly. The clean method is invoked
+to generate clean data. This data is checked to ensure it is a data.frame,
+is not empty, has at least two columns and that columns are clean by calling
+\code{expect_clean_cols}. Also tests that \code{avaliable_regions()} are not NA and
+they are all characters.
 }

@@ -7,11 +7,11 @@
 expect_clean_cols(data, level)
 }
 \arguments{
-\item{data}{The data to check}
+\item{data}{The clean data to check}
 
 \item{level}{character_array the level of the data to check}
 }
 \description{
-Expect data has cleaned columns. Inherited by child
-classes so tests run through each class.
+Checks the date column is an s3 class and that region level
+column is a character in the cleaned data (data$clean)
 }

@@ -1,19 +1,17 @@
 #' Test clean columns contain the correct data and types
-#' @description Expect data has cleaned columns. Inherited by child
-#' classes so tests run through each class.
-#' @param data The data to check
+#' @description Checks the date column is an s3 class and that region level
+#' column is a character in the cleaned data (data$clean)
+#' @param data The clean data to check
 #' @param level character_array the level of the data to check
 expect_clean_cols <- function(data, level) {
   testthat::expect_s3_class(data[["date"]], "Date")
-  testthat::expect_type(data[["level_1_region"]], "character")
-  if (level == "2") {
-    testthat::expect_type(data[["level_2_region"]], "character")
-  }
+  level_region_str <- paste0("level_", level, "_region")
+  testthat::expect_type(data[[level_region_str]], "character")
 }
 
-#' Test that processed columns contain the correct data types
-#' @description Expect data has processed columns. Inherited by child
-#' classes so tests run through each class.
+#' Test that processed columns contain the correct data and types
+#' @description Checks that processed data columns date, cases_new, cases_total,
+#' deaths_new, deaths_total and that region level have the correct types.
 #' @param data The data to check
 #' @param level character_array the level of the data to check
 #' @param localised logical to check localised data or not, defaults to
@@ -25,16 +23,14 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
   testthat::expect_type(data[["deaths_new"]], "double")
   testthat::expect_type(data[["deaths_total"]], "double")
   if (!localised) {
-    testthat::expect_type(data[["level_1_region"]], "character")
-    if (level == "2") {
-      testthat::expect_type(data[["level_2_region"]], "character")
-    }
+    level_region_str <- paste0("level_", level, "_region")
+    testthat::expect_type(data[[level_region_str]], "character")
   }
 }
 
-#' Test that cleaned columns contain data and are the correct types
-#' @description Expect data has cleaned columns. Inherited by child
-#' classes so tests run through each class.
+#' Test that cleaned columns contain data/
+#' @description Checks that cleaned columns cases, deaths, recovered and test
+#' (new and total) are not entirely composed of NAs.
 #' @param cntry_obj The DataClass object (R6Class) object to perform checks on.
 #' @importFrom purrr map walk
 #' @importFrom dplyr filter
@@ -72,8 +68,7 @@ expect_columns_contain_data <- function(cntry_obj) {
 #' Test download method works correctly
 #' @description Test data can be downloaded if download = TRUE, or a requested
 #' snapshot file is not found, and store a snap shot at the snapshot_path. If an
-#' existing snapshot file is found then just load this data to use in future
-#' tests.
+#' existing snapshot file is found then load this data to use in future tests.
 #' @param cntry_obj The DataClass object (R6Class) object to perform checks on.
 #' @param download logical check to download or use a snapshot of the data
 #' @param snapshot_path character_array the path to save the downloaded
@@ -108,7 +103,11 @@ test_download <- function(cntry_obj, download, snapshot_path) {
 }
 
 #' Test clean method works correctly
-#' @description Test data can be cleaned correctly using the clean method
+#' @description Test data can be cleaned properly. The clean method is invoked
+#' to generate clean data. This data is checked to ensure it is a data.frame,
+#' is not empty, has at least two columns and that columns are clean by calling
+#' `expect_clean_cols`. Also tests that `avaliable_regions()` are not NA and
+#' they are all characters.
 #' @inheritParams test_download
 test_cleaning <- function(cntry_obj) {
   testthat::test_that(
@@ -133,7 +132,10 @@ test_cleaning <- function(cntry_obj) {
 }
 
 #' Test process method works correctly
-#' @description Test data can be processed correctly using the process method
+#' @description Test data can be processed correctly using the process method.
+#' process is invoked to generate processed data which is then checked to ensure
+#' it is a data.frame, which is not empty, has at least 2 columns and calls
+#' `expect_processed_columns` to check each column types.
 #' @inheritParams test_download
 #' @param localise Logical, defaults to TRUE. Should region names be
 #' localised for tests.
@@ -160,7 +162,10 @@ test_processing <- function(cntry_obj, localise = TRUE) {
 }
 
 #' Test return method works correctly
-#' @description Test data can be returned correctly using the return method
+#' @description Test data can be returned correctly using the return method.
+#' return is invoked to generate returned data which is then checked to ensure
+#' it is a data.frame, not empty and has at least 2 columns. Each column is then
+#' checked to ensure it contains data and is not just composed of NAs.
 #' @inheritParams test_download
 test_return <- function(cntry_obj) {
   testthat::test_that(

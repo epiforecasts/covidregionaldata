@@ -10,5 +10,8 @@ test_return(cntry_obj)
 \item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
 }
 \description{
-Test data can be returned correctly using the return method
+Test data can be returned correctly using the return method.
+return is invoked to generate returned data which is then checked to ensure
+it is a data.frame, not empty and has at least 2 columns. Each column is then
+checked to ensure it contains data and is not just composed of NAs.
 }

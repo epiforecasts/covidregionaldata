@@ -498,17 +498,18 @@ UK <- R6::R6Class("UK",
       return(clean_data)
     },
 
-    #' @description Run tests on UK class. Test data can be downloaded if
-    #' download = TRUE, or a requested snapshot file is not found, and store a
-    #' snap shot at the path provided. If an existing snapshot file is found
-    #' then just load this data to use in the next tests. Tests data can be
-    #' downloaded (if requested), cleaned, processed and returned.
+    #' @description Specific tests for UK data. In addition to generic tests ran
+    #' by `DataClass$test()` data for NHS regions are downloaded and ran through
+    #' the same generic checks (test_cleaning, test_processing, test_return). If
+    #' download = TRUE or a snapshot file is not found, the nhs data is
+    #' downloaded and saved to the snapshot location provided. If an existing
+    #' snapshot file is found then this data is used in the next tests.
+    #' Tests data can be downloaded, cleaned, processed and returned.
     #' @param self_copy R6class the object to test
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
     #' @param nhs_included_path character_array the path to save the downloaded
-    #' nhs data
-    #' snapshot to.
+    #' nhs data snapshot to.
     specific_tests = function(self_copy, download = FALSE,
                               nhs_included_path) {
       if (missing(nhs_included_path)) {

@@ -515,10 +515,15 @@ DataClass <- R6::R6Class(
       return(sum_df)
     },
 
-    #' @description Run tests on data class. Inherited by child classes so test
-    #' run through each class. Tests data can be downloaded (if requested),
-    #' cleaned, processed and returned. Tests run on a cloned copy of the target
-    #' class.
+    #' @description Run tests on a country class instance. Calling `test()` on a
+    #' class instance runs tests with the settings in use. For example, if you
+    #' set `level = "1"` and `localise = FALSE` the tests will be ran on level 1
+    #' data which is not localised. Rather than downloading data for a test
+    #' users can provide a path to a snapshot file of data to test instead.
+    #' Tests are ran on a clone of the class. This method calls generic tests
+    #' for all country class objects. It also calls country specific tests
+    #' which can be defined in an individual country class method called
+    #' `specific_tests()`.
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
     #' @param snapshot_path character_array the path to save the downloaded data

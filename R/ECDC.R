@@ -121,7 +121,8 @@ ECDC <- R6::R6Class("ECDC",
       }
     },
 
-    #' @description Run tests on ECDC class.
+    #' @description Run additional tests on ECDC class. Tests ECDC has required
+    #' additional columns and that there is only one row per country.
     #' @param self_copy R6class the object to test
     #' @param ... Extra params passed to specific download functions
     #' @importFrom dplyr filter group_by tally

@@ -95,7 +95,8 @@ WHO <- R6::R6Class("WHO",
       }
     },
 
-    #' @description Run tests on WHO class.
+    #' @description Run additional tests on WHO data. Tests that there is only
+    #' one row per country
     #' @param self_copy R6class the object to test
     #' @param ... Extra params passed to specific download functions
     #' @importFrom dplyr filter group_by tally

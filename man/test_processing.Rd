@@ -13,5 +13,8 @@ test_processing(cntry_obj, localise = TRUE)
 localised for tests.}
 }
 \description{
-Test data can be processed correctly using the process method
+Test data can be processed correctly using the process method.
+process is invoked to generate processed data which is then checked to ensure
+it is a data.frame, which is not empty, has at least 2 columns and calls
+\code{expect_processed_columns} to check each column types.
 }

@@ -17,6 +17,5 @@ snapshot to.}
 \description{
 Test data can be downloaded if download = TRUE, or a requested
 snapshot file is not found, and store a snap shot at the snapshot_path. If an
-existing snapshot file is found then just load this data to use in future
-tests.
+existing snapshot file is found then load this data to use in future tests.
 }

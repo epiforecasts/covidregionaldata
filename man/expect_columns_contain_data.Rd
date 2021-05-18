@@ -2,7 +2,7 @@
 % Please edit documentation in R/test-DataClass.R
 \name{expect_columns_contain_data}
 \alias{expect_columns_contain_data}
-\title{Test that cleaned columns contain data and are the correct types}
+\title{Test that cleaned columns contain data/}
 \usage{
 expect_columns_contain_data(cntry_obj)
 }
@@ -10,6 +10,6 @@ expect_columns_contain_data(cntry_obj)
 \item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
 }
 \description{
-Expect data has cleaned columns. Inherited by child
-classes so tests run through each class.
+Checks that cleaned columns cases, deaths, recovered and test
+(new and total) are not entirely composed of NAs.
 }

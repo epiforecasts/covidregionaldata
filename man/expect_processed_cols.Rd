@@ -2,7 +2,7 @@
 % Please edit documentation in R/test-DataClass.R
 \name{expect_processed_cols}
 \alias{expect_processed_cols}
-\title{Test that processed columns contain the correct data types}
+\title{Test that processed columns contain the correct data and types}
 \usage{
 expect_processed_cols(data, level = "1", localised = TRUE)
 }
@@ -15,6 +15,6 @@ expect_processed_cols(data, level = "1", localised = TRUE)
 TRUE.}
 }
 \description{
-Expect data has processed columns. Inherited by child
-classes so tests run through each class.
+Checks that processed data columns date, cases_new, cases_total,
+deaths_new, deaths_total and that region level have the correct types.
 }

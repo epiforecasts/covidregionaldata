@@ -360,10 +360,15 @@ the urls of the raw data and the columns present in the raw data.
 \if{html}{\out{<a id="method-test"></a>}}
 \if{latex}{\out{\hypertarget{method-test}{}}}
 \subsection{Method \code{test()}}{
-Run tests on data class. Inherited by child classes so test
-run through each class. Tests data can be downloaded (if requested),
-cleaned, processed and returned. Tests run on a cloned copy of the target
-class.
+Run tests on a country class instance. Calling \code{test()} on a
+class instance runs tests with the settings in use. For example, if you
+set \code{level = "1"} and \code{localise = FALSE} the tests will be ran on level 1
+data which is not localised. Rather than downloading data for a test
+users can provide a path to a snapshot file of data to test instead.
+Tests are ran on a clone of the class. This method calls generic tests
+for all country class objects. It also calls country specific tests
+which can be defined in an individual country class method called
+\code{specific_tests()}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", ...)}\if{html}{\out{</div>}}
 }

@@ -303,11 +303,13 @@ Section 2, "2. Estimated new hospital cases"
 \if{html}{\out{<a id="method-specific_tests"></a>}}
 \if{latex}{\out{\hypertarget{method-specific_tests}{}}}
 \subsection{Method \code{specific_tests()}}{
-Run tests on UK class. Test data can be downloaded if
-download = TRUE, or a requested snapshot file is not found, and store a
-snap shot at the path provided. If an existing snapshot file is found
-then just load this data to use in the next tests. Tests data can be
-downloaded (if requested), cleaned, processed and returned.
+Specific tests for UK data. In addition to generic tests ran
+by \code{DataClass$test()} data for NHS regions are downloaded and ran through
+the same generic checks (test_cleaning, test_processing, test_return). If
+download = TRUE or a snapshot file is not found, the nhs data is
+downloaded and saved to the snapshot location provided. If an existing
+snapshot file is found then this data is used in the next tests.
+Tests data can be downloaded, cleaned, processed and returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(self_copy, download = FALSE, nhs_included_path)}\if{html}{\out{</div>}}
 }
@@ -321,8 +323,7 @@ downloaded (if requested), cleaned, processed and returned.
 (FALSE). Defaults to FALSE.}
 
 \item{\code{nhs_included_path}}{character_array the path to save the downloaded
-nhs data
-snapshot to.}
+nhs data snapshot to.}
 }
 \if{html}{\out{</div>}}
 }

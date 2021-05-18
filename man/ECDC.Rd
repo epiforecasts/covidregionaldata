@@ -97,7 +97,8 @@ Specific return settings for the ECDC dataset.
 \if{html}{\out{<a id="method-specific_tests"></a>}}
 \if{latex}{\out{\hypertarget{method-specific_tests}{}}}
 \subsection{Method \code{specific_tests()}}{
-Run tests on ECDC class.
+Run additional tests on ECDC class. Tests ECDC has required
+additional columns and that there is only one row per country.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ECDC$specific_tests(self_copy, ...)}\if{html}{\out{</div>}}
 }
