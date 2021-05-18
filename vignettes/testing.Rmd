@@ -30,7 +30,7 @@ Interactively, tests can be ran by doing the following:
 library(covidregionaldata)
 ukdata <- UK$new(level = "1", verbose = FALSE)
 # could use anything but I used the acutal test one here for simplicity
-ukdata$test(snapshot_path = "tests/testthat/custom_data/UK_level_1.rds")
+ukdata$test(snapshot_dir = "../tests/testthat/custom_data/")
 ```
 
 
@@ -40,13 +40,13 @@ Here, I break down the different components of this function to walk through how
 print(DataClass$test)
 ```
 
-For a given country, such as the UK, you would make this by calling something like `ukdata <- UK$new(level = "1")` and can run the steps one by one by calling the respective methods: `ukdata$download(); ukdata$clean(); ukdata$process()`. To run the tests you would call `ukdata$test(shapshot_path = "path/2/data.rds")`. Rather than running tests on your active class, the code first makes a clone of your class which is then used for tests: `self_copy <- self$clone()` The snapshot path is the path to a rds file where you either have stored some raw downloaded data to test, or where you want a downloaded snapshot of the data to end up. This is handled by the function `test_download()`. The cloned class is passed to this function, along with the download parameter, which dictates whether to overwrite the snapshot file provided.
+For a given country, such as the UK, you would make this by calling something like `ukdata <- UK$new(level = "1")` and can run the steps one by one by calling the respective methods: `ukdata$download(); ukdata$clean(); ukdata$process()`. To run the tests you would call `ukdata$test(shapshot_dir = "place/2/save/snapshots")` By default, if `snapshot_dir` is not given it will use a generic `snapsots` directory. The `snapshot_dir` argument specifies a directory to save data snapshots to and if it doesn't exist it will make it for you. The file is constructed internally from the object you are testing and the data level, e.g. `Uk_level_1.rds`. Rather than running tests on your active class, the code first makes a clone of your class which is then used for tests: `self_copy <- self$clone()` The snapshot path is the path to a rds file where you either have stored some raw downloaded data to test, or where you want a downloaded snapshot of the data to end up. This is handled by the function `test_download()`. The cloned class is passed to this function, along with the download parameter, which dictates whether to overwrite the snapshot file provided.
 
 ```{r, echo = TRUE}
 print(test_download)
 ```
 
-As shown by the code, if the data is to be downloaded (either through requesting this with the download parameter or by providing a path to a none existent file) then the download method is called on the class copy (`cntry_obj`): `cntry_obj$download()`. After this has downloaded the code tests the data is a data.frame, is not empty and has at least 2 columns. The code then takes the first 250 rows to work on, as using the whole data set could be very slow and for the purpose of testing is not needed. This sliced data is then saved to the snapshot file provided for use later on. If the data is not to be downloaded, the snapshot of data saved in the snapshot path is loaded as the raw data `cntry_obj$data$raw`.
+As shown by the code, if the data is to be downloaded (either through requesting this with the download parameter or by providing a path to a none existent file) then the download method is called on the class copy (`DataClass_obj`): `DataClass_obj$download()`. After this has downloaded the code tests the data is a data.frame, is not empty and has at least 2 columns. The code then takes the first 250 rows to work on, as using the whole data set could be very slow and for the purpose of testing is not needed. This sliced data is then saved to the snapshot file provided for use later on. If the data is not to be downloaded, the snapshot of data saved in the snapshot path is loaded as the raw data `DataClass_obj$data$raw`.
 
 Once the data is downloaded, the cleaning methods are then tested `test_cleaning()`. Again this function takes the copied class as the argument and runs through tests on the clean data. These tests check the data is a data.frame, is not empty, has more than 2 columns and that the method `avaliable_regions` returns a list of characters. In addition, `expect_clean_cols` checks the date column is an s3 class and that region level column is a character in the cleaned data (`data$clean`).
 
@@ -56,7 +56,7 @@ print(test_cleaning)
 
 Once cleaning has been tested `test_processing()` is called to process the data and run tests to check it all works. Again this function takes the clone of the class to work on, the same clone which has been called with the preceding functions. These tests check the data is a data.frame, is not empty, has more than 2 columns. In addition `expect_processed_cols` checks that processed data columns date, cases_new, cases_total, deaths_new, deaths_total and that region level have the correct types.
 
-In processing there is an extra parameter called `test_all`. This parameter, if `TRUE` runs the processing step with both localised as `TRUE` and `FALSE`, making another copy of the object to check the localised data on so not to influence further tests. If `FALSE` processing is ran with localised set to whatever it is set at prior to `test()` being invoked.
+In processing there is an extra parameter called `all`. This parameter, if `TRUE` runs the processing step with both localised as `TRUE` and `FALSE`, making another copy of the object to check the localised data on so not to influence further tests. If `FALSE` processing is ran with localised set to whatever it is set at prior to `test()` being invoked.
 
 ```{r, echo = TRUE}
 print(test_processing)
@@ -73,8 +73,4 @@ These tests form the generic tests applied to all classes. However, country spec
 
 ## Integration with *testthat*
 
-As well as interactive tests the `test()` method is also used by `testthat` when conducting package level tests but with the argument `test_all = TRUE`. This is done in the following code:
-
-```{r, echo = TRUE}
-print(test_regional_dataset)
-```
+As well as interactive tests the `test()` method is also used by `testthat` when conducting package level tests but with the argument `all = TRUE`. This is done in the file `tests/testthat/custom_tests/test_regional_dataset.R`
