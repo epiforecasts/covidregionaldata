@@ -68,6 +68,9 @@ list should be named after a supported level.}
 \item{\code{level}}{target region level. This field is filled at initialisation
 using user inputs or defaults in \verb{$new()}}
 
+\item{\code{data_name}}{string. The country name followed by the level. E.g.
+"Italy at level 1"}
+
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
 up to today's date. This field is filled at initialisation using user
 inputs or defaults in \verb{$new()}}

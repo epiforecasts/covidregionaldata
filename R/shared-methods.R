@@ -172,6 +172,9 @@ DataClass <- R6::R6Class(
     #' @field level target region level. This field is filled at initialisation
     #' using user inputs or defaults in `$new()`
     level = NULL,
+    #' @field data_name string. The country name followed by the level. E.g.
+    #' "Italy at level 1"
+    data_name = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
     #' up to today's date. This field is filled at initialisation using user
     #' inputs or defaults in `$new()`
@@ -252,6 +255,7 @@ DataClass <- R6::R6Class(
       check_level(self$level, self$supported_levels)
       check_level(self$filter_level, self$supported_levels)
 
+      self$data_name <- paste0(class(self)[1], " at level ", self$level)
       self$totals <- totals
       self$localise <- localise
       self$verbose <- verbose
@@ -525,30 +529,25 @@ DataClass <- R6::R6Class(
       if (!grepl(".rds$", snapshot_path)) {
         stop("snapshot_path must be to an rds file")
       }
-      data_name <- paste0(class(self)[1], " at level ", self$level)
-      test_class <- self$clone()
+      self_copy <- self$clone()
       test_download(
-        self = test_class,
+        cntry_obj = self_copy,
         download = download,
-        data_name = data_name,
         snapshot_path = snapshot_path
       )
       test_cleaning(
-        self = test_class,
-        data_name = data_name
+        cntry_obj = self_copy
       )
       test_processing(
-        self = test_class,
-        data_name = data_name
+        cntry_obj = self_copy
       )
       test_return(
-        self = test_class,
-        data_name = data_name
+        cntry_obj = self_copy
       )
 
       if ("specific_tests" %in% names(self)) {
         specific <- paste0(
-          "self$specific_tests(self_copy=test_class, download=download, ...)"
+          "self$specific_tests(cntry_obj=self_copy, download=download, ...)"
         )
         eval(parse(text = specific))
       }

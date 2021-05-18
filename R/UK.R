@@ -519,7 +519,7 @@ UK <- R6::R6Class("UK",
         return(invisible(NULL))
       }
       if (self_copy$level == "1") {
-        data_name <- "UK level 1 with 'nhsregions=TRUE'"
+        self_copy$data_name <- "UK level 1 with 'nhsregions=TRUE'"
         self_copy$nhsregions <- TRUE
         source <- class(self_copy)[1]
         if (!file.exists(nhs_included_path)) {
@@ -532,15 +532,14 @@ UK <- R6::R6Class("UK",
             expect_true(nrow(self_copy$data$raw$nhs) > 0)
             expect_true(ncol(self_copy$data$raw$nhs) >= 2)
           })
-          print(self_copy$data)
           self_copy$data$raw$nhs <- slice_tail(self_copy$data$raw$nhs, n = 1000)
           saveRDS(self_copy$data$raw$nhs, nhs_included_path)
         } else {
           self_copy$data$raw$nhs <- readRDS(nhs_included_path)
         }
-        test_cleaning(self = self_copy, data_name = data_name)
-        test_processing(self = self_copy, data_name = data_name)
-        test_return(self = self_copy, data_name = data_name)
+        test_cleaning(cntry_obj = self_copy)
+        test_processing(cntry_obj = self_copy)
+        test_return(cntry_obj = self_copy)
       }
     }
   )
