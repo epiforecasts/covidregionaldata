@@ -97,7 +97,7 @@ Specific return settings for the WHO dataset.
 \if{latex}{\out{\hypertarget{method-specific_tests}{}}}
 \subsection{Method \code{specific_tests()}}{
 Run additional tests on WHO data. Tests that there is only
-one row per country
+one row per country. Designed to be ran from \code{test} and not ran directly.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{WHO$specific_tests(self_copy, ...)}\if{html}{\out{</div>}}
 }

@@ -309,21 +309,33 @@ the same generic checks (test_cleaning, test_processing, test_return). If
 download = TRUE or a snapshot file is not found, the nhs data is
 downloaded and saved to the snapshot location provided. If an existing
 snapshot file is found then this data is used in the next tests.
-Tests data can be downloaded, cleaned, processed and returned.
+Tests data can be downloaded, cleaned, processed and returned. Designed
+to be ran from \code{test} and not ran directly.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(self_copy, download = FALSE, nhs_included_path)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(
+  self_copy,
+  download = FALSE,
+  all = FALSE,
+  snapshot_path = "",
+  ...
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{self_copy}}{R6class the object to test}
+\item{\code{self_copy}}{R6class the object to test.}
 
 \item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.}
 
-\item{\code{nhs_included_path}}{character_array the path to save the downloaded
-nhs data snapshot to.}
+\item{\code{all}}{logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.}
+
+\item{\code{snapshot_path}}{character_array the path to save the downloaded
+snapshot to. Works on the snapshot path constructed by \code{test} but adds}
+
+\item{\code{...}}{Additional parameters to pass to \code{specific_tests}}
 }
 \if{html}{\out{</div>}}
 }

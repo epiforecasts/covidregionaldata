@@ -4,12 +4,21 @@
 \alias{expect_columns_contain_data}
 \title{Test that cleaned columns contain data/}
 \usage{
-expect_columns_contain_data(cntry_obj)
+expect_columns_contain_data(DataClass_obj)
 }
 \arguments{
-\item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
+\item{DataClass_obj}{The DataClass object (R6Class) to perform checks on.}
 }
 \description{
 Checks that cleaned columns cases, deaths, recovered and test
 (new and total) are not entirely composed of NAs.
 }
+\seealso{
+Other tests: 
+\code{\link{expect_clean_cols}()},
+\code{\link{test_cleaning}()},
+\code{\link{test_download}()},
+\code{\link{test_processing}()},
+\code{\link{test_return}()}
+}
+\concept{tests}

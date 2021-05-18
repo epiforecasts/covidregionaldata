@@ -15,3 +15,12 @@ expect_clean_cols(data, level)
 Checks the date column is an s3 class and that region level
 column is a character in the cleaned data (data$clean)
 }
+\seealso{
+Other tests: 
+\code{\link{expect_columns_contain_data}()},
+\code{\link{test_cleaning}()},
+\code{\link{test_download}()},
+\code{\link{test_processing}()},
+\code{\link{test_return}()}
+}
+\concept{tests}

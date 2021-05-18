@@ -4,10 +4,10 @@
 \alias{test_return}
 \title{Test return method works correctly}
 \usage{
-test_return(cntry_obj)
+test_return(DataClass_obj)
 }
 \arguments{
-\item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.}
 }
 \description{
 Test data can be returned correctly using the return method.
@@ -15,3 +15,12 @@ return is invoked to generate returned data which is then checked to ensure
 it is a data.frame, not empty and has at least 2 columns. Each column is then
 checked to ensure it contains data and is not just composed of NAs.
 }
+\seealso{
+Other tests: 
+\code{\link{expect_clean_cols}()},
+\code{\link{expect_columns_contain_data}()},
+\code{\link{test_cleaning}()},
+\code{\link{test_download}()},
+\code{\link{test_processing}()}
+}
+\concept{tests}

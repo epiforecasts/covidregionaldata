@@ -4,18 +4,27 @@
 \alias{test_download}
 \title{Test download method works correctly}
 \usage{
-test_download(cntry_obj, download, snapshot_path)
+test_download(DataClass_obj, download, snapshot_path)
 }
 \arguments{
-\item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.}
 
-\item{download}{logical check to download or use a snapshot of the data}
+\item{download}{Logical check to download or use a snapshot of the data}
 
 \item{snapshot_path}{character_array the path to save the downloaded
 snapshot to.}
 }
 \description{
-Test data can be downloaded if download = TRUE, or a requested
-snapshot file is not found, and store a snap shot at the snapshot_path. If an
-existing snapshot file is found then load this data to use in future tests.
+Test data can be downloaded if \code{download = TRUE}, or a requested
+snapshot file is not found, and store a snap shot in the \code{snapshot_dir}. If
+an existing snapshot file is found then load this data to use in future tests
 }
+\seealso{
+Other tests: 
+\code{\link{expect_clean_cols}()},
+\code{\link{expect_columns_contain_data}()},
+\code{\link{test_cleaning}()},
+\code{\link{test_processing}()},
+\code{\link{test_return}()}
+}
+\concept{tests}

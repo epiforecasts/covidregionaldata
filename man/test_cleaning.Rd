@@ -4,10 +4,10 @@
 \alias{test_cleaning}
 \title{Test clean method works correctly}
 \usage{
-test_cleaning(cntry_obj)
+test_cleaning(DataClass_obj)
 }
 \arguments{
-\item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.}
 }
 \description{
 Test data can be cleaned properly. The clean method is invoked
@@ -16,3 +16,12 @@ is not empty, has at least two columns and that columns are clean by calling
 \code{expect_clean_cols}. Also tests that \code{avaliable_regions()} are not NA and
 they are all characters.
 }
+\seealso{
+Other tests: 
+\code{\link{expect_clean_cols}()},
+\code{\link{expect_columns_contain_data}()},
+\code{\link{test_download}()},
+\code{\link{test_processing}()},
+\code{\link{test_return}()}
+}
+\concept{tests}

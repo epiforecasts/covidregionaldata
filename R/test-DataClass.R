@@ -3,6 +3,8 @@
 #' column is a character in the cleaned data (data$clean)
 #' @param data The clean data to check
 #' @param level character_array the level of the data to check
+#' @family tests
+#' @export
 expect_clean_cols <- function(data, level) {
   testthat::expect_s3_class(data[["date"]], "Date")
   level_region_str <- paste0("level_", level, "_region")
@@ -31,14 +33,16 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
 #' Test that cleaned columns contain data/
 #' @description Checks that cleaned columns cases, deaths, recovered and test
 #' (new and total) are not entirely composed of NAs.
-#' @param cntry_obj The DataClass object (R6Class) object to perform checks on.
+#' @param DataClass_obj The DataClass object (R6Class) to perform checks on.
 #' @importFrom purrr map walk
 #' @importFrom dplyr filter
 #' @importFrom rlang !!
-expect_columns_contain_data <- function(cntry_obj) {
+#' @family tests
+#' @export
+expect_columns_contain_data <- function(DataClass_obj) {
   cols_present <- function(col) {
-    if (length(cntry_obj$source_data_cols[grep(
-      col, tolower(cntry_obj$source_data_cols)
+    if (length(DataClass_obj$source_data_cols[grep(
+      col, tolower(DataClass_obj$source_data_cols)
     )]) > 0) {
       return(paste0(col, c("_new", "_total")))
     } else {
@@ -53,11 +57,12 @@ expect_columns_contain_data <- function(cntry_obj) {
     ~ {
       testthat::test_that(
         paste0(
-          cntry_obj$data_name, "column '", .x, "' is not just composed of NA"
+          DataClass_obj$data_name, "column '",
+          .x, "' is not just composed of NA"
         ),
         {
           testthat::expect_true(
-            nrow(cntry_obj$data$processed %>% filter(!is.na(!!.x))) > 0
+            nrow(DataClass_obj$data$processed %>% filter(!is.na(!!.x))) > 0
           )
         }
       )
@@ -66,39 +71,44 @@ expect_columns_contain_data <- function(cntry_obj) {
 }
 
 #' Test download method works correctly
-#' @description Test data can be downloaded if download = TRUE, or a requested
-#' snapshot file is not found, and store a snap shot at the snapshot_path. If an
-#' existing snapshot file is found then load this data to use in future tests.
-#' @param cntry_obj The DataClass object (R6Class) object to perform checks on.
-#' @param download logical check to download or use a snapshot of the data
+#' @description Test data can be downloaded if `download = TRUE`, or a requested
+#' snapshot file is not found, and store a snap shot in the `snapshot_dir`. If
+#' an existing snapshot file is found then load this data to use in future tests
+#' @param DataClass_obj The R6Class object to perform checks on.
+#' @param download Logical check to download or use a snapshot of the data
 #' @param snapshot_path character_array the path to save the downloaded
 #' snapshot to.
 #' @importFrom purrr map walk
 #' @importFrom dplyr slice_tail
-test_download <- function(cntry_obj, download, snapshot_path) {
+#' @family tests
+#' @export
+test_download <- function(DataClass_obj, download, snapshot_path) {
   if (!file.exists(snapshot_path)) {
     download <- TRUE
   }
   if (download) {
-    testthat::test_that(paste0(cntry_obj$data_name, " downloads sucessfully"), {
-      cntry_obj$download()
-      walk(cntry_obj$data$raw, function(data) {
-        testthat::expect_s3_class(data, "data.frame")
-        testthat::expect_true(nrow(data) > 0)
-        testthat::expect_true(ncol(data) >= 2)
-      })
-    })
-    cntry_obj$data$raw <- map(cntry_obj$data$raw,
+    testthat::test_that(
+      paste0(DataClass_obj$data_name, " downloads sucessfully"),
+      {
+        DataClass_obj$download()
+        walk(DataClass_obj$data$raw, function(data) {
+          testthat::expect_s3_class(data, "data.frame")
+          testthat::expect_true(nrow(data) > 0)
+          testthat::expect_true(ncol(data) >= 2)
+        })
+      }
+    )
+    DataClass_obj$data$raw <- map(DataClass_obj$data$raw,
       slice_tail,
       n = 250
     )
-    cntry_obj$data$raw <- map(
-      cntry_obj$data$raw,
+    DataClass_obj$data$raw <- map(
+      DataClass_obj$data$raw,
       ~ .[, 1:min(100, ncol(.))]
     )
-    saveRDS(cntry_obj$data$raw, snapshot_path)
+    saveRDS(DataClass_obj$data$raw, snapshot_path)
   } else {
-    cntry_obj$data$raw <- readRDS(snapshot_path)
+    DataClass_obj$data$raw <- readRDS(snapshot_path)
   }
 }
 
@@ -109,23 +119,25 @@ test_download <- function(cntry_obj, download, snapshot_path) {
 #' `expect_clean_cols`. Also tests that `avaliable_regions()` are not NA and
 #' they are all characters.
 #' @inheritParams test_download
-test_cleaning <- function(cntry_obj) {
+#' @family tests
+#' @export
+test_cleaning <- function(DataClass_obj) {
   testthat::test_that(
-    paste0(cntry_obj$data_name, " can be cleaned as expected"),
+    paste0(DataClass_obj$data_name, " can be cleaned as expected"),
     {
-      cntry_obj$clean()
-      testthat::expect_s3_class(cntry_obj$data$clean, "data.frame")
-      testthat::expect_true(nrow(cntry_obj$data$clean) > 0)
-      testthat::expect_true(ncol(cntry_obj$data$clean) >= 2)
-      expect_clean_cols(cntry_obj$data$clean, cntry_obj$level)
+      DataClass_obj$clean()
+      testthat::expect_s3_class(DataClass_obj$data$clean, "data.frame")
+      testthat::expect_true(nrow(DataClass_obj$data$clean) > 0)
+      testthat::expect_true(ncol(DataClass_obj$data$clean) >= 2)
+      expect_clean_cols(DataClass_obj$data$clean, DataClass_obj$level)
     }
   )
   testthat::test_that(
-    paste0(cntry_obj$data_name, " can highlight available regions as expected"),
+    paste(DataClass_obj$data_name, "highlights available regions as expected"),
     {
-      testthat::expect_error(cntry_obj$available_regions(), NA)
+      testthat::expect_error(DataClass_obj$available_regions(), NA)
       testthat::expect_true(
-        class(cntry_obj$available_regions()) %in% "character"
+        class(DataClass_obj$available_regions()) %in% "character"
       )
     }
   )
@@ -137,23 +149,25 @@ test_cleaning <- function(cntry_obj) {
 #' it is a data.frame, which is not empty, has at least 2 columns and calls
 #' `expect_processed_columns` to check each column types.
 #' @inheritParams test_download
-#' @param test_all logical. Run tests with all settings (TRUE) or with those
+#' @param test_all Logical. Run tests with all settings (TRUE) or with those
 #' defined in the current class instance (FALSE). Defaults to FALSE.
-test_processing <- function(cntry_obj, test_all = FALSE) {
+#' @family tests
+#' @export
+test_processing <- function(DataClass_obj, all = FALSE) {
   testthat::test_that(
-    paste0(cntry_obj$data_name, " can be processed as expected"),
+    paste0(DataClass_obj$data_name, " can be processed as expected"),
     {
-      cntry_obj$process()
-      testthat::expect_s3_class(cntry_obj$data$processed, "data.frame")
-      testthat::expect_true(nrow(cntry_obj$data$processed) > 0)
-      testthat::expect_true(ncol(cntry_obj$data$processed) >= 2)
+      DataClass_obj$process()
+      testthat::expect_s3_class(DataClass_obj$data$processed, "data.frame")
+      testthat::expect_true(nrow(DataClass_obj$data$processed) > 0)
+      testthat::expect_true(ncol(DataClass_obj$data$processed) >= 2)
       expect_processed_cols(
-        cntry_obj$data$processed,
-        level = cntry_obj$level,
-        localised = cntry_obj$localise
+        DataClass_obj$data$processed,
+        level = DataClass_obj$level,
+        localised = DataClass_obj$localise
       )
-      if (test_all) {
-        local_region <- cntry_obj$clone()
+      if (all) {
+        local_region <- DataClass_obj$clone()
         local_region$localise <- FALSE
         local_region$process()
         expect_processed_cols(
@@ -172,11 +186,13 @@ test_processing <- function(cntry_obj, test_all = FALSE) {
 #' it is a data.frame, not empty and has at least 2 columns. Each column is then
 #' checked to ensure it contains data and is not just composed of NAs.
 #' @inheritParams test_download
-test_return <- function(cntry_obj) {
+#' @family tests
+#' @export
+test_return <- function(DataClass_obj) {
   testthat::test_that(
-    paste0(cntry_obj$data_name, " can be returned as expected"),
+    paste0(DataClass_obj$data_name, " can be returned as expected"),
     {
-      returned <- cntry_obj$return()
+      returned <- DataClass_obj$return()
       if (any(class(returned) %in% "data.frame")) {
         testthat::expect_s3_class(returned, "data.frame")
         testthat::expect_true(nrow(returned) > 0)
@@ -184,5 +200,5 @@ test_return <- function(cntry_obj) {
       }
     }
   )
-  expect_columns_contain_data(cntry_obj)
+  expect_columns_contain_data(DataClass_obj)
 }

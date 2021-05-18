@@ -4,12 +4,12 @@
 \alias{test_processing}
 \title{Test process method works correctly}
 \usage{
-test_processing(cntry_obj, test_all = FALSE)
+test_processing(DataClass_obj, all = FALSE)
 }
 \arguments{
-\item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.}
 
-\item{test_all}{logical. Run tests with all settings (TRUE) or with those
+\item{test_all}{Logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.}
 }
 \description{
@@ -18,3 +18,12 @@ process is invoked to generate processed data which is then checked to ensure
 it is a data.frame, which is not empty, has at least 2 columns and calls
 \code{expect_processed_columns} to check each column types.
 }
+\seealso{
+Other tests: 
+\code{\link{expect_clean_cols}()},
+\code{\link{expect_columns_contain_data}()},
+\code{\link{test_cleaning}()},
+\code{\link{test_download}()},
+\code{\link{test_return}()}
+}
+\concept{tests}

@@ -5,20 +5,10 @@ test_regional_dataset <- function(source, level, download = FALSE) {
       "', verbose = FALSE)"
     )
   ))
-  snapshot_path <- paste0(
-    "custom_data/", source,
-    "_level_", level, ".rds"
-  )
-
-  # UK nhs data snapshot
-  nhs_snapshot_path <- paste0(
-    "custom_data/", source,
-    "_level_", level, "_nhs", ".rds"
-  )
+  snapshot_dir <- "custom_data"
   region$test(
     download = download,
-    snapshot_path = snapshot_path,
-    test_all = TRUE,
-    nhs_included_path = nhs_snapshot_path
+    snapshot_dir = snapshot_dir,
+    all = TRUE
   )
 }

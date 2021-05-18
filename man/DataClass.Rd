@@ -362,15 +362,15 @@ the urls of the raw data and the columns present in the raw data.
 \subsection{Method \code{test()}}{
 Run tests on a country class instance. Calling \code{test()} on a
 class instance runs tests with the settings in use. For example, if you
-set \code{level = "1"} and \code{localise = FALSE} the tests will be ran on level 1
+set \code{level = "1"} and \code{localise = FALSE} the tests will be run on level 1
 data which is not localised. Rather than downloading data for a test
 users can provide a path to a snapshot file of data to test instead.
-Tests are ran on a clone of the class. This method calls generic tests
+Tests are run on a clone of the class. This method calls generic tests
 for all country class objects. It also calls country specific tests
 which can be defined in an individual country class method called
-\code{specific_tests()}.
+\code{specific_tests()}. The snapshots contain the first 1000 rows of data.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", test_all = FALSE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_dir = "snapshots", all = FALSE, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -379,14 +379,16 @@ which can be defined in an individual country class method called
 \item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.}
 
-\item{\code{snapshot_path}}{character_array the path to save the downloaded data
-or read from. Must be a path to an rds file.}
+\item{\code{snapshot_dir}}{character_array the name of a directory to save the
+downloaded data or read from. If not defined a directory called
+'snapshots' will be created in the current working directory. Snapshots
+are saved as rds files with the class name and level: e.g.
+\code{Italy_level_1.rds}.}
 
-\item{\code{test_all}}{logical. Run tests with all settings (TRUE) or with those
+\item{\code{all}}{logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.}
 
-\item{\code{...}}{Additional parameters to pass to \code{specific_tests}
-snapshot to.}
+\item{\code{...}}{Additional parameters to pass to \code{specific_tests}}
 }
 \if{html}{\out{</div>}}
 }
