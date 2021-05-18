@@ -554,9 +554,9 @@ DataClass <- R6::R6Class(
         cntry_obj = self_copy
       )
 
-      if ("specific_tests" %in% names(self)) {
+      if ("specific_tests" %in% names(self_copy)) {
         specific <- paste0(
-          "self$specific_tests(cntry_obj=self_copy, download=download, ...)"
+          "self$specific_tests(self_copy=self_copy, download=download, ...)"
         )
         eval(parse(text = specific))
       }

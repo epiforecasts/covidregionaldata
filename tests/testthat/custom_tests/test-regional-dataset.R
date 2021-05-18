@@ -18,6 +18,7 @@ test_regional_dataset <- function(source, level, download = FALSE) {
   region$test(
     download = download,
     snapshot_path = snapshot_path,
+    test_all = TRUE,
     nhs_included_path = nhs_snapshot_path
   )
 }

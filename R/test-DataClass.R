@@ -147,33 +147,19 @@ test_processing <- function(cntry_obj, test_all = FALSE) {
       testthat::expect_s3_class(cntry_obj$data$processed, "data.frame")
       testthat::expect_true(nrow(cntry_obj$data$processed) > 0)
       testthat::expect_true(ncol(cntry_obj$data$processed) >= 2)
-
+      expect_processed_cols(
+        cntry_obj$data$processed,
+        level = cntry_obj$level,
+        localised = cntry_obj$localise
+      )
       if (test_all) {
-        purrr::walk(
-          c(TRUE, FALSE),
-          ~ {
-            testthat::test_that(
-              paste0(
-                cntry_obj$data_name,
-                " with localise = ",
-                .x,
-                " can be processed as expected"
-              ),
-              {
-                expect_processed_cols(
-                  cntry_obj$data$processed,
-                  level = cntry_obj$level,
-                  localised = .x
-                )
-              }
-            )
-          }
-        )
-      } else {
+        local_region <- cntry_obj$clone()
+        local_region$localise <- FALSE
+        local_region$process()
         expect_processed_cols(
-          cntry_obj$data$processed,
-          level = cntry_obj$level,
-          localised = cntry_obj$localised
+          local_region$data$processed,
+          level = local_region$level,
+          localised = local_region$localise
         )
       }
     }
