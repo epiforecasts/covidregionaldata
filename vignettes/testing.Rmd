@@ -1,5 +1,5 @@
 ---
-title: "Testing this package"
+title: "Testing"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Testing}
