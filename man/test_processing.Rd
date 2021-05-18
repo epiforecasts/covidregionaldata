@@ -4,13 +4,13 @@
 \alias{test_processing}
 \title{Test process method works correctly}
 \usage{
-test_processing(cntry_obj, localise = TRUE)
+test_processing(cntry_obj, test_all = FALSE)
 }
 \arguments{
 \item{cntry_obj}{The DataClass object (R6Class) object to perform checks on.}
 
-\item{localise}{Logical, defaults to TRUE. Should region names be
-localised for tests.}
+\item{test_all}{logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.}
 }
 \description{
 Test data can be processed correctly using the process method.

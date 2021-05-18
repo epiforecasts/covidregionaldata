@@ -137,9 +137,9 @@ test_cleaning <- function(cntry_obj) {
 #' it is a data.frame, which is not empty, has at least 2 columns and calls
 #' `expect_processed_columns` to check each column types.
 #' @inheritParams test_download
-#' @param localise Logical, defaults to TRUE. Should region names be
-#' localised for tests.
-test_processing <- function(cntry_obj, localise = TRUE) {
+#' @param test_all logical. Run tests with all settings (TRUE) or with those
+#' defined in the current class instance (FALSE). Defaults to FALSE.
+test_processing <- function(cntry_obj, test_all = FALSE) {
   testthat::test_that(
     paste0(cntry_obj$data_name, " can be processed as expected"),
     {
@@ -147,16 +147,35 @@ test_processing <- function(cntry_obj, localise = TRUE) {
       testthat::expect_s3_class(cntry_obj$data$processed, "data.frame")
       testthat::expect_true(nrow(cntry_obj$data$processed) > 0)
       testthat::expect_true(ncol(cntry_obj$data$processed) >= 2)
-      expect_processed_cols(cntry_obj$data$processed, level = cntry_obj$level)
 
-      local_region <- cntry_obj$clone()
-      local_region$localise <- FALSE
-      local_region$process()
-      expect_processed_cols(
-        local_region$data$processed,
-        level = cntry_obj$level,
-        localised = FALSE
-      )
+      if (test_all) {
+        purrr::walk(
+          c(TRUE, FALSE),
+          ~ {
+            testthat::test_that(
+              paste0(
+                cntry_obj$data_name,
+                " with localise = ",
+                .x,
+                " can be processed as expected"
+              ),
+              {
+                expect_processed_cols(
+                  cntry_obj$data$processed,
+                  level = cntry_obj$level,
+                  localised = .x
+                )
+              }
+            )
+          }
+        )
+      } else {
+        expect_processed_cols(
+          cntry_obj$data$processed,
+          level = cntry_obj$level,
+          localised = cntry_obj$localised
+        )
+      }
     }
   )
 }

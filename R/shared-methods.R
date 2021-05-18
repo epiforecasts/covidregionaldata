@@ -528,9 +528,12 @@ DataClass <- R6::R6Class(
     #' (FALSE). Defaults to FALSE.
     #' @param snapshot_path character_array the path to save the downloaded data
     #' or read from. Must be a path to an rds file.
+    #' @param test_all logical. Run tests with all settings (TRUE) or with those
+    #' defined in the current class instance (FALSE). Defaults to FALSE.
     #' @param ... Additional parameters to pass to `specific_tests`
     #' snapshot to.
-    test = function(download = FALSE, snapshot_path = "", ...) {
+    test = function(download = FALSE, snapshot_path = "",
+                    test_all = FALSE, ...) {
       if (!grepl(".rds$", snapshot_path)) {
         stop("snapshot_path must be to an rds file")
       }
@@ -544,7 +547,8 @@ DataClass <- R6::R6Class(
         cntry_obj = self_copy
       )
       test_processing(
-        cntry_obj = self_copy
+        cntry_obj = self_copy,
+        test_all = test_all
       )
       test_return(
         cntry_obj = self_copy

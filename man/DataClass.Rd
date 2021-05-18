@@ -370,7 +370,7 @@ for all country class objects. It also calls country specific tests
 which can be defined in an individual country class method called
 \code{specific_tests()}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_path = "", test_all = FALSE, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -381,6 +381,9 @@ which can be defined in an individual country class method called
 
 \item{\code{snapshot_path}}{character_array the path to save the downloaded data
 or read from. Must be a path to an rds file.}
+
+\item{\code{test_all}}{logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.}
 
 \item{\code{...}}{Additional parameters to pass to \code{specific_tests}
 snapshot to.}
