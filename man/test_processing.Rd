@@ -9,7 +9,7 @@ test_processing(DataClass_obj, all = FALSE)
 \arguments{
 \item{DataClass_obj}{The R6Class object to perform checks on.}
 
-\item{test_all}{Logical. Run tests with all settings (TRUE) or with those
+\item{all}{Logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.}
 }
 \description{

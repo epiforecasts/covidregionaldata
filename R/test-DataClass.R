@@ -149,7 +149,7 @@ test_cleaning <- function(DataClass_obj) {
 #' it is a data.frame, which is not empty, has at least 2 columns and calls
 #' `expect_processed_columns` to check each column types.
 #' @inheritParams test_download
-#' @param test_all Logical. Run tests with all settings (TRUE) or with those
+#' @param all Logical. Run tests with all settings (TRUE) or with those
 #' defined in the current class instance (FALSE). Defaults to FALSE.
 #' @family tests
 #' @export
