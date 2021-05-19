@@ -7,7 +7,8 @@
 test_download(DataClass_obj, download, snapshot_path)
 }
 \arguments{
-\item{DataClass_obj}{The R6Class object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.
+Must be a \code{DataClass} or \code{DataClass} child object.}
 
 \item{download}{Logical check to download or use a snapshot of the data}
 

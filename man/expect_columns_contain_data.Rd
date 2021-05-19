@@ -7,7 +7,8 @@
 expect_columns_contain_data(DataClass_obj)
 }
 \arguments{
-\item{DataClass_obj}{The DataClass object (R6Class) to perform checks on.}
+\item{DataClass_obj}{The DataClass object (R6Class) to perform checks on.
+Must be a \code{DataClass} or \code{DataClass} child object.}
 }
 \description{
 Checks that cleaned columns cases, deaths, recovered and test

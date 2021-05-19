@@ -7,7 +7,8 @@
 test_processing(DataClass_obj, all = FALSE)
 }
 \arguments{
-\item{DataClass_obj}{The R6Class object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.
+Must be a \code{DataClass} or \code{DataClass} child object.}
 
 \item{all}{Logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.}

@@ -369,9 +369,15 @@ Tests are run on a clone of the class. This method calls generic tests
 for all country class objects. It also calls country specific tests
 which can be defined in an individual country class method called
 \code{specific_tests()}. The snapshots contain the first 1000 rows of data.
-For more details see the 'testing' vignette.
+For more details see the 'testing' vignette or run
+vignette(testing) .
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(download = FALSE, snapshot_dir = "snapshots", all = FALSE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(
+  download = FALSE,
+  snapshot_dir = paste0(tempdir(), "/snapshots"),
+  all = FALSE,
+  ...
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -382,9 +388,8 @@ For more details see the 'testing' vignette.
 
 \item{\code{snapshot_dir}}{character_array the name of a directory to save the
 downloaded data or read from. If not defined a directory called
-'snapshots' will be created in the current working directory. Snapshots
-are saved as rds files with the class name and level: e.g.
-\code{Italy_level_1.rds}.}
+'snapshots' will be created in the temp directory. Snapshots are saved as
+rds files with the class name and level: e.g. \code{Italy_level_1.rds}.}
 
 \item{\code{all}}{logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.}

@@ -528,7 +528,7 @@ UK <- R6::R6Class("UK",
           }
           if (download) {
             test_that(paste(self_copy$data_name, " downloads sucessfully"), { # nolint
-              self_copy$download()
+              self_copy$data$raw$nhs <- self_copy$download_nhs_regions()
               expect_s3_class(self_copy$data$raw$nhs, "data.frame")
               expect_true(nrow(self_copy$data$raw$nhs) > 0)
               expect_true(ncol(self_copy$data$raw$nhs) >= 2)

@@ -34,6 +34,7 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
 #' @description Checks that cleaned columns cases, deaths, recovered and test
 #' (new and total) are not entirely composed of NAs.
 #' @param DataClass_obj The DataClass object (R6Class) to perform checks on.
+#' Must be a `DataClass` or `DataClass` child object.
 #' @importFrom purrr map walk
 #' @importFrom dplyr filter
 #' @importFrom rlang !!
@@ -75,6 +76,7 @@ expect_columns_contain_data <- function(DataClass_obj) {
 #' snapshot file is not found, and store a snap shot in the `snapshot_dir`. If
 #' an existing snapshot file is found then load this data to use in future tests
 #' @param DataClass_obj The R6Class object to perform checks on.
+#' Must be a `DataClass` or `DataClass` child object.
 #' @param download Logical check to download or use a snapshot of the data
 #' @param snapshot_path character_array the path to save the downloaded
 #' snapshot to.

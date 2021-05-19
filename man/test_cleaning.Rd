@@ -7,7 +7,8 @@
 test_cleaning(DataClass_obj)
 }
 \arguments{
-\item{DataClass_obj}{The R6Class object to perform checks on.}
+\item{DataClass_obj}{The R6Class object to perform checks on.
+Must be a \code{DataClass} or \code{DataClass} child object.}
 }
 \description{
 Test data can be cleaned properly. The clean method is invoked

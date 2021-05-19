@@ -524,24 +524,29 @@ DataClass <- R6::R6Class(
     #' for all country class objects. It also calls country specific tests
     #' which can be defined in an individual country class method called
     #' `specific_tests()`. The snapshots contain the first 1000 rows of data.
-    #' For more details see the 'testing' vignette.
+    #' For more details see the 'testing' vignette or run
+    #' vignette(testing) .
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
     #' @param snapshot_dir character_array the name of a directory to save the
     #' downloaded data or read from. If not defined a directory called
-    #' 'snapshots' will be created in the current working directory. Snapshots
-    #' are saved as rds files with the class name and level: e.g.
-    #' `Italy_level_1.rds`.
+    #' 'snapshots' will be created in the temp directory. Snapshots are saved as
+    #' rds files with the class name and level: e.g. `Italy_level_1.rds`.
     #' @param all logical. Run tests with all settings (TRUE) or with those
     #' defined in the current class instance (FALSE). Defaults to FALSE.
     #' @param ... Additional parameters to pass to `specific_tests`
-    test = function(download = FALSE, snapshot_dir = "snapshots",
+    test = function(download = FALSE,
+                    snapshot_dir = paste0(tempdir(), "/snapshots"),
                     all = FALSE, ...) {
       snapshot_file_name <- paste0(
         class(self)[1], "_level_",
         self$level, ".rds"
       )
       dir.create(snapshot_dir, showWarnings = FALSE)
+      message_verbose(
+        verbose = self$verbose,
+        paste("snapshot to be saved at", snapshot_dir)
+      )
       snapshot_path <- file.path(snapshot_dir, snapshot_file_name)
       self_copy <- self$clone()
       test_download(
