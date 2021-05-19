@@ -5,7 +5,8 @@ articles:
   dataset-status: dataset-status.html
   quickstart: quickstart.html
   slowstart: slowstart.html
-last_built: 2021-05-19T11:21Z
+  testing: testing.html
+last_built: 2021-05-19T14:16Z
 urls:
   reference: epiforecasts.io/covidregionaldata/reference
   article: epiforecasts.io/covidregionaldata/articles

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • covidregionaldata</title>
+<title>Test download method works correctly — test_download • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Test download method works correctly — test_download" />
+<meta property="og:description" content="Test data can be downloaded if download = TRUE, or a requested
+snapshot file is not found, and store a snap shot in the snapshot_dir. If
+an existing snapshot file is found then load this data to use in future tests" />
 
 
 
@@ -73,7 +76,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -141,24 +144,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Test download method works correctly</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/test-DataClass.R'><code>R/test-DataClass.R</code></a></small>
+    <div class="hidden name"><code>test_download.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="dataset-status.html">Dataset status</a></dt>
-        <dd></dt>
-        <dt><a href="quickstart.html">Quick start</a></dt>
-        <dd></dt>
-        <dt><a href="slowstart.html">Package overview</a></dt>
-        <dd></dt>
-        <dt><a href="testing.html">Testing</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Test data can be downloaded if <code>download = TRUE</code>, or a requested
+snapshot file is not found, and store a snap shot in the <code>snapshot_dir</code>. If
+an existing snapshot file is found then load this data to use in future tests</p>
     </div>
+
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>test_download</span><span class='op'>(</span><span class='va'>DataClass_obj</span>, <span class='va'>download</span>, <span class='va'>snapshot_path</span><span class='op'>)</span></code></pre></div>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>DataClass_obj</th>
+      <td><p>The R6Class object to perform checks on.
+Must be a <code>DataClass</code> or <code>DataClass</code> child object.</p></td>
+    </tr>
+    <tr>
+      <th>download</th>
+      <td><p>Logical check to download or use a snapshot of the data</p></td>
+    </tr>
+    <tr>
+      <th>snapshot_path</th>
+      <td><p>character_array the path to save the downloaded
+snapshot to.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Functions used for testing data is cleaned and processed correctly
+<code><a href='expect_clean_cols.html'>expect_clean_cols</a>()</code>,
+<code><a href='expect_columns_contain_data.html'>expect_columns_contain_data</a>()</code>,
+<code><a href='expect_processed_cols.html'>expect_processed_cols</a>()</code>,
+<code><a href='test_cleaning.html'>test_cleaning</a>()</code>,
+<code><a href='test_processing.html'>test_processing</a>()</code>,
+<code><a href='test_return.html'>test_return</a>()</code></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

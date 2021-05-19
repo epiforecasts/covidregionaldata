@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • covidregionaldata</title>
+<title>Test that processed columns contain the correct data and types — expect_processed_cols • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,9 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Test that processed columns contain the correct data and types — expect_processed_cols" />
+<meta property="og:description" content="Checks that processed data columns date, cases_new, cases_total,
+deaths_new, deaths_total and that region level have the correct types." />
 
 
 
@@ -73,7 +75,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -141,24 +143,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Test that processed columns contain the correct data and types</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/test-DataClass.R'><code>R/test-DataClass.R</code></a></small>
+    <div class="hidden name"><code>expect_processed_cols.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="dataset-status.html">Dataset status</a></dt>
-        <dd></dt>
-        <dt><a href="quickstart.html">Quick start</a></dt>
-        <dd></dt>
-        <dt><a href="slowstart.html">Package overview</a></dt>
-        <dd></dt>
-        <dt><a href="testing.html">Testing</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Checks that processed data columns date, cases_new, cases_total,
+deaths_new, deaths_total and that region level have the correct types.</p>
     </div>
+
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>expect_processed_cols</span><span class='op'>(</span><span class='va'>data</span>, level <span class='op'>=</span> <span class='st'>"1"</span>, localised <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></code></pre></div>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>The data to check</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>character_array the level of the data to check</p></td>
+    </tr>
+    <tr>
+      <th>localised</th>
+      <td><p>logical to check localised data or not, defaults to
+TRUE.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Functions used for testing data is cleaned and processed correctly
+<code><a href='expect_clean_cols.html'>expect_clean_cols</a>()</code>,
+<code><a href='expect_columns_contain_data.html'>expect_columns_contain_data</a>()</code>,
+<code><a href='test_cleaning.html'>test_cleaning</a>()</code>,
+<code><a href='test_download.html'>test_download</a>()</code>,
+<code><a href='test_processing.html'>test_processing</a>()</code>,
+<code><a href='test_return.html'>test_return</a>()</code></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -160,8 +160,8 @@ downloading, processing, and returning data. These functions are contained
 within this parent class and so are accessible by all data sets which
 inherit from here. Individual data sets can overwrite any functions or
 fields providing they define a method with the same name, and can be
-extended with additinal functionality. See the individual method documentaion
-for further details.</p>
+extended with additional functionality. See the individual method
+documentaion for further details.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Data interface functions
@@ -214,6 +214,9 @@ list should be named after a supported level.</p></dd>
 <dt><code>level</code></dt><dd><p>target region level. This field is filled at initialisation
 using user inputs or defaults in <code>$new()</code></p></dd>
 
+<dt><code>data_name</code></dt><dd><p>string. The country name followed by the level. E.g.
+"Italy at level 1"</p></dd>
+
 <dt><code>totals</code></dt><dd><p>Boolean. If TRUE, returns totalled data per region
 up to today's date. This field is filled at initialisation using user
 inputs or defaults in <code>$new()</code></p></dd>
@@ -257,6 +260,7 @@ Defaults to the target level.</p></dd>
 <li><p><a href='#method-get'><code>DataClass$get()</code></a></p></li>
 <li><p><a href='#method-return'><code>DataClass$return()</code></a></p></li>
 <li><p><a href='#method-summary'><code>DataClass$summary()</code></a></p></li>
+<li><p><a href='#method-test'><code>DataClass$test()</code></a></p></li>
 <li><p><a href='#method-clone'><code>DataClass$clone()</code></a></p></li>
 </ul>
 <p><hr>
@@ -600,6 +604,77 @@ being processed.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidd
 <p>Returns a single row summary tibble containing the origin of the
 data source, class, level 1 and 2 region names, the type of data,
 the urls of the raw data and the columns present in the raw data.</p>
+<p><hr>
+<a id="method-test"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>test()</code></h3>
+<p>Run tests on a country class instance. Calling <code>test()</code> on a
+class instance runs tests with the settings in use. For example, if you
+set <code>level = "1"</code> and <code>localise = FALSE</code> the tests will be run on level 1
+data which is not localised. Rather than downloading data for a test
+users can provide a path to a snapshot file of data to test instead.
+Tests are run on a clone of the class. This method calls generic tests
+for all country class objects. It also calls country specific tests
+which can be defined in an individual country class method called
+<code>specific_tests()</code>. The snapshots contain the first 1000 rows of data.
+For more details see the
+<a href='https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd'>'testing' vignette</a>: <code>vignette(testing)</code>.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>test</span><span class='op'>(</span>
+  download <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  snapshot_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"/snapshots"</span><span class='op'>)</span>,
+  all <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>download</code></dt><dd><p>logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.</p></dd>
+
+<dt><code>snapshot_dir</code></dt><dd><p>character_array the name of a directory to save the
+downloaded data or read from. If not defined a directory called
+'snapshots' will be created in the temp directory. Snapshots are saved as
+rds files with the class name and level: e.g. <code>Italy_level_1.rds</code>.</p></dd>
+
+<dt><code>all</code></dt><dd><p>logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
+
+<dt><code>...</code></dt><dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
+</dl><p></div></p>
+<h3 class='hasAnchor' id='list-test-'><a class='anchor' aria-hidden='true' href='#list-test-'></a>Method <code>test()</code></h3>
+<p>Run tests on a country class instance. Calling <code>test()</code> on a
+class instance runs tests with the settings in use. For example, if you
+set <code>level = "1"</code> and <code>localise = FALSE</code> the tests will be run on level 1
+data which is not localised. Rather than downloading data for a test
+users can provide a path to a snapshot file of data to test instead.
+Tests are run on a clone of the class. This method calls generic tests
+for all country class objects. It also calls country specific tests
+which can be defined in an individual country class method called
+<code>specific_tests()</code>. The snapshots contain the first 1000 rows of data.
+For more details see the
+<a href='https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd'>'testing' vignette</a>: <code>vignette(testing)</code>.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>DataClass</span><span class='op'>$</span><span class='fu'>test</span><span class='op'>(</span>
+  download <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  snapshot_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"/snapshots"</span><span class='op'>)</span>,
+  all <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>download</code></dt><dd><p>logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.</p></dd>
+
+<dt><code>snapshot_dir</code></dt><dd><p>character_array the name of a directory to save the
+downloaded data or read from. If not defined a directory called
+'snapshots' will be created in the temp directory. Snapshots are saved as
+rds files with the class name and level: e.g. <code>Italy_level_1.rds</code>.</p></dd>
+
+<dt><code>all</code></dt><dd><p>logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
+
+<dt><code>...</code></dt><dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>

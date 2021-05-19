@@ -197,6 +197,7 @@ only entry, is be named main.</p></dd>
 <ul>
 <li><p><a href='#method-clean_common'><code>WHO$clean_common()</code></a></p></li>
 <li><p><a href='#method-return'><code>WHO$return()</code></a></p></li>
+<li><p><a href='#method-specific_tests'><code>WHO$specific_tests()</code></a></p></li>
 <li><p><a href='#method-clone'><code>WHO$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
@@ -209,6 +210,7 @@ only entry, is be named main.</p></dd>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process"><a href='../../covidregionaldata/html/DataClass.html#method-process'><code>covidregionaldata::DataClass$process()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes"><a href='../../covidregionaldata/html/DataClass.html#method-set_region_codes'><code>covidregionaldata::DataClass$set_region_codes()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary"><a href='../../covidregionaldata/html/DataClass.html#method-summary'><code>covidregionaldata::DataClass$summary()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test"><a href='../../covidregionaldata/html/DataClass.html#method-test'><code>covidregionaldata::DataClass$test()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="CountryDataClass" data-id="filter"><a href='../../covidregionaldata/html/CountryDataClass.html#method-filter'><code>covidregionaldata::CountryDataClass$filter()</code></a></span></p></li>
 </ul>
 </details>
@@ -231,6 +233,31 @@ only entry, is be named main.</p></dd>
 <p>Specific return settings for the WHO dataset.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>WHO</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
+<p><hr>
+<a id="method-specific_tests"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>specific_tests()</code></h3>
+<p>Run additional tests on WHO data. Tests that there is only
+one row per country. Designed to be ran from <code>test</code> and not ran directly.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>WHO</span><span class='op'>$</span><span class='fu'>specific_tests</span><span class='op'>(</span><span class='va'>self_copy</span>, <span class='va'>...</span><span class='op'>)</span></code></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>self_copy</code></dt><dd><p>R6class the object to test</p></dd>
+
+<dt><code>...</code></dt><dd><p>Extra params passed to specific download functions</p></dd>
+
+</dl><p></div></p>
+<h3 class='hasAnchor' id='list-specific-tests-'><a class='anchor' aria-hidden='true' href='#list-specific-tests-'></a>Method <code>specific_tests()</code></h3>
+<p>Run additional tests on WHO data. Tests that there is only
+one row per country. Designed to be ran from <code>test</code> and not ran directly.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>WHO</span><span class='op'>$</span><span class='fu'>specific_tests</span><span class='op'>(</span><span class='va'>self_copy</span>, <span class='va'>...</span><span class='op'>)</span></code></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>self_copy</code></dt><dd><p>R6class the object to test</p></dd>
+
+<dt><code>...</code></dt><dd><p>Extra params passed to specific download functions</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
