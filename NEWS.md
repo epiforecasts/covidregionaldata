@@ -4,7 +4,8 @@ This release is in development and therefore new features may change without war
 
 ## New features
 
-* Support added fo data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by @joseph-palmer).
+* Support added for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by @joseph-palmer).
+* Support added for data from the European Commission's Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by @joseph-palmer).
 
 ## Other changes
 
@@ -12,7 +13,7 @@ This release is in development and therefore new features may change without war
 
 ## Bug fixes
 
-* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN). 
+* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN).
 
 # covidregionaldata 0.9.1
 
