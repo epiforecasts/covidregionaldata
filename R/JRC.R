@@ -1,8 +1,12 @@
 #' R6 Class containing specific attributes and methods for European Commission's
 #' Joint Research Centre data
 #'
-#' @description Information for downloading, cleaning and processing COVID-19
-#' region data from the European Commission's Joint Research Centre
+#' @description Class for downloading, cleaning and processing COVID-19
+#' region data from the European Commission's Joint Research Centre. Subnational
+#' data (admin level 1) on numbers of contagious and fatalities by COVID-19,
+#' collected directly from the National Authoritative sources (National
+#' monitoring websites, when available). For more details see
+#' https://github.com/ec-jrc/COVID-19
 #'
 #' @source \url{https://github.com/ec-jrc/COVID-19}
 #' @concept dataset
@@ -10,8 +14,19 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' national <- JRC$new(verbose = TRUE, steps = TRUE, get = TRUE)
-#' national$return()
+#' # get country level data
+#' jrc_level_1 <- JRC$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+#' jrc_level_1$return()
+#'
+#' # show available regions with data at the first level of interest (country)
+#' jrc_level_1$available_regions()
+#'
+#' # get region level data
+#' jrc_level_2 <- JRC$new(level = "2", verbose = TRUE, steps = TRUE, get = TRUE)
+#' jrc_level_2$return()
+#'
+#' # show available regions with data at the second level of interest (region)
+#' jrc_level_2$available_regions()
 #' }
 JRC <- R6::R6Class("JRC",
   inherit = CountryDataClass,
@@ -47,7 +62,9 @@ JRC <- R6::R6Class("JRC",
       "IntensiveCare"
     ),
 
-    #' @description JRC specific data cleaning
+    #' @description JRC specific data cleaning. The raw source data columns are
+    #' converted to the correct type and renamed appropriately to match the
+    #' standard for general processing.
     #' @importFrom dplyr mutate rename
     #' @importFrom lubridate ymd
     #' @importFrom rlang .data
@@ -72,8 +89,8 @@ JRC <- R6::R6Class("JRC",
         )
     },
 
-    #' @description JRC specific country level data cleaning. Aggregates the
-    #' data to the country (level 1) level.
+    #' @description JRC specific country level data cleaning. Selects country
+    #' level (level 1) columns from the data ready for further processing.
     #' @importFrom dplyr select everything
     #' @importFrom rlang .data
     clean_level_1 = function() {
@@ -90,8 +107,9 @@ JRC <- R6::R6Class("JRC",
         )
     },
 
-    #' @description JRC specific region level data cleaning. Aggregates the
-    #' data to the region (level 2) level.
+    #' @description JRC specific region level data cleaning. Selects country
+    #' (level 1) and region (level 2) columns from the data ready for further
+    #' processing.
     #' @importFrom dplyr select everything
     #' @importFrom rlang .data
     clean_level_2 = function() {
