@@ -246,15 +246,15 @@ make_github_workflow <- function(source,
 #' @param source character_array The name of the class to create. Must start
 #' with a capital letter (be upper camel case or an acronym in all caps such as
 #' WHO).
-#' @param type character_array the type of class to create, Regional or National
-#' defaults to Regional. Regional classes are individual countries, such as UK,
-#' Italy, India, etc. These inherit from `DataClass`, whilst national classes
-#' are sources for multiple countries data, such as JRC, JHU, Google, etc. These
-#' inherit from `CountryDataClass`.
-make_new_data_source <- function(source, type = "Regional") {
-  if (!(type %in% c("Regional", "National"))) {
+#' @param type character_array the type of class to create, subnational or
+#' National defaults to subnational. Regional classes are individual countries,
+#' such as UK, Italy, India, etc. These inherit from `DataClass`, whilst
+#' national classes are sources for multiple countries data, such as JRC, JHU,
+#' Google, etc. These inherit from `CountryDataClass`.
+make_new_data_source <- function(source, type = "subnational") {
+  if (!(type %in% c("subnational", "national"))) {
     stop(
-      "type must be 'Regional' or 'National'"
+      "type must be 'subnational' or 'national'"
     )
   }
   if (!grepl("^[A-Z]", source)) {
@@ -262,17 +262,18 @@ make_new_data_source <- function(source, type = "Regional") {
       "New countries should start with a capital letter. E.g. Italy not italy."
     )
   }
-  newfile_path <- paste("R/", source, ".R")
+  newfile_path <- paste0("R/", source, ".R")
   if (file.exists(newfile_path)) {
     stop(
       paste0(newfile_path, " exists, Will not overwrite. Remove manually.")
     )
   }
   template_path <- "inst/CountryTemplate.R"
-  template(readLines(template_path))
+  template <- readLines(template_path)
   newfile <- gsub("CountryTemplate", source, template)
-  if (type == "National") {
+  if (type == "national") {
     newfile <- gsub("DataClass", "CountryDataClass", newfile)
+    newfile <- gsub("subnational", "national", newfile)
   }
   writeLines(newfile, newfile_path)
   message(

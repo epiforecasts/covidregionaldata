@@ -4,18 +4,18 @@
 \alias{make_new_data_source}
 \title{Create new country class for a given source}
 \usage{
-make_new_data_source(source, type = "Regional")
+make_new_data_source(source, type = "subnational")
 }
 \arguments{
 \item{source}{character_array The name of the class to create. Must start
 with a capital letter (be upper camel case or an acronym in all caps such as
 WHO).}
 
-\item{type}{character_array the type of class to create, Regional or National
-defaults to Regional. Regional classes are individual countries, such as UK,
-Italy, India, etc. These inherit from \code{DataClass}, whilst national classes
-are sources for multiple countries data, such as JRC, JHU, Google, etc. These
-inherit from \code{CountryDataClass}.}
+\item{type}{character_array the type of class to create, subnational or
+National defaults to subnational. Regional classes are individual countries,
+such as UK, Italy, India, etc. These inherit from \code{DataClass}, whilst
+national classes are sources for multiple countries data, such as JRC, JHU,
+Google, etc. These inherit from \code{CountryDataClass}.}
 }
 \description{
 Makes a new regional or national country class with the name
