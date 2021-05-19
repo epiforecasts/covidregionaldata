@@ -216,3 +216,67 @@ download_excel <- function(url, archive, verbose = FALSE,
   dt <- as.data.frame(dt)
   return(dt)
 }
+
+
+#' Create github action for a given source
+#' @description Makes a github workflow yaml file for a given source to be used
+#' as an action to check the data as a github action.
+#' @param source character_array The name of the class to create the workflow
+#' for.
+#' @param workflow_path character_array The path to where the workflow file
+#' should be saved. Defaults to '.github/workflows/'
+make_github_workflow <- function(source,
+                                 workflow_path = paste0(
+                                   ".github/workflows/", source, ".yaml"
+                                 )) {
+  template_path <- "inst/github_workflow_template.yaml"
+  template <- readLines(template_path)
+  newfile <- gsub("_SOURCE_", source, template)
+  writeLines(newfile, workflow_path)
+  message(
+    paste("workflow created for", source, "at", workflow_path)
+  )
+}
+
+#' Create new country class for a given source
+#' @description Makes a new regional or national country class with the name
+#' provided as the source. This forms a basic template for the user to fill in
+#' with the specific field values and cleaning functions required. This also
+#' creates a github workflow file for the same country.
+#' @param source character_array The name of the class to create. Must start
+#' with a capital letter (be upper camel case or an acronym in all caps such as
+#' WHO).
+#' @param type character_array the type of class to create, Regional or National
+#' defaults to Regional. Regional classes are individual countries, such as UK,
+#' Italy, India, etc. These inherit from `DataClass`, whilst national classes
+#' are sources for multiple countries data, such as JRC, JHU, Google, etc. These
+#' inherit from `CountryDataClass`.
+make_new_data_source <- function(source, type = "Regional") {
+  if (!(type %in% c("Regional", "National"))) {
+    stop(
+      "type must be 'Regional' or 'National'"
+    )
+  }
+  if (!grepl("^[A-Z]", source)) {
+    stop(
+      "New countries should start with a capital letter. E.g. Italy not italy."
+    )
+  }
+  newfile_path <- paste("R/", source, ".R")
+  if (file.exists(newfile_path)) {
+    stop(
+      paste0(newfile_path, " exists, Will not overwrite. Remove manually.")
+    )
+  }
+  template_path <- "inst/CountryTemplate.R"
+  template(readLines(template_path))
+  newfile <- gsub("CountryTemplate", source, template)
+  if (type == "National") {
+    newfile <- gsub("DataClass", "CountryDataClass", newfile)
+  }
+  writeLines(newfile, newfile_path)
+  message(
+    paste(type, "Class created for", source, "at", newfile_path)
+  )
+  make_github_workflow(source)
+}
