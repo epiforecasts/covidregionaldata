@@ -23,6 +23,7 @@ it is a data.frame, which is not empty, has at least 2 columns and calls
 Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{expect_columns_contain_data}()},
+\code{\link{expect_processed_cols}()},
 \code{\link{test_cleaning}()},
 \code{\link{test_download}()},
 \code{\link{test_return}()}

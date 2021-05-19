@@ -4,6 +4,7 @@
 #' @param data The clean data to check
 #' @param level character_array the level of the data to check
 #' @family tests
+#' @concept tests
 #' @export
 expect_clean_cols <- function(data, level) {
   testthat::expect_s3_class(data[["date"]], "Date")
@@ -18,6 +19,9 @@ expect_clean_cols <- function(data, level) {
 #' @param level character_array the level of the data to check
 #' @param localised logical to check localised data or not, defaults to
 #' TRUE.
+#' @family tests
+#' @concept tests
+#' @export
 expect_processed_cols <- function(data, level = "1", localised = TRUE) {
   testthat::expect_s3_class(data[["date"]], "Date")
   testthat::expect_type(data[["cases_new"]], "double")
@@ -39,6 +43,7 @@ expect_processed_cols <- function(data, level = "1", localised = TRUE) {
 #' @importFrom dplyr filter
 #' @importFrom rlang !!
 #' @family tests
+#' @concept tests
 #' @export
 expect_columns_contain_data <- function(DataClass_obj) {
   cols_present <- function(col) {
@@ -83,6 +88,7 @@ expect_columns_contain_data <- function(DataClass_obj) {
 #' @importFrom purrr map walk
 #' @importFrom dplyr slice_tail
 #' @family tests
+#' @concept tests
 #' @export
 test_download <- function(DataClass_obj, download, snapshot_path) {
   if (!file.exists(snapshot_path)) {
@@ -122,6 +128,7 @@ test_download <- function(DataClass_obj, download, snapshot_path) {
 #' they are all characters.
 #' @inheritParams test_download
 #' @family tests
+#' @concept tests
 #' @export
 test_cleaning <- function(DataClass_obj) {
   testthat::test_that(
@@ -154,6 +161,7 @@ test_cleaning <- function(DataClass_obj) {
 #' @param all Logical. Run tests with all settings (TRUE) or with those
 #' defined in the current class instance (FALSE). Defaults to FALSE.
 #' @family tests
+#' @concept tests
 #' @export
 test_processing <- function(DataClass_obj, all = FALSE) {
   testthat::test_that(
@@ -189,6 +197,7 @@ test_processing <- function(DataClass_obj, all = FALSE) {
 #' checked to ensure it contains data and is not just composed of NAs.
 #' @inheritParams test_download
 #' @family tests
+#' @concept tests
 #' @export
 test_return <- function(DataClass_obj) {
   testthat::test_that(

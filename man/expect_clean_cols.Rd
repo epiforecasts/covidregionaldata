@@ -18,6 +18,7 @@ column is a character in the cleaned data (data$clean)
 \seealso{
 Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_columns_contain_data}()},
+\code{\link{expect_processed_cols}()},
 \code{\link{test_cleaning}()},
 \code{\link{test_download}()},
 \code{\link{test_processing}()},

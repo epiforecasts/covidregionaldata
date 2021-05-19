@@ -524,7 +524,10 @@ DataClass <- R6::R6Class(
     #' for all country class objects. It also calls country specific tests
     #' which can be defined in an individual country class method called
     #' `specific_tests()`. The snapshots contain the first 1000 rows of data.
-    #' For more details see the 'testing' vignette: \code{vignette(testing)}.
+    #' For more details see the
+    # nolint start
+    #' \href{https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
+    # nolint end
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.
     #' @param snapshot_dir character_array the name of a directory to save the
