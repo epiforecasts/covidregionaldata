@@ -496,6 +496,56 @@ UK <- R6::R6Class("UK",
           release_date = self$release_date
         )
       return(clean_data)
+    },
+
+    #' @description Specific tests for UK data. In addition to generic tests ran
+    #' by `DataClass$test()` data for NHS regions are downloaded and ran through
+    #' the same generic checks (test_cleaning, test_processing, test_return). If
+    #' download = TRUE or a snapshot file is not found, the nhs data is
+    #' downloaded and saved to the snapshot location provided. If an existing
+    #' snapshot file is found then this data is used in the next tests.
+    #' Tests data can be downloaded, cleaned, processed and returned. Designed
+    #' to be ran from `test` and not ran directly.
+    #' @param self_copy R6class the object to test.
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @param all logical. Run tests with all settings (TRUE) or with those
+    #' defined in the current class instance (FALSE). Defaults to FALSE.
+    #' @param snapshot_path character_array the path to save the downloaded
+    #' snapshot to. Works on the snapshot path constructed by `test` but adds
+    # '_nhs' to the end.
+    #' @param ... Additional parameters to pass to `specific_tests`
+    #' @importFrom dplyr slice_tail
+    specific_tests = function(self_copy, download = FALSE,
+                              all = FALSE, snapshot_path = "", ...) {
+      if (all == TRUE) {
+        if (self_copy$level == "1") {
+          self_copy$data_name <- "UK level 1 with 'nhsregions=TRUE'"
+          self_copy$nhsregions <- TRUE
+          snapshot_path <- gsub(".rds", "_nhs.rds", snapshot_path)
+          if (!file.exists(snapshot_path)) {
+            download <- TRUE
+          }
+          if (download) {
+            test_that(paste(self_copy$data_name, " downloads sucessfully"), { # nolint
+              self_copy$data$raw$nhs <- self_copy$download_nhs_regions()
+              expect_s3_class(self_copy$data$raw$nhs, "data.frame")
+              expect_true(nrow(self_copy$data$raw$nhs) > 0)
+              expect_true(ncol(self_copy$data$raw$nhs) >= 2)
+            })
+            self_copy$data$raw$nhs <- slice_tail(
+              self_copy$data$raw$nhs,
+              n = 1000
+            )
+            saveRDS(self_copy$data$raw$nhs, snapshot_path)
+          } else {
+            self_copy$data$raw$nhs <- readRDS(snapshot_path)
+          }
+          test_cleaning(DataClass_obj = self_copy)
+          test_processing(DataClass_obj = self_copy)
+          test_return(DataClass_obj = self_copy)
+        }
+      }
     }
   )
 )

@@ -130,6 +130,7 @@ specific.}
 \item \href{#method-set_filters}{\code{UK$set_filters()}}
 \item \href{#method-download_nhs_regions}{\code{UK$download_nhs_regions()}}
 \item \href{#method-add_nhs_regions}{\code{UK$add_nhs_regions()}}
+\item \href{#method-specific_tests}{\code{UK$specific_tests()}}
 \item \href{#method-clone}{\code{UK$clone()}}
 }
 }
@@ -144,6 +145,7 @@ specific.}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return">}\href{../../covidregionaldata/html/DataClass.html#method-return}{\code{covidregionaldata::DataClass$return()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary">}\href{../../covidregionaldata/html/DataClass.html#method-summary}{\code{covidregionaldata::DataClass$summary()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test">}\href{../../covidregionaldata/html/DataClass.html#method-test}{\code{covidregionaldata::DataClass$test()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -293,6 +295,47 @@ Section 2, "2. Estimated new hospital cases"
 \item{\code{clean_data}}{Cleaned UK covid-19 data}
 
 \item{\code{nhs_data}}{NHS region data}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-specific_tests"></a>}}
+\if{latex}{\out{\hypertarget{method-specific_tests}{}}}
+\subsection{Method \code{specific_tests()}}{
+Specific tests for UK data. In addition to generic tests ran
+by \code{DataClass$test()} data for NHS regions are downloaded and ran through
+the same generic checks (test_cleaning, test_processing, test_return). If
+download = TRUE or a snapshot file is not found, the nhs data is
+downloaded and saved to the snapshot location provided. If an existing
+snapshot file is found then this data is used in the next tests.
+Tests data can be downloaded, cleaned, processed and returned. Designed
+to be ran from \code{test} and not ran directly.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UK$specific_tests(
+  self_copy,
+  download = FALSE,
+  all = FALSE,
+  snapshot_path = "",
+  ...
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{self_copy}}{R6class the object to test.}
+
+\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.}
+
+\item{\code{all}}{logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.}
+
+\item{\code{snapshot_path}}{character_array the path to save the downloaded
+snapshot to. Works on the snapshot path constructed by \code{test} but adds}
+
+\item{\code{...}}{Additional parameters to pass to \code{specific_tests}}
 }
 \if{html}{\out{</div>}}
 }

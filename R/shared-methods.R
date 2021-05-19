@@ -124,8 +124,8 @@ initialise_dataclass <- function(class = character(), level = "1",
 #' within this parent class and so are accessible by all data sets which
 #' inherit from here. Individual data sets can overwrite any functions or
 #' fields providing they define a method with the same name, and can be
-#' extended with additinal functionality. See the individual method documentaion
-#' for further details.
+#' extended with additional functionality. See the individual method
+#' documentaion for further details.
 #' @family interface
 #' @importFrom R6 R6Class
 DataClass <- R6::R6Class(
@@ -172,6 +172,9 @@ DataClass <- R6::R6Class(
     #' @field level target region level. This field is filled at initialisation
     #' using user inputs or defaults in `$new()`
     level = NULL,
+    #' @field data_name string. The country name followed by the level. E.g.
+    #' "Italy at level 1"
+    data_name = NULL,
     #' @field totals Boolean. If TRUE, returns totalled data per region
     #' up to today's date. This field is filled at initialisation using user
     #' inputs or defaults in `$new()`
@@ -252,6 +255,7 @@ DataClass <- R6::R6Class(
       check_level(self$level, self$supported_levels)
       check_level(self$filter_level, self$supported_levels)
 
+      self$data_name <- paste0(class(self)[1], " at level ", self$level)
       self$totals <- totals
       self$localise <- localise
       self$verbose <- verbose
@@ -509,6 +513,72 @@ DataClass <- R6::R6Class(
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
       )
       return(sum_df)
+    },
+
+    #' @description Run tests on a country class instance. Calling `test()` on a
+    #' class instance runs tests with the settings in use. For example, if you
+    #' set `level = "1"` and `localise = FALSE` the tests will be run on level 1
+    #' data which is not localised. Rather than downloading data for a test
+    #' users can provide a path to a snapshot file of data to test instead.
+    #' Tests are run on a clone of the class. This method calls generic tests
+    #' for all country class objects. It also calls country specific tests
+    #' which can be defined in an individual country class method called
+    #' `specific_tests()`. The snapshots contain the first 1000 rows of data.
+    #' For more details see the
+    # nolint start
+    #' \href{https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
+    # nolint end
+    #' @param download logical. To download the data (TRUE) or use a snapshot
+    #' (FALSE). Defaults to FALSE.
+    #' @param snapshot_dir character_array the name of a directory to save the
+    #' downloaded data or read from. If not defined a directory called
+    #' 'snapshots' will be created in the temp directory. Snapshots are saved as
+    #' rds files with the class name and level: e.g. `Italy_level_1.rds`.
+    #' @param all logical. Run tests with all settings (TRUE) or with those
+    #' defined in the current class instance (FALSE). Defaults to FALSE.
+    #' @param ... Additional parameters to pass to `specific_tests`
+    test = function(download = FALSE,
+                    snapshot_dir = paste0(tempdir(), "/snapshots"),
+                    all = FALSE, ...) {
+      snapshot_file_name <- paste0(
+        class(self)[1], "_level_",
+        self$level, ".rds"
+      )
+      dir.create(snapshot_dir, showWarnings = FALSE)
+      message_verbose(
+        verbose = self$verbose,
+        paste("snapshot to be saved at", snapshot_dir)
+      )
+      snapshot_path <- file.path(snapshot_dir, snapshot_file_name)
+      self_copy <- self$clone()
+      test_download(
+        DataClass_obj = self_copy,
+        download = download,
+        snapshot_path = snapshot_path
+      )
+      test_cleaning(
+        DataClass_obj = self_copy
+      )
+      test_processing(
+        DataClass_obj = self_copy,
+        all = all
+      )
+      test_return(
+        DataClass_obj = self_copy
+      )
+
+      if ("specific_tests" %in% names(self_copy)) {
+        specific <- paste0(
+          "self$specific_tests(
+            self_copy = self_copy,
+            download = download,
+            all = all,
+            snapshot_path = snapshot_path,
+            ...
+          )"
+        )
+        eval(parse(text = specific))
+      }
     }
   )
 )
