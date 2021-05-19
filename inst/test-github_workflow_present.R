@@ -8,6 +8,7 @@ test_github_workflow_found <- function(source) {
       )
     )
   }
+  print(paste(source_workflow_path, " exists"))
 }
 
 purrr::walk(
