@@ -12,8 +12,8 @@ downloading, processing, and returning data. These functions are contained
 within this parent class and so are accessible by all data sets which
 inherit from here. Individual data sets can overwrite any functions or
 fields providing they define a method with the same name, and can be
-extended with additinal functionality. See the individual method documentaion
-for further details.
+extended with additional functionality. See the individual method
+documentaion for further details.
 }
 \seealso{
 Data interface functions
@@ -68,6 +68,9 @@ list should be named after a supported level.}
 \item{\code{level}}{target region level. This field is filled at initialisation
 using user inputs or defaults in \verb{$new()}}
 
+\item{\code{data_name}}{string. The country name followed by the level. E.g.
+"Italy at level 1"}
+
 \item{\code{totals}}{Boolean. If TRUE, returns totalled data per region
 up to today's date. This field is filled at initialisation using user
 inputs or defaults in \verb{$new()}}
@@ -109,6 +112,7 @@ Defaults to the target level.}
 \item \href{#method-get}{\code{DataClass$get()}}
 \item \href{#method-return}{\code{DataClass$return()}}
 \item \href{#method-summary}{\code{DataClass$summary()}}
+\item \href{#method-test}{\code{DataClass$test()}}
 \item \href{#method-clone}{\code{DataClass$clone()}}
 }
 }
@@ -350,6 +354,49 @@ being processed.
 Returns a single row summary tibble containing the origin of the
 data source, class, level 1 and 2 region names, the type of data,
 the urls of the raw data and the columns present in the raw data.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-test"></a>}}
+\if{latex}{\out{\hypertarget{method-test}{}}}
+\subsection{Method \code{test()}}{
+Run tests on a country class instance. Calling \code{test()} on a
+class instance runs tests with the settings in use. For example, if you
+set \code{level = "1"} and \code{localise = FALSE} the tests will be run on level 1
+data which is not localised. Rather than downloading data for a test
+users can provide a path to a snapshot file of data to test instead.
+Tests are run on a clone of the class. This method calls generic tests
+for all country class objects. It also calls country specific tests
+which can be defined in an individual country class method called
+\code{specific_tests()}. The snapshots contain the first 1000 rows of data.
+For more details see the
+\href{https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$test(
+  download = FALSE,
+  snapshot_dir = paste0(tempdir(), "/snapshots"),
+  all = FALSE,
+  ...
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{download}}{logical. To download the data (TRUE) or use a snapshot
+(FALSE). Defaults to FALSE.}
+
+\item{\code{snapshot_dir}}{character_array the name of a directory to save the
+downloaded data or read from. If not defined a directory called
+'snapshots' will be created in the temp directory. Snapshots are saved as
+rds files with the class name and level: e.g. \code{Italy_level_1.rds}.}
+
+\item{\code{all}}{logical. Run tests with all settings (TRUE) or with those
+defined in the current class instance (FALSE). Defaults to FALSE.}
+
+\item{\code{...}}{Additional parameters to pass to \code{specific_tests}}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
