@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '36 12 * * *'
+    - cron: _CRON_
   workflow_dispatch:
 
 name: _SOURCE_

@@ -4,7 +4,11 @@
 \alias{make_new_data_source}
 \title{Create new country class for a given source}
 \usage{
-make_new_data_source(source, type = "subnational")
+make_new_data_source(
+  source,
+  type = "subnational",
+  newfile_path = paste0("R/", source, ".R")
+)
 }
 \arguments{
 \item{source}{character_array The name of the class to create. Must start
@@ -16,6 +20,8 @@ National defaults to subnational. Regional classes are individual countries,
 such as UK, Italy, India, etc. These inherit from \code{DataClass}, whilst
 national classes are sources for multiple countries data, such as JRC, JHU,
 Google, etc. These inherit from \code{CountryDataClass}.}
+
+\item{newfile_path}{character_array the place to save the class file}
 }
 \description{
 Makes a new regional or national country class with the name
@@ -23,3 +29,4 @@ provided as the source. This forms a basic template for the user to fill in
 with the specific field values and cleaning functions required. This also
 creates a github workflow file for the same country.
 }
+\concept{utility}

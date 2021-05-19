@@ -225,13 +225,21 @@ download_excel <- function(url, archive, verbose = FALSE,
 #' for.
 #' @param workflow_path character_array The path to where the workflow file
 #' should be saved. Defaults to '.github/workflows/'
+#' @param cron character_array the cron time to run the tests, defaults to
+#' 36 12 * * *, following the minute, hour, day(month), month and day(week)
+#' format.
+#' @concept utility
 make_github_workflow <- function(source,
                                  workflow_path = paste0(
                                    ".github/workflows/", source, ".yaml"
-                                 )) {
-  template_path <- "inst/github_workflow_template.yaml"
+                                 ), cron = "36 12 * * *") {
+  template_path <- system.file(
+    "github_workflow_template.yaml",
+    package = "covidregionaldata"
+  )
   template <- readLines(template_path)
   newfile <- gsub("_SOURCE_", source, template)
+  newfile <- gsub("_CRON_", paste0("'", cron, "'"), newfile)
   writeLines(newfile, workflow_path)
   message(
     paste("workflow created for", source, "at", workflow_path)
@@ -251,7 +259,10 @@ make_github_workflow <- function(source,
 #' such as UK, Italy, India, etc. These inherit from `DataClass`, whilst
 #' national classes are sources for multiple countries data, such as JRC, JHU,
 #' Google, etc. These inherit from `CountryDataClass`.
-make_new_data_source <- function(source, type = "subnational") {
+#' @param newfile_path character_array the place to save the class file
+#' @concept utility
+make_new_data_source <- function(source, type = "subnational",
+                                 newfile_path = paste0("R/", source, ".R")) {
   if (!(type %in% c("subnational", "national"))) {
     stop(
       "type must be 'subnational' or 'national'"
@@ -262,13 +273,15 @@ make_new_data_source <- function(source, type = "subnational") {
       "New countries should start with a capital letter. E.g. Italy not italy."
     )
   }
-  newfile_path <- paste0("R/", source, ".R")
   if (file.exists(newfile_path)) {
     stop(
       paste0(newfile_path, " exists, Will not overwrite. Remove manually.")
     )
   }
-  template_path <- "inst/CountryTemplate.R"
+  template_path <- system.file(
+    "CountryTemplate.R",
+    package = "covidregionaldata"
+  )
   template <- readLines(template_path)
   newfile <- gsub("CountryTemplate", source, template)
   if (type == "national") {
