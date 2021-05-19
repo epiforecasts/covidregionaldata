@@ -33,7 +33,7 @@ navbar:
           href: articles/slowstart.html
         - text: "Testing Datasets"
           href: articles/testing.html
-    - text: "News""
+    - text: "News"
       href: news/index.html
     - icon: fa-file-code-o
       text: "Functions"
