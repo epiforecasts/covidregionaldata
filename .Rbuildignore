@@ -28,3 +28,5 @@ SMG.md
 ^inst/CountryTemplate\.R$
 ^inst/paper$
 ^inst/examples$
+^inst/github_workflow_template\.yaml$
+^tests/testthat/test-github_workflow_present\.R$

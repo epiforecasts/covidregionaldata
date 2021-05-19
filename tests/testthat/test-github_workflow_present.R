@@ -23,6 +23,7 @@ test_github_workflow_found <- function(source) {
   )
 }
 
+skip_on_cran()
 purrr::walk(
   get_available_datasets()$class,
   test_github_workflow_found
