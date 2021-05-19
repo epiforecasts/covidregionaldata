@@ -4,7 +4,7 @@ test_github_workflow_found <- function(source) {
     stop(
       paste0(
         source, " does not have a github workflow yaml file. ",
-        "You can create this by calling `make_github_workflow(`'", source, "')`"
+        "You can create this by calling `make_github_workflow('", source, "')`"
       )
     )
   }
