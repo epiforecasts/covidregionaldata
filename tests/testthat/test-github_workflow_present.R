@@ -3,7 +3,8 @@ test_github_workflow_found <- function(source) {
   test_that(
     paste0(
       source, " has github workflow yaml file. ",
-      "You can create this by calling `make_github_workflow(`'", source, "')`."
+      "You can create this by calling `make_github_workflow(`'", source, "')`.",
+      " cwd = ", getwd()
     ),
     {
       expect_true(
