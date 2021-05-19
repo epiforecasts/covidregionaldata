@@ -25,11 +25,15 @@ navbar:
       href: index.html
     - text: "Getting Started"
       href: articles/quickstart.html
-    - text: "Package overview"
-      href: articles/slowstart.html
     - text: "Data Status"
       href: articles/dataset-status.html
-    - text: News
+    - text: "Other Articles"
+      menu:
+        - text: "Package Overview"
+          href: articles/slowstart.html
+        - text: "Testing Datasets"
+          href: articles/testing.html
+    - text: "News""
       href: news/index.html
     - icon: fa-file-code-o
       text: "Functions"
