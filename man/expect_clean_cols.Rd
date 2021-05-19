@@ -16,7 +16,7 @@ Checks the date column is an s3 class and that region level
 column is a character in the cleaned data (data$clean)
 }
 \seealso{
-Other tests: 
+Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_columns_contain_data}()},
 \code{\link{test_cleaning}()},
 \code{\link{test_download}()},

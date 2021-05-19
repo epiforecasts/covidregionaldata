@@ -17,7 +17,7 @@ it is a data.frame, not empty and has at least 2 columns. Each column is then
 checked to ensure it contains data and is not just composed of NAs.
 }
 \seealso{
-Other tests: 
+Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{expect_columns_contain_data}()},
 \code{\link{test_cleaning}()},

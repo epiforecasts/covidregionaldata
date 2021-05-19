@@ -73,6 +73,7 @@ conuntry
 Cota
 countries’
 countrycode
+CountryDataClass
 CoV
 covdata
 covid
@@ -392,6 +393,7 @@ saveRDS
 savivaldybe
 SciELOPreprints
 sciencemag
+seabbs
 sebastian
 Seidel
 seperate

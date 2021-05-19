@@ -18,7 +18,7 @@ is not empty, has at least two columns and that columns are clean by calling
 they are all characters.
 }
 \seealso{
-Other tests: 
+Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{expect_columns_contain_data}()},
 \code{\link{test_download}()},

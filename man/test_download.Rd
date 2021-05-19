@@ -21,7 +21,7 @@ snapshot file is not found, and store a snap shot in the \code{snapshot_dir}. If
 an existing snapshot file is found then load this data to use in future tests
 }
 \seealso{
-Other tests: 
+Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{expect_columns_contain_data}()},
 \code{\link{test_cleaning}()},

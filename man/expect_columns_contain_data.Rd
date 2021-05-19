@@ -15,7 +15,7 @@ Checks that cleaned columns cases, deaths, recovered and test
 (new and total) are not entirely composed of NAs.
 }
 \seealso{
-Other tests: 
+Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{test_cleaning}()},
 \code{\link{test_download}()},
