@@ -26,5 +26,6 @@ SMG.md
 ^README\.Rmd$
 ^.*.pdf$
 ^inst/CountryTemplate\.R$
+^inst/github_workflow_template\.yaml$
 ^inst/paper$
 ^inst/examples$
