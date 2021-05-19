@@ -118,6 +118,7 @@ dplyr
 DS
 DTRA
 eabg
+ec
 ecdc
 ECDC
 Edmunds
@@ -227,6 +228,8 @@ Jonnie
 joss
 journalCode
 journalInformation
+jrc
+JRC
 jul
 jure
 JW
@@ -356,7 +359,10 @@ rboyes
 RCB
 RCUK
 Rdev
+<<<<<<< HEAD
 rds
+=======
+>>>>>>> master
 Rds
 README
 readmissions
@@ -457,6 +463,7 @@ transmissibility
 Tully
 TWR
 ubuntu
+UCPM
 uk
 urldate
 urls

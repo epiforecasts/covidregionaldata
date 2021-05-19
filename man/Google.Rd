@@ -58,6 +58,7 @@ National data sources
 \code{\link{Covid19DataHub}},
 \code{\link{ECDC}},
 \code{\link{JHU}},
+\code{\link{JRC}},
 \code{\link{WHO}}
 
 Subnational data sources

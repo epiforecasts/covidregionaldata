@@ -24,6 +24,7 @@ National data sources
 \code{\link{Covid19DataHub}},
 \code{\link{Google}},
 \code{\link{JHU}},
+\code{\link{JRC}},
 \code{\link{WHO}}
 }
 \concept{dataset}
