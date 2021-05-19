@@ -37,7 +37,7 @@ ukdata$test(snapshot_dir = "../tests/testthat/custom_data/")
 Here, I break down the different components of this function to walk through how the tests are run.
 
 ```{r, echo = TRUE}
-DataClass$test
+ukdata$test
 ```
 
 For a given country, such as the UK, you would make this by calling something like `ukdata <- UK$new(level = "1")` and can run the steps one by one by calling the respective methods: `ukdata$download(); ukdata$clean(); ukdata$process()`. To run the tests you would call `ukdata$test(shapshot_dir = "place/2/save/snapshots")` By default, if `snapshot_dir` is not given it will use a generic `snapsots` directory. The `snapshot_dir` argument specifies a directory to save data snapshots to and if it doesn't exist it will make it for you. The file is constructed internally from the object you are testing and the data level, e.g. `Uk_level_1.rds`. Rather than running tests on your active class, the code first makes a clone of your class which is then used for tests: `self_copy <- self$clone()` The snapshot path is the path to a rds file where you either have stored some raw downloaded data to test, or where you want a downloaded snapshot of the data to end up. This is handled by the function `test_download()`. The cloned class is passed to this function, along with the download parameter, which dictates whether to overwrite the snapshot file provided.
