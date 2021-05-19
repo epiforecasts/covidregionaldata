@@ -38,5 +38,6 @@ jobs:
 
       - name: Check workflow found
         run: |
+          library("covidregionaldata")
           source("inst/test-github_workflow_present.R")
         shell: Rscript {0}
