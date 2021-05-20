@@ -4,11 +4,15 @@
 \alias{Netherlands}
 \title{Netherlands Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://coronadashboard.government.nl/verantwoording#vaccination}
+\url{https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427?tab=relations}
 }
 \description{
-Information for downloading, cleaning
-and processing COVID-19 region data for the Netherlands.
+Class for downloading, cleaning and processing COVID-19
+sub-regional data for the Netherlands, provided by RVIM (English: National
+Institute for Public Health and the Environment). This data contains number
+of newly reported cases (that have tested positive), number of newly reported
+hospital admissions and number of newly reported deaths going back to
+27/02/2020. Data is provided at both the province and municipality level.
 }
 \examples{
 \dontrun{
@@ -64,6 +68,7 @@ only entry, is be named main.}
 \itemize{
 \item \href{#method-set_region_codes}{\code{Netherlands$set_region_codes()}}
 \item \href{#method-clean_common}{\code{Netherlands$clean_common()}}
+\item \href{#method-clean_level_1}{\code{Netherlands$clean_level_1()}}
 \item \href{#method-clone}{\code{Netherlands$clone()}}
 }
 }
@@ -96,9 +101,22 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-clean_common"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
-State level data cleaning
+Common cleaning steps to be applied to raw data, regardless
+of level (province or municipality) for raw Netherlands data.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Netherlands$clean_common()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean_level_1"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
+\subsection{Method \code{clean_level_1()}}{
+Netherlands specific province level data cleaning. Takes
+the data cleaned by \code{clean_common} and aggregates it to the Province
+level (level 1).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Netherlands$clean_level_1()}\if{html}{\out{</div>}}
 }
 
 }
