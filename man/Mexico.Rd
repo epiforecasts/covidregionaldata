@@ -41,6 +41,7 @@ Subnational data sources
 \code{\link{Italy}},
 \code{\link{JHU}},
 \code{\link{Lithuania}},
+\code{\link{Netherlands}},
 \code{\link{SouthAfrica}},
 \code{\link{UK}},
 \code{\link{USA}}
