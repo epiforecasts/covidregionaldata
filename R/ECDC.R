@@ -119,6 +119,29 @@ ECDC <- R6::R6Class("ECDC",
       } else {
         return(self$data$return)
       }
+    },
+
+    #' @description Run additional tests on ECDC class. Tests ECDC has required
+    #' additional columns and that there is only one row per country. Designed
+    #' to be run from `test` and not run directly.
+    #' @param self_copy R6class the object to test
+    #' @param ... Extra params passed to specific download functions
+    #' @importFrom dplyr filter group_by tally
+    specific_tests = function(self_copy, ...) {
+      testthat::test_that("ecdc data has expected format", {
+        necessary_cols <- c(
+          "geoId", "countriesAndTerritories",
+          "cases", "deaths", "popData2019"
+        )
+        testthat::expect_true(
+          all(necessary_cols %in% colnames(self_copy$data$raw$main))
+        )
+        all_countries <- self_copy$data$return %>%
+          filter(is.na(un_region)) %>%
+          group_by(country) %>%
+          tally()
+        testthat::expect_true(nrow(all_countries) == 0)
+      })
     }
   )
 )

@@ -11,6 +11,7 @@ This release is in development and therefore new features may change without war
 ## Other changes
 
 * Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field (by @joseph-palmer).
+* Tests on data sets are now included as a method in `DataClass`. `test_regional-datasets` now calls the test function for all classes at each level. Data set specific tests (such as for NHS regions in the UK) are included as a `specific_tests` function within the country class, which is called by the parent (DataClass) `test` after performing standard checks. This allows all the code about a country to be defined in its own class. In addition, users can run tests interactively by calling the test method (e.g. `$test()`;) (by @joseph-palmer)
 
 ## Bug fixes
 

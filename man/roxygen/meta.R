@@ -6,6 +6,7 @@ list(
     interface = "Data interface functions",
     compulsory_processing = "Compulsory processing functions",
     optional_processing = "Optional processing function",
-    processing = "Functions used in the processing pipeline"
+    processing = "Functions used in the processing pipeline",
+    tests = "Functions used for testing data is cleaned and processed correctly"
   )
 )

@@ -73,6 +73,7 @@ conuntry
 Cota
 countries’
 countrycode
+CountryDataClass
 CoV
 covdata
 covid
@@ -358,6 +359,10 @@ rboyes
 RCB
 RCUK
 Rdev
+<<<<<<< HEAD
+rds
+=======
+>>>>>>> master
 Rds
 README
 readmissions
@@ -395,6 +400,7 @@ saveRDS
 savivaldybe
 SciELOPreprints
 sciencemag
+seabbs
 sebastian
 Seidel
 seperate

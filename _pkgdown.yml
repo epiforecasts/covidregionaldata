@@ -15,9 +15,9 @@ development:
 authors:
   Sam Abbott:
     href: "https://www.samabbott.co.uk/"
-  Sebastian Funk: 
+  Sebastian Funk:
     href: "https://www.lshtm.ac.uk/aboutus/people/funk.sebastian"
-    
+
 navbar:
   type: inverse
   left:
@@ -25,11 +25,15 @@ navbar:
       href: index.html
     - text: "Getting Started"
       href: articles/quickstart.html
-    - text: "Package overview"
-      href: articles/slowstart.html
     - text: "Data Status"
-      href: articles/dataset-status.html  
-    - text: News
+      href: articles/dataset-status.html
+    - text: "Other Articles"
+      menu:
+        - text: "Package Overview"
+          href: articles/slowstart.html
+        - text: "Testing Datasets"
+          href: articles/testing.html
+    - text: "News"
       href: news/index.html
     - icon: fa-file-code-o
       text: "Functions"
@@ -61,6 +65,10 @@ reference:
     desc: Utility functions that either help manage data, provide additional information, or convert the data into new formats.
     contents:
       - has_concept("utility")
+  - title: Tests
+    desc: Testing functions that check at each step (cleaning, processing, returning) the data structure and types are as expected. Requires `testthat` to be installed.
+    contents:
+      - has_concept("tests")
   - title: Datasets
     desc: Package datasets
     contents:
