@@ -79,6 +79,7 @@ Subnational data sources
 \code{\link{JHU}},
 \code{\link{Lithuania}},
 \code{\link{Mexico}},
+\code{\link{Netherlands}},
 \code{\link{SouthAfrica}},
 \code{\link{USA}}
 }
