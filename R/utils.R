@@ -229,6 +229,7 @@ download_excel <- function(url, archive, verbose = FALSE,
 #' 36 12 * * *, following the minute, hour, day(month), month and day(week)
 #' format.
 #' @concept utility
+#' @export
 make_github_workflow <- function(source,
                                  workflow_path = paste0(
                                    ".github/workflows/", source, ".yaml"
@@ -261,6 +262,7 @@ make_github_workflow <- function(source,
 #' Google, etc. These inherit from `CountryDataClass`.
 #' @param newfile_path character_array the place to save the class file
 #' @concept utility
+#' @export
 make_new_data_source <- function(source, type = "subnational",
                                  newfile_path = paste0("R/", source, ".R")) {
   if (!(type %in% c("subnational", "national"))) {
