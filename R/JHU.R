@@ -117,7 +117,7 @@ JHU <- R6::R6Class("JHU", # rename to country name
         ) %>%
         left_join(
           self$codes_lookup$`1`,
-          by = c("level_1_region" = "Country_Region")
+          by = c("level_1_region" = "Combined_Key")
         ) %>%
         select(
           date,
