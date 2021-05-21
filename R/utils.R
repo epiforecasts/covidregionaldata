@@ -216,3 +216,83 @@ download_excel <- function(url, archive, verbose = FALSE,
   dt <- as.data.frame(dt)
   return(dt)
 }
+
+
+#' Create github action for a given source
+#' @description Makes a github workflow yaml file for a given source to be used
+#' as an action to check the data as a github action.
+#' @param source character_array The name of the class to create the workflow
+#' for.
+#' @param workflow_path character_array The path to where the workflow file
+#' should be saved. Defaults to '.github/workflows/'
+#' @param cron character_array the cron time to run the tests, defaults to
+#' 36 12 * * *, following the minute, hour, day(month), month and day(week)
+#' format.
+#' @concept utility
+#' @export
+make_github_workflow <- function(source,
+                                 workflow_path = paste0(
+                                   ".github/workflows/", source, ".yaml"
+                                 ), cron = "36 12 * * *") {
+  template_path <- system.file(
+    "github_workflow_template.yaml",
+    package = "covidregionaldata"
+  )
+  template <- readLines(template_path)
+  newfile <- gsub("_SOURCE_", source, template)
+  newfile <- gsub("_CRON_", paste0("'", cron, "'"), newfile)
+  writeLines(newfile, workflow_path)
+  message(
+    paste("workflow created for", source, "at", workflow_path)
+  )
+}
+
+#' Create new country class for a given source
+#' @description Makes a new regional or national country class with the name
+#' provided as the source. This forms a basic template for the user to fill in
+#' with the specific field values and cleaning functions required. This also
+#' creates a github workflow file for the same country.
+#' @param source character_array The name of the class to create. Must start
+#' with a capital letter (be upper camel case or an acronym in all caps such as
+#' WHO).
+#' @param type character_array the type of class to create, subnational or
+#' National defaults to subnational. Regional classes are individual countries,
+#' such as UK, Italy, India, etc. These inherit from `DataClass`, whilst
+#' national classes are sources for multiple countries data, such as JRC, JHU,
+#' Google, etc. These inherit from `CountryDataClass`.
+#' @param newfile_path character_array the place to save the class file
+#' @concept utility
+#' @export
+make_new_data_source <- function(source, type = "subnational",
+                                 newfile_path = paste0("R/", source, ".R")) {
+  if (!(type %in% c("subnational", "national"))) {
+    stop(
+      "type must be 'subnational' or 'national'"
+    )
+  }
+  if (!grepl("^[A-Z]", source)) {
+    stop(
+      "New countries should start with a capital letter. E.g. Italy not italy."
+    )
+  }
+  if (file.exists(newfile_path)) {
+    stop(
+      paste0(newfile_path, " exists, Will not overwrite. Remove manually.")
+    )
+  }
+  template_path <- system.file(
+    "CountryTemplate.R",
+    package = "covidregionaldata"
+  )
+  template <- readLines(template_path)
+  newfile <- gsub("CountryTemplate", source, template)
+  if (type == "national") {
+    newfile <- gsub("DataClass", "CountryDataClass", newfile)
+    newfile <- gsub("subnational", "national", newfile)
+  }
+  writeLines(newfile, newfile_path)
+  message(
+    paste(type, "Class created for", source, "at", newfile_path)
+  )
+  make_github_workflow(source)
+}
