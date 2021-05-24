@@ -63,12 +63,18 @@ Authors@R:
              family = "Funk",
              role = "aut",
              email = "sebastian.funk@lshtm.ac.uk"))
-Description: An interface to subnational and national level COVID-19 data.
-    For all countries supported, this includes a daily time-series of
-    cases.  Wherever available we also provide data on deaths,
-    hospitalisations, and tests.  National level data is also supported
-    using a range of data sources as well as line list data and links to
-    intervention data sets.
+Description: Interface to subnational and national level COVID-19 data
+    sourced from both official sources, such as Public Health England in
+    the UK, and from other Covid-19 data collections, including the World
+    Health Organisation (WHO), European Centre for Disease Prevention and
+    Control (ECDC), John Hopkins University (JHU), Google Open Data and
+    others.  Covid-19 data is cleaned and processed from their raw format
+    in an open and transparent way, allowing users to scrutinise and
+    extend our methods. For all countries supported, this includes a daily
+    time-series of cases. Wherever available we also provide data on
+    deaths, hospitalisations, and tests. National level data is also
+    supported using a range of data sources as well as line list data and
+    links to intervention data sets.
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata/,
     https://github.com/epiforecasts/covidregionaldata/

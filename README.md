@@ -22,16 +22,17 @@ commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionald
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 [![status](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg)](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c)
 
-`covidregionaldata` provides an interface to subnational and national
-level COVID-19 data sourced from both official sources, such as Public
-Health England (UK), and from other Covid-19 data collections, such as
-WHO and Google Open Data. For all countries supported, this includes a
-daily time-series of cases. Wherever available we also provide data on
-deaths, hospitalisations, and tests. National level data is also
-supported using a range of data sources as well as line list data and
-links to intervention data sets. Data is cleaned and processed from the
-raw sources on use in an open and transparent way, allowing users to
-scrutinise and extend our methods.
+Interface to subnational and national level COVID-19 data sourced from
+both official sources, such as Public Health England in the UK, and from
+other Covid-19 data collections, including the World Health Organisation
+(WHO), European Centre for Disease Prevention and Control (ECDC), John
+Hopkins University (JHU), Google Open Data and others. Covid-19 data is
+cleaned and processed from their raw format in an open and transparent
+way, allowing users to scrutinise and extend our methods. For all
+countries supported, this includes a daily time-series of cases.
+Wherever available we also provide data on deaths, hospitalisations, and
+tests. National level data is also supported using a range of data
+sources as well as line list data and links to intervention data sets.
 
 ## Installation
 
@@ -102,15 +103,6 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 120,396
-#> Columns: 8
-#> Delimiter: ","
-#> chr  [3]: Country_code, Country, WHO_region
-#> dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
-#> date [1]: Date_reported
-#> 
-#> Use `spec()` to retrieve the guessed column specification
-#> Pass a specification to the `col_types` argument to quiet this message
 #> Cleaning data
 #> Processing data
 nots
@@ -218,14 +210,14 @@ internally support.
 If using `covidregionaldata` in your work please consider citing it
 using the following,
 
-    #> 
+    #>
     #> To cite covidregionaldata in publications use:
-    #> 
+    #>
     #>   Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020). covidregionaldata: Subnational Data for the COVID-19 Outbreak, DOI:
     #>   10.5281/zenodo.3957539
-    #> 
+    #>
     #> A BibTeX entry for LaTeX users is
-    #> 
+    #>
     #>   @Article{,
     #>     title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},
     #>     author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},
@@ -241,7 +233,7 @@ using the following,
 
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
 
-We welcome contributions and new contributors\! We particularly
+We welcome contributions and new contributors! We particularly
 appreciate help adding new data sources for countries at sub-national
 level, or work on priority problems in the
 [issues](https://github.com/epiforecasts/covidregionaldata/issues).
