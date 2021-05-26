@@ -30,7 +30,7 @@ Hopkins University (JHU), Google Open Data and others. Covid-19 data is
 cleaned and processed from their raw format in an open and transparent
 way, allowing users to scrutinise and extend our methods. For all
 countries supported, this includes a daily time-series of cases.
-Wherever available we also provide data on deaths, hospitalisations, and
+Wherever available data is provided on deaths, hospitalisations, and
 tests. National level data is also supported using a range of data
 sources as well as line list data and links to intervention data sets.
 
@@ -78,7 +78,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpN3Qhuk
+#> Using a cache at: /tmp/RtmpyIjK1S
 ```
 
 To stop using `memoise` use,
@@ -103,10 +103,19 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
+#> Rows: 120,633
+#> Columns: 8
+#> Delimiter: ","
+#> chr  [3]: Country_code, Country, WHO_region
+#> dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
+#> date [1]: Date_reported
+#>
+#> Use `spec()` to retrieve the guessed column specification
+#> Pass a specification to the `col_types` argument to quiet this message
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 120,396 x 15
+#> # A tibble: 120,633 x 15
 #>    date       un_region who_region country           iso_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total
 #>    <date>     <chr>     <chr>      <chr>             <chr>        <dbl>       <dbl>      <dbl>        <dbl>         <dbl>           <dbl>    <dbl>      <dbl>      <dbl>        <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0          0            0            NA              NA       NA         NA         NA           NA
@@ -119,7 +128,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Barbuda AG               0           0          0            0            NA              NA       NA         NA         NA           NA
 #>  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0          0            0            NA              NA       NA         NA         NA           NA
 #> 10 2020-01-03 Asia      EURO       Armenia           AM               0           0          0            0            NA              NA       NA         NA         NA           NA
-#> # … with 120,386 more rows
+#> # … with 120,623 more rows
 ```
 
 This can also be filtered for a country of interest,
@@ -158,7 +167,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,253 x 26
+#> # A tibble: 6,266 x 26
 #>    date       region    region_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total areaType cumCasesByPublish… cumCasesBySpecim… newCasesByPublis…
 #>    <date>     <chr>     <chr>           <dbl>       <dbl>      <dbl>        <dbl>         <dbl>           <dbl>    <dbl>      <dbl>      <dbl>        <dbl> <chr>                 <dbl>             <dbl>             <dbl>
 #>  1 2020-01-30 East Mid… E12000004          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
@@ -171,7 +180,7 @@ uk_nots
 #>  8 2020-01-30 Scotland  S92000003          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
 #>  9 2020-01-30 South Ea… E12000008          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
 #> 10 2020-01-30 South We… E12000009          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
-#> # … with 6,243 more rows, and 9 more variables: newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>, cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>,
+#> # … with 6,256 more rows, and 9 more variables: newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>, cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>,
 #> #   newPillarFourTestsByPublishDate <lgl>, newPillarOneTestsByPublishDate <dbl>, newPillarThreeTestsByPublishDate <dbl>, newPillarTwoTestsByPublishDate <dbl>
 ```
 
