@@ -33,6 +33,7 @@ Subnational data sources
 \code{\link{Lithuania}},
 \code{\link{Mexico}},
 \code{\link{Netherlands}},
+\code{\link{Switzerland}},
 \code{\link{UK}},
 \code{\link{USA}}
 }
