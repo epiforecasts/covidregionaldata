@@ -5,13 +5,15 @@ name: covr-check
 'on':
   push:
     branches:
-      - covr-test
+      - '*'
   schedule:
     - cron: '0 0 * * *'
   pull_request:
     branches:
       - '*'
   workflow_dispatch:
+    branches:
+      - '*'
 
 jobs:
   Lint:
