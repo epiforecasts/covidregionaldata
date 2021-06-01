@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/)   [![GitHub contributors](https://img.shields.io/github/contributors/epiforecasts/covidregionaldata)](https://github.com/epiforecasts/covidregionaldata/graphs/contributors)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/) [![GitHub commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.1.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/) [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189) [![status](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg)](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c)
 
-An interface to subnational and national level COVID-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.
+An interface to subnational and national level COVID-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide  data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets. This package is designed for people who wan't access to standardised Covid-19 data from 'official' sources.
 
 ## Installation
 
@@ -135,7 +135,7 @@ See `get_available_datasets()` for supported regions and subregional levels.
 For an updated view of dataset status check the
 [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html)
 or build the [dataset status vignette](vignettes/dataset-status.Rmd).
- 
+
 For further examples see the [quick start vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd). Additional subnational data are supported via the `JHU()` and `Google()` classes. Use the `available_regions()` method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.
 
 ## Citation
