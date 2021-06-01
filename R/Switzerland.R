@@ -2,9 +2,31 @@
 #' @description Information for downloading, cleaning
 #'  and processing COVID-19 region data for Switzerland
 #'
+#' @section Liechtenstein:
+#' Liechtenstein is not a canton of Switzerland, but is presented in the
+#' source data as a peer of Swiss cantons and assigned the two letter code
+#' `FL`. `covidregionaldata` modifies this and presents the region code
+#' for Liechtenstein as `FL-FL`, consistent with the Swiss ISO 3166-2 codes
+#' which are of the form `CH-BE`, `CH-ZH`, `CH-VD`, ...
+#'
+#' If you do not wish to work with Liechtenstein
+#' data, filter out on this code. Note that this is labelled as a ISO 3166-2
+#' code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
+#' regions.
+#'
+#' @section Additional data:
+#'
+#' In addition to the standard `covidregionaldata` columns provided,
+#' the OpenDataZH source data provides other figures for ICU occupancy,
+#' number of patients on ventilators, and the how many individuals are
+#' isolated or quarantined. These columns are passed through unchanged.
+
+#' Further detail on them can be found at
 # nolint start
+#' \url{https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset}
 #' @source \url{https://github.com/openZH/covid_19/}
 # nolint end
+#'
 #' @export
 #' @concept dataset
 #' @family subnational
@@ -49,19 +71,20 @@ Switzerland <- R6::R6Class("Switzerland",
           "CH-AG", "CH-AR", "CH-AI", "CH-BL", "CH-BS",
           "CH-BE", "CH-FR", "CH-GE", "CH-GL", "CH-GR", "CH-JU", "CH-LU",
           "CH-NE", "CH-NW", "CH-OW", "CH-SG", "CH-SH", "CH-SZ", "CH-SO",
-          "CH-TG", "CH-TI", "CH-UR", "CH-VS", "CH-VD", "CH-ZG", "CH-ZH"
+          "CH-TG", "CH-TI", "CH-UR", "CH-VS", "CH-VD", "CH-ZG", "CH-ZH",
+          "FL-FL"
         ),
         region = c(
-          "Aargau (de)", "Appenzell Ausserrhoden (de)",
-          "Appenzell Innerrhoden (de)", "Basel-Landschaft (de)",
-          "Basel-Stadt (de)", "Bern (de), Berne (fr)",
-          "Fribourg (fr), Freiburg (de)", "Gen\u00e8ve (fr)",
-          "Glarus (de)", "Graub\u00fcnden (de), Grigioni (it), Grischun (rm)",
-          "Jura (fr)", "Luzern (de)", "Neuch\u00e2tel (fr)", "Nidwalden (de)",
-          "Obwalden (de)", "Sankt Gallen (de)", "Schaffhausen (de)",
-          "Schwyz (de)", "Solothurn (de)", "Thurgau (de)", "Ticino (it)",
-          "Uri (de)", "Valais (fr), Wallis (de)", "Vaud (fr)", "Zug (de)",
-          "Z\u00fcrich (de)"
+          "Aargau", "Appenzell Ausserrhoden",
+          "Appenzell Innerrhoden", "Basel-Landschaft",
+          "Basel-Stadt", "Bern",
+          "Fribourg", "Gen\u00e8ve",
+          "Glarus", "Grischun",
+          "Jura", "Luzern", "Neuch\u00e2tel", "Nidwalden",
+          "Obwalden", "Sankt Gallen", "Schaffhausen",
+          "Schwyz", "Solothurn", "Thurgau", "Ticino",
+          "Uri", "Valais", "Vaud", "Zug",
+          "Z\u00fcrich", "Liechtenstein"
         )
       )
     },
@@ -74,16 +97,11 @@ Switzerland <- R6::R6Class("Switzerland",
     clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
         select(-time, -source) %>%
-        # Data for Liechtenstein is coded as being part of Switzerland
-        # in the source data set. Here it is filtered out since it is
-        # only available at the national level here, but treated as
-        # equivalent to level 1 regional data in the source.
-        filter(.data$abbreviation_canton_and_fl != "FL") %>%
         mutate(
-          level_1_region_code =
-            paste0("CH-", .data$abbreviation_canton_and_fl)
-        ) %>%
-        mutate(
+          level_1_region_code = if_else(
+            .data$abbreviation_canton_and_fl == "FL",
+            "FL-FL",
+            paste0("CH-", .data$abbreviation_canton_and_fl)),
           date = as_date(ymd(.data$date))
         ) %>%
         left_join(

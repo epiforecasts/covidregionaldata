@@ -10,6 +10,31 @@
 Information for downloading, cleaning
 and processing COVID-19 region data for Switzerland
 }
+\section{Liechtenstein}{
+
+Liechtenstein is not a canton of Switzerland, but is presented in the
+source data as a peer of Swiss cantons and assigned the two letter code
+\code{FL}. \code{covidregionaldata} modifies this and presents the region code
+for Liechtenstein as \code{FL-FL}, consistent with the Swiss ISO 3166-2 codes
+which are of the form \code{CH-BE}, \code{CH-ZH}, \code{CH-VD}, ...
+
+If you do not wish to work with Liechtenstein
+data, filter out on this code. Note that this is labelled as a ISO 3166-2
+code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
+regions.
+}
+
+\section{Additional data}{
+
+
+In addition to the standard \code{covidregionaldata} columns provided,
+the OpenDataZH source data provides other figures for ICU occupancy,
+number of patients on ventilators, and the how many individuals are
+isolated or quarantined. These columns are passed through unchanged.
+Further detail on them can be found at
+\url{https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset}
+}
+
 \examples{
 \dontrun{
 region <- Switzerland$new(verbose = TRUE, steps = TRUE, get = TRUE)
