@@ -14,12 +14,18 @@
 <script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Subnational Data for the COVID-19 Outbreak">
-<meta property="og:description" content="An interface to subnational and national level COVID-19 data.
-    For all countries supported, this includes a daily time-series of
-    cases.  Wherever available we also provide data on deaths,
-    hospitalisations, and tests.  National level data is also supported
-    using a range of data sources as well as line list data and links to
-    intervention data sets.">
+<meta property="og:description" content="An interface to subnational and national level COVID-19 data
+    sourced from both official sources, such as Public Health England in
+    the UK, and from other Covid-19 data collections, including the World
+    Health Organisation (WHO), European Centre for Disease Prevention and
+    Control (ECDC), John Hopkins University (JHU), Google Open Data and
+    others. Facilitates cleaning and processing Covid-19 data their raw 
+    format in an open and transparent way, allowing users to scrutinise and
+    extend the provided methods. For all countries supported, data includes
+    a daily time-series of cases. Wherever available data is also provided
+    for deaths, hospitalisations, and tests. National level data are also
+    supported using a range of sources as well as line list data and
+    links to intervention data sets.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -111,7 +117,7 @@
 <a href="#subnational-data-for-the-covid-19-outbreak" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak</h1></div>
 
 <p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.1.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="DOI"></a> <a href="https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c" class="external-link"><img src="https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg" alt="status"></a></p>
-<p>An interface to subnational and national level COVID-19 data. For all countries supported, this includes a daily time-series of cases. Wherever available we also provide data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
+<p>Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other Covid-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. Covid-19 data is cleaned and processed from their raw format in an open and transparent way, allowing users to scrutinise and extend our methods. For all countries supported, this includes a daily time-series of cases. Wherever available data is provided on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
@@ -143,7 +149,7 @@
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /var/folders/ss/817x_f3x2gnfr2gn2jrv_m3c0000gn/T//RtmpBAYQeN</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpyIjK1S</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -158,34 +164,32 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 118,263</span>
+<span class="co">#&gt; Rows: 120,633</span>
 <span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
 <span class="co">#&gt; dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths</span>
 <span class="co">#&gt; date [1]: Date_reported</span>
-<span class="co">#&gt; </span>
+<span class="co">#&gt;</span>
 <span class="co">#&gt; Use `spec()` to retrieve the guessed column specification</span>
 <span class="co">#&gt; Pass a specification to the `col_types` argument to quiet this message</span>
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 118,263 x 15</span>
-<span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
-<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
-<span class="co">#&gt;  2 2020-01-03 Europe    EURO       Albania        AL               0           0</span>
-<span class="co">#&gt;  3 2020-01-03 Africa    AFRO       Algeria        DZ               0           0</span>
-<span class="co">#&gt;  4 2020-01-03 Oceania   WPRO       American Samoa AS               0           0</span>
-<span class="co">#&gt;  5 2020-01-03 Europe    EURO       Andorra        AD               0           0</span>
-<span class="co">#&gt;  6 2020-01-03 Africa    AFRO       Angola         AO               0           0</span>
-<span class="co">#&gt;  7 2020-01-03 Americas  AMRO       Anguilla       AI               0           0</span>
-<span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
-<span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
-<span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 118,253 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 120,633 x 15</span>
+<span class="co">#&gt;    date       un_region who_region country           iso_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total</span>
+<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  2 2020-01-03 Europe    EURO       Albania           AL               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  3 2020-01-03 Africa    AFRO       Algeria           DZ               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  4 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  5 2020-01-03 Europe    EURO       Andorra           AD               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  6 2020-01-03 Africa    AFRO       Angola            AO               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  7 2020-01-03 Americas  AMRO       Anguilla          AI               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Barbuda AG               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia           AM               0           0          0            0            NA              NA       NA         NA         NA           NA</span>
+<span class="co">#&gt; # … with 120,623 more rows</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
@@ -213,29 +217,21 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 6,136 x 26</span>
-<span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
-<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
-<span class="co">#&gt;  2 2020-01-30 East of… E12000006          NA          NA         NA           NA</span>
-<span class="co">#&gt;  3 2020-01-30 England  E92000001           2           2         NA           NA</span>
-<span class="co">#&gt;  4 2020-01-30 London   E12000007          NA          NA         NA           NA</span>
-<span class="co">#&gt;  5 2020-01-30 North E… E12000001          NA          NA         NA           NA</span>
-<span class="co">#&gt;  6 2020-01-30 North W… E12000002          NA          NA         NA           NA</span>
-<span class="co">#&gt;  7 2020-01-30 Norther… N92000002          NA          NA         NA           NA</span>
-<span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
-<span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
-<span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 6,126 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newDeaths28DaysByPublishDate &lt;dbl&gt;, newPillarFourTestsByPublishDate &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   newPillarOneTestsByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newPillarThreeTestsByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newPillarTwoTestsByPublishDate &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 6,266 x 26</span>
+<span class="co">#&gt;    date       region    region_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total areaType cumCasesByPublish… cumCasesBySpecim… newCasesByPublis…</span>
+<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2020-01-30 East Mid… E12000004          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  2 2020-01-30 East of … E12000006          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  3 2020-01-30 England   E92000001           2           2         NA           NA            NA              NA       NA         NA         NA           NA nation                   NA                 2                NA</span>
+<span class="co">#&gt;  4 2020-01-30 London    E12000007          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  5 2020-01-30 North Ea… E12000001          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  6 2020-01-30 North We… E12000002          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  7 2020-01-30 Northern… N92000002          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  8 2020-01-30 Scotland  S92000003          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt;  9 2020-01-30 South Ea… E12000008          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt; 10 2020-01-30 South We… E12000009          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA &lt;NA&gt;                     NA                NA                NA</span>
+<span class="co">#&gt; # … with 6,256 more rows, and 9 more variables: newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;, cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;, newDeaths28DaysByPublishDate &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   newPillarFourTestsByPublishDate &lt;lgl&gt;, newPillarOneTestsByPublishDate &lt;dbl&gt;, newPillarThreeTestsByPublishDate &lt;dbl&gt;, newPillarTwoTestsByPublishDate &lt;dbl&gt;</span></code></pre></div>
 <p>Now we have the data we can create plots, for example the time-series of the number of cases for each region:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
@@ -257,26 +253,24 @@
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
 <p>If using <code>covidregionaldata</code> in your work please consider citing it using the following,</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#&gt; </span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; To cite covidregionaldata in publications use:</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen,</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;   Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020).</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;   covidregionaldata: Subnational Data for the COVID-19 Outbreak, DOI:</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;   10.5281/zenodo.3957539</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; </span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; </span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;   @Article{,</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;     title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;     author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;     journal = {-},</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;     year = {2020},</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt;     volume = {-},</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt;     number = {-},</span></span>
-<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;     pages = {-},</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;     doi = {10.5281/zenodo.3957539},</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt;   }</span></span></code></pre></div>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020). covidregionaldata: Subnational Data for the COVID-19 Outbreak, DOI:</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;   10.5281/zenodo.3957539</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;   @Article{,</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;     title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;     author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;     journal = {-},</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;     year = {2020},</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;     volume = {-},</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;     number = {-},</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt;     pages = {-},</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt;     doi = {10.5281/zenodo.3957539},</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div id="development" class="section level2">
 <h2 class="hasAnchor">
