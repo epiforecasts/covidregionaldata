@@ -8,7 +8,11 @@ This release is in development and therefore new features may change without war
 * Support added for data from the European Commission's Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by @joseph-palmer).
 * Support added for data from the Netherlands provided by RVIM (English: National Institute for Public Health and the Environment). This source provides case, deaths and hospital admission data at the province and municipal levels (by @joseph-palmer).
 * Support added for data from Switzerland and Liechtenstein collated by Canton Zurich (@OpenZH). This source provides case, deaths and hospital admission data at the canton level (by @RichardMN).
-* 
+
+## Changes to implemented data sources
+
+* Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent availabe data set (by @kathsherratt).
+
 ## Other changes
 
 * Testing of classes updated to allow for at least one of `common_data_urls` or `level_data_urls` to be present. The previous default which forced the presence of `common_data_urls` meant that several classes had to define an empty field (by @joseph-palmer).
