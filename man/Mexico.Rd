@@ -43,6 +43,7 @@ Subnational data sources
 \code{\link{Lithuania}},
 \code{\link{Netherlands}},
 \code{\link{SouthAfrica}},
+\code{\link{Switzerland}},
 \code{\link{UK}},
 \code{\link{USA}}
 }
