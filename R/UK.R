@@ -379,7 +379,7 @@ UK <- R6::R6Class("UK",
 
       # 1. Data from 7 April 2021 to now:
       # Data not always daily; set up to try different dates
-      check_latest_date <- function(try_date) {
+      get_nhs_url <- function(try_date) {
         nhs_recent_url <- paste0(
           self$data_urls[["nhs_recent_url"]],
           "/wp-content/uploads/sites/2/",
@@ -396,7 +396,7 @@ UK <- R6::R6Class("UK",
       try_date_seq <- seq.Date(self$release_date, 
                            by = -1, length.out = 7)
       try_urls <- map_chr(try_date_seq, 
-                          ~ check_latest_date(.x))
+                          ~ get_nhs_url(.x))
       names(try_urls) <- try_date_seq
       # Check for working urls
       url_status <- map_chr(try_urls, 
