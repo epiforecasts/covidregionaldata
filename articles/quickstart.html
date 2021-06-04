@@ -147,7 +147,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 123,113 x 15</span>
+<span class="co">#&gt; # A tibble: 123,003 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -160,7 +160,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 123,103 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 122,993 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
@@ -205,13 +205,13 @@
 <span class="co">#&gt;  1 United States  US          32979307       590095               0          0</span>
 <span class="co">#&gt;  2 India          IN          28574350       340702               0          0</span>
 <span class="co">#&gt;  3 Brazil         BR          16720081       467706               0          0</span>
-<span class="co">#&gt;  4 France         FR           5584232       108925               0          0</span>
-<span class="co">#&gt;  5 Turkey         TR           5263697        47768               0          0</span>
-<span class="co">#&gt;  6 Russia         RU           5099182       122660               0          0</span>
-<span class="co">#&gt;  7 United Kingdom GB           4494703       127794               0          0</span>
-<span class="co">#&gt;  8 Italy          IT           4223348       126314               0          0</span>
+<span class="co">#&gt;  4 France         FR           5592210       108994               0          0</span>
+<span class="co">#&gt;  5 Turkey         TR           5270299        47882               0          0</span>
+<span class="co">#&gt;  6 Russia         RU           5108129       123037               0          0</span>
+<span class="co">#&gt;  7 United Kingdom GB           4499882       127812               0          0</span>
+<span class="co">#&gt;  8 Italy          IT           4225311       126373               0          0</span>
 <span class="co">#&gt;  9 Argentina      AR           3852156        79320               0          0</span>
-<span class="co">#&gt; 10 Germany        DE           3692468        88940               0          0</span>
+<span class="co">#&gt; 10 Germany        DE           3695633        89026               0          0</span>
 <span class="co">#&gt; # … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="retrieving-subnational-region-data" class="section level2">
