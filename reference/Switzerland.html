@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Italy Class for downloading, cleaning and processing notification data — Italy • covidregionaldata</title>
+<title>Switzerland Class for downloading, cleaning and processing notification data — Switzerland • covidregionaldata</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,9 @@
 
 
 
-<meta property="og:title" content="Italy Class for downloading, cleaning and processing notification data — Italy" />
+<meta property="og:title" content="Switzerland Class for downloading, cleaning and processing notification data — Switzerland" />
 <meta property="og:description" content="Information for downloading, cleaning
-and processing COVID-19 region data for Italy." />
+and processing COVID-19 region data for Switzerland" />
 
 
 
@@ -154,21 +154,45 @@ and processing COVID-19 region data for Italy." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Italy Class for downloading, cleaning and processing notification data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Italy.R'><code>R/Italy.R</code></a></small>
-    <div class="hidden name"><code>Italy.Rd</code></div>
+    <h1>Switzerland Class for downloading, cleaning and processing notification data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Switzerland.R'><code>R/Switzerland.R</code></a></small>
+    <div class="hidden name"><code>Switzerland.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Information for downloading, cleaning
-and processing COVID-19 region data for Italy.</p>
+and processing COVID-19 region data for Switzerland</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://github.com/pcm-dpc/COVID-19/'>https://github.com/pcm-dpc/COVID-19/</a></p>
+    <p><a href='https://github.com/openZH/covid_19/'>https://github.com/openZH/covid_19/</a></p>
+    <h2 class="hasAnchor" id="liechtenstein"><a class="anchor" href="#liechtenstein"></a>Liechtenstein</h2>
+
+    
+
+<p>Liechtenstein is not a canton of Switzerland, but is presented in the
+source data as a peer of Swiss cantons and assigned the two letter code
+<code>FL</code>. <code>covidregionaldata</code> modifies this and presents the region code
+for Liechtenstein as <code>FL-FL</code>, consistent with the Swiss ISO 3166-2 codes
+which are of the form <code>CH-BE</code>, <code>CH-ZH</code>, <code>CH-VD</code>, ...</p>
+<p>If you do not wish to work with Liechtenstein
+data, filter out on this code. Note that this is labelled as a ISO 3166-2
+code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
+regions.</p>
+    <h2 class="hasAnchor" id="additional-data"><a class="anchor" href="#additional-data"></a>Additional data</h2>
+
+    
+
+
+<p>In addition to the standard <code>covidregionaldata</code> columns provided,
+the OpenDataZH source data provides other figures for ICU occupancy,
+number of patients on ventilators, and the how many individuals are
+isolated or quarantined. These columns are passed through unchanged.
+Further detail on them can be found at
+<a href='https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset'>https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Subnational data sources
@@ -182,17 +206,17 @@ and processing COVID-19 region data for Italy.</p>
 <code><a href='Germany.html'>Germany</a></code>,
 <code><a href='Google.html'>Google</a></code>,
 <code><a href='India.html'>India</a></code>,
+<code><a href='Italy.html'>Italy</a></code>,
 <code><a href='JHU.html'>JHU</a></code>,
 <code><a href='Lithuania.html'>Lithuania</a></code>,
 <code><a href='Mexico.html'>Mexico</a></code>,
 <code><a href='Netherlands.html'>Netherlands</a></code>,
 <code><a href='SouthAfrica.html'>SouthAfrica</a></code>,
-<code><a href='Switzerland.html'>Switzerland</a></code>,
 <code><a href='UK.html'>UK</a></code>,
 <code><a href='USA.html'>USA</a></code></p></div>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Italy</code></p>
+    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Switzerland</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
@@ -204,8 +228,7 @@ and processing COVID-19 region data for Italy.</p>
 
 <dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data. The first, and
-only entry, is be named main.</p></dd>
+<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data.</p></dd>
 
 <dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
@@ -216,9 +239,9 @@ only entry, is be named main.</p></dd>
 <h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-set_region_codes'><code>Italy$set_region_codes()</code></a></p></li>
-<li><p><a href='#method-clean_common'><code>Italy$clean_common()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Italy$clone()</code></a></p></li>
+<li><p><a href='#method-set_region_codes'><code>Switzerland$set_region_codes()</code></a></p></li>
+<li><p><a href='#method-clean_common'><code>Switzerland$clean_common()</code></a></p></li>
+<li><p><a href='#method-clone'><code>Switzerland$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
@@ -238,25 +261,25 @@ only entry, is be named main.</p></dd>
 <hr>
 <a id="method-set_region_codes"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-set-region-codes-'><a class='anchor' aria-hidden='true' href='#list-set-region-codes-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <p><hr>
 <a id="method-clean_common"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_common()</code></h3>
-<p>State level data cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p>Switzerland specific state level data cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-clean-common-'><a class='anchor' aria-hidden='true' href='#list-clean-common-'></a>Method <code>clean_common()</code></h3>
-<p>State level data cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p>Switzerland specific state level data cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -265,7 +288,7 @@ only entry, is be named main.</p></dd>
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Italy</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -277,7 +300,7 @@ only entry, is be named main.</p></dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Italy</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Switzerland</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>region</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </code></pre></div>
