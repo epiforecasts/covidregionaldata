@@ -15,4 +15,5 @@ test_that("CountryDataClass specific filter method works correctly", {
   expect_error(c$filter("madeupland"))
   expect_error(c$filter("zimbabwe"), NA)
   expect_error(c$filter("Zimbabwe"), NA)
+  expect_error(c$filter("Zimbabwe", level = "2"))
 })

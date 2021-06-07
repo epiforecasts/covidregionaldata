@@ -18,8 +18,36 @@ geographical resolution (resolution).
 }
 \examples{
 \dontrun{
-region <- UK$new(level = "1", verbose = TRUE, steps = TRUE, get = TRUE)
+# Setup a data cache
+start_using_memoise()
+
+# Download, clean and process level 1 UK data with hospital admissions
+region <- UK$new(level = "1", nhsregions = TRUE)
 region$return()
+
+# Initialise level 2 data
+utla <- UK$new(level = "2")
+
+# Download UTLA
+utla$download()
+
+# Clean UTLA data
+utla$clean()
+
+# Inspect available level 1 regions
+utla$available_regions(level = "1")
+
+# Filter data to the East of England
+utla$filter("East of England")
+
+# Process UTLA data
+utla$process()
+
+# Return processed and filtered data
+utla$return()
+
+# Inspect all data steps
+utla$data
 }
 
 ## ------------------------------------------------
@@ -88,6 +116,7 @@ specific.}
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
@@ -213,6 +242,8 @@ Set filters for UK data api query.
 Download NHS data for level 1 regions
 Separate NHS data is available for "first" admissions, excluding
 readmissions. This is available for England + English regions only.
+Data are available separately for the periods 2020-08-01 to 2021-04-06,
+and 2021-04-07 - present.
 See: \url{https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/}
 Section 2, "2. Estimated new hospital cases"
 \subsection{Usage}{

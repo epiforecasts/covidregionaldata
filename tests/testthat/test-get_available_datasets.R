@@ -8,7 +8,7 @@ test_that(
   {
     expected_names <- c(
       "origin", "class", "level_1_region",
-      "level_2_region", "type",
+      "level_2_region", "level_3_region", "type",
       "data_urls", "source_data_cols"
     )
     expect_identical(colnames(data), expected_names)
@@ -41,7 +41,7 @@ test_that(
 
 # test each column for na values
 for (name in colnames(data)) {
-  if (name %in% c("level_1_region", "level_2_region")) {
+  if (name %in% c("level_1_region", "level_2_region", "level_3_region")) {
     next
   }
   test_that(

@@ -129,7 +129,7 @@ return_data <- function(obj, class = FALSE) {
 #' `process_internal` based on the supported regions present in the
 #' class.
 #' @param level A character string indicating the current level.
-#' @param all_levels A characater vector indicating all the levels supported.
+#' @param all_levels A character vector indicating all the levels supported.
 #' @param region_names A named list of region names named after the levels
 #'  supported.
 #' @param region_codes A named list of region codes named after the levels
@@ -143,13 +143,13 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
     rn <- c()
     if (!is.null(region_names[[l]])) {
       rn <- c(region_names[[l]])
-      names(rn) <- paste0("level_", l, "_region")
+      names(rn) <- glue_level(l)
     }
 
     rc <- c()
     if (!is.null(region_codes[[l]])) {
       rc <- c(region_codes[[l]])
-      names(rc) <- paste0("level_", l, "_region_code")
+      names(rc) <- paste0(glue_level(l), "_code")
     }
     region_vars <- c(rn, rc)
     return(region_vars)
@@ -159,4 +159,60 @@ region_dispatch <- function(level, all_levels, region_names, region_codes) {
   region_vars <- region_vars[!is.null(region_vars)]
   region_vars <- region_vars[!is.na(region_vars)]
   return(region_vars)
+}
+
+#' Glue the spatial level into a variable name
+#'
+#' @inheritParams region_dispatch
+#' @return A string in the form "level_1_region".
+#' @concept utility
+glue_level <- function(level) {
+  paste0("level_", level, "_region")
+}
+
+#' Checks a given level is supported
+#' @param supported_levels A character vector of supported levels
+#' @inheritParams region_dispatch
+#' @return NULL
+#' @concept utility
+check_level <- function(level, supported_levels) {
+  if (!any(supported_levels %in% level)) {
+    stop(
+      level,
+      " is not a supported level check supported_levels for options"
+    )
+  }
+  return(invisible(NULL))
+}
+
+#' Download Excel Documents
+#'
+#' @param url Character string containing the full URL to the Excel document.
+#' @param archive Character string naming the file name to assign in the
+#' temporary directory.
+#' @param transpose Logical, should the read in data be transposed
+#' @param ... Additional parameters to pass to `read_excel()`.
+#' @inheritParams message_verbose
+#' @importFrom readxl read_excel
+#' @return A `data.frame`.
+#' @concept utility
+download_excel <- function(url, archive, verbose = FALSE,
+                           transpose = TRUE, ...) {
+  # download
+  archive <- file.path(tempdir(), archive)
+  download.file(
+    url = url,
+    destfile = archive,
+    mode = "wb", quiet = !(TRUE)
+  )
+  # read in
+  dt <- suppressMessages(
+    read_excel(archive, ...)
+  )
+
+  if (transpose) {
+    dt <- t(dt)
+  }
+  dt <- as.data.frame(dt)
+  return(dt)
 }
