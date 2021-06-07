@@ -13,7 +13,7 @@ if (!is.null(getOption("testSource"))) {
 }
 
 # get datasets for testing
-sources <- get_available_datasets() %>%
+sources <- get_available_datasets("regional") %>%
   dplyr::filter(.data$type %in%
                   c("regional")) %>%
   dplyr::select(source = class, level_1_region, level_2_region) %>%
