@@ -26,12 +26,12 @@ Install from CRAN:
 ```{r, eval = FALSE}
 install.packages("covidregionaldata")
 ```
+
 Install the stable development version of the package with:
 
 ```{r, eval = TRUE}
 install.packages("covidregionaldata", repos = "https://epiforecasts.r-universe.dev")
 ```
-
 
 Install the unstable development version of the package with:
 
