@@ -45,9 +45,7 @@ install.packages("covidregionaldata")
 Install the stable development version of the package with:
 
 ``` r
-install.packages("drat")
-drat:::add("epiforecasts")
-install.packages("covidregionaldata")
+install.packages("covidregionaldata", repos = "https://epiforecasts.r-universe.dev")
 ```
 
 Install the unstable development version of the package with:
@@ -66,7 +64,6 @@ this quick start),
 ``` r
 library(covidregionaldata)
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 4.0.4
 library(ggplot2)
 library(scales)
 ```
