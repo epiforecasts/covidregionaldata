@@ -41,9 +41,9 @@ install.packages("covidregionaldata")
 Install the stable development version of the package with:
 
 ``` r
-install.packages("drat")
-drat:::add("epiforecasts")
-install.packages("covidregionaldata")
+install.packages("covidregionaldata", repos = "https://epiforecasts.r-universe.dev")
+#> Installing package into '/home/joe/R/x86_64-pc-linux-gnu-library/3.6'
+#> (as 'lib' is unspecified)
 ```
 
 Install the unstable development version of the package with:
@@ -74,7 +74,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpMTgJm6
+#> Using a cache at: /tmp/RtmppJ4l0P
 ```
 
 To stop using `memoise` use,
@@ -99,7 +99,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 122,055
+#> Rows: 124,188
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -111,7 +111,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 122,055 x 15
+#> # A tibble: 124,188 x 15
 #>    date       un_region who_region country           iso_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total
 #>    <date>     <chr>     <chr>      <chr>             <chr>        <dbl>       <dbl>      <dbl>        <dbl>         <dbl>           <dbl>    <dbl>      <dbl>      <dbl>        <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0          0            0            NA              NA       NA         NA         NA           NA
@@ -124,7 +124,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Barbuda AG               0           0          0            0            NA              NA       NA         NA         NA           NA
 #>  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0          0            0            NA              NA       NA         NA         NA           NA
 #> 10 2020-01-03 Asia      EURO       Armenia           AM               0           0          0            0            NA              NA       NA         NA         NA           NA
-#> # … with 122,045 more rows
+#> # … with 124,178 more rows
 ```
 
 This can also be filtered for a country of interest,
@@ -163,7 +163,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,344 x 26
+#> # A tibble: 6,461 x 26
 #>    date       region    region_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total hosp_new hosp_total tested_new tested_total areaType cumCasesByPublish… cumCasesBySpecim… newCasesByPublis…
 #>    <date>     <chr>     <chr>           <dbl>       <dbl>      <dbl>        <dbl>         <dbl>           <dbl>    <dbl>      <dbl>      <dbl>        <dbl> <chr>                 <dbl>             <dbl>             <dbl>
 #>  1 2020-01-30 East Mid… E12000004          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
@@ -176,7 +176,7 @@ uk_nots
 #>  8 2020-01-30 Scotland  S92000003          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
 #>  9 2020-01-30 South Ea… E12000008          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
 #> 10 2020-01-30 South We… E12000009          NA          NA         NA           NA            NA              NA       NA         NA         NA           NA <NA>                     NA                NA                NA
-#> # … with 6,334 more rows, and 9 more variables: newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>, cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>,
+#> # … with 6,451 more rows, and 9 more variables: newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>, cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>,
 #> #   newPillarFourTestsByPublishDate <lgl>, newPillarOneTestsByPublishDate <dbl>, newPillarThreeTestsByPublishDate <dbl>, newPillarTwoTestsByPublishDate <dbl>
 ```
 

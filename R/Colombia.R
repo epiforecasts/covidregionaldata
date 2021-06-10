@@ -39,7 +39,7 @@ Colombia <- R6::R6Class("Colombia",
     #' @importFrom tibble tibble
     #' @importFrom dplyr mutate
     set_region_codes = function() {
-      self$codes_lookup$`1` <- colombia_codes
+      self$codes_lookup$`1` <- covidregionaldata::colombia_codes
     },
 
     #' @description Colombia specific state level data cleaning
