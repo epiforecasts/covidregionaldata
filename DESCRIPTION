@@ -68,13 +68,13 @@ Description: An interface to subnational and national level COVID-19 data
     the UK, and from other Covid-19 data collections, including the World
     Health Organisation (WHO), European Centre for Disease Prevention and
     Control (ECDC), John Hopkins University (JHU), Google Open Data and
-    others. Facilitates cleaning and processing Covid-19 data their raw 
-    format in an open and transparent way, allowing users to scrutinise and
-    extend the provided methods. For all countries supported, data includes
-    a daily time-series of cases. Wherever available data is also provided
-    for deaths, hospitalisations, and tests. National level data are also
-    supported using a range of sources as well as line list data and
-    links to intervention data sets.
+    others. Facilitates cleaning and processing Covid-19 data their raw
+    format in an open and transparent way, allowing users to scrutinise
+    and extend the provided methods. For all countries supported, data
+    includes a daily time-series of cases. Wherever available data is also
+    provided for deaths, hospitalisations, and tests. National level data
+    are also supported using a range of sources as well as line list data
+    and links to intervention data sets.
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata/,
     https://github.com/epiforecasts/covidregionaldata/
@@ -108,6 +108,7 @@ Suggests:
     rmarkdown,
     rvest,
     rworldmap,
+    sf,
     spelling,
     testthat (>= 3.0.0),
     usethis
