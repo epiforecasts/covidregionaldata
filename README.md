@@ -99,15 +99,6 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 124,188
-#> Columns: 8
-#> Delimiter: ","
-#> chr  [3]: Country_code, Country, WHO_region
-#> dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
-#> date [1]: Date_reported
-#> 
-#> Use `spec()` to retrieve the guessed column specification
-#> Pass a specification to the `col_types` argument to quiet this message
 #> Cleaning data
 #> Processing data
 nots
@@ -237,6 +228,12 @@ using the following,
 ## Development
 
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
+
+This package is the result of hard work from a number of contributors
+(see contributors list in the DESCRIPTION). We would particularly like
+to thank the [CMMID COVID-19 working
+group](https://cmmid.github.io/groups/ncov-group.html) for inciteful
+comments, feedback and advice in designing this package.
 
 We welcome contributions and new contributors\! We particularly
 appreciate help adding new data sources for countries at sub-national
