@@ -397,7 +397,7 @@ UK <- R6::R6Class("UK",
 
       names(try_urls) <- try_date_seq
       # Check for working urls
-      url_status <- map_chr(try_urls, 
+      url_status <- map_chr(try_urls,
                         ~ GET(.x) %>%
                           status_code())
       # Keep latest working url
