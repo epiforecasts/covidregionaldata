@@ -14,6 +14,46 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Supported countries
+
+This map shows what countries have level 1 and level 2 subregion data directly from an official source within that country. Please note other countries may be provided through our interface to external data sources, such as WHO and JHU.
+
+```{r, supported_region_plot, echo=FALSE, message=FALSE}
+library(covidregionaldata)
+library(dplyr)
+library(ggplot2)
+
+regional_countries <- get_available_datasets() %>%
+  filter(type == "regional")
+
+regional_countries_l2 <- regional_countries %>%
+  filter(!(is.na(level_2_region)))
+
+world <- map_data("world")
+
+supported_countries <- mutate(
+  world,
+  fill = case_when(
+    region %in% regional_countries_l2$class ~ "Level 2",
+    region %in% regional_countries$class ~ "Level 1",
+    TRUE ~ "None"
+  )
+)
+
+ggplot(supported_countries, aes(long, lat, fill = fill, group = group)) +
+  geom_polygon(color = "black", lwd = 0.1) +
+  ggtitle("Supported countries") +
+  scale_fill_manual(
+    name = "",
+    values = c("#d91c45", "#328ba8", "gray80")
+  ) +
+  theme_void() +
+  theme(legend.position = "top") +
+  coord_sf(ylim = c(-55, 80))
+```
+
+## dataset status
+
 Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transient issues may affect our testing of datasets and so our checks may occasionally show a spurious failure. 
 
 ```{r, include = FALSE}

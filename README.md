@@ -34,15 +34,6 @@ Wherever available data is provided on deaths, hospitalisations, and
 tests. National level data is also supported using a range of data
 sources as well as line list data and links to intervention data sets.
 
-## Supported countries
-
-This map shows what countries have level 1 and level 2 subregion data
-directly from an official source within that country. Please note other
-countries may be provided through our interface to external data
-sources, such as WHO and JHU.
-
-<img src="man/figures/README-supported_region_plot-1.png" width="100%" />
-
 ## Installation
 
 Install from CRAN:
@@ -87,7 +78,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/Rtmp1QavHq
+#> Using a cache at: /tmp/Rtmpg0dh4O
 ```
 
 To stop using `memoise` use,

@@ -19,45 +19,6 @@ knitr::opts_chunk$set(
 
 Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other Covid-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. Covid-19 data is cleaned and processed from their raw format in an open and transparent way, allowing users to scrutinise and extend our methods. For all countries supported, this includes a daily time-series of cases. Wherever available data is provided on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.
 
-## Supported countries
-
-This map shows what countries have level 1 and level 2 subregion data directly from an official source within that country. Please note other countries may be provided through our interface to external data sources, such as WHO and JHU.
-
-```{r, supported_region_plot, echo=FALSE, message=FALSE}
-library(covidregionaldata)
-library(dplyr)
-library(ggplot2)
-
-regional_countries <- get_available_datasets() %>%
-  filter(type == "regional")
-
-regional_countries_l2 <- regional_countries %>%
-  filter(!(is.na(level_2_region)))
-
-world <- map_data("world")
-
-supported_countries <- mutate(
-  world,
-  fill = case_when(
-    region %in% regional_countries_l2$class ~ "Level 2",
-    region %in% regional_countries$class ~ "Level 1",
-    TRUE ~ "None"
-  )
-)
-
-ggplot(supported_countries, aes(long, lat, fill = fill, group = group)) +
-  geom_polygon(color = "black", lwd = 0.1) +
-  ggtitle("Supported countries") +
-  scale_fill_manual(
-    name = "",
-    values = c("#d91c45", "#328ba8", "gray80")
-  ) +
-  theme_void() +
-  theme(legend.position = "top") +
-  coord_sf(ylim = c(-55, 80))
-```
-
-
 ## Installation
 
 Install from CRAN:
