@@ -38,29 +38,23 @@ world <- map_data("world")
 
 supported_countries <- mutate(
   world,
-  fill = ifelse(
-    region %in% regional_countries$class,
-    ifelse(
-      region %in% regional_countries_l2$class,
-      "#d91c45",
-      "#328ba8"
-    ),
-    "gray80"
+  fill = case_when(
+    region %in% regional_countries_l2$class ~ "Level 2",
+    region %in% regional_countries$class ~ "Level 1",
+    TRUE ~ "None"
   )
 )
 
 ggplot(supported_countries, aes(long, lat, fill = fill, group = group)) +
-  geom_polygon(colour = "gray85") +
+  geom_polygon(color = "black", lwd = 0.1) +
   ggtitle("Supported countries") +
-  scale_fill_identity() +
   scale_fill_manual(
-    "",
-    values = c("#d91c45", "#328ba8", "gray80"),
-    labels = c("Level 1", "Level 2", "None")
+    name = "",
+    values = c("#d91c45", "#328ba8", "gray80")
   ) +
   theme_void() +
   theme(legend.position = "top") +
-  coord_cartesian(ylim = c(-55, 80))
+  coord_sf(ylim = c(-55, 80))
 ```
 
 

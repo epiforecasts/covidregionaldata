@@ -87,7 +87,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpTq89jF
+#> Using a cache at: /tmp/Rtmp1QavHq
 ```
 
 To stop using `memoise` use,
@@ -112,7 +112,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 124,188
+#> Rows: 124,313
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -124,7 +124,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 124,188 x 15
+#> # A tibble: 124,424 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -137,7 +137,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 124,178 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 124,414 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
