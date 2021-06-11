@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+=======
+>>>>>>> master
 AAAS
 abbott
 AbbottSam
@@ -317,8 +320,8 @@ OJB
 ons
 ONS
 Ooms
-openjournals
 OpenDataZH
+openjournals
 ORCID
 Ordaz
 org
@@ -360,10 +363,7 @@ rboyes
 RCB
 RCUK
 Rdev
-<<<<<<< HEAD
 rds
-=======
->>>>>>> master
 Rds
 README
 readmissions
@@ -428,6 +428,7 @@ StatementThe
 stringr
 subnational
 Subnational
+subnationaldata
 subnationally
 subpopulation
 subregion
