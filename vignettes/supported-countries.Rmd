@@ -20,6 +20,9 @@ library(dplyr)
 library(knitr)
 library(dplyr)
 library(ggplot2)
+if (!(require(sf))) {
+  install.packages("sf")
+}
 library(sf)
 ```
 
