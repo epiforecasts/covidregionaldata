@@ -1,8 +1,8 @@
 ---
-title: "Dataset status"
+title: "Supported datasets and status"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Dataset status}
+  %\VignetteIndexEntry{Supported datasets and status}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
