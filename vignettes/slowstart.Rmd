@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ## Installing and loading the package
 
-The package can either be installed from CRAN, from our `drat` repository, or from GitHub. See the README for details. Once installed load the package using the following,
+The package can either be installed from CRAN, from our `r-universe` repository, or from GitHub. See the README for details. Once installed load the package using the following,
 
 ```{r}
 library(covidregionaldata)
