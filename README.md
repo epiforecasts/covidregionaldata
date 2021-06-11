@@ -31,7 +31,7 @@ data libraries provide an interface to a maintained database, this
 package is designed to take Covid-19 data from different sources and
 clean/process it from its raw format in an open and transparent way This
 allows users to inspect and scrutinise where their data comes from and
-how it is standardised. For all countries supported, the data includes a
+how it is standardised. For all countries supported, data includes a
 daily time-series of cases and, wherever available, data on deaths,
 hospitalisations, and tests. National level data is also supported using
 a range of data sources as well as line list data and links to
@@ -79,7 +79,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpGsHq5i
+#> Using a cache at: /tmp/RtmpJAeC7J
 ```
 
 To stop using `memoise` use,
