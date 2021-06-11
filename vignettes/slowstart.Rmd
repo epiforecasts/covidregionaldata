@@ -50,7 +50,7 @@ As for national level data any gaps in reported data are filled with NAs.
 For example, data for Belgium Level 1 regions over time can be accessed using:
 
 ```{r}
-get_regional_data(countries = "Belgium")
+get_regional_data(country = "Belgium")
 ```
 This returns a dataset in this format:
 
