@@ -93,6 +93,7 @@ Imports:
     R6,
     readxl,
     rlang,
+    sf,
     stringr,
     tibble,
     tidyr (>= 1.0.0),
@@ -108,7 +109,6 @@ Suggests:
     rmarkdown,
     rvest,
     rworldmap,
-    sf,
     spelling,
     testthat (>= 3.0.0),
     usethis
