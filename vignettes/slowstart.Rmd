@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ## Installing and loading the package
 
-The package can either be installed from CRAN, from our `drat` repository, or from GitHub. See the README for details. Once installed load the package using the following,
+The package can either be installed from CRAN, from our [`r-universe`](https://epiforecasts.r-universe.dev/) repository, or from GitHub. See the README for details. Once installed load the package using the following,
 
 ```{r}
 library(covidregionaldata)
@@ -50,7 +50,7 @@ As for national level data any gaps in reported data are filled with NAs.
 For example, data for Belgium Level 1 regions over time can be accessed using:
 
 ```{r}
-get_regional_data(countries = "Belgium")
+get_regional_data(country = "Belgium")
 ```
 This returns a dataset in this format:
 
