@@ -48,6 +48,8 @@ Install the stable development version of the package with:
 
 ``` r
 install.packages("covidregionaldata", repos = "https://epiforecasts.r-universe.dev")
+#> Installing package into '/home/joe/R/x86_64-pc-linux-gnu-library/3.6'
+#> (as 'lib' is unspecified)
 ```
 
 Install the unstable development version of the package with:
@@ -213,9 +215,11 @@ uk_nots %>%
 <img src="man/figures/README-uk_plot-1.png" width="100%" />
 
 See `get_available_datasets()` for supported regions and subregional
-levels. For an updated view of dataset status check the [hosted
-page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html)
-or build the [dataset status vignette](vignettes/dataset-status.Rmd).
+levels. To view what datasets we currently have subnationaldata for,
+along with their current status, check the [supported
+countries](https://epiforecasts.io/covidregionaldata/articles/supported-countriees.html)
+page or build the [supported countries
+vignette](vignettes/supported-countries.Rmd).
 
 For further examples see the [quick start
 vignette](https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd).
