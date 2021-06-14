@@ -30,7 +30,7 @@ Hopkins University (JHU), Google Open Data and others. This package is
 designed to streamline Covid-19 data extraction, cleaning, and processing
 from a range of data sources in an open and transparent way. This allows
 users to inspect and scrutinise the data, and tools used to process it,
-at every step.. For all countries supported, data includes a daily
+at every step. For all countries supported, data includes a daily
 time-series of cases and, wherever available, data on deaths,
 hospitalisations, and tests. National level data is also supported using
 a range of data sources as well as line list data and links to
