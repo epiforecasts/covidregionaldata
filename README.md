@@ -26,13 +26,12 @@ Interface to subnational and national level COVID-19 data sourced from
 both official sources, such as Public Health England in the UK, and from
 other Covid-19 data collections, including the World Health Organisation
 (WHO), European Centre for Disease Prevention and Control (ECDC), John
-Hopkins University (JHU), Google Open Data and others. Many Covid-19
-data libraries provide an interface to a maintained database, this
-package is designed to take Covid-19 data from different sources and
-clean/process it from its raw format in an open and transparent way This
-allows users to inspect and scrutinise where their data comes from and
-how it is standardised. For all countries supported, data includes a
-daily time-series of cases and, wherever available, data on deaths,
+Hopkins University (JHU), Google Open Data and others. This package is
+designed to streamline Covid-19 data extraction, cleaning, and processing
+from a range of data sources in an open and transparent way. This allows
+users to inspect and scrutinise the data, and tools used to process it,
+at every step.. For all countries supported, data includes a daily
+time-series of cases and, wherever available, data on deaths,
 hospitalisations, and tests. National level data is also supported using
 a range of data sources as well as line list data and links to
 intervention data sets.
