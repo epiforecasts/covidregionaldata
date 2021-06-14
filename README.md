@@ -255,8 +255,9 @@ using the following,
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
 
 This package is the result of hard work from a number of contributors
-(see contributors list in the DESCRIPTION). We would like to thank the
-[CMMID COVID-19 working
+(see contributors list in the
+[here](https://epiforecasts.io/covidregionaldata/authors.html)).
+We would like to thank the [CMMID COVID-19 working
 group](https://cmmid.github.io/groups/ncov-group.html) for inciteful
 comments and feedback.
 
