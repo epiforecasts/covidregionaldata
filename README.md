@@ -26,13 +26,15 @@ Interface to subnational and national level COVID-19 data sourced from
 both official sources, such as Public Health England in the UK, and from
 other Covid-19 data collections, including the World Health Organisation
 (WHO), European Centre for Disease Prevention and Control (ECDC), John
-Hopkins University (JHU), Google Open Data and others. Covid-19 data is
-cleaned and processed from their raw format in an open and transparent
-way, allowing users to scrutinise and extend our methods. For all
-countries supported, this includes a daily time-series of cases.
-Wherever available data is provided on deaths, hospitalisations, and
-tests. National level data is also supported using a range of data
-sources as well as line list data and links to intervention data sets.
+Hopkins University (JHU), Google Open Data and others. This package is
+designed to streamline Covid-19 data extraction, cleaning, and processing
+from a range of data sources in an open and transparent way. This allows
+users to inspect and scrutinise the data, and tools used to process it,
+at every step.. For all countries supported, data includes a daily
+time-series of cases and, wherever available, data on deaths,
+hospitalisations, and tests. National level data is also supported using
+a range of data sources as well as line list data and links to
+intervention data sets.
 
 ## Installation
 
@@ -78,7 +80,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpAyMFI4
+#> Using a cache at: /tmp/RtmpJAeC7J
 ```
 
 To stop using `memoise` use,
@@ -255,6 +257,13 @@ using the following,
 ## Development
 
 [![Development](https://img.shields.io/badge/Wiki-lightblue.svg?style=flat)](https://github.com/epiforecasts/covidregionaldata/wiki/)
+
+This package is the result of hard work from a number of contributors
+(see contributors list in the
+[here](https://epiforecasts.io/covidregionaldata/authors.html)).
+We would like to thank the [CMMID COVID-19 working
+group](https://cmmid.github.io/groups/ncov-group.html) for inciteful
+comments and feedback.
 
 We welcome contributions and new contributors\! We particularly
 appreciate help adding new data sources for countries at sub-national

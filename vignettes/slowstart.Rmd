@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 The package can either be installed from CRAN, from our [`r-universe`](https://epiforecasts.r-universe.dev/) repository, or from GitHub. See the README for details. Once installed load the package using the following,
 
-```{r}
+```{r, eval=TRUE}
 library(covidregionaldata)
 ```
 
@@ -29,7 +29,7 @@ library(covidregionaldata)
 
 Both the World Health Organisation (WHO) and European Centre for Disease Control (ECDC) provide worldwide national data. Access national level data for any country using:
 
-```{r}
+```{r, eval=FALSE}
 get_national_data()
 ```
 
@@ -47,24 +47,26 @@ This function returns daily new and cumulative (total) cases, and where availabl
 
 As for national level data any gaps in reported data are filled with NAs.
 
-For example, data for Belgium Level 1 regions over time can be accessed using:
+For example, data for France Level 1 regions over time can be accessed using:
 
 ```{r}
-get_regional_data(country = "Belgium")
+get_regional_data(country = "france")
 ```
-This returns a dataset in this format:
 
-**date**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recovered\_new**|**recovered\_total**|**hosp\_new**|**hosp\_total**|**tested\_new**|**tested\_total**
-:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-2020-05-24|Wallonia|BE-WAL|24|18196|16|3251|NA|NA|8|5126|NA|NA
-2020-05-25|Brussels|BE-BRU|26|5838|2|1421|NA|NA|6|2533|NA|NA
-2020-05-25|Flanders|BE-VLG|183|32381|14|4681|NA|NA|29|9334|NA|NA
+This data then has the following format: 
 
-Alternatively, the same data can be accessed using the underlying class as follows (the belgium object now contains data at each processing step and the methods used at each step), 
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
+start_using_memoise()
+knitr::kable(
+  tail(get_regional_data(country = "france"), n = 5)
+)
+```
 
-```{r}
-belgium <- Belgium$new(get = TRUE)
-belgium$return()
+Alternatively, the same data can be accessed using the underlying class as follows (the France object now contains data at each processing step and the methods used at each step), 
+
+```{r, eval=FALSE, message=FALSE}
+france <- France$new(get = TRUE)
+france$return()
 ```
 ### Level 1 and Level 2 regions
 
@@ -72,33 +74,37 @@ All countries included in the package (see below,"Coverage") have data for regio
 
 Data for Level 2 units can be returned by using the `level = "2"` argument. The dataset will still show the corresponding Level 1 region.
 
-An example of a country with Level 2 units is Belgium, where Level 2 units are Belgian provinces:
+An example of a country with Level 2 units is France, where Level 2 units are French departments:
 
 ```{r}
-get_regional_data("Belgium", level = "2")
+get_regional_data(country = "france", level = "2")
 ```
-This returns a dataset with the format:
 
-**date**|**province**|**level\_2\_region\_code**|**region**|**iso\_code**|**cases\_new**|**cases\_total**|**deaths\_new**|**deaths\_total**|**recovered\_new**|**recovered\_total**|**hosp\_new**|**hosp\_total**|**tested\_new**|**tested\_total**
-:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-2020-05-24|Brussels|BE-BRU|Brussels|BE-BRU|7|5812|NA|NA|NA|NA|4|2527|NA|NA
-2020-05-24|Antwerpen|BE-VAN|Flanders|BE-VLG|16|7905|NA|NA|NA|NA|5|2510|NA|NA
-2020-05-24|Limburg|BE-VLI|Flanders|BE-VLG|14|6126|NA|NA|NA|NA|2|1848|NA|NA
+This data again has the following format: 
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
+knitr::kable(
+  tail(get_regional_data(country = "france", level = "2"), n = 5)
+)
+```
 
 ### Totals
 
 For totalled data up to the most recent date available, use the `totals` argument.
 
 ```{r}
-get_regional_data("Belgium", totals = TRUE)
+get_regional_data("france", totals = TRUE)
 ```
-This returns a dataset with one row for each region, in the same format:
 
-**region**|**iso\_code**|**cases\_total**|**deaths\_total**|**recovered\_total**|**hosp\_total**|**tested\_total**
-:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-Flanders|BE-VLG|34195|4878|0|9694|0
-Wallonia|BE-WAL|19093|3362|0|5321|0
-Brussels|BE-BRU|6229|1482|0|2657|0
+This data now has no date variable and reflects the latest total:
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
+knitr::kable(
+  tail(get_regional_data(country = "france", totals = TRUE), n = 5)
+)
+```
+
+
 
 ## Data glossary
 

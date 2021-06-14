@@ -5,10 +5,6 @@
 \title{Belgium Class for downloading, cleaning and processing notification data}
 \source{
 \url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
-
-\url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
-
-\url{https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv}
 }
 \description{
 Information for downloading, cleaning
