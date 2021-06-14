@@ -52,7 +52,11 @@ For example, data for France Level 1 regions over time can be accessed using:
 ```{r}
 get_regional_data(country = "france")
 ```
+
+This data then has the following format: 
+
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
+start_using_memoise()
 knitr::kable(
   tail(get_regional_data(country = "france"), n = 5)
 )
@@ -75,6 +79,9 @@ An example of a country with Level 2 units is France, where Level 2 units are Fr
 ```{r}
 get_regional_data(country = "france", level = "2")
 ```
+
+This data again has the following format: 
+
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 knitr::kable(
   tail(get_regional_data(country = "france", level = "2"), n = 5)
@@ -88,6 +95,9 @@ For totalled data up to the most recent date available, use the `totals` argumen
 ```{r}
 get_regional_data("france", totals = TRUE)
 ```
+
+This data now has no date variable and reflects the latest total:
+
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 knitr::kable(
   tail(get_regional_data(country = "france", totals = TRUE), n = 5)
