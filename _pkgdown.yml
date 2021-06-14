@@ -25,8 +25,8 @@ navbar:
       href: index.html
     - text: "Getting Started"
       href: articles/quickstart.html
-    - text: "Data Status"
-      href: articles/dataset-status.html
+    - text: "Supported countries"
+      href: articles/supported-countries.html
     - text: "Other Articles"
       menu:
         - text: "Package Overview"

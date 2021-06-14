@@ -1,0 +1,79 @@
+---
+title: "Supported countries and status"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Supported countries and status}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, include = FALSE}
+library(covidregionaldata)
+library(dplyr)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(sf)
+```
+
+## Countries with subnational data
+
+This map shows what countries have level 1 and level 2 subregion data directly from an official source within that country. Please note other countries may be provided through our interface to external data sources, such as `WHO()` and `JHU()`.
+
+```{r, supported_region_plot, echo=FALSE, message=FALSE}
+
+regional_countries <- get_available_datasets() %>%
+  filter(type == "regional")
+
+regional_countries_l2 <- regional_countries %>%
+  filter(!(is.na(level_2_region)))
+
+world <- map_data("world")
+
+supported_countries <- mutate(
+  world,
+  fill = case_when(
+    region %in% regional_countries_l2[["class"]] ~ "Level 2",
+    region %in% regional_countries[["class"]] ~ "Level 1",
+    TRUE ~ "Unsupported"
+  )
+)
+
+ggplot(supported_countries, aes(long, lat, fill = fill, group = group)) +
+  geom_polygon(color = "black", lwd = 0.1) +
+  scale_fill_manual(
+    name = "",
+    values = c("#0072b2", "#cc79a7", "grey80")
+  ) +
+  theme_void() +
+  theme(legend.position = "bottom") +
+  coord_sf(ylim = c(-55, 80))
+```
+
+## Status
+
+Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transient issues may affect our testing of datasets and so our checks may occasionally show a spurious failure. 
+
+```{r, echo = FALSE}
+datasets <- get_available_datasets() %>%
+  arrange(origin) %>%
+  select(Origin = origin, Method = class) %>%
+  mutate(
+    `GitHub status` = paste0(
+      "[![", Method,
+      "](https://github.com/epiforecasts/covidregionaldata/workflows/",
+      Method, "/badge.svg)]",
+      "(https://github.com/epiforecasts/covidregionaldata/actions/workflows/", # nolint
+      Method, ".yaml)"
+    ),
+    `CRAN status` = "*working*"
+  )
+kable(datasets)
+```
