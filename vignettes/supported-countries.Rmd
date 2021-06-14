@@ -1,8 +1,8 @@
 ---
-title: "Supported countries and status"
+title: "Supported countries and their support status"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Supported countries and status}
+  %\VignetteIndexEntry{Supported countries and their support status}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -59,7 +59,7 @@ ggplot(supported_countries, aes(long, lat, fill = fill, group = group)) +
 
 ## Status
 
-Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/dataset-status.html) for up to date information on data set status. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transient issues may affect our testing of datasets and so our checks may occasionally show a spurious failure. 
+Dataset status is shown in the table below. Please see our [hosted page](https://epiforecasts.io/covidregionaldata/articles/supported-countries.html) for up to date information for the CRAN status of data sets. Please note that due to our release schedule datasets may remain non-functional if broken using the CRAN version for some time even if fixed on GitHub. Also note that transient issues may affect our testing of datasets and so our checks may occasionally show a spurious failure. 
 
 ```{r, echo = FALSE}
 datasets <- get_available_datasets() %>%
