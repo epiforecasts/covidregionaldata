@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.4000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.5000</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   <a href="../articles/quickstart.html">Getting Started</a>
 </li>
 <li>
-  <a href="../articles/dataset-status.html">Data Status</a>
+  <a href="../articles/supported-countries.html">Supported countries</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -167,11 +167,12 @@
 <li>Support added for data from the European Commission’s Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Support added for data from the Netherlands provided by RVIM (English: National Institute for Public Health and the Environment). This source provides case, deaths and hospital admission data at the province and municipal levels (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Support added for data from Switzerland and Liechtenstein collated by Canton Zurich (<a href='https://github.com/OpenZH'>@OpenZH</a>). This source provides case, deaths and hospital admission data at the canton level (by <a href='https://github.com/RichardMN'>@RichardMN</a>).</li>
+<li>Made package changes recomended in the JOSS review, including additional statements of need to the README, updates to the manuscript (paper.md) and fixes a bug of multiple sources for some countries. We are very grateful for the detailed feedback given by the JOSS reviewers and their help in improving this package.</li>
 </ul></div>
 <div id="changes-to-implemented-data-sources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-to-implemented-data-sources" class="anchor" aria-hidden="true"></a>Changes to implemented data sources</h2>
-<ul><li>Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent availabe data set (by <a href='https://github.com/kathsherratt'>@kathsherratt</a>).</li>
+<ul><li>Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent available data set (by <a href='https://github.com/kathsherratt'>@kathsherratt</a>).</li>
 </ul></div>
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -377,7 +378,7 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>.</p></p>
+  <p><p>Developed by Joe Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p></p>
 </div>
 
 <div class="pkgdown">

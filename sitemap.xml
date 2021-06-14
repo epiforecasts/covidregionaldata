@@ -13,9 +13,6 @@
     <loc>epiforecasts.io/covidregionaldata/LICENSE.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/dataset-status.html</loc>
-  </url>
-  <url>
     <loc>epiforecasts.io/covidregionaldata/articles/index.html</loc>
   </url>
   <url>
@@ -23,6 +20,9 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/articles/slowstart.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/articles/supported-countries.html</loc>
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/articles/testing.html</loc>

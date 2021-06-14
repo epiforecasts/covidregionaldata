@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.4000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.5000</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@
   <a href="../articles/quickstart.html">Getting Started</a>
 </li>
 <li>
-  <a href="../articles/dataset-status.html">Data Status</a>
+  <a href="../articles/supported-countries.html">Supported countries</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -141,189 +141,267 @@
 <p>Access sub-national level data for a specific country over time using <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>. Use <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> to explore the currently supported sub-national datasets and select the data set of interest using the <code>country</code> (selects the country of interest), and <code>level</code> (selects the spatial scale of the data) arguments of <code>get_regional_data</code>.</p>
 <p>This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documentation (<code><a href="../reference/get_regional_data.html">?get_regional_data</a></code>) for details of optional arguments.</p>
 <p>As for national level data any gaps in reported data are filled with NAs.</p>
-<p>For example, data for Belgium Level 1 regions over time can be accessed using:</p>
+<p>For example, data for France Level 1 regions over time can be accessed using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Belgium"</span><span class="op">)</span></code></pre></div>
-<p>This returns a dataset in this format:</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span><span class="op">)</span></code></pre></div>
+<p>This data then has the following format:</p>
 <table style="width:100%;" class="table">
 <colgroup>
+<col width="6%">
+<col width="15%">
+<col width="6%">
+<col width="5%">
+<col width="6%">
+<col width="6%">
 <col width="7%">
 <col width="7%">
+<col width="8%">
+<col width="5%">
+<col width="6%">
+<col width="6%">
 <col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
-<th align="center"><strong>date</strong></th>
-<th align="center"><strong>region</strong></th>
-<th align="center"><strong>iso_code</strong></th>
-<th align="center"><strong>cases_new</strong></th>
-<th align="center"><strong>cases_total</strong></th>
-<th align="center"><strong>deaths_new</strong></th>
-<th align="center"><strong>deaths_total</strong></th>
-<th align="center"><strong>recovered_new</strong></th>
-<th align="center"><strong>recovered_total</strong></th>
-<th align="center"><strong>hosp_new</strong></th>
-<th align="center"><strong>hosp_total</strong></th>
-<th align="center"><strong>tested_new</strong></th>
-<th align="center"><strong>tested_total</strong></th>
+<th align="left">date</th>
+<th align="left">region</th>
+<th align="left">iso_3166_2</th>
+<th align="right">cases_new</th>
+<th align="right">cases_total</th>
+<th align="right">deaths_new</th>
+<th align="right">deaths_total</th>
+<th align="right">recovered_new</th>
+<th align="right">recovered_total</th>
+<th align="right">hosp_new</th>
+<th align="right">hosp_total</th>
+<th align="right">tested_new</th>
+<th align="right">tested_total</th>
+<th align="left">insee_code</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">2020-05-24</td>
-<td align="center">Wallonia</td>
-<td align="center">BE-WAL</td>
-<td align="center">24</td>
-<td align="center">18196</td>
-<td align="center">16</td>
-<td align="center">3251</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">8</td>
-<td align="center">5126</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-10</td>
+<td align="left">Provence-Alpes-Côte-d’Azur</td>
+<td align="left">FR-PAC</td>
+<td align="right">201</td>
+<td align="right">3100599</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">27026</td>
+<td align="right">51154108</td>
+<td align="left">93</td>
 </tr>
 <tr class="even">
-<td align="center">2020-05-25</td>
-<td align="center">Brussels</td>
-<td align="center">BE-BRU</td>
-<td align="center">26</td>
-<td align="center">5838</td>
-<td align="center">2</td>
-<td align="center">1421</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">6</td>
-<td align="center">2533</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-10</td>
+<td align="left">Provence-Alpes-Côte-d’Azur</td>
+<td align="left">FR-PAC</td>
+<td align="right">201</td>
+<td align="right">3100800</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">27026</td>
+<td align="right">51181134</td>
+<td align="left">93</td>
 </tr>
 <tr class="odd">
-<td align="center">2020-05-25</td>
-<td align="center">Flanders</td>
-<td align="center">BE-VLG</td>
-<td align="center">183</td>
-<td align="center">32381</td>
-<td align="center">14</td>
-<td align="center">4681</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">29</td>
-<td align="center">9334</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-10</td>
+<td align="left">Saint-Barthelemy</td>
+<td align="left">FR-PM</td>
+<td align="right">0</td>
+<td align="right">21</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">5</td>
+<td align="right">1286</td>
+<td align="left">05</td>
+</tr>
+<tr class="even">
+<td align="left">2021-06-10</td>
+<td align="left">Saint-Martin</td>
+<td align="left">FR-BL</td>
+<td align="right">0</td>
+<td align="right">940</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">90</td>
+<td align="right">33190</td>
+<td align="left">07</td>
+</tr>
+<tr class="odd">
+<td align="left">2021-06-10</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-MF</td>
+<td align="right">11</td>
+<td align="right">2166</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">244</td>
+<td align="right">38762</td>
+<td align="left">08</td>
 </tr>
 </tbody>
 </table>
-<p>Alternatively, the same data can be accessed using the underlying class as follows (the belgium object now contains data at each processing step and the methods used at each step),</p>
+<p>Alternatively, the same data can be accessed using the underlying class as follows (the France object now contains data at each processing step and the methods used at each step),</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">belgium</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/Belgium.html">Belgium</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>get <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">belgium</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">france</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/France.html">France</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>get <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">france</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="level-1-and-level-2-regions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#level-1-and-level-2-regions" class="anchor" aria-hidden="true"></a>Level 1 and Level 2 regions</h3>
 <p>All countries included in the package (see below,“Coverage”) have data for regions at the admin-1 level, the largest administrative unit of the country (e.g. state in the USA). Some countries also have data for smaller areas at the admin-2 level (e.g. county in the USA).</p>
 <p>Data for Level 2 units can be returned by using the <code>level = "2"</code> argument. The dataset will still show the corresponding Level 1 region.</p>
-<p>An example of a country with Level 2 units is Belgium, where Level 2 units are Belgian provinces:</p>
+<p>An example of a country with Level 2 units is France, where Level 2 units are French departments:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"Belgium"</span>, level <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></code></pre></div>
-<p>This returns a dataset with the format:</p>
-<table style="width:100%;" class="table">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span>, level <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></code></pre></div>
+<p>This data again has the following format:</p>
+<table class="table">
 <colgroup>
+<col width="4%">
+<col width="12%">
+<col width="4%">
+<col width="11%">
+<col width="7%">
+<col width="4%">
+<col width="5%">
+<col width="4%">
+<col width="5%">
 <col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
+<col width="7%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="5%">
+<col width="4%">
 </colgroup>
 <thead><tr class="header">
-<th align="center"><strong>date</strong></th>
-<th align="center"><strong>province</strong></th>
-<th align="center"><strong>level_2_region_code</strong></th>
-<th align="center"><strong>region</strong></th>
-<th align="center"><strong>iso_code</strong></th>
-<th align="center"><strong>cases_new</strong></th>
-<th align="center"><strong>cases_total</strong></th>
-<th align="center"><strong>deaths_new</strong></th>
-<th align="center"><strong>deaths_total</strong></th>
-<th align="center"><strong>recovered_new</strong></th>
-<th align="center"><strong>recovered_total</strong></th>
-<th align="center"><strong>hosp_new</strong></th>
-<th align="center"><strong>hosp_total</strong></th>
-<th align="center"><strong>tested_new</strong></th>
-<th align="center"><strong>tested_total</strong></th>
+<th align="left">date</th>
+<th align="left">region</th>
+<th align="left">iso_3166_2</th>
+<th align="left">department</th>
+<th align="left">ons_region_code</th>
+<th align="right">cases_new</th>
+<th align="right">cases_total</th>
+<th align="right">deaths_new</th>
+<th align="right">deaths_total</th>
+<th align="right">recovered_new</th>
+<th align="right">recovered_total</th>
+<th align="right">hosp_new</th>
+<th align="right">hosp_total</th>
+<th align="right">tested_new</th>
+<th align="right">tested_total</th>
+<th align="left">insee_code</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">2020-05-24</td>
-<td align="center">Brussels</td>
-<td align="center">BE-BRU</td>
-<td align="center">Brussels</td>
-<td align="center">BE-BRU</td>
-<td align="center">7</td>
-<td align="center">5812</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">4</td>
-<td align="center">2527</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-13</td>
+<td align="left">Provence-Alpes-Côte-d’Azur</td>
+<td align="left">FR-PAC</td>
+<td align="left">Var</td>
+<td align="left">FR-83</td>
+<td align="right">NA</td>
+<td align="right">94677</td>
+<td align="right">0</td>
+<td align="right">1485</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">7889</td>
+<td align="right">NA</td>
+<td align="right">1619824</td>
+<td align="left">93</td>
 </tr>
 <tr class="even">
-<td align="center">2020-05-24</td>
-<td align="center">Antwerpen</td>
-<td align="center">BE-VAN</td>
-<td align="center">Flanders</td>
-<td align="center">BE-VLG</td>
-<td align="center">16</td>
-<td align="center">7905</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">5</td>
-<td align="center">2510</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-13</td>
+<td align="left">Provence-Alpes-Côte-d’Azur</td>
+<td align="left">FR-PAC</td>
+<td align="left">Vaucluse</td>
+<td align="left">FR-84</td>
+<td align="right">NA</td>
+<td align="right">52697</td>
+<td align="right">0</td>
+<td align="right">893</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">5395</td>
+<td align="right">NA</td>
+<td align="right">675566</td>
+<td align="left">93</td>
 </tr>
 <tr class="odd">
-<td align="center">2020-05-24</td>
-<td align="center">Limburg</td>
-<td align="center">BE-VLI</td>
-<td align="center">Flanders</td>
-<td align="center">BE-VLG</td>
-<td align="center">14</td>
-<td align="center">6126</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">2</td>
-<td align="center">1848</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left">2021-06-13</td>
+<td align="left">Saint-Barthelemy</td>
+<td align="left">FR-PM</td>
+<td align="left">Saint-Barthelemy</td>
+<td align="left">FR-977</td>
+<td align="right">NA</td>
+<td align="right">940</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">33190</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">2021-06-13</td>
+<td align="left">Saint-Martin</td>
+<td align="left">FR-BL</td>
+<td align="left">Saint-Martin</td>
+<td align="left">FR-978</td>
+<td align="right">NA</td>
+<td align="right">2166</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">38762</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">2021-06-13</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-MF</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-975</td>
+<td align="right">NA</td>
+<td align="right">21</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">1286</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -333,54 +411,72 @@
 <a href="#totals" class="anchor" aria-hidden="true"></a>Totals</h3>
 <p>For totalled data up to the most recent date available, use the <code>totals</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"Belgium"</span>, totals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>This returns a dataset with one row for each region, in the same format:</p>
-<table style="width:100%;" class="table">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"france"</span>, totals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>This data now has no date variable and reflects the latest total:</p>
+<table class="table">
 <colgroup>
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
+<col width="24%">
+<col width="10%">
+<col width="11%">
+<col width="12%">
+<col width="15%">
+<col width="10%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
-<th align="center"><strong>region</strong></th>
-<th align="center"><strong>iso_code</strong></th>
-<th align="center"><strong>cases_total</strong></th>
-<th align="center"><strong>deaths_total</strong></th>
-<th align="center"><strong>recovered_total</strong></th>
-<th align="center"><strong>hosp_total</strong></th>
-<th align="center"><strong>tested_total</strong></th>
+<th align="left">region</th>
+<th align="left">iso_3166_2</th>
+<th align="right">cases_total</th>
+<th align="right">deaths_total</th>
+<th align="right">recovered_total</th>
+<th align="right">hosp_total</th>
+<th align="right">tested_total</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">Flanders</td>
-<td align="center">BE-VLG</td>
-<td align="center">34195</td>
-<td align="center">4878</td>
-<td align="center">0</td>
-<td align="center">9694</td>
-<td align="center">0</td>
+<td align="left">Guadeloupe</td>
+<td align="left">FR-GP</td>
+<td align="right">16563</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">217102</td>
 </tr>
 <tr class="even">
-<td align="center">Wallonia</td>
-<td align="center">BE-WAL</td>
-<td align="center">19093</td>
-<td align="center">3362</td>
-<td align="center">0</td>
-<td align="center">5321</td>
-<td align="center">0</td>
+<td align="left">Martinique</td>
+<td align="left">FR-MQ</td>
+<td align="right">11501</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">230606</td>
 </tr>
 <tr class="odd">
-<td align="center">Brussels</td>
-<td align="center">BE-BRU</td>
-<td align="center">6229</td>
-<td align="center">1482</td>
-<td align="center">0</td>
-<td align="center">2657</td>
-<td align="center">0</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-MF</td>
+<td align="right">2166</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">38762</td>
+</tr>
+<tr class="even">
+<td align="left">Saint-Martin</td>
+<td align="left">FR-BL</td>
+<td align="right">940</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">33190</td>
+</tr>
+<tr class="odd">
+<td align="left">Saint-Barthelemy</td>
+<td align="left">FR-PM</td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1286</td>
 </tr>
 </tbody>
 </table>
@@ -438,7 +534,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link external-link">Sam Abbott</a>, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link external-link">Sebastian Funk</a>.</p>
+<p>Developed by Joe Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link external-link">Sam Abbott</a>.</p>
 </div>
 
 <div class="pkgdown">
