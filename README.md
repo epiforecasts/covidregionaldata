@@ -48,8 +48,6 @@ Install the stable development version of the package with:
 
 ``` r
 install.packages("covidregionaldata", repos = "https://epiforecasts.r-universe.dev")
-#> Installing package into '/home/joe/R/x86_64-pc-linux-gnu-library/3.6'
-#> (as 'lib' is unspecified)
 ```
 
 Install the unstable development version of the package with:
