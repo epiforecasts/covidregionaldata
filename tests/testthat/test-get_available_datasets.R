@@ -69,10 +69,10 @@ render_available_datasets_data <- render_available_datasets()
 test_that(
   paste(
     "all_country_data is up to date.",
-    "This will fail if a new data source has been added but the table",
-    "outlining available data (all_country_data) has not been re-rendered.",
-    "Run the code in data-raw/render_available_datasets.R to",
-    "update all_country_data"
+    "This will fail if a new data source has been added, or an existing one",
+    "modified, but the table outlining available data (all_country_data) has",
+    "not been re-rendered. Run the code in",
+    "data-raw/render_available_datasets.R to update all_country_data"
   ),
   {
     expect_identical(
