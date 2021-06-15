@@ -39,3 +39,10 @@
 #' @description The region codes for JHU
 #' @return A tibble of region codes and related information.
 "JHU_codes"
+
+#' Table of available datasets along with level and other information.
+#' Rendered from the individual R6 class objects included in this package.
+#'
+#' @description Available datasets
+#' @return A tibble of available datasets and related information.
+"all_country_data"

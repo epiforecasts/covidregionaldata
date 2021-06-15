@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_available_datasets.R
 \name{get_available_datasets}
 \alias{get_available_datasets}
-\title{Get supported data sets}
+\title{Fetch table of supported data sets}
 \usage{
 get_available_datasets(type)
 }
@@ -18,10 +18,9 @@ A list of available data sets and the spatial aggregation data is
 available for.
 }
 \description{
-The function searches the environment for R6 class objects and
-extracts the summary information from the available classes using
-their \code{summary} methods. In practice this means that it can be used
-to indicate supported data sets.
+The function returns data on what countries are available from
+the data provided with this package. This is rendered through the function
+\code{render_available_datasets()}.
 }
 \examples{
 # see all available datasets
@@ -39,6 +38,7 @@ Data interface functions
 \code{\link{DataClass}},
 \code{\link{get_national_data}()},
 \code{\link{get_regional_data}()},
-\code{\link{initialise_dataclass}()}
+\code{\link{initialise_dataclass}()},
+\code{\link{render_available_datasets}()}
 }
 \concept{interface}

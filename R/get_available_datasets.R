@@ -1,9 +1,8 @@
-#' Get supported data sets
+#' Fetch table of supported data sets
 #'
-#' @description The function searches the environment for R6 class objects and
-#' extracts the summary information from the available classes using
-#' their `summary` methods. In practice this means that it can be used
-#' to indicate supported data sets.
+#' @description The function returns data on what countries are available from
+#' the data provided with this package. This is rendered through the function
+#' `render_available_datasets()`.
 #' @param type A character vector indicating the types of data to
 #' return. Current options include "national" (which are datasets at the
 #' national level which inherit from `CountryDataClass`) and
@@ -26,6 +25,33 @@
 #' # see only regional level datasets
 #' get_available_datasets("regional")
 get_available_datasets <- function(type) {
+  if (!missing(type)) {
+    target_type <- match.arg(
+      type,
+      choices = c("national", "regional"),
+      several.ok = TRUE
+    )
+    all_country_data <- all_country_data %>%
+      filter(type %in% target_type)
+  }
+  return(all_country_data)
+}
+
+#' Make table of supported data sets and store as package data
+#'
+#' @description The function searches the environment for R6 class objects and
+#' extracts the summary information from the available classes using
+#' their `summary` methods. In practice this means that it can be used
+#' to indicate supported data sets.
+#' @family interface
+#' @importFrom rlang .data
+#' @importFrom dplyr select bind_rows filter
+#' @importFrom tibble as_tibble
+#' @export
+#' @examples
+#' # see all available datasets
+#' render_available_datasets()
+render_available_datasets <- function() {
   envi <- ls(getNamespace("covidregionaldata"), all.names = TRUE)
   # regional data
   starts_with_capitals_idx <- grep("^[A-Z]", envi)
@@ -44,15 +70,5 @@ get_available_datasets <- function(type) {
   )
   available_country_data <- valid_country_objects %>%
     bind_rows()
-
-  if (!missing(type)) {
-    target_type <- match.arg(
-      type,
-      choices = c("national", "regional"),
-      several.ok = TRUE
-    )
-    available_country_data <- available_country_data %>%
-      filter(type %in% target_type)
-  }
   return(available_country_data)
 }

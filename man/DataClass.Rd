@@ -21,7 +21,8 @@ Data interface functions
 \code{\link{get_available_datasets}()},
 \code{\link{get_national_data}()},
 \code{\link{get_regional_data}()},
-\code{\link{initialise_dataclass}()}
+\code{\link{initialise_dataclass}()},
+\code{\link{render_available_datasets}()}
 }
 \concept{interface}
 \section{Public fields}{
