@@ -34,7 +34,7 @@
 #' get_available_datasets("regional")
 #'
 #' # render the data
-#' get_availdable_datasets(render = TRUE)
+#' get_available_datasets(render = TRUE)
 get_available_datasets <- function(type, render = FALSE,
                                    namespace = "covidregionaldata") {
   if (render) {
