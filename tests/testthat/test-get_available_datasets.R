@@ -64,8 +64,8 @@ test_that("National level datasets can be filtered for", {
   expect_equal(unique(nat$type), "national")
 })
 
-get_available_datasets_data <- get_available_datasets()
-render_available_datasets_data <- render_available_datasets()
+package_avaliable_data <- get_available_datasets()
+rendered_available_data <- get_available_datasets(render = TRUE)
 test_that(
   paste(
     "all_country_data is up to date.",
@@ -76,8 +76,8 @@ test_that(
   ),
   {
     expect_identical(
-      get_available_datasets_data,
-      render_available_datasets_data
+      package_avaliable_data,
+      rendered_available_data
     )
   }
 )

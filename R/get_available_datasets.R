@@ -1,13 +1,21 @@
-#' Fetch table of supported data sets
+#' Fetch of build table of supported data sets
 #'
 #' @description The function returns data on what countries are available from
-#' the data provided with this package. This is rendered through the function
-#' `render_available_datasets()`.
+#' the data provided with this package. If render = TRUE The function searches
+#' the environment for R6 class objects and extracts the summary information
+#' from the available classes using their `summary` methods. If render = FALSE
+#' the function will fetch the data from package data. In practice this
+#' means that it can be used to indicate supported data sets.
 #' @param type A character vector indicating the types of data to
 #' return. Current options include "national" (which are datasets at the
 #' national level which inherit from `CountryDataClass`) and
 #' "regional" (which are datasets at the regional level which inherit
 #' directly from `DataClass()`).
+#' @param render Bool. If TRUE the supported data set table is build from the
+#' available classes using `summary` methods. If FALSE (dafault) the supported
+#' data set table is taken from package data.
+#' @param namespace characterArray The name of the namespace to search for class
+#' objects. Defaults to 'covidregionaldata' as the package.
 #' @return A list of available data sets and the spatial aggregation data is
 #' available for.
 #' @family interface
@@ -24,51 +32,41 @@
 #'
 #' # see only regional level datasets
 #' get_available_datasets("regional")
-get_available_datasets <- function(type) {
+#'
+#' # render the data
+#' get_availdable_datasets(render = TRUE)
+get_available_datasets <- function(type, render = FALSE,
+                                   namespace = "covidregionaldata") {
+  if (render) {
+    envi <- ls(getNamespace(namespace), all.names = TRUE)
+    starts_with_capitals_idx <- grep("^[A-Z]", envi)
+    starts_with_capitals <- envi[starts_with_capitals_idx]
+    exclude <- c("DataClass", "CountryDataClass")
+    valid_country_objects <- lapply(
+      starts_with_capitals,
+      function(x) {
+        country_obj <- get(x)
+        if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
+          dat <- get(x)$new()
+          dat <- dat$summary()
+          return(dat)
+        }
+      }
+    )
+    available_country_data <- valid_country_objects %>%
+      bind_rows()
+    country_data <- available_country_data
+  } else {
+    country_data <- all_country_data
+  }
   if (!missing(type)) {
     target_type <- match.arg(
       type,
       choices = c("national", "regional"),
       several.ok = TRUE
     )
-    all_country_data <- all_country_data %>%
+    country_data <- country_data %>%
       filter(type %in% target_type)
   }
-  return(all_country_data)
-}
-
-#' Make table of supported data sets and store as package data
-#'
-#' @description The function searches the environment for R6 class objects and
-#' extracts the summary information from the available classes using
-#' their `summary` methods. In practice this means that it can be used
-#' to indicate supported data sets.
-#' @family interface
-#' @importFrom rlang .data
-#' @importFrom dplyr select bind_rows filter
-#' @importFrom tibble as_tibble
-#' @export
-#' @examples
-#' # see all available datasets
-#' render_available_datasets()
-render_available_datasets <- function() {
-  envi <- ls(getNamespace("covidregionaldata"), all.names = TRUE)
-  # regional data
-  starts_with_capitals_idx <- grep("^[A-Z]", envi)
-  starts_with_capitals <- envi[starts_with_capitals_idx]
-  exclude <- c("DataClass", "CountryDataClass")
-  valid_country_objects <- lapply(
-    starts_with_capitals,
-    function(x) {
-      country_obj <- get(x)
-      if (class(country_obj) == "R6ClassGenerator" & !(x %in% c(exclude))) {
-        dat <- get(x)$new()
-        dat <- dat$summary()
-        return(dat)
-      }
-    }
-  )
-  available_country_data <- valid_country_objects %>%
-    bind_rows()
-  return(available_country_data)
+  return(country_data)
 }
