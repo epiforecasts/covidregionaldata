@@ -44,5 +44,6 @@
 #' Rendered from the individual R6 class objects included in this package.
 #'
 #' @description Available datasets
+#' @concept utility
 #' @return A tibble of available datasets and related information.
 "all_country_data"

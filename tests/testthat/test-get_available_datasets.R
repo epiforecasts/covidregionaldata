@@ -64,8 +64,6 @@ test_that("National level datasets can be filtered for", {
   expect_equal(unique(nat$type), "national")
 })
 
-package_avaliable_data <- get_available_datasets()
-rendered_available_data <- get_available_datasets(render = TRUE)
 test_that(
   paste(
     "all_country_data is up to date.",
@@ -75,6 +73,8 @@ test_that(
     "data-raw/render_available_datasets.R to update all_country_data"
   ),
   {
+    package_avaliable_data <- get_available_datasets()
+    rendered_available_data <- get_available_datasets(render = TRUE)
     expect_identical(
       package_avaliable_data,
       rendered_available_data

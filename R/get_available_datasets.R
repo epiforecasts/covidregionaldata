@@ -1,21 +1,18 @@
-#' Fetch of build table of supported data sets
+#' Get supported data sets
 #'
-#' @description The function returns data on what countries are available from
-#' the data provided with this package. If render = TRUE The function searches
-#' the environment for R6 class objects and extracts the summary information
-#' from the available classes using their `summary` methods. If render = FALSE
-#' the function will fetch the data from package data. In practice this
-#' means that it can be used to indicate supported data sets.
+#' @description Returns data on what countries are available from
+#' the data provided with this package either using a cached dataset or built
+#' by searching the target namespace.
 #' @param type A character vector indicating the types of data to
 #' return. Current options include "national" (which are datasets at the
 #' national level which inherit from `CountryDataClass`) and
 #' "regional" (which are datasets at the regional level which inherit
 #' directly from `DataClass()`).
-#' @param render Bool. If TRUE the supported data set table is build from the
-#' available classes using `summary` methods. If FALSE (dafault) the supported
-#' data set table is taken from package data.
-#' @param namespace characterArray The name of the namespace to search for class
-#' objects. Defaults to 'covidregionaldata' as the package.
+#' @param render Logical If TRUE the supported data set table is built from the
+#' available classes using `summary` methods. If FALSE the supported
+#' data set table is taken from package data. Defaults to FALSE.
+#' @param namespace Character string The name of the namespace to search for
+#'  class objects. Defaults to "covidregionaldata" as the package.
 #' @return A list of available data sets and the spatial aggregation data is
 #' available for.
 #' @family interface

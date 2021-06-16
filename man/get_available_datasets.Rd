@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_available_datasets.R
 \name{get_available_datasets}
 \alias{get_available_datasets}
-\title{Fetch of build table of supported data sets}
+\title{Get supported data sets}
 \usage{
 get_available_datasets(type, render = FALSE, namespace = "covidregionaldata")
 }
@@ -13,24 +13,21 @@ national level which inherit from \code{CountryDataClass}) and
 "regional" (which are datasets at the regional level which inherit
 directly from \code{DataClass()}).}
 
-\item{render}{Bool. If TRUE the supported data set table is build from the
-available classes using \code{summary} methods. If FALSE (dafault) the supported
-data set table is taken from package data.}
+\item{render}{Logical If TRUE the supported data set table is built from the
+available classes using \code{summary} methods. If FALSE the supported
+data set table is taken from package data. Defaults to FALSE.}
 
-\item{namespace}{characterArray The name of the namespace to search for class
-objects. Defaults to 'covidregionaldata' as the package.}
+\item{namespace}{Character string The name of the namespace to search for
+class objects. Defaults to "covidregionaldata" as the package.}
 }
 \value{
 A list of available data sets and the spatial aggregation data is
 available for.
 }
 \description{
-The function returns data on what countries are available from
-the data provided with this package. If render = TRUE The function searches
-the environment for R6 class objects and extracts the summary information
-from the available classes using their \code{summary} methods. If render = FALSE
-the function will fetch the data from package data. In practice this
-means that it can be used to indicate supported data sets.
+Returns data on what countries are available from
+the data provided with this package either using a cached dataset or built
+by searching the target namespace.
 }
 \examples{
 # see all available datasets

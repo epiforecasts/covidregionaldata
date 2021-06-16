@@ -17,4 +17,5 @@ A tibble of available datasets and related information.
 \description{
 Available datasets
 }
+\concept{utility}
 \keyword{datasets}
