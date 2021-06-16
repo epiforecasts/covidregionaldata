@@ -46,10 +46,9 @@
 
 
 <meta property="og:title" content="Get supported data sets — get_available_datasets" />
-<meta property="og:description" content="The function searches the environment for R6 class objects and
-extracts the summary information from the available classes using
-their summary methods. In practice this means that it can be used
-to indicate supported data sets." />
+<meta property="og:description" content="Returns data on what countries are available from
+the data provided with this package either using a cached dataset or built
+by searching the target namespace." />
 
 
 
@@ -162,13 +161,12 @@ to indicate supported data sets." />
     </div>
 
     <div class="ref-description">
-    <p>The function searches the environment for R6 class objects and
-extracts the summary information from the available classes using
-their <code>summary</code> methods. In practice this means that it can be used
-to indicate supported data sets.</p>
+    <p>Returns data on what countries are available from
+the data provided with this package either using a cached dataset or built
+by searching the target namespace.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='va'>type</span><span class='op'>)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='va'>type</span>, render <span class='op'>=</span> <span class='cn'>FALSE</span>, namespace <span class='op'>=</span> <span class='st'>"covidregionaldata"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,6 +178,17 @@ return. Current options include "national" (which are datasets at the
 national level which inherit from <code>CountryDataClass</code>) and
 "regional" (which are datasets at the regional level which inherit
 directly from <code><a href='DataClass.html'>DataClass()</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>render</th>
+      <td><p>Logical If TRUE the supported data set table is built from the
+available classes using <code>summary</code> methods. If FALSE the supported
+data set table is taken from package data. Defaults to FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>namespace</th>
+      <td><p>Character string The name of the namespace to search for
+class objects. Defaults to "covidregionaldata" as the package.</p></td>
     </tr>
     </table>
 
@@ -249,6 +258,23 @@ available for.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> United… UK     region         authority      <span style='color: #BB0000;'>NA</span>             regi… https://ww…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> United… USA    state          county         <span style='color: #BB0000;'>NA</span>             regi… https://ra…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 1 more variable: source_data_cols &lt;chr&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># render the data</span></span>
+<span class='r-in'><span class='fu'>get_available_datasets</span><span class='op'>(</span>render <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 22 x 8</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    origin   class level_1_region level_2_region level_3_region type  data_urls  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> Belgium  Belg… region         province       <span style='color: #BB0000;'>NA</span>             regi… https://ep…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Brazil   Braz… state          city           <span style='color: #BB0000;'>NA</span>             regi… https://gi…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Canada   Cana… province       <span style='color: #BB0000;'>NA</span>             <span style='color: #BB0000;'>NA</span>             regi… https://he…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> Colombia Colo… departamento   <span style='color: #BB0000;'>NA</span>             <span style='color: #BB0000;'>NA</span>             regi… https://ra…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> Covid-1… Covi… country        region         subregion      nati… https://st…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> Cuba     Cuba  provincia      <span style='color: #BB0000;'>NA</span>             <span style='color: #BB0000;'>NA</span>             regi… https://co…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Europea… ECDC  country        <span style='color: #BB0000;'>NA</span>             <span style='color: #BB0000;'>NA</span>             nati… https://op…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> France   Fran… region         department     <span style='color: #BB0000;'>NA</span>             regi… https://ww…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> Germany  Germ… bundesland     landkreis      <span style='color: #BB0000;'>NA</span>             regi… https://op…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Google   Goog… country        subregion      subregion2     nati… https://st…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 12 more rows, and 1 more variable: source_data_cols &lt;chr&gt;</span></span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
