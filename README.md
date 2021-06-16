@@ -78,7 +78,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpK4T80C
+#> Using a cache at: /tmp/RtmpdtqshY
 ```
 
 To stop using `memoise` use,
