@@ -35,7 +35,7 @@ covid_map <- ggplot(
 logo <- sticker(
   covid_map,
   package = "covidregionaldata",
-  p_size = 50, s_x = 0.93, s_y = 0.8, s_width = 1.7, s_height = 2,
+  p_size = 48, s_x = 0.93, s_y = 0.8, s_width = 1.7, s_height = 2,
   p_y = 1.45,
   p_color = "white",
   h_color = "#646770",

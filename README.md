@@ -1,5 +1,5 @@
 
-# Subnational data for the COVID-19 outbreak <img src="man/figures/logo.png" align="right" alt="" width="120" />
+# Subnational data for the COVID-19 outbreak <img src="man/figures/logo.png" align="right" alt="" width="120"/>
 
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -78,7 +78,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmprQRl5f
+#> Using a cache at: /tmp/RtmpK4T80C
 ```
 
 To stop using `memoise` use,
