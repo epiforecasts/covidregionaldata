@@ -63,3 +63,21 @@ test_that("National level datasets can be filtered for", {
   expect_equal(nrow(dplyr::filter(nat, class %in% "Italy")), 0)
   expect_equal(unique(nat$type), "national")
 })
+
+test_that(
+  paste(
+    "all_country_data is up to date.",
+    "This will fail if a new data source has been added, or an existing one",
+    "modified, but the table outlining available data (all_country_data) has",
+    "not been re-rendered. Run the code in",
+    "data-raw/render_available_datasets.R to update all_country_data"
+  ),
+  {
+    package_avaliable_data <- get_available_datasets()
+    rendered_available_data <- get_available_datasets(render = TRUE)
+    expect_identical(
+      package_avaliable_data,
+      rendered_available_data
+    )
+  }
+)
