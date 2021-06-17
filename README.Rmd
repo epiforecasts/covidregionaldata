@@ -12,7 +12,18 @@ knitr::opts_chunk$set(
 ```
 
 
-# Subnational data for the COVID-19 outbreak <img src="man/figures/logo.png" align="right" alt="" width="120"/>
+# Hexsticker designs
+
+### Design 1
+![Design 1](man/figures/logo.png)
+
+### Design 2
+![design 2](man/figures/logo2.png)
+
+### Design 3
+![design 3](man/figures/logo3.png)
+
+# Subnational data for the COVID-19 outbreak
 
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions) [![Codecov test coverage](https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg)](https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master) [![Data status](https://img.shields.io/badge/Data-status-lightblue.svg?style=flat)](https://epiforecasts.io/covidregionaldata/articles/supported-countries.html) [![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4)](https://cran.r-project.org/package=covidregionaldata)
 
