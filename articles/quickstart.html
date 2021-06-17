@@ -133,7 +133,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
 <span class="va">all_countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 125724 Columns: 8</span>
+<span class="co">#&gt; Rows: 125847 Columns: 8</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
@@ -147,7 +147,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 125,846 x 15</span>
+<span class="co">#&gt; # A tibble: 125,847 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -160,7 +160,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 125,836 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 125,837 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
@@ -203,13 +203,13 @@
 <span class="co">#&gt;    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 United States  US          33151678       594888               0          0</span>
-<span class="co">#&gt;  2 India          IN          29570886       377031               0          0</span>
+<span class="co">#&gt;  2 India          IN          29633110       379573               0          0</span>
 <span class="co">#&gt;  3 Brazil         BR          17452612       488228               0          0</span>
-<span class="co">#&gt;  4 France         FR           5636249       109572               0          0</span>
-<span class="co">#&gt;  5 Turkey         TR           5336073        48795               0          0</span>
-<span class="co">#&gt;  6 Russia         RU           5236593       127180               0          0</span>
-<span class="co">#&gt;  7 United Kingdom GB           4573423       127907               0          0</span>
-<span class="co">#&gt;  8 Italy          IT           4245927       127069               0          0</span>
+<span class="co">#&gt;  4 France         FR           5638116       109640               0          0</span>
+<span class="co">#&gt;  5 Turkey         TR           5342028        48879               0          0</span>
+<span class="co">#&gt;  6 Russia         RU           5249990       127576               0          0</span>
+<span class="co">#&gt;  7 United Kingdom GB           4581010       127917               0          0</span>
+<span class="co">#&gt;  8 Italy          IT           4247180       127132               0          0</span>
 <span class="co">#&gt;  9 Argentina      AR           4145482        86029               0          0</span>
 <span class="co">#&gt; 10 Colombia       CO           3777600        96366               0          0</span>
 <span class="co">#&gt; # … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></code></pre></div>
