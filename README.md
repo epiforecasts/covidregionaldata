@@ -3,7 +3,7 @@
 
 ### Design 1
 
-![Design 1](man/figures/logo.png)
+![Design 1](man/figures/logo1.png)
 
 ### Design 2
 
@@ -92,7 +92,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpcnFAXK
+#> Using a cache at: /tmp/Rtmp22YZr9
 ```
 
 To stop using `memoise` use,
@@ -117,7 +117,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 125,961
+#> Rows: 126,084
 #> Columns: 8
 #> Delimiter: ","
 #> chr  [3]: Country_code, Country, WHO_region
@@ -129,7 +129,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 126,083 x 15
+#> # A tibble: 126,084 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -142,7 +142,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 126,073 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 126,074 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -183,7 +183,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,552 x 26
+#> # A tibble: 6,565 x 26
 #>    date       region   region_code cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
@@ -196,7 +196,7 @@ uk_nots
 #>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
 #>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
 #> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 6,542 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 6,555 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
