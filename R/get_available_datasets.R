@@ -54,7 +54,7 @@ get_available_datasets <- function(type, render = FALSE,
       bind_rows()
     country_data <- available_country_data
   } else {
-    country_data <- all_country_data
+    country_data <- covidregionaldata::all_country_data
   }
   if (!missing(type)) {
     target_type <- match.arg(
