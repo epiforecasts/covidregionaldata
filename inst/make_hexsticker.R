@@ -20,8 +20,15 @@ regional_countries_l2 <- regional_countries %>%
   filter(!(is.na(.data$level_2_region)))
 
 # get world data
-world <- spData::world %>%
-  st_as_sf()
+world <- ms_simplify(spData::world %>%
+  st_as_sf(), keep = 0.04)
+
+regional_maps <- ms_simplify(ne_states(gsub(' \\(.*\\)', "", regional_countries$origin,perl=TRUE),
+                           returnclass = "sf"), keep = 0.04) %>%
+    mutate(
+      region_code = paste("Level", woe_id %% 7 + 3)
+    )
+
 
 world_without_regions <- ne_countries(returnclass = "sf") %>%
   filter(sovereignt != "Antarctica")
@@ -35,7 +42,7 @@ regional_maps <- ms_simplify(ne_states(gsub(' \\(.*\\)', "", regional_countries$
                   countryname(regional_countries_l2[["origin"]], destination = "country.name.en"),
                 0, 7)
     )
-  
+
 
 # mark supported countries from the world data
 supported_countries <- world %>%
