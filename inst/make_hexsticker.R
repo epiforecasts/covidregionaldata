@@ -1,30 +1,48 @@
+library(covidregionaldata)
 library(hexSticker)
 library(showtext)
 library(ggplot2)
 library(dplyr)
 library(maps)
+library(countrycode)
 library(sf)
+library(rnaturalearth)
+library(rmapshaper)
 
 # font setup
 font_add_google("Zilla Slab Highlight", "useme")
 
 # get countries we have data for
 regional_countries <- get_available_datasets() %>%
-  filter(type == "regional")
+  filter(.data$type == "regional")
 
 regional_countries_l2 <- regional_countries %>%
-  filter(!(is.na(level_2_region)))
+  filter(!(is.na(.data$level_2_region)))
 
 # get world data
 world <- spData::world %>%
   st_as_sf()
 
+world_without_regions <- ne_countries(returnclass = "sf") %>%
+  filter(sovereignt != "Antarctica")
+
+regional_maps <- ms_simplify(ne_states(gsub(' \\(.*\\)', "", regional_countries$origin,perl=TRUE),
+                           returnclass = "sf"), keep = 0.04) %>%
+    mutate(
+      #region_code = paste("Level", woe_id %% 7 + 3)
+      region_code = woe_id %% 7 +
+        if_else(admin %in%
+                  countryname(regional_countries_l2[["origin"]], destination = "country.name.en"),
+                0, 7)
+    )
+  
+
 # mark supported countries from the world data
 supported_countries <- world %>%
   mutate(
     fill = case_when(
-      name_long %in% countryname(regional_countries_l2[["origin"]], , destination = "country.name.en") ~ "Level 2",
-      name_long %in% countryname(regional_countries[["origin"]], , destination = "country.name.en") ~ "Level 1",
+      name_long %in% countryname(regional_countries_l2[["origin"]], destination = "country.name.en") ~ "Level 2",
+      name_long %in% countryname(regional_countries[["origin"]], destination = "country.name.en") ~ "Level 1",
       TRUE ~ "Unsupported"
     )
   )
@@ -86,6 +104,30 @@ covid_map_2 <- ggplot() +
 
 print(covid_map_2)
 
+covid_map_3 <- ggplot() +
+  ggspatial::layer_spatial(data = world_without_regions, size = 0.01) +
+  coord_sf(crs = "ESRI:54016") +
+  # scale_fill_manual(
+  #  name = "",
+  #  values = c("#0072b2", "#cc79a7", "grey80")
+  # ) +
+  # scale_color_manual(
+  #   name = "",
+  #   values = c("black", "black", "#666666")
+  # ) +
+  # scale_size_manual(
+  #   name = "",
+  #   values = c(0.1, 0.1, 0.018)
+  # ) +
+  ggspatial::layer_spatial(data = regional_maps,
+    aes(fill = region_code), size=0.01) +
+  coord_sf(crs = "ESRI:54016") +
+  scale_fill_fermenter(palette = "RdBu") +
+  theme_void() +
+  theme(legend.position = "none", axis.text.x = element_blank())
+
+print(covid_map_3)
+
 logo2 <- sticker(
   covid_map_2,
   package = "covidregionaldata",
@@ -110,6 +152,20 @@ logo3 <- sticker(
   h_color = "#646770",
   h_fill = "#24A7DF",
   filename = "man/figures/logo3.png",
+  u_size = 3.5,
+  dpi = 1000
+)
+
+logo4 <- sticker(
+  covid_map_3,
+  package = "covidregionaldata",
+  p_size = 48, s_x = 1, s_y = 0.8, s_width = 1.7, s_height = 1.7,
+  p_y = 1.45,
+  p_color = "white",
+  p_family = "useme",
+  h_color = "#646770",
+  h_fill = "#24A7DF",
+  filename = "man/figures/logo5.png",
   u_size = 3.5,
   dpi = 1000
 )
