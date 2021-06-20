@@ -13,6 +13,10 @@
 
 ![design 3](man/figures/logo3.png)
 
+### Design 5
+
+![design 5](man/figures/logo5.png)
+
 # Subnational data for the COVID-19 outbreak
 
 [![Lifecycle:
