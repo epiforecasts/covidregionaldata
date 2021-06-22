@@ -26,28 +26,6 @@ regional_countries_l1 <- regional_countries %>%
 world <- spData::world %>%
   st_as_sf()
 
-# regional_maps <- ms_simplify(ne_states(gsub(' \\(.*\\)', "", regional_countries$origin,perl=TRUE),
-#                            returnclass = "sf"), keep = 0.04) %>%
-#     mutate(
-#       region_code = paste("Level", woe_id %% 7 + 3)
-#     )
-
-
-world_without_regions <- ne_countries(returnclass = "sf") %>%
-  filter(sovereignt != "Antarctica")
-
-numberOfLevels <- 4
-regional_maps_l1 <- ms_simplify(
-  ne_states(gsub(' \\(.*\\)', "",
-                 regional_countries_l1$origin, perl=TRUE),returnclass = "sf") %>%
-    mutate( region_code = woe_id %% numberOfLevels), keep = 0.04) 
-
-regional_maps_l2 <- ms_simplify(
-  ne_states(gsub(' \\(.*\\)', "",
-                 regional_countries_l2$origin, perl=TRUE),returnclass = "sf") %>%
-    mutate( region_code = woe_id %% numberOfLevels + numberOfLevels + 1), keep = 0.04) 
-
-regional_maps <- bind_rows(regional_maps_l1, regional_maps_l2)
 
 # mark supported countries from the world data
 supported_countries <- world %>%
@@ -116,6 +94,39 @@ covid_map_2 <- ggplot() +
 
 print(covid_map_2)
 
+# Approach using Natural Earth data
+
+world_without_regions <- ne_countries(returnclass = "sf") %>%
+  filter(sovereignt != "Antarctica")
+
+# numberOfLevels should be less than half the number of colours in the
+# divergent palette used (usually 7)
+numberOfLevels <- 3
+
+regional_maps_l1 <- ms_simplify(
+  ne_states(gsub(' \\(.*\\)', "",
+                 regional_countries_l1$origin, perl=TRUE),returnclass = "sf") %>%
+    mutate( region_code = woe_id %% numberOfLevels), keep = 0.04) 
+
+regional_maps_l2 <- ms_simplify(
+  ne_states(gsub(' \\(.*\\)', "",
+                 regional_countries_l2$origin, perl=TRUE),returnclass = "sf") %>%
+    mutate( region_code = woe_id %% numberOfLevels + numberOfLevels + 1), keep = 0.04) 
+
+regional_maps <- bind_rows(regional_maps_l1, regional_maps_l2)
+
+# We keep 50% of the points of the country outlines because it's a
+# finer scale map
+# We add the US and the UK to the list because otherwise we don't
+# successfully include them.
+regional_outlines <- ms_simplify(
+  ne_countries(country = c(gsub(' \\(.*\\)', "", regional_countries$origin, perl=TRUE),
+                           "United States", "United Kingdom"),
+               returnclass = "sf"),
+  keep = 0.5
+)
+
+
 covid_map_3 <- ggplot() +
   ggspatial::layer_spatial(data = world_without_regions, size = 0.01) +
   coord_sf(crs = "ESRI:54016") +
@@ -131,8 +142,12 @@ covid_map_3 <- ggplot() +
   #   name = "",
   #   values = c(0.1, 0.1, 0.018)
   # ) +
+  ggspatial::layer_spatial(data = regional_outlines,
+                         aes(colour="black"), size=0.5) +
+  # scale_color_manual(name = "",
+  #                   values = c("black")) +
   ggspatial::layer_spatial(data = regional_maps,
-    aes(fill = region_code), size=0.01) +
+    aes(fill = region_code), size=0.02) +
   coord_sf(crs = "ESRI:54016") +
   scale_fill_fermenter(palette = "RdBu") +
   theme_void() +
