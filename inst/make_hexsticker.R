@@ -104,14 +104,22 @@ world_without_regions <- ne_countries(returnclass = "sf") %>%
 numberOfLevels <- 3
 
 regional_maps_l1 <- ms_simplify(
-  ne_states(gsub(' \\(.*\\)', "",
-                 regional_countries_l1$origin, perl=TRUE),returnclass = "sf") %>%
-    mutate( region_code = woe_id %% numberOfLevels), keep = 0.04) 
+  ne_states(gsub(" \\(.*\\)", "",
+    regional_countries_l1$origin,
+    perl = TRUE
+  ), returnclass = "sf") %>%
+    mutate(region_code = woe_id %% numberOfLevels),
+  keep = 0.04
+)
 
 regional_maps_l2 <- ms_simplify(
-  ne_states(gsub(' \\(.*\\)', "",
-                 regional_countries_l2$origin, perl=TRUE),returnclass = "sf") %>%
-    mutate( region_code = woe_id %% numberOfLevels + numberOfLevels + 1), keep = 0.04) 
+  ne_states(gsub(" \\(.*\\)", "",
+    regional_countries_l2$origin,
+    perl = TRUE
+  ), returnclass = "sf") %>%
+    mutate(region_code = woe_id %% numberOfLevels + numberOfLevels + 1),
+  keep = 0.04
+)
 
 regional_maps <- bind_rows(regional_maps_l1, regional_maps_l2)
 
@@ -119,35 +127,30 @@ regional_maps <- bind_rows(regional_maps_l1, regional_maps_l2)
 # finer scale map
 # We add the US and the UK to the list because otherwise we don't
 # successfully include them.
-regional_outlines <- ms_simplify(
-  ne_countries(country = c(gsub(' \\(.*\\)', "", regional_countries$origin, perl=TRUE),
-                           "United States", "United Kingdom"),
-               returnclass = "sf"),
-  keep = 0.5
+regional_outlines <- ms_lines(
+  ms_simplify(
+    ne_countries(
+      country = c(
+        gsub(" \\(.*\\)", "", regional_countries$origin, perl = TRUE),
+        "United States", "United Kingdom"
+      ),
+      returnclass = "sf"
+    ),
+    keep = 0.5
+  )
 )
 
 
 covid_map_3 <- ggplot() +
   ggspatial::layer_spatial(data = world_without_regions, size = 0.01) +
-  coord_sf(crs = "ESRI:54016") +
-  # scale_fill_manual(
-  #  name = "",
-  #  values = c("#0072b2", "#cc79a7", "grey80")
-  # ) +
-  # scale_color_manual(
-  #   name = "",
-  #   values = c("black", "black", "#666666")
-  # ) +
-  # scale_size_manual(
-  #   name = "",
-  #   values = c(0.1, 0.1, 0.018)
-  # ) +
-  ggspatial::layer_spatial(data = regional_outlines,
-                         aes(colour="black"), size=0.5) +
-  # scale_color_manual(name = "",
-  #                   values = c("black")) +
-  ggspatial::layer_spatial(data = regional_maps,
-    aes(fill = region_code), size=0.02) +
+  ggspatial::layer_spatial(
+    data = regional_maps,
+    aes(fill = region_code), size = 0.02
+  ) +
+  ggspatial::layer_spatial(
+    data = regional_outlines,
+    aes(colour = 1), size = 0.1
+  ) +
   coord_sf(crs = "ESRI:54016") +
   scale_fill_fermenter(palette = "RdBu") +
   theme_void() +
@@ -196,3 +199,4 @@ logo4 <- sticker(
   u_size = 3.5,
   dpi = 1000
 )
+
