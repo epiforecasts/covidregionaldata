@@ -510,7 +510,9 @@ DataClass <- R6::R6Class(
           "national", "regional"
         ),
         data_urls = paste(unlist(self$data_urls), collapse = ", "),
-        source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
+        source_data_cols = paste(unlist(self$source_data_cols), collapse = ", "),
+        source_text = self$source_text,
+        source_url = self$source_url
       )
       return(sum_df)
     },

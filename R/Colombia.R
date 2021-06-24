@@ -34,6 +34,11 @@ Colombia <- R6::R6Class("Colombia",
     # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Daniel Cárdenas",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/danielcs88/colombia_covid-19/", 
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble

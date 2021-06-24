@@ -50,6 +50,11 @@ Belgium <- R6::R6Class("Belgium",
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Sciensano (Belgian institute of health)",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://epistat.wiv-isp.be/covid/",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble tribble
