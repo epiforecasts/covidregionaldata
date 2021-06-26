@@ -35,7 +35,7 @@ SouthAfrica <- R6::R6Class("SouthAfrica",
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new", "recovered_new"),
     #' @field source_text Plain text description of the source of the data
-    source_text = "Data Science for Social Impact research group, University of Pretoria",
+    source_text = "Data Science for Social Impact research group, University of Pretoria", # nolint
     #' @field source_url Website address for explanation/introduction of the
     #' data
     source_url = "https://github.com/dsfsi/covid19za",

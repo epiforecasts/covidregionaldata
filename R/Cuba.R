@@ -38,7 +38,7 @@ Cuba <- R6::R6Class("Cuba",
     source_text = "COVID19 Cuba Data team",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://covid19cubadata.github.io/#cuba", 
+    source_url = "https://covid19cubadata.github.io/#cuba",
 
 
     #' @description Set up a table of region codes for clean data

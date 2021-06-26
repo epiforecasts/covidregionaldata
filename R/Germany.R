@@ -40,7 +40,7 @@ Germany <- R6::R6Class("Germany",
     source_text = "Robert Koch-Institut (RKI)",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0/explore",
+    source_url = "https://hub.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0/explore", # nolint
 
 
     #' @description Set up a table of region codes for clean data

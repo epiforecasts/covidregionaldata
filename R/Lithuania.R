@@ -158,7 +158,7 @@ Lithuania <- R6::R6Class("Lithuania",
     source_text = "Lithuanian Statistics Department",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0/about",
+    source_url = "https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0/about", # nolint
 
     # Additional attributes specific to the Lithuania functionality
     #' @field death_definition which criteria of deaths attributed to
