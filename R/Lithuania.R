@@ -154,6 +154,12 @@ Lithuania <- R6::R6Class("Lithuania",
     source_data_cols = c(
       "cases_new", "tested_new", "recovered_total", "deaths_new"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Lithuanian Statistics Department",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://hub.arcgis.com/datasets/d49a63c934be4f65a93b6273785a8449_0/about",
+
     # Additional attributes specific to the Lithuania functionality
     #' @field death_definition which criteria of deaths attributed to
     #' COVID to use

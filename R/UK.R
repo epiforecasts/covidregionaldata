@@ -101,6 +101,11 @@ UK <- R6::R6Class("UK",
       "newPillarOneTestsByPublishDate", "newPillarTwoTestsByPublishDate",
       "newPillarThreeTestsByPublishDate", "newPillarFourTestsByPublishDate"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Public Health England",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://coronavirus.data.gov.uk/",
 
     #' @description Specific function for getting region codes for UK .
     set_region_codes = function() {

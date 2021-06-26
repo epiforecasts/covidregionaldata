@@ -511,8 +511,8 @@ DataClass <- R6::R6Class(
         ),
         data_urls = paste(unlist(self$data_urls), collapse = ", "),
         source_data_cols = paste(unlist(self$source_data_cols), collapse = ", "),
-        source_text = self$source_text,
-        source_url = self$source_url
+        source_text = ifelse(is.null(self$source_text), NA, self$source_text),
+        source_url = ifelse(is.null(self$source_url), NA, self$source_url)
       )
       return(sum_df)
     },
