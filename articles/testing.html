@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Testing • covidregionaldata</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -15,6 +21,7 @@
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Testing">
 <meta property="og:description" content="covidregionaldata">
+<meta property="og:image" content="epiforecasts.io/covidregionaldata/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -123,16 +130,16 @@
 <span class="va">ukdata</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/UK.html">UK</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>level <span class="op">=</span> <span class="st">"1"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co"># could use anything but I used the acutal test one here for simplicity</span>
 <span class="va">ukdata</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span>snapshot_dir <span class="op">=</span> <span class="st">"../tests/testthat/custom_data/"</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 🥳</span>
+<span class="co">#&gt; Test passed 🎉</span>
+<span class="co">#&gt; Test passed 🌈</span>
+<span class="co">#&gt; Test passed 😸</span>
 <span class="co">#&gt; Test passed 🌈</span>
 <span class="co">#&gt; Test passed 🥇</span>
-<span class="co">#&gt; Test passed 😀</span>
-<span class="co">#&gt; Test passed 🌈</span>
+<span class="co">#&gt; Test passed 🥇</span>
 <span class="co">#&gt; Test passed 🎊</span>
+<span class="co">#&gt; Test passed 🎉</span>
 <span class="co">#&gt; Test passed 🌈</span>
-<span class="co">#&gt; Test passed 🥇</span>
-<span class="co">#&gt; Test passed 🌈</span>
-<span class="co">#&gt; Test passed 🥳</span></code></pre></div>
+<span class="co">#&gt; Test passed 😀</span></code></pre></div>
 <p>Here, I break down the different components of this function to walk through how the tests are run.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ukdata</span><span class="op">$</span><span class="va">test</span>
@@ -156,7 +163,7 @@
 <span class="co">#&gt;         eval(parse(text = specific))</span>
 <span class="co">#&gt;     }</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;environment: 0x7fb76ee676b8&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;environment: 0x7faf2a245e18&gt;</span></code></pre></div>
 <p>For a given country, such as the UK, you would make this by calling something like <code>ukdata &lt;- UK$new(level = "1")</code> and can run the steps one by one by calling the respective methods: <code>ukdata$download(); ukdata$clean(); ukdata$process()</code>. To run the tests you would call <code>ukdata$test(shapshot_dir = "place/2/save/snapshots")</code> By default, if <code>snapshot_dir</code> is not given it will use a generic <code>snapsots</code> directory. The <code>snapshot_dir</code> argument specifies a directory to save data snapshots to and if it doesn’t exist it will make it for you. The file is constructed internally from the object you are testing and the data level, e.g. <code>Uk_level_1.rds</code>. Rather than running tests on your active class, the code first makes a clone of your class which is then used for tests: <code>self_copy &lt;- self$clone()</code> The snapshot path is the path to a rds file where you either have stored some raw downloaded data to test, or where you want a downloaded snapshot of the data to end up. This is handled by the function <code><a href="../reference/test_download.html">test_download()</a></code>. The cloned class is passed to this function, along with the download parameter, which dictates whether to overwrite the snapshot file provided.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_download</span>
@@ -185,7 +192,7 @@
 <span class="co">#&gt;         DataClass_obj$data$raw &lt;- readRDS(snapshot_path)</span>
 <span class="co">#&gt;     }</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fb771b1e608&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7faf2b872c88&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:covidregionaldata&gt;</span></code></pre></div>
 <p>As shown by the code, if the data is to be downloaded (either through requesting this with the download parameter or by providing a path to a none existent file) then the download method is called on the class copy (<code>DataClass_obj</code>): <code>DataClass_obj$download()</code>. After this has downloaded the code tests the data is a data.frame, is not empty and has at least 2 columns. The code then takes the first 250 rows to work on, as using the whole data set could be very slow and for the purpose of testing is not needed. This sliced data is then saved to the snapshot file provided for use later on. If the data is not to be downloaded, the snapshot of data saved in the snapshot path is loaded as the raw data <code>DataClass_obj$data$raw</code>.</p>
 <p>Once the data is downloaded, the cleaning methods are then tested <code><a href="../reference/test_cleaning.html">test_cleaning()</a></code>. Again this function takes the copied class as the argument and runs through tests on the clean data. These tests check the data is a data.frame, is not empty, has more than 2 columns and that the method <code>avaliable_regions</code> returns a list of characters. In addition, <code>expect_clean_cols</code> checks the date column is an s3 class and that region level column is a character in the cleaned data (<code>data$clean</code>).</p>
@@ -212,7 +219,7 @@
 <span class="co">#&gt;                 "character")</span>
 <span class="co">#&gt;         })</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fb771b18b48&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7faf2b86a400&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:covidregionaldata&gt;</span></code></pre></div>
 <p>Once cleaning has been tested <code><a href="../reference/test_processing.html">test_processing()</a></code> is called to process the data and run tests to check it all works. Again this function takes the clone of the class to work on, the same clone which has been called with the preceding functions. These tests check the data is a data.frame, is not empty, has more than 2 columns. In addition <code>expect_processed_cols</code> checks that processed data columns date, cases_new, cases_total, deaths_new, deaths_total and that region level have the correct types.</p>
 <p>In processing there is an extra parameter called <code>all</code>. This parameter, if <code>TRUE</code> runs the processing step with both localised as <code>TRUE</code> and <code>FALSE</code>, making another copy of the object to check the localised data on so not to influence further tests. If <code>FALSE</code> processing is ran with localised set to whatever it is set at prior to <code>test()</code> being invoked.</p>
@@ -240,7 +247,7 @@
 <span class="co">#&gt;             }</span>
 <span class="co">#&gt;         })</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fb771b725d0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7faf2b85ac88&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:covidregionaldata&gt;</span></code></pre></div>
 <p>After processing the return method is tested with <code>test_return</code> which check the data is a data.frame, is not empty, has more than 2 columns and that all columns contain data and are not just composed of NAs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -258,7 +265,7 @@
 <span class="co">#&gt;         })</span>
 <span class="co">#&gt;     expect_columns_contain_data(DataClass_obj)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fb771b39920&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7faf2b812588&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:covidregionaldata&gt;</span></code></pre></div>
 <p>These tests form the generic tests applied to all classes. However, country specific tests are then called by calling the method <code>specific_tests</code> if that country has specific tests defined. So for <code>Italy</code>, where there are no specific tests, no specific tests are called, but for <code>UK</code>, <code>WHO</code> and <code>ECDC</code> specific tests are ran though, which are defined in their own country class. These functions should take a clone of the class as an argument (<code>self_copy</code> ) and any additional arguments they may need, such as a path to NHS included data for <code>UK</code>.</p>
 </div>

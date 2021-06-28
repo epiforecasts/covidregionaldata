@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Subnational Data for the COVID-19 Outbreak • covidregionaldata</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -19,14 +25,15 @@
     the UK, and from other Covid-19 data collections, including the World
     Health Organisation (WHO), European Centre for Disease Prevention and
     Control (ECDC), John Hopkins University (JHU), Google Open Data and
-    others. Designed to streamline Covid-19 data extraction, cleaning,
-    and processing from a range of data sources in an open and transparent
+    others. Designed to streamline Covid-19 data extraction, cleaning, and
+    processing from a range of data sources in an open and transparent
     way. This allows users to inspect and scrutinise the data, and tools
     used to process it, at every step. For all countries supported, data
     includes a daily time-series of cases. Wherever available data is also
     provided for deaths, hospitalisations, and tests. National level data
     are also supported using a range of sources as well as line list data
     and links to intervention data sets.">
+<meta property="og:image" content="epiforecasts.io/covidregionaldata/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -113,9 +120,10 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="subnational-data-for-the-covid-19-outbreak" class="section level1">
+<div id="subnational-data-for-the-covid-19-outbreak-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#subnational-data-for-the-covid-19-outbreak" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak</h1></div>
+<a href="#subnational-data-for-the-covid-19-outbreak-" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150">
+</h1></div>
 
 <p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.1.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="DOI"></a> <a href="https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c" class="external-link"><img src="https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg" alt="status"></a></p>
 <p>Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other Covid-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. This package is designed to streamline Covid-19 data extraction, cleaning, and processing from a range of data sources in an open and transparent way. This allows users to inspect and scrutinise the data, and tools used to process it, at every step. For all countries supported, data includes a daily time-series of cases and, wherever available, data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
@@ -148,7 +156,7 @@
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /tmp/RtmpJAeC7J</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpXdh1Cd</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -163,7 +171,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 124,425</span>
+<span class="co">#&gt; Rows: 128,546</span>
 <span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
@@ -175,7 +183,7 @@
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 124,425 x 15</span>
+<span class="co">#&gt; # A tibble: 128,690 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -188,7 +196,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 124,415 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 128,680 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -218,7 +226,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 6,474 x 26</span>
+<span class="co">#&gt; # A tibble: 6,695 x 26</span>
 <span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
@@ -231,7 +239,7 @@
 <span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
 <span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
 <span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 6,464 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 6,685 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
@@ -287,7 +295,7 @@
 <h2 class="hasAnchor">
 <a href="#development" class="anchor" aria-hidden="true"></a>Development</h2>
 <p><a href="https://github.com/epiforecasts/covidregionaldata/wiki/" class="external-link"><img src="https://img.shields.io/badge/Wiki-lightblue.svg?style=flat" alt="Development"></a></p>
-<p>This package is the result of work from a number of contributors (see contributors list in the <a href="https://epiforecasts.io/covidregionaldata/authors.html">here</a>). We would like to thank the <a href="https://cmmid.github.io/groups/ncov-group.html" class="external-link">CMMID COVID-19 working group</a> for inciteful comments and feedback.</p>
+<p>This package is the result of work from a number of contributors (see contributors list <a href="https://epiforecasts.io/covidregionaldata/authors.html">here</a>). We would like to thank the <a href="https://cmmid.github.io/groups/ncov-group.html" class="external-link">CMMID COVID-19 working group</a> for inciteful comments and feedback.</p>
 <p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues" class="external-link">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls" class="external-link">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing" class="external-link">contributing guide</a>. For details of the steps required to add support for a dataset see the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data" class="external-link">adding data guide</a>.</p>
 </div>
 </div>
