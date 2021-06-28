@@ -67,6 +67,8 @@ characterArray
 characterised
 Chun
 CIJ
+citEntry
+citHeader
 CJVA
 ClinicalTrials
 cloneable
@@ -353,6 +355,7 @@ paul
 paulcampbell
 Pedersen
 peoplepopulationandcommunity
+personList
 Petherick
 PHE
 piplines
@@ -464,6 +467,7 @@ testDownload
 testSource
 testthat
 textquoteright
+textVersion
 theoj
 Tianhan
 tibble
