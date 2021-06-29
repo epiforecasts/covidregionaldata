@@ -93,6 +93,11 @@ Covid19DataHub <- R6::R6Class("Covid19DataHub",
     # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("confirmed", "deaths", "recovered", "tested", "hosp"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "COVID-19 Data Hub",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://covid19datahub.io",
 
     #' @description Covid19 Data Hub specific data cleaning.
     #' This takes all the raw data, renames some columns and checks types.
