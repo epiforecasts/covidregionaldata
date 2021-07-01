@@ -261,7 +261,7 @@ This package is the result of work from a number of contributors (see
 contributors list
 [here](https://epiforecasts.io/covidregionaldata/authors.html)). We
 would like to thank the [CMMID COVID-19 working
-group](https://cmmid.github.io/groups/ncov-group.html) for inciteful
+group](https://cmmid.github.io/groups/ncov-group.html) for insightful
 comments and feedback.
 
 We welcome contributions and new contributors! We particularly
