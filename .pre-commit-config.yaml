@@ -34,7 +34,8 @@ repos:
           .*\.Rds|
           .*\.sh|
           .*\.RData|
-          .*\.png
+          .*\.png|
+          cran-comments\.md
           )$
     -   id: lintr
     -   id: readme-rmd-rendered
