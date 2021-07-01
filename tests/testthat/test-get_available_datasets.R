@@ -42,11 +42,13 @@ test_that(
 
 # test each column for na values
 for (name in colnames(data)) {
-  if (name %in% c("level_1_region",
-                  "level_2_region",
-                  "level_3_region",
-                  "source_text",
-                  "source_url")) {
+  if (name %in% c(
+    "level_1_region",
+    "level_2_region",
+    "level_3_region",
+    "source_text",
+    "source_url"
+  )) {
     next
   }
   test_that(

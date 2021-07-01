@@ -16,7 +16,7 @@ contributors](https://img.shields.io/github/contributors/epiforecasts/covidregio
 [![PRs
 Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
 [![GitHub
-commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/v0.9.2.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
 [![status](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg)](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c)
@@ -79,7 +79,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpB2UKDX
+#> Using a cache at: /tmp/RtmpMMiVQw
 ```
 
 To stop using `memoise` use,
@@ -104,7 +104,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 129165 Columns: 8
+#> Rows: 129279 Columns: 8
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
 #> chr  (3): Country_code, Country, WHO_region
@@ -116,7 +116,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 129,165 x 15
+#> # A tibble: 129,401 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -129,7 +129,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 129,155 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 129,391 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```

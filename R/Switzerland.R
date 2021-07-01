@@ -106,7 +106,8 @@ Switzerland <- R6::R6Class("Switzerland",
           level_1_region_code = if_else(
             .data$abbreviation_canton_and_fl == "FL",
             "FL-FL",
-            paste0("CH-", .data$abbreviation_canton_and_fl)),
+            paste0("CH-", .data$abbreviation_canton_and_fl)
+          ),
           date = as_date(ymd(.data$date))
         ) %>%
         left_join(

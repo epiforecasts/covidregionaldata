@@ -36,6 +36,7 @@ repos:
           .*\.RData|
           .*\.png|
           .*\.bib|
+          .*\.csv|
           cran-comments\.md
           )$
     -   id: lintr
