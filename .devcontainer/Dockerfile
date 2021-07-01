@@ -37,7 +37,7 @@ RUN install2.r --error --skipinstalled --repos ${CRAN} --ncpus -1 \
 
 RUN apt-get update \
      && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends libgdal-dev
+     && apt-get -y install --no-install-recommends libgdal-dev libudunits2-dev
 
 # install dependencies
 COPY DESCRIPTION /tmp/package/DESCRIPTION
