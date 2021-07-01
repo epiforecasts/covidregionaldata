@@ -38,6 +38,12 @@ WHO <- R6::R6Class("WHO",
       "deaths_new",
       "deaths_total"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "World Health Organisation",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://covid19.who.int",
+
 
     #' @description WHO specific data cleaning
     #' @importFrom dplyr mutate rename

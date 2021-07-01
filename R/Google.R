@@ -84,6 +84,12 @@ Google <- R6::R6Class("Google",
       "total_recovered",
       "total_tested"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "O. Wahltinez et al.",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/GoogleCloudPlatform/covid-19-open-data",
+
     #' @description GoogleData specific subregion2 level data cleaning. This
     #' takes all the raw data, puts into a single data frame, renames some
     #' columns and checks types.

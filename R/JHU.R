@@ -77,6 +77,11 @@ JHU <- R6::R6Class("JHU", # rename to country name
     # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("confirmed", "deaths", "recovered"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)", # nolint
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/CSSEGISandData/COVID-19/",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
