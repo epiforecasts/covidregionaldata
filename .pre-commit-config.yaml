@@ -35,6 +35,7 @@ repos:
           .*\.sh|
           .*\.RData|
           .*\.png|
+          .*\.bib|
           cran-comments\.md
           )$
     -   id: lintr
