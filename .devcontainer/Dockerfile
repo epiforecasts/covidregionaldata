@@ -36,4 +36,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
+# install dependencies
 RUN Rscript -e "devtools::install_dev_deps()"
+
+# configure precommit
+RUN Rscript -e "precommit::install_precommit(); precommit::use_precommit()"
+
+# add docthis
+RUN Rscript -e 'devtools::install_github("mdlincoln/docthis")'
