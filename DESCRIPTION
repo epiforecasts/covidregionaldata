@@ -1,5 +1,5 @@
 Package: covidregionaldata
-Title: Subnational data for COVID-19 epidemiology
+Title: Subnational Data for COVID-19 Epidemiology
 Version: 0.9.3
 Authors@R:
     c(person(given = "Joseph",

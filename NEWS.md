@@ -1,9 +1,5 @@
 # covidregionaldata 0.9.3
 
-This release completes all recommendations for the submission to JOSS.
-
-# covidregionaldata 0.9.2
-
 This release is in development and therefore new features may change without warning (though we will seek to keep this to a minimum).
 
 ## New features
