@@ -25,7 +25,7 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for contributions toward
 
 ## Bug fixes
 
-* An issue where the `Lithunia()` data set would ignore optional class specific arguments has been fixed (by @RichardMN).
+* An issue where the `Lithuania()` data set would ignore optional class specific arguments has been fixed (by @RichardMN).
 * An issue where the `JHU()` source had multiple region codes for each country has been fixed, giving just one region code per country (by @joseph-palmer).
 
 # covidregionaldata 0.9.1
