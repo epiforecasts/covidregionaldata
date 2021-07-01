@@ -291,5 +291,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: .devcontainer/Dockerfile
           push: true
           tags: docker.pkg.github.com/epiforecasts/covidregionaldata/covidregionaldata:latest

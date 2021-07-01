@@ -35,6 +35,11 @@ Italy <- R6::R6Class("Italy",
     # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_total", "deaths_total", "tested_total"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Department of Civil Protection, Italy",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/pcm-dpc/COVID-19/blob/master/README_EN.md",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble

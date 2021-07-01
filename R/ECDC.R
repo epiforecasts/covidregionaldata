@@ -36,6 +36,11 @@ ECDC <- R6::R6Class("ECDC",
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "European Centre for Disease Prevention and Control (ECDC)",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide", # nolint
 
     #' @description ECDC specific state level data cleaning
     #' @importFrom dplyr mutate rename select arrange filter

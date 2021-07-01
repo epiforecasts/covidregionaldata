@@ -61,6 +61,12 @@ JRC <- R6::R6Class("JRC",
       "Hospitalized",
       "IntensiveCare"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "European Commission Joint Research Centre (JRC)",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/ec-jrc/COVID-19",
+
 
     #' @description JRC specific data cleaning. The raw source data columns are
     #' converted to the correct type and renamed appropriately to match the

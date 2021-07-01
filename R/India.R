@@ -30,6 +30,11 @@ India <- R6::R6Class("India",
     ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "deaths_new", "recovered_new"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "COVID19India",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://www.covid19india.org",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble

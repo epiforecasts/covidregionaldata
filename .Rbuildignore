@@ -27,3 +27,4 @@ SMG.md
 ^.*.pdf$
 ^inst/paper$
 ^inst/examples$
+^\.devcontainer$
