@@ -85,7 +85,7 @@ Google <- R6::R6Class("Google",
       "total_tested"
     ),
     #' @field source_text Plain text description of the source of the data
-    source_text = "O. Wahltinez and others",
+    source_text = "O. Wahltinez et al.",
     #' @field source_url Website address for explanation/introduction of the
     #' data
     source_url = "https://github.com/GoogleCloudPlatform/covid-19-open-data",
