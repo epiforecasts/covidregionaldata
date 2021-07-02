@@ -50,7 +50,7 @@ link-citations: yes
 
 # Summary
 
-`covidregionaldata` is an R [@Rdev:2020] package that provides an interface to subnational and national level COVID-19 data. The package provides cleaned and verified COVID-19 test-positive case counts and, where available, counts of deaths, recoveries, and hospitalisations in a consistent and fully transparent framework. The package automates common processing steps while allowing researchers to easily and transparently trace the origin of the underlying data sources. It has been designed to allow users to easily extend the package's capabilities and contribute to shared data handling. All package code is archived on [Zenodo](https://zenodo.org/record/4718466) [@covidregionaldata] and [GitHub](https://github.com/epiforecasts/covidregionaldata).
+`covidregionaldata` is an R [@Rdev:2020] package that provides an interface to subnational and national level COVID-19 data. The package provides cleaned and verified COVID-19 test-positive case counts and, where available, counts of deaths, recoveries, and hospitalisations in a consistent and fully transparent framework. The package automates common processing steps while allowing researchers to easily and transparently trace the origin of the underlying data sources. It has been designed to allow users to easily extend the package's capabilities and contribute to shared data handling. All package code is archived on Zenodo and [GitHub](https://github.com/epiforecasts/covidregionaldata).
 
 # Statement of need
 
