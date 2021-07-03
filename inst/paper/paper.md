@@ -2,10 +2,10 @@
 ---
 title: "covidregionaldata: Subnational data for COVID-19 epidemiology"
 authors:
-  - name: Joseph Palmer$^{\star}$
+  - name: Joseph Palmer^[co-first author]
     orcid: 0000-0002-5593-9352
     affiliation: 1
-  - name: Katharine Sherratt$^{\star}$
+  - name: Katharine Sherratt^[co-first author]
     orcid: 0000-0003-2049-3423
     affiliation: 2
   - name: Richard Martin-Nielson
@@ -19,7 +19,7 @@ authors:
     affiliation: 2
   - name: Sebastian Funk
     affiliation: 2
-  - name: Sam Abbott$^{\dagger}$
+  - name: Sam Abbott^[corresponding author]
     affiliation: 2
     orcid: 0000-0001-8057-8037
 affiliations:
@@ -41,12 +41,9 @@ tags:
   - Sars-Cov-2
 
 output: articles::joss_article
-csl: apa.csl
 journal: JOSS
 link-citations: yes
 ---
-
-#### $^{\star}$ co-first author $^{\dagger}$ corresponding author
 
 # Summary
 
