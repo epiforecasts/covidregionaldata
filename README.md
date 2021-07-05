@@ -19,14 +19,14 @@ Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapull
 commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
 [![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
-[![status](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c/status.svg)](https://joss.theoj.org/papers/dd6f7acdae3b7136a3ac373ce9a0655c)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03290/status.svg)](https://doi.org/10.21105/joss.03290)
 
 Interface to subnational and national level COVID-19 data sourced from
 both official sources, such as Public Health England in the UK, and from
-other Covid-19 data collections, including the World Health Organisation
+other COVID-19 data collections, including the World Health Organisation
 (WHO), European Centre for Disease Prevention and Control (ECDC), John
 Hopkins University (JHU), Google Open Data and others. This package is
-designed to streamline Covid-19 data extraction, cleaning, and
+designed to streamline COVID-19 data extraction, cleaning, and
 processing from a range of data sources in an open and transparent way.
 This allows users to inspect and scrutinise the data, and tools used to
 process it, at every step. For all countries supported, data includes a
@@ -79,7 +79,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpMMiVQw
+#> Using a cache at: /tmp/RtmpvmRzcu
 ```
 
 To stop using `memoise` use,
@@ -104,7 +104,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 129279 Columns: 8
+#> Rows: 130227 Columns: 8
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
 #> chr  (3): Country_code, Country, WHO_region
@@ -116,7 +116,7 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 129,401 x 15
+#> # A tibble: 130,349 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -129,7 +129,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 129,391 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 130,339 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -170,7 +170,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,734 x 26
+#> # A tibble: 6,786 x 26
 #>    date       region   region_code cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
@@ -183,7 +183,7 @@ uk_nots
 #>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
 #>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
 #> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 6,724 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 6,776 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
@@ -216,7 +216,7 @@ uk_nots %>%
 See `get_available_datasets()` for supported regions and subregional
 levels. To view what datasets we currently have subnationaldata for,
 along with their current status, check the [supported
-countries](https://epiforecasts.io/covidregionaldata/articles/supported-countriees.html)
+countries](https://epiforecasts.io/covidregionaldata/articles/supported-countries.html)
 page or build the [supported countries
 vignette](vignettes/supported-countries.Rmd).
 

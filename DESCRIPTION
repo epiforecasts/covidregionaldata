@@ -65,10 +65,10 @@ Authors@R:
              comment = c(ORCID = "0000-0001-8057-8037")))
 Description: An interface to subnational and national level COVID-19 data
     sourced from both official sources, such as Public Health England in
-    the UK, and from other Covid-19 data collections, including the World
+    the UK, and from other COVID-19 data collections, including the World
     Health Organisation (WHO), European Centre for Disease Prevention and
     Control (ECDC), John Hopkins University (JHU), Google Open Data and
-    others. Designed to streamline Covid-19 data extraction, cleaning, and
+    others. Designed to streamline COVID-19 data extraction, cleaning, and
     processing from a range of data sources in an open and transparent
     way. This allows users to inspect and scrutinise the data, and tools
     used to process it, at every step. For all countries supported, data
