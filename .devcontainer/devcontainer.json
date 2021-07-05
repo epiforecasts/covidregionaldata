@@ -22,7 +22,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ikuyadeu.r",
-		"reditorsupport.r-lsp"
+		"reditorsupport.r-lsp",
+		"shan.code-settings-sync"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
