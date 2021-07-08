@@ -8,7 +8,7 @@ authors:
   - name: Katharine Sherratt^[co-first author]
     orcid: 0000-0003-2049-3423
     affiliation: 2
-  - name: Richard Martin-Nielson
+  - name: Richard Martin-Nielsen
     affiliation: 3
   - name: Jonnie Bevan
     affiliation: 4
