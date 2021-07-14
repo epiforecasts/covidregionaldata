@@ -80,7 +80,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpRJrpfd
+#> Using a cache at: /tmp/RtmpmGP3Do
 ```
 
 To stop using `memoise` use,
@@ -98,7 +98,7 @@ reset_cache()
 ### National data
 
 To get worldwide time-series data by country (sourced from the World
-Health Organisation (WHO) by default by also optionally from the
+Health Organisation (WHO) by default but also optionally from the
 European Centre for Disease Control (ECDC), John Hopkins University, or
 the Google COVID-19 open data project), use:
 
@@ -236,21 +236,21 @@ using the following,
     #> 
     #> To cite covidregionaldata in publications use:
     #> 
-    #>   Sam Abbott, Katharine Sherratt, Joe Palmer, Richard Martin-Nielsen,
-    #>   Jonnie Bevan, Hamish Gibbs, and Sebastian Funk (2020).
-    #>   covidregionaldata: Subnational Data for the COVID-19 Outbreak, DOI:
+    #>   Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie
+    #>   Bevan, Hamish Gibbs, Sebastian Funk and Sam Abbott (2021).
+    #>   covidregionaldata: Subnational data for COVID-19 epidemiology, DOI:
     #>   10.5281/zenodo.3957539
     #> 
     #> A BibTeX entry for LaTeX users is
     #> 
     #>   @Article{,
-    #>     title = {covidregionaldata: Subnational Data for the COVID-19 Outbreak},
-    #>     author = {Sam Abbott and Katharine Sherratt and Joe Palmer and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk},
-    #>     journal = {-},
-    #>     year = {2020},
-    #>     volume = {-},
-    #>     number = {-},
-    #>     pages = {-},
+    #>     title = {covidregionaldata: Subnational data for COVID-19 epidemiology},
+    #>     author = {Joseph Palmer and Katharine Sherratt and Richard Martin-Nielsen and Jonnie Bevan and Hamish Gibbs and Sebastian Funk and Sam Abbott},
+    #>     journal = {Journal of Open Source Software},
+    #>     year = {2021},
+    #>     volume = {6},
+    #>     number = {62},
+    #>     pages = {3290},
     #>     doi = {10.5281/zenodo.3957539},
     #>   }
 

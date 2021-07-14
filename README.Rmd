@@ -79,7 +79,7 @@ reset_cache()
 
 ### National data
 
-To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default by also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:
+To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default but also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:
 
 ```{r}
 nots <- get_national_data()
