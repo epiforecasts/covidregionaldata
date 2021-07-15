@@ -18,9 +18,9 @@ contributors](https://img.shields.io/github/contributors/epiforecasts/covidregio
 Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
 [![GitHub
 commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
-[![DOI](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
-[![DOI](https://joss.theoj.org/papers/10.21105/joss.03290/status.svg)](https://doi.org/10.21105/joss.03290)
+[![JOSS](https://joss.theoj.org/papers/10.21105/joss.03290/status.svg)](https://doi.org/10.21105/joss.03290)
+[![Zenodo](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
 
 Interface to subnational and national level COVID-19 data sourced from
 both official sources, such as Public Health England in the UK, and from
@@ -80,7 +80,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpMLqjUO
+#> Using a cache at: /tmp/RtmprTOAdV
 ```
 
 To stop using `memoise` use,
