@@ -125,7 +125,7 @@
 <a href="#subnational-data-for-the-covid-19-outbreak-" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150">
 </h1></div>
 
-<p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="DOI"></a></p>
+<p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://discord.gg/9YPDDADVt3" class="external-link"><img src="https://img.shields.io/discord/864828485981306890?logo=Discord" alt="Discord"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="DOI"></a></p>
 <p><a href="https://doi.org/10.21105/joss.03290" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.03290/status.svg" alt="DOI"></a></p>
 <p>Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other COVID-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. This package is designed to streamline COVID-19 data extraction, cleaning, and processing from a range of data sources in an open and transparent way. This allows users to inspect and scrutinise the data, and tools used to process it, at every step. For all countries supported, data includes a daily time-series of cases and, wherever available, data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
 <div id="installation" class="section level2">
@@ -159,7 +159,7 @@
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /tmp/RtmpvmRzcu</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpmGP3Do</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -170,23 +170,23 @@
 <div id="national-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h3>
-<p>To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default by also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:</p>
+<p>To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default but also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 130227 Columns: 8</span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Rows: 132,360</span>
+<span class="co">#&gt; Columns: 8</span>
 <span class="co">#&gt; Delimiter: ","</span>
-<span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
-<span class="co">#&gt; dbl  (4): New_cases, Cumulative_cases, New_deaths, Cumulative_deaths</span>
-<span class="co">#&gt; date (1): Date_reported</span>
+<span class="co">#&gt; chr  [3]: Country_code, Country, WHO_region</span>
+<span class="co">#&gt; dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths</span>
+<span class="co">#&gt; date [1]: Date_reported</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Use `spec()` to retrieve the guessed column specification</span>
+<span class="co">#&gt; Pass a specification to the `col_types` argument to quiet this message</span>
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 130,349 x 15</span>
+<span class="co">#&gt; # A tibble: 132,482 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -199,7 +199,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 130,339 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 132,472 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 6,786 x 26</span>
+<span class="co">#&gt; # A tibble: 6,903 x 26</span>
 <span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
@@ -242,7 +242,7 @@
 <span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
 <span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
 <span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 6,776 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 6,893 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
