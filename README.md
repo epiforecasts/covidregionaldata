@@ -80,7 +80,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpmGP3Do
+#> Using a cache at: /tmp/RtmpMLqjUO
 ```
 
 To stop using `memoise` use,
@@ -105,19 +105,19 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 132,360
-#> Columns: 8
+#> Rows: 132483 Columns: 8
+#> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
-#> chr  [3]: Country_code, Country, WHO_region
-#> dbl  [4]: New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
-#> date [1]: Date_reported
+#> chr  (3): Country_code, Country, WHO_region
+#> dbl  (4): New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
+#> date (1): Date_reported
 #> 
-#> Use `spec()` to retrieve the guessed column specification
-#> Pass a specification to the `col_types` argument to quiet this message
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 132,482 x 15
+#> # A tibble: 132,483 x 15
 #>    date       un_region who_region country        iso_code cases_new cases_total
 #>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
 #>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
@@ -130,7 +130,7 @@ nots
 #>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
 #>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
 #> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 132,472 more rows, and 8 more variables: deaths_new <dbl>,
+#> # … with 132,473 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -171,7 +171,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,903 x 26
+#> # A tibble: 6,916 x 26
 #>    date       region   region_code cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
@@ -184,7 +184,7 @@ uk_nots
 #>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
 #>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
 #> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 6,893 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 6,906 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
@@ -239,7 +239,7 @@ using the following,
     #>   Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie
     #>   Bevan, Hamish Gibbs, Sebastian Funk and Sam Abbott (2021).
     #>   covidregionaldata: Subnational data for COVID-19 epidemiology, DOI:
-    #>   10.5281/zenodo.3957539
+    #>   10.21105/joss.03290
     #> 
     #> A BibTeX entry for LaTeX users is
     #> 
@@ -249,9 +249,9 @@ using the following,
     #>     journal = {Journal of Open Source Software},
     #>     year = {2021},
     #>     volume = {6},
-    #>     number = {62},
+    #>     number = {63},
     #>     pages = {3290},
-    #>     doi = {10.5281/zenodo.3957539},
+    #>     doi = {10.21105/joss.03290},
     #>   }
 
 ## Development
@@ -265,7 +265,7 @@ would like to thank the [CMMID COVID-19 working
 group](https://cmmid.github.io/groups/ncov-group.html) for insightful
 comments and feedback.
 
-We welcome contributions and new contributors\! We particularly
+We welcome contributions and new contributors! We particularly
 appreciate help adding new data sources for countries at sub-national
 level, or work on priority problems in the
 [issues](https://github.com/epiforecasts/covidregionaldata/issues).
