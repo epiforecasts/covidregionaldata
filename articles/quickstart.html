@@ -140,7 +140,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
 <span class="va">all_countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 133668 Columns: 8</span>
+<span class="co">#&gt; Rows: 133905 Columns: 8</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
@@ -154,7 +154,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 133,668 x 15</span>
+<span class="co">#&gt; # A tibble: 133,905 x 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -167,7 +167,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 133,658 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 133,895 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
@@ -209,16 +209,16 @@
 <span class="co">#&gt; # A tibble: 236 x 7</span>
 <span class="co">#&gt;    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 United States  US          33723155       603790               0          0</span>
-<span class="co">#&gt;  2 India          IN          31144234       414108               0          0</span>
-<span class="co">#&gt;  3 Brazil         BR          19342448       541266               0          0</span>
-<span class="co">#&gt;  4 Russia         RU           5982766       149138               0          0</span>
-<span class="co">#&gt;  5 France         FR           5749620       110497               0          0</span>
-<span class="co">#&gt;  6 Turkey         TR           5529719        50554               0          0</span>
-<span class="co">#&gt;  7 United Kingdom GB           5433943       128708               0          0</span>
-<span class="co">#&gt;  8 Argentina      AR           4749443       101434               0          0</span>
-<span class="co">#&gt;  9 Colombia       CO           4621260       115831               0          0</span>
-<span class="co">#&gt; 10 Spain          ES           4492066        82082               0          0</span>
+<span class="co">#&gt;  1 United States  US          33741532       603880               0          0</span>
+<span class="co">#&gt;  2 India          IN          31174327       414482               0          0</span>
+<span class="co">#&gt;  3 Brazil         BR          19376574       542214               0          0</span>
+<span class="co">#&gt;  4 Russia         RU           6006536       149922               0          0</span>
+<span class="co">#&gt;  5 France         FR           5753579       110513               0          0</span>
+<span class="co">#&gt;  6 Turkey         TR           5537386        50604               0          0</span>
+<span class="co">#&gt;  7 United Kingdom GB           5473481       128727               0          0</span>
+<span class="co">#&gt;  8 Argentina      AR           4756378       101549               0          0</span>
+<span class="co">#&gt;  9 Colombia       CO           4639466       116307               0          0</span>
+<span class="co">#&gt; 10 Italy          IT           4289676       127905               0          0</span>
 <span class="co">#&gt; # … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="retrieving-subnational-region-data" class="section level2">
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">usa_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"USA"</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv</span>
-<span class="co">#&gt; Rows: 27679 Columns: 5</span>
+<span class="co">#&gt; Rows: 27734 Columns: 5</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (2): state, fips</span>
