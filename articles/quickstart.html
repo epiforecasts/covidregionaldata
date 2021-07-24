@@ -140,7 +140,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
 <span class="va">all_countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 134379 Columns: 8</span>
+<span class="co">#&gt; Rows: 134616 Columns: 8</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
@@ -154,7 +154,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 134,379 x 15</span>
+<span class="co">#&gt; # A tibble: 134,616 × 15</span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -167,7 +167,7 @@
 <span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 134,369 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 134,606 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
@@ -206,19 +206,19 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries_totals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span>totals <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">all_countries_totals</span>
-<span class="co">#&gt; # A tibble: 236 x 7</span>
+<span class="co">#&gt; # A tibble: 236 × 7</span>
 <span class="co">#&gt;    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 United States  US          33875385       604546               0          0</span>
-<span class="co">#&gt;  2 India          IN          31257725       418987               0          0</span>
-<span class="co">#&gt;  3 Brazil         BR          19419437       544180               0          0</span>
-<span class="co">#&gt;  4 Russia         RU           6054711       151501               0          0</span>
-<span class="co">#&gt;  5 France         FR           5791689       110556               0          0</span>
-<span class="co">#&gt;  6 United Kingdom GB           5563010       128896               0          0</span>
-<span class="co">#&gt;  7 Turkey         TR           5554317        50709               0          0</span>
-<span class="co">#&gt;  8 Argentina      AR           4784219       102381               0          0</span>
-<span class="co">#&gt;  9 Colombia       CO           4668750       117131               0          0</span>
-<span class="co">#&gt; 10 Italy          IT           4297485       127936               0          0</span>
+<span class="co">#&gt;  2 India          IN          31293067       419470               0          0</span>
+<span class="co">#&gt;  3 Brazil         BR          19473954       545604               0          0</span>
+<span class="co">#&gt;  4 Russia         RU           6078522       152296               0          0</span>
+<span class="co">#&gt;  5 France         FR           5813457       110566               0          0</span>
+<span class="co">#&gt;  6 United Kingdom GB           5602325       128980               0          0</span>
+<span class="co">#&gt;  7 Turkey         TR           5563903        50761               0          0</span>
+<span class="co">#&gt;  8 Argentina      AR           4798851       102818               0          0</span>
+<span class="co">#&gt;  9 Colombia       CO           4679994       117482               0          0</span>
+<span class="co">#&gt; 10 Italy          IT           4302541       127951               0          0</span>
 <span class="co">#&gt; # … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="retrieving-subnational-region-data" class="section level2">
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">usa_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"USA"</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv</span>
-<span class="co">#&gt; Rows: 27844 Columns: 5</span>
+<span class="co">#&gt; Rows: 27899 Columns: 5</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (2): state, fips</span>
