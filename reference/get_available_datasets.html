@@ -61,6 +61,8 @@ by searching the target namespace." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -72,9 +74,15 @@ by searching the target namespace." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -166,7 +174,7 @@ the data provided with this package either using a cached dataset or built
 by searching the target namespace.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='va'>type</span>, render <span class='op'>=</span> <span class='cn'>FALSE</span>, namespace <span class='op'>=</span> <span class='st'>"covidregionaldata"</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='va'>type</span>, render <span class='op'>=</span> <span class='cn'>FALSE</span>, namespace <span class='op'>=</span> <span class='st'>"covidregionaldata"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,7 +214,7 @@ available for.</p>
 <code><a href='initialise_dataclass.html'>initialise_dataclass</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># see all available datasets</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># see all available datasets</span></span>
 <span class='r-in'><span class='fu'>get_available_datasets</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 22 × 10</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    origin   class level_1_region level_2_region level_3_region type  data_urls  </span>
@@ -279,7 +287,7 @@ available for.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Google   Goog… country        subregion      subregion2     nati… https://st…</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 12 more rows, and 3 more variables: source_data_cols &lt;chr&gt;,</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   source_text &lt;chr&gt;, source_url &lt;chr&gt;</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -291,11 +299,11 @@ available for.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>, <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>.</p>
+  <p><p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -320,6 +328,8 @@ available for.</p>
 </script>
 
 
+
+  
 
   </body>
 </html>

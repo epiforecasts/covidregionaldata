@@ -2,21 +2,21 @@
   "index_name": "epiforecasts",
   "start_urls": [
     {
-      "url": "epiforecasts.io/covidregionaldata//index.html",
+      "url": "epiforecasts.io/covidregionaldata/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "epiforecasts.io/covidregionaldata//reference",
+      "url": "epiforecasts.io/covidregionaldata/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "epiforecasts.io/covidregionaldata//articles",
+      "url": "epiforecasts.io/covidregionaldata/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "epiforecasts.io/covidregionaldata//sitemap.xml"
+    "epiforecasts.io/covidregionaldata/sitemap.xml"
   ],
   "selectors": {
     "homepage": {
