@@ -40,8 +40,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -122,40 +120,40 @@
   <div class="contents col-md-9">
 <div id="subnational-data-for-the-covid-19-outbreak-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#subnational-data-for-the-covid-19-outbreak-" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150">
+<a href="#subnational-data-for-the-covid-19-outbreak-" class="anchor"></a>Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150">
 </h1></div>
 
-<p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://discord.gg/9YPDDADVt3" class="external-link"><img src="https://img.shields.io/discord/864828485981306890?logo=Discord" alt="Discord"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange" alt="GitHub commits"></a></p>
-<p><a href="https://doi.org/10.21105/joss.03290" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.03290/status.svg" alt="JOSS"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="Zenodo"></a></p>
+<p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://discord.gg/9YPDDADVt3"><img src="https://img.shields.io/discord/864828485981306890?logo=Discord" alt="Discord"></a> <a href="https://makeapullrequest.com/"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange" alt="GitHub commits"></a></p>
+<p><a href="https://doi.org/10.21105/joss.03290"><img src="https://joss.theoj.org/papers/10.21105/joss.03290/status.svg" alt="JOSS"></a> <a href="https://zenodo.org/badge/latestdoi/271601189"><img src="https://zenodo.org/badge/271601189.svg" alt="Zenodo"></a></p>
 <p>Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other COVID-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. This package is designed to streamline COVID-19 data extraction, cleaning, and processing from a range of data sources in an open and transparent way. This allows users to inspect and scrutinise the data, and tools used to process it, at every step. For all countries supported, data includes a daily time-series of cases and, wherever available, data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span><span class="op">)</span></code></pre></div>
 <p>Install the stable development version of the package with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span>,
   repos <span class="op">=</span> <span class="st">"https://epiforecasts.r-universe.dev"</span>
 <span class="op">)</span></code></pre></div>
 <p>Install the unstable development version of the package with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/covidregionaldata"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/covidregionaldata"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
+<a href="#quick-start" class="anchor"></a>Quick start</h2>
 <p><a href="https://epiforecasts.io/covidregionaldata/"><img src="https://img.shields.io/badge/Documentation-lightgrey.svg?style=flat" alt="Documentation"></a></p>
 <p>Load <code>covidregionaldata</code>, <code>dplyr</code>, <code>scales</code>, and <code>ggplot2</code> (all used in this quick start),</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></code></pre></div>
 <div id="setup-data-caching" class="section level3">
 <h3 class="hasAnchor">
-<a href="#setup-data-caching" class="anchor" aria-hidden="true"></a>Setup data caching</h3>
+<a href="#setup-data-caching" class="anchor"></a>Setup data caching</h3>
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
@@ -169,7 +167,7 @@
 </div>
 <div id="national-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h3>
+<a href="#national-data" class="anchor"></a>National data</h3>
 <p>To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default but also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
@@ -204,27 +202,27 @@
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">g7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">g7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"United States"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>,
   <span class="st">"Italy"</span>, <span class="st">"Canada"</span>, <span class="st">"Japan"</span>
 <span class="op">)</span>
 <span class="va">g7_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span>countries <span class="op">=</span> <span class="va">g7</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Using this data we can compare case information between countries, for example here is the number of deaths over time for each country in the G7:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">g7_nots</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">deaths_new</span>, col <span class="op">=</span> <span class="va">country</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Reported Covid-19 deaths"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Country"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">g7_nots</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">deaths_new</span>, col <span class="op">=</span> <span class="va">country</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Reported Covid-19 deaths"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Country"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-g7_plot-1.png" width="100%"></p>
 </div>
 <div id="subnational-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#subnational-data" class="anchor" aria-hidden="true"></a>Subnational data</h3>
+<a href="#subnational-data" class="anchor"></a>Subnational data</h3>
 <p>To get time-series data for subnational regions of a specific country, for example by level 1 region in the UK, use:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -254,24 +252,24 @@
 <span class="co">#&gt; #   newPillarTwoTestsByPublishDate &lt;dbl&gt;</span></code></pre></div>
 <p>Now we have the data we can create plots, for example the time-series of the number of cases for each region:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uk_nots</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"England"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">cases_new</span>, col <span class="op">=</span> <span class="va">region</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Reported Covid-19 cases"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Region"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">uk_nots</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"England"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">cases_new</span>, col <span class="op">=</span> <span class="va">region</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Reported Covid-19 cases"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="va">comma</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Region"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-uk_plot-1.png" width="100%"></p>
 <p>See <code><a href="reference/get_available_datasets.html">get_available_datasets()</a></code> for supported regions and subregional levels. To view what datasets we currently have subnationaldata for, along with their current status, check the <a href="https://epiforecasts.io/covidregionaldata/articles/supported-countries.html">supported countries</a> page or build the <a href="vignettes/supported-countries.Rmd">supported countries vignette</a>.</p>
-<p>For further examples see the <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd" class="external-link">quick start vignette</a>. Additional subnational data are supported via the <code><a href="reference/JHU.html">JHU()</a></code> and <code><a href="reference/Google.html">Google()</a></code> classes. Use the <code>available_regions()</code> method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.</p>
+<p>For further examples see the <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd">quick start vignette</a>. Additional subnational data are supported via the <code><a href="reference/JHU.html">JHU()</a></code> and <code><a href="reference/Google.html">Google()</a></code> classes. Use the <code>available_regions()</code> method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.</p>
 </div>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
+<a href="#citation" class="anchor"></a>Citation</h2>
 <p>If using <code>covidregionaldata</code> in your work please consider citing it using the following,</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; To cite covidregionaldata in publications use:</span></span>
@@ -296,17 +294,17 @@
 </div>
 <div id="development" class="section level2">
 <h2 class="hasAnchor">
-<a href="#development" class="anchor" aria-hidden="true"></a>Development</h2>
-<p><a href="https://github.com/epiforecasts/covidregionaldata/wiki/" class="external-link"><img src="https://img.shields.io/badge/Wiki-lightblue.svg?style=flat" alt="Development"></a></p>
-<p>This package is the result of work from a number of contributors (see contributors list <a href="https://epiforecasts.io/covidregionaldata/authors.html">here</a>). We would like to thank the <a href="https://cmmid.github.io/groups/ncov-group.html" class="external-link">CMMID COVID-19 working group</a> for insightful comments and feedback.</p>
-<p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues" class="external-link">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls" class="external-link">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing" class="external-link">contributing guide</a>. For details of the steps required to add support for a dataset see the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data" class="external-link">adding data guide</a>.</p>
+<a href="#development" class="anchor"></a>Development</h2>
+<p><a href="https://github.com/epiforecasts/covidregionaldata/wiki/"><img src="https://img.shields.io/badge/Wiki-lightblue.svg?style=flat" alt="Development"></a></p>
+<p>This package is the result of work from a number of contributors (see contributors list <a href="https://epiforecasts.io/covidregionaldata/authors.html">here</a>). We would like to thank the <a href="https://cmmid.github.io/groups/ncov-group.html">CMMID COVID-19 working group</a> for insightful comments and feedback.</p>
+<p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing">contributing guide</a>. For details of the steps required to add support for a dataset see the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data">adding data guide</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=covidregionaldata">https://​cloud.r-project.org/​package=covidregionaldata</a>
 </li>
@@ -316,67 +314,61 @@
 </li>
 </ul>
 </div>
-
 <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
-
 <div class="community">
-<h2 data-toc-skip>Community</h2>
+<h2>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-
 <div class="citation">
-<h2 data-toc-skip>Citation</h2>
+<h2>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing covidregionaldata</a></li>
 </ul>
 </div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Joseph Palmer <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5593-9352" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Katharine Sherratt <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2049-3423" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Richard Martin-Nielsen <br><small class="roles"> Author </small>  </li>
+<li>Richard Martin-Nielsen <br><small class="roles"> Author </small>  <br><small>(https://github.com/RichardMN)</small>
+</li>
 <li>Jonnie Bevan <br><small class="roles"> Author </small>  </li>
 <li>Hamish Gibbs <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4413-453X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian">Sebastian Funk</a> <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://www.samabbott.co.uk/">Sam Abbott</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8057-8037" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
+  <div class="dev-status">
+<h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/epiforecasts/covidregionaldata/actions" class="external-link"><img src="https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master" class="external-link"><img src="https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/epiforecasts/covidregionaldata/actions"><img src="https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/epiforecasts/covidregionaldata?branch=master"><img src="https://codecov.io/gh/epiforecasts/covidregionaldata/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://epiforecasts.io/covidregionaldata/articles/supported-countries.html"><img src="https://img.shields.io/badge/Data-status-lightblue.svg?style=flat" alt="Data status"></a></li>
-<li><a href="https://cran.r-project.org/package=covidregionaldata" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4" alt="metacran downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=covidregionaldata"><img src="http://cranlogs.r-pkg.org/badges/grand-total/covidregionaldata?color=ff69b4" alt="metacran downloads"></a></li>
 </ul>
 </div>
-
-  </div>
+</div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p>
+  <p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/">Sam Abbott</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

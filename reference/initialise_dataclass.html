@@ -62,8 +62,6 @@ for more details." />
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -75,15 +73,9 @@ for more details." />
 
 
 
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -176,7 +168,7 @@ examples for some potential use cases and the <code><a href='DataClass.html'>Dat
 for more details.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>initialise_dataclass</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>initialise_dataclass</span><span class='op'>(</span>
   class <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   level <span class='op'>=</span> <span class='st'>"1"</span>,
   totals <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -187,7 +179,7 @@ for more details.</p>
   get <span class='op'>=</span> <span class='cn'>FALSE</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"national"</span>, <span class='st'>"regional"</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></code></pre></div>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -263,7 +255,7 @@ e.g. <code><a href='Italy.html'>Italy()</a></code></p>
 <code><a href='get_regional_data.html'>get_regional_data</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='co'># set up a cache to store data to avoid downloading repeatedly</span></span>
 <span class='r-in'><span class='fu'><a href='start_using_memoise.html'>start_using_memoise</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'></span>
@@ -303,7 +295,7 @@ e.g. <code><a href='Italy.html'>Italy()</a></code></p>
 <span class='r-in'><span class='va'>ecdc</span> <span class='op'>&lt;-</span> <span class='fu'>initialise_dataclass</span><span class='op'>(</span><span class='st'>"ecdc"</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span>, totals <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>ecdc</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-</code></pre></div>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -315,11 +307,11 @@ e.g. <code><a href='Italy.html'>Italy()</a></code></p>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p></p>
+  <p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>, <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -344,8 +336,6 @@ e.g. <code><a href='Italy.html'>Italy()</a></code></p>
 </script>
 
 
-
-  
 
   </body>
 </html>

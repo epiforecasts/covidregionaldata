@@ -1,246 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>epiforecasts.io/covidregionaldata/404.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//index.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/CODE_OF_CONDUCT.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Belgium.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/LICENSE-text.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Brazil.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/LICENSE.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Canada.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/index.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Colombia.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/quickstart.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/CountryDataClass.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/slowstart.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Covid19DataHub.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/supported-countries.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Cuba.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/articles/testing.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/DataClass.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/authors.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/ECDC.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/index.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/France.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/news/index.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Germany.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Belgium.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Google.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Brazil.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/India.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Canada.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Italy.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Colombia.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/JHU.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/CountryDataClass.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/JHU_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Covid19DataHub.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/JRC.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Cuba.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Lithuania.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/DataClass.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Mexico.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/ECDC.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Netherlands.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/France.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/SouthAfrica.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Germany.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/Switzerland.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Google.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/UK.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/India.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/USA.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Italy.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/WHO.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/JHU.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/add_extra_na_cols.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/JHU_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/all_country_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/JRC.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/calculate_columns_from_existing_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Lithuania.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/check_level.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Mexico.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/colombia_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Netherlands.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/complete_cumulative_columns.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/SouthAfrica.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/csv_reader.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/Switzerland.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/download_excel.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/UK.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/expect_clean_cols.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/USA.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/expect_columns_contain_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/WHO.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/expect_processed_cols.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/add_extra_na_cols.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/fill_empty_dates_with_na.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/all_country_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/france_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/calculate_columns_from_existing_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_available_datasets.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/check_level.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_info_covidregionaldata.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/colombia_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_interventions_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/complete_cumulative_columns.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_linelist.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/csv_reader.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_national_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/download_excel.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/get_regional_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/expect_clean_cols.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/glue_level.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/expect_columns_contain_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/initialise_dataclass.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/expect_processed_cols.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/lithuania_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/fill_empty_dates_with_na.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/make_github_workflow.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/france_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/make_new_data_source.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_available_datasets.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/message_verbose.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_info_covidregionaldata.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/mexico_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_interventions_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_linelist.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/process_internal.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_national_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/reexports.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/get_regional_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/region_dispatch.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/glue_level.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/reset_cache.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/index.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/return_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/initialise_dataclass.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/run_default_processing_fns.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/lithuania_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/run_optional_processing_fns.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/make_github_workflow.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/set_negative_values_to_zero.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/make_new_data_source.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/start_using_memoise.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/message_verbose.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/stop_using_memoise.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/mexico_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/test_cleaning.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/pipe.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/test_download.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/process_internal.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/test_processing.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/reexports.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/test_return.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/region_dispatch.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/totalise_data.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/reset_cache.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//reference/uk_codes.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/return_data.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//articles/quickstart.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/run_default_processing_fns.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//articles/slowstart.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/run_optional_processing_fns.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//articles/supported-countries.html</loc>
   </url>
   <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/set_negative_values_to_zero.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/start_using_memoise.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/stop_using_memoise.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/test_cleaning.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/test_download.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/test_processing.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/test_return.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/totalise_data.html</loc>
-  </url>
-  <url>
-    <loc>epiforecasts.io/covidregionaldata/reference/uk_codes.html</loc>
+    <loc>epiforecasts.io/covidregionaldata//articles/testing.html</loc>
   </url>
 </urlset>

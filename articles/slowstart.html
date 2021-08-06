@@ -28,8 +28,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -85,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
+  <a href="https://github.com/epiforecasts/covidregionaldata/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -112,7 +110,7 @@
       <h1 data-toc-skip>Package overview</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/slowstart.Rmd" class="external-link"><code>vignettes/slowstart.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/slowstart.Rmd"><code>vignettes/slowstart.Rmd</code></a></small>
       <div class="hidden name"><code>slowstart.Rmd</code></div>
 
     </div>
@@ -121,17 +119,17 @@
     
 <div id="installing-and-loading-the-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installing-and-loading-the-package" class="anchor" aria-hidden="true"></a>Installing and loading the package</h2>
-<p>The package can either be installed from CRAN, from our <a href="https://epiforecasts.r-universe.dev/ui" class="external-link"><code>r-universe</code></a> repository, or from GitHub. See the README for details. Once installed load the package using the following,</p>
+<a href="#installing-and-loading-the-package" class="anchor"></a>Installing and loading the package</h2>
+<p>The package can either be installed from CRAN, from our <a href="https://epiforecasts.r-universe.dev/ui"><code>r-universe</code></a> repository, or from GitHub. See the README for details. Once installed load the package using the following,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="worldwide-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#worldwide-data" class="anchor" aria-hidden="true"></a>Worldwide data</h2>
+<a href="#worldwide-data" class="anchor"></a>Worldwide data</h2>
 <div id="accessing-national-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#accessing-national-data" class="anchor" aria-hidden="true"></a>Accessing national data</h3>
+<a href="#accessing-national-data" class="anchor"></a>Accessing national data</h3>
 <p>Both the World Health Organisation (WHO) and European Centre for Disease Control (ECDC) provide worldwide national data. Access national level data for any country using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -141,10 +139,10 @@
 </div>
 <div id="sub-national-time-series-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sub-national-time-series-data" class="anchor" aria-hidden="true"></a>Sub-national time-series data</h2>
+<a href="#sub-national-time-series-data" class="anchor"></a>Sub-national time-series data</h2>
 <div id="accessing-sub-national-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#accessing-sub-national-data" class="anchor" aria-hidden="true"></a>Accessing sub-national data</h3>
+<a href="#accessing-sub-national-data" class="anchor"></a>Accessing sub-national data</h3>
 <p>Access sub-national level data for a specific country over time using <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>. Use <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> to explore the currently supported sub-national datasets and select the data set of interest using the <code>country</code> (selects the country of interest), and <code>level</code> (selects the spatial scale of the data) arguments of <code>get_regional_data</code>.</p>
 <p>This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documentation (<code><a href="../reference/get_regional_data.html">?get_regional_data</a></code>) for details of optional arguments.</p>
 <p>As for national level data any gaps in reported data are filled with NAs.</p>
@@ -152,7 +150,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span><span class="op">)</span></code></pre></div>
 <p>This data then has the following format:</p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
 <col width="6%">
 <col width="15%">
@@ -275,7 +273,7 @@
 </div>
 <div id="level-1-and-level-2-regions" class="section level3">
 <h3 class="hasAnchor">
-<a href="#level-1-and-level-2-regions" class="anchor" aria-hidden="true"></a>Level 1 and Level 2 regions</h3>
+<a href="#level-1-and-level-2-regions" class="anchor"></a>Level 1 and Level 2 regions</h3>
 <p>All countries included in the package (see below,“Coverage”) have data for regions at the admin-1 level, the largest administrative unit of the country (e.g. state in the USA). Some countries also have data for smaller areas at the admin-2 level (e.g. county in the USA).</p>
 <p>Data for Level 2 units can be returned by using the <code>level = "2"</code> argument. The dataset will still show the corresponding Level 1 region.</p>
 <p>An example of a country with Level 2 units is France, where Level 2 units are French departments:</p>
@@ -415,7 +413,7 @@
 </div>
 <div id="totals" class="section level3">
 <h3 class="hasAnchor">
-<a href="#totals" class="anchor" aria-hidden="true"></a>Totals</h3>
+<a href="#totals" class="anchor"></a>Totals</h3>
 <p>For totalled data up to the most recent date available, use the <code>totals</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"france"</span>, totals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -491,10 +489,10 @@
 </div>
 <div id="data-glossary" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-glossary" class="anchor" aria-hidden="true"></a>Data glossary</h2>
+<a href="#data-glossary" class="anchor"></a>Data glossary</h2>
 <div id="subnational-data" class="section level4">
 <h4 class="hasAnchor">
-<a href="#subnational-data" class="anchor" aria-hidden="true"></a>Subnational data</h4>
+<a href="#subnational-data" class="anchor"></a>Subnational data</h4>
 <p>The data columns that will be returned by <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> are listed below.</p>
 <p>To standardise across countries and regions, the columns returned for each country will <em>always</em> be the same. If the corresponding data was missing from the original source then that data field is filled with NA values (or 0 if accessing totals data).</p>
 <p>Note that Date is not included if the <code>totals</code> argument is set to TRUE. Level 2 region/level 2 region code are not included if the <code>level = "1"</code>.</p>
@@ -518,7 +516,7 @@
 </div>
 <div id="national-data" class="section level4">
 <h4 class="hasAnchor">
-<a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h4>
+<a href="#national-data" class="anchor"></a>National data</h4>
 <p>In addition to the above, the following columns are included when using <code><a href="../reference/get_national_data.html">get_national_data()</a></code>.</p>
 <ul>
 <li><p><code>un_region</code>: country geographical region defined by the United Nations.</p></li>
@@ -540,13 +538,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link external-link">Sam Abbott</a>.</p>
+  <p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/">Sam Abbott</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
