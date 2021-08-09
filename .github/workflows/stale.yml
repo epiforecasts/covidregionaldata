@@ -17,3 +17,4 @@ jobs:
         stale-pr-message: 'This PR has been flagged as stale due to lack of activity'
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
+        days-before-close: -1
