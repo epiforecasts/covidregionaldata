@@ -2,7 +2,8 @@
 # Sample code to download Germany line list data from RKI by paging
 # through data offered by their RESTful api
 #
-# This currently does not parse dates correctly.
+# This now seems to parse dates correctly. It currently is testing the length of the response
+# instead of looking at the exceededTransferLimit field
 #
 
 library("httr")
@@ -31,7 +32,7 @@ get_de_df <- get_de_df %>%
     Landkreis = attributes.Landkreis,
     Anzahlfahl = attributes.AnzahlFall,
     AnzahlTodesfall = attributes.AnzahlTodesfall,
-    Meldedatum = as_date(attributes.Meldedatum)
+    Meldedatum = as_datetime(attributes.Meldedatum/1000)
   )
 page <- 1
 done_download <- FALSE
@@ -44,7 +45,9 @@ while(!done_download && supp_de_data$status_code == 200) {
   page <- page + 1
   supp_rki_call <- paste(rki_call,"&resultOffset=", sprintf("%d",offset), sep="" )
   supp_de_data <- GET(supp_rki_call)
-  message(paste("downloading page", page, "offset is", offset, "supp_de_data$status_code is", supp_de_data$status_code))
+  message(paste("downloading page", page,
+                "offset is", sprintf("%d",offset),
+                "supp_de_data$status_code is", supp_de_data$status_code))
   supp_de_content <- content(supp_de_data, "text")
   supp_de_json <- fromJSON(supp_de_content, flatten = TRUE)
   supp_de_df <- as.data.frame(supp_de_json$features) %>%
@@ -53,12 +56,13 @@ while(!done_download && supp_de_data$status_code == 200) {
       Landkreis = attributes.Landkreis,
       Anzahlfahl = attributes.AnzahlFall,
       AnzahlTodesfall = attributes.AnzahlTodesfall,
-      Meldedatum = as_date(attributes.Meldedatum)
+      Meldedatum = as_datetime(attributes.Meldedatum/1000)
     )
   row_count <- dim(supp_de_json$features)
   row_count <- row_count[1]
-  if (row_count < result_offset) {
-    message (paste("row_count is", row_count, " - download possibly complete"))
+
+  if (! hasName(supp_de_json, "exceededTransferLimit") ) {
+    message (paste("No exceededTransferLimit returned, row_count is", row_count, " - download complete"))
     done_download <- TRUE
   }
   if ( supp_de_data$status_code == 200 ) {
