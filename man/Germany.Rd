@@ -69,6 +69,7 @@ data}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Germany$set_region_codes()}}
+\item \href{#method-download}{\code{Germany$download()}}
 \item \href{#method-clean_common}{\code{Germany$clean_common()}}
 \item \href{#method-clean_level_1}{\code{Germany$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{Germany$clean_level_2()}}
@@ -80,7 +81,6 @@ data}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
@@ -98,6 +98,17 @@ data}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Germany$set_region_codes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Germany-specific download function to get raw data
+from RKI REST api by paging through requests
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Germany$download()}\if{html}{\out{</div>}}
 }
 
 }

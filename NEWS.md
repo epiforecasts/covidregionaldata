@@ -10,7 +10,7 @@ Thanks to @joseph-palmer, @RichardMN, and @kathsherratt for contributions toward
 * Support added for data from the European Commission's Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by @joseph-palmer).
 * Support added for data from the Netherlands provided by RVIM (English: National Institute for Public Health and the Environment). This source provides case, deaths and hospital admission data at the province and municipal levels (by @joseph-palmer).
 * Support added for data from Switzerland and Liechtenstein collated by Canton Zurich (@OpenZH). This source provides case, deaths and hospital admission data at the canton level (by @RichardMN).
-* Made package changes recomended in the JOSS review, including additional statements of need to the README, updates to the manuscript (paper.md) and fixes a bug of multiple sources for some countries. We are very grateful for the detailed feedback given by the JOSS reviewers and their help in improving this package.
+* Made package changes recommended in the JOSS review, including additional statements of need to the README, updates to the manuscript (paper.md) and fixes a bug of multiple sources for some countries. We are very grateful for the detailed feedback given by the JOSS reviewers and their help in improving this package.
 
 ## Changes to implemented data sources
 
