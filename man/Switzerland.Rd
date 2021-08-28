@@ -60,7 +60,8 @@ Subnational data sources
 \code{\link{Netherlands}},
 \code{\link{SouthAfrica}},
 \code{\link{UK}},
-\code{\link{USA}}
+\code{\link{USA}},
+\code{\link{Vietnam}}
 }
 \concept{dataset}
 \concept{subnational}

@@ -33,6 +33,12 @@
 #' @return A tibble of region codes and related information.
 "france_codes"
 
+#' Region Codes for Vietnam Dataset.
+#'
+#' @description The region codes for Viet Nam
+#' @return A tibble of region codes and related information.
+"vietnam_codes"
+
 #' Region Codes for JHU Dataset. Taken from the region codes provided as
 #' part of the WHO dataset.
 #'
