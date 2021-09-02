@@ -74,7 +74,8 @@ Vietnam <- R6::R6Class("Vietnam",
                                level_1_region = stringi::stri_trans_general(level_1_region, "latin-ascii"),
                                level_1_region = stringi::stri_trim_both(level_1_region),
                                level_1_region = stringr::str_replace_all(level_1_region, '\\(.*\\)|-| ', ''),
-                               level_1_region = stringr::str_to_title(level_1_region)
+                               level_1_region = stringr::str_to_title(level_1_region),
+                               level_1_region = tidyr::replace_na(level_1_region, "Unknown")
                              )  %>%
                              left_join(
                                self$codes_lookup$`1`,
