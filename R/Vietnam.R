@@ -36,7 +36,7 @@ Vietnam <- R6::R6Class("Vietnam",
                          # nolint end
                          #' @field source_data_cols existing columns within the raw data
                          source_data_cols = c(
-                           "cases_new"
+                           "cases_new", "deaths_total"
                          ),
                          #' @field source_text Plain text description of the source of the data
                          source_text = "Public COVID-19 data curated by 5F team",
@@ -59,17 +59,28 @@ Vietnam <- R6::R6Class("Vietnam",
                          #' @importFrom lubridate dmy
                          clean_common = function() {
                            self$data$clean <- self$data$raw[["main"]] %>%
-                             `colnames<-`(c('date', 'region', 'cases_new', 'case_group')) %>%
+                             `colnames<-`(c('date', 'region', 'cases_new', 
+                                            'case_group', 'deaths_date', 
+                                            'deaths_region', 'deaths_total')) %>%
                              select(
-                               date,
-                               region,
-                               cases_new
+                               date, region, cases_new, deaths_date, 
+                               deaths_region, deaths_total
                              ) %>%
+                             mutate(date = dmy(date),
+                                    deaths_date = dmy(deaths_date),
+                                    cases_new = as.numeric(cases_new),
+                                    deaths_total = as.numeric(deaths_total)) %>%
+                             full_join(x = select(., date, region, cases_new)%>%
+                                         group_by(date, region)%>%
+                                         mutate(cases_new=sum(cases_new))%>%distinct(),
+                                       y=select(., deaths_date, deaths_region, deaths_total) %>% 
+                                         group_by(deaths_date, deaths_region)%>%
+                                         mutate(deaths_total=first(deaths_total))%>%distinct(), 
+                                       by=c("date" = "deaths_date", 
+                                            "region" = "deaths_region"
+                                       )) %>%
+                             tidyr::drop_na(date, region) %>%
                              rename(level_1_region = region) %>%
-                             mutate(
-                               date = dmy(date),
-                               cases_new = as.numeric(cases_new)
-                             )%>%
                              mutate(
                                level_1_region = stringi::stri_trans_general(level_1_region, "latin-ascii"),
                                level_1_region = stringi::stri_trim_both(level_1_region),
