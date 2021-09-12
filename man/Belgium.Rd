@@ -64,6 +64,11 @@ each level of regions. For Belgium, there are only additional data for
 level 1 regions.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
+
+\item{\code{source_text}}{Plain text description of the source of the data}
+
+\item{\code{source_url}}{Website address for explanation/introduction of the
+data}
 }
 \if{html}{\out{</div>}}
 }

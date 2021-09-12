@@ -42,6 +42,12 @@ France <- R6::R6Class("France",
     # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c("cases_new", "tested_new"),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "French Public Open Data Platform",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://www.data.gouv.fr/fr/pages/donnees-coronavirus",
+
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble

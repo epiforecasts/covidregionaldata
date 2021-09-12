@@ -37,6 +37,11 @@ Canada <- R6::R6Class("Canada",
       "cases_new", "cases_total", "deaths_new",
       "recovered_total", "tested_new"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Public Health Infobase, Public Health Agency of Canada",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://open.canada.ca/data/en/dataset/261c32ab-4cfd-4f81-9dea-7b64065690dc", # nolint
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble

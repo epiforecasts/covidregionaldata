@@ -510,7 +510,11 @@ DataClass <- R6::R6Class(
           "national", "regional"
         ),
         data_urls = paste(unlist(self$data_urls), collapse = ", "),
-        source_data_cols = paste(unlist(self$source_data_cols), collapse = ", ")
+        source_data_cols = paste(unlist(self$source_data_cols),
+          collapse = ", "
+        ),
+        source_text = ifelse(is.null(self$source_text), NA, self$source_text),
+        source_url = ifelse(is.null(self$source_url), NA, self$source_url)
       )
       return(sum_df)
     },
@@ -526,7 +530,7 @@ DataClass <- R6::R6Class(
     #' `specific_tests()`. The snapshots contain the first 1000 rows of data.
     #' For more details see the
     # nolint start
-    #' \href{https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
+    #' \href{https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
     # nolint end
     #' @param download logical. To download the data (TRUE) or use a snapshot
     #' (FALSE). Defaults to FALSE.

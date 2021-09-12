@@ -370,7 +370,7 @@ for all country class objects. It also calls country specific tests
 which can be defined in an individual country class method called
 \code{specific_tests()}. The snapshots contain the first 1000 rows of data.
 For more details see the
-\href{https://github.com/epiforecasts/covidregionaldata/tree/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
+\href{https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/testing.Rmd}{'testing' vignette}: \code{vignette(testing)}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$test(
   download = FALSE,

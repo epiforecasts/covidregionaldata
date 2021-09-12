@@ -62,6 +62,11 @@ Switzerland <- R6::R6Class("Switzerland",
       "cases_total",
       "tested_total"
     ),
+    #' @field source_text Plain text description of the source of the data
+    source_text = "Open Data, Canton of Zurich",
+    #' @field source_url Website address for explanation/introduction of the
+    #' data
+    source_url = "https://github.com/openZH/covid_19/",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
@@ -101,7 +106,8 @@ Switzerland <- R6::R6Class("Switzerland",
           level_1_region_code = if_else(
             .data$abbreviation_canton_and_fl == "FL",
             "FL-FL",
-            paste0("CH-", .data$abbreviation_canton_and_fl)),
+            paste0("CH-", .data$abbreviation_canton_and_fl)
+          ),
           date = as_date(ymd(.data$date))
         ) %>%
         left_join(
