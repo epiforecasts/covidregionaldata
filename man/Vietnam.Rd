@@ -5,7 +5,7 @@
 \title{Vietnam Class for downloading, cleaning and processing
 notification data}
 \source{
-\url{https://github.com/biocyberman/covidregionaldata/}
+\url{https://covid.ncsc.gov.vn}
 }
 \description{
 Information for downloading, cleaning
@@ -70,6 +70,7 @@ data}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Vietnam$set_region_codes()}}
+\item \href{#method-download}{\code{Vietnam$download()}}
 \item \href{#method-clean_common}{\code{Vietnam$clean_common()}}
 \item \href{#method-clone}{\code{Vietnam$clone()}}
 }
@@ -79,7 +80,6 @@ data}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="initialize">}\href{../../covidregionaldata/html/DataClass.html#method-initialize}{\code{covidregionaldata::DataClass$initialize()}}\out{</span>}
@@ -97,6 +97,16 @@ data}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Vietnam$set_region_codes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+download function to get raw data
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Vietnam$download()}\if{html}{\out{</div>}}
 }
 
 }
