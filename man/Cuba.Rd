@@ -23,6 +23,7 @@ Subnational data sources
 \code{\link{Canada}},
 \code{\link{Colombia}},
 \code{\link{Covid19DataHub}},
+\code{\link{Estonia}},
 \code{\link{France}},
 \code{\link{Germany}},
 \code{\link{Google}},
