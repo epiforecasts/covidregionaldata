@@ -53,6 +53,30 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   return(tibble(data))
 }
 
+#' Custom JSON reading function
+#'
+#' @description Checks for use of memoise and then uses vroom::vroom.
+#' @param file A URL or filepath to a JSON
+#' @param ... extra parameters to be passed to jsonlite::fromJSON
+#' @inheritParams message_verbose
+#' @return A data table
+#' @importFrom tibble tibble
+#' @importFrom jsonlite fromJSON
+#' @concept utility
+json_reader <- function(file, verbose = FALSE, ...) {
+  if (verbose) {
+    message("Downloading data from ", file)
+    data <- fromJSON(file, ...)
+  } else {
+    data <- suppressWarnings(
+      suppressMessages(
+        fromJSON(file, ...)
+      )
+    )
+  }
+  return(tibble(data))
+}
+
 #' Wrapper for message
 #'
 #' @description A wrapper for `message` that only prints output when
