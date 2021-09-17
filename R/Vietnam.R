@@ -28,7 +28,7 @@ Vietnam <- R6::R6Class("Vietnam",
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data.
     common_data_urls = list(
-      "main" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
+      "case_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
       "death_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
       "recovered_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time",
       "provinces" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces"
@@ -109,30 +109,44 @@ Vietnam <- R6::R6Class("Vietnam",
     #' cleaning
     #' @param ... pass additional arguments
     #'
-    #' @importFrom dplyr filter select mutate rename tibble
-    #' @importFrom tidyr replace_na drop_na
+    #' @importFrom dplyr filter select mutate rename tibble as_tibble full_join
+    #' @importFrom tidyr replace_na drop_na separate
+    #' @importFrom purrr map
+    #' @importFrom stringi stri_trans_general stri_trim_both stri_replace_all
+    #' @importFrom stringr str_to_title str_replace_all
     clean_common = function() {
-      self$data$clean <- self$data$raw[["main"]] %>%
-        select(date, region_name, cases_total, deaths_total, recovered_total) %>%
+      data_inputs <- self$data$raw[1:3]
+      flat_all <- map(map(vn_data_inputs, function(x) as_tibble(unlist(x), rownames="date")),
+                         function(x) {x %>% separate(date, sep="[.]+", into=c(NA, "province", "date"))})
+      self$data$clean <- full_join(
+        full_join(
+          vn_flat_all$case_by_time, vn_flat_all$death_by_time, by=c("province","date"),suffix=c(".cases", ".deaths"),copy=TRUE),
+        vn_flat_all$recovered_by_time, by=c("province","date"), suffix=c("",".recovered"), copy=TRUE) %>%
+        select(level_1_region_code=province, date, cases_total = value.cases, deaths_total=value.deaths, recovered_total = value) %>%
+        mutate(level_1_region_code = as.numeric(level_1_region_code)) %>%
+        left_join(self$data$raw$provinces%>%select(level_1_region_code=id,level_1_region=name), by=c("level_1_region_code"))
+        #select(date, region_name, cases_total, deaths_total, recovered_total) %>%
         mutate(
           cases_total = as.numeric(cases_total),
           deaths_total = as.numeric(deaths_total),
           recovered_total = as.numeric(recovered_total),
-          region_name = stringr::str_replace_all(region_name, "TP HCM", "Hochiminh"),
+          level_1_region = str_replace_all(level_1_region, "TP HCM", "Hochiminh"),
         ) %>%
-        tidyr::drop_na(date, region_name) %>%
-        rename(level_1_region = region_name) %>%
+        #tidyr::drop_na(date, region_name) %>%
+        #rename(level_1_region = region_name) %>%
         mutate(
-          level_1_region = stringi::stri_trans_general(level_1_region, "latin-ascii"),
-          level_1_region = stringi::stri_trim_both(level_1_region),
-          level_1_region = stringr::str_replace_all(level_1_region, "\\(.*\\)|-| ", ""),
-          level_1_region = stringr::str_to_title(level_1_region),
-          level_1_region = tidyr::replace_na(level_1_region, "Unknown")
-        ) %>%
-        left_join(
-          self$codes_lookup$`1`,
-          by = c("level_1_region" = "level_1_region")
+          level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
+          level_1_region = stri_trim_both(level_1_region),
+          level_1_region = str_replace_all(level_1_region, "\\(.*\\)|-| ", ""),
+          level_1_region = str_to_title(level_1_region),
+          level_1_region = replace_na(level_1_region, "Unknown"),
+          level_1_region_code = paste0("VN-",level_1_region_code)
         )
+          
+        # left_join(
+        #   self$codes_lookup$`1`,
+        #   by = c("level_1_region" = "level_1_region")
+        # )
     }
   )
 )
