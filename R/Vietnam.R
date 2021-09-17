@@ -114,6 +114,7 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @importFrom purrr map
     #' @importFrom stringi stri_trans_general stri_trim_both stri_replace_all
     #' @importFrom stringr str_to_title str_replace_all
+    #' @importFrom lubridate dmy
     clean_common = function() {
       data_inputs <- self$data$raw[1:3]
       flat_all <- map(map(vn_data_inputs, function(x) as_tibble(unlist(x), rownames="date")),
@@ -124,13 +125,14 @@ Vietnam <- R6::R6Class("Vietnam",
         vn_flat_all$recovered_by_time, by=c("province","date"), suffix=c("",".recovered"), copy=TRUE) %>%
         select(level_1_region_code=province, date, cases_total = value.cases, deaths_total=value.deaths, recovered_total = value) %>%
         mutate(level_1_region_code = as.numeric(level_1_region_code)) %>%
-        left_join(self$data$raw$provinces%>%select(level_1_region_code=id,level_1_region=name), by=c("level_1_region_code"))
+        left_join(self$data$raw$provinces%>%select(level_1_region_code=id,level_1_region=name), by=c("level_1_region_code")) %>%
         #select(date, region_name, cases_total, deaths_total, recovered_total) %>%
         mutate(
           cases_total = as.numeric(cases_total),
           deaths_total = as.numeric(deaths_total),
           recovered_total = as.numeric(recovered_total),
-          level_1_region = str_replace_all(level_1_region, "TP HCM", "Hochiminh"),
+          date = dmy(date),
+          level_1_region = str_replace_all(level_1_region, "TP HCM", "Hochiminh")
         ) %>%
         #tidyr::drop_na(date, region_name) %>%
         #rename(level_1_region = region_name) %>%
