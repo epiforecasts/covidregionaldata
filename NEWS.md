@@ -1,6 +1,6 @@
 # covidregionaldata 0.9.3
 
-This release is currrent under development
+This release is currrently under development
 
 ## New data sets
 
