@@ -104,6 +104,7 @@ Defaults to the target level.}
 \item \href{#method-set_region_codes}{\code{DataClass$set_region_codes()}}
 \item \href{#method-new}{\code{DataClass$new()}}
 \item \href{#method-download}{\code{DataClass$download()}}
+\item \href{#method-download_JSON}{\code{DataClass$download_JSON()}}
 \item \href{#method-clean}{\code{DataClass$clean()}}
 \item \href{#method-clean_common}{\code{DataClass$clean_common()}}
 \item \href{#method-available_regions}{\code{DataClass$available_regions()}}
@@ -201,6 +202,19 @@ of the \code{data_url} name and the corresponding raw data table in
 \code{data$raw}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{DataClass$download()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download_JSON"></a>}}
+\if{latex}{\out{\hypertarget{method-download_JSON}{}}}
+\subsection{Method \code{download_JSON()}}{
+Download raw data from \code{data_urls}, stores a named list
+of the \code{data_url} name and the corresponding raw data table in
+\code{data$raw}. Designed as a drop-in replacement for \code{download} so
+it can be used in sub-classes.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{DataClass$download_JSON()}\if{html}{\out{</div>}}
 }
 
 }

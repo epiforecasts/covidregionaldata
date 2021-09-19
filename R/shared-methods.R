@@ -302,6 +302,20 @@ DataClass <- R6::R6Class(
       )
     },
 
+    #' @description Download raw data from `data_urls`, stores a named list
+    #' of the `data_url` name and the corresponding raw data table in
+    #' `data$raw`. Designed as a drop-in replacement for `download` so
+    #' it can be used in sub-classes.
+    #' @importFrom purrr map
+    download_JSON = function() {
+      if (length(self$data_urls) == 0) {
+        stop("No data to download as data_urls is empty")
+      }
+      self$data$raw <- map(self$data_urls, json_reader,
+        verbose = self$verbose
+      )
+    },
+
     #' @description Cleans raw data (corrects format, converts column types,
     #' etc). Works on raw data and so should be called after
     #' \href{#method-download}{\code{download()}}
