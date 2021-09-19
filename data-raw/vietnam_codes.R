@@ -16,7 +16,7 @@ vn_iso <- "https://en.wikipedia.org/wiki/ISO_3166-2:VN"
 level_1_region_df <- read_html(vn_iso) %>%
   html_element(css="table.wikitable:nth-child(11)") %>%
   html_table()
- 
+
 vietnam_codes <- data.frame(
   level_1_region_code = level_1_region_df$Code,
   level_1_region = level_1_region_df$`Subdivision name (vi)`,

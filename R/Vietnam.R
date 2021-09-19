@@ -27,7 +27,12 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @field supported_region_codes List of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
     #' @field common_data_urls List of named links to raw data.
-    common_data_urls = list(),
+    common_data_urls = list(
+      "case_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
+      "death_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
+      "recovered_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time",
+      "provinces" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces"
+    ),
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "cases_total", "deaths_total", "recovered_total"
@@ -48,64 +53,80 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @importFrom tidyr replace_na drop_na
     #' @importFrom lubridate dmy
     #' @importFrom jsonlite fromJSON
-    download = function() {
-      bundles_urls <- list(
-        "case_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
-        "death_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
-        "recovered_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time"
-      )
-      Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 4) # Fix VROOM error
-      provines_url <- "https://covid.ncsc.gov.vn/api/v3/covid/provinces"
-      bundles <- names(bundles_urls)
-      provines_data <- fromJSON(provines_url)
-
-      get_bundles_data <- function(bundles) {
-        bundles_data <- list()
-        for (bundle in bundles) {
-          url <- paste0("https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=", bundle)
-          data <- fromJSON(url)
-          bundles_data <- c(bundles_data, setNames(list(data), bundle))
-        }
-        bundles_data
-      }
-
-      bundles_data <- get_bundles_data(bundles)
-
-      get_province <- function(id, data) {
-        row_dat <- provines_data[(id <- id), ]
-        death_by_time <- do.call(cbind, data$death_by_time[id])
-        case_by_time <- do.call(cbind, data$case_by_time[id])
-        recovered_by_time <- do.call(cbind, data$recovered_by_time[id])
-        if (!identical(row.names(death_by_time), row.names(death_by_time))) {
-          stop("Dates on case_by_time and death_by_time do not match!")
-        }
-        df <- tibble(
-          date = dmy(row.names(case_by_time)),
-          id = row_dat$id,
-          name = row_dat$name,
-          case_by_time = case_by_time,
-          death_by_time = death_by_time,
-          recovered_by_time = recovered_by_time
-        )
-        df
-      }
-
-      df <- do.call(rbind, lapply(provines_data$id, function(id) {
-        get_province(id, bundles_data)
-      }))
-      names(df) <- c("date", "id", "region_name", "cases_total", "deaths_total", "recovered_total")
-      self$data$raw[["main"]] <- df
+    download = function(){
+      super$download_JSON()
     },
+    #   function() {
+    #   bundles_urls <- list(
+    #     "case_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
+    #     "death_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
+    #     "recovered_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time"
+    #   )
+    #   Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 4) # Fix VROOM error
+    #   provines_url <- "https://covid.ncsc.gov.vn/api/v3/covid/provinces"
+    #   bundles <- names(bundles_urls)
+    #   provines_data <- fromJSON(provines_url)
+    #
+    #   get_bundles_data <- function(bundles) {
+    #     bundles_data <- list()
+    #     for (bundle in bundles) {
+    #       url <- paste0("https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=", bundle)
+    #       data <- fromJSON(url)
+    #       bundles_data <- c(bundles_data, setNames(list(data), bundle))
+    #     }
+    #     bundles_data
+    #   }
+    #
+    #   bundles_data <- get_bundles_data(bundles)
+    #
+    #   get_province <- function(id, data) {
+    #     row_dat <- provines_data[(id <- id), ]
+    #     death_by_time <- do.call(cbind, data$death_by_time[id])
+    #     case_by_time <- do.call(cbind, data$case_by_time[id])
+    #     recovered_by_time <- do.call(cbind, data$recovered_by_time[id])
+    #     if (!identical(row.names(death_by_time), row.names(death_by_time))) {
+    #       stop("Dates on case_by_time and death_by_time do not match!")
+    #     }
+    #     df <- tibble(
+    #       date = dmy(row.names(case_by_time)),
+    #       id = row_dat$id,
+    #       name = row_dat$name,
+    #       case_by_time = case_by_time,
+    #       death_by_time = death_by_time,
+    #       recovered_by_time = recovered_by_time
+    #     )
+    #     df
+    #   }
+    #
+    #   df <- do.call(rbind, lapply(provines_data$id, function(id) {
+    #     get_province(id, bundles_data)
+    #   }))
+    #   names(df) <- c("date", "id", "region_name", "cases_total", "deaths_total", "recovered_total")
+    #   self$data$raw[["main"]] <- df
+    # },
 
     #' @description Provincial Level Data
     #' cleaning
     #' @param ... pass additional arguments
     #'
-    #' @importFrom dplyr filter select mutate rename tibble
-    #' @importFrom tidyr replace_na drop_na
+    #' @importFrom dplyr filter select mutate rename tibble as_tibble full_join
+    #' @importFrom tidyr replace_na drop_na separate
+    #' @importFrom purrr map
+    #' @importFrom stringi stri_trans_general stri_trim_both stri_replace_all
+    #' @importFrom stringr str_to_title str_replace_all
+    #' @importFrom lubridate dmy
     clean_common = function() {
-      self$data$clean <- self$data$raw[["main"]] %>%
-        select(date, region_name, cases_total, deaths_total, recovered_total) %>%
+      data_inputs <- self$data$raw[1:3]
+      flat_all <- map(map(vn_data_inputs, function(x) as_tibble(unlist(x), rownames="date")),
+                         function(x) {x %>% separate(date, sep="[.]+", into=c(NA, "province", "date"))})
+      self$data$clean <- full_join(
+        full_join(
+          vn_flat_all$case_by_time, vn_flat_all$death_by_time, by=c("province","date"),suffix=c(".cases", ".deaths"),copy=TRUE),
+        vn_flat_all$recovered_by_time, by=c("province","date"), suffix=c("",".recovered"), copy=TRUE) %>%
+        select(level_1_region_code=province, date, cases_total = value.cases, deaths_total=value.deaths, recovered_total = value) %>%
+        mutate(level_1_region_code = as.numeric(level_1_region_code)) %>%
+        left_join(self$data$raw$provinces%>%select(level_1_region_code=id,level_1_region=name), by=c("level_1_region_code")) %>%
+        #select(date, region_name, cases_total, deaths_total, recovered_total) %>%
         mutate(
           cases_total = as.numeric(cases_total),
           deaths_total = as.numeric(deaths_total),
@@ -128,4 +149,3 @@ Vietnam <- R6::R6Class("Vietnam",
     }
   )
 )
-
