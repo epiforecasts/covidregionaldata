@@ -9,6 +9,12 @@ library(sf)
 library(rnaturalearth)
 library(rmapshaper)
 
+# This code may fail if you do not have two more packages installed.
+# They are not on CRAN, but can likely be installed with the following
+# lines:
+# devtools::install_github("ropensci/rnaturalearthdata")
+# devtools::install_github("ropensci/rnaturalearthhires")
+
 # font setup
 font_add_google("Zilla Slab Highlight", "useme")
 
