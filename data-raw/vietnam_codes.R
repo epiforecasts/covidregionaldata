@@ -23,10 +23,10 @@ vietnam_codes <- data.frame(
   stringsAsFactors = FALSE
 ) %>%
   mutate(
-    level_1_region = stringi::stri_trans_general(level_1_region, "latin-ascii"),
-    level_1_region = stringi::stri_trim_both(level_1_region),
-    level_1_region = stringr::str_replace_all(level_1_region, '\\(.*\\)|-| ', ''),
-    level_1_region = stringr::str_to_title(level_1_region)
+    level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
+    level_1_region = stri_trim_both(level_1_region),
+    level_1_region = str_replace_all(level_1_region, '\\(.*\\)|-| ', ''),
+    level_1_region = str_to_title(level_1_region)
   )
 
 # update package region_codes
