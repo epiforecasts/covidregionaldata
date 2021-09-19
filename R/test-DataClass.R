@@ -103,7 +103,7 @@ test_download <- function(DataClass_obj, download, snapshot_path) {
           testthat::expect_s3_class(data, "data.frame")
           testthat::expect_true(nrow(data) > 0)
           testthat::expect_true(ncol(data) >= 2
-                                || typeof(data[[1]])=="list")
+                                || typeof(data[[1]]) == "list")
         })
       }
     )

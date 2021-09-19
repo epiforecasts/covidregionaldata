@@ -109,7 +109,7 @@ Vietnam <- R6::R6Class("Vietnam",
           self$data$raw$provinces %>%
             select(ncsc_region_code = id, level_1_region = name),
           by = c("ncsc_region_code")) %>%
-        select( -ncsc_region_code ) %>%
+        select(-ncsc_region_code) %>%
         mutate(
           date = dmy(date),
           cases_total = as.numeric(cases_total),
@@ -118,7 +118,7 @@ Vietnam <- R6::R6Class("Vietnam",
           level_1_region = str_replace_all(level_1_region,
                                         "TP HCM", "Hochiminh"),
         ) %>%
-        # 
+        #
         #tidyr::drop_na(date, region_name) %>%
         mutate(
           level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
