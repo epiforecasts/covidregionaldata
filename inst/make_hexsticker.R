@@ -62,10 +62,10 @@ regional_outlines <- ms_lines(
         gsub(" \\(.*\\)", "", regional_countries$origin, perl = TRUE),
         "United States", "United Kingdom"
       ),
-      returnclass = "sf"
+      returnclass = "sf",
+      scale = 50
     ),
-    keep = 0.1,
-    scale = 50
+    keep = 0.1
   )
 )
 
