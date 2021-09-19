@@ -105,7 +105,8 @@ Set up a table of region codes for clean data
 \if{html}{\out{<a id="method-download"></a>}}
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
-download function to get raw data
+Download function to get raw data. Uses the
+parent class JSON-specific method for downloads.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Vietnam$download()}\if{html}{\out{</div>}}
 }

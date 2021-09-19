@@ -95,6 +95,7 @@ Imports:
     R6,
     readxl,
     rlang,
+    stringi,
     stringr,
     tibble,
     tidyr (>= 1.0.0),
