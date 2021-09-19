@@ -80,7 +80,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmprTOAdV
+#> Using a cache at: /tmp/RtmpPgZXiv
 ```
 
 To stop using `memoise` use,
@@ -105,7 +105,7 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 132483 Columns: 8
+#> Rows: 142911 Columns: 8
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
 #> chr  (3): Country_code, Country, WHO_region
@@ -117,20 +117,20 @@ nots <- get_national_data()
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 132,483 x 15
-#>    date       un_region who_region country        iso_code cases_new cases_total
-#>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
-#>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
-#>  2 2020-01-03 Europe    EURO       Albania        AL               0           0
-#>  3 2020-01-03 Africa    AFRO       Algeria        DZ               0           0
-#>  4 2020-01-03 Oceania   WPRO       American Samoa AS               0           0
-#>  5 2020-01-03 Europe    EURO       Andorra        AD               0           0
-#>  6 2020-01-03 Africa    AFRO       Angola         AO               0           0
-#>  7 2020-01-03 Americas  AMRO       Anguilla       AI               0           0
-#>  8 2020-01-03 Americas  AMRO       Antigua & Bar… AG               0           0
-#>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
-#> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 132,473 more rows, and 8 more variables: deaths_new <dbl>,
+#> # A tibble: 142,911 × 15
+#>    date       un_region who_region country           iso_code cases_new cases_total
+#>    <date>     <chr>     <chr>      <chr>             <chr>        <dbl>       <dbl>
+#>  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0
+#>  2 2020-01-03 Europe    EURO       Albania           AL               0           0
+#>  3 2020-01-03 Africa    AFRO       Algeria           DZ               0           0
+#>  4 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0
+#>  5 2020-01-03 Europe    EURO       Andorra           AD               0           0
+#>  6 2020-01-03 Africa    AFRO       Angola            AO               0           0
+#>  7 2020-01-03 Americas  AMRO       Anguilla          AI               0           0
+#>  8 2020-01-03 Americas  AMRO       Antigua & Barbuda AG               0           0
+#>  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0
+#> 10 2020-01-03 Asia      EURO       Armenia           AM               0           0
+#> # … with 142,901 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
 ```
@@ -171,7 +171,7 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 6,916 x 26
+#> # A tibble: 7,501 × 26
 #>    date       region   region_code cases_new cases_total deaths_new deaths_total
 #>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
 #>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
@@ -184,16 +184,13 @@ uk_nots
 #>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
 #>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
 #> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 6,906 more rows, and 19 more variables: recovered_new <dbl>,
+#> # … with 7,491 more rows, and 19 more variables: recovered_new <dbl>,
 #> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
 #> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
 #> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
 #> #   newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>,
 #> #   cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>,
-#> #   newDeaths28DaysByPublishDate <dbl>, newPillarFourTestsByPublishDate <lgl>,
-#> #   newPillarOneTestsByPublishDate <dbl>,
-#> #   newPillarThreeTestsByPublishDate <dbl>,
-#> #   newPillarTwoTestsByPublishDate <dbl>
+#> #   newDeaths28DaysByPublishDate <dbl>, …
 ```
 
 Now we have the data we can create plots, for example the time-series of
