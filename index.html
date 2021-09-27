@@ -54,7 +54,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">covidregionaldata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.3000</span>
       </span>
     </div>
 
@@ -159,7 +159,7 @@
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using a cache at: /tmp/RtmprTOAdV</span></code></pre></div>
+<span class="co">#&gt; Using a cache at: /tmp/RtmpPgZXiv</span></code></pre></div>
 <p>To stop using <code>memoise</code> use,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/stop_using_memoise.html">stop_using_memoise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -174,7 +174,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 132483 Columns: 8</span>
+<span class="co">#&gt; Rows: 142911 Columns: 8</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Delimiter: ","</span>
 <span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
@@ -186,20 +186,20 @@
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span>
 <span class="va">nots</span>
-<span class="co">#&gt; # A tibble: 132,483 x 15</span>
-<span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
-<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
-<span class="co">#&gt;  2 2020-01-03 Europe    EURO       Albania        AL               0           0</span>
-<span class="co">#&gt;  3 2020-01-03 Africa    AFRO       Algeria        DZ               0           0</span>
-<span class="co">#&gt;  4 2020-01-03 Oceania   WPRO       American Samoa AS               0           0</span>
-<span class="co">#&gt;  5 2020-01-03 Europe    EURO       Andorra        AD               0           0</span>
-<span class="co">#&gt;  6 2020-01-03 Africa    AFRO       Angola         AO               0           0</span>
-<span class="co">#&gt;  7 2020-01-03 Americas  AMRO       Anguilla       AI               0           0</span>
-<span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
-<span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
-<span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; # … with 132,473 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # A tibble: 142,911 × 15</span>
+<span class="co">#&gt;    date       un_region who_region country           iso_code cases_new cases_total</span>
+<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0</span>
+<span class="co">#&gt;  2 2020-01-03 Europe    EURO       Albania           AL               0           0</span>
+<span class="co">#&gt;  3 2020-01-03 Africa    AFRO       Algeria           DZ               0           0</span>
+<span class="co">#&gt;  4 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0</span>
+<span class="co">#&gt;  5 2020-01-03 Europe    EURO       Andorra           AD               0           0</span>
+<span class="co">#&gt;  6 2020-01-03 Africa    AFRO       Angola            AO               0           0</span>
+<span class="co">#&gt;  7 2020-01-03 Americas  AMRO       Anguilla          AI               0           0</span>
+<span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Barbuda AG               0           0</span>
+<span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0</span>
+<span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia           AM               0           0</span>
+<span class="co">#&gt; # … with 142,901 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
 <p>This can also be filtered for a country of interest,</p>
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">uk_nots</span>
-<span class="co">#&gt; # A tibble: 6,916 x 26</span>
+<span class="co">#&gt; # A tibble: 7,501 × 26</span>
 <span class="co">#&gt;    date       region   region_code cases_new cases_total deaths_new deaths_total</span>
 <span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA</span>
@@ -242,16 +242,13 @@
 <span class="co">#&gt;  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA</span>
 <span class="co">#&gt;  9 2020-01-30 South E… E12000008          NA          NA         NA           NA</span>
 <span class="co">#&gt; 10 2020-01-30 South W… E12000009          NA          NA         NA           NA</span>
-<span class="co">#&gt; # … with 6,906 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 7,491 more rows, and 19 more variables: recovered_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   recovered_total &lt;dbl&gt;, hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   tested_total &lt;dbl&gt;, areaType &lt;chr&gt;, cumCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumCasesBySpecimenDate &lt;dbl&gt;, newCasesByPublishDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   newCasesBySpecimenDate &lt;dbl&gt;, cumDeaths28DaysByDeathDate &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   cumDeaths28DaysByPublishDate &lt;dbl&gt;, newDeaths28DaysByDeathDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newDeaths28DaysByPublishDate &lt;dbl&gt;, newPillarFourTestsByPublishDate &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   newPillarOneTestsByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newPillarThreeTestsByPublishDate &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   newPillarTwoTestsByPublishDate &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   newDeaths28DaysByPublishDate &lt;dbl&gt;, …</span></code></pre></div>
 <p>Now we have the data we can create plots, for example the time-series of the number of cases for each region:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>

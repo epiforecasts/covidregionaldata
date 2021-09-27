@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Canada Class containing origin specific attributes and methods — Canada • covidregionaldata</title>
+<title>Vietnam Class for downloading, cleaning and processing
+notification data — Vietnam • covidregionaldata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,9 +53,10 @@
 
 
 
-<meta property="og:title" content="Canada Class containing origin specific attributes and methods — Canada" />
+<meta property="og:title" content="Vietnam Class for downloading, cleaning and processing
+notification data — Vietnam" />
 <meta property="og:description" content="Information for downloading, cleaning
-and processing COVID-19 region data for Canada." />
+and processing covid-19 region data for Vietnam." />
 <meta property="og:image" content="epiforecasts.io/covidregionaldata/logo.png" />
 
 
@@ -162,26 +164,28 @@ and processing COVID-19 region data for Canada." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Canada Class containing origin specific attributes and methods</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Canada.R'><code>R/Canada.R</code></a></small>
-    <div class="hidden name"><code>Canada.Rd</code></div>
+    <h1>Vietnam Class for downloading, cleaning and processing
+notification data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/covidregionaldata/blob/master/R/Vietnam.R'><code>R/Vietnam.R</code></a></small>
+    <div class="hidden name"><code>Vietnam.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Information for downloading, cleaning
-and processing COVID-19 region data for Canada.</p>
+and processing covid-19 region data for Vietnam.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://health-infobase.canada.ca'>https://health-infobase.canada.ca</a></p>
+    <p><a href='https://covid.ncsc.gov.vn'>https://covid.ncsc.gov.vn</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Subnational data sources
 <code><a href='Belgium.html'>Belgium</a></code>,
 <code><a href='Brazil.html'>Brazil</a></code>,
+<code><a href='Canada.html'>Canada</a></code>,
 <code><a href='Colombia.html'>Colombia</a></code>,
 <code><a href='Covid19DataHub.html'>Covid19DataHub</a></code>,
 <code><a href='Cuba.html'>Cuba</a></code>,
@@ -198,24 +202,22 @@ and processing COVID-19 region data for Canada.</p>
 <code><a href='SouthAfrica.html'>SouthAfrica</a></code>,
 <code><a href='Switzerland.html'>Switzerland</a></code>,
 <code><a href='UK.html'>UK</a></code>,
-<code><a href='USA.html'>USA</a></code>,
-<code><a href='Vietnam.html'>Vietnam</a></code></p></div>
+<code><a href='USA.html'>USA</a></code></p></div>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Canada</code></p>
+    <p><code><a href='DataClass.html'>covidregionaldata::DataClass</a></code> -&gt; <code>Vietnam</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+<dt><code>origin</code></dt><dd><p>name of country to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
+<dt><code>supported_levels</code></dt><dd><p>List of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_region_names</code></dt><dd><p>List of region names in order of level.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
+<dt><code>supported_region_codes</code></dt><dd><p>List of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data that are common
-across levels.</p></dd>
+<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data.</p></dd>
 
 <dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
@@ -231,15 +233,15 @@ data</p></dd>
 <h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-set_region_codes'><code>Canada$set_region_codes()</code></a></p></li>
-<li><p><a href='#method-clean_common'><code>Canada$clean_common()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Canada$clone()</code></a></p></li>
+<li><p><a href='#method-set_region_codes'><code>Vietnam$set_region_codes()</code></a></p></li>
+<li><p><a href='#method-download'><code>Vietnam$download()</code></a></p></li>
+<li><p><a href='#method-clean_common'><code>Vietnam$clean_common()</code></a></p></li>
+<li><p><a href='#method-clone'><code>Vietnam$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions"><a href='../../covidregionaldata/html/DataClass.html#method-available_regions'><code>covidregionaldata::DataClass$available_regions()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean"><a href='../../covidregionaldata/html/DataClass.html#method-clean'><code>covidregionaldata::DataClass$clean()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download"><a href='../../covidregionaldata/html/DataClass.html#method-download'><code>covidregionaldata::DataClass$download()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON"><a href='../../covidregionaldata/html/DataClass.html#method-download_JSON'><code>covidregionaldata::DataClass$download_JSON()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter"><a href='../../covidregionaldata/html/DataClass.html#method-filter'><code>covidregionaldata::DataClass$filter()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get"><a href='../../covidregionaldata/html/DataClass.html#method-get'><code>covidregionaldata::DataClass$get()</code></a></span></p></li>
@@ -254,17 +256,28 @@ data</p></dd>
 <hr>
 <a id="method-set_region_codes"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h3 class='hasAnchor' id='list-set-region-codes-'><a class='anchor' aria-hidden='true' href='#list-set-region-codes-'></a>Method <code>set_region_codes()</code></h3>
 <p>Set up a table of region codes for clean data</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>set_region_codes</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+
+<p><hr>
+<a id="method-download"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>download()</code></h3>
+<p>Download function to get raw data. Uses the
+parent class JSON-specific method for downloads.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+
+<h3 class='hasAnchor' id='list-download-'><a class='anchor' aria-hidden='true' href='#list-download-'></a>Method <code>download()</code></h3>
+<p>Download function to get raw data. Uses the
+parent class JSON-specific method for downloads.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>download</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <p><hr>
 <a id="method-clean_common"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clean_common()</code></h3>
 <p>Provincial Level Data
 cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -274,7 +287,7 @@ cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true
 <h3 class='hasAnchor' id='list-clean-common-'><a class='anchor' aria-hidden='true' href='#list-clean-common-'></a>Method <code>clean_common()</code></h3>
 <p>Provincial Level Data
 cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>clean_common</span><span class='op'>(</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -284,7 +297,7 @@ cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -293,7 +306,7 @@ cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true
 </dl><p></div></p>
 <h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Canada</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></code></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -305,7 +318,7 @@ cleaning</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Canada</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>region</span> <span class='op'>&lt;-</span> <span class='va'>Vietnam</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, steps <span class='op'>=</span> <span class='cn'>TRUE</span>, get <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>region</span><span class='op'>$</span><span class='kw'>return</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </code></pre></div>

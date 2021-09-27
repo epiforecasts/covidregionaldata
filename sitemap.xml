@@ -112,6 +112,9 @@
     <loc>epiforecasts.io/covidregionaldata/reference/USA.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/Vietnam.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/WHO.html</loc>
   </url>
   <url>
@@ -181,6 +184,9 @@
     <loc>epiforecasts.io/covidregionaldata/reference/initialise_dataclass.html</loc>
   </url>
   <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/json_reader.html</loc>
+  </url>
+  <url>
     <loc>epiforecasts.io/covidregionaldata/reference/lithuania_codes.html</loc>
   </url>
   <url>
@@ -245,5 +251,8 @@
   </url>
   <url>
     <loc>epiforecasts.io/covidregionaldata/reference/uk_codes.html</loc>
+  </url>
+  <url>
+    <loc>epiforecasts.io/covidregionaldata/reference/vietnam_codes.html</loc>
   </url>
 </urlset>
