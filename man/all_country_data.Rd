@@ -6,7 +6,7 @@
 \title{Table of available datasets along with level and other information.
 Rendered from the individual R6 class objects included in this package.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 22 rows and 10 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 24 rows and 10 columns.
 }
 \usage{
 all_country_data
