@@ -77,6 +77,7 @@ Subnational data sources
 \code{\link{Canada}},
 \code{\link{Colombia}},
 \code{\link{Cuba}},
+\code{\link{Estonia}},
 \code{\link{France}},
 \code{\link{Germany}},
 \code{\link{Google}},
