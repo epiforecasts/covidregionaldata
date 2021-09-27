@@ -19,6 +19,7 @@ Functions used for testing data is cleaned and processed correctly
 \code{\link{expect_clean_cols}()},
 \code{\link{expect_processed_cols}()},
 \code{\link{test_cleaning}()},
+\code{\link{test_download_JSON}()},
 \code{\link{test_download}()},
 \code{\link{test_processing}()},
 \code{\link{test_return}()}
