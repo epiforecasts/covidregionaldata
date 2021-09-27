@@ -23,7 +23,9 @@
 	"extensions": [
 		"ikuyadeu.r",
 		"reditorsupport.r-lsp",
-		"shan.code-settings-sync"
+		"shan.code-settings-sync",
+		"searking.preview-vscode",
+		"tht13.html-preview-vscode"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
