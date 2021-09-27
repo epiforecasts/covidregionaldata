@@ -68,6 +68,7 @@ Subnational data sources
 \code{\link{Colombia}},
 \code{\link{Covid19DataHub}},
 \code{\link{Cuba}},
+\code{\link{Estonia}},
 \code{\link{France}},
 \code{\link{Germany}},
 \code{\link{India}},
