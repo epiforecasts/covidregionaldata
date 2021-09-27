@@ -121,6 +121,49 @@ test_download <- function(DataClass_obj, download, snapshot_path) {
   }
 }
 
+
+#' Test download method for JSON files works correctly
+#' @description Test data can be downloaded if `download = TRUE`, or a requested
+#' snapshot file is not found, and store a snap shot in the `snapshot_dir`. If
+#' an existing snapshot file is found then load this data to use in future tests
+#' @param DataClass_obj The R6Class object to perform checks on.
+#' Must be a `DataClass` or `DataClass` child object.
+#' @param download Logical check to download or use a snapshot of the data
+#' @param snapshot_path character_array the path to save the downloaded
+#' snapshot to.
+#' @importFrom purrr map walk
+#' @importFrom dplyr slice_head
+#' @family tests
+#' @concept tests
+#' @export
+test_download_JSON <- function(DataClass_obj, download, snapshot_path) {
+  if (!file.exists(snapshot_path)) {
+    download <- TRUE
+  }
+  if (download) {
+    testthat::test_that(
+      paste0(DataClass_obj$data_name, " downloads sucessfully"),
+      {
+        DataClass_obj$download_JSON()
+        walk(DataClass_obj$data$raw, function(data) {
+          testthat::expect_s3_class(data, "data.frame")
+          testthat::expect_true(nrow(data) > 0)
+          testthat::expect_true(ncol(data) >= 2
+                                || typeof(data[[1]]) == "list")
+        })
+      }
+    )
+    DataClass_obj$data$raw <- map(vn$data$raw,
+    slice_head,
+    n = 2
+    )
+
+    saveRDS(DataClass_obj$data$raw, snapshot_path)
+  } else {
+    DataClass_obj$data$raw <- readRDS(snapshot_path)
+  }
+}
+
 #' Test clean method works correctly
 #' @description Test data can be cleaned properly. The clean method is invoked
 #' to generate clean data. This data is checked to ensure it is a data.frame,
