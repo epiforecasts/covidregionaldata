@@ -83,7 +83,8 @@ Subnational data sources
 \code{\link{Netherlands}},
 \code{\link{SouthAfrica}},
 \code{\link{Switzerland}},
-\code{\link{USA}}
+\code{\link{USA}},
+\code{\link{Vietnam}}
 }
 \concept{dataset}
 \concept{subnational}
@@ -148,6 +149,7 @@ data}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON">}\href{../../covidregionaldata/html/DataClass.html#method-download_JSON}{\code{covidregionaldata::DataClass$download_JSON()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="process">}\href{../../covidregionaldata/html/DataClass.html#method-process}{\code{covidregionaldata::DataClass$process()}}\out{</span>}
