@@ -9,6 +9,13 @@ library(sf)
 library(rnaturalearth)
 library(rmapshaper)
 
+# This code may fail if you do not have two more packages installed.
+# They are not on CRAN, but can likely be installed with the following
+# lines:
+# devtools::install_github("ropensci/rnaturalearthdata") # nolint
+# devtools::install_github("ropensci/rnaturalearthhires") # nolint
+# Alternatively use the provided development dockerfile (optionally via VScode)
+
 # font setup
 font_add_google("Zilla Slab Highlight", "useme")
 
@@ -62,10 +69,10 @@ regional_outlines <- ms_lines(
         gsub(" \\(.*\\)", "", regional_countries$origin, perl = TRUE),
         "United States", "United Kingdom"
       ),
-      returnclass = "sf"
+      returnclass = "sf",
+      scale = 50
     ),
-    keep = 0.1,
-    scale = 50
+    keep = 0.1
   )
 )
 
@@ -79,7 +86,7 @@ covid_map <- ggplot() +
     data = regional_outlines,
     aes(colour = factor(RANK)), size = 0.1
   ) +
-  coord_sf(crs = "ESRI:54016") +
+  coord_sf(crs = 54016) +
   scale_fill_fermenter(palette = "RdBu") +
   theme_void() +
   scale_colour_manual(name = "", values = c("black", "black", "black")) +
