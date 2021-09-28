@@ -34,16 +34,28 @@ RUN install2.r --error --skipinstalled --repos ${CRAN} --ncpus -1 \
         git2r \
     && rm -rf /tmp/downloaded_packages
 
+# add development dependencies
+RUN Rscript -e 'devtools::install_github("mdlincoln/docthis")'
 
+# add linux libraries for dependencies
 RUN apt-get update \
      && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends libgdal-dev \
             libudunits2-dev  libharfbuzz-dev libfribidi-dev \
-            libjq-dev libprotobuf-dev
+            libjq-dev libprotobuf-dev protobuf-compiler
 
-# install dependencies
+# add dependencies for logo making
+RUN install2.r --error --skipinstalled --repos ${CRAN} --ncpus -1 \
+        hexSticker \
+        showtext \
+        maps \
+        sf \
+        rnaturalearth \
+        rmapshaper \
+    && rm -rf /tmp/downloaded_packages
+RUN Rscript -e 'devtools::install_github("ropensci/rnaturalearthdata")'
+RUN Rscript -e 'devtools::install_github("ropensci/rnaturalearthhires")'
+
+# install package dependencies
 COPY DESCRIPTION /tmp/package/DESCRIPTION
 RUN Rscript -e "devtools::install_dev_deps('/tmp/package')"
-
-# add docthis
-RUN Rscript -e 'devtools::install_github("mdlincoln/docthis")'

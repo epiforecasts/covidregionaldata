@@ -25,7 +25,8 @@
 		"reditorsupport.r-lsp",
 		"shan.code-settings-sync",
 		"searking.preview-vscode",
-		"tht13.html-preview-vscode"
+		"tht13.html-preview-vscode",
+		"formulahendry.code-runner"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
