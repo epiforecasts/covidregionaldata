@@ -167,12 +167,17 @@
     <div id="covidregionaldata-093" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.3">
 <a href="#covidregionaldata-093" class="anchor" aria-hidden="true"></a>covidregionaldata 0.9.3<small> Unreleased </small></h1>
-<p>This release is currrently under development</p>
+<p>This release is currently under development</p>
 <div id="new-data-sets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-data-sets" class="anchor" aria-hidden="true"></a>New data sets</h2>
 <ul><li>Support for level 1 region data in Estonia (thanks to <a href='https://github.com/RichardMN'>@RichardMN</a>). See <code><a href="../reference/Estonia.html">?Estonia</a></code> for details.</li>
 <li>Support for level 1 region data in Vietnam (thanks to <a href='https://github.com/biocyberman'>@biocyberman</a>). See <code>?Vietname</code> for details.</li>
+</ul></div>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<ul><li>Updated the package logo to include the newly supported data sets.</li>
 </ul></div>
 </div>
     <div id="covidregionaldata-092" class="section level1">
@@ -194,9 +199,9 @@
 <a href="#changes-to-implemented-data-sources" class="anchor" aria-hidden="true"></a>Changes to implemented data sources</h2>
 <ul><li>Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent available data set (by <a href='https://github.com/kathsherratt'>@kathsherratt</a>).</li>
 </ul></div>
-<div id="other-changes" class="section level2">
+<div id="other-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<a href="#other-changes-1" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul><li>Testing of classes updated to allow for at least one of <code>common_data_urls</code> or <code>level_data_urls</code> to be present. The previous default which forced the presence of <code>common_data_urls</code> meant that several classes had to define an empty field (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Tests on data sets are now included as a method in <code>DataClass</code>. <code>test_regional-datasets</code> now calls the test function for all classes at each level. Data set specific tests (such as for NHS regions in the UK) are included as a <code>specific_tests</code> function within the country class, which is called by the parent (DataClass) <code>test</code> after performing standard checks. This allows all the code about a country to be defined in its own class. In addition, users can run tests interactively by calling the test method (e.g. <code>$test()</code>) (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>)</li>
 <li>A function to create a template class and automatically add a github workflow file has been added. This makes adding a new data source for a country even easier as now you can call the function <code><a href="../reference/make_new_data_source.html">make_new_data_source()</a></code> with the country / source name to add and it will set up the basic structure for you. There is also now a github check to make sure all new sources have a workflow set up (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
@@ -222,9 +227,9 @@
 <li>Added a <code>available_regions</code> method for all classes that shows level 1 regions with data available for the region of interest. This is of particular use when combined with the JHU or Google datasets where processing a large number of regions that are not required can take some time.</li>
 <li>Adds support for JHU or Google data to <code><a href="../reference/get_national_data.html">get_national_data()</a></code>. This may also now be used to access lower level data from these sources but it may be better to instead use the classes directly or via <code><a href="../reference/initialise_dataclass.html">initialise_dataclass()</a></code>.</li>
 </ul></div>
-<div id="other-changes-1" class="section level2">
+<div id="other-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes-1" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<a href="#other-changes-2" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul><li>The optional downloading of NHS region data in the <code><a href="../reference/UK.html">UK()</a></code> has been improved to include both the dynamic data previously supported and the archive document now produced (by <a href='https://github.com/kathsherratt'>@kathsherratt</a>).</li>
 <li>The examples for the <code><a href="../reference/UK.html">UK()</a></code> class have been expanded to better showcase the package functionality.</li>
 <li>The documentation and examples for <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>, <code><a href="../reference/get_national_data.html">get_national_data()</a></code>, and <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> has been expanded with a focus on increasing the visibility of the underlying package structure.</li>
@@ -306,9 +311,9 @@
 <ul><li>Relevant up to date package information can be fetched using <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code>.</li>
 <li>Switched to using <code>vroom</code> for faster <code>csv</code> downloads.</li>
 </ul></div>
-<div id="other-changes-2" class="section level2">
+<div id="other-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes-2" class="anchor" aria-hidden="true"></a>Other changes</h2>
+<a href="#other-changes-3" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul><li>Replaced silently broken functions for converting cumulative data to daily and vice versa.</li>
 <li>Removed integration with Covid19R formatting.</li>
 <li>UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these don’t fit into the existing data structure and are not available at lower level regions.</li>
