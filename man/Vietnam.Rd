@@ -5,7 +5,7 @@
 \title{Vietnam Class for downloading, cleaning and processing
 notification data}
 \source{
-\url{https://covid.ncsc.gov.vn}
+\url{https://covid19.ncsc.gov.vn}
 }
 \description{
 Information for downloading, cleaning
