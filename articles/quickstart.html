@@ -140,36 +140,36 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
 <span class="va">all_countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; Rows: 150732 Columns: 8</span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; Delimiter: ","</span>
-<span class="co">#&gt; chr  (3): Country_code, Country, WHO_region</span>
-<span class="co">#&gt; dbl  (4): New_cases, Cumulative_cases, New_deaths, Cumulative_deaths</span>
-<span class="co">#&gt; date (1): Date_reported</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">150969</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">8</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (3): Country_code, Country, WHO_region</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span>  (4): New_cases, Cumulative_cases, New_deaths, Cumulative_deaths</span>
+<span class="co">#&gt; <span style="color: #0000BB;">date</span> (1): Date_reported</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span></code></pre></div>
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; # A tibble: 150,732 × 15</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 150,969 × 15</span></span>
 <span class="co">#&gt;    date       un_region who_region country           iso_code cases_new cases_total</span>
-<span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0</span>
-<span class="co">#&gt;  2 2020-01-03 Europe    EURO       Albania           AL               0           0</span>
-<span class="co">#&gt;  3 2020-01-03 Africa    AFRO       Algeria           DZ               0           0</span>
-<span class="co">#&gt;  4 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0</span>
-<span class="co">#&gt;  5 2020-01-03 Europe    EURO       Andorra           AD               0           0</span>
-<span class="co">#&gt;  6 2020-01-03 Africa    AFRO       Angola            AO               0           0</span>
-<span class="co">#&gt;  7 2020-01-03 Americas  AMRO       Anguilla          AI               0           0</span>
-<span class="co">#&gt;  8 2020-01-03 Americas  AMRO       Antigua &amp; Barbuda AG               0           0</span>
-<span class="co">#&gt;  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0</span>
-<span class="co">#&gt; 10 2020-01-03 Asia      EURO       Armenia           AM               0           0</span>
-<span class="co">#&gt; # … with 150,722 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-01-03 Europe    EURO       Albania           AL               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-01-03 Africa    AFRO       Algeria           DZ               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-01-03 Europe    EURO       Andorra           AD               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-01-03 Africa    AFRO       Angola            AO               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-01-03 Americas  AMRO       Anguilla          AI               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-01-03 Americas  AMRO       Antigua &amp; Barbuda AG               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-01-03 Americas  AMRO       Argentina         AR               0           0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-01-03 Asia      EURO       Armenia           AM               0           0</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 150,959 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
@@ -206,20 +206,20 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries_totals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span>totals <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">all_countries_totals</span>
-<span class="co">#&gt; # A tibble: 236 × 7</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 236 × 7</span></span>
 <span class="co">#&gt;    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
-<span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 United States  US          42849008       686125               0          0</span>
-<span class="co">#&gt;  2 India          IN          33716456       447751               0          0</span>
-<span class="co">#&gt;  3 Brazil         BR          21366968       594653               0          0</span>
-<span class="co">#&gt;  4 United Kingdom GB           7736239       136375               0          0</span>
-<span class="co">#&gt;  5 Russia         RU           7487138       206388               0          0</span>
-<span class="co">#&gt;  6 Turkey         TR           7095580        63611               0          0</span>
-<span class="co">#&gt;  7 France         FR           6788617       114426               0          0</span>
-<span class="co">#&gt;  8 Iran           IR           5559691       119888               0          0</span>
-<span class="co">#&gt;  9 Argentina      AR           5251940       114954               0          0</span>
-<span class="co">#&gt; 10 Spain          ES           4953930        86358               0          0</span>
-<span class="co">#&gt; # … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> United States  US          42<span style="text-decoration: underline;">966</span>938       <span style="text-decoration: underline;">688</span>099               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> India          IN          33<span style="text-decoration: underline;">739</span>985       <span style="text-decoration: underline;">448</span>062               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Brazil         BR          21<span style="text-decoration: underline;">382</span>363       <span style="text-decoration: underline;">595</span>446               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> United Kingdom GB           7<span style="text-decoration: underline;">771</span>298       <span style="text-decoration: underline;">136</span>525               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Russia         RU           7<span style="text-decoration: underline;">511</span>026       <span style="text-decoration: underline;">207</span>255               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Turkey         TR           7<span style="text-decoration: underline;">124</span>966        <span style="text-decoration: underline;">63</span>838               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> France         FR           6<span style="text-decoration: underline;">794</span>096       <span style="text-decoration: underline;">114</span>468               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Iran           IR           5<span style="text-decoration: underline;">572</span>962       <span style="text-decoration: underline;">120</span>160               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Argentina      AR           5<span style="text-decoration: underline;">253</span>765       <span style="text-decoration: underline;">115</span>038               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Spain          ES           4<span style="text-decoration: underline;">956</span>691        <span style="text-decoration: underline;">86</span>397               0          0</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div id="retrieving-subnational-region-data" class="section level2">
 <h2 class="hasAnchor">
@@ -229,15 +229,15 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">usa_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"USA"</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv</span>
-<span class="co">#&gt; Rows: 31702 Columns: 5</span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; Delimiter: ","</span>
-<span class="co">#&gt; chr  (2): state, fips</span>
-<span class="co">#&gt; dbl  (2): cases, deaths</span>
-<span class="co">#&gt; date (1): date</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">31702</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">5</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (2): state, fips</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span>  (2): cases, deaths</span>
+<span class="co">#&gt; <span style="color: #0000BB;">date</span> (1): date</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use <span style="color: #262626; background-color: #DADADA;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set <span style="color: #262626; background-color: #DADADA;">`show_col_types = FALSE`</span> to quiet this message.</span>
 <span class="co">#&gt; Cleaning data</span>
 <span class="co">#&gt; Processing data</span></code></pre></div>
 <p>This retrieves the new and total cases and deaths for all states over time in the United States. Note that the <code>country</code> argument to the <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code> function must be specified. Let’s plot out how the number of cases has evolved for a selection of states:</p>
