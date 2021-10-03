@@ -183,13 +183,13 @@
     <div id="covidregionaldata-092" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.2">
 <a href="#covidregionaldata-092" class="anchor" aria-hidden="true"></a>covidregionaldata 0.9.2<small> 2021-07-05 </small></h1>
-<p>This release adds support for the Covid19 Data Hub which includes Google and Apple mobility data amongst a large range of other data sets, data from the European Commission’s Joint Research Centre which is at both the regional and national level, and individual sources for regional data from several countries. Package updates have been made in line with a software review at the <a href="https://github.com/openjournals/joss-reviews/issues/3290" class="external-link">Journal of Open Source Software</a>. Finally, this release exposes more of the testing infrastructure to users and adds a package hexsticker.</p>
+<p>This release adds support for the Covid19 Data Hub which includes Google and Apple mobility data amongst a large range of other data sets, data from the European Commissionâs Joint Research Centre which is at both the regional and national level, and individual sources for regional data from several countries. Package updates have been made in line with a software review at the <a href="https://github.com/openjournals/joss-reviews/issues/3290" class="external-link">Journal of Open Source Software</a>. Finally, this release exposes more of the testing infrastructure to users and adds a package hexsticker.</p>
 <p>Thanks to <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>, <a href='https://github.com/RichardMN'>@RichardMN</a>, and <a href='https://github.com/kathsherratt'>@kathsherratt</a> for contributions towards this release.</p>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor" aria-hidden="true"></a>New features</h2>
 <ul><li>Support added for data sets from Covid19 Data Hub. This source aggregates a range of data at a national and subnational level and provides keys to link to mobility data provided by Apple and Google (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
-<li>Support added for data from the European Commission’s Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
+<li>Support added for data from the European Commissionâs Joint Research Centre (JRC). The source aggregates incidence data at the country and regional level for 34 UCPM Participating States plus Switzerland (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Support added for data from the Netherlands provided by RVIM (English: National Institute for Public Health and the Environment). This source provides case, deaths and hospital admission data at the province and municipal levels (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Support added for data from Switzerland and Liechtenstein collated by Canton Zurich (<a href='https://github.com/OpenZH'>@OpenZH</a>). This source provides case, deaths and hospital admission data at the canton level (by <a href='https://github.com/RichardMN'>@RichardMN</a>).</li>
 <li>Made package changes recomended in the JOSS review, including additional statements of need to the README, updates to the manuscript (paper.md) and fixes a bug of multiple sources for some countries. We are very grateful for the detailed feedback given by the JOSS reviewers and their help in improving this package.</li>
@@ -203,7 +203,7 @@
 <h2 class="hasAnchor">
 <a href="#other-changes-1" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul><li>Testing of classes updated to allow for at least one of <code>common_data_urls</code> or <code>level_data_urls</code> to be present. The previous default which forced the presence of <code>common_data_urls</code> meant that several classes had to define an empty field (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
-<li>Tests on data sets are now included as a method in <code>DataClass</code>. <code>test_regional-datasets</code> now calls the test function for all classes at each level. Data set specific tests (such as for NHS regions in the UK) are included as a <code>specific_tests</code> function within the country class, which is called by the parent (DataClass) <code>test</code> after performing standard checks. This allows all the code about a country to be defined in its own class. In addition, users can run tests interactively by calling the test method (e.g. <code>$test()</code>) (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>)</li>
+<li>Tests on data sets are now included as a method in <code>DataClass</code>. <code>test_regional-datasets</code> now calls the test function for all classes at each level. Data set specific tests (such as for NHS regions in the UK) are included as a <code>specific_tests</code> function within the country class, which is called by the parent (DataClass) <code>test</code> after performing standard checks. This allows all the code about a country to be defined in its own class. In addition, users can run tests interactively by calling the test method (e.g.Â <code>$test()</code>) (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>)</li>
 <li>A function to create a template class and automatically add a github workflow file has been added. This makes adding a new data source for a country even easier as now you can call the function <code><a href="../reference/make_new_data_source.html">make_new_data_source()</a></code> with the country / source name to add and it will set up the basic structure for you. There is also now a github check to make sure all new sources have a workflow set up (by <a href='https://github.com/joseph-palmer'>@joseph-palmer</a>).</li>
 <li>Adds <code>source_</code> fields to all data sets to help users properly attribute their data sources (by <a href='https://github.com/RichardMN'>@RichardMN</a>).</li>
 </ul></div>
@@ -282,9 +282,9 @@
 <li>Germany level 2 region codes have been removed (previously was all NAs).</li>
 <li>India uses NA for unknown region codes, a change from IN-UN previously.</li>
 <li>Italy column region is now regioni.</li>
-<li>Mexico codes ‘inegi_code’ has been changed to ‘inegi’.</li>
-<li>UK Level 1 ‘ons_region_code’ is now ‘region_code’.</li>
-<li>UK level 2 “ltla_code” is now “local_authority_code”.</li>
+<li>Mexico codes âinegi_codeâ has been changed to âinegiâ.</li>
+<li>UK Level 1 âons_region_codeâ is now âregion_codeâ.</li>
+<li>UK level 2 âltla_codeâ is now âlocal_authority_codeâ.</li>
 <li>
 <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> now return an origin column rather than a country column and a type column rather than a get_data_function to better reflect the types of data supported.</li>
 </ul></div>
@@ -316,7 +316,7 @@
 <a href="#other-changes-3" class="anchor" aria-hidden="true"></a>Other changes</h2>
 <ul><li>Replaced silently broken functions for converting cumulative data to daily and vice versa.</li>
 <li>Removed integration with Covid19R formatting.</li>
-<li>UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these don’t fit into the existing data structure and are not available at lower level regions.</li>
+<li>UK data - removed hospital admissions by age, and occupied mechanical ventilation beds. Currently, these donât fit into the existing data structure and are not available at lower level regions.</li>
 <li>Removed code that required ECDC variables to work.</li>
 <li>Update the ECDC source to pull data from the new weekly snapshots. Updated the variables. In a later update the downloading the now archived daily data will be made possible.</li>
 </ul></div>
@@ -340,8 +340,8 @@
 <div id="changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes" class="anchor" aria-hidden="true"></a>Changes</h2>
-<ul><li><p>Added new option to return UK data by NHS region. This will also return “first admissions” hospital data (excludes readmissions). Specify ‘nhsregions = TRUE’. Default is FALSE, returning ONS regions as before.</p></li>
-<li><p>Fixed inconsistent reference dates for variables in UK data. cases_new and cases_total now by “Specimen date” (date of test), while deaths_new and deaths_total are by “Date of death”, for all regions and nations.</p></li>
+<ul><li><p>Added new option to return UK data by NHS region. This will also return âfirst admissionsâ hospital data (excludes readmissions). Specify ânhsregions = TRUEâ. Default is FALSE, returning ONS regions as before.</p></li>
+<li><p>Fixed inconsistent reference dates for variables in UK data. cases_new and cases_total now by âSpecimen dateâ (date of test), while deaths_new and deaths_total are by âDate of deathâ, for all regions and nations.</p></li>
 <li><p>Additional delays added to <code>get_linelist</code> when <code>clean_dates = TRUE</code>.</p></li>
 </ul></div>
 </div>
