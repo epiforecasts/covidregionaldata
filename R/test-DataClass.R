@@ -153,7 +153,7 @@ test_download_JSON <- function(DataClass_obj, download, snapshot_path) {
         })
       }
     )
-    DataClass_obj$data$raw <- map(vn$data$raw,
+    DataClass_obj$data$raw <- map(DataClass_obj$data$raw,
     slice_head,
     n = 2
     )
