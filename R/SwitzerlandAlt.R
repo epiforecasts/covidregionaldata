@@ -2,15 +2,40 @@
 #' @description Information for downloading, cleaning
 #'  and processing COVID-19 region data for Switzerland
 #'
+#' @section Liechtenstein:
+#' Liechtenstein is not a canton of Switzerland, but is presented in the
+#' source data as a peer of Swiss cantons and assigned the two letter code
+#' `FL`. `covidregionaldata` modifies this and presents the region code
+#' for Liechtenstein as `FL-FL`, consistent with the Swiss ISO 3166-2 codes
+#' which are of the form `CH-BE`, `CH-ZH`, `CH-VD`, ...
+#'
+#' If you do not wish to work with Liechtenstein
+#' data, filter out on this code. Note that this is labelled as a ISO 3166-2
+#' code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
+#' regions.
+#'
+#' @section Additional data:
+#'
+#' In addition to the standard `covidregionaldata` columns provided,
+#' the OpenDataZH source data provides other figures for ICU occupancy,
+#' number of patients on ventilators, and the how many individuals are
+#' isolated or quarantined. These columns are passed through unchanged.
+
+#' Further detail on them can be found at
+# nolint start
+#' \url{https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset}
+#' @source \url{https://github.com/openZH/covid_19/}
+# nolint end
+#'
 #' @export
 #' @concept dataset
 #' @family subnational
 #' @examples
 #' \dontrun{
-#' region <- Switzerland$new(verbose = TRUE, steps = TRUE, get = TRUE)
+#' region <- SwitzerlandAlt$new(verbose = TRUE, steps = TRUE, get = TRUE)
 #' region$return()
 #' }
-Switzerland <- R6::R6Class("Switzerland",
+SwitzerlandAlt <- R6::R6Class("SwitzerlandAlt",
   inherit = DataClass,
   public = list(
 
@@ -23,12 +48,12 @@ Switzerland <- R6::R6Class("Switzerland",
     supported_region_names = list("1" = "canton"),
     #' @field supported_region_codes A list of region codes in order of level.
     supported_region_codes = list("1" = "iso_3166_2"),
-    #' @field common_data_urls List of named links to raw data. This url links
-    #' to a JSON file which provides the addresses for the most recently-updated
-    #' CSV files, which are then downloaded.
+    #' @field common_data_urls List of named links to raw data.
+    # nolint start
     common_data_urls = list(
-      "main" = "https://www.covid19.admin.ch/api/data/context"
+      "main" = "https://github.com/openZH/covid_19/raw/master/COVID19_Fallzahlen_CH_total_v2.csv"
     ),
+    # nolint end
     #' @field source_data_cols existing columns within the raw data
     source_data_cols = c(
       "hosp_new",
@@ -67,25 +92,6 @@ Switzerland <- R6::R6Class("Switzerland",
           "Z\u00fcrich", "Liechtenstein"
         )
       )
-    },
-    
-    #' @description Download function to get raw data. Downloads
-    #' the updated list of CSV files using `download_JSON`, filters
-    #' that to identify the required CSV files, then uses the parent
-    #' method `download` to download the CSV files.
-    #' @importFrom purrr keep
-    download = function() {
-      message_verbose(
-        self$verbose,
-        paste0("Downloading updated URLs from ", common_data_urls$main) )
-      
-      super$download_JSON()
-
-      self$data_urls <-
-        self$data$raw$main$data$sources$individual$csv$daily %>%
-        keep(names(.) %in% c('cases', 'test', 'death', 'hosp'))
-      
-      super$download()
     },
 
     #' @description Switzerland specific state level data cleaning
