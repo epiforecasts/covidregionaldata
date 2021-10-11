@@ -68,7 +68,7 @@ Switzerland <- R6::R6Class("Switzerland",
         )
       )
     },
-    
+
     #' @description Download function to get raw data. Downloads
     #' the updated list of CSV files using `download_JSON`, filters
     #' that to identify the required CSV files, then uses the parent
@@ -77,14 +77,14 @@ Switzerland <- R6::R6Class("Switzerland",
     download = function() {
       message_verbose(
         self$verbose,
-        paste0("Downloading updated URLs from ", self$common_data_urls$main) )
-      
+        paste0("Downloading updated URLs from ", self$common_data_urls$main))
+
       super$download_JSON()
 
       self$data_urls <-
         self$data$raw$main$data$sources$individual$csv$daily %>%
-        keep(names(.) %in% c('cases', 'test', 'death', 'hosp'))
-      
+        keep(names(.) %in% c("cases", "test", "death", "hosp"))
+
       super$download()
     },
 
@@ -117,18 +117,18 @@ Switzerland <- R6::R6Class("Switzerland",
                deaths_total = sumTotal)
       tests <- self$data$raw$test %>%
         filter(geoRegion != "CH", geoRegion != "CHFL", datum_unit == "day") %>%
-        # note that the data has entries_pos and entries_neg and we're currently 
-        # not using it.
+        # note that the data has entries_pos and entries_neg and we're
+        # currently not using it.
         select(geoRegion, datum, entries, sumTotal) %>%
         rename(level_1_region_code = geoRegion,
                date = datum,
                tested_new = entries,
                tested_total = sumTotal)
-     
+
       self$data$clean <-
-        full_join(cases, deaths, by=c("date", "level_1_region_code")) %>%
-        full_join(hosp, by=c("date", "level_1_region_code")) %>%
-        full_join(tests, by=c("date", "level_1_region_code")) %>%
+        full_join(cases, deaths, by = c("date", "level_1_region_code")) %>%
+        full_join(hosp, by = c("date", "level_1_region_code")) %>%
+        full_join(tests, by = c("date", "level_1_region_code")) %>%
         mutate(
           level_1_region_code = if_else(
             .data$level_1_region_code == "FL",
