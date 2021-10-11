@@ -77,7 +77,7 @@ Switzerland <- R6::R6Class("Switzerland",
     download = function() {
       message_verbose(
         self$verbose,
-        paste0("Downloading updated URLs from ", common_data_urls$main) )
+        paste0("Downloading updated URLs from ", self$common_data_urls$main) )
       
       super$download_JSON()
 
@@ -89,18 +89,51 @@ Switzerland <- R6::R6Class("Switzerland",
     },
 
     #' @description Switzerland specific state level data cleaning
-    #' @importFrom dplyr select filter mutate left_join rename
+    #' @importFrom dplyr select filter mutate left_join rename full_join
     #' @importFrom lubridate as_date ymd
     #' @importFrom rlang .data
     #'
     clean_common = function() {
-      self$data$clean <- self$data$raw[["main"]] %>%
-        select(-time, -source) %>%
+      cases <- self$data$raw$cases %>%
+        filter(geoRegion != "CH", geoRegion != "CHFL", datum_unit == "day") %>%
+        select(geoRegion, datum, entries, sumTotal) %>%
+        rename(level_1_region_code = geoRegion,
+               date = datum,
+               cases_new = entries,
+               cases_total = sumTotal)
+      hosp <- self$data$raw$hosp %>%
+        filter(geoRegion != "CH", geoRegion != "CHFL", datum_unit == "day") %>%
+        select(geoRegion, datum, entries, sumTotal) %>%
+        rename(level_1_region_code = geoRegion,
+               date = datum,
+               hosp_new = entries,
+               hosp_total = sumTotal)
+      deaths <- self$data$raw$death %>%
+        filter(geoRegion != "CH", geoRegion != "CHFL", datum_unit == "day") %>%
+        select(geoRegion, datum, entries, sumTotal) %>%
+        rename(level_1_region_code = geoRegion,
+               date = datum,
+               deaths_new = entries,
+               deaths_total = sumTotal)
+      tests <- self$data$raw$test %>%
+        filter(geoRegion != "CH", geoRegion != "CHFL", datum_unit == "day") %>%
+        # note that the data has entries_pos and entries_neg and we're currently 
+        # not using it.
+        select(geoRegion, datum, entries, sumTotal) %>%
+        rename(level_1_region_code = geoRegion,
+               date = datum,
+               tested_new = entries,
+               tested_total = sumTotal)
+     
+      self$data$clean <-
+        full_join(cases, deaths, by=c("date", "level_1_region_code")) %>%
+        full_join(hosp, by=c("date", "level_1_region_code")) %>%
+        full_join(tests, by=c("date", "level_1_region_code")) %>%
         mutate(
           level_1_region_code = if_else(
-            .data$abbreviation_canton_and_fl == "FL",
+            .data$level_1_region_code == "FL",
             "FL-FL",
-            paste0("CH-", .data$abbreviation_canton_and_fl)
+            paste0("CH-", .data$level_1_region_code)
           ),
           date = as_date(ymd(.data$date))
         ) %>%
@@ -108,15 +141,7 @@ Switzerland <- R6::R6Class("Switzerland",
           self$codes_lookup$`1`,
           by = c("level_1_region_code" = "code")
         ) %>%
-        select(-abbreviation_canton_and_fl) %>%
-        rename(
-          level_1_region = .data$region,
-          cases_total = .data$ncumul_conf,
-          deaths_total = .data$ncumul_deceased,
-          hosp_new = .data$new_hosp,
-          recovered_total = .data$ncumul_released,
-          tested_total = .data$ncumul_tested
-        )
+        rename(level_1_region = region)
     }
   )
 )
