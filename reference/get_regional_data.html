@@ -113,7 +113,8 @@ options.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>country</th>
       <td><p>A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
@@ -151,12 +152,15 @@ and the Level 1 data will be returned.</p></td>
       <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical, defaults to TRUE. Should region names be localised.</p></td>
     </tr><tr><th>...</th>
       <td><p>Additional arguments to pass to class specific functionality.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value</h2>
     <p>A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing stratified by regions within the given country.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="Italy.html">Italy()</a></code>, <code><a href="UK.html">UK()</a></code></p>
 <p>Data interface functions
 <code><a href="CountryDataClass.html">CountryDataClass</a></code>,
@@ -164,8 +168,10 @@ recoveries and testing stratified by regions within the given country.</p>
 <code><a href="get_available_datasets.html">get_available_datasets</a>()</code>,
 <code><a href="get_national_data.html">get_national_data</a>()</code>,
 <code><a href="initialise_dataclass.html">initialise_dataclass</a>()</code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># set up a data cache</span></span>
 <span class="r-in"><span class="fu"><a href="start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -184,6 +190,7 @@ recoveries and testing stratified by regions within the given country.</p>
 <span class="r-in"><span class="va">uk</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

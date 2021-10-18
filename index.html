@@ -120,17 +120,16 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="subnational-data-for-the-covid-19-outbreak-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#subnational-data-for-the-covid-19-outbreak-" class="anchor" aria-hidden="true"></a>Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150">
+<div class="section level1">
+<div class="page-header"><h1 id="subnational-data-for-the-covid-19-outbreak-">Subnational data for the COVID-19 outbreak <img src="reference/figures/logo.png" align="right" alt="" height="150"><a class="anchor" aria-label="anchor" href="#subnational-data-for-the-covid-19-outbreak-"></a>
 </h1></div>
 
 <p><a href="https://github.com/epiforecasts/covidregionaldata/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/covidregionaldata/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/covidregionaldata" alt="GitHub contributors"></a> <a href="https://discord.gg/9YPDDADVt3" class="external-link"><img src="https://img.shields.io/discord/864828485981306890?logo=Discord" alt="Discord"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/covidregionaldata/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange" alt="GitHub commits"></a></p>
 <p><a href="https://doi.org/10.21105/joss.03290" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.03290/status.svg" alt="JOSS"></a> <a href="https://zenodo.org/badge/latestdoi/271601189" class="external-link"><img src="https://zenodo.org/badge/271601189.svg" alt="Zenodo"></a></p>
 <p>Interface to subnational and national level COVID-19 data sourced from both official sources, such as Public Health England in the UK, and from other COVID-19 data collections, including the World Health Organisation (WHO), European Centre for Disease Prevention and Control (ECDC), John Hopkins University (JHU), Google Open Data and others. This package is designed to streamline COVID-19 data extraction, cleaning, and processing from a range of data sources in an open and transparent way. This allows users to inspect and scrutinise the data, and tools used to process it, at every step. For all countries supported, data includes a daily time-series of cases and, wherever available, data on deaths, hospitalisations, and tests. National level data is also supported using a range of data sources as well as line list data and links to intervention data sets.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"covidregionaldata"</span><span class="op">)</span></code></pre></div>
@@ -143,9 +142,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/covidregionaldata"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="quick-start" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
 <p><a href="https://epiforecasts.io/covidregionaldata/"><img src="https://img.shields.io/badge/Documentation-lightgrey.svg?style=flat" alt="Documentation"></a></p>
 <p>Load <code>covidregionaldata</code>, <code>dplyr</code>, <code>scales</code>, and <code>ggplot2</code> (all used in this quick start),</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -153,9 +152,9 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span></code></pre></div>
-<div id="setup-data-caching" class="section level3">
-<h3 class="hasAnchor">
-<a href="#setup-data-caching" class="anchor" aria-hidden="true"></a>Setup data caching</h3>
+<div class="section level3">
+<h3 id="setup-data-caching">Setup data caching<a class="anchor" aria-label="anchor" href="#setup-data-caching"></a>
+</h3>
 <p>This package can optionally use a data cache from <code>memoise</code> to locally cache downloads. This can be enabled using the following (this will use the temporary directory by default),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span>
@@ -167,9 +166,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/reset_cache.html">reset_cache</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="national-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#national-data" class="anchor" aria-hidden="true"></a>National data</h3>
+<div class="section level3">
+<h3 id="national-data">National data<a class="anchor" aria-label="anchor" href="#national-data"></a>
+</h3>
 <p>To get worldwide time-series data by country (sourced from the World Health Organisation (WHO) by default but also optionally from the European Centre for Disease Control (ECDC), John Hopkins University, or the Google COVID-19 open data project), use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
@@ -222,9 +221,9 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Country"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-g7_plot-1.png" width="100%"></p>
 </div>
-<div id="subnational-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subnational-data" class="anchor" aria-hidden="true"></a>Subnational data</h3>
+<div class="section level3">
+<h3 id="subnational-data">Subnational data<a class="anchor" aria-label="anchor" href="#subnational-data"></a>
+</h3>
 <p>To get time-series data for subnational regions of a specific country, for example by level 1 region in the UK, use:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_nots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UK"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -266,9 +265,9 @@
 <p>For further examples see the <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/quickstart.Rmd" class="external-link">quick start vignette</a>. Additional subnational data are supported via the <code><a href="reference/JHU.html">JHU()</a></code> and <code><a href="reference/Google.html">Google()</a></code> classes. Use the <code>available_regions()</code> method once these data have been downloaded and cleaned (see their examples) for subnational data they internally support.</p>
 </div>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>If using <code>covidregionaldata</code> in your work please consider citing it using the following,</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; To cite covidregionaldata in publications use:</span></span>
@@ -291,9 +290,9 @@
 <span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;     doi = {10.21105/joss.03290},</span></span>
 <span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
-<div id="development" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development" class="anchor" aria-hidden="true"></a>Development</h2>
+<div class="section level2">
+<h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
+</h2>
 <p><a href="https://github.com/epiforecasts/covidregionaldata/wiki/" class="external-link"><img src="https://img.shields.io/badge/Wiki-lightblue.svg?style=flat" alt="Development"></a></p>
 <p>This package is the result of work from a number of contributors (see contributors list <a href="https://epiforecasts.io/covidregionaldata/authors.html">here</a>). We would like to thank the <a href="https://cmmid.github.io/groups/ncov-group.html" class="external-link">CMMID COVID-19 working group</a> for insightful comments and feedback.</p>
 <p>We welcome contributions and new contributors! We particularly appreciate help adding new data sources for countries at sub-national level, or work on priority problems in the <a href="https://github.com/epiforecasts/covidregionaldata/issues" class="external-link">issues</a>. Please check and add to the issues, and/or add a <a href="https://github.com/epiforecasts/covidregionaldata/pulls" class="external-link">pull request</a>. For more details, start with the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Contributing" class="external-link">contributing guide</a>. For details of the steps required to add support for a dataset see the <a href="https://github.com/epiforecasts/covidregionaldata/wiki/Adding-Data" class="external-link">adding data guide</a>.</p>
