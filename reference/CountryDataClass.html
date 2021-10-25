@@ -56,7 +56,7 @@ to access general methods defined in DataClass() but with additional"><meta prop
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/">
+  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@ to access general methods defined in DataClass() but with additional"><meta prop
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>R6 Class containing national level methods</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R"><code>R/shared-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R" class="external-link"><code>R/shared-methods.R</code></a></small>
     <div class="hidden name"><code>CountryDataClass.Rd</code></div>
     </div>
 
@@ -86,7 +86,7 @@ to access general methods defined in <code><a href="DataClass.html">DataClass()<
     </div>
 
 
-
+    <div id="ref-sections">
     <div id="details">
     <h2>Details</h2>
     <p>On top of the methods documented in <code><a href="DataClass.html">DataClass()</a></code>, this class
@@ -116,8 +116,8 @@ Defaults to the country level of the data.</p></dd>
     <div id="methods">
     <h2>Methods</h2>
     
-<div id="public-methods">
-<h3>Public methods</h3>
+<div class="section">
+<h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-filter"><code>CountryDataClass$filter()</code></a></p></li>
 <li><p><a href="#method-clone"><code>CountryDataClass$clone()</code></a></p></li>
@@ -133,20 +133,20 @@ Defaults to the country level of the data.</p></dd>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="set_region_codes"><a href="DataClass.html#method-set_region_codes"><code>covidregionaldata::DataClass$set_region_codes()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary"><a href="DataClass.html#method-summary"><code>covidregionaldata::DataClass$summary()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test"><a href="DataClass.html#method-test"><code>covidregionaldata::DataClass$test()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-filter"></a><div id="method-filter-">
-<h3>Method <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code></h3>
+</ul></details></p><hr><a id="method-filter"></a><div class="section">
+<h3 id="method-filter-">Method <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code><a class="anchor" aria-label="anchor" href="#method-filter-"></a></h3>
 <p>Filter method for country level data. Uses <code>countryname</code>
-to match input countries with known names.</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>CountryDataClass$filter(countries, level)</code></pre><p></p></div>
+to match input countries with known names.</p><div class="section">
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">CountryDataClass</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">countries</span>, <span class="va">level</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
-<div id="arguments">
-<h4>Arguments</h4>
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>countries</code></dt><dd><p>A character vector of target countries. Overrides the
 current class setting for <code>target_regions</code>. If the <code>filter_level</code> field
 <code>level</code> argument is set to anything other than level 1 this is passed
-directly to the parent <code><a href="DataClass.html">DataClass()</a></code> <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> method with no
+directly to the parent <code><a href="DataClass.html">DataClass()</a></code> <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> method with no
 alteration.</p></dd>
 
 <dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults to
@@ -155,15 +155,15 @@ the conuntry level if not specified.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div id="method-clone-">
-<h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>CountryDataClass$clone(deep = FALSE)</code></pre><p></p></div>
+</div><p></p><hr><a id="method-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">CountryDataClass</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
-<div id="arguments">
-<h4>Arguments</h4>
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></p></div>
@@ -171,6 +171,7 @@ the conuntry level if not specified.</p></dd>
 
 </div>
 
+    </div>
     </div>
 
   </div>

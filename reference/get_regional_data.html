@@ -63,7 +63,7 @@ options."><meta property="og:image" content="epiforecasts.io/covidregionaldata/l
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/">
+  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -83,7 +83,7 @@ options."><meta property="og:image" content="epiforecasts.io/covidregionaldata/l
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get regional-level data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_regional_data.R"><code>R/get_regional_data.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_regional_data.R" class="external-link"><code>R/get_regional_data.R</code></a></small>
     <div class="hidden name"><code>get_regional_data.Rd</code></div>
     </div>
 
@@ -108,52 +108,43 @@ options.</p>
   class <span class="op">=</span> <span class="cn">FALSE</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">regions</span>,
-  include_level_2_regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
-  localise_regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
+  include_level_2_regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
+  localise_regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>country</th>
-      <td><p>A character string specifying the country to get data from.
+    
+
+<dl><dt>country</dt><dd><p>A character string specifying the country to get data from.
 Not case dependent. Name should be the English name. For a list of
-options use <code><a href="get_available_datasets.html">get_available_datasets()</a></code>.</p></td>
-    </tr><tr><th>level</th>
-      <td><p>A character string indicating the target administrative level
+options use <code><a href="get_available_datasets.html">get_available_datasets()</a></code>.</p></dd>
+</dl><dl><dt>level</dt><dd><p>A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use <code><a href="get_available_datasets.html">get_available_datasets()</a></code> for supported
-options by dataset.</p></td>
-    </tr><tr><th>totals</th>
-      <td><p>Logical, defaults to FALSE. If TRUE, returns totalled
+options by dataset.</p></dd>
+</dl><dl><dt>totals</dt><dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.</p></td>
-    </tr><tr><th>localise</th>
-      <td><p>Logical, defaults to TRUE. Should region names be localised.</p></td>
-    </tr><tr><th>steps</th>
-      <td><p>Logical, defaults to FALSE. Should all processing and cleaning
-steps be kept and output in a list.</p></td>
-    </tr><tr><th>class</th>
-      <td><p>Logical, defaults to FALSE. If TRUE returns the
+stratified by date and region.</p></dd>
+</dl><dl><dt>localise</dt><dd><p>Logical, defaults to TRUE. Should region names be localised.</p></dd>
+</dl><dl><dt>steps</dt><dd><p>Logical, defaults to FALSE. Should all processing and cleaning
+steps be kept and output in a list.</p></dd>
+</dl><dl><dt>class</dt><dd><p>Logical, defaults to FALSE. If TRUE returns the
 <code>DataClass</code> object rather than a tibble or a list of tibbles.
-Overrides <code>steps</code>.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
-messages and warnings be returned.</p></td>
-    </tr><tr><th>regions</th>
-      <td><p>A character vector of target regions to be assigned to the
-<code>target_regions</code> field and used to filter the returned data.</p></td>
-    </tr><tr><th>include_level_2_regions</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Boolean. If TRUE, returns data stratified by
+Overrides <code>steps</code>.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
+messages and warnings be returned.</p></dd>
+</dl><dl><dt>regions</dt><dd><p>A character vector of target regions to be assigned to the
+<code>target_regions</code> field and used to filter the returned data.</p></dd>
+</dl><dl><dt>include_level_2_regions</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Boolean. If TRUE, returns data stratified by
 level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
 data is not always available. In these cases the user will get a warning
-and the Level 1 data will be returned.</p></td>
-    </tr><tr><th>localise_regions</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical, defaults to TRUE. Should region names be localised.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional arguments to pass to class specific functionality.</p></td>
-    </tr></table></div>
-
+and the Level 1 data will be returned.</p></dd>
+</dl><dl><dt>localise_regions</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical, defaults to TRUE. Should region names be localised.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional arguments to pass to class specific functionality.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A tibble with data related to cases, deaths, hospitalisations,
@@ -168,6 +159,7 @@ recoveries and testing stratified by regions within the given country.</p>
 <code><a href="get_available_datasets.html">get_available_datasets</a>()</code>,
 <code><a href="get_national_data.html">get_national_data</a>()</code>,
 <code><a href="initialise_dataclass.html">initialise_dataclass</a>()</code></p></div>
+    </div>
     </div>
 
     <div id="examples">

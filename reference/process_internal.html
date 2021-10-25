@@ -56,7 +56,7 @@ by process."><meta property="og:image" content="epiforecasts.io/covidregionaldat
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/">
+  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@ by process."><meta property="og:image" content="epiforecasts.io/covidregionaldat
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Internal Shared Regional Dataset Processing</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/processing.R"><code>R/processing.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/processing.R" class="external-link"><code>R/processing.R</code></a></small>
     <div class="hidden name"><code>process_internal.Rd</code></div>
     </div>
 
@@ -95,37 +95,33 @@ by <code>process</code>.</p>
   <span class="va">process_fns</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>clean_data</th>
-      <td><p>The clean data for a class, e.g. <code>Italy$data$clean</code></p></td>
-    </tr><tr><th>level</th>
-      <td><p>The level of the data, e.g. 'level_1_region'</p></td>
-    </tr><tr><th>group_vars</th>
-      <td><p>Grouping variables, used to
+    
+
+<dl><dt>clean_data</dt><dd><p>The clean data for a class, e.g. <code>Italy$data$clean</code></p></dd>
+</dl><dl><dt>level</dt><dd><p>The level of the data, e.g. 'level_1_region'</p></dd>
+</dl><dl><dt>group_vars</dt><dd><p>Grouping variables, used to
 for grouping and to localise names. It is assumed that the first entry
 indicates the main region variable and the second indicates the geocode for
-this variable.</p></td>
-    </tr><tr><th>totals</th>
-      <td><p>Logical, defaults to <code>FALSE</code>. If `TRUE``, returns totalled
+this variable.</p></dd>
+</dl><dl><dt>totals</dt><dd><p>Logical, defaults to <code>FALSE</code>. If `TRUE``, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
-stratified by date and region.</p></td>
-    </tr><tr><th>localise</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should region names be
-localised.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
-messages and warnings be returned.</p></td>
-    </tr><tr><th>process_fns</th>
-      <td><p>array, additional functions to be called after default
-processing steps</p></td>
-    </tr></table></div>
-
+stratified by date and region.</p></dd>
+</dl><dl><dt>localise</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should region names be
+localised.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
+messages and warnings be returned.</p></dd>
+</dl><dl><dt>process_fns</dt><dd><p>array, additional functions to be called after default
+processing steps</p></dd>
+</dl></div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Functions used in the processing pipeline
 <code><a href="run_default_processing_fns.html">run_default_processing_fns</a>()</code>,
 <code><a href="run_optional_processing_fns.html">run_optional_processing_fns</a>()</code></p></div>
+    </div>
     </div>
 
   </div>

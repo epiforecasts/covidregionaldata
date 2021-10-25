@@ -58,7 +58,7 @@ and processing covid-19 region data for Vietnam."><meta property="og:image" cont
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/">
+  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,7 +79,7 @@ and processing covid-19 region data for Vietnam."><meta property="og:image" cont
     <div class="page-header">
     <h1>Vietnam Class for downloading, cleaning and processing
 notification data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/Vietnam.R"><code>R/Vietnam.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/Vietnam.R" class="external-link"><code>R/Vietnam.R</code></a></small>
     <div class="hidden name"><code>Vietnam.Rd</code></div>
     </div>
 
@@ -89,10 +89,10 @@ and processing covid-19 region data for Vietnam.</p>
     </div>
 
 
-
+    <div id="ref-sections">
     <div id="source">
     <h2>Source</h2>
-    <p><a href="https://covid19.ncsc.gov.vn">https://covid19.ncsc.gov.vn</a></p>
+    <p><a href="https://covid19.ncsc.gov.vn" class="external-link">https://covid19.ncsc.gov.vn</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -146,8 +146,8 @@ data</p></dd>
     <div id="methods">
     <h2>Methods</h2>
     
-<div id="public-methods">
-<h3>Public methods</h3>
+<div class="section">
+<h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-set_region_codes"><code>Vietnam$set_region_codes()</code></a></p></li>
 <li><p><a href="#method-download"><code>Vietnam$download()</code></a></p></li>
@@ -163,47 +163,47 @@ data</p></dd>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="return"><a href="DataClass.html#method-return"><code>covidregionaldata::DataClass$return()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="summary"><a href="DataClass.html#method-summary"><code>covidregionaldata::DataClass$summary()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="test"><a href="DataClass.html#method-test"><code>covidregionaldata::DataClass$test()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-set_region_codes"></a><div id="method-set-region-codes-">
-<h3>Method <code>set_region_codes()</code></h3>
-<p>Set up a table of region codes for clean data</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>Vietnam$set_region_codes()</code></pre><p></p></div>
+</ul></details></p><hr><a id="method-set_region_codes"></a><div class="section">
+<h3 id="method-set-region-codes-">Method <code>set_region_codes()</code><a class="anchor" aria-label="anchor" href="#method-set-region-codes-"></a></h3>
+<p>Set up a table of region codes for clean data</p><div class="section">
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">Vietnam</span><span class="op">$</span><span class="fu">set_region_codes</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-download"></a><div id="method-download-">
-<h3>Method <code>download()</code></h3>
+</div><p></p><hr><a id="method-download"></a><div class="section">
+<h3 id="method-download-">Method <code>download()</code><a class="anchor" aria-label="anchor" href="#method-download-"></a></h3>
 <p>Download function to get raw data. Uses the
-parent class JSON-specific method for downloads.</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>Vietnam$download()</code></pre><p></p></div>
+parent class JSON-specific method for downloads.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">Vietnam</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-clean_common"></a><div id="method-clean-common-">
-<h3>Method <code>clean_common()</code></h3>
+</div><p></p><hr><a id="method-clean_common"></a><div class="section">
+<h3 id="method-clean-common-">Method <code>clean_common()</code><a class="anchor" aria-label="anchor" href="#method-clean-common-"></a></h3>
 <p>Provincial Level Data
-cleaning</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>Vietnam$clean_common()</code></pre><p></p></div>
+cleaning</p><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">Vietnam</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
-<div id="arguments">
-<h4>Arguments</h4>
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt><dd><p>pass additional arguments</p></dd>
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div id="method-clone-">
-<h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><div id="usage">
-<h4>Usage</h4>
-<p></p><div class="r"><pre><code>Vietnam$clone(deep = FALSE)</code></pre><p></p></div>
+</div><p></p><hr><a id="method-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><pre><code><span class="va">Vietnam</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre><p></p></div>
 </div>
 
-<div id="arguments">
-<h4>Arguments</h4>
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></p></div>
@@ -211,6 +211,7 @@ cleaning</p><div id="usage">
 
 </div>
 
+    </div>
     </div>
 
     <div id="examples">

@@ -56,7 +56,7 @@ as an action to check the data as a github action."><meta property="og:image" co
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/covidregionaldata/">
+  <a href="https://github.com/epiforecasts/covidregionaldata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@ as an action to check the data as a github action."><meta property="og:image" co
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create github action for a given source</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/utils.R"><code>R/utils.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>make_github_workflow.Rd</code></div>
     </div>
 
@@ -87,24 +87,24 @@ as an action to check the data as a github action.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">make_github_workflow</span><span class="op">(</span>
   <span class="va">source</span>,
-  workflow_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">".github/workflows/"</span>, <span class="va">source</span>, <span class="st">".yaml"</span><span class="op">)</span>,
+  workflow_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">".github/workflows/"</span>, <span class="va">source</span>, <span class="st">".yaml"</span><span class="op">)</span>,
   cron <span class="op">=</span> <span class="st">"36 12 * * *"</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>source</th>
-      <td><p>character_array The name of the class to create the workflow
-for.</p></td>
-    </tr><tr><th>workflow_path</th>
-      <td><p>character_array The path to where the workflow file
-should be saved. Defaults to '.github/workflows/'</p></td>
-    </tr><tr><th>cron</th>
-      <td><p>character_array the cron time to run the tests, defaults to
-36 12 * * *, following the minute, hour, day(month), month and day(week)
-format.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>source</dt><dd><p>character_array The name of the class to create the workflow
+for.</p></dd>
+</dl><dl><dt>workflow_path</dt><dd><p>character_array The path to where the workflow file
+should be saved. Defaults to '.github/workflows/'</p></dd>
+</dl><dl><dt>cron</dt><dd><p>character_array the cron time to run the tests, defaults to
+36 12 * * *, following the minute, hour, day(month), month and day(week)
+format.</p></dd>
+</dl></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
