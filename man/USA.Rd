@@ -56,7 +56,10 @@ Subnational data sources
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
 \item{\code{level_data_urls}}{List of named links to raw data that are level
-specific.}
+specific. Note that for the USA, the upstream source (@nytimes) splits
+the level 2 (county) data into separate CSV files for each year, so
+a template is listed here and expanded in this class' \code{download} method
+before the parent \code{download} is called.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
@@ -71,6 +74,7 @@ data}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{USA$set_region_codes()}}
+\item \href{#method-download}{\code{USA$download()}}
 \item \href{#method-clean_level_1}{\code{USA$clean_level_1()}}
 \item \href{#method-clean_level_2}{\code{USA$clean_level_2()}}
 \item \href{#method-clone}{\code{USA$clone()}}
@@ -82,7 +86,6 @@ data}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean_common">}\href{../../covidregionaldata/html/DataClass.html#method-clean_common}{\code{covidregionaldata::DataClass$clean_common()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON">}\href{../../covidregionaldata/html/DataClass.html#method-download_JSON}{\code{covidregionaldata::DataClass$download_JSON()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
@@ -101,6 +104,18 @@ data}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{USA$set_region_codes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Specific function for downloading USA
+data which expands the list of \code{data_urls} before calling
+the parent class method, only if level 2 is sought.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{USA$download()}\if{html}{\out{</div>}}
 }
 
 }

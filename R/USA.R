@@ -33,11 +33,15 @@ USA <- R6::R6Class("USA",
       "2" = "fips"
     ),
     #' @field level_data_urls List of named links to raw data that are level
-    #' specific.
+    #' specific. Note that for the USA, the upstream source (@nytimes) splits
+    #' the level 2 (county) data into separate CSV files for each year, so
+    #' a template is listed here and expanded in this class' `download` method
+    #' before the parent `download` is called.
+    #'
     # nolint start
     level_data_urls = list(
-      "1" = list("state" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"),
-      "2" = list("county" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+      "1" = list("state" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us-states.csv"),
+      "2" = list("county" = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us-counties-%04d.csv")
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
@@ -80,6 +84,26 @@ USA <- R6::R6Class("USA",
       )
     },
 
+    #' @description Specific function for downloading USA
+    #' data which expands the list of `data_urls` before calling
+    #' the parent class method, only if level 2 is sought.
+    #' @importFrom lubridate year now
+    #' @importFrom purrr map set_names
+    download = function() {
+      if (self$level == 2) {
+        years <- seq(
+          from = 2020,
+          to = year(now()),
+          by = 1)
+        self$data_urls <- set_names(
+          map(years,
+              ~ sprintf(self$data_urls[["county"]], .x)),
+          map(years,
+              ~ sprintf("county-%04d", .x)))
+      }
+      super$download()
+    },
+
     #' @description State Level Data Cleaning
     #' @importFrom dplyr rename mutate select left_join
     clean_level_1 = function() {
@@ -101,13 +125,14 @@ USA <- R6::R6Class("USA",
     },
 
     #' @description County Level Data Cleaning
-    #' @importFrom dplyr mutate rename left_join
+    #' @importFrom dplyr mutate rename left_join bind_rows
     clean_level_2 = function() {
-      self$data$clean <- self$data$raw$county %>%
+      collated_county <- bind_rows(self$data$raw)
+      self$data$clean <- collated_county %>%
         rename(
           level_2_region = county,
           level_1_region = state,
-          level_2_region_code = fips,
+          level_2_region_code = geoid,
           cases_total = cases,
           deaths_total = deaths
         ) %>%
