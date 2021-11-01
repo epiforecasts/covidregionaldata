@@ -76,7 +76,7 @@ by process."><meta property="og:image" content="epiforecasts.io/covidregionaldat
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Internal Shared Regional Dataset Processing</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/processing.R" class="external-link"><code>R/processing.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/processing.R" class="external-link"><code>R/processing.R</code></a></small>
     <div class="hidden name"><code>process_internal.Rd</code></div>
     </div>
 
@@ -98,22 +98,27 @@ by <code>process</code>.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>clean_data</dt><dd><p>The clean data for a class, e.g. <code>Italy$data$clean</code></p></dd>
-</dl><dl><dt>level</dt><dd><p>The level of the data, e.g. 'level_1_region'</p></dd>
-</dl><dl><dt>group_vars</dt><dd><p>Grouping variables, used to
+    <dl><dt>clean_data</dt>
+<dd><p>The clean data for a class, e.g. <code>Italy$data$clean</code></p></dd>
+<dt>level</dt>
+<dd><p>The level of the data, e.g. 'level_1_region'</p></dd>
+<dt>group_vars</dt>
+<dd><p>Grouping variables, used to
 for grouping and to localise names. It is assumed that the first entry
 indicates the main region variable and the second indicates the geocode for
 this variable.</p></dd>
-</dl><dl><dt>totals</dt><dd><p>Logical, defaults to <code>FALSE</code>. If `TRUE``, returns totalled
+<dt>totals</dt>
+<dd><p>Logical, defaults to <code>FALSE</code>. If `TRUE``, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.</p></dd>
-</dl><dl><dt>localise</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should region names be
+<dt>localise</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should region names be
 localised.</p></dd>
-</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
+<dt>verbose</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
 messages and warnings be returned.</p></dd>
-</dl><dl><dt>process_fns</dt><dd><p>array, additional functions to be called after default
+<dt>process_fns</dt>
+<dd><p>array, additional functions to be called after default
 processing steps</p></dd>
 </dl></div>
     <div id="see-also">

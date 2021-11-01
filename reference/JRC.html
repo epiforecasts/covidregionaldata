@@ -83,7 +83,7 @@ https://github.com/ec-jrc/COVID-19"><meta property="og:image" content="epiforeca
     <div class="page-header">
     <h1>R6 Class containing specific attributes and methods for European Commission's
 Joint Research Centre data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/JRC.R" class="external-link"><code>R/JRC.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/JRC.R" class="external-link"><code>R/JRC.R</code></a></small>
     <div class="hidden name"><code>JRC.Rd</code></div>
     </div>
 
@@ -117,22 +117,38 @@ https://github.com/ec-jrc/COVID-19</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>name of origin to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data.</p></dd>
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_text</code></dt><dd><p>Plain text description of the source of the data</p></dd>
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>source_url</code></dt><dd><p>Website address for explanation/introduction of the
+
+<dt><code>level_data_urls</code></dt>
+<dd><p>List of named links to raw data.</p></dd>
+
+
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
+
+
+<dt><code>source_text</code></dt>
+<dd><p>Plain text description of the source of the data</p></dd>
+
+
+<dt><code>source_url</code></dt>
+<dd><p>Website address for explanation/introduction of the
 data</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -196,7 +212,9 @@ processing.</p><div class="section">
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

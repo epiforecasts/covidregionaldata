@@ -82,7 +82,7 @@ geographical resolution (resolution)."><meta property="og:image" content="epifor
     <div class="page-header">
     <h1>United Kingdom Class for downloading, cleaning and processing notification
 data.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/UK.R" class="external-link"><code>R/UK.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/UK.R" class="external-link"><code>R/UK.R</code></a></small>
     <div class="hidden name"><code>UK.Rd</code></div>
     </div>
 
@@ -131,36 +131,64 @@ geographical resolution (resolution).</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>name of origin to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data. The first, and
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
+
+
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.</p></dd>
+
+
+<dt><code>common_data_urls</code></dt>
+<dd><p>List of named links to raw data. The first, and
 only entry, is be named main.</p></dd>
 
-<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data that are level
+
+<dt><code>level_data_urls</code></dt>
+<dd><p>List of named links to raw data that are level
 specific.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_text</code></dt><dd><p>Plain text description of the source of the data</p></dd>
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_url</code></dt><dd><p>Website address for explanation/introduction of the
+
+<dt><code>source_text</code></dt>
+<dd><p>Plain text description of the source of the data</p></dd>
+
+
+<dt><code>source_url</code></dt>
+<dd><p>Website address for explanation/introduction of the
 data</p></dd>
 
-<dt><code>query_filters</code></dt><dd><p>Set what filters to use to query the data</p></dd>
 
-<dt><code>nhsregions</code></dt><dd><p>Whether to include NHS regions in the data</p></dd>
+<dt><code>query_filters</code></dt>
+<dd><p>Set what filters to use to query the data</p></dd>
 
-<dt><code>release_date</code></dt><dd><p>The release date for the data</p></dd>
 
-<dt><code>resolution</code></dt><dd><p>The resolution of the data to return</p></dd>
+<dt><code>nhsregions</code></dt>
+<dd><p>Whether to include NHS regions in the data</p></dd>
 
-<dt><code>authority_data</code></dt><dd><p>The raw data for creating authority lookup tables</p></dd>
+
+<dt><code>release_date</code></dt>
+<dd><p>The release date for the data</p></dd>
+
+
+<dt><code>resolution</code></dt>
+<dd><p>The resolution of the data to return</p></dd>
+
+
+<dt><code>authority_data</code></dt>
+<dd><p>The raw data for creating authority lookup tables</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -232,16 +260,24 @@ data</p></dd>
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>nhsregions</code></dt><dd><p>Return subnational English regions using NHS region
+<p></p><div class="arguments"><dl><dt><code>nhsregions</code></dt>
+<dd><p>Return subnational English regions using NHS region
 boundaries instead of PHE boundaries.</p></dd>
 
-<dt><code>release_date</code></dt><dd><p>Date data was released. Default is to extract
+
+<dt><code>release_date</code></dt>
+<dd><p>Date data was released. Default is to extract
 latest release. Dates should be in the format "yyyy-mm-dd".</p></dd>
 
-<dt><code>resolution</code></dt><dd><p>"utla" (default) or "ltla", depending on which
+
+<dt><code>resolution</code></dt>
+<dd><p>"utla" (default) or "ltla", depending on which
 geographical resolution is preferred</p></dd>
 
-<dt><code>...</code></dt><dd><p>Optional arguments passed to <code><a href="DataClass.html">DataClass()</a></code> initalize.</p></dd>
+
+<dt><code>...</code></dt>
+<dd><p>Optional arguments passed to <code><a href="DataClass.html">DataClass()</a></code> initalize.</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -268,7 +304,9 @@ UK$new(
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>filter</code></dt><dd><p>region filters</p></dd>
+<p></p><div class="arguments"><dl><dt><code>filter</code></dt>
+<dd><p>region filters</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -312,9 +350,13 @@ Section 2, "2. Estimated new hospital cases"</p><div class="section">
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>clean_data</code></dt><dd><p>Cleaned UK covid-19 data</p></dd>
+<p></p><div class="arguments"><dl><dt><code>clean_data</code></dt>
+<dd><p>Cleaned UK covid-19 data</p></dd>
 
-<dt><code>nhs_data</code></dt><dd><p>NHS region data</p></dd>
+
+<dt><code>nhs_data</code></dt>
+<dd><p>NHS region data</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -341,18 +383,28 @@ to be ran from <code>test</code> and not ran directly.</p><div class="section">
 
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>self_copy</code></dt><dd><p>R6class the object to test.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>self_copy</code></dt>
+<dd><p>R6class the object to test.</p></dd>
 
-<dt><code>download</code></dt><dd><p>logical. To download the data (TRUE) or use a snapshot
+
+<dt><code>download</code></dt>
+<dd><p>logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.</p></dd>
 
-<dt><code>all</code></dt><dd><p>logical. Run tests with all settings (TRUE) or with those
+
+<dt><code>all</code></dt>
+<dd><p>logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
 
-<dt><code>snapshot_path</code></dt><dd><p>character_array the path to save the downloaded
+
+<dt><code>snapshot_path</code></dt>
+<dd><p>character_array the path to save the downloaded
 snapshot to. Works on the snapshot path constructed by <code>test</code> but adds</p></dd>
 
-<dt><code>...</code></dt><dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
+<dt><code>...</code></dt>
+<dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -366,7 +418,9 @@ snapshot to. Works on the snapshot path constructed by <code>test</code> but add
 
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

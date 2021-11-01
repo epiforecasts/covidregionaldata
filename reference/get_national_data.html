@@ -83,7 +83,7 @@ and options."><meta property="og:image" content="epiforecasts.io/covidregionalda
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get national-level data for countries globally from a range of sources</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_national_data.R" class="external-link"><code>R/get_national_data.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/get_national_data.R" class="external-link"><code>R/get_national_data.R</code></a></small>
     <div class="hidden name"><code>get_national_data.Rd</code></div>
     </div>
 
@@ -114,30 +114,37 @@ and options.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>countries</dt><dd><p>A character vector specifying country names of interest.
+    <dl><dt>countries</dt>
+<dd><p>A character vector specifying country names of interest.
 Used to filter the data.</p></dd>
-</dl><dl><dt>source</dt><dd><p>A character string specifying the data source (not case
+<dt>source</dt>
+<dd><p>A character string specifying the data source (not case
 dependent). Defaults to WHO (the World Health Organisation). See
 <code>get_available_datasets("national")</code> for all options.</p></dd>
-</dl><dl><dt>level</dt><dd><p>A character string indicating the target administrative level
+<dt>level</dt>
+<dd><p>A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use <code><a href="get_available_datasets.html">get_available_datasets()</a></code> for supported
 options by dataset.</p></dd>
-</dl><dl><dt>totals</dt><dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
+<dt>totals</dt>
+<dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.</p></dd>
-</dl><dl><dt>steps</dt><dd><p>Logical, defaults to FALSE. Should all processing and cleaning
+<dt>steps</dt>
+<dd><p>Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.</p></dd>
-</dl><dl><dt>class</dt><dd><p>Logical, defaults to FALSE. If TRUE returns the
+<dt>class</dt>
+<dd><p>Logical, defaults to FALSE. If TRUE returns the
 <code>DataClass</code> object rather than a tibble or a list of tibbles.
 Overrides <code>steps</code>.</p></dd>
-</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
+<dt>verbose</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
 messages and warnings be returned.</p></dd>
-</dl><dl><dt>country</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A character string
+<dt>country</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A character string
 specifying a country to filter for.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional arguments to pass to class specific functionality.</p></dd>
+<dt>...</dt>
+<dd><p>Additional arguments to pass to class specific functionality.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

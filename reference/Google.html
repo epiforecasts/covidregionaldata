@@ -84,7 +84,7 @@ in hospital, ICU, etc."><meta property="og:image" content="epiforecasts.io/covid
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>R6 Class containing specific attributes and methods for Google data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/Google.R" class="external-link"><code>R/Google.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/Google.R" class="external-link"><code>R/Google.R</code></a></small>
     <div class="hidden name"><code>Google.Rd</code></div>
     </div>
 
@@ -146,22 +146,38 @@ in hospital, ICU, etc.</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>name of country to fetch data for</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>name of country to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data.</p></dd>
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_text</code></dt><dd><p>Plain text description of the source of the data</p></dd>
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>source_url</code></dt><dd><p>Website address for explanation/introduction of the
+
+<dt><code>common_data_urls</code></dt>
+<dd><p>List of named links to raw data.</p></dd>
+
+
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
+
+
+<dt><code>source_text</code></dt>
+<dd><p>Plain text description of the source of the data</p></dd>
+
+
+<dt><code>source_url</code></dt>
+<dd><p>Website address for explanation/introduction of the
 data</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -226,7 +242,9 @@ data cleaned by <code>clean_common</code> and aggregates it to the subregion lev
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt><dd><p>arguments to be passed to <code>DataClass</code> and initialize Google</p></dd>
+<p></p><div class="arguments"><dl><dt><code>...</code></dt>
+<dd><p>arguments to be passed to <code>DataClass</code> and initialize Google</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -240,7 +258,9 @@ data cleaned by <code>clean_common</code> and aggregates it to the subregion lev
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

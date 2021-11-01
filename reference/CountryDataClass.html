@@ -76,7 +76,7 @@ to access general methods defined in DataClass() but with additional"><meta prop
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>R6 Class containing national level methods</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R" class="external-link"><code>R/shared-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/shared-methods.R" class="external-link"><code>R/shared-methods.R</code></a></small>
     <div class="hidden name"><code>CountryDataClass.Rd</code></div>
     </div>
 
@@ -108,8 +108,10 @@ English country names using the <code>countrycode</code> package.</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>filter_level</code></dt><dd><p>Character The level of the data to filter at.
+    <p></p><div class="r6-fields"><dl><dt><code>filter_level</code></dt>
+<dd><p>Character The level of the data to filter at.
 Defaults to the country level of the data.</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -143,14 +145,18 @@ to match input countries with known names.</p><div class="section">
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>countries</code></dt><dd><p>A character vector of target countries. Overrides the
+<p></p><div class="arguments"><dl><dt><code>countries</code></dt>
+<dd><p>A character vector of target countries. Overrides the
 current class setting for <code>target_regions</code>. If the <code>filter_level</code> field
 <code>level</code> argument is set to anything other than level 1 this is passed
 directly to the parent <code><a href="DataClass.html">DataClass()</a></code> <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> method with no
 alteration.</p></dd>
 
-<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults to
+
+<dt><code>level</code></dt>
+<dd><p>Character The level of the data to filter at. Defaults to
 the conuntry level if not specified.</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -164,7 +170,9 @@ the conuntry level if not specified.</p></dd>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

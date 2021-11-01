@@ -77,7 +77,7 @@ by searching the target namespace."><meta property="og:image" content="epiforeca
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get supported data sets</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/get_available_datasets.R" class="external-link"><code>R/get_available_datasets.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/get_available_datasets.R" class="external-link"><code>R/get_available_datasets.R</code></a></small>
     <div class="hidden name"><code>get_available_datasets.Rd</code></div>
     </div>
 
@@ -92,17 +92,18 @@ by searching the target namespace.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>type</dt><dd><p>A character vector indicating the types of data to
+    <dl><dt>type</dt>
+<dd><p>A character vector indicating the types of data to
 return. Current options include "national" (which are datasets at the
 national level which inherit from <code>CountryDataClass</code>) and
 "regional" (which are datasets at the regional level which inherit
 directly from <code><a href="DataClass.html">DataClass()</a></code>).</p></dd>
-</dl><dl><dt>render</dt><dd><p>Logical If TRUE the supported data set table is built from the
+<dt>render</dt>
+<dd><p>Logical If TRUE the supported data set table is built from the
 available classes using <code>summary</code> methods. If FALSE the supported
 data set table is taken from package data. Defaults to FALSE.</p></dd>
-</dl><dl><dt>namespace</dt><dd><p>Character string The name of the namespace to search for
+<dt>namespace</dt>
+<dd><p>Character string The name of the namespace to search for
 class objects. Defaults to "covidregionaldata" as the package.</p></dd>
 </dl></div>
     <div id="value">

@@ -75,7 +75,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>R6 Class containing non-dataset specific methods</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/shared-methods.R" class="external-link"><code>R/shared-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/shared-methods.R" class="external-link"><code>R/shared-methods.R</code></a></small>
     <div class="hidden name"><code>DataClass.Rd</code></div>
     </div>
 
@@ -106,74 +106,116 @@ documentaion for further details.</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>the origin of the data source. For regional data sources
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>the origin of the data source. For regional data sources
 this will usually be the name of the country.</p></dd>
 
-<dt><code>data</code></dt><dd><p>Once initialised, a list of named data frames: raw
+
+<dt><code>data</code></dt>
+<dd><p>Once initialised, a list of named data frames: raw
 (list of named raw data frames) clean (cleaned data) and processed
 (processed data). Data is accessed using <code>$data</code>.</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>region_name</code></dt><dd><p>string Name for the region column, e.g. 'region'.
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
+
+
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.</p></dd>
+
+
+<dt><code>region_name</code></dt>
+<dd><p>string Name for the region column, e.g. 'region'.
 This field is filled at initialisation with the region name for the
 specified level (supported_region_names$level).</p></dd>
 
-<dt><code>code_name</code></dt><dd><p>string Name for the codes column, e.g. 'iso_3166_2'
+
+<dt><code>code_name</code></dt>
+<dd><p>string Name for the codes column, e.g. 'iso_3166_2'
 Filled at initialisation with the code name associated with the
 requested level (supported_region_codes$level).</p></dd>
 
-<dt><code>codes_lookup</code></dt><dd><p>string or tibble Region codes for the target origin
+
+<dt><code>codes_lookup</code></dt>
+<dd><p>string or tibble Region codes for the target origin
 filled by origin specific codes in
 <a href="#method-set_region_codes"><code>set_region_codes()</code></a></p></dd>
 
-<dt><code>data_urls</code></dt><dd><p>List of named common and shared url links to raw data.
+
+<dt><code>data_urls</code></dt>
+<dd><p>List of named common and shared url links to raw data.
 Prefers shared if there is a name conflict.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data that are common
+
+<dt><code>common_data_urls</code></dt>
+<dd><p>List of named links to raw data that are common
 across levels. The first entry should be named main.</p></dd>
 
-<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data that are level
+
+<dt><code>level_data_urls</code></dt>
+<dd><p>List of named links to raw data that are level
 specific. Any urls that share a name with a url from
 <code>common_data_urls</code> will be selected preferentially. Each top level
 list should be named after a supported level.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>level</code></dt><dd><p>target region level. This field is filled at initialisation
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
+
+
+<dt><code>level</code></dt>
+<dd><p>target region level. This field is filled at initialisation
 using user inputs or defaults in <code>$new()</code></p></dd>
 
-<dt><code>data_name</code></dt><dd><p>string. The country name followed by the level. E.g.
+
+<dt><code>data_name</code></dt>
+<dd><p>string. The country name followed by the level. E.g.
 "Italy at level 1"</p></dd>
 
-<dt><code>totals</code></dt><dd><p>Boolean. If TRUE, returns totalled data per region
+
+<dt><code>totals</code></dt>
+<dd><p>Boolean. If TRUE, returns totalled data per region
 up to today's date. This field is filled at initialisation using user
 inputs or defaults in <code>$new()</code></p></dd>
 
-<dt><code>localise</code></dt><dd><p>Boolean. Should region names be localised.
+
+<dt><code>localise</code></dt>
+<dd><p>Boolean. Should region names be localised.
 This field is filled at initialisation using user inputs or defaults
 in <code>$new()</code></p></dd>
 
-<dt><code>verbose</code></dt><dd><p>Boolean. Display information at various stages.
+
+<dt><code>verbose</code></dt>
+<dd><p>Boolean. Display information at various stages.
 This field is filled at initialisation. using user inputs or defaults
 in <code>$new()</code></p></dd>
 
-<dt><code>steps</code></dt><dd><p>Boolean. Keep data from each processing step.
+
+<dt><code>steps</code></dt>
+<dd><p>Boolean. Keep data from each processing step.
 This field is filled at initialisation.using user inputs or defaults
 in <code>$new()</code></p></dd>
 
-<dt><code>target_regions</code></dt><dd><p>A character vector of regions to filter for. Used
+
+<dt><code>target_regions</code></dt>
+<dd><p>A character vector of regions to filter for. Used
 by the <code>filter method</code>.</p></dd>
 
-<dt><code>process_fns</code></dt><dd><p>array, additional, user supplied functions to process
+
+<dt><code>process_fns</code></dt>
+<dd><p>array, additional, user supplied functions to process
 the data.</p></dd>
 
-<dt><code>filter_level</code></dt><dd><p>Character The level of the data to filter at.
+
+<dt><code>filter_level</code></dt>
+<dd><p>Character The level of the data to filter at.
 Defaults to the target level.</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -227,34 +269,51 @@ Should only be called by a <code>DataClass</code> class object.</p><div class="s
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>level</code></dt><dd><p>A character string indicating the target administrative
+<p></p><div class="arguments"><dl><dt><code>level</code></dt>
+<dd><p>A character string indicating the target administrative
 level of the data with the default being "1". Currently supported
 options are level 1 ("1) and level 2 ("2").</p></dd>
 
-<dt><code>filter_level</code></dt><dd><p>A character string indicating the level to filter at.
+
+<dt><code>filter_level</code></dt>
+<dd><p>A character string indicating the level to filter at.
 Defaults to the level of the data if not specified and if not otherwise
 defined in the class.
 Use <code><a href="get_available_datasets.html">get_available_datasets()</a></code> for supported options by dataset.</p></dd>
 
-<dt><code>regions</code></dt><dd><p>A character vector of target regions to be assigned to
+
+<dt><code>regions</code></dt>
+<dd><p>A character vector of target regions to be assigned to
 the<code>target_regions</code> field if present.</p></dd>
 
-<dt><code>totals</code></dt><dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
+
+<dt><code>totals</code></dt>
+<dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.</p></dd>
 
-<dt><code>localise</code></dt><dd><p>Logical, defaults to TRUE. Should region names be
+
+<dt><code>localise</code></dt>
+<dd><p>Logical, defaults to TRUE. Should region names be
 localised.</p></dd>
 
-<dt><code>verbose</code></dt><dd><p>Logical, defaults to TRUE. Should verbose processing</p></dd>
 
-<dt><code>steps</code></dt><dd><p>Logical, defaults to FALSE. Should all processing and
+<dt><code>verbose</code></dt>
+<dd><p>Logical, defaults to TRUE. Should verbose processing</p></dd>
+
+
+<dt><code>steps</code></dt>
+<dd><p>Logical, defaults to FALSE. Should all processing and
 cleaning steps be kept and output in a list.</p></dd>
 
-<dt><code>get</code></dt><dd><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
+
+<dt><code>get</code></dt>
+<dd><p>Logical, defaults to FALSE. Should the class <code>get</code> method be
 called (this will download, clean, and process data at initialisation).</p></dd>
 
-<dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+
+<dt><code>process_fns</code></dt>
+<dd><p>Array, additional functions to process the data.
 Users can supply their own functions here which would act on clean data
 and they will be called alongside our default processing functions.
 The default optional function added is <code>set_negative_values_to_zero</code>.
@@ -264,6 +323,7 @@ remember to add it to your list also. If you feel you have created a
 cool processing function that others could benefit from please submit a
 Pull Request to our <a href="https://github.com/epiforecasts/covidregionaldata" class="external-link">github repository</a>
 and we will consider adding it to the package.</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -324,8 +384,10 @@ field.</p><div class="section">
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>level</code></dt><dd><p>A character string indicating the level to filter at.
+<p></p><div class="arguments"><dl><dt><code>level</code></dt>
+<dd><p>A character string indicating the level to filter at.
 Defaults to using the <code>filter_level</code> field if not specified</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -340,11 +402,15 @@ after <a href="#method-clean"><code>clean()</code></a></p><div class="section">
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>regions</code></dt><dd><p>A character vector of target regions. Overrides the
+<p></p><div class="arguments"><dl><dt><code>regions</code></dt>
+<dd><p>A character vector of target regions. Overrides the
 current class setting for <code>target_regions</code>.</p></dd>
 
-<dt><code>level</code></dt><dd><p>Character The level of the data to filter at. Defaults to
+
+<dt><code>level</code></dt>
+<dd><p>Character The level of the data to filter at. Defaults to
 the lowest level in the data.</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -371,11 +437,13 @@ which does the following:</p><ul><li><p>Adds columns not present in the data <co
 
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>process_fns</code></dt><dd><p>Array, additional functions to process the data.
+<p></p><div class="arguments"><dl><dt><code>process_fns</code></dt>
+<dd><p>Array, additional functions to process the data.
 Users can supply their own functions here which would act on clean data
 and they will be called alongside our default processing functions.
 The default optional function added is <code>set_negative_values_to_zero</code>.
 if process_fns is not set (see <code>process_fns</code> field for all defaults).</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -445,18 +513,26 @@ For more details see the
 
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>download</code></dt><dd><p>logical. To download the data (TRUE) or use a snapshot
+<p></p><div class="arguments"><dl><dt><code>download</code></dt>
+<dd><p>logical. To download the data (TRUE) or use a snapshot
 (FALSE). Defaults to FALSE.</p></dd>
 
-<dt><code>snapshot_dir</code></dt><dd><p>character_array the name of a directory to save the
+
+<dt><code>snapshot_dir</code></dt>
+<dd><p>character_array the name of a directory to save the
 downloaded data or read from. If not defined a directory called
 'snapshots' will be created in the temp directory. Snapshots are saved as
 rds files with the class name and level: e.g. <code>Italy_level_1.rds</code>.</p></dd>
 
-<dt><code>all</code></dt><dd><p>logical. Run tests with all settings (TRUE) or with those
+
+<dt><code>all</code></dt>
+<dd><p>logical. Run tests with all settings (TRUE) or with those
 defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
 
-<dt><code>...</code></dt><dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
+<dt><code>...</code></dt>
+<dd><p>Additional parameters to pass to <code>specific_tests</code></p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -470,7 +546,9 @@ defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
 
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

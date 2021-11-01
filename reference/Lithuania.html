@@ -76,7 +76,7 @@ and processing COVID-19 region level 1 and 2 data for Lithuania."><meta property
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Lithuania Class for downloading, cleaning and processing notification data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/Lithuania.R" class="external-link"><code>R/Lithuania.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/Lithuania.R" class="external-link"><code>R/Lithuania.R</code></a></small>
     <div class="hidden name"><code>Lithuania.Rd</code></div>
     </div>
 
@@ -191,34 +191,58 @@ many of these are still ill).</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>name of origin to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.</p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data that are common
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
+
+
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.</p></dd>
+
+
+<dt><code>common_data_urls</code></dt>
+<dd><p>List of named links to raw data that are common
 across levels.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_text</code></dt><dd><p>Plain text description of the source of the data</p></dd>
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_url</code></dt><dd><p>Website address for explanation/introduction of the
+
+<dt><code>source_text</code></dt>
+<dd><p>Plain text description of the source of the data</p></dd>
+
+
+<dt><code>source_url</code></dt>
+<dd><p>Website address for explanation/introduction of the
 data</p></dd>
 
-<dt><code>death_definition</code></dt><dd><p>which criteria of deaths attributed to
+
+<dt><code>death_definition</code></dt>
+<dd><p>which criteria of deaths attributed to
 COVID to use</p></dd>
 
-<dt><code>recovered_definition</code></dt><dd><p>whether to use the official counts of
+
+<dt><code>recovered_definition</code></dt>
+<dd><p>whether to use the official counts of
 recovered cases or the statistical estimates provided by OSP</p></dd>
 
-<dt><code>all_osp_fields</code></dt><dd><p>whether to return all the data vectors provided
+
+<dt><code>all_osp_fields</code></dt>
+<dd><p>whether to return all the data vectors provided
 by OSP</p></dd>
 
-<dt><code>national_data</code></dt><dd><p>whether to return data rows for national results</p></dd>
+
+<dt><code>national_data</code></dt>
+<dd><p>whether to return data rows for national results</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -284,24 +308,34 @@ provided by the source at the level 2 (municipality) regional level.</p><div cla
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>death_definition</code></dt><dd><p>A character string. Determines which criteria
+<p></p><div class="arguments"><dl><dt><code>death_definition</code></dt>
+<dd><p>A character string. Determines which criteria
 for attributing deaths to COVID is used. Should be <code>"of"</code>,
 <code>"with"</code>, or <code>"after"</code>. Can also be <code>"daily_deaths_def1"</code>,
 <code>"daily_deaths_def2"</code>, or <code>"daily_deaths_def3"</code>. (Defaults
 to <code>"of"</code>, the strictest definition.)</p></dd>
 
-<dt><code>recovered_definition</code></dt><dd><p>A character string. Determines whether
+
+<dt><code>recovered_definition</code></dt>
+<dd><p>A character string. Determines whether
 the count of officially-recovered (<em>de jure</em>) cases is used, or
 the statistical estimate provided by OSP. Should be <code>"official"</code>
 or <code>"statistical"</code>. (Defaults to <code>"official"</code>.)</p></dd>
 
-<dt><code>all_osp_fields</code></dt><dd><p>A logical scalar. Should all the meaningful
+
+<dt><code>all_osp_fields</code></dt>
+<dd><p>A logical scalar. Should all the meaningful
 data fields from the OSP source be returned? (Defaults <code>FALSE</code>)</p></dd>
 
-<dt><code>national_data</code></dt><dd><p>A logical scalar. Should national values be
+
+<dt><code>national_data</code></dt>
+<dd><p>A logical scalar. Should national values be
 returned?  (Defaults <code>FALSE</code>)</p></dd>
 
-<dt><code>...</code></dt><dd><p>Parameters passed to <code><a href="DataClass.html">DataClass()</a></code> initalize</p></dd>
+
+<dt><code>...</code></dt>
+<dd><p>Parameters passed to <code><a href="DataClass.html">DataClass()</a></code> initalize</p></dd>
+
 
 </dl><p></p></div>
 </div>
@@ -315,7 +349,9 @@ returned?  (Defaults <code>FALSE</code>)</p></dd>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>

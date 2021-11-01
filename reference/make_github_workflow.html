@@ -76,7 +76,7 @@ as an action to check the data as a github action."><meta property="og:image" co
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create github action for a given source</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>make_github_workflow.Rd</code></div>
     </div>
 
@@ -94,13 +94,14 @@ as an action to check the data as a github action.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>source</dt><dd><p>character_array The name of the class to create the workflow
+    <dl><dt>source</dt>
+<dd><p>character_array The name of the class to create the workflow
 for.</p></dd>
-</dl><dl><dt>workflow_path</dt><dd><p>character_array The path to where the workflow file
+<dt>workflow_path</dt>
+<dd><p>character_array The path to where the workflow file
 should be saved. Defaults to '.github/workflows/'</p></dd>
-</dl><dl><dt>cron</dt><dd><p>character_array the cron time to run the tests, defaults to
+<dt>cron</dt>
+<dd><p>character_array the cron time to run the tests, defaults to
 36 12 * * *, following the minute, hour, day(month), month and day(week)
 format.</p></dd>
 </dl></div>

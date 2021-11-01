@@ -76,7 +76,7 @@ and processing COVID-19 region level 1 and 2 data for Belgium."><meta property="
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Belgium Class for downloading, cleaning and processing notification data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/R/Belgium.R" class="external-link"><code>R/Belgium.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/covidregionaldata/blob/HEAD/R/Belgium.R" class="external-link"><code>R/Belgium.R</code></a></small>
     <div class="hidden name"><code>Belgium.Rd</code></div>
     </div>
 
@@ -121,30 +121,48 @@ and processing COVID-19 region level 1 and 2 data for Belgium.</p>
     </div>
     <div id="public-fields">
     <h2>Public fields</h2>
-    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt><dd><p>name of origin to fetch data for</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>origin</code></dt>
+<dd><p>name of origin to fetch data for</p></dd>
 
-<dt><code>supported_levels</code></dt><dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_names</code></dt><dd><p>A list of region names in order of level.</p></dd>
+<dt><code>supported_levels</code></dt>
+<dd><p>A list of supported levels.</p></dd>
 
-<dt><code>supported_region_codes</code></dt><dd><p>A list of region codes in order of level.
+
+<dt><code>supported_region_names</code></dt>
+<dd><p>A list of region names in order of level.</p></dd>
+
+
+<dt><code>supported_region_codes</code></dt>
+<dd><p>A list of region codes in order of level.
 ISO 3166-2 codes are used for both region and province levels in
 Belgium, and for provinces these are marked as being
 <code>iso_3166_2_province</code></p></dd>
 
-<dt><code>common_data_urls</code></dt><dd><p>List of named links to raw data that are common
+
+<dt><code>common_data_urls</code></dt>
+<dd><p>List of named links to raw data that are common
 across levels.</p></dd>
 
-<dt><code>level_data_urls</code></dt><dd><p>List of named links to raw data specific to
+
+<dt><code>level_data_urls</code></dt>
+<dd><p>List of named links to raw data specific to
 each level of regions. For Belgium, there are only additional data for
 level 1 regions.</p></dd>
 
-<dt><code>source_data_cols</code></dt><dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_text</code></dt><dd><p>Plain text description of the source of the data</p></dd>
+<dt><code>source_data_cols</code></dt>
+<dd><p>existing columns within the raw data</p></dd>
 
-<dt><code>source_url</code></dt><dd><p>Website address for explanation/introduction of the
+
+<dt><code>source_text</code></dt>
+<dd><p>Plain text description of the source of the data</p></dd>
+
+
+<dt><code>source_url</code></dt>
+<dd><p>Website address for explanation/introduction of the
 data</p></dd>
+
 
 </dl><p></p></div>
     </div>
@@ -212,7 +230,9 @@ applies an initial data patch.</p><div class="section">
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>deep</code></dt>
+<dd><p>Whether to make a deep clone.</p></dd>
+
 
 </dl><p></p></div>
 </div>
