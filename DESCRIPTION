@@ -99,6 +99,7 @@ Imports:
     R6,
     readxl,
     rlang,
+    RSocrata,
     stringi,
     stringr,
     tibble,
