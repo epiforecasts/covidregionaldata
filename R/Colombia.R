@@ -36,7 +36,7 @@ Colombia <- R6::R6Class("Colombia",
     #' @field common_data_urls List of named links to raw data.
     # nolint start
     common_data_urls = list(
-      "main" = "https://www.datos.gov.co/resource/gt2j-8ykr.csv?$select=fecha_diagnostico,departamento_nom,ciudad_municipio_nom,ciudad_municipio"
+      "main" = "https://www.datos.gov.co/resource/gt2j-8ykr.csv?$select=fecha_diagnostico,ciudad_municipio"
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
@@ -51,7 +51,10 @@ Colombia <- R6::R6Class("Colombia",
     #' @importFrom tibble tibble
     #' @importFrom dplyr mutate
     set_region_codes = function() {
-      self$codes_lookup$`1` <- covidregionaldata::colombia_codes
+      self$codes_lookup$`1` <- covidregionaldata::colombia_codes %>%
+        select(level_1_region, level_1_region_code) %>%
+        unique()
+      self$codes_lookup$`2` <- covidregionaldata::colombia_codes
     },
 
     #' @description Colombia specific download using Socrata API
@@ -72,30 +75,15 @@ Colombia <- R6::R6Class("Colombia",
       self$data$clean <- self$data$raw[["main"]] %>%
         rename(
           date = .data$fecha_diagnostico,
-          level_1_region = .data$departamento_nom,
-          level_2_region = .data$ciudad_municipio_nom,
           level_2_region_code = .data$ciudad_municipio
         ) %>%
-        group_by(date, level_1_region, level_2_region, level_2_region_code) %>%
+        group_by(date, level_2_region_code) %>%
         summarise(cases_new = n(), .groups = "drop") %>%
         mutate(date = as_date(dmy_hms(date)),
-               level_1_region = iconv(.data$level_1_region,
-                                      from = "UTF-8",
-                                      to = "ASCII//TRANSLIT"
-               ),
-               level_1_region =
-                 str_replace_all(.data$level_1_region,
-                                 c(" D.C." = "",
-                                   "San Andres y Providencia"
-                                   = "San Andres, Providencia y Santa Catalina",
-                                   "Norte Santander" = "Norte De Santander"
-                                 )
-               ),
-               level_1_region = str_to_sentence(.data$level_1_region),
-               level_1_region = str_to_title(.data$level_1_region)) %>%
+               level_2_region_code=sprintf("%05d", level_2_region_code)) %>%
         left_join(
-          self$codes_lookup$`1`,
-          by = c("level_1_region" = "level_1_region")
+          self$codes_lookup$`2`,
+          by = c("level_2_region_code" = "level_2_region_code")
         )
     },
     
@@ -104,10 +92,11 @@ Colombia <- R6::R6Class("Colombia",
     #' Aggregates data to the level 1 (department) regional level. Data is
     #' provided by the source at the level 2 (municipality) regional level.
     #'
-    #' @importFrom dplyr group_by summarise ungroup full_join across if_else
+    #' @importFrom dplyr group_by summarise ungroup full_join across if_else select
     #' @importFrom tidyselect vars_select_helpers
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
+        select(-level_2_region_code, -level_2_region) %>%
         group_by(
           .data$date,
           .data$level_1_region, .data$level_1_region_code

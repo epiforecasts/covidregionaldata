@@ -5,7 +5,7 @@
 \alias{colombia_codes}
 \title{Region Codes for Colombia Dataset.}
 \format{
-An object of class \code{data.frame} with 33 rows and 2 columns.
+An object of class \code{data.frame} with 1119 rows and 4 columns.
 }
 \usage{
 colombia_codes
