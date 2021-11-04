@@ -66,7 +66,7 @@ Colombia <- R6::R6Class("Colombia",
     },
 
     #' @description Colombia specific data cleaning
-    #' @importFrom dplyr select mutate rename summarise group_by
+    #' @importFrom dplyr select mutate rename summarise group_by n
     #' @importFrom lubridate dmy_hms as_date
     #' @importFrom stringr str_replace_all str_to_sentence str_to_title
     #' @importFrom rlang .data
