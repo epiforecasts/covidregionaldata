@@ -58,25 +58,11 @@ Colombia <- R6::R6Class("Colombia",
     },
 
     #' @description Colombia specific download using Socrata API
-    #' @importFrom dplyr select
+    #' @importFrom RSocrata read.socrata
     download = function () {
       message_verbose(self$verbose,
                       "Downloading Colombia data. This may take a while.")
-      # RSocrata package is recommended but not required
-      if (require("RSocrata", attach.required = TRUE)) {
-        self$data$raw$main <- RSocrata::read.socrata(self$data_urls[["main"]])
-      } else {
-        # If the RSocrata package is not available, we download the full wide
-        # csv (which is at least 8x larger) then select down to what we could
-        # get through the API.
-        #truncated_url <- sub("\\?.*", "", self$data_urls[["main"]])
-        alternate_url <- "https://www.datos.gov.co/api/views/gt2j-8ykr/rows.csv?accessType=DOWNLOAD"
-        massive_co_data <-
-          csv_reader(alternate_url,
-                     self$verbose)
-        self$data$raw$main <- massive_co_data %>%
-          select(.data$fecha_diagnostico, .data$ciudad-municipio)
-      }
+      self$data$raw$main <- read.socrata(self$data_urls[["main"]])
     },
 
     #' @description Colombia specific data cleaning
