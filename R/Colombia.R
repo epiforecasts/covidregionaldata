@@ -4,7 +4,6 @@
 #'
 # nolint start
 #' @source \url{https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr}
-#' @source \url{https://github.com/danielcs88/colombia_covid-19/}
 # nolint end
 #' @export
 #' @concept dataset
@@ -58,6 +57,8 @@ Colombia <- R6::R6Class("Colombia",
     },
 
     #' @description Colombia specific download using Socrata API
+    #' This uses the `RSocrata` package if it is installed or downloads
+    #' a much larger csv file if that package is not available.
     #' @importFrom dplyr select
     download = function() {
       message_verbose(self$verbose,
