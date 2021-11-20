@@ -58,11 +58,25 @@ Colombia <- R6::R6Class("Colombia",
     },
 
     #' @description Colombia specific download using Socrata API
-    #' @importFrom RSocrata read.socrata
-    download = function () {
+    #' @importFrom dplyr select
+    download = function() {
       message_verbose(self$verbose,
                       "Downloading Colombia data. This may take a while.")
-      self$data$raw$main <- read.socrata(self$data_urls[["main"]])
+      # RSocrata package is recommended but not required
+      if (require(RSocrata, attach.required = TRUE)) {
+        self$data$raw$main <- RSocrata::read.socrata(self$data_urls[["main"]])
+      } else {
+        # If the RSocrata package is not available, we download the full wide
+        # csv (which is at least 8x larger) then select down to what we could
+        # get through the API.
+        alternate_url <- "https://www.datos.gov.co/api/views/gt2j-8ykr/rows.csv?accessType=DOWNLOAD" # nolint
+        massive_co_data <-
+          csv_reader(alternate_url,
+                     self$verbose)
+        self$data$raw$main <- massive_co_data %>%
+          select(fecha_diagnostico = .data$`Fecha de diagn\\00f3stico`,
+                 ciudad_municipio = .data$`C\\00f3digo DIVIPOLA municipio`)
+      }
     },
 
     #' @description Colombia specific data cleaning
@@ -80,19 +94,19 @@ Colombia <- R6::R6Class("Colombia",
         group_by(date, level_2_region_code) %>%
         summarise(cases_new = n(), .groups = "drop") %>%
         mutate(date = as_date(dmy_hms(date)),
-               level_2_region_code=sprintf("%05d", level_2_region_code)) %>%
+               level_2_region_code = sprintf("%05d", level_2_region_code)) %>%
         left_join(
           self$codes_lookup$`2`,
           by = c("level_2_region_code" = "level_2_region_code")
         )
     },
-    
+
     #' @description Colombia Specific Department Level Data Cleaning
     #'
     #' Aggregates data to the level 1 (department) regional level. Data is
     #' provided by the source at the level 2 (municipality) regional level.
     #'
-    #' @importFrom dplyr group_by summarise ungroup full_join across if_else select
+    #' @importFrom dplyr group_by summarise ungroup across select
     #' @importFrom tidyselect vars_select_helpers
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
