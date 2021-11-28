@@ -5,7 +5,8 @@ This release is currently under development
 ## New data sets
 
 * Support for level 1 region data in Estonia (thanks to @RichardMN). See `?Estonia` for details.
-* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietname` for details.
+* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details.
+* Support for level 2 region data in Colombia has been added (thanks to @RichardMN). The package no longer relies on aggregation by another project but takes data direct from the Colombia open data API. This uses the `RSocrata` package, which is suggested but not required. Using the `RSocrata` package cuts download volume and time by a factor of about 8.
 
 ## Other changes
 
