@@ -131,7 +131,7 @@ reset_cache <- function() {
 
 #' Control data return
 #'
-#' @description Controls data return for `get_reigonal_data` and
+#' @description Controls data return for `get_regional_data` and
 #' `get_national_data`
 #' @param obj A Class based on a `DataClass`
 #' @param class Logical, defaults to FALSE. If TRUE returns the

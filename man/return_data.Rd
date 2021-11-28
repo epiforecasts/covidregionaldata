@@ -14,7 +14,7 @@ return_data(obj, class = FALSE)
 Overrides \code{steps}.}
 }
 \description{
-Controls data return for \code{get_reigonal_data} and
+Controls data return for \code{get_regional_data} and
 \code{get_national_data}
 }
 \concept{utility}
