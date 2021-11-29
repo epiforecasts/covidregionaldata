@@ -139,7 +139,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/covidregionaldata/">covidregionaldata</a></span><span class="op">)</span>
 <span class="va">all_countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_national_data.html">get_national_data</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">162819</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">8</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">164478</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">8</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (3): Country_code, Country, WHO_region</span>
@@ -154,7 +154,7 @@
 <p>We can take a look at this data by printing it to the console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_countries</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 162,819 × 15</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 164,478 × 15</span></span>
 <span class="co">#&gt;    date       un_region who_region country        iso_code cases_new cases_total</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0</span>
@@ -167,7 +167,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-01-03 Americas  AMRO       Antigua &amp; Bar… AG               0           0</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-01-03 Americas  AMRO       Argentina      AR               0           0</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-01-03 Asia      EURO       Armenia        AM               0           0</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 162,809 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 164,468 more rows, and 8 more variables: deaths_new &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   deaths_total &lt;dbl&gt;, recovered_new &lt;dbl&gt;, recovered_total &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   hosp_new &lt;dbl&gt;, hosp_total &lt;dbl&gt;, tested_new &lt;dbl&gt;, tested_total &lt;dbl&gt;</span></span></code></pre></div>
 <p>We can see that this provides information about the number of cases and deaths for each country over time. As a tibble is returned, we can easily manipulate and plot this using <code>tidyverse</code> packages. For example, we can plot the total deaths in Italy over time.</p>
@@ -209,16 +209,16 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 236 × 7</span></span>
 <span class="co">#&gt;    country        iso_code cases_total deaths_total recovered_total hosp_total</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> United States  US          47<span style="text-decoration: underline;">030</span>792       <span style="text-decoration: underline;">759</span>388               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> India          IN          34<span style="text-decoration: underline;">489</span>628       <span style="text-decoration: underline;">465</span>082               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Brazil         BR          21<span style="text-decoration: underline;">978</span>234       <span style="text-decoration: underline;">611</span>851               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> United Kingdom GB           9<span style="text-decoration: underline;">721</span>920       <span style="text-decoration: underline;">143</span>559               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Russia         RU           9<span style="text-decoration: underline;">257</span>068       <span style="text-decoration: underline;">261</span>589               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Turkey         TR           8<span style="text-decoration: underline;">503</span>220        <span style="text-decoration: underline;">74</span>428               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> France         FR           7<span style="text-decoration: underline;">122</span>737       <span style="text-decoration: underline;">115</span>967               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Iran           IR           6<span style="text-decoration: underline;">057</span>893       <span style="text-decoration: underline;">128</span>531               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Argentina      AR           5<span style="text-decoration: underline;">310</span>334       <span style="text-decoration: underline;">116</span>313               0          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Germany        DE           5<span style="text-decoration: underline;">248</span>291        <span style="text-decoration: underline;">98</span>739               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> United States  US          47<span style="text-decoration: underline;">802</span>459       <span style="text-decoration: underline;">771</span>529               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> India          IN          34<span style="text-decoration: underline;">555</span>436       <span style="text-decoration: underline;">467</span>468               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Brazil         BR          22<span style="text-decoration: underline;">043</span>685       <span style="text-decoration: underline;">613</span>339               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> United Kingdom GB          10<span style="text-decoration: underline;">021</span>501       <span style="text-decoration: underline;">144</span>433               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Russia         RU           9<span style="text-decoration: underline;">502</span>879       <span style="text-decoration: underline;">270</span>292               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Turkey         TR           8<span style="text-decoration: underline;">676</span>639        <span style="text-decoration: underline;">75</span>840               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> France         FR           7<span style="text-decoration: underline;">285</span>128       <span style="text-decoration: underline;">116</span>361               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Iran           IR           6<span style="text-decoration: underline;">092</span>822       <span style="text-decoration: underline;">129</span>280               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Germany        DE           5<span style="text-decoration: underline;">650</span>170       <span style="text-decoration: underline;">100</span>476               0          0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Argentina      AR           5<span style="text-decoration: underline;">319</span>867       <span style="text-decoration: underline;">116</span>458               0          0</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 226 more rows, and 1 more variable: tested_total &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">usa_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"USA"</span><span class="op">)</span>
 <span class="co">#&gt; Downloading data from https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">34614</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">5</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">35006</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">5</span></span>
 <span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (2): state, fips</span>

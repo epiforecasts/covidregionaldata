@@ -89,8 +89,8 @@ and processing COVID-19 region data for Brazil.</p>
 DOI 10.1590/SciELOPreprints.362</p>
     </div>
 
+    <div id="ref-usage">Usage,NULL</div>
 
-    <div id="ref-sections">
     <div id="source">
     <h2>Source</h2>
     <p><a href="https://github.com/wcota/covid19br" class="external-link">https://github.com/wcota/covid19br</a></p>
@@ -187,7 +187,7 @@ data</p></dd>
 <h3 id="method-set-region-codes-">Method <code>set_region_codes()</code><a class="anchor" aria-label="anchor" href="#method-set-region-codes-"></a></h3>
 <p>Set up a table of region codes for clean data</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">set_region_codes</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">set_region_codes</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -195,7 +195,7 @@ data</p></dd>
 <h3 id="method-clean-common-">Method <code>clean_common()</code><a class="anchor" aria-label="anchor" href="#method-clean-common-"></a></h3>
 <p>Common data cleaning for both levels</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -203,7 +203,7 @@ data</p></dd>
 <h3 id="method-clean-level-">Method <code>clean_level_1()</code><a class="anchor" aria-label="anchor" href="#method-clean-level-"></a></h3>
 <p>State Level Data Cleaning</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_level_1</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_level_1</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -211,7 +211,7 @@ data</p></dd>
 <h3 id="method-clean-level--1">Method <code>clean_level_2()</code><a class="anchor" aria-label="anchor" href="#method-clean-level--1"></a></h3>
 <p>City Level Data Cleaning</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_level_2</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clean_level_2</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -219,7 +219,7 @@ data</p></dd>
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Brazil</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -234,11 +234,10 @@ data</p></dd>
 </div>
 
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">region</span> <span class="op">&lt;-</span> <span class="va">Brazil</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">TRUE</span>, steps <span class="op">=</span> <span class="cn">TRUE</span>, get <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">region</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>

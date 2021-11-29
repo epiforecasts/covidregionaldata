@@ -101,8 +101,8 @@ data sets, and "hospitalizations" which holds data about number of people
 in hospital, ICU, etc.</p>
     </div>
 
+    <div id="ref-usage">Usage,NULL</div>
 
-    <div id="ref-sections">
     <div id="source">
     <h2>Source</h2>
     <p><a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" class="external-link">https://github.com/GoogleCloudPlatform/covid-19-open-data</a></p>
@@ -209,7 +209,7 @@ data</p></dd>
 takes all the raw data, puts into a single data frame, renames some
 columns and checks types.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -219,7 +219,7 @@ columns and checks types.</p><div class="section">
 data cleaned by <code>clean_common</code> and aggregates it to the country level
 (level 1).</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_level_1</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_level_1</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -229,7 +229,7 @@ data cleaned by <code>clean_common</code> and aggregates it to the country level
 data cleaned by <code>clean_common</code> and aggregates it to the subregion level
 (level 2).</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_level_2</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clean_level_2</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -237,7 +237,7 @@ data cleaned by <code>clean_common</code> and aggregates it to the subregion lev
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>custom initialize for Google</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><pre><code><span class="va"><a href="../reference/Google.html">Google</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va"><a href="../reference/Google.html">Google</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -253,7 +253,7 @@ data cleaned by <code>clean_common</code> and aggregates it to the subregion lev
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Google</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -268,11 +268,10 @@ data cleaned by <code>clean_common</code> and aggregates it to the subregion lev
 </div>
 
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># nolint start</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># nolint start</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># set up a data cache</span></span>
 <span class="r-in"><span class="fu"><a href="start_using_memoise.html">start_using_memoise</a></span><span class="op">(</span><span class="op">)</span></span>

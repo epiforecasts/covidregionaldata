@@ -83,8 +83,8 @@
     <p>A parent class containing non-dataset specific methods.</p>
     </div>
 
+    <div id="ref-usage">Usage,NULL</div>
 
-    <div id="ref-sections">
     <div id="details">
     <h2>Details</h2>
     <p>All data sets have shared methods for extracting geographic codes,
@@ -244,7 +244,7 @@ Defaults to the target level.</p></dd>
 <p>Place holder for custom country specific function to load
 region codes.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">set_region_codes</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">set_region_codes</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -254,7 +254,7 @@ region codes.</p><div class="section">
 Set up the <code>DataClass</code> class with attributes set to input parameters.
 Should only be called by a <code>DataClass</code> class object.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><pre><code><span class="va"><a href="../reference/DataClass.html">DataClass</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va"><a href="../reference/DataClass.html">DataClass</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
   level <span class="op">=</span> <span class="st">"1"</span>,
   <span class="va">filter_level</span>,
   <span class="va">regions</span>,
@@ -264,7 +264,7 @@ Should only be called by a <code>DataClass</code> class object.</p><div class="s
   steps <span class="op">=</span> <span class="cn">FALSE</span>,
   get <span class="op">=</span> <span class="cn">FALSE</span>,
   <span class="va">process_fns</span>
-<span class="op">)</span></code></pre><p></p></div>
+<span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -334,7 +334,7 @@ and we will consider adding it to the package.</p></dd>
 of the <code>data_url</code> name and the corresponding raw data table in
 <code>data$raw</code></p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -345,7 +345,7 @@ of the <code>data_url</code> name and the corresponding raw data table in
 <code>data$raw</code>. Designed as a drop-in replacement for <code>download</code> so
 it can be used in sub-classes.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">download_JSON</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">download_JSON</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -358,7 +358,7 @@ Calls the specific class specific cleaning method (<code>clean_common</code>)
 followed by level specific cleaning methods.
 <code>clean_level_[1/2]</code>. Cleaned data is stored in <code>data$clean</code></p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clean</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clean</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -368,7 +368,7 @@ followed by level specific cleaning methods.
 By default this method is empty as if any code is required it should be
 defined in a child class specific <code>clean_common</code> method.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -379,7 +379,7 @@ filtering operations. Can only be called once <code>clean()</code> has been
 called. Filtering level is determined by checking the <code>filter_level</code>
 field.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">available_regions</span><span class="op">(</span><span class="va">level</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">available_regions</span><span class="op">(</span><span class="va">level</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -397,7 +397,7 @@ Defaults to using the <code>filter_level</code> field if not specified</p></dd>
 <p>Filter cleaned data for a specific region  To be called
 after <a href="#method-clean"><code>clean()</code></a></p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">regions</span>, <span class="va">level</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">regions</span>, <span class="va">level</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -432,7 +432,7 @@ which does the following:</p><ul><li><p>Adds columns not present in the data <co
 <code><a href="calculate_columns_from_existing_data.html">calculate_columns_from_existing_data()</a></code></p></li>
 </ul><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">process</span><span class="op">(</span><span class="va">process_fns</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">process</span><span class="op">(</span><span class="va">process_fns</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -458,7 +458,7 @@ Internally calls <a href="#method-download"><code>download()</code></a>,
 <a href="#method-process"><code>process()</code></a>
 <code>download</code>, <code>clean</code>, <code>filter</code> and <code>process</code> methods.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -470,7 +470,7 @@ this uses the steps argument to return either a
 list of all the data preserved at each step or just the processed data.
 For most datasets a custom method should not be needed.</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 
@@ -479,7 +479,7 @@ For most datasets a custom method should not be needed.</p><div class="section">
 <p>Create a table of summary information for the data set
 being processed.</p><div class="section">
 <h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -503,12 +503,12 @@ which can be defined in an individual country class method called
 For more details see the
 <a href="https://github.com/epiforecasts/covidregionaldata/blob/master/vignettes/testing.Rmd" class="external-link">'testing' vignette</a>: <code>vignette(testing)</code>.</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span>
   download <span class="op">=</span> <span class="cn">FALSE</span>,
   snapshot_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/snapshots"</span><span class="op">)</span>,
   all <span class="op">=</span> <span class="cn">FALSE</span>,
   <span class="va">...</span>
-<span class="op">)</span></code></pre><p></p></div>
+<span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -541,7 +541,7 @@ defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
-<p></p><div class="r"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">DataClass</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -555,7 +555,6 @@ defined in the current class instance (FALSE). Defaults to FALSE.</p></dd>
 
 </div>
 
-    </div>
     </div>
 
   </div>
