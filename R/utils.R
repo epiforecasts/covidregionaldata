@@ -2,9 +2,6 @@
 #' @export
 dplyr::`%>%`
 
-#' @importFrom rlang .data
-rlang::`.data`
-
 #' Custom CSV reading function
 #'
 #' @description Checks for use of memoise and then uses vroom::vroom.
