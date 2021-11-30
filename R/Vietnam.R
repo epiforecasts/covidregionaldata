@@ -64,8 +64,7 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @importFrom dplyr filter select mutate rename tibble as_tibble full_join
     #' @importFrom tidyr replace_na drop_na separate
     #' @importFrom purrr map
-    #' @importFrom stringi stri_trans_general stri_trim_both stri_replace_all
-    #' @importFrom stringr str_to_title str_replace_all
+    #' @importFrom stringr str_conv str_trim str_to_title str_replace_all
     #' @importFrom lubridate dmy
     clean_common = function() {
       # The first three elements of self$data$raw are the data
@@ -120,8 +119,8 @@ Vietnam <- R6::R6Class("Vietnam",
         #
         #tidyr::drop_na(date, region_name) %>%
         mutate(
-          level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
-          level_1_region = stri_trim_both(level_1_region),
+          level_1_region = str_conv(level_1_region, "ASCII"),
+          level_1_region = str_trim(level_1_region, side = "both"),
           level_1_region = str_replace_all(level_1_region,
                                            "\\(.*\\)|-| ", ""),
           level_1_region = str_to_title(level_1_region),
