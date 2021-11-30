@@ -7,7 +7,7 @@
 #' @return A tibble with relevant NA columns added
 #' @family compulsory_processing
 #' @concept compulsory_processing
-#' @importFrom tibble tibble add_column
+#' @importFrom dplyr mutate
 #' @importFrom rlang !!!
 add_extra_na_cols <- function(data) {
   expected_col_names <- c(
@@ -17,7 +17,7 @@ add_extra_na_cols <- function(data) {
 
   new_cols <- rep(list(NA_real_), length(expected_col_names))
   names(new_cols) <- expected_col_names
-  data <- add_column(
+  data <- mutate(
     data,
     !!!new_cols[!(names(new_cols) %in% names(data))]
   )
@@ -50,7 +50,6 @@ set_negative_values_to_zero <- function(data) {
 #' @return A tibble with rows of NAs added.
 #' @family compulsory_processing
 #' @concept compulsory_processing
-#' @importFrom tibble tibble
 #' @importFrom tidyr complete full_seq nesting
 #' @importFrom tidyselect starts_with
 #' @importFrom rlang !!! syms
@@ -103,7 +102,6 @@ complete_cumulative_columns <- function(data) {
 #' @importFrom purrr walk2
 #' @importFrom tidyr replace_na
 #' @importFrom tidyselect ends_with
-#' @importFrom tibble tibble
 #' @importFrom rlang !! :=
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
@@ -150,7 +148,6 @@ calculate_columns_from_existing_data <- function(data) {
 #' @param data A data table
 #' @return A data table, totalled up
 #' @importFrom dplyr left_join group_by summarise select arrange
-#' @importFrom tibble tibble
 #' @family optional_processing
 #' @concept optional_processing
 totalise_data <- function(data) {

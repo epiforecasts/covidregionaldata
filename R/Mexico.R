@@ -54,7 +54,6 @@ Mexico <- R6::R6Class("Mexico",
     source_url = "https://datos.covid-19.conacyt.mx",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
     #' @importFrom dplyr select
     set_region_codes = function() {
       self$codes_lookup$`1` <- covidregionaldata::mexico_codes %>%

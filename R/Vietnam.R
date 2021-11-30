@@ -47,7 +47,6 @@ Vietnam <- R6::R6Class("Vietnam",
     source_url = "https://covid19.ncsc.gov.vn",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
     set_region_codes = function() {
       self$codes_lookup$`1` <- covidregionaldata::vietnam_codes
     },

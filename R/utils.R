@@ -16,7 +16,7 @@ rlang::`.data`
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 #' @importFrom withr with_envvar
 #' @concept utility
 csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
@@ -50,7 +50,7 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
 #' @param ... extra parameters to be passed to jsonlite::fromJSON
 #' @inheritParams message_verbose
 #' @return A data table
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 #' @importFrom jsonlite fromJSON
 #' @concept utility
 json_reader <- function(file, verbose = FALSE, ...) {

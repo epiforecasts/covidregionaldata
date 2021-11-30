@@ -18,7 +18,6 @@
 #' @family interface
 #' @importFrom rlang .data
 #' @importFrom dplyr select bind_rows filter
-#' @importFrom tibble as_tibble
 #' @export
 #' @examples
 #' # see all available datasets

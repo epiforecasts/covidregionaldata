@@ -50,7 +50,6 @@ France <- R6::R6Class("France",
 
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
     #' @importFrom dplyr select
     set_region_codes = function() {
       self$codes_lookup$`1` <- france_codes %>%

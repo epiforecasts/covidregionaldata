@@ -69,7 +69,7 @@ Switzerland <- R6::R6Class("Switzerland",
     source_url = "https://github.com/openZH/covid_19/",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
+    #' @importFrom dplyr tibble
     set_region_codes = function() {
       self$codes_lookup$`1` <- tibble(
         code = c(

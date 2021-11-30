@@ -100,7 +100,6 @@ Imports:
     rlang,
     stringi,
     stringr,
-    tibble,
     tidyr (>= 1.0.0),
     tidyselect,
     vroom,

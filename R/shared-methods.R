@@ -505,7 +505,7 @@ DataClass <- R6::R6Class(
 
     #' @description Create a table of summary information for the data set
     #' being processed.
-    #' @importFrom tibble tibble
+    #' @importFrom dplyr tibble
     #' @return Returns a single row summary tibble containing the origin of the
     #' data source, class, level 1 and 2 region names, the type of data,
     #' the urls of the raw data and the columns present in the raw data.
