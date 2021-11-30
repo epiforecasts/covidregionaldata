@@ -93,7 +93,6 @@ Imports:
     jsonlite,
     lifecycle,
     lubridate,
-    magrittr,
     memoise,
     purrr,
     R6,
