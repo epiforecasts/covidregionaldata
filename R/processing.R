@@ -51,7 +51,7 @@ set_negative_values_to_zero <- function(data) {
 #' @family compulsory_processing
 #' @concept compulsory_processing
 #' @importFrom tidyr complete full_seq nesting
-#' @importFrom tidyselect starts_with
+#' @importFrom dplyr starts_with
 #' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
@@ -75,7 +75,7 @@ fill_empty_dates_with_na <- function(data) {
 #' @family compulsory_processing
 #' @concept compulsory_processing
 #' @importFrom tidyr fill
-#' @importFrom tidyselect all_of
+#' @importFrom dplyr all_of
 complete_cumulative_columns <- function(data) {
   cumulative_col_names <- c(
     "deaths_total", "cases_total", "recovered_total",
@@ -98,10 +98,9 @@ complete_cumulative_columns <- function(data) {
 #' @return A data frame with extra columns if required
 #' @family compulsory_processing
 #' @concept compulsory_processing
-#' @importFrom dplyr mutate group_by_at arrange vars starts_with lag
+#' @importFrom dplyr mutate group_by_at arrange vars starts_with lag ends_with
 #' @importFrom purrr walk2
 #' @importFrom tidyr replace_na
-#' @importFrom tidyselect ends_with
 #' @importFrom rlang !! :=
 calculate_columns_from_existing_data <- function(data) {
   possible_counts <- c("cases", "deaths", "hosp", "recovered", "tested")
@@ -220,10 +219,9 @@ run_optional_processing_fns <- function(data, process_fns) {
 #' processing steps
 #' @concept utility
 #' @family processing
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange all_of
 #' @importFrom dplyr rename
 #' @importFrom tidyr drop_na
-#' @importFrom tidyselect all_of
 #' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
                              totals = FALSE, localise = TRUE,

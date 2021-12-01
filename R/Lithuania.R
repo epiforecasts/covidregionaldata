@@ -184,8 +184,7 @@ Lithuania <- R6::R6Class("Lithuania",
     #' @description Common data cleaning for both levels
     #'
     # nolint start
-    #' @importFrom dplyr mutate group_by summarise if_else filter select bind_rows rename left_join everything across lead
-    #' @importFrom tidyselect all_of
+    #' @importFrom dplyr mutate group_by summarise if_else filter select bind_rows rename left_join everything across lead all_of
     #' @importFrom lubridate as_date
     # nolint end
     clean_common = function() {
@@ -244,7 +243,7 @@ Lithuania <- R6::R6Class("Lithuania",
       # or qualitative)
       sum_cols <- names(select(
         self$data$raw$main,
-        "population":tidyselect::last_col()
+        "population":dplyr::last_col()
       ))
       sum_cols <- sum_cols[!grepl("prc|map_colors", sum_cols)]
 
@@ -345,7 +344,6 @@ Lithuania <- R6::R6Class("Lithuania",
     #' provided by the source at the level 2 (municipality) regional level.
     #'
     #' @importFrom dplyr group_by summarise ungroup full_join across if_else
-    #' @importFrom tidyselect vars_select_helpers
     clean_level_1 = function() {
       self$data$clean <- self$data$clean %>%
         group_by(
@@ -354,7 +352,7 @@ Lithuania <- R6::R6Class("Lithuania",
         ) %>%
         summarise(
           across(
-            tidyselect::vars_select_helpers$where(is.numeric),
+            where(is.numeric),
             sum
           )
         ) %>%

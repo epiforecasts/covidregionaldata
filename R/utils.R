@@ -303,3 +303,7 @@ make_new_data_source <- function(source, type = "subnational",
   )
   make_github_workflow(source)
 }
+
+# Hack to work around the fact that `where()` is not exported 
+# (https://github.com/r-lib/tidyselect/issues/201)
+utils::globalVariables("where")
