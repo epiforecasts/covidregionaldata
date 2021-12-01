@@ -14,7 +14,6 @@ dplyr::`%>%`
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
 #' @importFrom dplyr tibble
-#' @importFrom withr with_envvar
 #' @concept utility
 csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   read_csv_fun <- vroom
@@ -26,14 +25,11 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   }
   if (verbose) {
     message("Downloading data from ", file)
-    data <- read_csv_fun(file, ..., guess_max = guess_max)
+    data <- read_csv_fun(file, progress = TRUE, ..., guess_max = guess_max)
   } else {
-    with_envvar(
-      new = c("VROOM_SHOW_PROGRESS" = "false"),
-      data <- suppressWarnings(
-        suppressMessages(
-          read_csv_fun(file, ..., guess_max = guess_max)
-        )
+    data <- suppressWarnings(
+      suppressMessages(
+        read_csv_fun(file, progress = FALSE, ..., guess_max = guess_max)
       )
     )
   }

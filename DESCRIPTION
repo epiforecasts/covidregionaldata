@@ -102,7 +102,6 @@ Imports:
     tidyr (>= 1.0.0),
     tidyselect,
     vroom,
-    withr,
     xml2
 Suggests:
     ggplot2,
