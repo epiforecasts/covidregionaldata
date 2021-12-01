@@ -1,5 +1,5 @@
 
-# Subnational data for the COVID-19 outbreak <img src="man/figures/logo.png" align="right" alt="" height="150" />
+# Subnational data for the COVID-19 outbreak <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![R-CMD-check](https://github.com/epiforecasts/covidregionaldata/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/covidregionaldata/actions)
 [![Codecov test
@@ -118,18 +118,18 @@ nots <- get_national_data()
 #> Processing data
 nots
 #> # A tibble: 142,911 × 15
-#>    date       un_region who_region country           iso_code cases_new cases_total
-#>    <date>     <chr>     <chr>      <chr>             <chr>        <dbl>       <dbl>
-#>  1 2020-01-03 Asia      EMRO       Afghanistan       AF               0           0
-#>  2 2020-01-03 Europe    EURO       Albania           AL               0           0
-#>  3 2020-01-03 Africa    AFRO       Algeria           DZ               0           0
-#>  4 2020-01-03 Oceania   WPRO       American Samoa    AS               0           0
-#>  5 2020-01-03 Europe    EURO       Andorra           AD               0           0
-#>  6 2020-01-03 Africa    AFRO       Angola            AO               0           0
-#>  7 2020-01-03 Americas  AMRO       Anguilla          AI               0           0
+#>    date       un_region who_region country        iso_code cases_new cases_total
+#>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
+#>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
+#>  2 2020-01-03 Europe    EURO       Albania        AL               0           0
+#>  3 2020-01-03 Africa    AFRO       Algeria        DZ               0           0
+#>  4 2020-01-03 Oceania   WPRO       American Samoa AS               0           0
+#>  5 2020-01-03 Europe    EURO       Andorra        AD               0           0
+#>  6 2020-01-03 Africa    AFRO       Angola         AO               0           0
+#>  7 2020-01-03 Americas  AMRO       Anguilla       AI               0           0
 #>  8 2020-01-03 Americas  AMRO       Antigua & Barbuda AG               0           0
-#>  9 2020-01-03 Americas  AMRO       Argentina         AR               0           0
-#> 10 2020-01-03 Asia      EURO       Armenia           AM               0           0
+#>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
+#> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
 #> # … with 142,901 more rows, and 8 more variables: deaths_new <dbl>,
 #> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
 #> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
