@@ -5,8 +5,6 @@
 \title{Colombia Class for downloading, cleaning and processing notification data}
 \source{
 \url{https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr}
-
-\url{https://github.com/danielcs88/colombia_covid-19/}
 }
 \description{
 Information for downloading, cleaning
@@ -109,6 +107,8 @@ Set up a table of region codes for clean data
 \if{latex}{\out{\hypertarget{method-download}{}}}
 \subsection{Method \code{download()}}{
 Colombia specific download using Socrata API
+This uses the \code{RSocrata} package if it is installed or downloads
+a much larger csv file if that package is not available.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Colombia$download()}\if{html}{\out{</div>}}
 }

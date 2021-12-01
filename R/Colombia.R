@@ -64,7 +64,7 @@ Colombia <- R6::R6Class("Colombia",
       message_verbose(self$verbose,
                       "Downloading Colombia data. This may take a while.")
       # RSocrata package is recommended but not required
-      if (require(RSocrata, attach.required = TRUE)) {
+      if (requireNamespace(RSocrata, quietly = self$verbose)) {
         self$data$raw$main <- RSocrata::read.socrata(self$data_urls[["main"]])
       } else {
         # If the RSocrata package is not available, we download the full wide
