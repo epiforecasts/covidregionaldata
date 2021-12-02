@@ -5,11 +5,12 @@ This release is currently under development
 ## New data sets
 
 * Support for level 1 region data in Estonia (thanks to @RichardMN). See `?Estonia` for details.
-* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietname` for details.
+* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details.
 
 ## Other changes
 
 * Updated the package logo to include the newly supported data sets.
+* Added tests for JSON download code.
 
 ## Bug fixes
 
