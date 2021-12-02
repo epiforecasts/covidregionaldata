@@ -94,8 +94,8 @@ Germany <- R6::R6Class("Germany",
           .data$date
         ) %>%
         summarise(
-          cases_new = as.numeric(sum(.data$cases_new > 0)),
-          deaths_new = as.numeric(sum(.data$deaths_new > 0))
+          cases_new = as.numeric(sum(.data$cases_new)),
+          deaths_new = as.numeric(sum(.data$deaths_new))
         ) %>%
         ungroup()
     },
@@ -116,8 +116,8 @@ Germany <- R6::R6Class("Germany",
           .data$level_2_region, .data$date
         ) %>%
         summarise(
-          cases_new = as.numeric(sum(.data$cases_new > 0)),
-          deaths_new = as.numeric(sum(.data$deaths_new > 0))
+          cases_new = as.numeric(sum(.data$cases_new)),
+          deaths_new = as.numeric(sum(.data$deaths_new))
         ) %>%
         ungroup()
     }

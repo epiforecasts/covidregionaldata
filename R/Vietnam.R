@@ -4,7 +4,7 @@
 #' @description Information for downloading, cleaning
 #'  and processing covid-19 region data for Vietnam.
 #'
-#' @source \url{https://covid.ncsc.gov.vn}
+#' @source \url{https://covid19.ncsc.gov.vn}
 #' @export
 #' @concept dataset
 #' @family subnational
@@ -29,10 +29,10 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @field common_data_urls List of named links to raw data.
     common_data_urls = list(
       # nolint start
-      "case_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
-      "death_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
-      "recovered_by_time" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time",
-      "provinces" = "https://covid.ncsc.gov.vn/api/v3/covid/provinces"
+      "case_by_time" = "https://covid19.ncsc.gov.vn/api/v3/covid/provinces?filter_type=case_by_time",
+      "death_by_time" = "https://covid19.ncsc.gov.vn/api/v3/covid/provinces?filter_type=death_by_time",
+      "recovered_by_time" = "https://covid19.ncsc.gov.vn/api/v3/covid/provinces?filter_type=recovered_by_time",
+      "provinces" = "https://covid19.ncsc.gov.vn/api/v3/covid/provinces"
       # nolint end
     ),
     #' @field source_data_cols existing columns within the raw data
@@ -44,7 +44,7 @@ Vietnam <- R6::R6Class("Vietnam",
       "Public COVID-19 for Vietnam, curated by NCSC's COVID-19 team",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://covid.ncsc.gov.vn",
+    source_url = "https://covid19.ncsc.gov.vn",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom tibble tibble
