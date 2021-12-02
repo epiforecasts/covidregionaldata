@@ -18,7 +18,8 @@ Data interface functions
 \code{\link{get_available_datasets}()},
 \code{\link{get_national_data}()},
 \code{\link{get_regional_data}()},
-\code{\link{initialise_dataclass}()}
+\code{\link{initialise_dataclass}()},
+\code{\link{try_regional_data}()}
 }
 \concept{interface}
 \section{Super class}{
