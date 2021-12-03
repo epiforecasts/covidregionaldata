@@ -3,38 +3,10 @@
 \name{Switzerland}
 \alias{Switzerland}
 \title{Switzerland Class for downloading, cleaning and processing notification data}
-\source{
-\url{https://github.com/openZH/covid_19/}
-}
 \description{
 Information for downloading, cleaning
 and processing COVID-19 region data for Switzerland
 }
-\section{Liechtenstein}{
-
-Liechtenstein is not a canton of Switzerland, but is presented in the
-source data as a peer of Swiss cantons and assigned the two letter code
-\code{FL}. \code{covidregionaldata} modifies this and presents the region code
-for Liechtenstein as \code{FL-FL}, consistent with the Swiss ISO 3166-2 codes
-which are of the form \code{CH-BE}, \code{CH-ZH}, \code{CH-VD}, ...
-
-If you do not wish to work with Liechtenstein
-data, filter out on this code. Note that this is labelled as a ISO 3166-2
-code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
-regions.
-}
-
-\section{Additional data}{
-
-
-In addition to the standard \code{covidregionaldata} columns provided,
-the OpenDataZH source data provides other figures for ICU occupancy,
-number of patients on ventilators, and the how many individuals are
-isolated or quarantined. These columns are passed through unchanged.
-Further detail on them can be found at
-\url{https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset}
-}
-
 \examples{
 \dontrun{
 region <- Switzerland$new(verbose = TRUE, steps = TRUE, get = TRUE)
@@ -80,7 +52,9 @@ Subnational data sources
 
 \item{\code{supported_region_codes}}{A list of region codes in order of level.}
 
-\item{\code{common_data_urls}}{List of named links to raw data.}
+\item{\code{common_data_urls}}{List of named links to raw data. This url links
+to a JSON file which provides the addresses for the most recently-updated
+CSV files, which are then downloaded.}
 
 \item{\code{source_data_cols}}{existing columns within the raw data}
 
@@ -95,6 +69,7 @@ data}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Switzerland$set_region_codes()}}
+\item \href{#method-download}{\code{Switzerland$download()}}
 \item \href{#method-clean_common}{\code{Switzerland$clean_common()}}
 \item \href{#method-clone}{\code{Switzerland$clone()}}
 }
@@ -104,7 +79,6 @@ data}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON">}\href{../../covidregionaldata/html/DataClass.html#method-download_JSON}{\code{covidregionaldata::DataClass$download_JSON()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
@@ -123,6 +97,19 @@ data}
 Set up a table of region codes for clean data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Switzerland$set_region_codes()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Download function to get raw data. Downloads
+the updated list of CSV files using \code{download_JSON}, filters
+that to identify the required CSV files, then uses the parent
+method \code{download} to download the CSV files.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Switzerland$download()}\if{html}{\out{</div>}}
 }
 
 }

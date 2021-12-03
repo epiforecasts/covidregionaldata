@@ -41,7 +41,6 @@ Colombia <- R6::R6Class("Colombia",
     source_url = "https://github.com/danielcs88/colombia_covid-19/",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
     #' @importFrom dplyr mutate
     set_region_codes = function() {
       self$codes_lookup$`1` <- covidregionaldata::colombia_codes

@@ -24,7 +24,6 @@
 #' @importFrom lifecycle deprecate_warn
 #' @importFrom dplyr if_else select mutate filter
 #' @importFrom lubridate dmy
-#' @importFrom tibble as_tibble
 #' @importFrom utils download.file untar
 #' @examples
 #' \dontrun{

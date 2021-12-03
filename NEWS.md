@@ -9,8 +9,13 @@ This release is currently under development
 
 ## Other changes
 
+* Change the data source for Switzerland to draw data from the Swiss Federal Office of Public Health (FOPH)
 * Updated code for accessing U.S. data as provided by @nytimes
 * Updated the package logo to include the newly supported data sets.
+* Reduced the number of package dependencies (@bisaloo and @RichardMN)
+## Bug fixes
+
+- Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
 
 # covidregionaldata 0.9.2
 

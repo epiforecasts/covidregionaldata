@@ -44,7 +44,7 @@ Canada <- R6::R6Class("Canada",
     source_url = "https://open.canada.ca/data/en/dataset/261c32ab-4cfd-4f81-9dea-7b64065690dc", # nolint
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
+    #' @importFrom dplyr tibble
     set_region_codes = function() {
       canada_codes <- tibble(
         code = c(

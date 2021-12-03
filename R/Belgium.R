@@ -57,13 +57,13 @@ Belgium <- R6::R6Class("Belgium",
     source_url = "https://epistat.wiv-isp.be/covid/",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble tribble
+    #' @importFrom dplyr tibble tribble
     set_region_codes = function() {
-      self$codes_lookup$`1` <- tibble::tibble(
+      self$codes_lookup$`1` <- tibble(
         level_1_region_code = c("BE-BRU", "BE-VLG", "BE-WAL"),
         level_1_region = c("Brussels", "Flanders", "Wallonia")
       )
-      self$codes_lookup$`2` <- tibble::tribble(
+      self$codes_lookup$`2` <- tribble(
         ~level_2_region_code, ~level_2_region, ~level_1_region_code,
         "BE-VAN", "Antwerpen", "BE-VLG",
         "BE-WBR", "BrabantWallon", "BE-WAL",
@@ -82,8 +82,7 @@ Belgium <- R6::R6Class("Belgium",
 
     #' @description Downloads data from source and (for Belgium)
     #' applies an initial data patch.
-    #' @importFrom dplyr select mutate filter bind_rows
-    #' @importFrom tibble tribble
+    #' @importFrom dplyr select mutate filter bind_rows tribble
     download = function() {
       # do the actual downloading using the parent download method
       super$download()
@@ -92,7 +91,7 @@ Belgium <- R6::R6Class("Belgium",
       # For now, we filter out the broken lines and replace them
       # with the following data shim
 
-      fixed_lines <- tibble::tribble(
+      fixed_lines <- tribble(
         ~DATE, ~PROVINCE, ~REGION, ~AGEGROUP, ~SEX, ~CASES,
         "2020-04-22", "Limburg", "Flanders", "50-59", "F", 10,
         "2021-02-17", "VlaamsBrabant", "Flanders", "10-19", "M", 12

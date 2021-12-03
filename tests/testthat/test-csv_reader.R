@@ -1,5 +1,5 @@
 test_path <- "custom_data/mtcars.csv"
-target <- tibble::as_tibble(head(mtcars))
+target <- dplyr::as_tibble(head(mtcars))
 
 test_that("csv_reader can read in a simple dataset", {
   test <- csv_reader(test_path)
