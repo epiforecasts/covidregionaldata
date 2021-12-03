@@ -42,7 +42,7 @@ Cuba <- R6::R6Class("Cuba",
 
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
+    #' @importFrom dplyr tibble
     set_region_codes = function() {
       self$codes_lookup$`1` <- tibble(
         code = c(
