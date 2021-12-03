@@ -72,40 +72,7 @@ and processing COVID-19 region data for Switzerland"><meta property="og:image" c
 and processing COVID-19 region data for Switzerland</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    </div>
 
-    <div class="section level2">
-    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p><a href="https://github.com/openZH/covid_19/" class="external-link">https://github.com/openZH/covid_19/</a></p>
-    </div>
-    <div class="section level2">
-    <h2 id="liechtenstein">Liechtenstein<a class="anchor" aria-label="anchor" href="#liechtenstein"></a></h2>
-    
-
-<p>Liechtenstein is not a canton of Switzerland, but is presented in the
-source data as a peer of Swiss cantons and assigned the two letter code
-<code>FL</code>. <code>covidregionaldata</code> modifies this and presents the region code
-for Liechtenstein as <code>FL-FL</code>, consistent with the Swiss ISO 3166-2 codes
-which are of the form <code>CH-BE</code>, <code>CH-ZH</code>, <code>CH-VD</code>, ...</p>
-<p>If you do not wish to work with Liechtenstein
-data, filter out on this code. Note that this is labelled as a ISO 3166-2
-code but Liechtenstein's real ISO 3166-2 codes refer to sub-national
-regions.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="additional-data">Additional data<a class="anchor" aria-label="anchor" href="#additional-data"></a></h2>
-    
-
-
-<p>In addition to the standard <code>covidregionaldata</code> columns provided,
-the OpenDataZH source data provides other figures for ICU occupancy,
-number of patients on ventilators, and the how many individuals are
-isolated or quarantined. These columns are passed through unchanged.
-Further detail on them can be found at
-<a href="https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset" class="external-link">https://github.com/openZH/covid_19/#swiss-cantons-and-principality-of-liechtenstein-unified-dataset</a></p>
-    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Subnational data sources
@@ -153,7 +120,9 @@ Further detail on them can be found at
 
 
 <dt><code>common_data_urls</code></dt>
-<dd><p>List of named links to raw data.</p></dd>
+<dd><p>List of named links to raw data. This url links
+to a JSON file which provides the addresses for the most recently-updated
+CSV files, which are then downloaded.</p></dd>
 
 
 <dt><code>source_data_cols</code></dt>
@@ -178,11 +147,11 @@ data</p></dd>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-set_region_codes"><code>Switzerland$set_region_codes()</code></a></p></li>
+<li><p><a href="#method-download"><code>Switzerland$download()</code></a></p></li>
 <li><p><a href="#method-clean_common"><code>Switzerland$clean_common()</code></a></p></li>
 <li><p><a href="#method-clone"><code>Switzerland$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions"><a href="DataClass.html#method-available_regions"><code>covidregionaldata::DataClass$available_regions()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean"><a href="DataClass.html#method-clean"><code>covidregionaldata::DataClass$clean()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download"><a href="DataClass.html#method-download"><code>covidregionaldata::DataClass$download()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON"><a href="DataClass.html#method-download_JSON"><code>covidregionaldata::DataClass$download_JSON()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter"><a href="DataClass.html#method-filter"><code>covidregionaldata::DataClass$filter()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get"><a href="DataClass.html#method-get"><code>covidregionaldata::DataClass$get()</code></a></span></p></li>
@@ -199,10 +168,21 @@ data</p></dd>
 </div>
 
 
+</div><p></p><hr><a id="method-download"></a><div class="section">
+<h3 id="method-download-">Method <code>download()</code><a class="anchor" aria-label="anchor" href="#method-download-"></a></h3>
+<p>Download function to get raw data. Downloads
+the updated list of CSV files using <code>download_JSON</code>, filters
+that to identify the required CSV files, then uses the parent
+method <code>download</code> to download the CSV files.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Switzerland</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+</div>
+
+
 </div><p></p><hr><a id="method-clean_common"></a><div class="section">
 <h3 id="method-clean-common-">Method <code>clean_common()</code><a class="anchor" aria-label="anchor" href="#method-clean-common-"></a></h3>
 <p>Switzerland specific state level data cleaning</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Switzerland</span><span class="op">$</span><span class="fu">clean_common</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
@@ -210,7 +190,7 @@ data</p></dd>
 </div><p></p><hr><a id="method-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">Switzerland</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
@@ -244,7 +224,7 @@ data</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
     </footer></div>
