@@ -64,19 +64,11 @@ Colombia <- R6::R6Class("Colombia",
       message_verbose(self$verbose,
                       "Downloading Colombia data. This may take a while.")
       # RSocrata package is recommended but not required
-      if (requireNamespace(RSocrata, quietly = self$verbose)) {
+      if (requireNamespace("RSocrata", quietly = self$verbose)) {
         self$data$raw$main <- RSocrata::read.socrata(self$data_urls[["main"]])
       } else {
-        # If the RSocrata package is not available, we download the full wide
-        # csv (which is at least 8x larger) then select down to what we could
-        # get through the API.
-        alternate_url <- "https://www.datos.gov.co/api/views/gt2j-8ykr/rows.csv?accessType=DOWNLOAD" # nolint
-        massive_co_data <-
-          csv_reader(alternate_url,
-                     self$verbose)
-        self$data$raw$main <- massive_co_data %>%
-          select(fecha_diagnostico = .data$`Fecha de diagn\\00f3stico`,
-                 ciudad_municipio = .data$`C\\00f3digo DIVIPOLA municipio`)
+        stop("covidregionaldata::Colombia$download - requires RSocrata package.\n",
+             "Please run install.packages(\"RSocrata\")\n", call.=TRUE)
       }
     },
 
