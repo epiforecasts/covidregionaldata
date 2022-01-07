@@ -13,6 +13,7 @@ get_regional_data(
   class = FALSE,
   verbose = TRUE,
   regions,
+  use_fallbacks = TRUE,
   include_level_2_regions = deprecated(),
   localise_regions = deprecated(),
   ...
@@ -62,7 +63,8 @@ recoveries and testing stratified by regions within the given country.
 }
 \description{
 Provides an interface to source specific classes which
-support regional level data. For simple use cases this allows downloading
+support regional level data, and where these do not exist, seeks regional
+level data from JHU or google. For simple use cases this allows downloading
 clean, standardised, regional-level COVID-19 data sets. Internally this uses
 the \code{DataClass()} parent class which allows documented downloading, cleaning,
 and processing. Optionally all steps of data processing can be returned
@@ -77,13 +79,13 @@ options.
 start_using_memoise()
 
 # download data for Italy
-get_regional_data("italy")
+try_regional_data("italy")
 
 # return totals for Italy with no localisation
-get_regional_data("italy", localise = FALSE, totals = TRUE)
+try_regional_data("italy", localise = FALSE, totals = TRUE)
 
 # download data for the UK but return the class
-uk <- get_regional_data("United Kingdom", class = TRUE)
+uk <- try_regional_data("United Kingdom", class = TRUE)
 uk
 
 # return UK data from the class object]
@@ -98,7 +100,7 @@ Data interface functions
 \code{\link{DataClass}},
 \code{\link{get_available_datasets}()},
 \code{\link{get_national_data}()},
-\code{\link{initialise_dataclass}()},
-\code{\link{try_regional_data}()}
+\code{\link{get_regional_data_specific}()},
+\code{\link{initialise_dataclass}()}
 }
 \concept{interface}

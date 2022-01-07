@@ -20,9 +20,9 @@ Data interface functions
 \code{\link{CountryDataClass}},
 \code{\link{get_available_datasets}()},
 \code{\link{get_national_data}()},
+\code{\link{get_regional_data_specific}()},
 \code{\link{get_regional_data}()},
-\code{\link{initialise_dataclass}()},
-\code{\link{try_regional_data}()}
+\code{\link{initialise_dataclass}()}
 }
 \concept{interface}
 \section{Public fields}{
