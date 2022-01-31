@@ -98,6 +98,7 @@ Imports:
     R6,
     readxl,
     rlang,
+    stringi,
     stringr,
     tidyr (>= 1.0.0),
     vroom,
