@@ -82,9 +82,12 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
   # with NA in cases)
   expected_data <- expected_data %>%
     dplyr::group_by(, level_1_region, level_1_region_code)
-  
+
   partial_data <- expected_data[-c(6:9), ]
-  expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
+  expect_equal(
+    fill_empty_dates_with_na(partial_data),
+    dplyr::arrange(expected_data, level_1_region, date)
+  )
   expected_data <- dplyr::mutate(
     expected_data,
     level_2_region = level_1_region,
@@ -95,7 +98,10 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
       level_1_region, level_1_region_code, cases
     )
   partial_data <- expected_data[-c(6:9), ]
-  expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
+  expect_equal(
+    fill_empty_dates_with_na(partial_data),
+    dplyr::arrange(expected_data, level_1_region, date)
+  )
 })
 
 test_that("complete_cumulative_columns works", {
