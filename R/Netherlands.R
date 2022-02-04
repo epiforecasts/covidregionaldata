@@ -46,7 +46,6 @@ Netherlands <- R6::R6Class("Netherlands",
     source_url = "https://data.rivm.nl/covid-19/",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tibble
     set_region_codes = function() {
 
     },

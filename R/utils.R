@@ -1,19 +1,6 @@
-#' Pipe operator
-#'
-#' @description See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
+#' @importFrom dplyr %>%
 #' @export
-#' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
-#' @param lhs A value or the magrittr placeholder.
-#' @param rhs A function call using the magrittr semantics.
-#' @return The result of calling `rhs(lhs)`.
-NULL
-
-#' @importFrom rlang .data
-rlang::`.data`
+dplyr::`%>%`
 
 #' Custom CSV reading function
 #'
@@ -26,8 +13,7 @@ rlang::`.data`
 #' @return A data table
 #' @importFrom memoise memoise cache_filesystem
 #' @importFrom vroom vroom
-#' @importFrom tibble tibble
-#' @importFrom withr with_envvar
+#' @importFrom dplyr tibble
 #' @concept utility
 csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   read_csv_fun <- vroom
@@ -39,14 +25,11 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
   }
   if (verbose) {
     message("Downloading data from ", file)
-    data <- read_csv_fun(file, ..., guess_max = guess_max)
+    data <- read_csv_fun(file, progress = TRUE, ..., guess_max = guess_max)
   } else {
-    with_envvar(
-      new = c("VROOM_SHOW_PROGRESS" = "false"),
-      data <- suppressWarnings(
-        suppressMessages(
-          read_csv_fun(file, ..., guess_max = guess_max)
-        )
+    data <- suppressWarnings(
+      suppressMessages(
+        read_csv_fun(file, progress = FALSE, ..., guess_max = guess_max)
       )
     )
   }
@@ -60,7 +43,7 @@ csv_reader <- function(file, verbose = FALSE, guess_max = 1000, ...) {
 #' @param ... extra parameters to be passed to jsonlite::fromJSON
 #' @inheritParams message_verbose
 #' @return A data table
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 #' @importFrom jsonlite fromJSON
 #' @concept utility
 json_reader <- function(file, verbose = FALSE, ...) {
@@ -320,3 +303,7 @@ make_new_data_source <- function(source, type = "subnational",
   )
   make_github_workflow(source)
 }
+
+# Hack to work around the fact that `where()` is not exported 
+# (https://github.com/r-lib/tidyselect/issues/201)
+utils::globalVariables("where")

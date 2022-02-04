@@ -6,11 +6,15 @@ This release is currently under development
 
 * Support for level 1 region data in Estonia (thanks to @RichardMN). See `?Estonia` for details.
 * Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details.
-* Support for level 2 region data in Colombia has been added (thanks to @RichardMN). The package no longer relies on aggregation by another project but takes data direct from the Colombia open data API. This uses the `RSocrata` package, which is suggested but not required. Using the `RSocrata` package cuts download volume and time by a factor of about 8.
 
 ## Other changes
 
+* Change the data source for Switzerland to draw data from the Swiss Federal Office of Public Health (FOPH)
 * Updated the package logo to include the newly supported data sets.
+* Reduced the number of package dependencies (@bisaloo and @RichardMN)
+## Bug fixes
+
+- Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
 
 # covidregionaldata 0.9.2
 

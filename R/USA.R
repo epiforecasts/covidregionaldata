@@ -49,7 +49,7 @@ USA <- R6::R6Class("USA",
     source_url = "https://github.com/nytimes/covid-19-data",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tribble
+    #' @importFrom dplyr tibble
     set_region_codes = function() {
       self$codes_lookup <- usa_codes <- tibble(
         level_1_region_code = c(

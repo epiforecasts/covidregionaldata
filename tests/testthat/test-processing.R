@@ -12,31 +12,31 @@ test_that("default functions are called", {
     "add_extra_na_cols",
     function(x) dplyr::mutate(x, A = A + 2),
   )
-  x <- tibble::tibble(A = c(1, 2, 3))
-  expected <- tibble::tibble("A" = c(4, 5, 6))
+  x <- dplyr::tibble(A = c(1, 2, 3))
+  expected <- dplyr::tibble("A" = c(4, 5, 6))
   expect_identical(expected, run_default_processing_fns(x))
 })
 
 test_that("optional functions can be empty", {
-  x <- tibble::tibble(A = c(1, 2, 3))
+  x <- dplyr::tibble(A = c(1, 2, 3))
   expect_identical(x, run_optional_processing_fns(x, c()))
   expect_identical(x, run_optional_processing_fns(x))
   expect_identical(x, run_optional_processing_fns(x, NULL))
 })
 
 test_that("optional functions run", {
-  x <- tibble::tibble(A = c(1, 2, 3))
+  x <- dplyr::tibble(A = c(1, 2, 3))
   process_fns <- c(function(x) {
     return(dplyr::mutate(x, A = A^2))
   })
   expect_identical(
-    tibble::tibble(A = c(1, 4, 9)),
+    dplyr::tibble(A = c(1, 4, 9)),
     run_optional_processing_fns(x, process_fns)
   )
 })
 
 test_that("calculate_columns_from_existing_data returns correct results", {
-  input_data <- tibble::tibble(
+  input_data <- dplyr::tibble(
     "date" = seq.Date(as.Date("2020-01-01"), as.Date("2020-01-07"), by = 1),
     "level_1_region" = c(rep("A", 4), rep("B", 3)),
     "cases_new" = c(0, 1, NA_integer_, 1, 1, 1, 1),
@@ -68,10 +68,10 @@ test_that("add_extra_na_cols is working", {
 test_that("set_negative_values_to_zero works", {
   dates <- c(rep(Sys.Date(), 100))
   values <- 49:-50
-  df <- tibble::tibble(date = dates, cases_total = values)
+  df <- dplyr::tibble(date = dates, cases_total = values)
   colnames(df) <- c("date", "cases_total")
 
-  df_expected <- tibble::tibble(date = dates, cases_total = c(49:0, rep(0, 50)))
+  df_expected <- dplyr::tibble(date = dates, cases_total = c(49:0, rep(0, 50)))
   df_actual <- set_negative_values_to_zero(df)
   expect_equal(df_actual, df_expected)
 })
