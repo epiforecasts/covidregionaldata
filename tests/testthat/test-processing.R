@@ -81,7 +81,7 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
   # partial data deletes some rows (i.e. gets rid of some dates - all the ones
   # with NA in cases)
   expected_data <- expected_data %>%
-    dplyr::group_by(, level_1_region, level_1_region_code)
+    dplyr::group_by(level_1_region, level_1_region_code)
 
   partial_data <- expected_data[-c(6:9), ]
   expect_equal(
@@ -93,14 +93,15 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
     level_2_region = level_1_region,
     level_2_region_code = level_1_region_code
   ) %>%
+    group_by(level_2_region, level_2_region_code) %>%
     select(
-      date, level_2_region, level_2_region_code,
-      level_1_region, level_1_region_code, cases
+      date, level_1_region, level_1_region_code,
+      level_2_region, level_2_region_code, cases
     )
   partial_data <- expected_data[-c(6:9), ]
   expect_equal(
     fill_empty_dates_with_na(partial_data),
-    dplyr::arrange(expected_data, level_1_region, date)
+    dplyr::arrange(expected_data, level_2_region, date)
   )
 })
 

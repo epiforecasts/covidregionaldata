@@ -215,7 +215,7 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
     dplyr::left_join(region_codes, by = c("level_1_region" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
   expected_data <- dplyr::select(
-    expected_data, level_1_region, level_1_region_code, date, everything()
+    expected_data, date, level_1_region, level_1_region_code, everything()
   )
   return(dplyr::tibble(expected_data))
 }
