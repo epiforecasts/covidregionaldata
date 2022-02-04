@@ -146,10 +146,8 @@ test_download_JSON <- function(DataClass_obj, download, snapshot_path) {
       {
         DataClass_obj$download_JSON()
         walk(DataClass_obj$data$raw, function(data) {
-          testthat::expect_s3_class(data, "data.frame")
-          testthat::expect_true(nrow(data) > 0)
-          testthat::expect_true(ncol(data) >= 2
-                                || typeof(data[[1]]) == "list")
+          testthat::expect_true(length(data) > 0)
+          testthat::expect_false(is.null(data))
         })
       }
     )
