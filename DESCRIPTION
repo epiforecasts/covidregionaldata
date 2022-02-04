@@ -107,7 +107,6 @@ Suggests:
     ggspatial,
     knitr,
     mockery,
-    pkgdown,
     rmarkdown,
     rvest,
     rworldmap,
@@ -118,6 +117,9 @@ Suggests:
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3
+Config/Needs/website: 
+    r-lib/pkgdown,
+    amirmasoudabdol/preferably
 Encoding: UTF-8
 Language: en-gb
 LazyData: true
