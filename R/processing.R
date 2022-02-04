@@ -58,8 +58,7 @@ fill_empty_dates_with_na <- function(data) {
     names()
   data <- data %>%
     complete(
-      date = full_seq(data$date, period = 1),
-      nesting(!!!syms(regions))
+      date = full_seq(data$date, period = 1)
     )
   return(data)
 }
