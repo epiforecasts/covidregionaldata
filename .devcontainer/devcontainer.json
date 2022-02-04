@@ -2,12 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/r
 {
 	"name": "covidregionaldata",
-	"build": {
-		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a specific R version: latest, ... ,4.0.1 , 4.0.0
-		"args": { "VARIANT": "latest" },
-		"context": ".."
-	},
+	"image": "ghcr.io/epiforecasts/covidregionaldata:master",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -26,7 +21,8 @@
 		"shan.code-settings-sync",
 		"searking.preview-vscode",
 		"tht13.html-preview-vscode",
-		"formulahendry.code-runner"
+		"formulahendry.code-runner",
+		"github.vscode-pull-request-github"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

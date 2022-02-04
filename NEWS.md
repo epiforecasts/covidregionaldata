@@ -5,11 +5,13 @@ This release is currently under development
 ## New data sets
 
 * Support for level 1 region data in Estonia (thanks to @RichardMN). See `?Estonia` for details.
-* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietname` for details.
+* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details.
 
 ## Other changes
 
+* Change the data source for Switzerland to draw data from the Swiss Federal Office of Public Health (FOPH)
 * Updated the package logo to include the newly supported data sets.
+* Reduced the number of package dependencies (@bisaloo and @RichardMN)
 
 ## Bug fixes
 

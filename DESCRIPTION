@@ -25,6 +25,10 @@ Authors@R:
              role = "aut",
              email = "Hamish.Gibbs@lshtm.ac.uk",
              comment = c(ORCID = "0000-0003-4413-453X")),
+      person(given = "Hugo",
+             family = "Gruson",
+             role = "aut",
+             comment = c(ORCID = "0000-0002-4094-1476")),
       person(given = "Sophie",
              family = "Meakin",
              role = "ctb",
@@ -51,10 +55,6 @@ Authors@R:
              family = "Boyes",
              role = "ctb",
              comment = c(URL = "https://github.com/rboyes")),
-      person(given = "Hugo",
-             family = "Gruson",
-             role = "ctb",
-             comment = c(ORCID = "0000-0002-4094-1476")),
       person(given = "Vang",
              family = "Le",
              role = "ctb",
@@ -93,26 +93,20 @@ Imports:
     jsonlite,
     lifecycle,
     lubridate,
-    magrittr,
     memoise,
     purrr,
     R6,
     readxl,
     rlang,
-    stringi,
     stringr,
-    tibble,
     tidyr (>= 1.0.0),
-    tidyselect,
     vroom,
-    withr,
     xml2
 Suggests:
     ggplot2,
     ggspatial,
     knitr,
     mockery,
-    pkgdown,
     rmarkdown,
     rvest,
     rworldmap,
@@ -123,6 +117,9 @@ Suggests:
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3
+Config/Needs/website: 
+    r-lib/pkgdown,
+    amirmasoudabdol/preferably
 Encoding: UTF-8
 Language: en-gb
 LazyData: true

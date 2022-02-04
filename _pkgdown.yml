@@ -1,4 +1,4 @@
-url: epiforecasts.io/covidregionaldata/
+url: https://epiforecasts.io/covidregionaldata/
 template:
   bootstrap: 5
   params:

@@ -47,7 +47,7 @@ Brazil <- R6::R6Class("Brazil",
     source_url = "https://github.com/wcota/covid19br/blob/master/README.en.md",
 
     #' @description Set up a table of region codes for clean data
-    #' @importFrom tibble tribble
+    #' @importFrom dplyr tibble
     set_region_codes = function() {
       self$codes_lookup <- tibble(
         state_name = c(

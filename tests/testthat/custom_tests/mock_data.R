@@ -15,7 +15,7 @@ get_expected_data_for_get_regional_data_tests_only_level_1_regions <- function()
   dates <- c("2020-01-31", "2020-02-01", "2020-02-02", "2020-02-03", "2020-02-04", "2020-02-05")
   provinces <- c("Northland", "Eastland", "Southland", "Westland", "Virginia")
   ## Fake region codes
-  region_codes <- tibble::tibble(iso_3166_2 = c("NO", "EA", "SO", "WE", "VA"), region = provinces)
+  region_codes <- dplyr::tibble(iso_3166_2 = c("NO", "EA", "SO", "WE", "VA"), region = provinces)
 
   expected_data_for_provinces <- list()
   for (i in 1:length(provinces)) {
@@ -87,7 +87,7 @@ get_expected_data_for_get_regional_data_tests_only_level_1_regions <- function()
     ) %>%
     dplyr::arrange(date, province)
 
-  return(tibble::tibble(expected_data))
+  return(dplyr::tibble(expected_data))
 }
 
 get_input_data_for_get_regional_data_tests_only_level_1_regions <- function() {
@@ -109,7 +109,7 @@ get_expected_totals_data_for_get_regional_data_tests_only_level_1_regions <- fun
   colnames(totals_data) <- c("province", "iso_3166_2", "cases_total", "deaths_total", "recovered_total", "hosp_total", "tested_total")
   totals_data <- totals_data %>% dplyr::arrange(-cases_total)
 
-  return(tibble::tibble(totals_data))
+  return(dplyr::tibble(totals_data))
 }
 
 
@@ -117,7 +117,7 @@ get_expected_totals_data_for_get_regional_data_tests_only_level_1_regions <- fun
 get_input_data_for_get_regional_data_tests_with_level_2_regions <- function() {
   data <- get_input_data_for_get_regional_data_tests_only_level_1_regions()
   colnames(data)[2] <- "level_2_region"
-  regions_table <- tibble::tibble(
+  regions_table <- dplyr::tibble(
     level_2_region = c("Northland", "Eastland", "Southland", "Westland", "Virginia"),
     level_1_region = c("Oneland", "Oneland", "Twoland", "Twoland", "USA")
   )
@@ -137,11 +137,11 @@ get_expected_data_for_get_regional_data_tests_with_level_2_regions <- function()
   data <- get_expected_data_for_get_regional_data_tests_only_level_1_regions()
   data <- data[, -3]
   data$region <- rep(c("Oneland", "Oneland", "Twoland", "USA", "Twoland"), 6)
-  region_codes <- tibble::tibble(
+  region_codes <- dplyr::tibble(
     iso_3166_2 = c("ON", "TW", "US"),
     region = c("Oneland", "Twoland", "USA")
   )
-  level_2_region_codes <- tibble::tibble(
+  level_2_region_codes <- dplyr::tibble(
     iso_3166_2_province = c("NO", "EA", "SO", "WE", "VA"),
     region = c(
       "Northland", "Eastland", "Southland",
@@ -168,11 +168,11 @@ get_expected_totals_data_for_get_regional_data_tests_with_level_2_regions <- fun
 
   data <- data[, -2]
   data$region <- c("Oneland", "USA", "Twoland", "Twoland", "Oneland")
-  region_codes <- tibble::tibble(
+  region_codes <- dplyr::tibble(
     iso_3166_2 = c("ON", "TW", "US"),
     region = c("Oneland", "Twoland", "USA")
   )
-  level_2_region_codes <- tibble::tibble(
+  level_2_region_codes <- dplyr::tibble(
     iso_3166_2_province = c("NO", "EA", "SO", "WE", "VA"),
     region = c(
       "Northland", "Eastland", "Southland",
@@ -188,7 +188,7 @@ get_expected_totals_data_for_get_regional_data_tests_with_level_2_regions <- fun
       recovered_total, hosp_total, tested_total
     )
 
-  return(tibble::tibble(data))
+  return(dplyr::tibble(data))
 }
 
 
@@ -199,7 +199,7 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
   dates <- c("2020-01-31", "2020-02-01", "2020-02-02", "2020-02-03")
   regions <- c("Northland", "Eastland", "Wisconsin")
 
-  region_codes <- tibble::tibble(
+  region_codes <- dplyr::tibble(
     region = regions,
     level_1_region_code = c("NO", "EA", "WI")
   )
@@ -213,7 +213,7 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
     dplyr::arrange(date, level_1_region) %>%
     dplyr::left_join(region_codes, by = c("level_1_region" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
-  return(tibble::tibble(expected_data))
+  return(dplyr::tibble(expected_data))
 }
 
 get_input_data_for_complete_cumulative_columns_test <- function() {
@@ -239,5 +239,5 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, as.integer(c(1, 5, 5, 15, 2, 7, 7, 18, 3, 3, 3, 15)))
   colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 
-  return(tibble::tibble(full_data_with_cum_cases_filled))
+  return(dplyr::tibble(full_data_with_cum_cases_filled))
 }

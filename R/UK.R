@@ -450,8 +450,8 @@ UK <- R6::R6Class("UK",
     #'     Section 2, "2. Estimated new hospital cases"
     #' @importFrom lubridate year month
     #' @importFrom readxl read_excel cell_limits
-    #' @importFrom tibble as_tibble
     #' @importFrom dplyr mutate select %>% group_by summarise left_join
+    #' @importFrom dplyr as_tibble
     #' @importFrom tidyr pivot_longer
     #' @param clean_data Cleaned UK covid-19 data
     #' @param nhs_data NHS region data
