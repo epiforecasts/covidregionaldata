@@ -64,7 +64,8 @@ Vietnam <- R6::R6Class("Vietnam",
     #' @importFrom dplyr filter select mutate rename tibble as_tibble full_join
     #' @importFrom tidyr replace_na drop_na separate
     #' @importFrom purrr map
-    #' @importFrom stringr str_conv str_trim str_to_title str_replace_all
+    #' @importFrom stringr str_to_title str_replace_all
+    #' @importFrom stringi stri_trans_general stri_trim_both
     #' @importFrom lubridate dmy
     clean_common = function() {
       # The first three elements of self$data$raw are the data
@@ -80,18 +81,19 @@ Vietnam <- R6::R6Class("Vietnam",
           y %>% separate(date, sep = "[.]+", into = c(NA, "province", "date"))
         }
       )
-      self$data$clean <- full_join(
-        full_join(
-          flat_all$case_by_time, flat_all$death_by_time,
-          by = c("province", "date"),
-          suffix = c(".cases", ".deaths"),
-          copy = TRUE
-        ),
-        flat_all$recovered_by_time,
-        by = c("province", "date"),
-        suffix = c("", ".recovered"),
-        copy = TRUE
-      ) %>%
+      index_cols <- bind_rows(
+        flat_all$case_by_time %>% select("date", "province"),
+        flat_all$death_by_time %>% select("date", "province"),
+        flat_all$recovered_by_time %>% select("date", "province")) %>%
+        unique()
+      
+      self$data$clean <- 
+        left_join(index_cols, flat_all$case_by_time %>% rename(cases_total =value),
+                  by = c("province", "date") ) %>%
+        left_join(flat_all$death_by_time %>% rename(deaths_total =value),
+                  by = c("province", "date") ) %>%
+        left_join(flat_all$recovered_by_time %>% rename(recovered_total =value),
+                  by = c("province", "date") ) %>%
         # The api uses integer codes for provinces which do not
         # line up with ISO 3166-2 (some of which are not numbers)
         # so we use this as a temporary code to line names up
@@ -99,9 +101,14 @@ Vietnam <- R6::R6Class("Vietnam",
         select(
           ncsc_region_code = province,
           date,
-          cases_total = value.cases,
-          deaths_total = value.deaths,
-          recovered_total = value) %>%
+          cases_total,
+          deaths_total,
+          recovered_total
+          # ,
+          # cases_total = value.cases,
+          # deaths_total = value.deaths,
+          # recovered_total = value
+          ) %>%
         mutate(ncsc_region_code = as.numeric(ncsc_region_code)) %>%
         left_join(
           self$data$raw$provinces %>%
@@ -119,8 +126,8 @@ Vietnam <- R6::R6Class("Vietnam",
         #
         #tidyr::drop_na(date, region_name) %>%
         mutate(
-          level_1_region = str_conv(level_1_region, "ASCII"),
-          level_1_region = str_trim(level_1_region, side = "both"),
+          level_1_region = stri_trans_general(level_1_region, "ASCII"),
+          level_1_region = stri_trim_both(level_1_region),
           level_1_region = str_replace_all(level_1_region,
                                            "\\(.*\\)|-| ", ""),
           level_1_region = str_to_title(level_1_region),
