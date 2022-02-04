@@ -21,7 +21,8 @@
 		"shan.code-settings-sync",
 		"searking.preview-vscode",
 		"tht13.html-preview-vscode",
-		"formulahendry.code-runner"
+		"formulahendry.code-runner",
+		"github.vscode-pull-request-github"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
