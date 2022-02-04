@@ -219,8 +219,8 @@ run_optional_processing_fns <- function(data, process_fns) {
 #' processing steps
 #' @concept utility
 #' @family processing
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange all_of
-#' @importFrom dplyr rename
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr rename all_of
 #' @importFrom tidyr drop_na
 #' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
