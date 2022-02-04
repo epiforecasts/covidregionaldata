@@ -99,7 +99,7 @@ test_that("complete_cumulative_columns works", {
   input_data <- get_input_data_for_complete_cumulative_columns_test()
   expected_data <- get_expected_data_for_complete_cumulative_columns_test()
   actual_data <- complete_cumulative_columns(input_data)
-  expect_equal(colnames(actual_data), colnames(expected_data))
+  expect_equal(sort(colnames(actual_data)), sort(colnames(expected_data)))
   expect_true(!any(is.na(actual_data$cases_total)))
 })
 
