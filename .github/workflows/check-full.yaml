@@ -270,27 +270,3 @@ jobs:
           git config --local user.name "GitHub Actions"
           Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE, clean = TRUE)"
         shell: bash
-
-  push_to_registry:
-    if: github.ref == 'refs/heads/master' && github.repository == 'epiforecasts/covidregionaldata'
-    name: Push Docker image to GitHub Packages
-    runs-on: ubuntu-20.04
-
-    needs: [R-CMD-check, pkgdown, test-coverage]
-
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Login to GitHub Packages
-        uses: docker/login-action@v1
-        with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: .devcontainer/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/epiforecasts/covidregionaldata/covidregionaldata:latest
