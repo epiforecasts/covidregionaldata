@@ -15,6 +15,7 @@ This release is currently under development
 
 ## Bug fixes
 
+- Fixed a bug in `fill_empty_dates_with_na()` caused by changes made in version `1.2.0` of `tidyr`. 
 - Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
 
 # covidregionaldata 0.9.2

@@ -1,6 +1,6 @@
 Package: covidregionaldata
 Title: Subnational Data for COVID-19 Epidemiology
-Version: 0.9.2.3000
+Version: 0.9.2.4000
 Authors@R:
     c(person(given = "Joseph",
              family = "Palmer",
@@ -98,6 +98,7 @@ Imports:
     R6,
     readxl,
     rlang,
+    stringi,
     stringr,
     tidyr (>= 1.0.0),
     vroom,
