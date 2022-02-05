@@ -24,6 +24,7 @@ This release is currently under development
 - `get_interventions_data()` has been depreciated and removed.
 - `get_info_covidregionaldata()` has been depreciated and removed.
 - The `country` argument to `get_national_data()`  has been depreciated and removed. It's functionality can be replicated using the `countries` argument.
+- `get_linelist()` has been updated to fail on use vs warn on use and will be removed from future versions of the package. 
 
 # covidregionaldata 0.9.2
 
