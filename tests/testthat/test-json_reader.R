@@ -1,5 +1,5 @@
 test_path <- "custom_data/mtcars.json"
-target <- tibble::as_tibble(head(mtcars))
+target <- dplyr::as_tibble(head(mtcars))
 
 test_that("json_reader can read in a simple dataset", {
   test <- json_reader(test_path)
