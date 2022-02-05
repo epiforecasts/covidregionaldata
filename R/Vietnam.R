@@ -78,21 +78,21 @@ Vietnam <- R6::R6Class("Vietnam",
           function(x) as_tibble(unlist(x),
                                 rownames = "date")),
         function(y) {
-          y %>% separate(date, sep = "[.]+", into = c(NA, "province", "date"))
+          separate(y, date, sep = "[.]+", into = c(NA, "province", "date"))
         }
       )
       index_cols <- bind_rows(
-        flat_all$case_by_time %>% select("date", "province"),
-        flat_all$death_by_time %>% select("date", "province"),
-        flat_all$recovered_by_time %>% select("date", "province")) %>%
+        select(flat_all$case_by_time, "date", "province"),
+        select(flat_all$death_by_time, "date", "province"),
+        select(flat_all$recovered_by_time, "date", "province")) %>%
         unique()
       
-      self$data$clean <- 
-        left_join(index_cols, flat_all$case_by_time %>% rename(cases_total =value),
+      self$data$clean <- index_cols %>%
+        left_join(rename(flat_all$case_by_time, cases_total = value),
                   by = c("province", "date") ) %>%
-        left_join(flat_all$death_by_time %>% rename(deaths_total =value),
+        left_join(rename(flat_all$death_by_time, deaths_total = value),
                   by = c("province", "date") ) %>%
-        left_join(flat_all$recovered_by_time %>% rename(recovered_total =value),
+        left_join(rename(flat_all$recovered_by_time, recovered_total = value),
                   by = c("province", "date") ) %>%
         # The api uses integer codes for provinces which do not
         # line up with ISO 3166-2 (some of which are not numbers)
@@ -104,11 +104,7 @@ Vietnam <- R6::R6Class("Vietnam",
           cases_total,
           deaths_total,
           recovered_total
-          # ,
-          # cases_total = value.cases,
-          # deaths_total = value.deaths,
-          # recovered_total = value
-          ) %>%
+        ) %>%
         mutate(ncsc_region_code = as.numeric(ncsc_region_code)) %>%
         left_join(
           self$data$raw$provinces %>%
@@ -123,8 +119,6 @@ Vietnam <- R6::R6Class("Vietnam",
           level_1_region = str_replace_all(level_1_region,
                                         "TP HCM", "Hochiminh"),
         ) %>%
-        #
-        #tidyr::drop_na(date, region_name) %>%
         mutate(
           level_1_region = stri_trans_general(level_1_region, "ASCII"),
           level_1_region = stri_trim_both(level_1_region),

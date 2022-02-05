@@ -1,8 +1,9 @@
 url: https://epiforecasts.io/covidregionaldata/
 template:
   bootstrap: 5
+  package: preferably
   params:
-    bootswatch: lumen
+    toggle: manual
     docsearch:
       api_key: 721a43acf6af66699c04bd8b2af75ff1
       index_name: epiforecasts
