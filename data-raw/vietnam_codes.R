@@ -14,7 +14,7 @@ library(tibble)
 vn_iso <- "https://en.wikipedia.org/wiki/ISO_3166-2:VN"
 
 level_1_region_df <- read_html(vn_iso) %>%
-  html_element(css="table.wikitable:nth-child(11)") %>%
+  html_element(css = "table.wikitable:nth-child(11)") %>%
   html_table()
 
 vietnam_codes <- data.frame(
@@ -25,7 +25,7 @@ vietnam_codes <- data.frame(
   mutate(
     level_1_region = stri_trans_general(level_1_region, "latin-ascii"),
     level_1_region = stri_trim_both(level_1_region),
-    level_1_region = str_replace_all(level_1_region, '\\(.*\\)|-| ', ''),
+    level_1_region = str_replace_all(level_1_region, "\\(.*\\)|-| ", ""),
     level_1_region = str_to_title(level_1_region)
   )
 

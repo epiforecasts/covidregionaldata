@@ -12,8 +12,10 @@ This release is currently under development
 * Change the data source for Switzerland to draw data from the Swiss Federal Office of Public Health (FOPH)
 * Updated the package logo to include the newly supported data sets.
 * Reduced the number of package dependencies (@bisaloo and @RichardMN)
+
 ## Bug fixes
 
+- Fixed a bug in `fill_empty_dates_with_na()` caused by changes made in version `1.2.0` of `tidyr`. 
 - Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
 
 # covidregionaldata 0.9.2
