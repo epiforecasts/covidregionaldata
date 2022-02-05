@@ -104,7 +104,17 @@
 <h3 id="bug-fixes-0-9-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-3"></a></h3>
 <ul><li>Fixed a bug in <code><a href="../reference/fill_empty_dates_with_na.html">fill_empty_dates_with_na()</a></code> caused by changes made in version <code>1.2.0</code> of <code>tidyr</code>.</li>
 <li>Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>).</li>
-<li>Fixed a bug in the Vietnam class due to <code>stringr</code> (<a href="https://github.com/epiforecasts/covidregionaldata/pull/448" class="external-link">#448</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>)</li>
+<li>Fixed a bug in the Vietnam class due to <code>stringr</code> (<a href="https://github.com/epiforecasts/covidregionaldata/pull/448" class="external-link">#448</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="depreciations-0-9-3">Depreciations<a class="anchor" aria-label="anchor" href="#depreciations-0-9-3"></a></h3>
+<ul><li>
+<code>get_interventions_data()</code> has been depreciated and removed.</li>
+<li>
+<code>get_info_covidregionaldata()</code> has been depreciated and removed.</li>
+<li>The <code>country</code> argument to <code><a href="../reference/get_national_data.html">get_national_data()</a></code> has been depreciated and removed. It’s functionality can be replicated using the <code>countries</code> argument.</li>
+<li>
+<code><a href="../reference/get_linelist.html">get_linelist()</a></code> has been updated to fail on use vs warn on use and will be removed from future versions of the package.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -182,9 +192,9 @@
 <div class="section level3">
 <h3 id="deprecated-functions-0-9-0">Deprecated functions<a class="anchor" aria-label="anchor" href="#deprecated-functions-0-9-0"></a></h3>
 <ul><li>
-<code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> replaces <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> to view available data. <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code> is deprecated.</li>
+<code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> replaces <code>get_info_covidregionaldata()</code> to view available data. <code>get_info_covidregionaldata()</code> is deprecated.</li>
 <li>
-<code><a href="../reference/get_interventions_data.html">get_interventions_data()</a></code> is deprecated. These data no longer update as of December 2020. Check for alternatives at <a href="https://supertracker.spi.ox.ac.uk/policy-trackers/" class="external-link uri">https://supertracker.spi.ox.ac.uk/policy-trackers/</a>
+<code>get_interventions_data()</code> is deprecated. These data no longer update as of December 2020. Check for alternatives at <a href="https://supertracker.spi.ox.ac.uk/policy-trackers/" class="external-link uri">https://supertracker.spi.ox.ac.uk/policy-trackers/</a>
 </li>
 <li>
 <code>get_linelist</code> is deprecated. Linelist stopped updating June 2020. Up to date linelist data are now behind a login: access at <a href="https://global.health/" class="external-link uri">https://global.health/</a>. We are working on a solution for accessing with <code>covidregionaldata</code>.</li>
@@ -217,7 +227,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-8-3">New features<a class="anchor" aria-label="anchor" href="#new-features-0-8-3"></a></h3>
-<ul><li>Relevant up to date package information can be fetched using <code><a href="../reference/get_info_covidregionaldata.html">get_info_covidregionaldata()</a></code>.</li>
+<ul><li>Relevant up to date package information can be fetched using <code>get_info_covidregionaldata()</code>.</li>
 <li>Switched to using <code>vroom</code> for faster <code>csv</code> downloads.</li>
 </ul></div>
 <div class="section level3">
