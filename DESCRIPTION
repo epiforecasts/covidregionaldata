@@ -101,6 +101,7 @@ Imports:
     stringi,
     stringr,
     tidyr (>= 1.0.0),
+    tidyselect,
     vroom,
     xml2
 Suggests:
@@ -109,6 +110,7 @@ Suggests:
     knitr,
     mockery,
     rmarkdown,
+    RSocrata,
     rvest,
     rworldmap,
     sf,

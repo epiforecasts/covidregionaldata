@@ -104,7 +104,7 @@ Vietnam <- R6::R6Class("Vietnam",
           cases_total,
           deaths_total,
           recovered_total
-          ) %>%
+        ) %>%
         mutate(ncsc_region_code = as.numeric(ncsc_region_code)) %>%
         left_join(
           self$data$raw$provinces %>%
@@ -119,8 +119,6 @@ Vietnam <- R6::R6Class("Vietnam",
           level_1_region = str_replace_all(level_1_region,
                                         "TP HCM", "Hochiminh"),
         ) %>%
-        #
-        #tidyr::drop_na(date, region_name) %>%
         mutate(
           level_1_region = stri_trans_general(level_1_region, "ASCII"),
           level_1_region = stri_trim_both(level_1_region),

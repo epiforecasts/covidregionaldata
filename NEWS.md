@@ -20,6 +20,7 @@ This release is currently under development
 - Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
 - Fixed a bug in the Vietnam class due to `stringr` ([#448](https://github.com/epiforecasts/covidregionaldata/pull/448) by @RichardMN).
 - Fixed a bug with the Netherlands class were the lack of Hospitalisation data in the source was causing the class to fail ([#446](https://github.com/epiforecasts/covidregionaldata/pull/446) by @RichardMN).
+- Fixed an issue with the Colombia data and reduced dependencies by making `RSocrata` be a suggested package ([#433](https://github.com/epiforecasts/covidregionaldata/pull/433) by @RichardMN).
 
 ## Depreciations
 
