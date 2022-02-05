@@ -13,8 +13,6 @@ get_regional_data(
   class = FALSE,
   verbose = TRUE,
   regions,
-  include_level_2_regions = deprecated(),
-  localise_regions = deprecated(),
   ...
 )
 }
@@ -46,13 +44,6 @@ messages and warnings be returned.}
 
 \item{regions}{A character vector of target regions to be assigned to the
 \code{target_regions} field and used to filter the returned data.}
-
-\item{include_level_2_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Boolean. If TRUE, returns data stratified by
-level 2 regions. If FALSE, stratified by Level 1. Note that Level 2 region
-data is not always available. In these cases the user will get a warning
-and the Level 1 data will be returned.}
-
-\item{localise_regions}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, defaults to TRUE. Should region names be localised.}
 
 \item{...}{Additional arguments to pass to class specific functionality.}
 }
