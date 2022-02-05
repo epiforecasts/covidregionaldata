@@ -38,7 +38,7 @@ Netherlands <- R6::R6Class("Netherlands",
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_new", "deaths_new"), #, "hosp_new"
+    source_data_cols = c("cases_new", "deaths_new"),
     #' @field source_text Plain text description of the source of the data
     source_text = "National Institute for Public Health and the Environment (RIVM), Netherlands", # nolint
     #' @field source_url Website address for explanation/introduction of the
@@ -60,7 +60,6 @@ Netherlands <- R6::R6Class("Netherlands",
         mutate(
           Date_of_publication = ymd(.data$Date_of_publication),
           Total_reported = as.double(.data$Total_reported),
-          #Hospital_admission = as.double(.data$Hospital_admission),
           Deceased = as.double(.data$Deceased),
           level_1_region_code = sub("[a-z].*-", "", .data$Province),
           level_1_region_code = paste0(
