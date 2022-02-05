@@ -1,7 +1,7 @@
 if (identical(Sys.getenv("NOT_CRAN"), "true")) {
   # load testing function and tools.
   # set up custom tests using:
-  # custom_tests/regional-dataset-specific.R
+  # custom_tests/regional-dataset-specific.R # nolint
   source("custom_tests/test-regional-dataset.R")
 
   # should a single dataset be tested vs all datasets

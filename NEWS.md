@@ -1,6 +1,6 @@
 # covidregionaldata 0.9.3
 
-This is largely a patch release dealing with processesing issues introduced by the recent release of `tidyr 1.2.0`. In addition support for data from Estonia and Vietnam has been added. See the full release notes for details. Thanks to @RichardMN, @biocyberman, @Bisaloo, @sbfnk, and @kathsherratt for contributing to this release.
+This is largely a patch release dealing with processing issues introduced by the recent release of `tidyr 1.2.0`. In addition support for data from Estonia and Vietnam has been added. See the full release notes for details. Thanks to @RichardMN, @biocyberman, @Bisaloo, @sbfnk, and @kathsherratt for contributing to this release.
 
 ## New data sets
 
