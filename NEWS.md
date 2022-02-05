@@ -17,6 +17,7 @@ This release is currently under development
 
 - Fixed a bug in `fill_empty_dates_with_na()` caused by changes made in version `1.2.0` of `tidyr`. 
 - Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by @sbfnk).
+- Fixed a bug in the Vietnam class due to `stringr` ([#448](https://github.com/epiforecasts/covidregionaldata/pull/448) by @RichardMN)
 
 # covidregionaldata 0.9.2
 
