@@ -250,8 +250,7 @@ process_internal <- function(clean_data, level, group_vars,
           group_vars_standard, "cases_total", "deaths_total", "recovered_total",
           "hosp_total", "tested_total"
         )
-      )) %>%
-      ungroup()
+      ))
   } else {
     dat <- dat %>%
       drop_na(.data$date) %>%
@@ -264,10 +263,10 @@ process_internal <- function(clean_data, level, group_vars,
           "hosp_new", "hosp_total", "tested_new", "tested_total"
         )),
         everything()
-      ) %>%
-      ungroup() %>%
-      arrange(.data$date, all_of(group_vars_standard[1]))
+      )
   }
+
+  dat <- ungroup(dat)
 
   if (localise) {
     old <- names(group_vars)

@@ -239,7 +239,6 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
 
   # manually add cumulative cases to get expected data
   full_data_with_cum_cases_filled <- partial_data %>%
-    dplyr::group_by(level_1_region, level_1_region_code) %>%
     covidregionaldata:::fill_empty_dates_with_na()
   full_data_with_cum_cases_filled <-
     dplyr::arrange(full_data_with_cum_cases_filled, level_1_region, date)
