@@ -232,6 +232,9 @@
     <loc>https://epiforecasts.io/covidregionaldata/reference/test_download.html</loc>
   </url>
   <url>
+    <loc>https://epiforecasts.io/covidregionaldata/reference/test_download_JSON.html</loc>
+  </url>
+  <url>
     <loc>https://epiforecasts.io/covidregionaldata/reference/test_processing.html</loc>
   </url>
   <url>
