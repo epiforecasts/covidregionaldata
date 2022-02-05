@@ -26,10 +26,6 @@ test_get_national_data <- function(source) {
       countries = "rwfwf", source = source,
       verbose = FALSE
     ))
-    expect_warning(get_national_data(
-      country = "Zimbabwe", source = source,
-      verbose = FALSE
-    ))
     expect_equal(
       true_steps,
       get_national_data(source = source, steps = TRUE, verbose = FALSE)

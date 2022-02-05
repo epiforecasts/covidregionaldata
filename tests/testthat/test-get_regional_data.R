@@ -46,19 +46,6 @@ test_get_regional_data <- function(level) {
         verbose = FALSE
       )
     )
-    # test depreciated args
-    if (level == "2") {
-      expect_warning(get_regional_data("mexico",
-        level = level,
-        include_level_2_regions = TRUE, verbose = FALSE
-      ))
-      expect_warning(
-        get_regional_data("mexico",
-          localise_regions = TRUE,
-          verbose = FALSE
-        )
-      )
-    }
   })
 }
 
