@@ -21,8 +21,9 @@ This release is currently under development
 
 ## Depreciations
 
-- `get_interventions_data()` has been depreciated.
-
+- `get_interventions_data()` has been depreciated and removed.
+- `get_info_covidregionaldata()` has been depreciated and removed.
+- The `country` argument to `get_national_data()`  has been depreciated and removed. It's functionality can be replicated using the `countries` argument.
 
 # covidregionaldata 0.9.2
 

@@ -12,8 +12,6 @@
 #'
 #' @param countries A character vector specifying country names of interest.
 #' Used to filter the data.
-#' @param country `r lifecycle::badge("deprecated")` A character string
-#'  specifying a country to filter for.
 #' @param source A character string specifying the data source (not case
 #'  dependent). Defaults to WHO (the World Health Organisation). See
 #' `get_available_datasets("national")` for all options.
@@ -54,16 +52,7 @@
 #' }
 get_national_data <- function(countries, source = "who", level = "1", totals = FALSE,
                               steps = FALSE, class = FALSE, verbose = TRUE,
-                              country = deprecated(),
                               ...) {
-  if (is_present(country)) {
-    deprecate_warn(
-      "0.9.0",
-      "covidregionaldata::get_national_data(country = )",
-      "covidregionaldata::get_national_data(countries = )"
-    )
-    countries <- country
-  }
 
   # check data availability and initiate country class if available
   nation_class <- initialise_dataclass(
