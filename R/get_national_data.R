@@ -18,7 +18,6 @@
 #' @return A tibble with data related to cases, deaths, hospitalisations,
 #'  recoveries and testing.
 #' @inheritParams get_regional_data
-#' @importFrom lifecycle deprecated is_present deprecate_warn
 #' @family interface
 #' @seealso [WHO()], [ECDC()], [JHU()], [Google()]
 #' @export
