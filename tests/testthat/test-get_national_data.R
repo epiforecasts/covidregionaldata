@@ -27,7 +27,7 @@ test_get_national_data <- function(source) {
       verbose = FALSE
     ))
     expect_warning(get_national_data(
-      country = "Zimbabwe", source = source,
+      countries = "Zimbabwe", source = source,
       verbose = FALSE
     ))
     expect_equal(
