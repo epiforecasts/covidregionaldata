@@ -28,3 +28,4 @@ SMG.md
 ^inst/paper$
 ^inst/examples$
 ^\.devcontainer$
+^CRAN-SUBMISSION$
