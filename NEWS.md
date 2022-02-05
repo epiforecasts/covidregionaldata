@@ -5,7 +5,7 @@ This is largely a patch release dealing with processesing issues introduced by t
 ## New data sets
 
 * Support for level 1 region data in Estonia (thanks to @RichardMN). See `?Estonia` for details.
-* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details.
+* Support for level 1 region data in Vietnam (thanks to @biocyberman). See `?Vietnam` for details. Note that this class is only available if installing the `vietnam` branch from GitHub due to API instability issues. 
 
 ## Other changes
 
