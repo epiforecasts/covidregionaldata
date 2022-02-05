@@ -51,15 +51,13 @@ set_negative_values_to_zero <- function(data) {
 #' @family compulsory_processing
 #' @concept compulsory_processing
 #' @importFrom tidyr complete full_seq nesting
-#' @importFrom dplyr starts_with group_by ungroup
+#' @importFrom dplyr starts_with group_by ungroup group_vars
 #' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
     names()
 
-  groups <- attributes(data)$groups
-  groups <- colnames(groups)
-  groups <- setdiff(groups, ".rows")
+  groups <- group_vars(data)
 
   data <- data %>%
     ungroup() %>%
