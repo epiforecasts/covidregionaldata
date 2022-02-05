@@ -51,16 +51,21 @@ set_negative_values_to_zero <- function(data) {
 #' @family compulsory_processing
 #' @concept compulsory_processing
 #' @importFrom tidyr complete full_seq nesting
-#' @importFrom dplyr starts_with
+#' @importFrom dplyr starts_with group_by ungroup group_vars
 #' @importFrom rlang !!! syms
 fill_empty_dates_with_na <- function(data) {
   regions <- select(data, starts_with("level_")) %>%
     names()
+
+  groups <- group_vars(data)
+
   data <- data %>%
+    ungroup() %>%
     complete(
       date = full_seq(data$date, period = 1),
       nesting(!!!syms(regions))
-    )
+    ) %>%
+    group_by(across(.cols = all_of(groups)))
   return(data)
 }
 
@@ -219,8 +224,8 @@ run_optional_processing_fns <- function(data, process_fns) {
 #' processing steps
 #' @concept utility
 #' @family processing
-#' @importFrom dplyr do group_by_at across ungroup select everything arrange all_of
-#' @importFrom dplyr rename
+#' @importFrom dplyr do group_by_at across ungroup select everything arrange
+#' @importFrom dplyr rename all_of
 #' @importFrom tidyr drop_na
 #' @importFrom rlang !!!
 process_internal <- function(clean_data, level, group_vars,
@@ -258,9 +263,9 @@ process_internal <- function(clean_data, level, group_vars,
           "hosp_new", "hosp_total", "tested_new", "tested_total"
         )),
         everything()
-      ) %>%
-      arrange(.data$date, all_of(group_vars_standard[1]))
+      )
   }
+
   dat <- ungroup(dat)
 
   if (localise) {

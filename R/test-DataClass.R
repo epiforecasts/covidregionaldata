@@ -113,7 +113,7 @@ test_download <- function(DataClass_obj, download, snapshot_path) {
     )
     DataClass_obj$data$raw <- map(
       DataClass_obj$data$raw,
-      ~ .[, 1:min(100, ncol(.))]
+      ~ .[, seq_len(min(100, ncol(.)))]
     )
     saveRDS(DataClass_obj$data$raw, snapshot_path)
   } else {

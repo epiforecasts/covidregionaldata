@@ -80,26 +80,35 @@ test_that("fill_empty_dates_with_na fills empty dates with NA", {
   expected_data <- get_expected_data_for_fill_empty_dates_with_na_test()
   # partial data deletes some rows (i.e. gets rid of some dates - all the ones
   # with NA in cases)
+  expected_data <- expected_data
+
   partial_data <- expected_data[-c(6:9), ]
-  expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
+  expect_equal(
+    fill_empty_dates_with_na(partial_data),
+    expected_data
+  )
   expected_data <- dplyr::mutate(
     expected_data,
     level_2_region = level_1_region,
     level_2_region_code = level_1_region_code
   ) %>%
+    group_by(level_2_region, level_2_region_code) %>%
     select(
-      date, level_2_region, level_2_region_code,
-      level_1_region, level_1_region_code, cases
+      date, level_1_region, level_1_region_code,
+      level_2_region, level_2_region_code, cases
     )
   partial_data <- expected_data[-c(6:9), ]
-  expect_equal(fill_empty_dates_with_na(partial_data), expected_data)
+  expect_equal(
+    fill_empty_dates_with_na(partial_data),
+    expected_data
+  )
 })
 
 test_that("complete_cumulative_columns works", {
   input_data <- get_input_data_for_complete_cumulative_columns_test()
   expected_data <- get_expected_data_for_complete_cumulative_columns_test()
   actual_data <- complete_cumulative_columns(input_data)
-  expect_equal(colnames(actual_data), colnames(expected_data))
+  expect_equal(sort(colnames(actual_data)), sort(colnames(expected_data)))
   expect_true(!any(is.na(actual_data$cases_total)))
 })
 
