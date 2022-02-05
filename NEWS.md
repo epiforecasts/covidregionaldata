@@ -23,6 +23,7 @@ This release is currently under development
 
 - `get_interventions_data()` has been depreciated.
 
+
 # covidregionaldata 0.9.2
 
 This release adds support for the Covid19 Data Hub which includes Google and Apple mobility data amongst a large range of other data sets, data from the European Commission's Joint Research Centre which is at both the regional and national level, and individual sources for regional data from several countries. Package updates have been made in line with a software review at the [Journal of Open Source Software](https://github.com/openjournals/joss-reviews/issues/3290). Finally, this release exposes more of the testing infrastructure to users and adds a package hexsticker.
