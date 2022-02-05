@@ -6,7 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="covidregionaldata">
-<title>Package overview • covidregionaldata</title>
+<!-- Inform modern browsers that this page supports both dark and light color schemes,
+  and the page author prefers light. --><meta name="color-scheme" content="dark light">
+<script>
+  // If `prefers-color-scheme` is not supported, fall back to light mode.
+  // i.e. In this case, inject the `light` CSS before the others, with
+  // no media filter so that it will be downloaded with highest priority.
+  if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+    document.documentElement.style.display = "none";
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      "<link id=\"css\" rel=\"stylesheet\" href=\"https://bootswatch.com/5/flatly/bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
+    );
+  }
+</script><title>Package overview • covidregionaldata</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -23,24 +36,29 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Flatly Theme - Light  --><link id="css-light" rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+<!-- Darkly Theme - Dark --><link id="css-dark" rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.css" media="(prefers-color-scheme: dark)">
+<!-- preferably CSS --><link rel="stylesheet" href="../preferably.css">
+<link id="css-code-light" rel="stylesheet" href="../code-color-scheme-light.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+<link id="css-code-dark" rel="stylesheet" href="../code-color-scheme-dark.css" media="(prefers-color-scheme: dark)">
+<script src="../darkswitch.js"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">covidregionaldata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.2.3000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.2.4000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-3">
+    <div id="navbar" class="collapse navbar-collapse ms-2">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">Home</a>
@@ -80,6 +98,16 @@
      
   </a>
 </li>
+
+        
+        <li>
+          <a class="external-link nav-link" id="css-toggle-btn" aria-label="github">
+            <span class="fas fa fas fa-adjust fa-lg"></span>
+          </a>
+        </li>
+        
+        
+        
       </ul>
 </div>
 
@@ -133,17 +161,17 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span><span class="op">)</span></code></pre></div>
 <p>This data then has the following format:</p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
 <col width="6%">
-<col width="15%">
+<col width="10%">
 <col width="6%">
 <col width="5%">
-<col width="6%">
-<col width="6%">
 <col width="7%">
+<col width="6%">
 <col width="7%">
 <col width="8%">
+<col width="9%">
 <col width="5%">
 <col width="6%">
 <col width="6%">
@@ -168,84 +196,84 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2022-01-20</td>
-<td align="left">Provence-Alpes-Côte-d’Azur</td>
-<td align="left">FR-PAC</td>
-<td align="right">30558</td>
-<td align="right">8892858</td>
+<td align="left">2022-02-02</td>
+<td align="left">Pays-de-la-Loire</td>
+<td align="left">FR-PDL</td>
+<td align="right">17847</td>
+<td align="right">4938103</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">121626</td>
-<td align="right">136104522</td>
-<td align="left">93</td>
+<td align="right">50076</td>
+<td align="right">54967219</td>
+<td align="left">52</td>
 </tr>
 <tr class="even">
-<td align="left">2022-01-20</td>
-<td align="left">Provence-Alpes-Côte-d’Azur</td>
-<td align="left">FR-PAC</td>
-<td align="right">30558</td>
-<td align="right">8923416</td>
+<td align="left">2022-02-02</td>
+<td align="left">Pays-de-la-Loire</td>
+<td align="left">FR-PDL</td>
+<td align="right">17847</td>
+<td align="right">4955950</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">121626</td>
-<td align="right">136226148</td>
-<td align="left">93</td>
+<td align="right">50076</td>
+<td align="right">55017295</td>
+<td align="left">52</td>
 </tr>
 <tr class="odd">
-<td align="left">2022-01-20</td>
+<td align="left">2022-02-02</td>
 <td align="left">Saint-Barthelemy</td>
 <td align="left">FR-PM</td>
-<td align="right">4</td>
-<td align="right">98</td>
+<td align="right">1</td>
+<td align="right">113</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">20</td>
-<td align="right">3271</td>
+<td align="right">11</td>
+<td align="right">3451</td>
 <td align="left">05</td>
 </tr>
 <tr class="even">
-<td align="left">2022-01-20</td>
-<td align="left">Saint-Martin</td>
-<td align="left">FR-BL</td>
-<td align="right">23</td>
-<td align="right">3395</td>
+<td align="left">2022-02-02</td>
+<td align="left">La Réunion</td>
+<td align="left">FR-RE</td>
+<td align="right">3631</td>
+<td align="right">258449</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">179</td>
-<td align="right">77297</td>
-<td align="left">07</td>
+<td align="right">8958</td>
+<td align="right">2507311</td>
+<td align="left">04</td>
 </tr>
 <tr class="odd">
-<td align="left">2022-01-20</td>
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-MF</td>
-<td align="right">94</td>
-<td align="right">9294</td>
+<td align="left">2022-02-02</td>
+<td align="left">Mayotte</td>
+<td align="left">FR-YT</td>
+<td align="right">12</td>
+<td align="right">34765</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">435</td>
-<td align="right">108066</td>
-<td align="left">08</td>
+<td align="right">282</td>
+<td align="right">342511</td>
+<td align="left">06</td>
 </tr>
 </tbody>
 </table>
@@ -265,22 +293,22 @@
 <p>This data again has the following format:</p>
 <table class="table">
 <colgroup>
-<col width="4%">
-<col width="12%">
-<col width="4%">
+<col width="5%">
+<col width="11%">
+<col width="5%">
 <col width="11%">
 <col width="7%">
 <col width="4%">
 <col width="5%">
-<col width="4%">
+<col width="5%">
 <col width="5%">
 <col width="6%">
 <col width="7%">
 <col width="4%">
-<col width="4%">
-<col width="4%">
 <col width="5%">
-<col width="4%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
@@ -302,49 +330,67 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2022-01-23</td>
-<td align="left">Provence-Alpes-Côte-d’Azur</td>
-<td align="left">FR-PAC</td>
-<td align="left">Var</td>
-<td align="left">FR-83</td>
+<td align="left">2022-02-05</td>
+<td align="left">La Réunion</td>
+<td align="left">FR-RE</td>
+<td align="left">La Réunion</td>
+<td align="left">FR-974</td>
 <td align="right">NA</td>
-<td align="right">280546</td>
-<td align="right">9</td>
-<td align="right">1974</td>
+<td align="right">258449</td>
+<td align="right">5</td>
+<td align="right">569</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">23</td>
-<td align="right">11429</td>
+<td align="right">3</td>
+<td align="right">5604</td>
 <td align="right">NA</td>
-<td align="right">4311326</td>
-<td align="left">93</td>
+<td align="right">2507311</td>
+<td align="left">04</td>
 </tr>
 <tr class="even">
-<td align="left">2022-01-23</td>
-<td align="left">Provence-Alpes-Côte-d’Azur</td>
-<td align="left">FR-PAC</td>
-<td align="left">Vaucluse</td>
-<td align="left">FR-84</td>
+<td align="left">2022-02-05</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-MF</td>
+<td align="left">Saint-Pierre et Miquelon</td>
+<td align="left">FR-975</td>
 <td align="right">NA</td>
-<td align="right">142733</td>
-<td align="right">2</td>
-<td align="right">1153</td>
+<td align="right">113</td>
+<td align="right">NA</td>
+<td align="right">0</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">25</td>
-<td align="right">7767</td>
 <td align="right">NA</td>
-<td align="right">1865806</td>
-<td align="left">93</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">3451</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left">2022-01-23</td>
+<td align="left">2022-02-05</td>
+<td align="left">Mayotte</td>
+<td align="left">FR-YT</td>
+<td align="left">Mayotte</td>
+<td align="left">FR-976</td>
+<td align="right">NA</td>
+<td align="right">34765</td>
+<td align="right">0</td>
+<td align="right">159</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">2019</td>
+<td align="right">NA</td>
+<td align="right">342511</td>
+<td align="left">06</td>
+</tr>
+<tr class="even">
+<td align="left">2022-02-05</td>
 <td align="left">Saint-Barthelemy</td>
 <td align="left">FR-PM</td>
 <td align="left">Saint-Barthelemy</td>
 <td align="left">FR-977</td>
 <td align="right">NA</td>
-<td align="right">3395</td>
+<td align="right">3635</td>
 <td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">NA</td>
@@ -352,17 +398,17 @@
 <td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">NA</td>
-<td align="right">77297</td>
+<td align="right">79560</td>
 <td align="left">NA</td>
 </tr>
-<tr class="even">
-<td align="left">2022-01-23</td>
+<tr class="odd">
+<td align="left">2022-02-05</td>
 <td align="left">Saint-Martin</td>
 <td align="left">FR-BL</td>
 <td align="left">Saint-Martin</td>
 <td align="left">FR-978</td>
 <td align="right">NA</td>
-<td align="right">9294</td>
+<td align="right">9654</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">NA</td>
@@ -370,26 +416,8 @@
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">NA</td>
-<td align="right">108066</td>
+<td align="right">111575</td>
 <td align="left">07</td>
-</tr>
-<tr class="odd">
-<td align="left">2022-01-23</td>
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-MF</td>
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-975</td>
-<td align="right">NA</td>
-<td align="right">98</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">3271</td>
-<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -424,47 +452,47 @@
 <tr class="odd">
 <td align="left">Guyane (française)</td>
 <td align="left">FR-GF</td>
-<td align="right">71675</td>
+<td align="right">75160</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">581846</td>
+<td align="right">600096</td>
 </tr>
 <tr class="even">
 <td align="left">Mayotte</td>
 <td align="left">FR-YT</td>
-<td align="right">34074</td>
+<td align="right">34765</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">333147</td>
+<td align="right">342511</td>
 </tr>
 <tr class="odd">
 <td align="left">Saint-Pierre et Miquelon</td>
 <td align="left">FR-MF</td>
-<td align="right">9294</td>
+<td align="right">9654</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">108066</td>
+<td align="right">111575</td>
 </tr>
 <tr class="even">
 <td align="left">Saint-Martin</td>
 <td align="left">FR-BL</td>
-<td align="right">3395</td>
+<td align="right">3635</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">77297</td>
+<td align="right">79560</td>
 </tr>
 <tr class="odd">
 <td align="left">Saint-Barthelemy</td>
 <td align="left">FR-PM</td>
-<td align="right">98</td>
+<td align="right">113</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">3271</td>
+<td align="right">3451</td>
 </tr>
 </tbody>
 </table>
@@ -514,14 +542,15 @@
 
 
 
-    <footer><div class="pkgdown-footer-left">
+    <footer><div class="copyright">
   <p></p>
-<p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p>
+<p>Developed by Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, Hugo Gruson, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>, <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>.</p>
 </div>
 
-<div class="pkgdown-footer-right">
+<div class="pkgdown">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
     </footer>
