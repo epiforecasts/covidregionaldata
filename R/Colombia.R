@@ -66,8 +66,9 @@ Colombia <- R6::R6Class("Colombia",
       if (requireNamespace("RSocrata", quietly = self$verbose)) {
         self$data$raw$main <- RSocrata::read.socrata(self$data_urls[["main"]])
       } else {
-        stop("covidregionaldata::Colombia$download - requires RSocrata package.\n",
-             "Please run install.packages(\"RSocrata\")\n", call.=TRUE)
+        stop(
+          "covidregionaldata::Colombia$download - requires RSocrata package.\n",
+             "Please run install.packages(\"RSocrata\")\n", call. = TRUE)
       }
     },
 
