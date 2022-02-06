@@ -74,7 +74,7 @@ Colombia <- R6::R6Class("Colombia",
 
     #' @description Colombia specific data cleaning
     #' @importFrom dplyr select mutate rename summarise group_by n
-    #' @importFrom lubridate dmy_hms as_date
+    #' @importFrom lubridate as_date
     #' @importFrom stringr str_replace_all str_to_sentence str_to_title
     #' @importFrom rlang .data
     #'
@@ -86,7 +86,7 @@ Colombia <- R6::R6Class("Colombia",
         ) %>%
         group_by(date, level_2_region_code) %>%
         summarise(cases_new = n(), .groups = "drop") %>%
-        mutate(date = as_date(dmy_hms(date)),
+        mutate(date = as_date(date),
                level_2_region_code = sprintf("%05d", level_2_region_code)) %>%
         left_join(
           self$codes_lookup$`2`,
