@@ -78,8 +78,7 @@ Description: An interface to subnational and national level COVID-19 data
     used to process it, at every step. For all countries supported, data
     includes a daily time-series of cases. Wherever available data is also
     provided for deaths, hospitalisations, and tests. National level data
-    are also supported using a range of sources as well as line list data
-    and links to intervention data sets.
+    are also supported using a range of sources.
 License: MIT + file LICENSE
 URL: https://epiforecasts.io/covidregionaldata/,
     https://github.com/epiforecasts/covidregionaldata/

@@ -32,8 +32,7 @@ This allows users to inspect and scrutinise the data, and tools used to
 process it, at every step. For all countries supported, data includes a
 daily time-series of cases and, wherever available, data on deaths,
 hospitalisations, and tests. National level data is also supported using
-a range of data sources as well as line list data and links to
-intervention data sets.
+a range of data sources.
 
 ## Installation
 
