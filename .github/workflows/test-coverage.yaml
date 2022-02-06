@@ -36,6 +36,11 @@ jobs:
 
       - name: Test coverage
         run: |
-          options("testRegions" = TRUE)
-          covr::codecov()
+          covr::codecov(function_exclusions = c(
+            "Belgium", "Brazil", "Canada", "Colombia",
+            "Covid19DataHub", "Cuba", "ECDC", "Estonia",
+            "France", "Germany", "Google", "India", "Italy",
+            "JHU", "JRC", "Lithuania", "Mexico", "Netherlands",
+            "SouthAfrica", "Switzerland", "UK", "USA", "WHO"
+          ))
         shell: Rscript {0}
