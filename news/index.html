@@ -22,7 +22,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">covidregionaldata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.2.4000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.3" id="covidregionaldata-093">covidregionaldata 0.9.3<a class="anchor" aria-label="anchor" href="#covidregionaldata-093"></a></h2>
-<p>This release is currently under development</p>
+<p>This is largely a patch release dealing with processesing issues introduced by the recent release of <code>tidyr 1.2.0</code>. In addition support for data from Estonia and Vietnam has been added. See the full release notes for details. Thanks to <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>, <a href="https://github.com/biocyberman" class="external-link">@biocyberman</a>, <a href="https://github.com/Bisaloo" class="external-link">@Bisaloo</a>, <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>, and <a href="https://github.com/kathsherratt" class="external-link">@kathsherratt</a> for contributing to this release.</p>
 <div class="section level3">
 <h3 id="new-data-sets-0-9-3">New data sets<a class="anchor" aria-label="anchor" href="#new-data-sets-0-9-3"></a></h3>
 <ul><li>Support for level 1 region data in Estonia (thanks to <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>). See <code><a href="../reference/Estonia.html">?Estonia</a></code> for details.</li>
@@ -106,6 +106,8 @@
 <ul><li>Fixed a bug in <code><a href="../reference/fill_empty_dates_with_na.html">fill_empty_dates_with_na()</a></code> caused by changes made in version <code>1.2.0</code> of <code>tidyr</code>.</li>
 <li>Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>).</li>
 <li>Fixed a bug in the Vietnam class due to <code>stringr</code> (<a href="https://github.com/epiforecasts/covidregionaldata/pull/448" class="external-link">#448</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+<li>Fixed a bug with the Netherlands class were the lack of Hospitalisation data in the source was causing the class to fail (<a href="https://github.com/epiforecasts/covidregionaldata/pull/446" class="external-link">#446</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+<li>Fixed an issue with the Colombia data and reduced dependencies by making <code>RSocrata</code> be a suggested package (<a href="https://github.com/epiforecasts/covidregionaldata/pull/433" class="external-link">#433</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="depreciations-0-9-3">Depreciations<a class="anchor" aria-label="anchor" href="#depreciations-0-9-3"></a></h3>
