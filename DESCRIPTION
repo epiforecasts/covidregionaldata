@@ -122,6 +122,8 @@ Config/testthat/edition: 3
 Config/Needs/website: 
     r-lib/pkgdown,
     amirmasoudabdol/preferably
+Config/Needs/coverage: 
+    covr
 Encoding: UTF-8
 Language: en-gb
 LazyData: true
