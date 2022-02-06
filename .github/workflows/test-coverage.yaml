@@ -54,6 +54,6 @@ jobs:
 
       - name: Test coverage
         run: |
-          options(testRegions = TRUE)
+          options("testRegions" = TRUE)
           covr::codecov()
         shell: Rscript {0}
