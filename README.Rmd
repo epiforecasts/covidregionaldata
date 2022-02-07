@@ -135,7 +135,7 @@ uk_nots %>%
 ```
 
 See `get_available_datasets()` for supported regions and subregional levels.
-To view what datasets we currently have subnationaldata for, along with their current status, check the
+To view what datasets we currently have subnational data for, along with their current status, check the
 [supported countries](https://epiforecasts.io/covidregionaldata/articles/supported-countries.html) page
 or build the [supported countries vignette](vignettes/supported-countries.Rmd).
 
