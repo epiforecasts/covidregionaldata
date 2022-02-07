@@ -16,7 +16,7 @@ contributors](https://img.shields.io/github/contributors/epiforecasts/covidregio
 [![PRs
 Welcome](https://img.shields.io/badge/PRs-welcome-yellow.svg)](https://makeapullrequest.com/)
 [![GitHub
-commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.2.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
+commits](https://img.shields.io/github/commits-since/epiforecasts/covidregionaldata/0.9.3.svg?color=orange)](https://GitHub.com/epiforecasts/covidregionaldata/commit/master/)
 
 [![JOSS](https://joss.theoj.org/papers/10.21105/joss.03290/status.svg)](https://doi.org/10.21105/joss.03290)
 [![Zenodo](https://zenodo.org/badge/271601189.svg)](https://zenodo.org/badge/latestdoi/271601189)
