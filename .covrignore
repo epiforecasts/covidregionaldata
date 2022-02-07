@@ -1,3 +1,4 @@
+R/Brazil.R
 R/Belgium.R
 R/Canada.R
 R/Colombia.R
@@ -20,3 +21,4 @@ R/Switzerland.R
 R/UK.R
 R/USA.R
 R/WHO.R
+R/test-DataClass.R
