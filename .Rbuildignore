@@ -29,3 +29,4 @@ SMG.md
 ^inst/examples$
 ^\.devcontainer$
 ^CRAN-SUBMISSION$
+^\.covrignore$
