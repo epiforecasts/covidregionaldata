@@ -78,7 +78,7 @@ the temporary directory by default),
 
 ``` r
 start_using_memoise()
-#> Using a cache at: /tmp/RtmpPgZXiv
+#> Using a cache at: /var/folders/68/22ndk9854tq394wl_n1cxzlr0000gn/T//RtmpylL81U
 ```
 
 To stop using `memoise` use,
@@ -103,34 +103,24 @@ the Google COVID-19 open data project), use:
 ``` r
 nots <- get_national_data()
 #> Downloading data from https://covid19.who.int/WHO-COVID-19-global-data.csv
-#> Rows: 142911 Columns: 8
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr  (3): Country_code, Country, WHO_region
-#> dbl  (4): New_cases, Cumulative_cases, New_deaths, Cumulative_deaths
-#> date (1): Date_reported
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #> Cleaning data
 #> Processing data
 nots
-#> # A tibble: 142,911 × 15
-#>    date       un_region who_region country        iso_code cases_new cases_total
-#>    <date>     <chr>     <chr>      <chr>          <chr>        <dbl>       <dbl>
-#>  1 2020-01-03 Asia      EMRO       Afghanistan    AF               0           0
-#>  2 2020-01-03 Europe    EURO       Albania        AL               0           0
-#>  3 2020-01-03 Africa    AFRO       Algeria        DZ               0           0
-#>  4 2020-01-03 Oceania   WPRO       American Samoa AS               0           0
-#>  5 2020-01-03 Europe    EURO       Andorra        AD               0           0
-#>  6 2020-01-03 Africa    AFRO       Angola         AO               0           0
-#>  7 2020-01-03 Americas  AMRO       Anguilla       AI               0           0
-#>  8 2020-01-03 Americas  AMRO       Antigua & Barbuda AG               0           0
-#>  9 2020-01-03 Americas  AMRO       Argentina      AR               0           0
-#> 10 2020-01-03 Asia      EURO       Armenia        AM               0           0
-#> # … with 142,901 more rows, and 8 more variables: deaths_new <dbl>,
-#> #   deaths_total <dbl>, recovered_new <dbl>, recovered_total <dbl>,
-#> #   hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>, tested_total <dbl>
+#> # A tibble: 182,253 × 15
+#>    date       un_region who_region country iso_code cases_new cases_total deaths_new deaths_total recovered_new
+#>    <date>     <chr>     <chr>      <chr>   <chr>        <dbl>       <dbl>      <dbl>        <dbl>         <dbl>
+#>  1 2020-01-03 Asia      EMRO       Afghan… AF               0           0          0            0            NA
+#>  2 2020-01-03 Europe    EURO       Albania AL               0           0          0            0            NA
+#>  3 2020-01-03 Africa    AFRO       Algeria DZ               0           0          0            0            NA
+#>  4 2020-01-03 Oceania   WPRO       Americ… AS               0           0          0            0            NA
+#>  5 2020-01-03 Europe    EURO       Andorra AD               0           0          0            0            NA
+#>  6 2020-01-03 Africa    AFRO       Angola  AO               0           0          0            0            NA
+#>  7 2020-01-03 Americas  AMRO       Anguil… AI               0           0          0            0            NA
+#>  8 2020-01-03 Americas  AMRO       Antigu… AG               0           0          0            0            NA
+#>  9 2020-01-03 Americas  AMRO       Argent… AR               0           0          0            0            NA
+#> 10 2020-01-03 Asia      EURO       Armenia AM               0           0          0            0            NA
+#> # … with 182,243 more rows, and 5 more variables: recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>,
+#> #   tested_new <dbl>, tested_total <dbl>
 ```
 
 This can also be filtered for a country of interest,
@@ -169,26 +159,25 @@ for example by level 1 region in the UK, use:
 ``` r
 uk_nots <- get_regional_data(country = "UK", verbose = FALSE)
 uk_nots
-#> # A tibble: 7,501 × 26
-#>    date       region   region_code cases_new cases_total deaths_new deaths_total
-#>    <date>     <chr>    <chr>           <dbl>       <dbl>      <dbl>        <dbl>
-#>  1 2020-01-30 East Mi… E12000004          NA          NA         NA           NA
-#>  2 2020-01-30 East of… E12000006          NA          NA         NA           NA
-#>  3 2020-01-30 England  E92000001           2           2         NA           NA
-#>  4 2020-01-30 London   E12000007          NA          NA         NA           NA
-#>  5 2020-01-30 North E… E12000001          NA          NA         NA           NA
-#>  6 2020-01-30 North W… E12000002          NA          NA         NA           NA
-#>  7 2020-01-30 Norther… N92000002          NA          NA         NA           NA
-#>  8 2020-01-30 Scotland S92000003          NA          NA         NA           NA
-#>  9 2020-01-30 South E… E12000008          NA          NA         NA           NA
-#> 10 2020-01-30 South W… E12000009          NA          NA         NA           NA
-#> # … with 7,491 more rows, and 19 more variables: recovered_new <dbl>,
-#> #   recovered_total <dbl>, hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
-#> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>,
-#> #   cumCasesBySpecimenDate <dbl>, newCasesByPublishDate <dbl>,
-#> #   newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>,
-#> #   cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>,
-#> #   newDeaths28DaysByPublishDate <dbl>, …
+#> # A tibble: 9,893 × 26
+#>    date       region    region_code cases_new cases_total deaths_new deaths_total recovered_new recovered_total
+#>    <date>     <chr>     <chr>           <dbl>       <dbl>      <dbl>        <dbl>         <dbl>           <dbl>
+#>  1 2020-01-11 North Ea… E12000001          NA          NA         NA           NA            NA              NA
+#>  2 2020-01-11 North We… E12000002          NA          NA         NA           NA            NA              NA
+#>  3 2020-01-11 Yorkshir… E12000003          NA          NA         NA           NA            NA              NA
+#>  4 2020-01-11 East Mid… E12000004          NA          NA         NA           NA            NA              NA
+#>  5 2020-01-11 West Mid… E12000005          NA          NA         NA           NA            NA              NA
+#>  6 2020-01-11 East of … E12000006          NA          NA         NA           NA            NA              NA
+#>  7 2020-01-11 London    E12000007          NA          NA         NA           NA            NA              NA
+#>  8 2020-01-11 South Ea… E12000008          NA          NA         NA           NA            NA              NA
+#>  9 2020-01-11 South We… E12000009          NA          NA         NA           NA            NA              NA
+#> 10 2020-01-11 England   E92000001          NA          NA         NA           NA            NA              NA
+#> # … with 9,883 more rows, and 17 more variables: hosp_new <dbl>, hosp_total <dbl>, tested_new <dbl>,
+#> #   tested_total <dbl>, areaType <chr>, cumCasesByPublishDate <dbl>, cumCasesBySpecimenDate <dbl>,
+#> #   newCasesByPublishDate <dbl>, newCasesBySpecimenDate <dbl>, cumDeaths28DaysByDeathDate <dbl>,
+#> #   cumDeaths28DaysByPublishDate <dbl>, newDeaths28DaysByDeathDate <dbl>, newDeaths28DaysByPublishDate <dbl>,
+#> #   newPillarFourTestsByPublishDate <lgl>, newPillarOneTestsByPublishDate <dbl>,
+#> #   newPillarThreeTestsByPublishDate <dbl>, newPillarTwoTestsByPublishDate <dbl>
 ```
 
 Now we have the data we can create plots, for example the time-series of
@@ -210,7 +199,7 @@ uk_nots %>%
 <img src="man/figures/README-uk_plot-1.png" width="100%" />
 
 See `get_available_datasets()` for supported regions and subregional
-levels. To view what datasets we currently have subnationaldata for,
+levels. To view what datasets we currently have subnational data for,
 along with their current status, check the [supported
 countries](https://epiforecasts.io/covidregionaldata/articles/supported-countries.html)
 page or build the [supported countries
@@ -231,9 +220,8 @@ using the following,
     #> 
     #> To cite covidregionaldata in publications use:
     #> 
-    #>   Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie
-    #>   Bevan, Hamish Gibbs, Sebastian Funk and Sam Abbott (2021).
-    #>   covidregionaldata: Subnational data for COVID-19 epidemiology, DOI:
+    #>   Joseph Palmer, Katharine Sherratt, Richard Martin-Nielsen, Jonnie Bevan, Hamish Gibbs, Sebastian
+    #>   Funk and Sam Abbott (2021). covidregionaldata: Subnational data for COVID-19 epidemiology, DOI:
     #>   10.21105/joss.03290
     #> 
     #> A BibTeX entry for LaTeX users is
