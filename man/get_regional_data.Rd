@@ -13,6 +13,7 @@ get_regional_data(
   class = FALSE,
   verbose = TRUE,
   regions,
+  use_fallbacks = TRUE,
   ...
 )
 }
