@@ -12,7 +12,6 @@ get_national_data(
   steps = FALSE,
   class = FALSE,
   verbose = TRUE,
-  country = deprecated(),
   ...
 )
 }
@@ -42,9 +41,6 @@ Overrides \code{steps}.}
 
 \item{verbose}{Logical, defaults to \code{TRUE}. Should verbose processing
 messages and warnings be returned.}
-
-\item{country}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A character string
-specifying a country to filter for.}
 
 \item{...}{Additional arguments to pass to class specific functionality.}
 }

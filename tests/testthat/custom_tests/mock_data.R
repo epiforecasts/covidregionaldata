@@ -207,12 +207,16 @@ get_expected_data_for_fill_empty_dates_with_na_test <- function() {
   # full data is data with all dates/regions + some NAs in the cases column
   expected_data <- data.frame(expand.grid(dates, regions))
   colnames(expected_data) <- c("date", "level_1_region")
+
   expected_data$date <- as.Date(expected_data$date)
   expected_data$level_1_region <- as.character(expected_data$level_1_region)
   expected_data <- expected_data %>%
     dplyr::arrange(date, level_1_region) %>%
     dplyr::left_join(region_codes, by = c("level_1_region" = "region"))
   expected_data$cases <- c(1:5, rep(NA, 4), 10:12)
+  expected_data <- dplyr::select(
+    expected_data, date, level_1_region, level_1_region_code, everything()
+  )
   return(dplyr::tibble(expected_data))
 }
 
@@ -234,10 +238,16 @@ get_expected_data_for_complete_cumulative_columns_test <- function() {
   partial_data <- expected_data[-c(6:9), ]
 
   # manually add cumulative cases to get expected data
-  full_data_with_cum_cases_filled <- covidregionaldata:::fill_empty_dates_with_na(partial_data)
-  full_data_with_cum_cases_filled <- dplyr::arrange(full_data_with_cum_cases_filled, level_1_region, date)
-  full_data_with_cum_cases_filled <- cbind(full_data_with_cum_cases_filled, as.integer(c(1, 5, 5, 15, 2, 7, 7, 18, 3, 3, 3, 15)))
+  full_data_with_cum_cases_filled <- partial_data %>%
+    covidregionaldata:::fill_empty_dates_with_na()
+  full_data_with_cum_cases_filled <-
+    dplyr::arrange(full_data_with_cum_cases_filled, level_1_region, date)
+  full_data_with_cum_cases_filled <-
+   cbind(
+     full_data_with_cum_cases_filled,
+     as.integer(c(1, 5, 5, 15, 2, 7, 7, 18, 3, 3, 3, 15))
+   )
   colnames(full_data_with_cum_cases_filled)[5] <- "cases_total"
 
-  return(dplyr::tibble(full_data_with_cum_cases_filled))
+  return(full_data_with_cum_cases_filled)
 }

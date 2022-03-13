@@ -72,8 +72,7 @@ datasets <- get_available_datasets() %>%
       Method, "/badge.svg)]",
       "(https://github.com/epiforecasts/covidregionaldata/actions/workflows/", # nolint
       Method, ".yaml)"
-    ),
-    `CRAN status` = "*working*"
+    )
   )
 kable(datasets)
 ```

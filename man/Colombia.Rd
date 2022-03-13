@@ -4,7 +4,7 @@
 \alias{Colombia}
 \title{Colombia Class for downloading, cleaning and processing notification data}
 \source{
-\url{https://github.com/danielcs88/colombia_covid-19/}
+\url{https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr}
 }
 \description{
 Information for downloading, cleaning
@@ -36,8 +36,7 @@ Subnational data sources
 \code{\link{SouthAfrica}},
 \code{\link{Switzerland}},
 \code{\link{UK}},
-\code{\link{USA}},
-\code{\link{Vietnam}}
+\code{\link{USA}}
 }
 \concept{dataset}
 \concept{subnational}
@@ -70,7 +69,9 @@ data}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-set_region_codes}{\code{Colombia$set_region_codes()}}
+\item \href{#method-download}{\code{Colombia$download()}}
 \item \href{#method-clean_common}{\code{Colombia$clean_common()}}
+\item \href{#method-clean_level_1}{\code{Colombia$clean_level_1()}}
 \item \href{#method-clone}{\code{Colombia$clone()}}
 }
 }
@@ -79,7 +80,6 @@ data}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="available_regions">}\href{../../covidregionaldata/html/DataClass.html#method-available_regions}{\code{covidregionaldata::DataClass$available_regions()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="clean">}\href{../../covidregionaldata/html/DataClass.html#method-clean}{\code{covidregionaldata::DataClass$clean()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download">}\href{../../covidregionaldata/html/DataClass.html#method-download}{\code{covidregionaldata::DataClass$download()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="download_JSON">}\href{../../covidregionaldata/html/DataClass.html#method-download_JSON}{\code{covidregionaldata::DataClass$download_JSON()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="filter">}\href{../../covidregionaldata/html/DataClass.html#method-filter}{\code{covidregionaldata::DataClass$filter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="covidregionaldata" data-topic="DataClass" data-id="get">}\href{../../covidregionaldata/html/DataClass.html#method-get}{\code{covidregionaldata::DataClass$get()}}\out{</span>}
@@ -102,12 +102,37 @@ Set up a table of region codes for clean data
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-download"></a>}}
+\if{latex}{\out{\hypertarget{method-download}{}}}
+\subsection{Method \code{download()}}{
+Colombia specific download using Socrata API
+This uses the \code{RSocrata} package if it is installed or downloads
+a much larger csv file if that package is not available.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Colombia$download()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clean_common"></a>}}
 \if{latex}{\out{\hypertarget{method-clean_common}{}}}
 \subsection{Method \code{clean_common()}}{
-Colombia specific state level data cleaning
+Colombia specific data cleaning
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Colombia$clean_common()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clean_level_1"></a>}}
+\if{latex}{\out{\hypertarget{method-clean_level_1}{}}}
+\subsection{Method \code{clean_level_1()}}{
+Colombia Specific Department Level Data Cleaning
+
+Aggregates data to the level 1 (department) regional level. Data is
+provided by the source at the level 2 (municipality) regional level.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Colombia$clean_level_1()}\if{html}{\out{</div>}}
 }
 
 }

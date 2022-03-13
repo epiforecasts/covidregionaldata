@@ -638,9 +638,12 @@ CountryDataClass <- R6::R6Class("CountryDataClass",
         }
 
         if (!is.null(self$target_regions)) {
-          self$target_regions <- countryname(
-            self$target_regions,
-            destination = "country.name.en"
+          self$target_regions <- suppressWarnings(
+              countryname(
+              self$target_regions,
+              destination = "country.name.en",
+              warn = FALSE
+            )
           )
           if (all(is.na(self$target_regions))) {
             stop("No countries found with target names")
