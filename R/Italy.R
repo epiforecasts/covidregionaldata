@@ -30,16 +30,16 @@ Italy <- R6::R6Class("Italy",
     #' only entry, is be named main.
     # nolint start
     common_data_urls = list(
-      "main" = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
+      "main" = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/raw/use_initial_conditions/epiforecasts_covidregionaldata/COVID19-Italy-Integrated-Surveillance-Data.csv"
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
-    source_data_cols = c("cases_total", "deaths_total", "tested_total"),
+    source_data_cols = c("cases_new", "deaths_new", "hosp_new"),
     #' @field source_text Plain text description of the source of the data
-    source_text = "Department of Civil Protection, Italy",
+    source_text = "Pietro Monticone and Claudio Moroni, Interdisciplinary Physics Team (InPhyT)",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://github.com/pcm-dpc/COVID-19/blob/master/README_EN.md",
+    source_url = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/blob/797ceacaee6e0e418715d235506d28656b8333ba/README.md",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom dplyr tibble
@@ -61,37 +61,38 @@ Italy <- R6::R6Class("Italy",
     },
 
     #' @description State level data cleaning
-    #' @importFrom dplyr mutate select arrange recode group_by ungroup
-    #' @importFrom lubridate as_date ymd_hms
+    #' @importFrom dplyr mutate select arrange recode group_by summarise
+    #' @importFrom lubridate as_date ymd
     #' @importFrom rlang .data
     #'
     clean_common = function() {
       self$data$clean <- self$data$raw[["main"]] %>%
+        group_by(date,region,indicator) %>%
+        summarise(across(where(is.double), sum), .groups = "drop") %>%
         mutate(
-          date = suppressWarnings(as_date(ymd_hms(.data$data))),
-          level_1_region = as.character(.data$denominazione_regione),
-          cases_total = .data$totale_casi,
-          deaths_total = .data$deceduti,
-          tested_total = .data$tamponi
+          date = suppressWarnings(as_date(ymd(.data$date))),
+          level_1_region = as.character(.data$region)
+        ) %>%
+        pivot_wider(
+          id_cols = c("date", "level_1_region"),
+          names_from = c("indicator"),
+          values_from = c("count")
         ) %>%
         arrange(.data$date) %>%
         mutate(level_1_region = recode(.data$level_1_region,
           "P.A. Trento" = "Trentino-Alto Adige",
           "P.A. Bolzano" = "Trentino-Alto Adige"
         )) %>%
-        group_by(.data$date, .data$level_1_region) %>%
-        summarise(
-          cases_total = sum(.data$cases_total, na.rm = TRUE),
-          deaths_total = sum(.data$deaths_total, na.rm = TRUE),
-          tested_total = sum(.data$tested_total, na.rm = TRUE),
-        ) %>%
-        ungroup() %>%
         full_join(self$codes_lookup[["1"]],
           by = c("level_1_region" = "region")
         ) %>%
         select(.data$date, .data$level_1_region,
           level_1_region_code = .data$code,
-          .data$cases_total, .data$deaths_total, .data$tested_total
+          cases_new = .data$confirmed,
+          deaths_new = .data$deceased,
+          hosp_new = .data$hospitalizations,
+          symp_new = .data$symptomatic,
+          care_new = .data$care
         )
     }
   )
