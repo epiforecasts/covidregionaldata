@@ -79,6 +79,8 @@ Italy <- R6::R6Class("Italy",
           values_from = c("count")
         ) %>%
         arrange(.data$date) %>%
+        # The region of Trentino-Alto Adige is made up of two self-governing
+        # provinces of Trento and Bolzano
         mutate(level_1_region = recode(.data$level_1_region,
           "P.A. Trento" = "Trentino-Alto Adige",
           "P.A. Bolzano" = "Trentino-Alto Adige"
@@ -90,9 +92,9 @@ Italy <- R6::R6Class("Italy",
           level_1_region_code = .data$code,
           cases_new = .data$confirmed,
           deaths_new = .data$deceased,
-          hosp_new = .data$hospitalizations,
+          hosp_new = .data$ordinary_hospital_admission,
           symp_new = .data$symptomatic,
-          care_new = .data$care
+          icu_new = .data$ICU_admission
         )
     }
   )
