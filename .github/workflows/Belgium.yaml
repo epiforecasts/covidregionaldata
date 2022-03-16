@@ -6,7 +6,7 @@ on:
 name: Belgium
 
 jobs:
-  belgium:
+  Belgium:
     uses: ./.github/workflows/test-regional-datasets.yml
     with: 
       test-source: ${{ github.workflow }}
