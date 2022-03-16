@@ -25,7 +25,7 @@ jobs:
       - name: Test dataset
         run: |
           options("testDownload" = TRUE)
-          options("testSource" = " ${{ inputs.test-source }}")
+          options("testSource" = "${{ inputs.test-source }}")
           library(covidregionaldata)
           testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail"))
         shell: Rscript {0}
