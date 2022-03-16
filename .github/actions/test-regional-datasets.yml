@@ -1,24 +1,30 @@
-name: 'Test Regional Datasets'
-description: 'Greet someone'
-inputs:
-  test-source:
-    description: 'testSource option value'
-    required: true
-runs:
-  using: "composite"
-  steps:
-    - uses: actions/checkout@v2
+name: Test Regional Datasets
 
-    - uses: r-lib/actions/setup-r@v1
+on:
+  workflow_call:
+    inputs:
+      test-source:
+        description: 'testSource option value'
+        required: true
 
-    - uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        extra-packages: local::.
-
-    - name: Test dataset
-      run: |
-        options("testDownload" = TRUE)
-        options("testSource" = " ${{ inputs.test-source }}")
-        library(covidregionaldata)
-        testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail"))
-      shell: Rscript {0}
+jobs:
+  test-regional-dataset:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+  
+      - uses: r-lib/actions/setup-r@v1
+  
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: local::.
+  
+      - name: Test dataset
+        run: |
+          options("testDownload" = TRUE)
+          options("testSource" = " ${{ inputs.test-source }}")
+          library(covidregionaldata)
+          testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail"))
+        shell: Rscript {0}

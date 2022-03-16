@@ -7,10 +7,6 @@ name: Belgium
 
 jobs:
   test-regional-dataset:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: ./.github/actions/test-regional-datasets.yml
-        with: 
-          test-source: ${{ github.workflow }}
+    uses: ./.github/actions/test-regional-datasets.yml
+    with: 
+      test-source: ${{ github.workflow }}
