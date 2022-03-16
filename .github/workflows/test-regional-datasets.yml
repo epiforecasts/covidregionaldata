@@ -6,6 +6,7 @@ on:
       test-source:
         description: 'testSource option value'
         required: true
+        type: string
 
 jobs:
   test-regional-dataset:
