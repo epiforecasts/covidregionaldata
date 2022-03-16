@@ -7,6 +7,6 @@ name: Belgium
 
 jobs:
   test-regional-dataset:
-    uses: ./.github/actions/test-regional-datasets.yml
+    uses: ./.github/actions/test-regional-datasets.yml@master
     with: 
       test-source: ${{ github.workflow }}
