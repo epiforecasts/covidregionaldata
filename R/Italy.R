@@ -30,7 +30,7 @@ Italy <- R6::R6Class("Italy",
     #' only entry, is be named main.
     # nolint start
     common_data_urls = list(
-      "main" = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/raw/use_initial_conditions/epiforecasts_covidregionaldata/COVID19-Italy-Integrated-Surveillance-Data.csv"
+      "main" = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/blob/main/epiforecasts_covidregionaldata/COVID19-Italy-Integrated-Surveillance-Data.csv"
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
@@ -39,7 +39,7 @@ Italy <- R6::R6Class("Italy",
     source_text = "Pietro Monticone and Claudio Moroni, Interdisciplinary Physics Team (InPhyT)",
     #' @field source_url Website address for explanation/introduction of the
     #' data
-    source_url = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/blob/797ceacaee6e0e418715d235506d28656b8333ba/README.md",
+    source_url = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data",
 
     #' @description Set up a table of region codes for clean data
     #' @importFrom dplyr tibble
