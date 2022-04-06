@@ -30,7 +30,7 @@ Italy <- R6::R6Class("Italy",
     #' only entry, is be named main.
     # nolint start
     common_data_urls = list(
-      "main" = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/blob/main/epiforecasts_covidregionaldata/COVID19-Italy-Integrated-Surveillance-Data.csv"
+      "main" = "https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data/raw/main/epiforecasts_covidregionaldata/COVID19-Italy-Integrated-Surveillance-Data.csv?raw=true"
     ),
     # nolint end
     #' @field source_data_cols existing columns within the raw data
