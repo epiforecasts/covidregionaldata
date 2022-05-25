@@ -2,6 +2,18 @@ on:
   schedule:
     - cron: '36 12 * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - R/ECDC.R
+      - R/processing.R
+      - R/shared-methods
+      - R/utils.R
+  pull_request:
+    paths:
+      - R/ECDC.R
+      - R/processing.R
+      - R/shared-methods
+      - R/utils.R
 
 name: ECDC
 

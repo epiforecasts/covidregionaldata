@@ -2,6 +2,18 @@ on:
   schedule:
     - cron: '36 12 * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - R/Lithuania.R
+      - R/processing.R
+      - R/shared-methods
+      - R/utils.R
+  pull_request:
+    paths:
+      - R/Lithuania.R
+      - R/processing.R
+      - R/shared-methods
+      - R/utils.R
 
 name: Lithuania
 
