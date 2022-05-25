@@ -19,25 +19,6 @@ name: Germany
 
 jobs:
   Germany:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: r-lib/actions/setup-r@v2
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: devtools
-
-      - name: Install package
-        run: R CMD INSTALL .
-
-      - name: Test dataset
-        run: |
-          options("testDownload" = TRUE)
-          options("testSource" = "Germany")
-          devtools::load_all()
-          testthat::test_file("tests/testthat/test-regional-datasets.R", reporter = c("summary", "fail")) 
-        shell: Rscript {0}
+    uses: ./.github/workflows/test-regional-datasets.yml
+    with: 
+      test-source: ${{ github.workflow }}
