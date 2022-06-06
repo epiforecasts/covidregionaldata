@@ -47,10 +47,10 @@ This function returns daily new and cumulative (total) cases, and where availabl
 
 As for national level data any gaps in reported data are filled with NAs.
 
-For example, data for France Level 1 regions over time can be accessed using:
+For example, data for Lithuania Level 1 regions over time can be accessed using:
 
 ```{r}
-get_regional_data(country = "france")
+get_regional_data(country = "lithuania")
 ```
 
 This data then has the following format: 
@@ -58,15 +58,15 @@ This data then has the following format:
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 start_using_memoise()
 knitr::kable(
-  tail(get_regional_data(country = "france"), n = 5)
+  tail(get_regional_data(country = "lithuania"), n = 5)
 )
 ```
 
-Alternatively, the same data can be accessed using the underlying class as follows (the France object now contains data at each processing step and the methods used at each step), 
+Alternatively, the same data can be accessed using the underlying class as follows (the Lithuania object now contains data at each processing step and the methods used at each step), 
 
 ```{r, eval=FALSE, message=FALSE}
-france <- France$new(get = TRUE)
-france$return()
+lithuania <- Lithuania$new(get = TRUE)
+lithuania$return()
 ```
 ### Level 1 and Level 2 regions
 
@@ -74,17 +74,17 @@ All countries included in the package (see below,"Coverage") have data for regio
 
 Data for Level 2 units can be returned by using the `level = "2"` argument. The dataset will still show the corresponding Level 1 region.
 
-An example of a country with Level 2 units is France, where Level 2 units are French departments:
+An example of a country with Level 2 units is Lithuania, where Level 2 units are Lithuanian municipalities:
 
 ```{r}
-get_regional_data(country = "france", level = "2")
+get_regional_data(country = "lithuania", level = "2")
 ```
 
 This data again has the following format: 
 
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 knitr::kable(
-  tail(get_regional_data(country = "france", level = "2"), n = 5)
+  tail(get_regional_data(country = "lithuania", level = "2"), n = 5)
 )
 ```
 
@@ -93,14 +93,14 @@ knitr::kable(
 For totalled data up to the most recent date available, use the `totals` argument.
 
 ```{r}
-get_regional_data("france", totals = TRUE)
+get_regional_data("lithuania", totals = TRUE)
 ```
 
 This data now has no date variable and reflects the latest total:
 
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 knitr::kable(
-  tail(get_regional_data(country = "france", totals = TRUE), n = 5)
+  tail(get_regional_data(country = "lithuania", totals = TRUE), n = 5)
 )
 ```
 
