@@ -134,35 +134,52 @@ and options.</p>
     <dl><dt>countries</dt>
 <dd><p>A character vector specifying country names of interest.
 Used to filter the data.</p></dd>
+
+
 <dt>source</dt>
 <dd><p>A character string specifying the data source (not case
 dependent). Defaults to WHO (the World Health Organisation). See
 <code>get_available_datasets("national")</code> for all options.</p></dd>
+
+
 <dt>level</dt>
 <dd><p>A character string indicating the target administrative level
 of the data with the default being "1". Currently supported options are
 level 1 ("1) and level 2 ("2"). Use <code><a href="get_available_datasets.html">get_available_datasets()</a></code> for supported
 options by dataset.</p></dd>
+
+
 <dt>totals</dt>
 <dd><p>Logical, defaults to FALSE. If TRUE, returns totalled
 data per region up to today's date. If FALSE, returns the full dataset
 stratified by date and region.</p></dd>
+
+
 <dt>steps</dt>
 <dd><p>Logical, defaults to FALSE. Should all processing and cleaning
 steps be kept and output in a list.</p></dd>
+
+
 <dt>class</dt>
 <dd><p>Logical, defaults to FALSE. If TRUE returns the
 <code>DataClass</code> object rather than a tibble or a list of tibbles.
 Overrides <code>steps</code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical, defaults to <code>TRUE</code>. Should verbose processing
 messages and warnings be returned.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments to pass to class specific functionality.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A tibble with data related to cases, deaths, hospitalisations,
+    
+
+<p>A tibble with data related to cases, deaths, hospitalisations,
 recoveries and testing.</p>
     </div>
     <div class="section level2">
@@ -216,7 +233,7 @@ recoveries and testing.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

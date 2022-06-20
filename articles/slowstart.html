@@ -116,7 +116,7 @@
 </nav><div class="container template-article">
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Package overview</h1>
             
       
@@ -155,30 +155,29 @@
 <p>Access sub-national level data for a specific country over time using <code><a href="../reference/get_regional_data.html">get_regional_data()</a></code>. Use <code><a href="../reference/get_available_datasets.html">get_available_datasets()</a></code> to explore the currently supported sub-national datasets and select the data set of interest using the <code>country</code> (selects the country of interest), and <code>level</code> (selects the spatial scale of the data) arguments of <code>get_regional_data</code>.</p>
 <p>This function returns daily new and cumulative (total) cases, and where available, deaths, hospitalisations, and tests. For a complete list of variables returned, see section 5, “Data glossary” below. See the documentation (<code><a href="../reference/get_regional_data.html">?get_regional_data</a></code>) for details of optional arguments.</p>
 <p>As for national level data any gaps in reported data are filled with NAs.</p>
-<p>For example, data for France Level 1 regions over time can be accessed using:</p>
+<p>For example, data for Lithuania Level 1 regions over time can be accessed using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"lithuania"</span><span class="op">)</span></code></pre></div>
 <p>This data then has the following format:</p>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="6%">
-<col width="10%">
+<col width="11%">
 <col width="6%">
-<col width="5%">
-<col width="7%">
 <col width="6%">
 <col width="7%">
+<col width="6%">
+<col width="8%">
 <col width="8%">
 <col width="9%">
 <col width="5%">
 <col width="6%">
 <col width="6%">
-<col width="7%">
-<col width="6%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
-<th align="left">region</th>
+<th align="left">county</th>
 <th align="left">iso_3166_2</th>
 <th align="right">cases_new</th>
 <th align="right">cases_total</th>
@@ -190,130 +189,123 @@
 <th align="right">hosp_total</th>
 <th align="right">tested_new</th>
 <th align="right">tested_total</th>
-<th align="left">insee_code</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2022-04-19</td>
-<td align="left">Pays-de-la-Loire</td>
-<td align="left">FR-PDL</td>
-<td align="right">8060</td>
-<td align="right">7119370</td>
+<td align="left">2022-06-19</td>
+<td align="left">Tauragės apskritis</td>
+<td align="left">LT-TA</td>
+<td align="right">1</td>
+<td align="right">23325</td>
+<td align="right">0</td>
+<td align="right">380</td>
+<td align="right">0</td>
+<td align="right">17792</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">19607</td>
-<td align="right">61733513</td>
-<td align="left">52</td>
+<td align="right">7</td>
+<td align="right">220108</td>
 </tr>
 <tr class="even">
-<td align="left">2022-04-19</td>
-<td align="left">Pays-de-la-Loire</td>
-<td align="left">FR-PDL</td>
-<td align="right">8060</td>
-<td align="right">7127430</td>
+<td align="left">2022-06-19</td>
+<td align="left">Telšių apskritis</td>
+<td align="left">LT-TE</td>
+<td align="right">0</td>
+<td align="right">37515</td>
+<td align="right">0</td>
+<td align="right">481</td>
+<td align="right">0</td>
+<td align="right">29865</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">19607</td>
-<td align="right">61753120</td>
-<td align="left">52</td>
+<td align="right">2</td>
+<td align="right">406951</td>
 </tr>
 <tr class="odd">
-<td align="left">2022-04-19</td>
-<td align="left">Saint-Barthelemy</td>
-<td align="left">FR-PM</td>
-<td align="right">11</td>
-<td align="right">591</td>
+<td align="left">2022-06-19</td>
+<td align="left">Unknown</td>
+<td align="left">NA</td>
+<td align="right">1</td>
+<td align="right">1854</td>
+<td align="right">0</td>
+<td align="right">16</td>
+<td align="right">0</td>
+<td align="right">641</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">36</td>
-<td align="right">5146</td>
-<td align="left">05</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left">2022-04-19</td>
-<td align="left">La Réunion</td>
-<td align="left">FR-RE</td>
-<td align="right">4115</td>
-<td align="right">397754</td>
+<td align="left">2022-06-19</td>
+<td align="left">Utenos apskritis</td>
+<td align="left">LT-UT</td>
+<td align="right">1</td>
+<td align="right">37865</td>
+<td align="right">0</td>
+<td align="right">288</td>
+<td align="right">0</td>
+<td align="right">29063</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">9489</td>
-<td align="right">2898611</td>
-<td align="left">04</td>
+<td align="right">4</td>
+<td align="right">328907</td>
 </tr>
 <tr class="odd">
-<td align="left">2022-04-19</td>
-<td align="left">Mayotte</td>
-<td align="left">FR-YT</td>
-<td align="right">14</td>
-<td align="right">35378</td>
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="right">10</td>
+<td align="right">370071</td>
+<td align="right">1</td>
+<td align="right">2244</td>
+<td align="right">7</td>
+<td align="right">270287</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">435</td>
-<td align="right">374173</td>
-<td align="left">06</td>
+<td align="right">40</td>
+<td align="right">3520780</td>
 </tr>
 </tbody>
 </table>
-<p>Alternatively, the same data can be accessed using the underlying class as follows (the France object now contains data at each processing step and the methods used at each step),</p>
+<p>Alternatively, the same data can be accessed using the underlying class as follows (the Lithuania object now contains data at each processing step and the methods used at each step),</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">france</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/France.html">France</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>get <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">france</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">lithuania</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/Lithuania.html">Lithuania</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>get <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">lithuania</span><span class="op">$</span><span class="kw">return</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="level-1-and-level-2-regions">Level 1 and Level 2 regions<a class="anchor" aria-label="anchor" href="#level-1-and-level-2-regions"></a>
 </h3>
 <p>All countries included in the package (see below,“Coverage”) have data for regions at the admin-1 level, the largest administrative unit of the country (e.g. state in the USA). Some countries also have data for smaller areas at the admin-2 level (e.g. county in the USA).</p>
 <p>Data for Level 2 units can be returned by using the <code>level = "2"</code> argument. The dataset will still show the corresponding Level 1 region.</p>
-<p>An example of a country with Level 2 units is France, where Level 2 units are French departments:</p>
+<p>An example of a country with Level 2 units is Lithuania, where Level 2 units are Lithuanian municipalities:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"france"</span>, level <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"lithuania"</span>, level <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></code></pre></div>
 <p>This data again has the following format:</p>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="5%">
-<col width="11%">
+<col width="9%">
 <col width="5%">
+<col width="9%">
 <col width="11%">
-<col width="7%">
 <col width="4%">
 <col width="5%">
 <col width="5%">
-<col width="5%">
+<col width="6%">
 <col width="6%">
 <col width="7%">
 <col width="4%">
 <col width="5%">
 <col width="5%">
-<col width="5%">
-<col width="5%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
-<th align="left">region</th>
+<th align="left">county</th>
 <th align="left">iso_3166_2</th>
-<th align="left">department</th>
-<th align="left">ons_region_code</th>
+<th align="left">municipality</th>
+<th align="left">iso_3166_2_municipality</th>
 <th align="right">cases_new</th>
 <th align="right">cases_total</th>
 <th align="right">deaths_new</th>
@@ -324,98 +316,92 @@
 <th align="right">hosp_total</th>
 <th align="right">tested_new</th>
 <th align="right">tested_total</th>
-<th align="left">insee_code</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2022-04-22</td>
-<td align="left">La Réunion</td>
-<td align="left">FR-RE</td>
-<td align="left">La Réunion</td>
-<td align="left">FR-974</td>
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="left">Švenčionių r. sav.</td>
+<td align="left">LT-49</td>
+<td align="right">0</td>
+<td align="right">7189</td>
+<td align="right">0</td>
+<td align="right">61</td>
+<td align="right">0</td>
+<td align="right">5361</td>
 <td align="right">NA</td>
-<td align="right">397754</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">63041</td>
+</tr>
+<tr class="even">
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="left">Trakų r. sav.</td>
+<td align="left">LT-52</td>
+<td align="right">0</td>
+<td align="right">11719</td>
+<td align="right">0</td>
+<td align="right">95</td>
 <td align="right">2</td>
-<td align="right">769</td>
+<td align="right">8342</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">25</td>
-<td align="right">7333</td>
-<td align="right">NA</td>
-<td align="right">2898611</td>
-<td align="left">04</td>
-</tr>
-<tr class="even">
-<td align="left">2022-04-22</td>
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-MF</td>
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-975</td>
-<td align="right">NA</td>
-<td align="right">591</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">5146</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">2022-04-22</td>
-<td align="left">Mayotte</td>
-<td align="left">FR-YT</td>
-<td align="left">Mayotte</td>
-<td align="left">FR-976</td>
-<td align="right">NA</td>
-<td align="right">35378</td>
-<td align="right">0</td>
-<td align="right">165</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">2081</td>
-<td align="right">NA</td>
-<td align="right">374173</td>
-<td align="left">06</td>
-</tr>
-<tr class="even">
-<td align="left">2022-04-22</td>
-<td align="left">Saint-Barthelemy</td>
-<td align="left">FR-PM</td>
-<td align="left">Saint-Barthelemy</td>
-<td align="left">FR-977</td>
-<td align="right">NA</td>
-<td align="right">4515</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">92476</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">2022-04-22</td>
-<td align="left">Saint-Martin</td>
-<td align="left">FR-BL</td>
-<td align="left">Saint-Martin</td>
-<td align="left">FR-978</td>
-<td align="right">NA</td>
-<td align="right">10341</td>
-<td align="right">0</td>
 <td align="right">1</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<td align="right">89880</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="left">Ukmergės r. sav.</td>
+<td align="left">LT-53</td>
 <td align="right">0</td>
+<td align="right">12578</td>
 <td align="right">0</td>
+<td align="right">169</td>
+<td align="right">0</td>
+<td align="right">8718</td>
 <td align="right">NA</td>
-<td align="right">130727</td>
-<td align="left">07</td>
+<td align="right">NA</td>
+<td align="right">4</td>
+<td align="right">104655</td>
+</tr>
+<tr class="even">
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="left">Vilniaus m. sav.</td>
+<td align="left">LT-57</td>
+<td align="right">10</td>
+<td align="right">288436</td>
+<td align="right">0</td>
+<td align="right">1434</td>
+<td align="right">6</td>
+<td align="right">211964</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">32</td>
+<td align="right">2745763</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-06-19</td>
+<td align="left">Vilniaus apskritis</td>
+<td align="left">LT-VL</td>
+<td align="left">Vilniaus r. sav.</td>
+<td align="left">LT-58</td>
+<td align="right">0</td>
+<td align="right">28659</td>
+<td align="right">0</td>
+<td align="right">259</td>
+<td align="right">0</td>
+<td align="right">21255</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">3</td>
+<td align="right">328978</td>
 </tr>
 </tbody>
 </table>
@@ -425,20 +411,20 @@
 </h3>
 <p>For totalled data up to the most recent date available, use the <code>totals</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"france"</span>, totals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_regional_data.html">get_regional_data</a></span><span class="op">(</span><span class="st">"lithuania"</span>, totals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>This data now has no date variable and reflects the latest total:</p>
 <table class="table">
 <colgroup>
-<col width="24%">
-<col width="10%">
+<col width="23%">
 <col width="11%">
 <col width="12%">
-<col width="15%">
-<col width="10%">
-<col width="12%">
+<col width="13%">
+<col width="16%">
+<col width="11%">
+<col width="13%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">region</th>
+<th align="left">county</th>
 <th align="left">iso_3166_2</th>
 <th align="right">cases_total</th>
 <th align="right">deaths_total</th>
@@ -448,49 +434,49 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Guyane (française)</td>
-<td align="left">FR-GF</td>
-<td align="right">79110</td>
+<td align="left">Marijampolės apskritis</td>
+<td align="left">LT-MR</td>
+<td align="right">43048</td>
+<td align="right">485</td>
+<td align="right">32712</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">655476</td>
+<td align="right">372407</td>
 </tr>
 <tr class="even">
-<td align="left">Mayotte</td>
-<td align="left">FR-YT</td>
-<td align="right">35378</td>
+<td align="left">Utenos apskritis</td>
+<td align="left">LT-UT</td>
+<td align="right">37865</td>
+<td align="right">288</td>
+<td align="right">29100</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">374173</td>
+<td align="right">328907</td>
 </tr>
 <tr class="odd">
-<td align="left">Saint-Pierre et Miquelon</td>
-<td align="left">FR-MF</td>
-<td align="right">10341</td>
+<td align="left">Telšių apskritis</td>
+<td align="left">LT-TE</td>
+<td align="right">37515</td>
+<td align="right">481</td>
+<td align="right">29895</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">130727</td>
+<td align="right">406951</td>
 </tr>
 <tr class="even">
-<td align="left">Saint-Martin</td>
-<td align="left">FR-BL</td>
-<td align="right">4515</td>
+<td align="left">Tauragės apskritis</td>
+<td align="left">LT-TA</td>
+<td align="right">23325</td>
+<td align="right">380</td>
+<td align="right">17814</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">92476</td>
+<td align="right">220108</td>
 </tr>
 <tr class="odd">
-<td align="left">Saint-Barthelemy</td>
-<td align="left">FR-PM</td>
-<td align="right">591</td>
+<td align="left">Unknown</td>
+<td align="left">NA</td>
+<td align="right">1854</td>
+<td align="right">16</td>
+<td align="right">642</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">5146</td>
 </tr>
 </tbody>
 </table>
@@ -547,7 +533,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

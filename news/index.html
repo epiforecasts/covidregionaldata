@@ -105,9 +105,9 @@
 <h3 id="bug-fixes-0-9-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-3"></a></h3>
 <ul><li>Fixed a bug in <code><a href="../reference/fill_empty_dates_with_na.html">fill_empty_dates_with_na()</a></code> caused by changes made in version <code>1.2.0</code> of <code>tidyr</code>.</li>
 <li>Fixed a bug in the data sourced from Germany so that instead of treating it as a line list of individuals it is treated as a relatively finely resolved count data which needs to be summed up (by <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>).</li>
-<li>Fixed a bug in the Vietnam class due to <code>stringr</code> (<a href="https://github.com/epiforecasts/covidregionaldata/pull/448" class="external-link">#448</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
-<li>Fixed a bug with the Netherlands class were the lack of Hospitalisation data in the source was causing the class to fail (<a href="https://github.com/epiforecasts/covidregionaldata/pull/446" class="external-link">#446</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
-<li>Fixed an issue with the Colombia data and reduced dependencies by making <code>RSocrata</code> be a suggested package (<a href="https://github.com/epiforecasts/covidregionaldata/pull/433" class="external-link">#433</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+<li>Fixed a bug in the Vietnam class due to <code>stringr</code> (<a href="https://github.com/epiforecasts/covidregionaldata/pull/448" class="external-link"></a><a href="https://github.com/epiforecasts/covidregionaldata/issues/448" class="external-link">#448</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+<li>Fixed a bug with the Netherlands class were the lack of Hospitalisation data in the source was causing the class to fail (<a href="https://github.com/epiforecasts/covidregionaldata/pull/446" class="external-link"></a><a href="https://github.com/epiforecasts/covidregionaldata/issues/446" class="external-link">#446</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
+<li>Fixed an issue with the Colombia data and reduced dependencies by making <code>RSocrata</code> be a suggested package (<a href="https://github.com/epiforecasts/covidregionaldata/pull/433" class="external-link"></a><a href="https://github.com/epiforecasts/covidregionaldata/issues/433" class="external-link">#433</a> by <a href="https://github.com/RichardMN" class="external-link">@RichardMN</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="depreciations-0-9-3">Depreciations<a class="anchor" aria-label="anchor" href="#depreciations-0-9-3"></a></h3>
@@ -134,8 +134,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="changes-to-implemented-data-sources-0-9-2">Changes to implemented data sources<a class="anchor" aria-label="anchor" href="#changes-to-implemented-data-sources-0-9-2"></a></h3>
-<ul><li>Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent available data set (by <a href="https://github.com/kathsherratt" class="external-link">@kathsherratt</a>).</li>
-</ul></div>
+<ul><li>Increased the robustness of fetching UK NHS admissions by region. Rather than testing a single date for data we now look over the last 7 days and pick the most recent available data set (by <a href="https://github.com/kathsherratt" class="external-link">@kathsherratt</a>).</li></ul></div>
 <div class="section level3">
 <h3 id="other-changes-0-9-2">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-0-9-2"></a></h3>
 <ul><li>Testing of classes updated to allow for at least one of <code>common_data_urls</code> or <code>level_data_urls</code> to be present. The previous default which forced the presence of <code>common_data_urls</code> meant that several classes had to define an empty field (by <a href="https://github.com/joseph-palmer" class="external-link">@joseph-palmer</a>).</li>
@@ -253,8 +252,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h3>
 <ul><li>
-<code>get_linelist</code>: argument <code>clean</code> changed to <code>clean_dates</code> to reflect slight change in use case.</li>
-</ul></div>
+<code>get_linelist</code>: argument <code>clean</code> changed to <code>clean_dates</code> to reflect slight change in use case.</li></ul></div>
 <div class="section level3">
 <h3 id="changes-0-7-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-7-0"></a></h3>
 <ul><li>Added new option to return UK data by NHS region. This will also return “first admissions” hospital data (excludes readmissions). Specify ‘nhsregions = TRUE’. Default is FALSE, returning ONS regions as before.</li>
@@ -273,8 +271,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="covidregionaldata-050">covidregionaldata 0.5.0<a class="anchor" aria-label="anchor" href="#covidregionaldata-050"></a></h2><p class="text-muted">CRAN release: 2020-07-24</p>
-<ul><li>Release candidate.</li>
-</ul></div>
+<ul><li>Release candidate.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="covidregionaldata-040">covidregionaldata 0.4.0<a class="anchor" aria-label="anchor" href="#covidregionaldata-040"></a></h2>
 <ul><li>Added functions to extract regional cases for Spain, Japan, South Korea, the United Kingdom, and the United States.</li>
@@ -311,7 +308,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
